@@ -13,7 +13,7 @@ function MarketPlacePage() {
       <ul>
         {PRODUCT_DATA.map((pd) => (
           <li key={pd.id}>
-            <Link to={`marketplace/${pd.id}`}>{pd.title}</Link>
+            <Link to={`/marketplace/${pd.id}`}>{pd.title}</Link>
           </li>
         ))}
       </ul>

@@ -18,6 +18,7 @@ import WishlistPage from "./pages/Wishlist";
 import AgAiPage from "./pages/AgAI";
 import RootLayout from "./pages/Root";
 import ProfileRootLayout from "./pages/ProfileRoot";
+import ProductRootLayout from "./pages/ProductRoot";
 
 const router = createBrowserRouter([
   {
@@ -44,9 +45,10 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "marketplace",
-        element: <MarketPlacePage />,
+        path: "/",
+        element: <ProductRootLayout />,
         children: [
+          {path: 'marketplace', element: <MarketPlacePage />},
           { path: "marketplace/:productId", element: <ProductDetailPage /> },
         ],
       },
