@@ -17,8 +17,8 @@ import SignUpPage from "./pages/SignUp";
 import WishlistPage from "./pages/Wishlist";
 import AgAiPage from "./pages/AgAI";
 import RootLayout from "./pages/Root";
-import ProfileRootLayout from "./pages/ProfileRoot";
 import ProductRootLayout from "./pages/ProductRoot";
+import PaymentPage from "./pages/Payment";
 
 const router = createBrowserRouter([
   {
@@ -31,29 +31,24 @@ const router = createBrowserRouter([
       { path: "mylearning", element: <MyLearningPage /> },
       { path: "agai", element: <AgAiPage /> },
       { path: "wishlist", element: <WishlistPage /> },
+      { path: "guest", element: <GuestProfilePage /> },
+      { path: "instructor", element: <InstructorProfilePage /> },
       {
         path: "courses/:courseId",
         element: <CourseDetailPage />,
         children: [{ path: "watch/:videoId", element: <CourseVideoPage /> }],
       },
       {
-        path: "profile",
-        element: <ProfileRootLayout />,
-        children: [
-          { path: "guest", element: <GuestProfilePage /> },
-          { path: "instructor", element: <InstructorProfilePage /> },
-        ],
-      },
-      {
         path: "/",
         element: <ProductRootLayout />,
         children: [
-          {path: 'marketplace', element: <MarketPlacePage />},
+          { path: "marketplace", element: <MarketPlacePage /> },
           { path: "marketplace/:productId", element: <ProductDetailPage /> },
         ],
       },
     ],
   },
+  { path: "payment", element: <PaymentPage /> },
   { path: "login", element: <LoginPage /> },
   { path: "signup", element: <SignUpPage /> },
   { path: "info", element: <PersonalInformationPage /> },

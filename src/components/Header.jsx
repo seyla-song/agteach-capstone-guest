@@ -32,6 +32,9 @@ function Navigation() {
           <li>
             <NavLink to='search'>Search Result</NavLink>
           </li>
+          <li>
+            <NavLink to='payment'>Payment</NavLink>
+          </li>
         </ul>
       </nav>
     </header>
