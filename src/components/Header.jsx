@@ -1,44 +1,32 @@
 import { NavLink } from "react-router-dom";
 
+const HEADER_DATA = [
+  { page: "My Learning", path: "mylearning" },
+  { page: "Marketplace", path: "marketplace" },
+  { page: "Become a member", path: "" },
+  { page: "AgAI", path: "agai" },
+  { page: "Wishlist", path: "wishlist" },
+  { page: "Cart", path: "cart" },
+  { page: "Login", path: "login" },
+//   { page: "guest-profile", path: "guest-profile" },
+//   { page: "instructor-profile", path: "instructor-profile" },
+  { page: "Search Result", path: "search" },
+];
+
 function Navigation() {
   return (
     <header>
       <nav>
         <ul>
-          <li>
-            <NavLink to='mylearning'>My Learning</NavLink>
-          </li>
-          <li>
-            <NavLink to='marketplace'>Marketplace</NavLink>
-          </li>
-          <li>
-            <NavLink to=''>Become a member</NavLink>
-          </li>
-          <li>
-            <NavLink to='agai'>AgAI</NavLink>
-          </li>
-          <li>
-            <NavLink to='wishlist'>Wishlist</NavLink>
-          </li>
-          <li>
-            <NavLink to='cart'>Cart</NavLink>
-          </li>
-          <li>
-            <NavLink to='login'>Login</NavLink>
-          </li>
-          <li>
-            <NavLink to='profile'>Profile</NavLink>
-          </li>
-          <li>
-            <NavLink to='search'>Search Result</NavLink>
-          </li>
-          <li>
-            <NavLink to='payment'>Payment</NavLink>
-          </li>
+          {HEADER_DATA.map((data) => (
+            <li key={data.path}>
+              <NavLink to={data.path}>{data.page}</NavLink>
+            </li>
+          ))}
         </ul>
       </nav>
     </header>
   );
 }
 
-export default Navigation
+export default Navigation;
