@@ -8,9 +8,6 @@ const HEADER_DATA = [
   { page: "Wishlist", path: "wishlist" },
   { page: "Cart", path: "cart" },
   { page: "Login", path: "login" },
-//   { page: "guest-profile", path: "guest-profile" },
-//   { page: "instructor-profile", path: "instructor-profile" },
-  { page: "Search Result", path: "search" },
 ];
 
 function Navigation() {
