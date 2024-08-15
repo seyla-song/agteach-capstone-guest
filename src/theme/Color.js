@@ -30,7 +30,7 @@ export function colorPalette() {
                 contrastText: '#fff', 
             },
             red: {
-                1: '#E2111C', 
+                main: '#E2111C', 
             },
             blue: {
                 main: '#348FFD',

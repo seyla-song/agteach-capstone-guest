@@ -10,9 +10,13 @@ function App() {
     <ThemeProvider theme={theme}>
     <Box sx={{ bgcolor: theme => theme.palette.blue.main, p: 2 }}>
         <Typography variant="h6" color="textPrimary">
-            This is a themed Typography component
+            Color Theme!
         </Typography>
     </Box>
+        <Button
+        color= 'grey'
+        variant='contained'
+        >clickMe</Button>
     </ThemeProvider>
 
 
