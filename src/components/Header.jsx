@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import Button from '@mui/material/Button';
 
 const HEADER_DATA = [
   { page: "My Learning", path: "mylearning" },
@@ -8,7 +9,6 @@ const HEADER_DATA = [
   { page: "Wishlist", path: "wishlist" },
   { page: "Cart", path: "cart" },
   { page: "Login", path: "login" },
-  { page: "Course detail", path: "courses/:coursesId" },
 ];
 
 function Navigation() {
@@ -19,6 +19,7 @@ function Navigation() {
           {HEADER_DATA.map((data) => (
             <li key={data.path}>
               <NavLink to={data.path}>{data.page}</NavLink>
+              <Button href={data.path}>{data.page}</Button>
             </li>
           ))}
         </ul>
