@@ -2,9 +2,7 @@ import React from 'react';
 import './App.css';
 import { Button, Typography, Box } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
-import theme from './theme/Theme';
-
-// import UsingColorObject from './theme/example.js';
+import theme from './theme/theme';
 
 function App() {
   return (
