@@ -75,7 +75,7 @@ function App() {
   return (
   <ThemeProvider theme={theme}>
       <Typography variant='h1' color='primary' >Hi there</Typography>
-      <Button variant='contained' color='secondary'>this thing</Button>
+      <Button variant='outlined' color='secondary'>Click Me</Button>
     </ThemeProvider>
   )
 }
