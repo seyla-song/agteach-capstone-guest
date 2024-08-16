@@ -1,54 +1,86 @@
 const fontWeight = [{ regular: 400, medium: 500, semiBold: 600, bold: 700 }];
-const fontSize = [{ h1: (50/5)+'rem', h2: `${30 / 16}rem` }]
-console.log(fontSize);
 const typography = {
   htmlFontSize: 16,
   fontFamily: 'Poppins, Arial, sans-serif',
+  
   h1: {
     fontWeight: fontWeight.bold, // Bold
-    fontSize: '50px', // Large heading
-    lineHeight: '72px',
+    fontSize: '45px', // Large heading
+    lineHeight: 'auto',
   },
   h2: {
     fontWeight: fontWeight.bold, // Bold
-    fontSize: '30px', // Medium heading
-    lineHeight: '72px',
+    fontSize: '40px', // Medium heading
+    lineHeight: 'auto',
   },
   h3: {
     fontWeight: fontWeight.semiBold, // SemiBold
-    fontSize: '26px', // Small heading
-    lineHeight: '40px',
+    fontSize: '30px', // Small heading
+    lineHeight: 'auto',
   },
   h4: {
     fontWeight: fontWeight.semiBold, // SemiBold
-    fontSize: '20px', // Smaller heading
-    lineHeight: '30px',
+    fontSize: '25px', // Smaller heading
+    lineHeight: 'auto',
   },
-  body1: {
+
+
+  blgsm: {   // body large semibold
+    fontWeight: fontWeight.medium, // Semibold
+    fontSize: '20px', // Standard body text
+    lineHeight: 'auto',
+  },
+  blgmd: {  // body large medium
     fontWeight: fontWeight.medium, // Medium
-    fontSize: '16px', // Standard body text
-    lineHeight: '24px',
+    fontSize: '20px', // Standard body text
+    lineHeight: 'auto',
   },
-  body2: {
+  blgr : {  // body large regular
     fontWeight: fontWeight.regular, // Regular
-    fontSize: '14px', // Small body text
-    lineHeight: '22px',
+    fontSize: '20px', // Small body text
+    lineHeight: 'auto',
   },
-  caption: {
+  bmdsm:{  // body mudium semibold
     fontWeight: fontWeight.medium, // Medium
-    fontSize: '12px', // Captions or small notes
-    lineHeight: '20px',
+    fontSize: '16px', // Captions or small notes
+    lineHeight: 'auto',
   },
-  overline: {
+  bmdmd: { // body medium medium
     fontWeight: fontWeight.regular, // Regular
-    fontSize: '10px', // Very small text
-    lineHeight: '18px',
+    fontSize: '16px', // Very small text
+    lineHeight: 'auto',
   },
-  subtitle1: {
+  bmdr: {  // body medium regular
     fontWeight: fontWeight.regular, // Regular
-    fontSize: '9px', // Extra small text
-    lineHeight: '20px',
+    fontSize: '16px', // Extra small text
+    lineHeight: 'auto',
   },
+  bssm: {   // body small semibold
+    fontWeight: fontWeight.regular, // Regular
+    fontSize: '14px', // Extra small text
+    lineHeight: 'auto',
+  },
+ bsr: {  // body small regular
+    fontWeight: fontWeight.regular, // Regular
+    fontSize: '14px', // Extra small text
+    lineHeight: 'auto',
+  },
+  bxsr: { // body extra small regular
+    fontWeight: fontWeight.regular, // Regular
+    fontSize: '12px', // Extra small text
+    lineHeight: 'auto',
+  },
+  bxsmd: { // body extra small meduim 
+    fontWeight: fontWeight.regular, // Regular
+    fontSize: '12px', // Extra small text
+    lineHeight: 'auto',
+  },
+  btr: { // body tiny regular
+    fontWeight: fontWeight.regular, // Regular
+    fontSize: '10px', // Extra small text
+    lineHeight: 'auto',
+  },
+  
 };
 
 export default typography;
