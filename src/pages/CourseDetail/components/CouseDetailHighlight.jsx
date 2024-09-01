@@ -1,9 +1,8 @@
 import { Grid, Stack, Typography } from '@mui/material';
 
-
 export const CourseDetailHighlight = () => {
   return (
-    <Grid style={{ border: '1px solid black', padding: 0 }} item xs={12}>
+    <Grid border={'1px solid black'} item xs={12}>
       <Grid container paddingY={10}>
         <Grid xs={7} item>
           <Typography>What you learn in this course? What included</Typography>

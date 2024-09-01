@@ -11,7 +11,7 @@ import {
 
 export const CourseDetailContent = () => {
   return (
-    <Grid style={{ border: '1px solid black', padding: 0 }} item xs={12}>
+    <Grid border={'1px solid black'} item xs={12}>
       <Stack>
         <Typography>Course Content</Typography>
         <Typography>20 sections • 60 video • 30h total length</Typography>

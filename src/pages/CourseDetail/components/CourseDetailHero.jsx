@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const CourseDetailHero = () => {
   return (
-    <Grid style={{ border: '1px solid black', padding: 0 }} item xs={12}>
+    <Grid border={'1px solid black'} item xs={12}>
       <Grid alignItems={'center'} paddingY={10} container bgcolor={'lightblue'}>
         <Grid item xs={5}>
           <Typography>$74.99</Typography>

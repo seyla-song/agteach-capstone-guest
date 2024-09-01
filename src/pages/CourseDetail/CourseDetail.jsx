@@ -18,7 +18,7 @@ function CourseDetailPage() {
         <CourseDetailHighlight />
         <CourseDetailContent />
         <SuggestedCourseProduct />
-        <Grid style={{ border: '1px solid black' }} item xs={12}>
+        <Grid border={'1px solid black'} item xs={12}>
           Become a member
         </Grid>
       </Grid>
