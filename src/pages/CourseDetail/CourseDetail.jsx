@@ -1,5 +1,6 @@
 import { Box, Grid } from '@mui/material';
 import { CourseDetailHero } from './components/CourseDetailHero';
+import { CourseDetailHighlight } from './components/CouseDetailHighlight';
 
 function CourseDetailPage() {
   return (
@@ -11,9 +12,7 @@ function CourseDetailPage() {
       >
         <Grid container spacing={2}>
           <CourseDetailHero />
-          <Grid style={{ border: '1px solid black' }} item xs={12}>
-            What you learn in this course? What include
-          </Grid>
+          <CourseDetailHighlight />
           <Grid style={{ border: '1px solid black' }} item xs={12}>
             Course Content
           </Grid>
