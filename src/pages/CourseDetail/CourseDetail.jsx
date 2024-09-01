@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, Stack, Typography } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
 import { CourseDetailHero } from './components/CourseDetailHero';
 import { CourseDetailHighlight } from './components/CouseDetailHighlight';
 import { CourseDetailContent } from './components/CourseDetailContent';
