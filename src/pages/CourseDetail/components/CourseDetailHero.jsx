@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography, Stack } from '@mui/material';
+import {Button, Grid, Typography, Stack } from '@mui/material';
 import { Link } from 'react-router-dom';
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
