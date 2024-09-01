@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export const CourseDetailHero = () => {
   return (
     <Grid border={'1px solid black'} item xs={12}>
-      <Grid alignItems={'center'} paddingY={10} container bgcolor={'lightblue'}>
+      <Grid alignItems={'center'} paddingY={10} container>
         <Grid item xs={5}>
           <Stack gap>
             <Typography variant="h2">$74.99</Typography>
