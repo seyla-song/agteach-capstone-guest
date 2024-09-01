@@ -1,18 +1,9 @@
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Paper,
-  styled,
-  Typography,
-} from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Box, Grid } from '@mui/material';
 import { CourseDetailHero } from './components/CourseDetailHero';
 
 function CourseDetailPage() {
   return (
-    <Box display='flex' justifyContent='center' alignItems="center">
+    <Box display="flex" justifyContent="center" alignItems="center">
       <Box
         sx={{
           maxWidth: '1420px',
