@@ -23,7 +23,7 @@ const color = {
   },
   secondary: {
     main: '#F3BE2A',
-    contrastText: '#fff',
+    contrastText: '#082214',
   },
   red: {
     main: '#E2111C',
