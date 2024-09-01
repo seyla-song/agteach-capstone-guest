@@ -4,7 +4,7 @@ export const CourseDetailHighlight = () => {
   return (
     <Grid item xs={12}>
       <Stack py={10}>
-        <Grid container>
+        <Grid container spacing={2}>
           <Grid xs={7} item>
             <Stack
               gap
@@ -61,3 +61,4 @@ export const CourseDetailHighlight = () => {
     </Grid>
   );
 };
+
