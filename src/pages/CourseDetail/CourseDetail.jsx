@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Divider, Grid, Stack, Typography } from '@mui/material';
 import { CourseDetailHero } from './components/CourseDetailHero';
 import { CourseDetailHighlight } from './components/CouseDetailHighlight';
 import { CourseDetailContent } from './components/CourseDetailContent';
@@ -6,9 +6,13 @@ import { SuggestedCourseProduct } from './components/SuggestCourseProduct';
 
 function CourseDetailPage() {
   return (
-    <Box display="flex" justifyContent="center">
+    <Stack alignItems="center">
+      <Stack width='100%' alignItems='center' bgcolor={'primary.dark'}>
+        <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
+          <CourseDetailHero />
+        </Grid>
+      </Stack>
       <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
-        <CourseDetailHero />
         <CourseDetailHighlight />
         <CourseDetailContent />
         <SuggestedCourseProduct />
@@ -16,7 +20,7 @@ function CourseDetailPage() {
           Become a member - Get Components from chitra
         </Grid>
       </Grid>
-    </Box>
+    </Stack>
   );
 }
 
