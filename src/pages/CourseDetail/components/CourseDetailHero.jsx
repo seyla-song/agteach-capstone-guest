@@ -1,4 +1,4 @@
-import {Button, Grid, Typography, Stack } from '@mui/material';
+import { Button, Grid, Typography, Stack } from '@mui/material';
 import { Link } from 'react-router-dom';
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
@@ -45,7 +45,9 @@ export const CourseDetailHero = () => {
               <Button color="secondary" variant="contained">
                 Enroll Now
               </Button>
-              <Button variant="contained">Add to Wishlist</Button>
+              <Button color="tertiary" variant="contained">
+                Add to Wishlist
+              </Button>
             </Stack>
           </Stack>
         </Grid>
