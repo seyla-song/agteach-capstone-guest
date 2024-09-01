@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 export const CourseDetailHero = () => {
   return (
-    <Grid border={'1px solid black'} item xs={12}>
-      <Grid alignItems={'center'} paddingY={10} container>
+    <Grid color={'white'} item xs={12}>
+      <Grid alignItems={'center'} paddingY={15} container>
         <Grid item xs={5}>
           <Stack gap>
             <Typography variant="h2">$74.99</Typography>
@@ -16,8 +16,8 @@ export const CourseDetailHero = () => {
               solutions, lighting, and plant care techniques hands-on projects
               to design and build a personal hydroponic garden
             </Typography>
-            <Typography variant="bsr">
-              Created by: <Link>Emily Greene</Link>
+            <Typography  variant="bsr">
+              Created by: <Link >Emily Greene</Link>
             </Typography>
           </Stack>
         </Grid>
