@@ -1,5 +1,12 @@
 import { Box, Button, Grid, Typography, Stack } from '@mui/material';
 import { Link } from 'react-router-dom';
+import '@vidstack/react/player/styles/default/theme.css';
+import '@vidstack/react/player/styles/default/layouts/video.css';
+import { MediaPlayer, MediaProvider } from '@vidstack/react';
+import {
+  defaultLayoutIcons,
+  DefaultVideoLayout,
+} from '@vidstack/react/player/layouts/default';
 
 export const CourseDetailHero = () => {
   return (
@@ -16,24 +23,31 @@ export const CourseDetailHero = () => {
               solutions, lighting, and plant care techniques hands-on projects
               to design and build a personal hydroponic garden
             </Typography>
-            <Typography  variant="bsr">
-              Created by: <Link >Emily Greene</Link>
+            <Typography variant="bsr">
+              Created by: <Link>Emily Greene</Link>
             </Typography>
           </Stack>
         </Grid>
         <Grid item xs={2} />
         <Grid item xs={5}>
-          <Box display={'flex'} flexDirection={'column'} gap={1}>
-            <Box height={'330px'} bgcolor={'yellow'}>
-              cat
-            </Box>
-            <Box display={'flex'} flexDirection={'column'} gap={1}>
+          <Stack display={'flex'} flexDirection={'column'} gap={1}>
+            <MediaPlayer
+              title="Sprite Fight"
+              src="https://files.vidstack.io/sprite-fight/720p.mp4"
+            >
+              <MediaProvider />
+              <DefaultVideoLayout
+                thumbnails="https://files.vidstack.io/sprite-fight/thumbnails.vtt"
+                icons={defaultLayoutIcons}
+              />
+            </MediaPlayer>
+            <Stack display={'flex'} flexDirection={'column'} gap={1}>
               <Button color="secondary" variant="contained">
                 Enroll Now
               </Button>
               <Button variant="contained">Add to Wishlist</Button>
-            </Box>
-          </Box>
+            </Stack>
+          </Stack>
         </Grid>
       </Grid>
     </Grid>
