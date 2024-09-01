@@ -1,4 +1,6 @@
 import { Grid, Stack, Typography } from '@mui/material';
+import TimerIcon from '@mui/icons-material/TimerOutlined';
+import MovieIcon from '@mui/icons-material/MovieOutlined';
 
 export const CourseDetailHighlight = () => {
   return (
@@ -43,14 +45,14 @@ export const CourseDetailHighlight = () => {
               height="100%"
               gap
             >
-              <Stack>
+              <Stack gap>
                 <Typography variant="h4">This course include:</Typography>
                 <Stack direction="row" gap={2}>
-                  <Typography>0</Typography>
+                  <TimerIcon />
                   <Typography variant="bsr">30 hours</Typography>
                 </Stack>
                 <Stack direction="row" gap={2}>
-                  <Typography>0</Typography>
+                  <MovieIcon />
                   <Typography variant="bsr">60 videos</Typography>
                 </Stack>
               </Stack>
