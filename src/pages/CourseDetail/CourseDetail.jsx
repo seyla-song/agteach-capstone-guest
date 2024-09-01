@@ -1,29 +1,27 @@
 import { Box, Grid } from '@mui/material';
 import { CourseDetailHero } from './components/CourseDetailHero';
 import { CourseDetailHighlight } from './components/CouseDetailHighlight';
+import { CourseDetailContent } from './components/CourseDetailContent';
+import { SuggestedCourseProduct } from './components/SuggestCourseProduct';
 
 function CourseDetailPage() {
   return (
-    <Box display="flex" justifyContent="center" alignItems="center">
-      <Box
+    <Box display="flex" justifyContent="center">
+      <Grid
         sx={{
           maxWidth: '1420px',
         }}
+        container
+        spacing={2}
       >
-        <Grid container spacing={2}>
-          <CourseDetailHero />
-          <CourseDetailHighlight />
-          <Grid style={{ border: '1px solid black' }} item xs={12}>
-            Course Content
-          </Grid>
-          <Grid style={{ border: '1px solid black' }} item xs={12}>
-            Suggested Product and Course
-          </Grid>
-          <Grid style={{ border: '1px solid black' }} item xs={12}>
-            Become a member
-          </Grid>
+        <CourseDetailHero />
+        <CourseDetailHighlight />
+        <CourseDetailContent />
+        <SuggestedCourseProduct />
+        <Grid style={{ border: '1px solid black' }} item xs={12}>
+          Become a member
         </Grid>
-      </Box>
+      </Grid>
     </Box>
   );
 }
