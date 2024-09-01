@@ -22,8 +22,7 @@ import {
 export const router = createBrowserRouter([
   {
     path: '/',
-    // element: <RootLayout />,
-    element: <CourseDetailPage />,
+    element: <RootLayout />,
     children: [
       { index: true, element: <HomePage /> },
       { path: 'search', element: <SearchResultPage /> },
