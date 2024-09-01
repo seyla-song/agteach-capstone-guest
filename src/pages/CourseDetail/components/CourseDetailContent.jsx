@@ -7,6 +7,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export const CourseDetailContent = () => {
   return (
@@ -19,33 +20,33 @@ export const CourseDetailContent = () => {
           </Typography>
         </Stack>
         <Stack>
-        {courses.map((course) => (
-          <Accordion
-            key={course.title}
-            sx={{ backgroundColor: 'grey.200', py: 2, boxShadow: 'none' }}
-          >
-            <AccordionSummary
-              expandIcon={'v'}
-              aria-controls="panel1-content"
-              id="panel1-header"
+          {courses.map((course) => (
+            <Accordion
+              key={course.title}
+              sx={{ backgroundColor: 'grey.200', py: 2, boxShadow: 'none' }}
             >
-              <Typography variant="bmdsm">{course.title}</Typography> (
-              {course.duration})
-            </AccordionSummary>
-            {course.topics.map((topic) => (
-              <AccordionDetails
-                key={topic.title}
-                sx={{ backgroundColor: 'white', px: 5 }}
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1-content"
+                id="panel1-header"
               >
-                <Stack direction="row" justifyContent="space-between" py={2}>
-                  <Typography>{topic.title}</Typography>
-                  <Typography>{topic.duration}</Typography>
-                </Stack>
-                <Divider />
-              </AccordionDetails>
-            ))}
-          </Accordion>
-        ))}
+                <Typography variant="bmdsm">{course.title}</Typography> (
+                {course.duration})
+              </AccordionSummary>
+              {course.topics.map((topic) => (
+                <AccordionDetails
+                  key={topic.title}
+                  sx={{ backgroundColor: 'white', px: 5 }}
+                >
+                  <Stack direction="row" justifyContent="space-between" py={2}>
+                    <Typography>{topic.title}</Typography>
+                    <Typography>{topic.duration}</Typography>
+                  </Stack>
+                  <Divider />
+                </AccordionDetails>
+              ))}
+            </Accordion>
+          ))}
         </Stack>
       </Stack>
     </Grid>
