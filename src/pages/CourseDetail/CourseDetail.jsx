@@ -7,19 +7,13 @@ import { SuggestedCourseProduct } from './components/SuggestCourseProduct';
 function CourseDetailPage() {
   return (
     <Box display="flex" justifyContent="center">
-      <Grid
-        sx={{
-          maxWidth: '1420px',
-        }}
-        container
-        spacing={2}
-      >
+      <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
         <CourseDetailHero />
         <CourseDetailHighlight />
         <CourseDetailContent />
         <SuggestedCourseProduct />
         <Grid border={'1px solid black'} item xs={12}>
-          Become a member
+          Become a member - Get Components from chitra
         </Grid>
       </Grid>
     </Box>
