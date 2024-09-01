@@ -2,6 +2,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Button,
   Divider,
   Grid,
   Stack,
@@ -34,20 +35,24 @@ export const CourseDetailContent = () => {
                 {course.duration})
               </AccordionSummary>
               {course.topics.map((topic) => (
-                <AccordionDetails
-                  key={topic.title}
-                  sx={{ backgroundColor: 'white', px: 5 }}
-                >
-                  <Stack direction="row" justifyContent="space-between" py={2}>
-                    <Typography>{topic.title}</Typography>
-                    <Typography>{topic.duration}</Typography>
-                  </Stack>
-                  <Divider />
-                </AccordionDetails>
+                <Stack px={2}>
+                  <AccordionDetails key={topic.title} sx={{ bgcolor: 'white' }}>
+                    <Stack
+                      direction="row"
+                      justifyContent="space-between"
+                      py={2}
+                    >
+                      <Typography>{topic.title}</Typography>
+                      <Typography>{topic.duration}</Typography>
+                    </Stack>
+                    <Divider />
+                  </AccordionDetails>
+                </Stack>
               ))}
             </Accordion>
           ))}
         </Stack>
+        <Button  variant="outlined">View (10) More</Button>
       </Stack>
     </Grid>
   );
