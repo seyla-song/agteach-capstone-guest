@@ -1,0 +1,37 @@
+import { Box, Button, Grid, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+
+export const CourseDetailHero = () => {
+  return (
+    <Grid style={{ border: '1px solid black', padding: 0 }} item xs={12}>
+      <Grid alignItems={'center'} paddingY={10} container bgcolor={'lightblue'}>
+        <Grid item xs={5}>
+          <Typography>$74.99</Typography>
+          <Typography>Indoor Gardening and Hydroponics</Typography>
+          <Typography>
+            Learn about various types of hydroponic setups, nutrient solutions,
+            lighting, and plant care techniques hands-on projects to design and
+            build a personal hydroponic garden
+          </Typography>
+          <Typography>
+            Created by: <Link>Emily Greene</Link>
+          </Typography>
+        </Grid>
+        <Grid item xs={2} />
+        <Grid item xs={5}>
+          <Box display={'flex'} flexDirection={'column'} gap={1}>
+            <Box height={'330px'} bgcolor={'yellow'}>
+              cat
+            </Box>
+            <Box display={'flex'} flexDirection={'column'} gap={1}>
+              <Button color="secondary" variant="contained">
+                Enroll Now
+              </Button>
+              <Button variant="contained">Add to Wishlist</Button>
+            </Box>
+          </Box>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+};
