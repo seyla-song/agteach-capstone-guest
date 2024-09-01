@@ -1,5 +1,4 @@
-import { Button, Grid, Typography, Stack } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Button, Grid, Typography, Stack, Link } from '@mui/material';
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
 import { MediaPlayer, MediaProvider } from '@vidstack/react';
@@ -24,7 +23,16 @@ export const CourseDetailHero = () => {
               to design and build a personal hydroponic garden
             </Typography>
             <Typography variant="bsr">
-              Created by: <Link>Emily Greene</Link>
+              Created by:{' '}
+              <Link
+                sx={{
+                  color: 'white',
+                  textDecoration: 'underline',
+                  textUnderlineOffset: 3,
+                }}
+              >
+                Emily Greene
+              </Link>
             </Typography>
           </Stack>
         </Grid>
