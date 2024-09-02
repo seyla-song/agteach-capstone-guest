@@ -3,7 +3,7 @@ import SearchResultPage from "../pages/SearchResult";
 import MarketPlacePage from "../pages/MarketPlace";
 import CourseDetailPage from "../pages/CourseDetail/CourseDetail";
 import CartPage from "../pages/Cart";
-import CourseVideoPage from "../pages/CourseVideo";
+import CourseVideoPage from "../pages/CourseVideo/CourseVideo";
 import GuestProfilePage from "../pages/GuestProfile";
 import InstructorProfilePage from "../pages/InstructorProfile";
 import LoginPage from "../pages/LogIn";
