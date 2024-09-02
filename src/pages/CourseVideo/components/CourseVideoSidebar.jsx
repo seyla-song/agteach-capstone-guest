@@ -1,5 +1,14 @@
 import { Stack, Typography } from '@mui/material';
 import { CourseAccordionComponent } from '../../../components/CourseAccordionComponent';
+/**
+ * A component that renders the sidebar of the course video page.
+ *
+ * It displays a course content header, followed by the course outline in an
+ * accordion.
+ *
+ * @param {object} data The data for the course outline.
+ * @returns {React.ReactElement} The course video sidebar component.
+ */
 export const CourseVideoSidebar = ({ data }) => {
   return (
     <Stack
