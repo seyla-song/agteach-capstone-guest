@@ -4,6 +4,9 @@ export const CourseVideoSidebar = ({ data }) => {
   return (
     <Stack
       sx={{
+        borderLeftColor:'primary.main',
+        borderLeftWidth: 1,
+        borderLeftStyle:'solid',
         width: '400px',
         height: '100vh',
         bgcolor: 'grey.100',
