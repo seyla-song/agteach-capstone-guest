@@ -1,6 +1,6 @@
 // ExpandableText.js
 import React, { useState } from 'react';
-import { Button, Typography, Stack } from '@mui/material';
+import { Button, Typography, Box } from '@mui/material';
 
 /**
  * A component that displays a given text, truncated to a given length with an
@@ -14,7 +14,7 @@ import { Button, Typography, Stack } from '@mui/material';
  * @returns {React.ReactElement} A Stack component with a Typography and a
  * Button component
  */
-const ExpandableText = ({ text, initialLength = 100, ...props }) => {
+const ExpandableText = ({ text, initialLength = 150, ...props }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpand = () => {
@@ -25,14 +25,14 @@ const ExpandableText = ({ text, initialLength = 100, ...props }) => {
   const displayText = isExpanded ? text : `${text.slice(0, initialLength)}...`;
 
   return (
-    <Stack {...props}>
-      <Typography variant="body1">{displayText}</Typography>
+    <Box {...props}>
+      <Typography variant="bssr">{displayText}</Typography>
       {text.length > initialLength && (
-        <Button onClick={toggleExpand} color="primary">
+        <Button size='small' onClick={toggleExpand} variant='text'>
           {isExpanded ? 'See Less' : 'See More'}
         </Button>
       )}
-    </Stack>
+    </Box>
   );
 };
 
