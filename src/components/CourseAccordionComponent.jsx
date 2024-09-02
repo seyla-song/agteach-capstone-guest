@@ -22,8 +22,8 @@ export const CourseAccordionComponent = ({ data }) => {
             id="panel1-header"
           >
             <Stack>
-              <Typography variant="bmdsm">{course.title}</Typography>
-              <Typography variant='bsr'>{course.duration}</Typography>
+              <Typography variant="bssm">{course.title}</Typography>
+              <Typography variant='bxsr'>{course.duration}</Typography>
             </Stack>
           </AccordionSummary>
           {course.topics.map((topic) => (
