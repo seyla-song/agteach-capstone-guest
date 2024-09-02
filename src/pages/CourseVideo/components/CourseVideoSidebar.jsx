@@ -24,7 +24,7 @@ export const CourseVideoSidebar = ({ data }) => {
         overflowY: 'auto',
       }}
     >
-      <Stack p={2} bgcolor="primary.main" color="common.white">
+      <Stack p={2} bgcolor="primary.dark" color="common.white">
         <Typography variant="blgsm">Course Content</Typography>
       </Stack>
       <CourseAccordionComponent data={data} />
