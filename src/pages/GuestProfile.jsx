@@ -1,8 +1,14 @@
 import React from "react";
 import GuestProfileImg from '../assets/profile-pic.jpg';
+import Button from '../components/Button.jsx';
 
 export default function GuestProfile() {
+    const handleClick = () => {
+        alert('Button clicked!');
+      };
+
     return (
+        <>
         <div className="guestprofile-uppertext">
             <h1>Photo</h1>
             <p>Add a nice Photo of yourself for your profile.</p>
@@ -17,13 +23,14 @@ export default function GuestProfile() {
             </div>
 
             <div className="guest-profile-subtext">
-                <p>Add / Change Image</p>
+                <h2>Add / Change Image</h2>
                 <div className="subtext-input">
                     <input type="file" id="myfile" name="myfile" />
-                    <button>Upload I mage</button>
+                    {/* <button>Upload Image</button> */}
+                    <Button className="subtext-input" onClick={handleClick}>Upload Image</Button>
                 </div>
 
-                <hr class="sep-line"/>
+                <hr className="sep-line"/>
 
                 <div className="guest-section">
                     <div className="basic-info">
@@ -33,18 +40,37 @@ export default function GuestProfile() {
                             <input type="text" id="fname" name="fname" value="John" />
                             <input type="text" id="fname" name="fname" value="Doe" />
                             <input type="text" id="fname" name="fname" value="012 897 456" />
-                            <button>Save</button>
+                            <Button className="subtext-input" onClick={handleClick}>Save</Button>
                          </div>
                     </div>
                 </div>
-
-                {/* <hr class="sep-line"/> */}
-
             </div>
 
+            <hr className="sec-sep-line"/>
+
+            <div className="guest-section">
+                    <div className="acc-info">
+                        <h2>Account Security</h2>
+
+                        <div className="acc-subtext-input">
+                            <input type="text" id="fname" name="fname" value="johndoe123@gmail.com"/>
+                            <Button className="subtext-input" onClick={handleClick}>Save</Button>
+                         </div>
+                    </div>
+            </div>
+
+            <hr className="third-sep-line"/>
+
+
+            <div className="password-subtext-input">
+                <input type="password" id="currentPassword" name="currentPassword" placeholder="Enter Current Password" />
+                <input type="password" id="newPassword" name="newPassword" placeholder="Enter New Password" />
+                <input type="password" id="retypePassword" name="retypePassword" placeholder="Re-type Password" />
+                <Button className="subtext-input" onClick={handleClick}>Save</Button>
+            </div>
 
         </div>
+        </>
 
-        
     );
 }

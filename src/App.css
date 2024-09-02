@@ -49,8 +49,14 @@ body, html {
   font-size: 16px;
   font-family: 'Poppins', serif;
 }
-.guestprofile-uppertext h1 ,p{
-  margin: 10px;
+.guestprofile-uppertext h1 ,h2{
+     margin-left: 8px;
+     margin-top: 8px;
+}
+.guestprofile-uppertext p{
+  font-size: 14px;
+  margin-left: 10px;
+  margin-bottom: 10px;
 }
 .guestprofile-bg{
   background-color: #f1f1f1;
@@ -83,11 +89,13 @@ body, html {
   display: inline-block;
   border: 1.8px solid #000000;
   box-sizing: border-box;
+  border-radius: 4px;
 }
 .subtext-input button{
   width: 174px;
   background-color: #000000;
   border: none;
+  border-radius: 4px;
   color: white;
   padding: 12px;
   text-align: center;
@@ -99,6 +107,7 @@ body, html {
 }
 .sep-line{
   margin: 3rem 8px;
+  margin-bottom: 1rem;
   border-top: 1px solid #dddbdb;
 }
 .guest-section h2{
@@ -112,6 +121,7 @@ body, html {
   display: inline-block;
   border: 1.8px solid #000000;
   box-sizing: border-box;
+  border-radius: 4px;
 }
 .basic-subtext-input button{
   display: block;
@@ -127,4 +137,71 @@ body, html {
   font-size: 14px;
   margin: 8px 5px 8px 8px;
   cursor: pointer;
+  border-radius: 4px;
+}
+
+.sec-sep-line{
+  margin: 6rem 8px;
+  margin-bottom: 1rem;
+  border-top: 1px solid #dddbdb;
+}
+
+.acc-subtext-input input[type=text]{
+  display: none;
+  width: 99%;
+  padding: 12px;
+  margin: 8px 0px 8px 8px;
+  display: inline-block;
+  border: 1.8px solid #000000;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+.acc-subtext-input button{
+  display: block;
+  float: right;
+  width: 174px;
+  background-color: #000000;
+  border: none;
+  color: white;
+  padding: 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 8px 5px 8px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.third-sep-line{
+  margin: 4rem 8px;
+  margin-bottom: 1rem;
+  border-top: 1px solid #dddbdb;
+}
+
+.password-subtext-input input[type=password]{
+  display: none;
+  width: 99%;
+  padding: 12px;
+  margin: 8px 0px 8px 8px;
+  display: inline-block;
+  border: 1.8px solid #000000;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+.password-subtext-input button{
+  display: block;
+  float: right;
+  width: 174px;
+  background-color: #000000;
+  border: none;
+  color: white;
+  padding: 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 8px 5px 8px 8px;
+  cursor: pointer;
+  border-radius: 4px;
 }
