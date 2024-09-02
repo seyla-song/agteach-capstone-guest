@@ -1,76 +1,41 @@
-import React from "react";
-import GuestProfileImg from '../assets/profile-pic.jpg';
-import Button from '../components/Button.jsx';
+import ProfilePhoto from '../components/ProfilePhoto.jsx';
+import BasicInfo from '../components/BasicInfo.jsx';
+import AccountSecurity from '../components/AccountSecurity.jsx';
+import ChangePassword from '../components/ChangePassword.jsx';
+
 
 export default function GuestProfile() {
-    const handleClick = () => {
-        alert('Button clicked!');
+    const handleUpload = () => {
+        // Handle image upload
+      };
+    
+      const handleSaveBasicInfo = () => {
+        // Handle saving basic info
+      };
+    
+      const handleSaveAccountSecurity = () => {
+        // Handle saving account security
+      };
+    
+      const handleSavePassword = () => {
+        // Handle saving password
       };
 
     return (
         <>
-        <div className="guestprofile-uppertext">
-            <h1>Photo</h1>
-            <p>Add a nice Photo of yourself for your profile.</p>
+            <ProfilePhoto onUpload={handleUpload} />
 
-            <div className="guestprofile-bg">
-                <div className="guestprofile-img">
-                    <img src={GuestProfileImg} alt="Profile Pic" />
-                </div>
-                <div className="img-text">
-                    <p>Image Preview</p>
-                </div>
-            </div>
+            <hr className="sep-line" />
 
-            <div className="guest-profile-subtext">
-                <h2>Add / Change Image</h2>
-                <div className="subtext-input">
-                    <input type="file" id="myfile" name="myfile" />
-                    {/* <button>Upload Image</button> */}
-                    <Button className="subtext-input" onClick={handleClick}>Upload Image</Button>
-                </div>
+            <BasicInfo onSave={handleSaveBasicInfo} />
 
-                <hr className="sep-line"/>
+            <hr className="sec-sep-line" />
 
-                <div className="guest-section">
-                    <div className="basic-info">
-                        <h2>Basics Information</h2>
+            <AccountSecurity onSave={handleSaveAccountSecurity} />
 
-                        <div className="basic-subtext-input">
-                            <input type="text" id="fname" name="fname" value="John" />
-                            <input type="text" id="fname" name="fname" value="Doe" />
-                            <input type="text" id="fname" name="fname" value="012 897 456" />
-                            <Button className="subtext-input" onClick={handleClick}>Save</Button>
-                         </div>
-                    </div>
-                </div>
-            </div>
+            <hr className="third-sep-line" />
 
-            <hr className="sec-sep-line"/>
-
-            <div className="guest-section">
-                    <div className="acc-info">
-                        <h2>Account Security</h2>
-
-                        <div className="acc-subtext-input">
-                            <input type="text" id="fname" name="fname" value="johndoe123@gmail.com"/>
-                            <Button className="subtext-input" onClick={handleClick}>Save</Button>
-                         </div>
-                    </div>
-            </div>
-
-            <hr className="third-sep-line"/>
-
-
-            <div className="password-subtext-input">
-                <input type="password" id="currentPassword" name="currentPassword" placeholder="Enter Current Password" />
-                <input type="password" id="newPassword" name="newPassword" placeholder="Enter New Password" />
-                <input type="password" id="retypePassword" name="retypePassword" placeholder="Re-type Password" />
-                <Button className="subtext-input" onClick={handleClick}>Save</Button>
-            </div>
-
-        </div>
-        </>
-
+            <ChangePassword onSave={handleSavePassword} />
+        </> 
     );
 }
