@@ -1,44 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Container, CssBaseline } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles'; // Import ThemeProvider
+import LogIn from './pages/LogIn';
+import SignUp from './pages/SignUp';
+import PersonalInfoForm from './pages/PersonalInformation';
+import theme from './theme/theme'; // Import your custom theme
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}> 
+      <CssBaseline /> 
+      <Container component="main" maxWidth="xs">
+        {/* <LogIn /> */}
+        {/* <SignUp/> */}
+        <PersonalInfoForm />
+      </Container>
+    </ThemeProvider>
   );
-}
-
-
-
-    // <div className="App">
-    //   {/* <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header> */}
-    // </div>
+};
 
 export default App;
+
