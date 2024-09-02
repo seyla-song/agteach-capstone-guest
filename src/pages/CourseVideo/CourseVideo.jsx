@@ -11,6 +11,7 @@ import {
   defaultLayoutIcons,
   DefaultVideoLayout,
 } from '@vidstack/react/player/layouts/default';
+import { CourseVideoSidebar } from './components/CourseVideoSidebar';
 
 function CourseVideoPage() {
   return (
@@ -71,21 +72,7 @@ function CourseVideoPage() {
           </Grid>
         </Stack>
       </Stack>
-      <Stack
-        sx={{
-          width: '400px',
-          height: '100vh',
-          bgcolor: 'background.paper',
-          position: 'sticky',
-          top: 0,
-          overflowY: 'auto',
-        }}
-      >
-        <Stack>
-          <Typography>Course Content</Typography>
-        </Stack>
-        <CourseAccordionComponent data={courses} />
-      </Stack>
+      <CourseVideoSidebar data={courses} />
     </Stack>
   );
 }
