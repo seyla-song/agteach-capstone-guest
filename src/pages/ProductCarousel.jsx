@@ -1,97 +1,92 @@
-import React, { useState } from 'react';
-import { Button, Card, CardContent, Typography } from '@mui/material';
+import { useRef } from 'react';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { Box, Button, Container, Typography } from '@mui/material';
+import Slider from 'react-slick';
 import { motion } from 'framer-motion';
-import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
-const carouselVariants = {
-  enter: (direction) => ({
-    x: direction > 0 ? 1000 : -1000,
-    opacity: 0,
-  }),
-  center: {
-    x: 0,
-    opacity: 1,
-  },
-  exit: (direction) => ({
-    x: direction < 0 ? 1000 : -1000,
-    opacity: 0,
-  }),
-};
+export const ProductCarousel = ({ products }) => {
+  const sliderRef = useRef();
 
-const ProductCarousel = ({ products }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   const handleNext = () => {
-    setDirection(1); // Set direction to right
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % products.length);
+    sliderRef.current.slickNext();
   };
 
   const handlePrev = () => {
-    setDirection(-1); // Set direction to left
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + products.length) % products.length
-    );
+    sliderRef.current.slickPrev();
   };
 
   return (
-    <div style={{ position: 'relative', maxWidth: '100%', overflow: 'hidden' }}>
-      <motion.div
-        key={currentIndex}
-        custom={direction}
-        variants={carouselVariants}
-        initial="enter"
-        animate="center"
-        exit="exit"
-        transition={{ duration: 0.5 }}
-        style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
-      >
-        {products.map((product, index) => (
-          <motion.div
-            key={currentIndex}
-            style={{
-              minWidth: '300px',
-              margin: '0 10px',
-              display: index === currentIndex ? 'block' : 'none',
-              flexShrink: 0,
-            }}
-            custom={direction}
-          >
-            <Card>
-              <CardContent>
-                <Typography variant="h6">{product.name}</Typography>
-                <Typography variant="body2" color="textSecondary">
-                  {product.description}
-                </Typography>
-              </CardContent>
-            </Card>
-          </motion.div>
+    <Container>
+      <Slider ref={sliderRef} {...settings}>
+        {products.map((product, idx) => (
+          <Box key={idx} sx={{ padding: '10px' }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+            >
+              <Box p>
+                <Box
+                  component="img"
+                  src={product.image}
+                  alt={product.name}
+                  sx={{ width: '100%', borderRadius: '10px' }}
+                />
+                <Typography>{product.name}</Typography>
+                <Typography>{product.price}</Typography>
+              </Box>
+            </motion.div>
+          </Box>
         ))}
-      </motion.div>
-
-      <Button
-        onClick={handlePrev}
-        style={{
-          position: 'absolute',
-          left: 0,
-          top: '50%',
-          transform: 'translateY(-50%)',
-        }}
+      </Slider>
+      <Box
+        sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}
       >
-        <ArrowBackIos />
-      </Button>
-      <Button
-        onClick={handleNext}
-        style={{
-          position: 'absolute',
-          right: 0,
-          top: '50%',
-          transform: 'translateY(-50%)',
-        }}
-      >
-        <ArrowForwardIos />
-      </Button>
-    </div>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handlePrev}
+          sx={{ marginRight: '10px' }}
+        >
+          Back
+        </Button>
+        <Button variant="contained" color="primary" onClick={handleNext}>
+          Next
+        </Button>
+      </Box>
+    </Container>
   );
 };
-
-export default ProductCarousel;
