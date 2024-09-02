@@ -1,6 +1,7 @@
 import { Grid, Stack, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import TimerIcon from '@mui/icons-material/TimerOutlined';
+import { CourseObjectiveComponent } from '../../components/CourseObjectiveComponent';
 
 function CourseVideoPage() {
   return (
@@ -8,14 +9,16 @@ function CourseVideoPage() {
       <Stack width="100%" alignItems="center">
         <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}></Grid>
         <CourseAboutComponent />
-        <Grid>
+
         {highlights.map((highlight) => (
-          <Stack direction='row' gap alignItems='start' padding>
+          <Stack direction="row" gap alignItems="start" padding>
             {highlight.icons}
-            <Typography>{highlight.value} {highlight.title}</Typography>
+            <Typography>
+              {highlight.value} {highlight.title}
+            </Typography>
           </Stack>
         ))}
-        </Grid>
+        <CourseObjectiveComponent />
       </Stack>
     </Stack>
   );
