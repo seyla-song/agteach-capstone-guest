@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import TimerIcon from '@mui/icons-material/TimerOutlined';
 import { CourseObjectiveComponent } from '../../components/CourseObjectiveComponent';
 import { SuggestProductCourse } from '../../components/SuggestCourseProduct';
-import { CourseAccordionComponent } from '../../components/CourseAccordionComponent';
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
 import { MediaPlayer, MediaProvider } from '@vidstack/react';
