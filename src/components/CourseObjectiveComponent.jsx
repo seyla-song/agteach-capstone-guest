@@ -1,5 +1,14 @@
 import { Stack, Typography } from '@mui/material';
 
+/**
+ * A component that renders a course objectives section.
+ *
+ * It displays a heading, "What you learn in this course? What included", and
+ * a list of objectives of the course in a Stack component.
+ *
+ * @param {React.ReactNode} children The children to render inside the component.
+ * @returns {React.ReactElement} The course objectives component.
+ */
 export const CourseObjectiveComponent = (children) => {
   return (
     <Stack
@@ -11,7 +20,7 @@ export const CourseObjectiveComponent = (children) => {
     >
       <Stack gap maxWidth={500}>
         <Typography variant="h4">
-          What you learn in this course? What included
+          What you learn in this course?
         </Typography>
         <Typography variant="bxsr">
           ✅ How to mix and manage nutrient solutions to ensure optimal plant
