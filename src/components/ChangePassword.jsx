@@ -1,4 +1,4 @@
-import { Box, Button, OutlinedInput, Stack } from "@mui/material";
+import { Box, Button, OutlinedInput, Stack } from '@mui/material';
 
 function ChangePassword() {
   return (
@@ -17,6 +17,7 @@ function ChangePassword() {
           placeholder="Enter New Password"
         />
         <OutlinedInput
+          type="password"
           id="retypePassword"
           name="retypePassword"
           placeholder="Re-type Password"
@@ -25,12 +26,12 @@ function ChangePassword() {
 
       <Box
         sx={{
-          width: "100%",
-          boxSizing: "border-box",
+          width: '100%',
+          boxSizing: 'border-box',
         }}
       >
         <Stack
-          sx={{ m: 2, justifyContent: "flex-end" }}
+          sx={{ m: 2, justifyContent: 'flex-end' }}
           direction="row"
           spacing={2}
         >
