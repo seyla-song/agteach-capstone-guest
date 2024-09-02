@@ -1,7 +1,6 @@
 import { Link as RouterLink } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Link from "@mui/material/Link";
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,57 +9,54 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-// import AdbIcon from "@mui/icons-material/Adb";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
+import { useState } from "react";
 import Logo from "../assets/logo.png";
 
-const HEADER_DATA = [
+const HEADER_MENU_DESKTOP = [
   { page: "My Learning", path: "mylearning" },
   { page: "Marketplace", path: "marketplace" },
-  { page: "Become a member", path: "" },
   { page: "AgAI", path: "agai" },
-  { page: "Wishlist", path: "wishlist" },
-  { page: "Cart", path: "cart" },
-  // { page: "Login", path: "login" },
+  { page: "Become a member", path: "" },
 ];
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const HEADER_MENU_MOBILE = [
+  { page: "My Learning", path: "mylearning" },
+  { page: "Marketplace", path: "marketplace" },
+  { page: "AgAI", path: "agai" },
+  { page: "Become a member", path: "" },
+  { page: "Wishlist", path: "wishlist" },
+  { page: "Cart", path: "cart" },
+  { page: "Login", path: "login" },
+];
 
 function Navigation() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
-
+        <Toolbar
+          disableGutters
+          sx={{ display: "flex", justifyContent: "space-between" }}
+        >
           {/* logo */}
-          <Box sx={{ flexGrow: 1, display: "flex" }}>
-            <Link to="/">
-              <img src={Logo} alt="" />
+          <Box sx={{ display: "flex" }}>
+            <Link component={RouterLink} to="/">
+              <img width="94px" height="45px" src={Logo} alt="AgTeach Logo" />
             </Link>
           </Box>
 
@@ -95,59 +91,53 @@ function Navigation() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {HEADER_DATA.map((data) => (
+              {HEADER_MENU_MOBILE.map((data) => (
                 <MenuItem key={data.path} onClick={handleCloseNavMenu}>
-                  <Link component={NavLink} to={data.path}>{data.page}</Link>
+                  <Link component={NavLink} to={data.path}>
+                    <Typography variant="bsr">{data.page}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
-
           {/* desktop */}
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {HEADER_DATA.map((data) => (
-              <Button component={NavLink} variant="" to={data.path}>
-                {data.page}
-              </Button>
+          <Box sx={{ display: { xs: "none", md: "flex" }, gap: "2rem" }}>
+            {HEADER_MENU_DESKTOP.map((data) => (
+              <Link key={data.path} component={NavLink} to={data.path}>
+                <Typography variant="bsr" color="common.white">
+                  {data.page}
+                </Typography>
+              </Link>
             ))}
-            <Button
-              startIcon={<AccountCircleOutlinedIcon />}
-              variant="contained"
-            >
-              <RouterLink to="/login">Login</RouterLink>
-            </Button>
           </Box>
 
-          {/* <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <Button
+              startIcon={
+                <AccountCircleOutlinedIcon sx={{ color: "common.black" }} />
+              }
+              variant="contained"
+              sx={{ backgroundColor: "common.white", borderRadius: 50 }}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box> */}
+              <Link underline="none" component={RouterLink} to="/login">
+                <Typography variant="bsr">Login</Typography>
+              </Link>
+            </Button>
+            <IconButton
+              sx={{ color: "common.white" }}
+              component={RouterLink}
+              to="cart"
+            >
+              <ShoppingCartOutlinedIcon fontSize="small" />
+            </IconButton>
+            <IconButton
+              sx={{ color: "common.white" }}
+              component={RouterLink}
+              to="wishlist"
+            >
+              <StarOutlineOutlinedIcon fontSize="small" />
+            </IconButton>
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>
