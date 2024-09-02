@@ -1,41 +1,41 @@
-import ProfilePhoto from '../components/ProfilePhoto.jsx';
-import BasicInfo from '../components/BasicInfo.jsx';
-import AccountSecurity from '../components/AccountSecurity.jsx';
-import ChangePassword from '../components/ChangePassword.jsx';
-
+import ProfilePhoto from "../components/ProfilePhoto.jsx";
+import BasicInfo from "../components/BasicInfo.jsx";
+import AccountSecurity from "../components/AccountSecurity.jsx";
+import ChangePassword from "../components/ChangePassword.jsx";
+import Divider from "@mui/material/Divider";
 
 export default function GuestProfile() {
-    const handleUpload = () => {
-        // Handle image upload
-      };
-    
-      const handleSaveBasicInfo = () => {
-        // Handle saving basic info
-      };
-    
-      const handleSaveAccountSecurity = () => {
-        // Handle saving account security
-      };
-    
-      const handleSavePassword = () => {
-        // Handle saving password
-      };
+  const handleUpload = () => {
+    // Handle image upload
+  };
 
-    return (
-        <>
-            <ProfilePhoto onUpload={handleUpload} />
+  const handleSaveBasicInfo = () => {
+    // Handle saving basic info
+  };
 
-            <hr className="sep-line" />
+  const handleSaveAccountSecurity = () => {
+    // Handle saving account security
+  };
 
-            <BasicInfo onSave={handleSaveBasicInfo} />
+  const handleSavePassword = () => {
+    // Handle saving password
+  };
 
-            <hr className="sec-sep-line" />
+  return (
+    <>
+      <ProfilePhoto onUpload={handleUpload} />
 
-            <AccountSecurity onSave={handleSaveAccountSecurity} />
+      <Divider sx={{ m: 5, mx: 0 }} />
 
-            <hr className="third-sep-line" />
+      <BasicInfo onSave={handleSaveBasicInfo} />
 
-            <ChangePassword onSave={handleSavePassword} />
-        </> 
-    );
+      <Divider sx={{ m: 5, mx: 0 }} />
+
+      <AccountSecurity onSave={handleSaveAccountSecurity} />
+
+      <Divider sx={{ m: 5, mx: 0 }} />
+
+      <ChangePassword onSave={handleSavePassword} />
+    </>
+  );
 }

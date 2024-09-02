@@ -1,18 +1,30 @@
-import React from "react";
-import Button from "./Button";
-import Input from "./Input";
+import { Box, Button, OutlinedInput, Stack, Typography } from "@mui/material";
 
-const AccountSecurity = ({ onSave }) => (
-    <div className="guest-section">
-        <div className="acc-info">
-            <h2>Account Security</h2>
+function AccountSecurity() {
+  return (
+    <>
+      <Stack sx={{ m: 2, gap: 2 }}>
+        <Typography variant="h4">Account Security</Typography>
+        <OutlinedInput placeholder="Enter your Email" />
+      </Stack>
 
-            <div className="acc-subtext-input">
-                <Input type="text" id="fname" name="fname" value="johndoe@gmail.com" />
-                <Button className="subtext-input" onClick={onSave}>Save</Button>
-            </div>
-        </div>
-    </div>
-
-);
+      <Box
+        sx={{
+          width: "100%",
+          boxSizing: "border-box",
+        }}
+      >
+        <Stack
+          sx={{ m: 2, justifyContent: "flex-end" }}
+          direction="row"
+          spacing={2}
+        >
+          <Button variant="contained" sx={{ px: 10, py: 2 }}>
+            Save
+          </Button>
+        </Stack>
+      </Box>
+    </>
+  );
+}
 export default AccountSecurity;

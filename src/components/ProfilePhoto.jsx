@@ -1,27 +1,74 @@
-import { Button, OutlinedInput, Stack, Typography } from "@mui/material";
+import { Margin } from "@mui/icons-material";
+import GuestProfileImg from "../assets/profile-pic.jpg";
+import {
+  Box,
+  Button,
+  OutlinedInput,
+  Stack,
+  Typography,
+  Avatar,
+} from "@mui/material";
 
-const ProfilePhoto = ({ onUpload }) => (
-    <Stack>
-        <Typography variant="h2" >Photo</Typography>
-        <Typography variant="bssm" >Add a nice photo of yourself for your profile</Typography>
+function ProfilePhoto() {
+  return (
+    <>
+      <Stack sx={{ m: 2 }}>
+        <Typography variant="h2">Photo</Typography>
+        <Typography variant="bssm">
+          Add a nice photo of yourself for your profile
+        </Typography>
+      </Stack>
 
-        {/* <img src={GuestProfileImg} alt="Profile Pic" /> */}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          backgroundColor: "grey.100",
+          padding: 2,
+          boxSizing: "border-box",
+        }}
+      >
+        <Stack>
+          <Avatar
+            src={GuestProfileImg}
+            alt="Profile Pic"
+            sx={{ width: 300, height: 300 }}
+            // border-color='grey.500 10px'
+          />
+          <Typography variant="bmdsm" textAlign="center" margin="10px">
+            Image Preview
+          </Typography>
+        </Stack>
+      </Box>
 
-        {/* <p>Image Preview</p> */}
+      <Stack sx={{ m: 2, mb: 0 }}>
+        <Typography variant="h4">Add/Change Image</Typography>
+      </Stack>
 
+      <Box
+        sx={{
+          display: "none",
+          display: "inline-block",
+          width: "100%",
+          boxSizing: "border-box",
+        }}
+      >
+        <Stack sx={{ m: 2, gap: 2 }} direction="row">
+          <OutlinedInput
+            type="file"
+            id="myfile"
+            name="myfile"
+            sx={{ flexGrow: 1, width: "auto" }}
+          />
+          <Button variant="contained" sx={{ px: 10, py: 2 }}>
+            Upload
+          </Button>
+        </Stack>
+      </Box>
+    </>
+  );
+}
 
-
-
-        {/* <h2>Add / Change Image</h2> */}
-
-        {/* <Input type="file" id="myfile" name="myfile" /> */}
-        <Button variant="contained">Upload</Button>
-        
-    </Stack>
-
-
-
-             
-  
-);
 export default ProfilePhoto;
