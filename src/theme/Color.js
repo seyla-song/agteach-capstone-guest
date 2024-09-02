@@ -30,7 +30,7 @@ const color = {
   },
   blue: {
     main: '#348FFD',
-    dark: '#016FD0',
+    // dark: '#016FD0',
   },
   purple: {
     main: '#5D87FF',
