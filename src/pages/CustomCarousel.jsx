@@ -5,9 +5,7 @@ import {
   Box,
   Button,
   Container,
-  IconButton,
   Stack,
-  Typography,
 } from '@mui/material';
 import Slider from 'react-slick';
 import { motion } from 'framer-motion';
