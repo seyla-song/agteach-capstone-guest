@@ -8,7 +8,7 @@ import { CourseVideoHeaderComponent } from './components/CourseVideoHeaderCompon
 function CourseVideoPage() {
   return (
     <Stack>
-      <CourseVideoHeaderComponent />
+      <CourseVideoHeaderComponent title={'Course Video'} />
       <Stack direction="row">
         <CourseVideoMainContent data={highlights} />
         <CourseVideoSidebar data={courses} />

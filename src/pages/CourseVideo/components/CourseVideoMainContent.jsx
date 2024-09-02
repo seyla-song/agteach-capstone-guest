@@ -15,6 +15,7 @@ export const CourseVideoMainContent = ({ data }) => {
     <Stack sx={{ flexGrow: 1 }}>
       <Stack width="100%" alignItems="center">
         <MediaPlayer
+          style={{borderRadius:0}}
           title="Sprite Fight"
           src="https://files.vidstack.io/sprite-fight/720p.mp4"
         >
