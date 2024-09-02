@@ -48,7 +48,7 @@ function Navigation() {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth={false} sx={{ maxWidth: "1420px" }}>
         <Toolbar
           disableGutters
           sx={{ display: "flex", justifyContent: "space-between" }}
