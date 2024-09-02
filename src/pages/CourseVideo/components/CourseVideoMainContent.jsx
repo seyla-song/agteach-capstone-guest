@@ -45,7 +45,7 @@ export const CourseVideoMainContent = ({ data }) => {
           gap={5}
         >
           {/* The course about section is on the left side and takes up 7/12 of the width */}
-          <Grid item xs={7}>
+          <Grid item xs={8}>
             <CourseAboutComponent />
           </Grid>
 
