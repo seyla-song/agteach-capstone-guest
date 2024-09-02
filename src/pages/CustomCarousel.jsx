@@ -1,16 +1,25 @@
 import { useRef } from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Box, Button, Container, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  IconButton,
+  Stack,
+  Typography,
+} from '@mui/material';
 import Slider from 'react-slick';
 import { motion } from 'framer-motion';
+import { CustomCard } from './CustomCard';
+import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 
-export const ProductCarousel = ({ products }) => {
+export const CustomCarousel = ({ data, cardVariant }) => {
   const sliderRef = useRef();
 
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
@@ -51,42 +60,32 @@ export const ProductCarousel = ({ products }) => {
   return (
     <Container>
       <Slider ref={sliderRef} {...settings}>
-        {products.map((product, idx) => (
+        {data.map((product, idx) => (
           <Box key={idx} sx={{ padding: '10px' }}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
             >
-              <Box p>
-                <Box
-                  component="img"
-                  src={product.image}
-                  alt={product.name}
-                  sx={{ width: '100%', borderRadius: '10px' }}
-                />
-                <Typography>{product.name}</Typography>
-                <Typography>{product.price}</Typography>
-              </Box>
+              <CustomCard dataObj={product} variant={cardVariant} />
             </motion.div>
           </Box>
         ))}
       </Slider>
-      <Box
-        sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}
-      >
+      <Stack justifyContent="end" direction="row" gap>
         <Button
-          variant="contained"
-          color="primary"
+          size="medium"
           onClick={handlePrev}
-          sx={{ marginRight: '10px' }}
-        >
-          Back
-        </Button>
-        <Button variant="contained" color="primary" onClick={handleNext}>
-          Next
-        </Button>
-      </Box>
+          variant="contained"
+          startIcon={<ChevronLeft />}
+        />
+        <Button
+          size="medium"
+          onClick={handleNext}
+          variant="contained"
+          endIcon={<ChevronRight />}
+        />
+      </Stack>
     </Container>
   );
 };
