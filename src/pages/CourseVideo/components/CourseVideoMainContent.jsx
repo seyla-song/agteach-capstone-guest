@@ -10,9 +10,19 @@ import { CourseAboutComponent } from './CourseAboutComponent';
 import { CourseObjectiveComponent } from '../../../components/CourseObjectiveComponent';
 import { SuggestProductCourse } from '../../../components/SuggestCourseProduct';
 
+/**
+ * The main content of the course video page.
+ *
+ * It displays the video player at the top, followed by the course about,
+ * course objective, and suggested courses sections.
+ *
+ * @param {Object} data The data for the course about section.
+ * @returns {React.ReactElement} The main content of the course video page.
+ */
 export const CourseVideoMainContent = ({ data }) => {
   return (
     <Stack sx={{ flexGrow: 1 }}>
+      {/* The video player is centered and stretched to the full width */}
       <Stack width="100%" alignItems="center">
         <MediaPlayer
           style={{borderRadius:0}}
@@ -25,6 +35,8 @@ export const CourseVideoMainContent = ({ data }) => {
             icons={defaultLayoutIcons}
           />
         </MediaPlayer>
+
+        {/* The rest of the content is wrapped in a container with a maximum width of 1420px */}
         <Grid
           sx={{ maxWidth: '1420px' }}
           container
@@ -32,9 +44,12 @@ export const CourseVideoMainContent = ({ data }) => {
           py={10}
           gap={5}
         >
+          {/* The course about section is on the left side and takes up 7/12 of the width */}
           <Grid item xs={7}>
             <CourseAboutComponent />
           </Grid>
+
+          {/* The highlights section is on the right side and takes up 9/12 of the width */}
           <Grid item xs={9}>
             <Stack gap={2} direction="row">
               {data.map((highlight) => (
@@ -60,9 +75,13 @@ export const CourseVideoMainContent = ({ data }) => {
               ))}
             </Stack>
           </Grid>
+
+          {/* The course objective section is on the right side and takes up 9/12 of the width */}
           <Grid item xs={9}>
             <CourseObjectiveComponent />
           </Grid>
+
+          {/* The suggested courses section is on the right side and takes up 9/12 of the width */}
           <Grid item xs={9}>
             <SuggestProductCourse />
           </Grid>
