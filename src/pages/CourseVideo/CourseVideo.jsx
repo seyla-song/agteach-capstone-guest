@@ -5,12 +5,24 @@ import { CourseVideoSidebar } from './components/CourseVideoSidebar';
 import { CourseVideoMainContent } from './components/CourseVideoMainContent';
 import { CourseVideoHeaderComponent } from './components/CourseVideoHeaderComponent';
 
+/**
+ * The course video page.
+ *
+ * This page will display the course video, together with the sidebar containing
+ * the course details and the course outline.
+ *
+ * @returns {React.ReactElement} The course video page.
+ */
 function CourseVideoPage() {
   return (
     <Stack>
+      {/* The course video header */}
       <CourseVideoHeaderComponent title={'Course Video'} />
+      {/* The course video main content and sidebar */}
       <Stack direction="row">
+        {/* The main content containing the video */}
         <CourseVideoMainContent data={highlights} />
+        {/* The sidebar containing the course details and outline */}
         <CourseVideoSidebar data={courses} />
       </Stack>
     </Stack>
