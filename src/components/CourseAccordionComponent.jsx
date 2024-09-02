@@ -14,22 +14,24 @@ export const CourseAccordionComponent = ({ data }) => {
       {data.map((course) => (
         <Accordion
           key={course.title}
-          sx={{ backgroundColor: 'grey.200', py: 2, boxShadow: 'none' }}
+          sx={{ backgroundColor: 'grey.200', boxShadow: 'none' }}
         >
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
+            expandIcon={<ExpandMoreIcon fontSize='small' />}
             aria-controls="panel1-content"
             id="panel1-header"
           >
-            <Typography variant="bmdsm">{course.title}</Typography> (
-            {course.duration})
+            <Stack>
+              <Typography variant="bmdsm">{course.title}</Typography>
+              <Typography variant='bsr'>{course.duration}</Typography>
+            </Stack>
           </AccordionSummary>
           {course.topics.map((topic) => (
             <Stack px={2}>
               <AccordionDetails key={topic.title} sx={{ bgcolor: 'white' }}>
                 <Stack direction="row" justifyContent="space-between" py={2}>
-                  <Typography>{topic.title}</Typography>
-                  <Typography>{topic.duration}</Typography>
+                  <Typography variant='bsr'>{topic.title}</Typography>
+                  <Typography variant='bsr'>{topic.duration}</Typography>
                 </Stack>
                 <Divider />
               </AccordionDetails>
