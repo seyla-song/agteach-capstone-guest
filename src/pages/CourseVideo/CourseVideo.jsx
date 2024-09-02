@@ -15,15 +15,28 @@ function CourseVideoPage() {
           paddingX={1}
           gap={10}
         >
-          <Grid item xs={12}>
+          <Grid item xs={7}>
             <CourseAboutComponent />
           </Grid>
-          <Grid item xs={12}>
-            <Stack direction="row">
+          <Grid item xs={7}>
+            <Stack gap={2} direction="row">
               {highlights.map((highlight) => (
-                <Stack direction="row" gap alignItems="start" padding>
+                <Stack
+                  sx={{
+                    borderColor: 'dark.100',
+                    borderWidth: 1,
+                    borderStyle: 'solid',
+                  }}
+                  flex={1}
+                  borderRadius={1}
+                  justifyContent="center"
+                  py={3}
+                  direction="row"
+                  alignItems="start"
+                  gap
+                >
                   {highlight.icons}
-                  <Typography>
+                  <Typography variant="bsr">
                     {highlight.value} {highlight.title}
                   </Typography>
                 </Stack>
@@ -46,14 +59,14 @@ export default CourseVideoPage;
 
 const CourseAboutComponent = () => {
   return (
-    <Stack>
-      <Typography variant="blgmd">Indoor Gardening and Hydroponics</Typography>
-      <Typography>
+    <Stack gap>
+      <Typography variant="h3">Indoor Gardening and Hydroponics</Typography>
+      <Typography variant="bxsr">
         Learn about various types of hydroponic setups, nutrient solutions,
         lighting, and plant care techniques hands-on projects to design and
         build a personal hydroponic garden
       </Typography>
-      <Typography>
+      <Typography variant="bxsr">
         Created by: <Link>Emily Greene</Link>
       </Typography>
     </Stack>
@@ -63,17 +76,17 @@ const CourseAboutComponent = () => {
 const highlights = [
   {
     title: 'Sections',
-    icons: <TimerIcon />,
+    icons: <TimerIcon fontSize="small" />,
     value: 20,
   },
   {
     title: 'Hours',
-    icons: <TimerIcon />,
+    icons: <TimerIcon fontSize="small" />,
     value: 20,
   },
   {
     title: 'Vidoes',
-    icons: <TimerIcon />,
+    icons: <TimerIcon fontSize="small" />,
     value: 20,
   },
 ];
