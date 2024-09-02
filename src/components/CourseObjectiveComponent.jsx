@@ -1,14 +1,13 @@
 import { Stack, Typography } from '@mui/material';
 
-export const CourseObjectiveComponent = () => {
+export const CourseObjectiveComponent = (children) => {
   return (
     <Stack
       gap
-      justifyContent="center"
-      alignItems="center"
       bgcolor="primary.dark"
       color={'white'}
       padding={10}
+      {...children}
     >
       <Stack gap maxWidth={500}>
         <Typography variant="h4">
