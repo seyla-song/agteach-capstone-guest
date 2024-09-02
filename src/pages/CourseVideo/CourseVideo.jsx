@@ -2,13 +2,17 @@ import { Stack } from '@mui/material';
 import TimerIcon from '@mui/icons-material/TimerOutlined';
 
 import { CourseVideoSidebar } from './components/CourseVideoSidebar';
-import {CourseVideoMainContent} from './components/CourseVideoMainContent'
+import { CourseVideoMainContent } from './components/CourseVideoMainContent';
+import { CourseVideoHeaderComponent } from './components/CourseVideoHeaderComponent';
 
 function CourseVideoPage() {
   return (
-    <Stack direction="row">
-      <CourseVideoMainContent data={highlights} />
-      <CourseVideoSidebar data={courses} />
+    <Stack>
+      <CourseVideoHeaderComponent />
+      <Stack direction="row">
+        <CourseVideoMainContent data={highlights} />
+        <CourseVideoSidebar data={courses} />
+      </Stack>
     </Stack>
   );
 }
