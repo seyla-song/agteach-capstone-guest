@@ -8,18 +8,35 @@ function CourseVideoPage() {
   return (
     <Stack alignItems="center">
       <Stack width="100%" alignItems="center">
-        <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}></Grid>
-        <CourseAboutComponent />
-        {highlights.map((highlight) => (
-          <Stack direction="row" gap alignItems="start" padding>
-            {highlight.icons}
-            <Typography>
-              {highlight.value} {highlight.title}
-            </Typography>
-          </Stack>
-        ))}
-        <CourseObjectiveComponent />
-        <SuggestProductCourse />
+        <Grid
+          sx={{ maxWidth: '1420px' }}
+          bgcolor="yellowgreen"
+          container
+          paddingX={1}
+          gap={10}
+        >
+          <Grid item xs={12}>
+            <CourseAboutComponent />
+          </Grid>
+          <Grid item xs={12}>
+            <Stack direction="row">
+              {highlights.map((highlight) => (
+                <Stack direction="row" gap alignItems="start" padding>
+                  {highlight.icons}
+                  <Typography>
+                    {highlight.value} {highlight.title}
+                  </Typography>
+                </Stack>
+              ))}
+            </Stack>
+          </Grid>
+          <Grid item xs={12}>
+            <CourseObjectiveComponent />
+          </Grid>
+          <Grid item xs={12}>
+            <SuggestProductCourse />
+          </Grid>
+        </Grid>
       </Stack>
     </Stack>
   );
