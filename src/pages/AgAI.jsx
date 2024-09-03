@@ -5,11 +5,9 @@ import { ImageScan } from '../components/AgAi/ImageScan';
 function AgAiPage() {
   return (
     <Container>
-      <Stack gap={5} mt={10}>
+      <Stack height="100vh" gap={5} mt={10}>
         <Stack>
-          <Typography variant="h3">
-            Identify a plant disease with us{' '}
-          </Typography>
+          <Typography variant="h3">Identify a plant disease with us</Typography>
           <Typography variant="bxsmd">
             Find out the problem, symptom, and cure
           </Typography>
@@ -25,7 +23,6 @@ function AgAiPage() {
             Search any plant with AgAI
           </Typography>
           <ImageScan />
-
         </Stack>
       </Stack>
     </Container>
