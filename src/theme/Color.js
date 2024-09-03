@@ -31,9 +31,11 @@ const color = {
   },
   red: {
     main: '#E2111C',
+    light: '#FCE7E8',
   },
   blue: {
     main: '#348FFD',
+    light: '#EBF4FF',
     dark: '#016FD0',
   },
   purple: {
