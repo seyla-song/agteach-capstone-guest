@@ -83,7 +83,7 @@ const Login = () => {
                         color: '#032613',
                         marginBottom: 3,
                         fontSize: '0.875rem', // Smaller font size
-                        textAlign: 'center', // Center text
+                        textAlign: 'center', 
                         maxWidth: '300px', // Limit width to ensure it stays on one line
                         marginLeft: 'auto', 
                         marginRight: 'auto', 

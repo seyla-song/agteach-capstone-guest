@@ -3,142 +3,147 @@ import { Container, TextField, Typography, Button, Box, Grid } from '@mui/materi
 
 const PersonalInfoForm = () => {
   return (
-    <Container maxWidth="md" sx={{ mt: 5 }}>
+    <Container maxWidth="lg" sx={{ mt: 30 }}>
       {/* Logo */}
       <Box sx={{ display: 'flex', justifyContent: 'center', mb: 10 }}>
         <img src="/icon/agteach.png" alt="Logo" style={{ height: '50px' }} />
       </Box>
 
-      <Grid container spacing={4}>
+      <Grid container spacing={3} justifyContent="center">
         {/* Personal Information Section */}
-        <Grid item xs={12}>
-          <Typography variant="h6">Personal Information</Typography>
+        <Grid item xs={12} >
+          <Typography variant="h5" >Personal Information</Typography>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            label="First name"
-            variant="outlined"
-            fullWidth
-            required
-            InputProps={{
-              style: { height: '50px', borderWidth: '2px' }, // Increased border width
-            }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                  borderWidth: '2px', // Larger border
+        
+        {/* Flexbox for First and Last Name */}
+        <Grid item xs={160}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <TextField
+              label="First name"
+              variant="outlined"
+              required
+              InputProps={{
+                style: { height: '50px', borderRadius: '12px', width:'328px'},
+              }}
+              sx={{
+                width: '48%', // Adjusted to fit wider screen
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderWidth: '2px',
+                  },
+                  '&:hover fieldset': {
+                    borderWidth: '2px',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderWidth: '2px',
+                  },
                 },
-                '&:hover fieldset': {
-                  borderWidth: '2px',
+              }}
+            />
+            <TextField
+              label="Last name"
+              variant="outlined"
+              required
+              InputProps={{
+                style: { height: '50px', borderRadius: '12px', width:'328px' },
+              }}
+              sx={{
+                width: '48%', // Adjusted to fit wider screen
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderWidth: '2px',
+                  },
+                  '&:hover fieldset': {
+                    borderWidth: '2px',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderWidth: '2px',
+                  },
                 },
-                '&.Mui-focused fieldset': {
-                  borderWidth: '2px',
-                },
-              },
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            label="Last name"
-            variant="outlined"
-            fullWidth
-            required
-            InputProps={{
-              style: { height: '50px', borderWidth: '2px' },
-            }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                  borderWidth: '2px',
-                },
-                '&:hover fieldset': {
-                  borderWidth: '2px',
-                },
-                '&.Mui-focused fieldset': {
-                  borderWidth: '2px',
-                },
-              },
-            }}
-          />
+              }}
+            />
+          </Box>
         </Grid>
 
         {/* Contact Information Section */}
-        <Grid item xs={12}>
-          <Typography variant="h6">Contact Information</Typography>
+        <Grid item xs={200}>
+          <Typography variant="h5">Contact Information</Typography>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            label="Email"
-            variant="outlined"
-            fullWidth
-            required
-            InputProps={{
-              style: { height: '50px', borderWidth: '2px' },
-            }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                  borderWidth: '2px',
+
+        {/* Flexbox for Email and Phone Number */}
+        <Grid item xs={200}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <TextField
+              label="Email"
+              variant="outlined"
+              required
+              InputProps={{
+                style: { height: '50px', borderRadius: '12px', width:'328px' },
+              }}
+              sx={{
+                width: '48%', // Adjusted to fit wider screen
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderWidth: '2px',
+                  },
+                  '&:hover fieldset': {
+                    borderWidth: '2px',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderWidth: '2px',
+                  },
                 },
-                '&:hover fieldset': {
-                  borderWidth: '2px',
+              }}
+            />
+            <TextField
+              label="Phone number"
+              variant="outlined"
+              required
+              InputProps={{
+                style: { height: '50px', borderRadius: '12px', width:'328px' },
+              }}
+              sx={{
+                width: '48%', // Adjusted to fit wider screen
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderWidth: '2px',
+                  },
+                  '&:hover fieldset': {
+                    borderWidth: '2px',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderWidth: '2px',
+                  },
                 },
-                '&.Mui-focused fieldset': {
-                  borderWidth: '2px',
-                },
-              },
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            label="Phone number"
-            variant="outlined"
-            fullWidth
-            required
-            InputProps={{
-              style: { height: '50px', borderWidth: '2px' },
-            }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                  borderWidth: '2px',
-                },
-                '&:hover fieldset': {
-                  borderWidth: '2px',
-                },
-                '&.Mui-focused fieldset': {
-                  borderWidth: '2px',
-                },
-              },
-            }}
-          />
+              }}
+            />
+          </Box>
         </Grid>
 
         {/* Buttons aligned to the right */}
-        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4 }}>
+        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4, marginLeft:'100%' }}>
+          <Button
+            variant="outlined"
+            sx={{
+              padding: '10px 45px',
+              borderColor: '#003300',
+              color: '#003300',
+              '&:hover': { borderColor: '#002200', color: '#002200' },
+              marginRight: '10px',
+            }}
+          >
+            Skip
+          </Button>
+
           <Button
             variant="contained"
             sx={{
               backgroundColor: '#003300',
               '&:hover': { backgroundColor: '#002200' },
-              padding: '10px 20px',
-              marginRight: '10px',
+              padding: '10px 40px',
             }}
           >
             Submit
-          </Button>
-          <Button
-            variant="outlined"
-            sx={{
-              padding: '10px 20px',
-              borderColor: '#003300',
-              color: '#003300',
-              '&:hover': { borderColor: '#002200', color: '#002200' },
-            }}
-          >
-            Skip
           </Button>
         </Grid>
       </Grid>
@@ -147,4 +152,5 @@ const PersonalInfoForm = () => {
 };
 
 export default PersonalInfoForm;
+
 

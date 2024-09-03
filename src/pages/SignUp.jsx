@@ -46,7 +46,6 @@ const SignUp = () => {
       height: '1.5em', // Align adornments
     },
   };
-
   return (
     <Container
       maxWidth="xs"
