@@ -25,7 +25,7 @@ function ProfilePhoto() {
           alignItems: "center",
           justifyContent: "flex-start",
           backgroundColor: "grey.100",
-          padding: 2,
+          padding: '30px',
           boxSizing: "border-box",
         }}
       >
@@ -33,7 +33,7 @@ function ProfilePhoto() {
           <Avatar
             src={GuestProfileImg}
             alt="Profile Pic"
-            sx={{ width: 300, height: 300 }}
+            sx={{ width: 300, height: 300, border: "15px solid lightgrey"}}
             // border-color='grey.500 10px'
           />
           <Typography variant="bmdsm" textAlign="center" margin="10px">
