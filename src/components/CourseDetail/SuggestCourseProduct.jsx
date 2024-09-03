@@ -1,12 +1,14 @@
-import { Box, Grid, Stack, Typography } from '@mui/material';
+import { Grid, Stack, Typography } from '@mui/material';
 import { CustomCarousel } from '../CustomCarousel';
 
 export const SuggestedCourseProduct = ({ courses, products }) => {
   return (
-    <Grid border={'1px solid black'} item xs={12}>
+    <Grid item xs={12}>
       <Stack gap={5}>
         <Stack>
-          <Typography variant="h4" maxWidth={300}>People also learn this course</Typography>
+          <Typography variant="h4" maxWidth={300}>
+            People also learn this course
+          </Typography>
           <CustomCarousel data={courses} slideToShow={5} />
         </Stack>
         <Stack>
