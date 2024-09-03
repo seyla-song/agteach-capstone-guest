@@ -1,8 +1,8 @@
-import { Typography, Button, Container, Stack } from '@mui/material';
-import ImageIcon from '@mui/icons-material/Image';
-import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
+import { Typography, Container, Stack } from '@mui/material';
 import theme from '../theme/theme';
 import { DiseaseInfoComponent } from '../components/AgAi/DiseaseInfoComponent';
+import { ImageScan } from '../components/AgAi/ImageScan';
+
 function AgAiPage() {
   return (
     <Container>
@@ -25,26 +25,7 @@ function AgAiPage() {
           <Typography variant="bmdsm" color="initial">
             Search any plant with AgAI
           </Typography>
-          <Stack
-            bgcolor="grey.100"
-            width="100%"
-            py={5}
-            gap={2}
-            justifyContent="center"
-            alignItems="center"
-          >
-            <ImageIcon sx={{ width: 200, height: 200 }} />
-            <Typography variant="bsr" color="initial">
-              Drag an image here or upload a file
-            </Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              endIcon={<FileUploadOutlinedIcon />}
-            >
-              Upload
-            </Button>
-          </Stack>
+          <ImageScan />
           <DiseaseInfoComponent data={plantDiseaseInfo} />
         </Stack>
       </Stack>
