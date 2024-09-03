@@ -2,6 +2,7 @@ import { Typography, Button, Container, Stack } from '@mui/material';
 import ImageIcon from '@mui/icons-material/Image';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import theme from '../theme/theme';
+import { DiseaseInfoComponent } from '../components/AgAi/DiseaseInfoComponent';
 function AgAiPage() {
   return (
     <Container>
@@ -44,6 +45,7 @@ function AgAiPage() {
               Upload
             </Button>
           </Stack>
+          <DiseaseInfoComponent />
         </Stack>
       </Stack>
     </Container>
@@ -51,3 +53,26 @@ function AgAiPage() {
 }
 
 export default AgAiPage;
+
+const plantDiseaseInfo = {
+  plant: 'Brandywine Tomato',
+  problem: {
+    title: 'Problem',
+    description: 'Late Blight (Phytophthora infestans)',
+  },
+  symptoms: {
+    title: 'Symptoms',
+    details: [
+      'Irregular, water-soaked spots on leaves and stems that turn brown and necrotic.',
+      'Fruits may develop dark, sunken lesions.',
+    ],
+  },
+  cureManagement: {
+    title: 'Cure/Management',
+    recommendations: [
+      'Resistant Varieties: Use late blight-resistant varieties if available.',
+      'Fungicides: Apply metalaxyl or mefenoxam-based fungicides as a preventative measure.',
+      'Cultural Control: Remove and destroy infected plants and maintain good air circulation. Avoid overhead watering.',
+    ],
+  },
+};
