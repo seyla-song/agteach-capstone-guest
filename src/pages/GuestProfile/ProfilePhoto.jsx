@@ -1,5 +1,4 @@
-import { Margin } from "@mui/icons-material";
-import GuestProfileImg from "../assets/profile-pic.jpg";
+import GuestProfileImg from "../../assets/profile-pic.jpg";
 import {
   Box,
   Button,
@@ -49,7 +48,6 @@ function ProfilePhoto() {
 
       <Box
         sx={{
-          display: "none",
           display: "inline-block",
           width: "100%",
           boxSizing: "border-box",
