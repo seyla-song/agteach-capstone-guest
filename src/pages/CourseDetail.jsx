@@ -1,13 +1,15 @@
 import { Grid, Stack } from '@mui/material';
-import { CourseDetailHero } from './components/CourseDetailHero';
-import { CourseDetailHighlight } from './components/CouseDetailHighlight';
-import { CourseDetailContent } from './components/CourseDetailContent';
-import { SuggestedCourseProduct } from './components/SuggestCourseProduct';
+import {
+  CourseDetailHero,
+  CourseDetailHighlight,
+  CourseDetailContent,
+  SuggestedCourseProduct,
+} from '../components/CourseDetail/index';
 
 function CourseDetailPage() {
   return (
     <Stack alignItems="center">
-      <Stack width='100%' alignItems='center' bgcolor={'primary.dark'}>
+      <Stack width="100%" alignItems="center" bgcolor={'primary.dark'}>
         <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
           <CourseDetailHero />
         </Grid>
