@@ -1,0 +1,5 @@
+REVIEWBOARD_URL = "https://review.clp.kr/"
+REPOSITORY = "AlphaBeez/AgTeach/Guest"
+REPOSITORY_TYPE = "git"
+BRANCH = "feature/ref-coursedetail-component"
+LAND_DEST_BRANCH = "feature/ref-coursedetail-component"
