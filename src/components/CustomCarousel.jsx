@@ -80,7 +80,7 @@ export const CustomCarousel = ({ data, cardVariant, slideToShow = 4 }) => {
   };
 
   return (
-    <Stack disableGutters sx={{ bgcolor:'yellow'}}>
+    <Stack>
       {/* Custom carousel component using react-slick */}
       <Slider ref={sliderRef} {...settings}>
         {data.map((product, idx) => (
