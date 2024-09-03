@@ -32,7 +32,9 @@ We use folder structure to organize our project and it is essential for maintain
 project-root/
 ├── client/
 │   ├── public/
-│   ├── src/
+│   ├── src
+│   │   ├── assets/
+│   │   │   └── images-1.png
 │   │   ├── components/
 │   │   │   └── Button.js
 │   │   ├── hooks/
@@ -81,6 +83,7 @@ project-root/
 | -------------------------- | ----------------------------------------------------------- |
 | **client/public/**         | Contains static files like HTML, CSS, and images.           |
 | **client/src/**            | main source code for the React application                  |
+| **client/src/assets/**     | Contains images need to import into your React components   |
 | **client/src/components/** | Reusable UI components.                                     |
 | **client/src/pages/**      | Components representing different pages of the application. |
 | **client/src/services/**   | API service functions.                                      |
