@@ -12,6 +12,19 @@ import { motion } from 'framer-motion';
 import { CustomCard } from './CustomCard';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 
+/**
+ * CustomCarousel component is a reusable component
+ * that renders a slider and a navigator at the bottom
+ * with next and prev buttons.
+ *
+ * @param {{ data: Array, cardVariant: string }} props
+ *   - data is an array of objects that will be passed to CustomCard
+ *   - cardVariant is the variant of the card that will be used
+ *     in the CustomCard component
+ *
+ * @returns {JSX.Element} A JSX element that renders a slider
+ *   with navigator at the bottom.
+ */
 export const CustomCarousel = ({ data, cardVariant }) => {
   const sliderRef = useRef();
 
@@ -47,16 +60,33 @@ export const CustomCarousel = ({ data, cardVariant }) => {
     ],
   };
 
+  /**
+   * Handle next button click event on the slider
+   *
+   * @function
+   * @since 0.0.1
+   * @example
+   * <CustomCarousel data={data} cardVariant='product' />
+   */
   const handleNext = () => {
     sliderRef.current.slickNext();
   };
 
+  /**
+   * Handle previous button click event on the slider
+   *
+   * @function
+   * @since 0.0.1
+   * @example
+   * <CustomCarousel data={data} cardVariant='product' />
+   */
   const handlePrev = () => {
     sliderRef.current.slickPrev();
   };
 
   return (
     <Container>
+      {/* Custom carousel component using react-slick */}
       <Slider ref={sliderRef} {...settings}>
         {data.map((product, idx) => (
           <Box key={idx} sx={{ padding: '10px' }}>
@@ -71,12 +101,14 @@ export const CustomCarousel = ({ data, cardVariant }) => {
         ))}
       </Slider>
       <Stack justifyContent="end" direction="row" gap>
+        {/* Previous button */}
         <Button
           size="medium"
           onClick={handlePrev}
           variant="contained"
           startIcon={<ChevronLeft />}
         />
+        {/* Next button */}
         <Button
           size="medium"
           onClick={handleNext}
