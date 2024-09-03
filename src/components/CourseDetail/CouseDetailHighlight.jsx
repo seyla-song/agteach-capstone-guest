@@ -46,7 +46,7 @@ export const CourseDetailHighlight = () => {
               height="100%"
               gap
             >
-              <Stack gap>
+              <Stack px={3} gap>
                 <Typography variant="h4">This course include:</Typography>
                 <Stack direction="row" gap={2}>
                   <TimerIcon />
