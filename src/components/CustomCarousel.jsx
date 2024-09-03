@@ -1,12 +1,7 @@
 import { useRef } from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import {
-  Box,
-  Button,
-  Container,
-  Stack,
-} from '@mui/material';
+import { Box, Button, Container, Stack } from '@mui/material';
 import Slider from 'react-slick';
 import { motion } from 'framer-motion';
 import { CustomCard } from './CustomCard';
@@ -25,14 +20,14 @@ import { ChevronLeft, ChevronRight } from '@mui/icons-material';
  * @returns {JSX.Element} A JSX element that renders a slider
  *   with navigator at the bottom.
  */
-export const CustomCarousel = ({ data, cardVariant }) => {
+export const CustomCarousel = ({ data, cardVariant, slideToShow = 4 }) => {
   const sliderRef = useRef();
 
   const settings = {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: slideToShow,
     slidesToScroll: 4,
     arrows: false,
     responsive: [
@@ -85,7 +80,7 @@ export const CustomCarousel = ({ data, cardVariant }) => {
   };
 
   return (
-    <Container>
+    <Stack disableGutters sx={{ bgcolor:'yellow'}}>
       {/* Custom carousel component using react-slick */}
       <Slider ref={sliderRef} {...settings}>
         {data.map((product, idx) => (
@@ -116,7 +111,7 @@ export const CustomCarousel = ({ data, cardVariant }) => {
           endIcon={<ChevronRight />}
         />
       </Stack>
-    </Container>
+    </Stack>
   );
 };
 
