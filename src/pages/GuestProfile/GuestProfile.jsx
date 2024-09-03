@@ -3,7 +3,7 @@ import BasicInfo from "./BasicInfo.jsx";
 import AccountSecurity from "./AccountSecurity.jsx";
 import ChangePassword from "./ChangePassword.jsx";
 import Divider from "@mui/material/Divider";
-import { Stack } from "@mui/material";
+import { Box, Container, Stack } from "@mui/material";
 
 export default function GuestProfile() {
   const handleUpload = () => {
@@ -24,21 +24,31 @@ export default function GuestProfile() {
 
   return (
     <>
-      <Stack sx={{ m: 5, mx: 0 }}> 
-        <ProfilePhoto onUpload={handleUpload} />
+      <Container
+        maxWidth="1420px"
+        width="100%"
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Stack maxWidth="1420px" width="100%" sx={{ m: 5, mx: 0 }}>
+          <ProfilePhoto onUpload={handleUpload} />
 
-        <Divider sx={{ m: 5, mx: 0 }}/>
+          <Divider sx={{ m: 5, mx: 0 }} />
 
-        <BasicInfo onSave={handleSaveBasicInfo} />
+          <BasicInfo onSave={handleSaveBasicInfo} />
 
-        <Divider sx={{ m: 5, mx: 0 }}/>
+          <Divider sx={{ m: 5, mx: 0 }} /> 
 
-        <AccountSecurity onSave={handleSaveAccountSecurity} />
+          <AccountSecurity onSave={handleSaveAccountSecurity} />
 
-        <Divider sx={{ m: 5, mx: 0 }}/>
+          <Divider sx={{ m: 5, mx: 0 }} />
 
-        <ChangePassword onSave={handleSavePassword} />
-      </Stack>
+          <ChangePassword onSave={handleSavePassword} />
+        </Stack>
+      </Container>
     </>
   );
 }
