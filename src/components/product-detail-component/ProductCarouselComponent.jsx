@@ -15,7 +15,7 @@ const carouselStyle = {
   ".carousel": {
     textAlign: 'center',
     padding: 0,
-    margin: 0
+    margin: 0,
   },
   ".carousel .control-arrow": {
     color: "primary.main",

@@ -1,18 +1,4 @@
-// import { Box, Chip, Typography } from "@mui/material";
-
-// const data = `Our Heavy-Duty Garden Shovel is a must-have tool for every gardener and
-//         farmer. Designed for durability and efficiency, this shovel makes
-//         digging, planting, and landscaping tasks easier and more comfortable.
-//         Features:`;
-// export default function DescriptionComponent() {
-//   return (
-//     <Box height="100px">
-//       <Chip label={data} maxLength={2} />
-//     </Box>
-//   );
-// }
-
-import { Box, Typography, Modal, Stack, IconButton } from "@mui/material";
+import { Box, Typography, Modal, IconButton } from "@mui/material";
 import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -46,7 +32,7 @@ Durable Construction: Built to withstand heavy use in all weather conditions, en
         {description}
       </Typography>
 
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={open} onClose={handleClose} sx={{ margin: 0, padding: 0 }}>
         <Box
           sx={{
             position: "absolute",
@@ -57,10 +43,10 @@ Durable Construction: Built to withstand heavy use in all weather conditions, en
             bgcolor: "background.paper",
             border: "2px solid #000",
             boxShadow: 24,
-            p: 4,
+            p: { xs: 2, md: 4 },
             borderRadius: "20px",
             outline: "none",
-            typography: {xs: 'bsr', md: 'bmdr'} 
+            typography: { xs: "bsr", md: "bmdr" },
           }}
         >
           <Box display="flex" justifyContent="end">
@@ -71,7 +57,7 @@ Durable Construction: Built to withstand heavy use in all weather conditions, en
           <Typography variant="h6" component="h2">
             Description
           </Typography>
-          <Typography sx={{ mt: 2}}>{description}</Typography>
+          <Typography sx={{ mt: 2 }}>{description}</Typography>
         </Box>
       </Modal>
     </Box>

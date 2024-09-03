@@ -1,6 +1,8 @@
-import { Avatar, Box, Stack, Typography } from "@mui/material";
+import { Avatar, Box, IconButton, Stack, Typography } from "@mui/material";
 import puSok from "../../assets/ProductDetail/pu-sok.png";
-import addToWishlist from "../../assets/ProductDetail/add-to-wishlist.png";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { useState } from "react";
 
 const SELLER_DATA = {
   shop: "Pu Sok Farm",
@@ -9,8 +11,13 @@ const SELLER_DATA = {
 };
 
 export default function SellerComponent() {
+  const [wishlist, setWishlist] = useState(false);
+
+  const handleWishlistButton = () => {
+    setWishlist((wishlist) => !wishlist);
+  };
   return (
-    <Box sx={{ display: "flex", gap: "20px", justifyContent: 'space-between' }}>
+    <Box sx={{ display: "flex", gap: "20px", justifyContent: "space-between" }}>
       <Stack direction="row" alignItems="center">
         <Avatar src={SELLER_DATA.image} />
         <Stack direction="column" sx={{ marginLeft: 2 }}>
@@ -21,7 +28,9 @@ export default function SellerComponent() {
         </Stack>
       </Stack>
 
-      <Box component="img" src={addToWishlist} />
+      <IconButton onClick={handleWishlistButton}>
+        {wishlist ? <FavoriteIcon color="red" /> : <FavoriteBorderIcon />}
+      </IconButton>
     </Box>
   );
 }
