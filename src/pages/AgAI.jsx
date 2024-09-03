@@ -45,7 +45,7 @@ function AgAiPage() {
               Upload
             </Button>
           </Stack>
-          <DiseaseInfoComponent />
+          <DiseaseInfoComponent data={plantDiseaseInfo} />
         </Stack>
       </Stack>
     </Container>
@@ -58,7 +58,7 @@ const plantDiseaseInfo = {
   plant: 'Brandywine Tomato',
   problem: {
     title: 'Problem',
-    description: 'Late Blight (Phytophthora infestans)',
+    details: ['Late Blight (Phytophthora infestans)'],
   },
   symptoms: {
     title: 'Symptoms',
@@ -69,7 +69,7 @@ const plantDiseaseInfo = {
   },
   cureManagement: {
     title: 'Cure/Management',
-    recommendations: [
+    details: [
       'Resistant Varieties: Use late blight-resistant varieties if available.',
       'Fungicides: Apply metalaxyl or mefenoxam-based fungicides as a preventative measure.',
       'Cultural Control: Remove and destroy infected plants and maintain good air circulation. Avoid overhead watering.',
