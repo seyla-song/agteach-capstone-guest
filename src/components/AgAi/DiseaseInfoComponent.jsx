@@ -34,7 +34,7 @@ const InformationDetail = ({ dataObj, icon }) => {
       </Stack>
       <List sx={{ listStyleType: 'disc', listStylePosition: 'inside' }}>
         {dataObj.details.map((item, index) => (
-          <ListItem sx={{ display: 'list-item', padding: 0 }}>{item}</ListItem>
+          <ListItem sx={{ display: 'list-item', paddingY: 1 }}>{item}</ListItem>
         ))}
       </List>
     </Stack>
