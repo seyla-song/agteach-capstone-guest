@@ -23,7 +23,11 @@ const color = {
   },
   secondary: {
     main: '#F3BE2A',
-    contrastText: '#fff',
+    contrastText: '#082214',
+  },
+  tertiary: {
+    main: '#fff',
+    contrastText: '#082214',
   },
   red: {
     main: '#E2111C',
@@ -40,5 +44,4 @@ const color = {
   },
 };
 
-
-export default color
+export default color;
