@@ -1,4 +1,4 @@
-import { Grid, Stack } from '@mui/material';
+import { Divider, Grid, Stack } from '@mui/material';
 import {
   CourseDetailHero,
   CourseDetailHighlight,
@@ -17,6 +17,9 @@ function CourseDetailPage() {
       <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
         <CourseDetailHighlight />
         <CourseDetailContent />
+        <Grid item xs={12}>
+          <Divider />
+        </Grid>
         <SuggestedCourseProduct courses={courses} products={products} />
         <Grid border={'1px solid black'} item xs={12}>
           Become a member - Get Components from chitra
