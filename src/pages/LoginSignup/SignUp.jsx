@@ -24,28 +24,18 @@ const SignUp = () => {
     setShowPassword(!showPassword);
   };
 
-  // Inline styles for TextField borders using MUI system
   const textFieldStyles = {
     '& .MuiOutlinedInput-root': {
       borderRadius: '10px',
-      '& fieldset': {
-        borderColor: '#003300', 
-      },
-      '&:hover fieldset': {
-        borderColor: '#003300',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#003300',
-      },
     },
     '& .MuiInputBase-input': {
       color: '#032613',
-      height: '1.5em', // Adjust height here
     },
     '& .MuiInputAdornment-root': {
-      height: '1.5em', // Align adornments
+      color: '#003300',
     },
   };
+
   return (
     <Container
       maxWidth="xs"
@@ -53,20 +43,35 @@ const SignUp = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        mt: 10,
+        mt: { xs: 8, md: 10 },
+        mb: { xs: 4, md: 6 },
       }}
     >
       <Box
         component="img"
         src="/icon/agteach.png"
         alt="AgTeach Logo"
-        sx={{ mb: 30 }}
+        sx={{
+          width: { xs: '100px', md: '120px' },
+          mb: { xs: 4, md: 6 },
+        }}
       />
 
-      <Typography variant="h4" sx={{ mb: 2 }}>
+      <Typography
+        variant="h4"
+        sx={{
+          mb: 2,
+          fontSize: { xs: '1.75rem', md: '2rem' },
+          textAlign: 'center',
+        }}
+      >
         Sign up
       </Typography>
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        sx={{ mb: 3, textAlign: 'center' }}
+      >
         Sign up to enjoy AgTeach features
       </Typography>
 
@@ -77,45 +82,20 @@ const SignUp = () => {
         sx={{ mb: 2, ...textFieldStyles }}
       />
 
-{/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-  <DatePicker
-    label="Date of Birth"
-    value={dateOfBirth}
-    onChange={(newValue) => setDateOfBirth(newValue)}
-    renderInput={(params) => (
       <TextField
-        {...params}
+        label="Date of Birth"
         variant="outlined"
         fullWidth
-        sx={{
-          mb: 2,
-          '& .MuiOutlinedInput-root': {
-            height: '120px', 
-            '& input': {
-              padding: '20px', 
-            },
-            '& .MuiInputAdornment-root': {
-              height: '120px', 
-              '& .MuiSvgIcon-root': {
-                fontSize: '30px', 
-              },
-            },
-          },
-          ...textFieldStyles, 
-        }}
+        sx={{ mb: 2, ...textFieldStyles }}
         InputProps={{
-          ...params.InputProps,
-          startAdornment: (
-            <InputAdornment position="start">
+          
+          endAdornment: (
+            <InputAdornment position="end">
               <CalendarTodayIcon />
             </InputAdornment>
           ),
         }}
       />
-    )}
-  />
-</LocalizationProvider> */}
-
 
       <TextField
         label="Email"
@@ -144,14 +124,23 @@ const SignUp = () => {
       <Button
         type="submit"
         variant="contained"
-        sx={{ marginTop: 3, backgroundColor: '#003300', '&:hover': { backgroundColor: '#002200' } }}
+        sx={{
+          mt: 3,
+          backgroundColor: '#003300',
+          '&:hover': { backgroundColor: '#002200' },
+          padding: { xs: '10px', md: '12px' },
+        }}
         fullWidth
       >
         Sign Up
       </Button>
 
-      <Typography variant="body2" color="text.secondary">
-        Need an account?{' '}
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        sx={{ mt: 2, textAlign: 'center' }}
+      >
+        Already have an account?{' '}
         <Typography
           component="a"
           href="#"
@@ -159,14 +148,12 @@ const SignUp = () => {
         >
           Login
         </Typography>
-      </Typography>
+       </Typography>
     </Container>
   );
 };
 
 export default SignUp;
-
-
 
 
 

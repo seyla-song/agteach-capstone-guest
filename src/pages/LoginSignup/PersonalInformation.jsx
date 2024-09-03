@@ -1,32 +1,31 @@
 import React from 'react';
-import { Container, TextField, Typography, Button, Box, Grid } from '@mui/material';
+import { Container, TextField, Typography, Button, Box, Grid, Stack } from '@mui/material';
 
 const PersonalInfoForm = () => {
   return (
-    <Container maxWidth="lg" sx={{ mt: 30 }}>
+    <Container maxWidth="xs" sx={{ mt: 5 }}>
       {/* Logo */}
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 10 }}>
+      <Stack sx={{ display: 'flex', justifyContent: 'center', mb: 10}}>
         <img src="/icon/agteach.png" alt="Logo" style={{ height: '50px' }} />
-      </Box>
+      </Stack>
 
-      <Grid container spacing={3} justifyContent="center">
+      <Box container spacing={3} justifyContent="center" >
         {/* Personal Information Section */}
-        <Grid item xs={12} >
-          <Typography variant="h5" >Personal Information</Typography>
-        </Grid>
+        <Stack item xs={12} >
+          <Typography variant="h5">Personal Information</Typography>
+        </Stack>
         
         {/* Flexbox for First and Last Name */}
-        <Grid item xs={160}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Box item xs={12}>
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between' }}>
             <TextField
               label="First name"
               variant="outlined"
               required
-              InputProps={{
-                style: { height: '50px', borderRadius: '12px', width:'328px'},
-              }}
+              
               sx={{
-                width: '48%', // Adjusted to fit wider screen
+                width: { xs: '100%', sm: '48%' },
+                mb: { xs: 2, sm: 0 }, // Add margin bottom on mobile
                 '& .MuiOutlinedInput-root': {
                   '& fieldset': {
                     borderWidth: '2px',
@@ -44,11 +43,9 @@ const PersonalInfoForm = () => {
               label="Last name"
               variant="outlined"
               required
-              InputProps={{
-                style: { height: '50px', borderRadius: '12px', width:'328px' },
-              }}
+              
               sx={{
-                width: '48%', // Adjusted to fit wider screen
+                width: { xs: '100%', sm: '48%' },
                 '& .MuiOutlinedInput-root': {
                   '& fieldset': {
                     borderWidth: '2px',
@@ -63,25 +60,26 @@ const PersonalInfoForm = () => {
               }}
             />
           </Box>
-        </Grid>
+        </Box>
 
         {/* Contact Information Section */}
-        <Grid item xs={200}>
+        <Stack item xs={12}>
           <Typography variant="h5">Contact Information</Typography>
-        </Grid>
+        </Stack>
 
         {/* Flexbox for Email and Phone Number */}
-        <Grid item xs={200}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Box item xs={12}>
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between' }}>
             <TextField
               label="Email"
               variant="outlined"
               required
               InputProps={{
-                style: { height: '50px', borderRadius: '12px', width:'328px' },
+                style: { height: '50px', borderRadius: '12px' },
               }}
               sx={{
-                width: '48%', // Adjusted to fit wider screen
+                width: { xs: '100%', sm: '48%' },
+                mb: { xs: 2, sm: 0 }, // Add margin bottom on mobile
                 '& .MuiOutlinedInput-root': {
                   '& fieldset': {
                     borderWidth: '2px',
@@ -100,10 +98,10 @@ const PersonalInfoForm = () => {
               variant="outlined"
               required
               InputProps={{
-                style: { height: '50px', borderRadius: '12px', width:'328px' },
+                style: { height: '50px', borderRadius: '12px' },
               }}
               sx={{
-                width: '48%', // Adjusted to fit wider screen
+                width: { xs: '100%', sm: '48%' },
                 '& .MuiOutlinedInput-root': {
                   '& fieldset': {
                     borderWidth: '2px',
@@ -118,10 +116,10 @@ const PersonalInfoForm = () => {
               }}
             />
           </Box>
-        </Grid>
+        </Box>
 
-        {/* Buttons aligned to the right */}
-        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4, marginLeft:'100%' }}>
+        {/* Buttons aligned side-by-side on the right side */}
+        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4 }}>
           <Button
             variant="outlined"
             sx={{
@@ -129,7 +127,7 @@ const PersonalInfoForm = () => {
               borderColor: '#003300',
               color: '#003300',
               '&:hover': { borderColor: '#002200', color: '#002200' },
-              marginRight: '10px',
+              mr:2, // Margin between buttons
             }}
           >
             Skip
@@ -146,11 +144,13 @@ const PersonalInfoForm = () => {
             Submit
           </Button>
         </Grid>
-      </Grid>
+      </Box>
     </Container>
   );
 };
 
 export default PersonalInfoForm;
+
+
 
 

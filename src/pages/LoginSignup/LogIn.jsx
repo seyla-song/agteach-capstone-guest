@@ -46,35 +46,35 @@ const Login = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                height: '100vh',
-                padding: '0 20px', // Add padding for responsiveness
+                minHeight: '100vh',
+                padding: '20px', // Add padding for responsiveness
                 boxSizing: 'border-box',
             }}
         >
             {/* Logo at the top */}
             <Box
                 sx={{
-                    position: 'absolute',
-                    top: 0,
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    padding: '40px', 
+                    position: { xs: 'relative', md: 'absolute' },
+                    top: { md: 0 },
+                    left: { md: '50%' },
+                    transform: { md: 'translateX(-50%)' },
+                    padding: { xs: '20px 0', md: '40px 0' },
                 }}
             >
-                <img src={`${process.env.PUBLIC_URL}/icon/agteach.png`} alt="Logo" style={{ maxHeight: '120px' }} />
+                <img src={`${process.env.PUBLIC_URL}/icon/agteach.png`} alt="Logo" style={{ maxHeight: '120px', maxWidth: '100%' }} />
             </Box>
-            
-            {/* Login Box */}  
+
+            {/* Login Box */}
             <Box
                 sx={{
                     backgroundColor: 'white',
-                    padding: '40px 30px',
+                    padding: { xs: '20px 20px', md: '40px 30px' },
                     borderRadius: '12px',
                     textAlign: 'center',
-                    width: '460px', // Fixed width
+                    width: { xs: '100%', sm: '80%', md: '460px' }, // Adjust width for different screen sizes
                 }}
             >
-                <Typography variant="h2" component="h2" gutterBottom sx={{ color: '#032613' }}>
+                <Typography variant="h2" component="h2" gutterBottom sx={{ color: '#032613', fontSize: { xs: '1.5rem', md: '2rem' } }}>
                     Login
                 </Typography>
                 <Typography
@@ -82,11 +82,11 @@ const Login = () => {
                     sx={{
                         color: '#032613',
                         marginBottom: 3,
-                        fontSize: '0.875rem', // Smaller font size
-                        textAlign: 'center', 
-                        maxWidth: '300px', // Limit width to ensure it stays on one line
-                        marginLeft: 'auto', 
-                        marginRight: 'auto', 
+                        fontSize: { xs: '0.75rem', md: '0.875rem' }, // Smaller font size
+                        textAlign: 'center',
+                        maxWidth: '300px',
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
                     }}
                 >
                     Please login to continue to your account
@@ -103,13 +103,13 @@ const Login = () => {
                             error={emailError}
                             helperText={emailError ? 'Invalid email address' : ''}
                             InputLabelProps={{
-                                style: { color: '#032613' }, 
+                                style: { color: '#032613' },
                             }}
                             sx={{
                                 '& .MuiOutlinedInput-root': {
                                     borderRadius: '12px', // Rounded corners for the input fields
                                     '& fieldset': {
-                                        borderColor: emailError ? 'red' : '#032613', 
+                                        borderColor: emailError ? 'red' : '#032613',
                                     },
                                     '&:hover fieldset': {
                                         borderColor: emailError ? 'red' : '#032613',
@@ -119,7 +119,7 @@ const Login = () => {
                                     },
                                 },
                                 '& .MuiInputBase-input': {
-                                    color: '#032613', 
+                                    color: '#032613',
                                 },
                             }}
                         />
@@ -135,14 +135,11 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}
                             error={passwordError}
                             helperText={passwordError ? 'Password is required' : ''}
-                            InputLabelProps={{
-                                style: { color: '#032613' }, 
-                            }}
                             sx={{
                                 '& .MuiOutlinedInput-root': {
                                     borderRadius: '12px', // Rounded corners for the input fields
                                     '& fieldset': {
-                                        borderColor: passwordError ? 'red' : '#032613', 
+                                        borderColor: passwordError ? 'red' : '#032613',
                                     },
                                     '&:hover fieldset': {
                                         borderColor: passwordError ? 'red' : '#032613',
@@ -152,7 +149,7 @@ const Login = () => {
                                     },
                                 },
                                 '& .MuiInputBase-input': {
-                                    color: '#032613', 
+                                    color: '#032613',
                                 },
                             }}
                             InputProps={{
@@ -181,18 +178,19 @@ const Login = () => {
                         </Link>
                     </Box>
                     <Button
+                        href='#'
                         type="submit"
                         variant="contained"
-                        sx={{ 
-                            backgroundColor: '#032613', 
-                            color: 'white', 
-                            padding: '12px 0', 
+                        sx={{
+                            backgroundColor: '#032613',
+                            color: 'white',
+                            padding: '12px 0',
                             fontWeight: 'bold',
-                            marginTop: 4, 
-                            borderRadius: '12px', 
+                            marginTop: 4,
+                            borderRadius: '12px',
                             '&:hover': {
                                 backgroundColor: '#021a0e',
-                            }
+                            },
                         }}
                         fullWidth
                     >
@@ -202,7 +200,6 @@ const Login = () => {
                         Need an account? <Link href="#" sx={{ color: '#032613' }}>Create one</Link>
                     </Typography>
                 </form>
-                
             </Box>
         </Box>
     );
