@@ -4,18 +4,13 @@ import { router } from "./route/Route";
 import { ThemeProvider } from "@emotion/react";
 import theme from "./theme/theme";
 
-const App = () => {
+function App() {
   return (
-    <ThemeProvider theme={theme}> 
-      <CssBaseline /> 
-      <Container component="main" maxWidth="xs">
-        {/* <LogIn /> */}
-        {/* <SignUp/> */}
-        <PersonalInfoForm />
-      </Container>
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
-};
+}
 
 export default App;
 
