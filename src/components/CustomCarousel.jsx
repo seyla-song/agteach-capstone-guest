@@ -84,7 +84,7 @@ export const CustomCarousel = ({ data, cardVariant, slideToShow = 4 }) => {
       {/* Custom carousel component using react-slick */}
       <Slider ref={sliderRef} {...settings}>
         {data.map((product, idx) => (
-          <Box key={idx} sx={{ padding: '10px' }}>
+          <Box key={idx}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
