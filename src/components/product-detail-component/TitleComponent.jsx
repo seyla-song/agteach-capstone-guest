@@ -6,6 +6,13 @@ const TITLE_DATA = {
 };
 
 const typographyStyle = { typography: { xs: "blgsm", md: "h3" } };
+
+/**
+ * A reusable React component that displays the title and price of a product.
+ *
+ * @return {JSX.Element} A JSX element that renders the title and price of a product.
+ */
+
 export default function TitleComponent() {
   return (
     <Box display="flex" justifyContent="space-between">

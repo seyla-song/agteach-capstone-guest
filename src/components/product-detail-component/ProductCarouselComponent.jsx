@@ -34,6 +34,12 @@ const carouselStyle = {
     },
 };
 
+/**
+ * Renders a product carousel component.
+ *
+ * @return {JSX.Element} The rendered product carousel component.
+ */
+
 export default function ProductCarouselComponent() {
   return (
     <Box sx={carouselStyle}>

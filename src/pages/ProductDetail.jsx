@@ -7,6 +7,16 @@ import ProductCarouselComponent from "../components/product-detail-component/Pro
 import { CustomCarousel } from "../components/CustomCarousel";
 import products from "../utils/carouselProductDummy";
 
+/**
+ * A React functional component that renders a product detail page.
+ *
+ * The component includes a product carousel, title, description, seller information,
+ * and buttons for adding to cart and buying now. It also displays a custom carousel
+ * with recommended products.
+ *
+ * @return {JSX.Element} The JSX element representing the product detail page.
+ */
+
 function ProductDetailPage() {
   return (
     <Container
