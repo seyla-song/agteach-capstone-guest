@@ -1,7 +1,7 @@
-import ProfilePhoto from "./ProfilePhoto.jsx";
-import BasicInfo from "./BasicInfo.jsx";
-import AccountSecurity from "./AccountSecurity.jsx";
-import ChangePassword from "./ChangePassword.jsx";
+import ProfilePhoto from "../components/GuestProfile/ProfilePhoto.jsx";
+import BasicInfo from "../components/GuestProfile/BasicInfo.jsx";
+import AccountSecurity from "../components/GuestProfile/AccountSecurity.jsx";
+import ChangePassword from "../components/GuestProfile/ChangePassword.jsx";
 import Divider from "@mui/material/Divider";
 import { Box, Container, Stack } from "@mui/material";
 

@@ -1,7 +1,7 @@
 import { Container, Divider } from "@mui/material";
-import ProfilePage from "./ProfilePage.jsx";
-import Courses from "./Coures.jsx";
-import Products from "./Products.jsx";
+import ProfilePage from "../components/InstructorProfile/ProfilePage.jsx";
+import Courses from "../components/InstructorProfile/Coures.jsx";
+import Products from "../components/InstructorProfile/Products.jsx";
 
 export default function InstructorProfile() {
   return (
