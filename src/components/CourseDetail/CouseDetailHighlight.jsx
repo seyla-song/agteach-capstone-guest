@@ -14,7 +14,8 @@ export const CourseDetailHighlight = () => {
               alignItems="center"
               bgcolor="primary.dark"
               color={'white'}
-              padding={10}
+              paddingY={10}
+              paddingX={3}
             >
               <Stack gap maxWidth={500}>
                 <Typography variant="h4">
@@ -45,7 +46,7 @@ export const CourseDetailHighlight = () => {
               height="100%"
               gap
             >
-              <Stack gap>
+              <Stack px={3} gap>
                 <Typography variant="h4">This course include:</Typography>
                 <Stack direction="row" gap={2}>
                   <TimerIcon />
