@@ -1,5 +1,5 @@
 import { Stack, Typography } from '@mui/material';
-import { CourseAccordionComponent } from '../../../components/CourseAccordionComponent';
+import { CourseAccordionComponent } from '../../components/CourseAccordionComponent';
 /**
  * A component that renders the sidebar of the course video page.
  *
@@ -16,7 +16,6 @@ export const CourseVideoSidebar = ({ data }) => {
         borderLeftColor:'primary.main',
         borderLeftWidth: 1,
         borderLeftStyle:'solid',
-        width: '400px',
         height: '100vh',
         bgcolor: 'grey.100',
         position: 'sticky',
@@ -24,7 +23,7 @@ export const CourseVideoSidebar = ({ data }) => {
         overflowY: 'auto',
       }}
     >
-      <Stack p={2} bgcolor="primary.dark" color="common.white">
+      <Stack p={2} bgcolor="primary.main" color="common.white">
         <Typography variant="blgsm">Course Content</Typography>
       </Stack>
       <CourseAccordionComponent data={data} />
