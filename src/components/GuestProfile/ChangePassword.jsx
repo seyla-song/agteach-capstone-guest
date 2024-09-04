@@ -1,5 +1,10 @@
 import { Box, Button, OutlinedInput, Stack } from '@mui/material';
 
+/**
+ * Renders a form to change the user's password.
+ *
+ * @returns {React.ReactElement} A JSX element representing the password change form.
+ */
 function ChangePassword() {
   return (
     <>
