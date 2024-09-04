@@ -6,10 +6,9 @@ import {
   defaultLayoutIcons,
   DefaultVideoLayout,
 } from '@vidstack/react/player/layouts/default';
-import { CourseAboutComponent } from './CourseAboutComponent';
-import { CourseObjectiveComponent } from '../CourseObjectiveComponent';
-import { SuggestProductCourse } from '../SuggestCourseProduct';
-
+import { CourseAboutComponent } from '../../components/CourseVideo/index';
+import { CourseObjectiveComponent } from '../../components/CourseObjectiveComponent';
+import { SuggestedCourseProduct } from '../../components/SuggestCourseProduct';
 /**
  * The main content of the course video page.
  *
@@ -19,13 +18,15 @@ import { SuggestProductCourse } from '../SuggestCourseProduct';
  * @param {Object} data The data for the course about section.
  * @returns {React.ReactElement} The main content of the course video page.
  */
-export const CourseVideoMainContent = ({ data }) => {
+export const CourseVideoMainContent = ( data ) => {
+  const { highlights, courses, products } = data;
+  
   return (
     <Stack sx={{ flexGrow: 1 }}>
       {/* The video player is centered and stretched to the full width */}
       <Stack width="100%" alignItems="center">
         <MediaPlayer
-          style={{borderRadius:0}}
+          style={{ borderRadius: 0 }}
           title="Sprite Fight"
           src="https://files.vidstack.io/sprite-fight/720p.mp4"
         >
@@ -52,7 +53,7 @@ export const CourseVideoMainContent = ({ data }) => {
           {/* The highlights section is on the right side and takes up 9/12 of the width */}
           <Grid item xs={9}>
             <Stack gap={2} direction="row">
-              {data.map((highlight) => (
+              {highlights.map((item) => (
                 <Stack
                   sx={{
                     borderColor: 'dark.100',
@@ -67,9 +68,9 @@ export const CourseVideoMainContent = ({ data }) => {
                   alignItems="start"
                   gap
                 >
-                  {highlight.icons}
+                  {item.icons}
                   <Typography variant="bsr">
-                    {highlight.value} {highlight.title}
+                    {item.value} {item.title}
                   </Typography>
                 </Stack>
               ))}
@@ -83,7 +84,7 @@ export const CourseVideoMainContent = ({ data }) => {
 
           {/* The suggested courses section is on the right side and takes up 9/12 of the width */}
           <Grid item xs={9}>
-            <SuggestProductCourse />
+            <SuggestedCourseProduct courses={courses} products={products} />
           </Grid>
         </Grid>
       </Stack>

@@ -1,6 +1,6 @@
 import { Stack, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import ExpandableText from '../ExpandableText';
+import ExpandableText from '../../components/ExpandableText';
 
 /**
  * A component that renders a course about section.

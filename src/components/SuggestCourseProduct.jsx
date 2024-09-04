@@ -1,5 +1,5 @@
 import { Grid, Stack, Typography } from '@mui/material';
-import { CustomCarousel } from '../CustomCarousel';
+import { CustomCarousel } from './CustomCarousel';
 
 export const SuggestedCourseProduct = ({ courses, products }) => {
   return (

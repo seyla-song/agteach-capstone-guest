@@ -22,7 +22,7 @@ function CourseVideoPage() {
       {/* The course video main content and sidebar */}
       <Stack direction="row">
         {/* The main content containing the video */}
-        <CourseVideoMainContent data={highlights} />
+        <CourseVideoMainContent highlights={highlights} courses={courses} products={products} />
         {/* The sidebar containing the course details and outline */}
         <CourseVideoSidebar data={courses} />
       </Stack>
@@ -131,5 +131,48 @@ const courses = [
       { title: 'Disease Prevention Strategies', duration: '15min' },
       { title: 'Advanced Treatment Methods', duration: '10min' },
     ],
+  },
+];
+
+const products = [
+  {
+    name: 'Grow Lights - LED or fluorescent grow lights',
+    price: '$10',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    name: 'Grow Lights - LED or fluorescent grow lights',
+    price: '$15',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    name: 'Grow Lights - LED or fluorescent grow lights',
+    price: '$20',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    name: 'Grow Lights - LED or fluorescent grow lights',
+    price: '$25',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    name: 'Grow Lights - LED or fluorescent grow lights',
+    price: '$30',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    name: 'Product 6',
+    price: '$35',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    name: 'Product 7',
+    price: '$40',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    name: 'Product 8',
+    price: '$45',
+    image: 'https://via.placeholder.com/150',
   },
 ];
