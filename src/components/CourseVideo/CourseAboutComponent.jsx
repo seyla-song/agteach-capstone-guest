@@ -1,6 +1,6 @@
 import { Stack, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import ExpandableText from '../../../components/ExpandableText';
+import ExpandableText from '../ExpandableText';
 
 export const CourseAboutComponent = () => {
   return (

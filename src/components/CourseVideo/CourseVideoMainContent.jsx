@@ -7,8 +7,8 @@ import {
   DefaultVideoLayout,
 } from '@vidstack/react/player/layouts/default';
 import { CourseAboutComponent } from './CourseAboutComponent';
-import { CourseObjectiveComponent } from '../../../components/CourseObjectiveComponent';
-import { SuggestProductCourse } from '../../../components/SuggestCourseProduct';
+import { CourseObjectiveComponent } from '../CourseObjectiveComponent';
+import { SuggestProductCourse } from '../SuggestCourseProduct';
 
 /**
  * The main content of the course video page.
