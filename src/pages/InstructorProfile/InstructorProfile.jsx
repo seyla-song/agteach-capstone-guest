@@ -16,7 +16,7 @@ export default function InstructorProfile() {
         <Divider sx={{ my: 6 }} />
 
         <Courses />
-<Container></Container>
+
         <Products />
       </Container>
     </>
