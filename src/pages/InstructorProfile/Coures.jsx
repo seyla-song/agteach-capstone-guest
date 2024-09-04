@@ -66,7 +66,6 @@ function Courses() {
           </Grid>
         </Container>
       </Stack>
-
       <Stack sx={{ mt: 4, mb: 4 }}>
         <Button variant="outlined" sx={{ px: 4, py: 2 }}>
           View (5) more
