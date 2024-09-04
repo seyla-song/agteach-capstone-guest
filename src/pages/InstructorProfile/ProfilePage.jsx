@@ -25,6 +25,7 @@ function ProfilePage() {
           flexDirection: { xs: "column", sm: "row" },
           alignItems: "center",
           boxSizing: "border-box",
+          display: "flex",
         }}
       >
         <Stack>
