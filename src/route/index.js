@@ -4,7 +4,7 @@ import MarketPlacePage from "../pages/MarketPlace";
 import CourseDetailPage from "../pages/CourseDetail";
 import CartPage from "../pages/Cart";
 import CourseVideoPage from "../pages/CourseVideo";
-import GuestProfilePage from "../pages/GuestProfile/GuestProfile";
+import GuestProfilePage from "../pages/GuestProfile";
 import InstructorProfilePage from "../pages/InstructorProfile";
 import LoginPage from "../pages/LogIn";
 import MyLearningPage from "../pages/MyLearning";
