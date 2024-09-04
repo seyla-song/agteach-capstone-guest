@@ -6,11 +6,7 @@ import Products from "./Products.jsx";
 export default function InstructorProfile() {
   return (
     <>
-      <Container
-        sx={{
-          alignItems: "center",
-        }}
-      >
+      <Container sx={{alignItems: "center"}}>
         <ProfilePage />
 
         <Divider sx={{ my: 6 }} />
@@ -22,4 +18,3 @@ export default function InstructorProfile() {
     </>
   );
 }
-

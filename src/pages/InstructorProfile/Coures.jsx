@@ -60,7 +60,7 @@ function Courses() {
                 xs={12 / itemsPerRow()} // Responsive columns
                 key={idx}
               >
-                <CustomCard dataObj={item} variant="product" />
+                <CustomCard dataObj={item} variant="course" />
               </Grid>
             ))}
           </Grid>

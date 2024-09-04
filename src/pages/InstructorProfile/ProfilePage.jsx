@@ -11,11 +11,18 @@ import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import InstructorProfileImg from "../../assets/InstructorProfile/instructorprofile.jpg";
 
 function ProfilePage() {
+  const handleCopyToClipboard = (text) => {
+    navigator.clipboard.writeText(text).catch(err => {
+      console.error('Failed to copy text: ', err);
+    });
+  };
+
   return (
-    <Container sx={{ mt: 5, mx: 1 }}>
+    <Container sx={{ mt: 5, px: { xs: 2, sm: 4, md: 4 }, maxWidth: "lg" }}>
       <Box
         sx={{
           display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
           alignItems: "center",
           boxSizing: "border-box",
         }}
@@ -32,17 +39,14 @@ function ProfilePage() {
             }}
           />
         </Stack>
-        <Stack>
-          <Typography variant="h4" sx={{ ml: 2 }}>
-            Instructor
-          </Typography>
-          <Typography variant="h2" sx={{ ml: 2 }}>
-            Emily Greene
-          </Typography>
-          <Typography variant="blgsm" sx={{ ml: 2, mt: 3, mb: 2 }}>
+
+        <Stack sx={{ ml: 1 }} disableGutters>
+          <Typography variant="h4">Instructor</Typography>
+          <Typography variant="h2">Emily Greene</Typography>
+          <Typography variant="blgsm" sx={{ mt: 3, mb: 2 }}>
             About Me
           </Typography>
-          <Typography variant="bsr" sx={{ ml: 2 }}>
+          <Typography variant="bsr">
             I'm Emily Greene, I'm a developer with a passion for teaching. I'm
             the lead instructor at the London App Brewery, London's leading
             Programming Bootcamp. I've helped hundreds of thousands of students
@@ -60,20 +64,22 @@ function ProfilePage() {
             step of the way.
           </Typography>
 
-          <Stack sx={{ m: 2 }} direction="row" spacing={2}>
+          <Stack sx={{ mt: 2, ml: 0.5 }} direction="row" spacing={2}>
             <Button
               variant="outlined"
               sx={{ px: 4, py: 2, borderRadius: 50 }}
               startIcon={<EmailOutlinedIcon />}
+              onClick={() => handleCopyToClipboard("emiylgreen@gmail.com")}
             >
-              emiylgreen@gmail.com
+              <Typography variant="bxsmd">emiylgreen@gmail.com</Typography>
             </Button>
             <Button
               variant="outlined"
               sx={{ px: 4, py: 2, borderRadius: 50 }}
               startIcon={<LocalPhoneOutlinedIcon />}
+              onClick={() => handleCopyToClipboard("012 456 789")}
             >
-              012 254 987
+              <Typography variant="bxsmd">012 456 789</Typography>
             </Button>
           </Stack>
         </Stack>
