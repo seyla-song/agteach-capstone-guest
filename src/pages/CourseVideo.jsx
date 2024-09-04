@@ -1,9 +1,10 @@
 import { Stack } from '@mui/material';
 import TimerIcon from '@mui/icons-material/TimerOutlined';
-
-import { CourseVideoSidebar } from './components/CourseVideoSidebar';
-import { CourseVideoMainContent } from './components/CourseVideoMainContent';
-import { CourseVideoHeaderComponent } from './components/CourseVideoHeaderComponent';
+import {
+  CourseVideoHeaderComponent,
+  CourseVideoMainContent,
+  CourseVideoSidebar,
+} from '../components/CourseVideo/index';
 
 /**
  * The course video page.
