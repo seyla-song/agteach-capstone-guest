@@ -18,6 +18,19 @@ import Img18 from "../../assets/InstructorProfile/Rectangle 18.png";
 import Img19 from "../../assets/InstructorProfile/Rectangle 19.png";
 import Img20 from "../../assets/InstructorProfile/Rectangle 20.png";
 
+  /**
+   * A component that renders a responsive list of products, with a responsive
+   * design that shows different numbers of items based on screen size.
+   *
+   * It uses the `useMediaQuery` hook from `@mui/material` to determine the
+   * screen size and adjust the number of items accordingly.
+   *
+   * It renders a list of products with a title, a "View more" button, and a
+   * responsive layout that shows different numbers of items per row based on
+   * screen size.
+   *
+   * @returns {React.ReactElement} The component element.
+   */
 function Products() {
   // Check for breakpoints
   const desktop = useMediaQuery("(min-width:1420px)");

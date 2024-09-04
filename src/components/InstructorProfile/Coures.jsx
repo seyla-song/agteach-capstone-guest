@@ -18,6 +18,17 @@ import Img8 from "../../assets/InstructorProfile/Rectangle 8.png";
 import Img9 from "../../assets/InstructorProfile/Rectangle 9.png";
 import Img10 from "../../assets/InstructorProfile/Rectangle 10.png";
 
+  /**
+   * A component that renders a list of courses, with a responsive design
+   * that shows different numbers of items based on screen size.
+   *
+   * It uses the `useMediaQuery` hook from `@mui/material` to determine
+   * the screen size and adjust the number of items accordingly.
+   *
+   * It renders a list of courses with a title and a "View more" button.
+   *
+   * @returns {React.ReactElement} The component element.
+   */
 function Courses() {
   // Check for breakpoints
   const desktop = useMediaQuery("(min-width:1420px)");

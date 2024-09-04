@@ -5,10 +5,29 @@ import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import InstructorProfileImg from "../../assets/InstructorProfile/instructorprofile.jpg";
 
+/**
+ * ProfilePage is a component that renders an instructor's profile page.
+ *
+ * It displays the instructor's profile image, name, and bio, as well as their
+ * contact information and a copy-to-clipboard button. When the button is
+ * clicked, the contact information is copied to the clipboard and a success
+ * message is displayed at the bottom of the page for 3 seconds.
+ *
+ * @returns {JSX.Element} The ProfilePage component.
+ */
 function ProfilePage() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
+
+
+  /**
+   * Copies the given text to the user's clipboard.
+   *
+   * @param {string} text The text to copy.
+   *
+   * @returns {Promise<void>} A promise that resolves when the copy is complete.
+   */
   const handleCopyToClipboard = (text) => {
     navigator.clipboard
       .writeText(text)
@@ -21,6 +40,9 @@ function ProfilePage() {
       });
   };
 
+  /**
+   * Closes the snackbar.
+   */
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
   };

@@ -1,5 +1,10 @@
 import { Box, Button, OutlinedInput, Stack, Typography } from "@mui/material";
 
+/**
+ * @function AccountSecurity
+ * @description This component renders a form to input an email and a button to save the input.
+ * @returns {JSX.Element} A JSX element that renders the form and button.
+ */
 function AccountSecurity() {
   return (
     <>

@@ -1,5 +1,16 @@
 import { Box, Button, OutlinedInput, Stack, Typography } from "@mui/material";
 
+/**
+ * BasicInfo component renders a basic information form with fields
+ * for the user's first name, last name, and phone number.
+ *
+ * The component uses the `Stack` component to stack the form fields
+ * vertically and the `OutlinedInput` component to render the input
+ * fields. The component also renders a save button at the bottom of
+ * the form using the `Button` component.
+ *
+ * @returns {React.ReactElement} The BasicInfo component.
+ */
 function BasicInfo() {
   return (
     <>
