@@ -1,17 +1,8 @@
-import {
-  Card,
-  Container,
-  Grid,
-  makeStyles,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
-import HeroComponent from "../components/home-components/HeroComponent";
+import { Container } from "@mui/material";
+import HeroComponent from "../components/HomeComponent/CoreValueComponent";
 import MemberComponent from "../components/MemberComponent";
 import SearchBarComponent from "../components/SearchBarComponent";
-import CarouselComponent from "../components/home-components/CarouselComponent";
-import { products } from "../utils/carouselDummy";
-import { CustomCard } from "../components/CustomCard";
+import CarouselComponent from "../components/HomeComponent/CarouselComponent";
 import search from "../assets/Home/search.png";
 
 function HomePage() {

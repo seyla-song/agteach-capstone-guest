@@ -3,13 +3,7 @@ import { CustomCarousel } from "../CustomCarousel";
 import { products, courses } from "../../utils/carouselDummy";
 
 export default function CarouselComponent({ data, cardVariant, children }) {
-  const dataType = () => {
-    if (data === "products") {
-      return products;
-    } else {
-      return courses;
-    }
-  };
+  const carouselData = data === "products" ? products : courses;
 
   return (
     <Box sx={{ p: { xs: "10px", md: 0 } }}>
@@ -21,7 +15,7 @@ export default function CarouselComponent({ data, cardVariant, children }) {
       >
         {children}
       </Typography>
-      <CustomCarousel data={dataType()} cardVariant={cardVariant} />
+      <CustomCarousel data={carouselData} cardVariant={cardVariant} />
     </Box>
   );
 }
