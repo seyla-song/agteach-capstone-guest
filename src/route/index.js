@@ -5,7 +5,7 @@ import CourseDetailPage from "../pages/CourseDetail";
 import CartPage from "../pages/Cart";
 import CourseVideoPage from "../pages/CourseVideo";
 import GuestProfilePage from "../pages/GuestProfile/GuestProfile";
-import InstructorProfilePage from "../pages/InstructorProfile";
+import InstructorProfilePage from "../pages/InstructorProfile/InstructorProfile";
 import LoginPage from "../pages/LogIn";
 import MyLearningPage from "../pages/MyLearning";
 import PersonalInformationPage from "../pages/PersonalInformation";
