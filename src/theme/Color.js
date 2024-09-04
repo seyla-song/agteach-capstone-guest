@@ -23,14 +23,20 @@ const color = {
   },
   secondary: {
     main: '#F3BE2A',
-    contrastText: '#fff',
+    contrastText: '#082214',
+  },
+  tertiary: {
+    main: '#fff',
+    contrastText: '#082214',
   },
   red: {
     main: '#E2111C',
+    light: '#FCE7E8',
   },
   blue: {
     main: '#348FFD',
-    // dark: '#016FD0',
+    light: '#EBF4FF',
+    dark: '#016FD0',
   },
   purple: {
     main: '#5D87FF',
@@ -40,5 +46,4 @@ const color = {
   },
 };
 
-
-export default color
+export default color;
