@@ -91,9 +91,9 @@ export default function InstructorProfile() {
           </Box>
         </Container>
 
-        <Divider sx={{ m: 6, mx: 0 }} />
+        <Divider sx={{ my: 6, }} />
 
-        <Stack>
+        <Stack sx={{  }}>
           <Typography variant="h4" sx={{ ml: 2 }}>
             Emily Greene courses
           </Typography>
