@@ -16,7 +16,6 @@ export const CourseVideoSidebar = ({ data }) => {
         borderLeftColor:'primary.main',
         borderLeftWidth: 1,
         borderLeftStyle:'solid',
-        width: '400px',
         height: '100vh',
         bgcolor: 'grey.100',
         position: 'sticky',

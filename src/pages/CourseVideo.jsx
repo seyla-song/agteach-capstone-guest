@@ -1,4 +1,4 @@
-import { Stack } from '@mui/material';
+import { Stack, Grid } from '@mui/material';
 import TimerIcon from '@mui/icons-material/TimerOutlined';
 import {
   CourseVideoHeaderComponent,
@@ -20,12 +20,20 @@ function CourseVideoPage() {
       {/* The course video header */}
       <CourseVideoHeaderComponent title={'Course Video'} />
       {/* The course video main content and sidebar */}
-      <Stack direction="row">
+      <Grid container>
         {/* The main content containing the video */}
-        <CourseVideoMainContent highlights={highlights} courses={courses} products={products} />
+        <Grid item xs={10}>
+          <CourseVideoMainContent
+            highlights={highlights}
+            courses={courses}
+            products={products}
+          />
+        </Grid>
         {/* The sidebar containing the course details and outline */}
-        <CourseVideoSidebar data={coursesContent} />
-      </Stack>
+        <Grid item xs={2}>
+          <CourseVideoSidebar data={coursesContent} />
+        </Grid>
+      </Grid>
     </Stack>
   );
 }
