@@ -1,5 +1,5 @@
 import { Stack, Typography } from '@mui/material';
-import { CourseAccordionComponent } from '../CourseAccordionComponent';
+import { CourseAccordionComponent } from '../../components/CourseAccordionComponent';
 /**
  * A component that renders the sidebar of the course video page.
  *
