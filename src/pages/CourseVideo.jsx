@@ -24,7 +24,7 @@ function CourseVideoPage() {
         {/* The main content containing the video */}
         <CourseVideoMainContent highlights={highlights} courses={courses} products={products} />
         {/* The sidebar containing the course details and outline */}
-        <CourseVideoSidebar data={courses} />
+        <CourseVideoSidebar data={coursesContent} />
       </Stack>
     </Stack>
   );
@@ -50,7 +50,7 @@ const highlights = [
   },
 ];
 
-const courses = [
+const coursesContent = [
   {
     title: 'Introduction to Indoor Gardening',
     duration: '35min',
@@ -173,6 +173,49 @@ const products = [
   {
     name: 'Product 8',
     price: '$45',
+    image: 'https://via.placeholder.com/150',
+  },
+];
+
+const courses = [
+  {
+    name: 'Indoor Plant Propagation Techniques',
+    instructor: 'Emily Greene',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    name: 'Vertical Gardening for Urban Spaces',
+    instructor: 'Emily Greene',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    name: 'Organic Indoor Plant Care and Maintenance',
+    instructor: 'Emily Greene',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    name: 'Advanced Indoor Plant Lighting Strategies',
+    instructor: 'Emily Greene',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    name: 'Product 5',
+    instructor: 'Emily Greene',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    name: 'Product 6',
+    instructor: 'Emily Greene',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    name: 'Product 7',
+    instructor: 'Emily Greene',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    name: 'Product 8',
+    instructor: 'Emily Greene',
     image: 'https://via.placeholder.com/150',
   },
 ];

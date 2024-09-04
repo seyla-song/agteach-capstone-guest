@@ -84,7 +84,7 @@ export const CourseVideoMainContent = ( data ) => {
 
           {/* The suggested courses section is on the right side and takes up 9/12 of the width */}
           <Grid item xs={9}>
-            <SuggestedCourseProduct courses={courses} products={products} />
+          <SuggestedCourseProduct courses={courses} products={products} />
           </Grid>
         </Grid>
       </Stack>
