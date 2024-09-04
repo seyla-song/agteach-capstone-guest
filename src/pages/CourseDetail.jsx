@@ -3,8 +3,9 @@ import {
   CourseDetailHero,
   CourseDetailHighlight,
   CourseDetailContent,
-  SuggestedCourseProduct,
 } from '../components/CourseDetail/index';
+
+import { SuggestedCourseProduct } from '../components/SuggestCourseProduct';
 
 function CourseDetailPage() {
   return (
