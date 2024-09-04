@@ -18,7 +18,7 @@ function Searchbar({ setSearchQuery }) {
         fullWidth
         placeholder="Search course, plant, crop, service"
         size="small"
-        sx={{ bgcolor: "common.white", borderRadius: '10px', height: "100%" }}
+        sx={{ bgcolor: "common.white", borderRadius: "10px", height: "100%" }}
       />
     </form>
   );
@@ -37,16 +37,14 @@ const data = ["Plant", "Fertilizer", "Shovel"];
 export default function SearchBar({ backDrop, slogan }) {
   const [searchQuery, setSearchQuery] = useState("");
   const dataFiltered = filterData(searchQuery, data);
-  const [suggestion, setSuggestion] = useState(false)
+  const [suggestion, setSuggestion] = useState(false);
 
   const handleSearchSuggestion = () => {
     if (!suggestion) {
-      setSuggestion(suggestion => !suggestion)
+      setSuggestion((suggestion) => !suggestion);
       console.log(suggestion);
-      
     }
-
-  }
+  };
 
   return (
     <Box
@@ -104,16 +102,21 @@ export default function SearchBar({ backDrop, slogan }) {
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
             />
-            <Box width="100%" bgcolor='white' borderRadius='0 0 10px 10px' style={{ padding: 3 }}>
+            <Box
+              width="100%"
+              bgcolor="white"
+              borderRadius="0 0 10px 10px"
+              style={{ padding: 3 }}
+            >
               {dataFiltered.map((d) => (
                 <Typography
                   style={{
                     padding: 5,
                     // justifyContent: "normal",
-                    typography: {xs: 'bxsr', md: 'blgsm'},
+                    typography: { xs: "bxsr", md: "blgsm" },
                     color: "primary",
                     margin: 3,
-                    width: "100%",        
+                    width: "100%",
                   }}
                   key={d.id}
                 >
@@ -129,7 +132,7 @@ export default function SearchBar({ backDrop, slogan }) {
               color="secondary"
               sx={{ height: "100%", color: "primary.main" }}
             >
-              Search
+              Searchx
             </Button>
           </Box>
         </Box>
