@@ -1,10 +1,16 @@
 import { useState } from "react";
-import { Box, Button, FilledInput, Stack, TextField } from "@mui/material";
-import search from "../assets/Home/search.png";
+import {
+  Box,
+  Button,
+  FilledInput,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 function Searchbar({ setSearchQuery }) {
   return (
-    <form>
+    <form onClick={handleSearchSuggestion}>
       <TextField
         onInput={(e) => {
           setSearchQuery(e.target.value);
@@ -12,7 +18,7 @@ function Searchbar({ setSearchQuery }) {
         fullWidth
         placeholder="Search course, plant, crop, service"
         size="small"
-        sx={{ bgcolor: "common.white", borderRadius: 1, height: "100%" }}
+        sx={{ bgcolor: "common.white", borderRadius: '10px', height: "100%" }}
       />
     </form>
   );
@@ -26,15 +32,21 @@ const filterData = (query, data) => {
   }
 };
 
-const data = [
-  "Plant",
-  "Fertilizer",
-  "Shovel",
-];
+const data = ["Plant", "Fertilizer", "Shovel"];
 
-export default function SearchBar() {
+export default function SearchBar({ backDrop, slogan }) {
   const [searchQuery, setSearchQuery] = useState("");
   const dataFiltered = filterData(searchQuery, data);
+  const [suggestion, setSuggestion] = useState(false)
+
+  const handleSearchSuggestion = () => {
+    if (!suggestion) {
+      setSuggestion(suggestion => !suggestion)
+      console.log(suggestion);
+      
+    }
+
+  }
 
   return (
     <Box
@@ -44,70 +56,84 @@ export default function SearchBar() {
         alignItems: "center",
         justifyContent: "center",
         position: "relative",
+        height: { xs: "300px", md: "400px" },
       }}
     >
-      <Box
-        component="img"
-        sx={{
-          width: "100%", // Full width of the container
-          height: "auto", // Maintain aspect ratio
-          maxHeight: "500px", // You can adjust this as needed
-          objectFit: "cover", // Crop the image sides as the width decreases
-          objectPosition: "center", // Keep the center of the image visible
-          position: "relative",
-        }}
-        src={search}
-      />
+      {backDrop === "black" ? (
+        <Box
+          height="100%"
+          width="100%"
+          bgcolor="common.black"
+          position="relative"
+        ></Box>
+      ) : (
+        <Box
+          component="img"
+          sx={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center",
+            position: "relative",
+          }}
+          src={backDrop}
+        />
+      )}
 
-      <Box
+      <Stack
         maxWidth="1180px"
+        spacing="30px"
+        padding="0 20px"
         sx={{
-          display: "flex",
-          gap: "20px",
           position: "absolute",
           width: "100%",
-          padding: "0 20px",
-          boxSizing: "border-box",
-          height: "40px",
+          padding: { xs: "0 20px", md: "0 120px" },
         }}
       >
-        <Box sx={{ flexGrow: 1 }}>
-          <Searchbar
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-          />
-        </Box>
-        <Box sx={{ width: { xs: "80px", sm: "100px", md: "220px" } }}>
-          <Button
-            fullWidth
-            variant="contained"
-            color="secondary"
-            sx={{ height: "100%", color: "primary.main" }}
+        {slogan && (
+          <Typography
+            color="white"
+            sx={{ typography: { xs: "blgsm", md: "h4" } }}
           >
-            Search
-          </Button>
+            Learn Smarter . Learn Faster . AgTeach
+          </Typography>
+        )}
+        <Box display="flex" gap="20px" width="100%" height="40px">
+          <Box sx={{ flexGrow: 1 }}>
+            <Searchbar
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+            />
+            <Box width="100%" bgcolor='white' borderRadius='0 0 10px 10px' style={{ padding: 3 }}>
+              {dataFiltered.map((d) => (
+                <Typography
+                  style={{
+                    padding: 5,
+                    // justifyContent: "normal",
+                    typography: {xs: 'bxsr', md: 'blgsm'},
+                    color: "primary",
+                    margin: 3,
+                    width: "100%",        
+                  }}
+                  key={d.id}
+                >
+                  {d}
+                </Typography>
+              ))}
+            </Box>
+          </Box>
+          <Box sx={{ width: { xs: "80px", sm: "100px", md: "220px" } }}>
+            <Button
+              fullWidth
+              variant="contained"
+              color="secondary"
+              sx={{ height: "100%", color: "primary.main" }}
+            >
+              Search
+            </Button>
+          </Box>
         </Box>
-      </Box>
-      {/* <div style={{ padding: 3 }}>
-    {dataFiltered.map((d) => (
-      <div
-        className="text"
-        style={{
-          padding: 5,
-          justifyContent: "normal",
-          fontSize: 20,
-          color: "blue",
-          margin: 1,
-          width: "250px",
-          BorderColor: "green",
-          borderWidth: "10px",
-        }}
-        key={d.id}
-      >
-        {d}
-      </div>
-    ))}
-  </div> */}
+      </Stack>
     </Box>
   );
 }

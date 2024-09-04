@@ -9,7 +9,7 @@ export default function MemberComponent() {
       sx={{
         display: "flex",
         gap: {xs: '20px', sm: '40px', md: '80px'},
-        padding: { xs: "10px", sm: "50px", md: '100px' },
+        padding: { xs: '30px 10px', sm: '50px', md: '100px' }
       }}
     >
       <Stack
@@ -18,7 +18,7 @@ export default function MemberComponent() {
           justifyContent: "center",
         }}
       >
-        <Typography sx={{typography: {xs: 'h4', sm: 'h3', md: 'h2'}}} color="common.white">
+        <Typography sx={{typography: {xs: 'blgsm', sm: 'h4', md: 'h2'}}} color="common.white">
           Ready to share your passion for indoor gardening?
         </Typography>
         <Typography sx={{typography: {xs: 'bxsr', sm: 'bsr'}}} color="common.white">

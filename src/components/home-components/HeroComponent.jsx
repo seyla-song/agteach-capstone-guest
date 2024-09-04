@@ -27,7 +27,7 @@ export default function HeroComponent() {
         flexDirection: "column",
         justifyContent: "center",
         height: { xs: "fit", sm: "645px" },
-        padding: { xs: "10px", sm: "50px" },
+        padding: {xs: "50px 10px", md: '50px'}
       }}
     >
       <Box sx={{ mb: 10 }}>
