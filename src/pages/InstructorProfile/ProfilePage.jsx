@@ -1,47 +1,56 @@
-import {
-  Stack,
-  Avatar,
-  Box,
-  Typography,
-  Container,
-  Button,
-} from "@mui/material";
+import { Stack, Avatar, Typography, Button, Grid, Link, Snackbar, Alert } from "@mui/material";
+import React, { useState } from "react";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import InstructorProfileImg from "../../assets/InstructorProfile/instructorprofile.jpg";
 
 function ProfilePage() {
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
   const handleCopyToClipboard = (text) => {
-    navigator.clipboard.writeText(text).catch(err => {
-      console.error('Failed to copy text: ', err);
-    });
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setSnackbarMessage(`Copied: ${text}`);
+        setSnackbarOpen(true);
+      })
+      .catch((err) => {
+        console.error("Failed to copy text: ", err);
+      });
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
   };
 
   return (
-    <Container sx={{ mt: 5, px: { xs: 2, sm: 4, md: 4 }, maxWidth: "lg" }}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: { xs: "column", sm: "row" },
-          alignItems: "center",
-          boxSizing: "border-box",
-          display: "flex",
-        }}
-      >
-        <Stack>
-          <Avatar
-            alt="Instructor Profile Image"
-            src={InstructorProfileImg}
-            sx={{
-              width: 300,
-              height: 300,
-              m: 1,
-              border: "15px solid lightgrey",
-            }}
-          />
-        </Stack>
-
-        <Stack sx={{ ml: 1 }} disableGutters>
+    <Grid container pt={10}>
+      <Grid item xs={12} pb="10px">
+        <Link>
+          <Button
+            sx={{ px: 2, borderRadius: 50 }}
+            startIcon={<ArrowBackIosIcon />}
+          >
+            <Typography variant=" bsr">Back</Typography>
+          </Button>
+        </Link>
+      </Grid>
+      <Grid item xs={12} md={4}>
+        <Avatar
+          alt="Instructor Profile Image"
+          src={InstructorProfileImg}
+          sx={{
+            width: 300,
+            height: 300,
+            m: 1,
+            border: "15px solid lightgrey",
+          }}
+        />
+      </Grid>
+      <Grid item xs={12} md={8}>
+        <Stack sx={{ pt: 2, ml: 1 }} disableGutters>
           <Typography variant="h4">Instructor</Typography>
           <Typography variant="h2">Emily Greene</Typography>
           <Typography variant="blgsm" sx={{ mt: 3, mb: 2 }}>
@@ -65,7 +74,7 @@ function ProfilePage() {
             step of the way.
           </Typography>
 
-          <Stack sx={{ mt: 2, ml: 0.5 }} direction="row" spacing={2}>
+          <Grid container sx={{ py: 2, gap: 2 }} direction="row">
             <Button
               variant="outlined"
               sx={{ px: 4, py: 2, borderRadius: 50 }}
@@ -82,10 +91,25 @@ function ProfilePage() {
             >
               <Typography variant="bxsmd">012 456 789</Typography>
             </Button>
-          </Stack>
+            <Snackbar
+              open={snackbarOpen}
+              autoHideDuration={3000}
+              onClose={handleCloseSnackbar}
+              message={snackbarMessage}
+              action={
+                <Button color="inherit" onClick={handleCloseSnackbar}>
+                  Close
+                </Button>
+              }
+            >
+              <Alert onClose={handleCloseSnackbar} severity="success">
+                {snackbarMessage}
+              </Alert>
+            </Snackbar>
+          </Grid>
         </Stack>
-      </Box>
-    </Container>
+      </Grid>
+    </Grid>
   );
 }
 
