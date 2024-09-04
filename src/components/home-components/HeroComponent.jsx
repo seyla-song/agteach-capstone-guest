@@ -27,11 +27,14 @@ export default function HeroComponent() {
         flexDirection: "column",
         justifyContent: "center",
         height: { xs: "fit", sm: "645px" },
-        padding: {xs: "50px 10px", md: '50px'}
+        padding: { xs: "50px 10px", md: "50px" },
       }}
     >
       <Box sx={{ mb: 10 }}>
-        <Typography sx={{typography: {xs: 'h4', sm: 'h3', md: 'h2'}}} color="common.white">
+        <Typography
+          sx={{ typography: { xs: "h4", sm: "h3", md: "h2" } }}
+          color="common.white"
+        >
           There are many <br /> platform, Why should <br /> you learn on
           AgTeach?
         </Typography>
@@ -39,7 +42,10 @@ export default function HeroComponent() {
       <Grid container spacing={{ xs: 5, md: 10 }}>
         {HERO_COMPONENT.map((data) => (
           <Grid key={data.title} item xs={12} sm={4}>
-            <Typography sx={{typography: {xs: 'blgsm', sm: 'h4'}}} color="common.white">
+            <Typography
+              sx={{ typography: { xs: "blgsm", sm: "h4" } }}
+              color="common.white"
+            >
               {data.title}
             </Typography>
             <Typography variant="bsr" color="common.white">

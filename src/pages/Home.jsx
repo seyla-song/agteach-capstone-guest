@@ -7,7 +7,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import HeroComponent from "../components/home-components/HeroComponent";
-import MemberComponent from "../components/home-components/MemberComponent";
+import MemberComponent from "../components/MemberComponent";
 import SearchBarComponent from "../components/SearchBarComponent";
 import CarouselComponent from "../components/home-components/CarouselComponent";
 import { products } from "../utils/carouselDummy";

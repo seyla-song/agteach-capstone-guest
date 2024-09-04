@@ -1,51 +1,16 @@
-import { useState } from "react";
 import {
   Box,
   Button,
-  FilledInput,
   Stack,
   TextField,
   Typography,
+  Autocomplete,
 } from "@mui/material";
-
-function Searchbar({ setSearchQuery }) {
-  return (
-    <form onClick={handleSearchSuggestion}>
-      <TextField
-        onInput={(e) => {
-          setSearchQuery(e.target.value);
-        }}
-        fullWidth
-        placeholder="Search course, plant, crop, service"
-        size="small"
-        sx={{ bgcolor: "common.white", borderRadius: "10px", height: "100%" }}
-      />
-    </form>
-  );
-}
-
-const filterData = (query, data) => {
-  if (!query) {
-    return data;
-  } else {
-    return data.filter((d) => d.toLowerCase().includes(query));
-  }
-};
+import { Link as RouterLink } from "react-router-dom";
 
 const data = ["Plant", "Fertilizer", "Shovel"];
 
 export default function SearchBar({ backDrop, slogan }) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const dataFiltered = filterData(searchQuery, data);
-  const [suggestion, setSuggestion] = useState(false);
-
-  const handleSearchSuggestion = () => {
-    if (!suggestion) {
-      setSuggestion((suggestion) => !suggestion);
-      console.log(suggestion);
-    }
-  };
-
   return (
     <Box
       sx={{
@@ -97,42 +62,48 @@ export default function SearchBar({ backDrop, slogan }) {
           </Typography>
         )}
         <Box display="flex" gap="20px" width="100%" height="40px">
-          <Box sx={{ flexGrow: 1 }}>
-            <Searchbar
-              searchQuery={searchQuery}
-              setSearchQuery={setSearchQuery}
-            />
-            <Box
-              width="100%"
-              bgcolor="white"
-              borderRadius="0 0 10px 10px"
-              style={{ padding: 3 }}
-            >
-              {dataFiltered.map((d) => (
-                <Typography
-                  style={{
-                    padding: 5,
-                    // justifyContent: "normal",
-                    typography: { xs: "bxsr", md: "blgsm" },
-                    color: "primary",
-                    margin: 3,
-                    width: "100%",
-                  }}
-                  key={d.id}
-                >
-                  {d}
-                </Typography>
-              ))}
-            </Box>
-          </Box>
+          <Autocomplete
+            id="search-bar"
+            sx={{ width: "100%", height: "40px", mx: "auto" }}
+            options={data}
+            autoHighlight
+            getOptionLabel={(option) => option}
+            renderOption={(props, option) => {
+              const { key, ...optionProps } = props;
+              return (
+                <Box key={key} component="li" {...optionProps}>
+                  {option}
+                </Box>
+              );
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                placeholder="Search course, plant, crop, service"
+                InputProps={{
+                  ...params.InputProps,
+                  sx: {
+                    height: "40px",
+                    bgcolor: "grey.100",
+                    borderRadius: "4px",
+                  },
+                  endAdornment: null,
+                  autoComplete: "new-password",
+                }}
+              />
+            )}
+          />
+
           <Box sx={{ width: { xs: "80px", sm: "100px", md: "220px" } }}>
             <Button
+              component={RouterLink}
+              to="search"
               fullWidth
               variant="contained"
               color="secondary"
               sx={{ height: "100%", color: "primary.main" }}
             >
-              Searchx
+              Search
             </Button>
           </Box>
         </Box>
