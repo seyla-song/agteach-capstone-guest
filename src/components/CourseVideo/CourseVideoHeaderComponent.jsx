@@ -14,7 +14,7 @@ export const CourseVideoHeaderComponent = ({ title }) => {
       direction="row"
       alignItems="center"
       justifyContent="space-between"
-      bgcolor='primary.main'
+      bgcolor='primary.dark'
     >
       <Stack color='common.white' direction="row" alignItems="center" gap={3}>
         <Button  variant="teritary" startIcon={<ChevronLeftIcon />}>
