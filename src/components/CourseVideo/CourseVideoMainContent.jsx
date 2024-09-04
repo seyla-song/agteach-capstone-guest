@@ -38,7 +38,7 @@ export const CourseVideoMainContent = (data) => {
         </MediaPlayer>
 
         {/* The rest of the content is wrapped in a container with a maximum width of 1420px */}
-        <Grid sx={{ maxWidth: '1420px' }} container paddingX={1} py={10}>
+        <Grid sx={{ maxWidth: '1420px' }} container px={1} py={10}>
           {/* The course about section is on the left side and takes up 7/12 of the width */}
           <Grid item xs={10}>
             <Stack gap={5}>

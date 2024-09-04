@@ -6,7 +6,7 @@ import {
   defaultLayoutIcons,
   DefaultVideoLayout,
 } from '@vidstack/react/player/layouts/default';
-import { Link } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export const CourseDetailHero = () => {
   return (
@@ -51,7 +51,7 @@ export const CourseDetailHero = () => {
               />
             </MediaPlayer>
             <Stack display={'flex'} flexDirection={'column'} gap={1}>
-              <Link>
+              <Link to='/payment'>
                 <Button fullWidth color="secondary" variant="contained">
                   Enroll Now
                 </Button>
