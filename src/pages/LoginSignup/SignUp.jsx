@@ -1,161 +1,183 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  Container,
   TextField,
-  Typography,
+  Button,
   IconButton,
   InputAdornment,
+  Typography,
   Box,
-  Button,
+  Stack,
+  Grid,
+  Container,
 } from '@mui/material';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { Visibility, VisibilityOff, CalendarToday } from '@mui/icons-material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [dateOfBirth, setDateOfBirth] = React.useState(dayjs());
+  // State variables to manage form inputs and visibility of the password
+  const [showPassword, setShowPassword] = useState(false);
+  const [dateOfBirth, setDateOfBirth] = useState(dayjs());
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [nameError, setNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
 
   const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
+    setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
-  const textFieldStyles = {
-    '& .MuiOutlinedInput-root': {
-      borderRadius: '10px',
-    },
-    '& .MuiInputBase-input': {
-      color: '#032613',
-    },
-    '& .MuiInputAdornment-root': {
-      color: '#003300',
-    },
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    let valid = true;
+
+    if (!name) {
+      setNameError(true);
+      valid = false;
+    } else {
+      setNameError(false);
+    }
+
+    if (!email || !email.includes('@')) {
+      setEmailError(true);
+      valid = false;
+    } else {
+      setEmailError(false);
+    }
+
+    if (!password) {
+      setPasswordError(true);
+      valid = false;
+    } else {
+      setPasswordError(false);
+    }
+
+    if (valid) {
+      console.log('Form submitted');
+    } else {
+      console.log('Form contains errors');
+    }
   };
 
   return (
-    <Container
-      maxWidth="xs"
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        mt: { xs: 8, md: 10 },
-        mb: { xs: 4, md: 6 },
-      }}
-    >
-      <Box
-        component="img"
-        src="/icon/agteach.png"
-        alt="AgTeach Logo"
-        sx={{
-          width: { xs: '100px', md: '120px' },
-          mb: { xs: 4, md: 6 },
-        }}
-      />
-
-      <Typography
-        variant="h4"
-        sx={{
-          mb: 2,
-          fontSize: { xs: '1.75rem', md: '2rem' },
-          textAlign: 'center',
-        }}
-      >
-        Sign up
-      </Typography>
-      <Typography
-        variant="body2"
-        color="text.secondary"
-        sx={{ mb: 3, textAlign: 'center' }}
-      >
-        Sign up to enjoy AgTeach features
-      </Typography>
-
-      <TextField
-        label="Your Name"
-        variant="outlined"
-        fullWidth
-        sx={{ mb: 2, ...textFieldStyles }}
-      />
-
-      <TextField
-        label="Date of Birth"
-        variant="outlined"
-        fullWidth
-        sx={{ mb: 2, ...textFieldStyles }}
-        InputProps={{
-          
-          endAdornment: (
-            <InputAdornment position="end">
-              <CalendarTodayIcon />
-            </InputAdornment>
-          ),
-        }}
-      />
-
-      <TextField
-        label="Email"
-        variant="outlined"
-        fullWidth
-        sx={{ mb: 2, ...textFieldStyles }}
-      />
-
-      <TextField
-        label="Password"
-        variant="outlined"
-        type={showPassword ? 'text' : 'password'}
-        fullWidth
-        sx={{ mb: 2, ...textFieldStyles }}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={handleClickShowPassword}>
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
-
-      <Button
-        type="submit"
-        variant="contained"
-        sx={{
-          mt: 3,
-          backgroundColor: '#003300',
-          '&:hover': { backgroundColor: '#002200' },
-          padding: { xs: '10px', md: '12px' },
-        }}
-        fullWidth
-      >
-        Sign Up
-      </Button>
-
-      <Typography
-        variant="body2"
-        color="text.secondary"
-        sx={{ mt: 2, textAlign: 'center' }}
-      >
-        Already have an account?{' '}
-        <Typography
-          component="a"
-          href="#"
-          sx={{ color: '#003300', textDecoration: 'none' }}
+    <Box>
+      <Container maxWidth="md">
+        <Stack
+          paddingTop={{ xs: 8, md: 10 }}
+          alignItems="center"
+          justifyContent="start"
+          textAlign="center"
+          spacing={4}
         >
-          Login
-        </Typography>
-       </Typography>
-    </Container>
+          <Link to="/HomePage ">
+          <img
+            src="/icon/agteach.png"
+            alt="Logo"
+            style={{ maxHeight: '120px', maxWidth: '100%' }}
+          />
+      </Link>
+          <Grid container justifyContent="center">
+            <Grid item xs={12} md={6}>
+              <Stack spacing={2}>
+                <Typography variant="h2">
+                  Sign Up
+                </Typography>
+                <Typography variant="bmdr">
+                  Sign up to enjoy AgTeach features
+                </Typography>
+
+                <Box component="form" onSubmit={handleSubmit}>
+                  <Stack spacing={2}>
+                    <TextField
+                      fullWidth
+                      label="Your Name"
+                      variant="outlined"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      error={nameError}
+                      helperText={nameError ? 'Name is required' : ''}
+                    />
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker
+                        label="Date of Birth"
+                        value={dateOfBirth}
+                        onChange={(newValue) => setDateOfBirth(newValue)}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            fullWidth
+                            variant="outlined"
+                            InputProps={{
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <CalendarToday />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                        )}
+                      />
+                    </LocalizationProvider>
+                    <TextField
+                      fullWidth
+                      label="Email"
+                      variant="outlined"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      error={emailError}
+                      helperText={emailError ? 'Invalid email address' : ''}
+                    />
+                    <TextField
+                      fullWidth
+                      label="Password"
+                      type={showPassword ? 'text' : 'password'}
+                      variant="outlined"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      error={passwordError}
+                      helperText={passwordError ? 'Password is required' : ''}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowPassword}
+                              edge="end"
+                            >
+                              {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </Stack>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    fullWidth
+                    style={{
+                      marginTop: '16px',
+                      padding: '12px',
+                    }}
+                  >
+                    Sign Up
+                  </Button>
+                  <Typography py={2} >
+                    Already have an account? <Link to="/login">Login</Link>
+                  </Typography>
+                </Box>
+              </Stack>
+            </Grid>
+          </Grid>
+        </Stack>
+      </Container>
+    </Box>
   );
 };
 
 export default SignUp;
-
-
-
-
-// <Signup />

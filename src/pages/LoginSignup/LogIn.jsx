@@ -54,8 +54,6 @@ const Login = () => {
 
   return (
     <Box>
-      {/* Logo at the top */}
-
       {/* Login Box */}
       <Container>
         <Stack
@@ -72,11 +70,14 @@ const Login = () => {
             alignItems="center"
             justifyContent="center"
           >
+            <Link to="/HomePage ">
             <img
-              src={`${process.env.PUBLIC_URL}/icon/agteach.png`}
+              src="/icon/agteach.png"
               alt="Logo"
               style={{ maxHeight: '120px', maxWidth: '100%' }}
-            />
+            
+              />
+              </Link>
           </Stack>
           <Grid container>
             <Grid item xs={4} />
