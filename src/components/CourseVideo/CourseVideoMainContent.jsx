@@ -1,4 +1,4 @@
-import { Grid, Stack, Typography } from '@mui/material';
+import { Divider, Grid, Stack, Typography } from '@mui/material';
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
 import { MediaPlayer, MediaProvider } from '@vidstack/react';
@@ -18,9 +18,9 @@ import { SuggestedCourseProduct } from '../../components/SuggestCourseProduct';
  * @param {Object} data The data for the course about section.
  * @returns {React.ReactElement} The main content of the course video page.
  */
-export const CourseVideoMainContent = ( data ) => {
+export const CourseVideoMainContent = (data) => {
   const { highlights, courses, products } = data;
-  
+
   return (
     <Stack sx={{ flexGrow: 1 }}>
       {/* The video player is centered and stretched to the full width */}
@@ -38,53 +38,38 @@ export const CourseVideoMainContent = ( data ) => {
         </MediaPlayer>
 
         {/* The rest of the content is wrapped in a container with a maximum width of 1420px */}
-        <Grid
-          sx={{ maxWidth: '1420px' }}
-          container
-          paddingX={1}
-          py={10}
-          gap={5}
-        >
+        <Grid sx={{ maxWidth: '1420px' }} container paddingX={1} py={10}>
           {/* The course about section is on the left side and takes up 7/12 of the width */}
-          <Grid item xs={8}>
-            <CourseAboutComponent />
-          </Grid>
-
-          {/* The highlights section is on the right side and takes up 9/12 of the width */}
-          <Grid item xs={9}>
-            <Stack gap={2} direction="row">
-              {highlights.map((item) => (
-                <Stack
-                  sx={{
-                    borderColor: 'dark.100',
-                    borderWidth: 1,
-                    borderStyle: 'solid',
-                  }}
-                  flex={1}
-                  borderRadius={1}
-                  justifyContent="center"
-                  py={3}
-                  direction="row"
-                  alignItems="start"
-                  gap
-                >
-                  {item.icons}
-                  <Typography variant="bsr">
-                    {item.value} {item.title}
-                  </Typography>
-                </Stack>
-              ))}
+          <Grid item xs={10}>
+            <Stack gap={5}>
+              <CourseAboutComponent />
+              <Stack gap={2} direction="row">
+                {highlights.map((item) => (
+                  <Stack
+                    sx={{
+                      borderColor: 'dark.100',
+                      borderWidth: 1,
+                      borderStyle: 'solid',
+                    }}
+                    flex={1}
+                    borderRadius={1}
+                    justifyContent="center"
+                    py={3}
+                    direction="row"
+                    alignItems="start"
+                    gap
+                  >
+                    {item.icons}
+                    <Typography variant="bsr">
+                      {item.value} {item.title}
+                    </Typography>
+                  </Stack>
+                ))}
+              </Stack>
+              <CourseObjectiveComponent />
+              <Divider sx={{ pt:10}} />
+              <SuggestedCourseProduct courses={courses} products={products} />
             </Stack>
-          </Grid>
-
-          {/* The course objective section is on the right side and takes up 9/12 of the width */}
-          <Grid item xs={9}>
-            <CourseObjectiveComponent />
-          </Grid>
-
-          {/* The suggested courses section is on the right side and takes up 9/12 of the width */}
-          <Grid item xs={9}>
-          <SuggestedCourseProduct courses={courses} products={products} />
           </Grid>
         </Grid>
       </Stack>
