@@ -13,7 +13,7 @@ const IMAGE = [growLight1, growLight2, growLight3, growLight4, growLight5];
 
 const carouselStyle = {
   ".carousel": {
-    textAlign: 'center',
+    textAlign: "center",
     padding: 0,
     margin: 0,
   },
@@ -22,15 +22,16 @@ const carouselStyle = {
   },
   ".carousel .thumb": {
     padding: 0,
-    color: 'primary.main'
+    color: "primary.main",
   },
   ".carousel .thumb.selected": {
     border: 2,
     borderColor: "dark.200",
   },
-  ".carousel .control-prev.control-arrow, .carousel .control-next.control-arrow": {
-    color: "primary.main", 
-  },
+  ".carousel .control-prev.control-arrow, .carousel .control-next.control-arrow":
+    {
+      color: "primary.main",
+    },
 };
 
 export default function ProductCarouselComponent() {
@@ -38,18 +39,9 @@ export default function ProductCarouselComponent() {
     <Box sx={carouselStyle}>
       <Carousel>
         {IMAGE.map((data, index) => (
-        //   <Box
-        //     key={index}
-        //     component="img"
-        //     src={data}
-        //     sx={{ width: "100%", height: "auto", objectFit: "cover" }}
-        //   ></Box>
-        <div key={index}>
-            <img src={data} />
-        </div>
-        // <Box component='div' key={index}>
-        //     <Box component='img' src={data} />
-        // </Box>
+          <div key={index}>
+            <img src={data} alt="product images" />
+          </div>
         ))}
       </Carousel>
     </Box>

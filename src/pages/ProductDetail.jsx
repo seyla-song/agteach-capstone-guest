@@ -1,16 +1,13 @@
 import { Container, Stack, Typography, Grid } from "@mui/material";
-import { useParams } from "react-router-dom";
 import ButtonComponent from "../components/product-detail-component/ButtonComponent";
 import TitleComponent from "../components/product-detail-component/TitleComponent";
 import DescriptionComponent from "../components/product-detail-component/DescriptionComponent";
 import SellerComponent from "../components/product-detail-component/SellerComponent";
 import ProductCarouselComponent from "../components/product-detail-component/ProductCarouselComponent";
 import { CustomCarousel } from "../components/CustomCarousel";
-import products from '../utils/carouselProductDummy'
-
+import products from "../utils/carouselProductDummy";
 
 function ProductDetailPage() {
-  // const params = useParams();
   return (
     <Container
       maxWidth="1420px"
@@ -42,10 +39,9 @@ function ProductDetailPage() {
               </Stack>
             </Stack>
           </Grid>
-          {/* <Grid size={1} /> */}
         </Grid>
         <Stack spacing="30px" sx={{ mt: { xs: "50px", md: "160px" } }}>
-          <Typography sx={{typography: {xs: 'blgsm', md: 'h4'}}}>
+          <Typography sx={{ typography: { xs: "blgsm", md: "h4" } }}>
             You might also want to buy these product
           </Typography>
           <CustomCarousel data={products} cardVariant="product" />
