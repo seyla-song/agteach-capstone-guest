@@ -93,7 +93,7 @@ export default function InstructorProfile() {
 
         <Divider sx={{ my: 6, }} />
 
-        <Stack sx={{  }}>
+        <Stack>
           <Typography variant="h4" sx={{ ml: 2 }}>
             Emily Greene courses
           </Typography>
@@ -101,10 +101,10 @@ export default function InstructorProfile() {
             Found (15) Courses
           </Typography>
 
-          <Container sx={{ mt: 2 }}>
-            <Grid container columns={15}>
+          <Container disableGutters>
+            <Grid container columns={15} >
               {products.map((item, idx) => (
-                <Grid item xs={3}>
+                <Grid item xs={3} >
                   <CustomCard key={idx} dataObj={item} />
                 </Grid>
               ))}
@@ -112,7 +112,7 @@ export default function InstructorProfile() {
           </Container>
         </Stack>
 
-        <Stack sx={{ mt: 4, mb: 4, }}>
+        <Stack sx={{ mt: 4, mb: 4 }}>
           <Button variant="outlined" sx={{ px: 4, py: 2 }}>
             View (5) more
           </Button>
