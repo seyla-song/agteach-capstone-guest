@@ -1,105 +1,114 @@
-import React from 'react';
-import {
-  Container,
-  TextField,
-  Typography,
-  Button,
-  Box,
-  Stack,
-  Grid,
-} from '@mui/material';
+import React, { useState } from 'react';
+import LogoLink from '../../../components/LoginSignup/LogoLink';
+import FormInput from '../../../components/LoginSignup/FormInput';
 import { Link } from 'react-router-dom';
+import { Container, Typography, Button, Box, Stack, Grid } from '@mui/material';
 
 const PersonalInfoForm = () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [errors, setErrors] = useState({
+    firstName: false,
+    lastName: false,
+    email: false,
+    phone: false,
+  });
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Implement form submission logic
+    console.log('Form submitted with:', { firstName, lastName, email, phone });
+  };
+
   return (
     <Box>
-      <Container maxWidth="sm">
+      <Container maxWidth="md">
         <Stack
-          paddingTop={{ xs: 4, md: 8 }}
+          paddingTop={{ xs: 8, md: 10 }}
           alignItems="center"
           spacing={4}
         >
           {/* Logo */}
-          <Link to="/">
-            <img
-              src="/icon/agteach.png"
-              alt="Logo"
-              style={{ maxHeight: '100px', maxWidth: '100%' }}
-            />
-          </Link>
+          <LogoLink />
+          
+          <Typography variant="h2" textAlign="center">
+            Personal Information
+          </Typography>
+          
+          <Box component="form" sx={{ width: '100%' }} onSubmit={handleSubmit}>
+            <Stack spacing={4}>
+              {/* Personal Information */}
+              <Stack spacing={2}>
+                <Typography variant="h4">Personal Information</Typography>
+                <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
+                  <FormInput
+                    label="First Name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    error={errors.firstName}
+                    helperText={errors.firstName ? 'First name is required' : ''}
+                  />
+                  <FormInput
+                    label="Last Name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    error={errors.lastName}
+                    helperText={errors.lastName ? 'Last name is required' : ''}
+                  />
+                </Box>
+              </Stack>
 
-          <Grid container spacing={4}>
-            {/* Personal Information */}
-            <Grid item xs={11.5}>
-              <Typography variant="h5" gutterBottom>
-                Personal Information
-              </Typography>
-              <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
-                <TextField
-                  label="First name"
-                  variant="outlined"
-                  required
-                  fullWidth
-                />
-                <TextField
-                  label="Last name"
-                  variant="outlined"
-                  required
-                  fullWidth
-                />
-              </Box>
-            </Grid>
-
-            {/* Contact Information */}
-            <Grid item xs={11.5}>
-              <Typography variant="h5" gutterBottom>
-                Contact Information
-              </Typography>
-              <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
-                <TextField
-                  label="Email"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  sx={{ minHeight: '56px', fontSize: '1rem' }}
-                />
-                <TextField
-                  label="Phone number"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  sx={{ minHeight: '56px', fontSize: '1rem' }}
-                />
-              </Box>
-            </Grid>
-          </Grid>
-
-          {/* Buttons aligned to the right on all screen sizes */}
-          <Box sx={{ display: 'flex', justifyContent: { xs: 'flex-end', md: 'flex-end' }, width: '100%' }}>
-            <Stack direction="row" spacing={2}>
-              <Button
-                variant="outlined"
-                sx={{
-                  padding: { xs: '8px 20px', md: '8px 35px' },
-                  borderColor: '#003300',
-                  color: '#003300',
-                  '&:hover': { borderColor: '#002200', color: '#002200' },
-                }}
-              >
-                Skip
-              </Button>
-
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: '#003300',
-                  '&:hover': { backgroundColor: '#002200' },
-                  padding: { xs: '8px 20px', md: '8px 35px' },
-                }}
-              >
-                Submit
-              </Button>
+              {/* Contact Information */}
+              <Stack spacing={2}>
+                <Typography variant="h4">Contact Information</Typography>
+                <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
+                  <FormInput
+                    label="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    error={errors.email}
+                    helperText={errors.email ? 'Email is required' : ''}
+                  />
+                  <FormInput
+                    label="Phone Number"
+                    type='tel'
+                  
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    error={errors.phone}
+                    helperText={errors.phone ? 'Phone number is required' : ''}
+                  />
+                </Box>
+              </Stack>
             </Stack>
+
+            {/* Buttons aligned to the right on all screen sizes */}
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: 4 }}>
+              <Stack direction="row" spacing={2}>
+                <Link to="/guest-profile">
+                  <Button
+                    variant="outlined"
+                    sx={{ padding: { xs: '8px 20px', md: '8px 35px' },
+                    }}
+                  >
+                    Skip
+                  </Button>
+                </Link>
+
+                <Link to="/guest-profile">
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{ padding: { xs: '8px 20px', md: '8px 35px' },
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </Link>
+              </Stack>
+            </Box>
           </Box>
         </Stack>
       </Container>
@@ -108,12 +117,3 @@ const PersonalInfoForm = () => {
 };
 
 export default PersonalInfoForm;
-
-
-
-
-
-
-
-
-

@@ -1,18 +1,8 @@
 import React, { useState } from 'react';
-import {
-  TextField,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Typography,
-  Box,
-  Stack,
-  IconButton,
-  InputAdornment,
-  Grid,
-  Container,
+import FormInput from '../../../components/LoginSignup/FormInput';
+import LogoLink from '../../../components/LoginSignup/LogoLink';
+import { Button, Checkbox, FormControlLabel, Typography, Box, Stack, Grid, Container,
 } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
@@ -45,7 +35,6 @@ const Login = () => {
     }
 
     if (valid) {
-      // Proceed with form submission (e.g., API call)
       console.log('Form submitted');
     } else {
       console.log('Form contains errors');
@@ -62,13 +51,8 @@ const Login = () => {
           textAlign="center"
           spacing={4}
         >
-          <Link to="/">
-            <img
-              src="/icon/agteach.png"
-              alt="Logo"
-              style={{ maxHeight: '120px', maxWidth: '100%' }}
-            />
-          </Link>
+          <LogoLink />
+          
           <Grid container justifyContent="center">
             <Grid item xs={12} md={6}>
               <Stack spacing={2}>
@@ -78,58 +62,48 @@ const Login = () => {
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit}>
                   <Stack spacing={2}>
-                    <TextField
-                      fullWidth
+                  <FormInput
                       label="Email"
-                      variant="outlined"
-                      placeholder="Email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       error={emailError}
                       helperText={emailError ? 'Invalid email address' : ''}
                     />
-                    <TextField
-                      fullWidth
+                    <FormInput
                       label="Password"
-                      type={showPassword ? 'text' : 'password'}
-                      variant="outlined"
-                      placeholder="Password"
+                      type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       error={passwordError}
                       helperText={passwordError ? 'Password is required' : ''}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton
-                              aria-label="toggle password visibility"
-                              onClick={handleClickShowPassword}
-                              edge="end"
-                            >
-                              {showPassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                          </InputAdornment>
-                        ),
-                      }}
+                      showPassword={showPassword}
+                      handleClickShowPassword={handleClickShowPassword}
                     />
+                    
                   </Stack>
                   <Stack py={2} alignItems="start">
                     <FormControlLabel
                       control={<Checkbox />}
                       label="Keep me logged in"
                     />
-                    <Link to="/forgotpassword">
+                    <Link to="/forgot-password">
                       <Typography variant="bmdmd">Forgot Password?</Typography>
                     </Link>
                   </Stack>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    fullWidth
-                    style={{ marginTop: '16px', padding: '12px' }}
-                  >
-                    Login
-                  </Button>
+
+                  <Link to="/">
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      fullWidth
+                      style={{
+                        marginTop: '16px',
+                        padding: '12px',
+                      }}
+                    >
+                      Login
+                    </Button>
+                  </Link>
                   <Typography py={2}>
                     Need an account? <Link to="/signup">Create one</Link>
                   </Typography>

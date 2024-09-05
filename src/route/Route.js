@@ -17,17 +17,17 @@ import {
   AgAiPage,
   RootLayout,
   PaymentPage,
+  ForgotPasswordPage,
+  ResetPasswordPage,
 } from './index';
+
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
-    // element: <LoginPage />,
-    // element:<SignUpPage/>,
-    // element: <PersonalInformationPage />,
     
-
+  
     children: [
       { index: true, element: <HomePage /> },
       { path: 'search', element: <SearchResultPage /> },
@@ -50,4 +50,6 @@ export const router = createBrowserRouter([
   { path: 'login', element: <LoginPage /> },
   { path: 'signup', element: <SignUpPage /> },
   { path: 'info', element: <PersonalInformationPage /> },
+  {path: 'forgot-password', element: <ForgotPasswordPage />},
+  {path: 'reset-password', element: <ResetPasswordPage />},
 ]);

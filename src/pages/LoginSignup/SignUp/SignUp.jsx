@@ -1,24 +1,13 @@
 import React, { useState } from 'react';
-import {
-  TextField,
-  Button,
-  IconButton,
-  InputAdornment, 
-  Typography,
-  Box,
-  Stack,
-  Grid,
-  Container,
-} from '@mui/material';
-import { Visibility, VisibilityOff, CalendarToday } from '@mui/icons-material';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs from 'dayjs';
+import { Button, Typography, Box, Stack, Grid, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
+import FormInput from '../../../components/LoginSignup/FormInput';
+import LogoLink from '../../../components/LoginSignup/LogoLink';
+
+
+import dayjs from 'dayjs';
 
 const SignUp = () => {
-  // State variables to manage form inputs and visibility of the password
   const [showPassword, setShowPassword] = useState(false);
   const [dateOfBirth, setDateOfBirth] = useState(dayjs());
   const [name, setName] = useState('');
@@ -52,8 +41,7 @@ const SignUp = () => {
 
     if (!password) {
       setPasswordError(true);
-      valid = false;
-    } else {
+      valid = false; } else {
       setPasswordError(false);
     }
 
@@ -74,103 +62,65 @@ const SignUp = () => {
           textAlign="center"
           spacing={4}
         >
-          <Link to="/">
-          <img
-            src="/icon/agteach.png"
-            alt="Logo"
-            style={{ maxHeight: '120px', maxWidth: '100%' }}
-          />
-      </Link>
+          <LogoLink />
+
           <Grid container justifyContent="center">
             <Grid item xs={12} md={6}>
               <Stack spacing={2}>
-                <Typography variant="h2">
-                  Sign Up 
-                </Typography>
+                <Typography variant="h2">Sign Up</Typography>
                 <Typography variant="bmdr">
                   Sign up to enjoy AgTeach features
                 </Typography>
 
                 <Box component="form" onSubmit={handleSubmit}>
                   <Stack spacing={2}>
-                    <TextField
-                      fullWidth
+                    <FormInput
                       label="Your Name"
-                      variant="outlined"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       error={nameError}
                       helperText={nameError ? 'Name is required' : ''}
                     />
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DatePicker
-                        label="Date of Birth"
-                        value={dateOfBirth}
-                        onChange={(newValue) => setDateOfBirth(newValue)}
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            fullWidth
-                            variant="outlined"
-                            InputProps={{
-                              endAdornment: (
-                                <InputAdornment position="end">
-                                  <CalendarToday />
-                                </InputAdornment>
-                              ),
-                            }}
-                          />
-                        )}
-                      />
-                    </LocalizationProvider>
-                    <TextField
-                      fullWidth
+                    <FormInput
+                      label="Date of Birth"
+                      isDate={true}
+                      dateValue={dateOfBirth}
+                      onDateChange={(newValue) => setDateOfBirth(newValue)}
+                    />
+                    <FormInput
                       label="Email"
-                      variant="outlined"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       error={emailError}
                       helperText={emailError ? 'Invalid email address' : ''}
                     />
-                    <TextField
-                      fullWidth
+                    <FormInput
                       label="Password"
-                      type={showPassword ? 'text' : 'password'}
-                      variant="outlined"
+                      type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       error={passwordError}
                       helperText={passwordError ? 'Password is required' : ''}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton
-                              aria-label="toggle password visibility"
-                              onClick={handleClickShowPassword}
-                              edge="end"
-                            >
-                              {showPassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                          </InputAdornment>
-                        ),
-                      }}
+                      showPassword={showPassword}
+                      handleClickShowPassword={handleClickShowPassword}
                     />
                   </Stack>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    fullWidth
-                    style={{
-                      marginTop: '16px',
-                      padding: '12px',
-                    }}
-                  >
-                    <Typography>
-                    Sign Up <Link to="/PersonalInformationPage"></Link>
-                    </Typography>
-                  </Button>
+                  
+                  <Link to="/info">
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      fullWidth
+                      style={{
+                        marginTop: '16px',
+                        padding: '12px',
+                      }}
+                    >
+                      Sign Up
+                    </Button>
+                  </Link>
 
-                  <Typography py={2} >
+                  <Typography py={2}>
                     Already have an account? <Link to="/login">Login</Link>
                   </Typography>
                 </Box>
@@ -182,4 +132,6 @@ const SignUp = () => {
     </Box>
   );
 };
+
 export default SignUp;
+

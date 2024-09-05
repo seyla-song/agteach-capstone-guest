@@ -4,7 +4,7 @@ import MarketPlacePage from "../pages/MarketPlace";
 import CourseDetailPage from "../pages/CourseDetail";
 import CartPage from "../pages/Cart";
 import CourseVideoPage from "../pages/CourseVideo";
-import GuestProfilePage from "../pages/GuestProfile/GuestProfile";
+import GuestProfilePage from "../pages/GuestProfile";
 import InstructorProfilePage from "../pages/InstructorProfile";
 import LoginPage from "../pages/LoginSignup/LogIn/LogIn";
 import MyLearningPage from "../pages/MyLearning";
@@ -16,6 +16,8 @@ import AgAiPage from "../pages/AgAI";
 import RootLayout from "../route/Root";
 import ProductRootLayout from "../route/ProductRoot";
 import PaymentPage from "../pages/Payment";
+import ForgotPasswordPage from "../pages/LoginSignup/ForgotPassword/ForgotPassword";
+import ResetPasswordPage from "../pages/LoginSignup/ResetPassword/ResetPassword";
 
 export {
   HomePage,
@@ -36,4 +38,6 @@ export {
   RootLayout,
   ProductRootLayout,
   PaymentPage,
+  ForgotPasswordPage,
+  ResetPasswordPage,
 };
