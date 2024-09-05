@@ -19,6 +19,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { CustomCartItem } from '../components/CustomCartItem';
 
 function CartPage() {
   return (
@@ -35,10 +36,9 @@ function CartPage() {
     >
       <Grid container>
         <Grid item md={8} pr={3} pb={5} xs>
-          <CustomCartItem />
-          <CustomCartItem />
-          <CustomCartItem />
-          <CustomCartItem />
+          {orderItems.map((item) => (
+            <CustomCartItem key={item.id} {...item} />
+          ))}
         </Grid>
         <Grid item md={4} xs>
           <Stack
@@ -146,68 +146,6 @@ function CartPage() {
 
 export default CartPage;
 
-const CustomCartItem = () => {
-  const [count, setCount] = useState(1);
-  const handleChange = (event) => {
-    setCount(Math.max(Number(event.target.value), 1));
-  };
-  return (
-    <Stack gap={2} py>
-      <Stack direction="row" justifyContent="space-between">
-        <Stack direction="row" alignItems="center" gap={2}>
-          <Box
-            component="img"
-            src="https://via.placeholder.com/200"
-            alt="Cart"
-            height={130}
-            width={130}
-          />
-          <Stack gap>
-            <Stack direction="row">
-              <Typography maxWidth={280} variant="bssm">
-                Grow Lights - LED or florescent grow lights dsfsdf asdfasd
-              </Typography>
-              <IconButton
-                sx={{ width: 18, height: 18 }}
-                color="error"
-                children={<DeleteIcon sx={{ width: 16, height: 16 }} />}
-              />
-            </Stack>
-            <Typography variant="bxsr">ID 123ABCXX</Typography>
-            <ButtonGroup size="small">
-              <Button
-                onClick={() => setCount((prev) => prev - 1)}
-                disabled={count === 1}
-              >
-                <RemoveIcon fontSize="small" />
-              </Button>
-              <TextField
-                size="small"
-                sx={{ width: 80 }}
-                type="tel"
-                onChange={handleChange}
-                value={count}
-              />
-              <Button onClick={() => setCount((prev) => prev + 1)}>
-                <AddIcon fontSize="small" />
-              </Button>
-            </ButtonGroup>
-          </Stack>
-        </Stack>
-        <Stack textAlign="right" alignItems="end" pt>
-          <Typography variant="blgsm" color="initial">
-            $20
-          </Typography>
-          <Typography variant="bxsr" color="initial">
-            $10 X (2) items
-          </Typography>
-        </Stack>
-      </Stack>
-      <Divider sx={{ borderColor: 'grey.400', borderStyle: 'dotted' }} />
-    </Stack>
-  );
-};
-
 const purchasedHistory = [
   {
     orderId: 'ORD12345',
@@ -256,5 +194,32 @@ const purchasedHistory = [
       { name: 'Product 8', qty: 1, price: 30, total: 30 },
     ],
     totalPrice: 128,
+  },
+];
+
+const orderItems = [
+  {
+    id: 'PRD001',
+    name: 'Grow Light - LED',
+    price: 10,
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    id: 'PRD002',
+    name: 'Grow Light - Fluorescent',
+    price: 15,
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    id: 'PRD003',
+    name: 'Grow Light - HPS',
+    price: 20,
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    id: 'PRD004',
+    name: 'Grow Light - LED Grow Tent',
+    price: 25,
+    image: 'https://via.placeholder.com/150',
   },
 ];
