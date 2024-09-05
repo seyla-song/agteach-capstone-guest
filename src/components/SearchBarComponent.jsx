@@ -19,14 +19,14 @@ export default function SearchBar({ backDrop, slogan }) {
         alignItems: "center",
         justifyContent: "center",
         position: "relative",
-        height: { xs: "300px", md: "400px" },
+        height: { xs: "300px", md: "300px" },
       }}
     >
-      {backDrop === "black" ? (
+      {backDrop === "primary" ? (
         <Box
           height="100%"
           width="100%"
-          bgcolor="common.black"
+          bgcolor="primary.main"
           position="relative"
         ></Box>
       ) : (
