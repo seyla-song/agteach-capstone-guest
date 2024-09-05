@@ -2,29 +2,23 @@ import React, { useState } from 'react';
 import {
   TextField,
   Button,
-  IconButton,
-  InputAdornment,
+  Checkbox,
+  FormControlLabel,
   Typography,
   Box,
   Stack,
+  IconButton,
+  InputAdornment,
   Grid,
   Container,
 } from '@mui/material';
-import { Visibility, VisibilityOff, CalendarToday } from '@mui/icons-material';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs from 'dayjs';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
-const SignUp = () => {
-  // State variables to manage form inputs and visibility of the password
+const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [dateOfBirth, setDateOfBirth] = useState(dayjs());
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
@@ -35,13 +29,6 @@ const SignUp = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     let valid = true;
-
-    if (!name) {
-      setNameError(true);
-      valid = false;
-    } else {
-      setNameError(false);
-    }
 
     if (!email || !email.includes('@')) {
       setEmailError(true);
@@ -58,6 +45,7 @@ const SignUp = () => {
     }
 
     if (valid) {
+      // Proceed with form submission (e.g., API call)
       console.log('Form submitted');
     } else {
       console.log('Form contains errors');
@@ -74,59 +62,27 @@ const SignUp = () => {
           textAlign="center"
           spacing={4}
         >
-          <Link to="/HomePage ">
-          <img
-            src="/icon/agteach.png"
-            alt="Logo"
-            style={{ maxHeight: '120px', maxWidth: '100%' }}
-          />
-      </Link>
+          <Link to="/">
+            <img
+              src="/icon/agteach.png"
+              alt="Logo"
+              style={{ maxHeight: '120px', maxWidth: '100%' }}
+            />
+          </Link>
           <Grid container justifyContent="center">
             <Grid item xs={12} md={6}>
               <Stack spacing={2}>
-                <Typography variant="h2">
-                  Sign Up
-                </Typography>
+                <Typography variant="h2">Login</Typography>
                 <Typography variant="bmdr">
-                  Sign up to enjoy AgTeach features
+                  Please login to continue to your account
                 </Typography>
-
                 <Box component="form" onSubmit={handleSubmit}>
                   <Stack spacing={2}>
                     <TextField
                       fullWidth
-                      label="Your Name"
-                      variant="outlined"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      error={nameError}
-                      helperText={nameError ? 'Name is required' : ''}
-                    />
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DatePicker
-                        label="Date of Birth"
-                        value={dateOfBirth}
-                        onChange={(newValue) => setDateOfBirth(newValue)}
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            fullWidth
-                            variant="outlined"
-                            InputProps={{
-                              endAdornment: (
-                                <InputAdornment position="end">
-                                  <CalendarToday />
-                                </InputAdornment>
-                              ),
-                            }}
-                          />
-                        )}
-                      />
-                    </LocalizationProvider>
-                    <TextField
-                      fullWidth
                       label="Email"
                       variant="outlined"
+                      placeholder="Email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       error={emailError}
@@ -137,6 +93,7 @@ const SignUp = () => {
                       label="Password"
                       type={showPassword ? 'text' : 'password'}
                       variant="outlined"
+                      placeholder="Password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       error={passwordError}
@@ -156,19 +113,25 @@ const SignUp = () => {
                       }}
                     />
                   </Stack>
+                  <Stack py={2} alignItems="start">
+                    <FormControlLabel
+                      control={<Checkbox />}
+                      label="Keep me logged in"
+                    />
+                    <Link to="/forgotpassword">
+                      <Typography variant="bmdmd">Forgot Password?</Typography>
+                    </Link>
+                  </Stack>
                   <Button
                     type="submit"
                     variant="contained"
                     fullWidth
-                    style={{
-                      marginTop: '16px',
-                      padding: '12px',
-                    }}
+                    style={{ marginTop: '16px', padding: '12px' }}
                   >
-                    Sign Up
+                    Login
                   </Button>
-                  <Typography py={2} >
-                    Already have an account? <Link to="/login">Login</Link>
+                  <Typography py={2}>
+                    Need an account? <Link to="/signup">Create one</Link>
                   </Typography>
                 </Box>
               </Stack>
@@ -179,4 +142,6 @@ const SignUp = () => {
     </Box>
   );
 };
-export default SignUp;
+
+export default Login;
+
