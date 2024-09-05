@@ -5,6 +5,7 @@ import {
   CourseVideoMainContent,
   CourseVideoSidebar,
 } from '../components/CourseVideo/index';
+import Footer from '../components/Footer';
 
 /**
  * The course video page.
@@ -28,6 +29,7 @@ function CourseVideoPage() {
             courses={courses}
             products={products}
           />
+        <Footer />
         </Grid>
         {/* The sidebar containing the course details and outline */}
         <Grid item xs={2}>

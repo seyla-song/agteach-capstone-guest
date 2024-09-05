@@ -11,20 +11,32 @@ import Logo from "../assets/logo.png";
 import theme from "../theme/theme";
 
 const FOOTER_MENU = [
-  { page: "My Learning", path: "mylearning" },
-  { page: "Marketplace", path: "marketplace" },
+  { page: "My Learning", path: "/mylearning" },
+  { page: "Marketplace", path: "/marketplace" },
   { page: "Become a member", path: "" },
-  { page: "AgAI", path: "agai" },
+  { page: "AgAI", path: "/agai" },
 ];
 
 export default function Footer() {
   return (
     <AppBar
       position="static"
-      sx={{ height: "330px", display: "flex", justifyContent: "center", padding: 0 }}
+      sx={{
+        height: "330px",
+        display: "flex",
+        justifyContent: "center",
+        padding: 0,
+      }}
     >
       <Container maxWidth={false}>
-        <Toolbar sx={{ display: "flex", flexDirection: "column", gap: "50px", padding: 0 }}>
+        <Toolbar
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "50px",
+            padding: 0,
+          }}
+        >
           <Box sx={{ display: "flex" }}>
             <Link component={RouterLink} to="/">
               <img width="94px" height="45px" src={Logo} alt="AgTeach Logo" />
