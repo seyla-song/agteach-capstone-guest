@@ -7,7 +7,7 @@ import {
   Divider,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { CustomCartItem } from '../components/CustomCartItem';
+import { CustomCartItem } from '../components/Cart/CustomCartItem';
 import { PurchasedHistory } from '../components/Cart/PurchasedHistory';
 
 function CartPage() {
