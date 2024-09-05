@@ -1,13 +1,16 @@
 import { Box, Button, OutlinedInput, Stack, Typography } from "@mui/material";
 
-function BasicInfo() {
+/**
+ * @function AccountSecurity
+ * @description This component renders a form to input an email and a button to save the input.
+ * @returns {JSX.Element} A JSX element that renders the form and button.
+ */
+function AccountSecurity() {
   return (
     <>
       <Stack sx={{ m: 2, gap: 2 }}>
-        <Typography variant="h4">Basics Information</Typography>
-        <OutlinedInput placeholder="Enter your First Name" />
-        <OutlinedInput placeholder="Enter your Last Name" />
-        <OutlinedInput placeholder="Enter your Phone Number" />
+        <Typography variant="h4">Account Security</Typography>
+        <OutlinedInput placeholder="Enter your Email" />
       </Stack>
 
       <Box
@@ -29,5 +32,4 @@ function BasicInfo() {
     </>
   );
 }
-
-export default BasicInfo;
+export default AccountSecurity;

@@ -3,8 +3,10 @@ import {
   CourseDetailHero,
   CourseDetailHighlight,
   CourseDetailContent,
-  SuggestedCourseProduct,
 } from '../components/CourseDetail/index';
+import MemberComponent from '../components/MemberComponent';
+
+import { SuggestedCourseProduct } from '../components/SuggestCourseProduct';
 
 function CourseDetailPage() {
   return (
@@ -21,8 +23,8 @@ function CourseDetailPage() {
           <Divider />
         </Grid>
         <SuggestedCourseProduct courses={courses} products={products} />
-        <Grid border={'1px solid black'} item xs={12}>
-          Become a member - Get Components from chitra
+        <Grid item xs={12} pt={10} pb={20}>
+          <MemberComponent />
         </Grid>
       </Grid>
     </Stack>

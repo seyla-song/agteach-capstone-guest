@@ -8,6 +8,17 @@ import {
   Avatar,
 } from "@mui/material";
 
+/**
+ * ProfilePhoto component is a reusable component
+ * that renders a container with a Stack of several components:
+ *  - Profile photo with a preview
+ *  - Add/Change Image functionality with a file input and an upload button
+ *
+ * It also handles the state of the above components and their corresponding actions
+ *
+ * @returns {JSX.Element} A JSX element that renders a container
+ *   with a Stack of several components.
+ */
 function ProfilePhoto() {
   return (
     <>

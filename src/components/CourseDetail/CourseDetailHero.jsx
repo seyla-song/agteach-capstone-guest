@@ -1,4 +1,4 @@
-import { Button, Grid, Typography, Stack, Link } from '@mui/material';
+import { Button, Grid, Typography, Stack } from '@mui/material';
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
 import { MediaPlayer, MediaProvider } from '@vidstack/react';
@@ -6,6 +6,7 @@ import {
   defaultLayoutIcons,
   DefaultVideoLayout,
 } from '@vidstack/react/player/layouts/default';
+import { Link } from 'react-router-dom';
 
 export const CourseDetailHero = () => {
   return (
@@ -50,10 +51,18 @@ export const CourseDetailHero = () => {
               />
             </MediaPlayer>
             <Stack display={'flex'} flexDirection={'column'} gap={1}>
-              <Button color="secondary" variant="contained">
-                Enroll Now
-              </Button>
-              <Button color="tertiary" variant="contained">
+              <Link to='/payment'>
+                <Button fullWidth color="secondary" variant="contained">
+                  Enroll Now
+                </Button>
+              </Link>
+              <Button
+                sx={{
+                  backgroundColor: 'tertiary.main',
+                  color: 'tertiary.contrastText',
+                }}
+                variant="contained"
+              >
                 Add to Wishlist
               </Button>
             </Stack>
