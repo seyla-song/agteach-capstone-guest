@@ -13,6 +13,17 @@ import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
+/**
+ * A reusable React component that renders a single item in the cart.
+ *
+ * @param {{ name: string, id: string, price: number, image: string }} props
+ *   - name: The name of the product.
+ *   - id: The id of the product.
+ *   - price: The price of the product.
+ *   - image: The image of the product.
+ *
+ * @returns {React.ReactElement} A JSX element that renders the cart item.
+ */
 export const CustomCartItem = ({ name, id, price, image }) => {
   const [count, setCount] = useState(1);
   const handleChange = (event) => {

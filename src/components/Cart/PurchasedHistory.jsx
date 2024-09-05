@@ -9,6 +9,22 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+/**
+ * PurchasedHistory component is a reusable component
+ * that renders a list of purchased history with accordion
+ * that shows the details of the purchased items.
+ *
+ * @param {{ data: Array }} props
+ *   - data is an array of objects that should contain the keys:
+ *     - orderId: The order id of the purchased history.
+ *     - date: The date of the purchased history.
+ *     - items: An array of objects that contains the keys:
+ *       - name: The name of the item.
+ *       - price: The price of the item.
+ *       - qty: The quantity of the item.
+ *       - total: The total price of the item.
+ *     - totalPrice: The total price of the purchased history.
+ */
 export const PurchasedHistory = ({ data }) => {
   return (
     <Stack gap={3} pb={10}>
@@ -41,6 +57,7 @@ export const PurchasedHistory = ({ data }) => {
               </Stack>
             </AccordionSummary>
             <AccordionDetails>
+              {/* render purchased items with details */}
               {item.items.map((item) => (
                 <Stack>
                   <Stack
@@ -59,6 +76,7 @@ export const PurchasedHistory = ({ data }) => {
                   <Divider sx={{ borderStyle: 'dotted', py: 1 }} />
                 </Stack>
               ))}
+              {/* render total price */}
               <Stack
                 color={'dark.300'}
                 direction="row"
