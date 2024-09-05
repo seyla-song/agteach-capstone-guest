@@ -6,18 +6,18 @@ import CartPage from "../pages/Cart";
 import CourseVideoPage from "../pages/CourseVideo";
 import GuestProfilePage from "../pages/GuestProfile";
 import InstructorProfilePage from "../pages/InstructorProfile";
-import LoginPage from "../pages/LogIn";
+import LoginPage from "../pages/Login";
 import MyLearningPage from "../pages/MyLearning";
 import PersonalInformationPage from "../pages/PersonalInformation";
 import ProductDetailPage from "../pages/ProductDetail";
-import SignUpPage from "../pages/SignUp";
 import WishlistPage from "../pages/Wishlist";
 import AgAiPage from "../pages/AgAI";
 import RootLayout from "../route/Root";
 import ProductRootLayout from "../route/ProductRoot";
 import PaymentPage from "../pages/Payment";
-import ForgetPasswordPage from "../pages/forgetpassword";
-import ResetPasswordPage from "../pages/resetpassword";
+import ForgotPasswordPage from "../pages/ForgotPassword";
+import ResetPasswordPage from "../pages/ResetPassword";
+import SignupPage from "../pages/Signup";
 
 export {
   HomePage,
@@ -32,12 +32,12 @@ export {
   MyLearningPage,
   PersonalInformationPage,
   ProductDetailPage,
-  SignUpPage,
+  SignupPage,
   WishlistPage,
   AgAiPage,
   RootLayout,
   ProductRootLayout,
   PaymentPage,
-  ForgetPasswordPage,
+  ForgotPasswordPage,
   ResetPasswordPage,
 };
