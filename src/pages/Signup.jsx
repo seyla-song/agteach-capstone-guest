@@ -7,7 +7,7 @@ import LogoLink from '../../../components/LoginSignup/LogoLink';
 
 import dayjs from 'dayjs';
 
-const SignUp = () => {
+const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [dateOfBirth, setDateOfBirth] = useState(dayjs());
   const [name, setName] = useState('');
@@ -133,5 +133,5 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Signup;
 

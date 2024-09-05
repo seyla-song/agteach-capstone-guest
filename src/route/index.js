@@ -8,16 +8,16 @@ import GuestProfilePage from "../pages/GuestProfile";
 import InstructorProfilePage from "../pages/InstructorProfile";
 import LoginPage from "../pages/Login";
 import MyLearningPage from "../pages/MyLearning";
-import PersonalInformationPage from "../pages/LoginSignup/PersonalInformation/PersonalInformation";
+import PersonalInformationPage from "../pages/PersonalInformation";
 import ProductDetailPage from "../pages/ProductDetail";
-import SignUpPage from "../pages/LoginSignup/SignUp/SignUp";
-import WishlistPage from "../pages/Wishlist/Wishlist";
+import WishlistPage from "../pages/Wishlist";
 import AgAiPage from "../pages/AgAI";
 import RootLayout from "../route/Root";
 import ProductRootLayout from "../route/ProductRoot";
 import PaymentPage from "../pages/Payment";
 import ForgotPasswordPage from "../pages/ForgotPassword";
-import ResetPasswordPage from "../pages/LoginSignup/ResetPassword/ResetPassword";
+import ResetPasswordPage from "../pages/ResetPassword";
+import SignupPage from "../pages/SignUp";
 
 export {
   HomePage,
@@ -32,7 +32,7 @@ export {
   MyLearningPage,
   PersonalInformationPage,
   ProductDetailPage,
-  SignUpPage,
+  SignupPage,
   WishlistPage,
   AgAiPage,
   RootLayout,
