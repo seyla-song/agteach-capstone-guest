@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import CustomFormController from "./CutomFormController";
 function FilterByOther() {
   return (
     <Box>
@@ -21,17 +22,20 @@ function FilterByOther() {
       </Typography>
       <Stack direction="row" gap={0}>
         <FormGroup>
-          <FormControlLabel
-            control={<Checkbox defaultChecked />}
+          <CustomFormController
             label="Price Low to high"
+            value="price"
+            control={<Checkbox defaultChecked />}
           />
-          <FormControlLabel
-            control={<Checkbox />}
+          <CustomFormController
             label="Long course(up to 10 hours)"
+            value="long"
+            control={<Checkbox  />}
           />
-          <FormControlLabel
-            control={<Checkbox />}
+          <CustomFormController
             label="Short course(up to 5 hours)"
+            value="short"
+            control={<Checkbox  />}
           />
         </FormGroup>
       </Stack>

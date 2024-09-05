@@ -2,20 +2,24 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 
 function CategoryFilter() {
   return (
-    <Box>
+    <Box sx={{ pr: 1 }}>
       <Typography
         sx={{
-          typography: { xs: "bssm", sm: "blgsm4" },
+          typography: { xs: "bsmr", sm: "blgsm4" },
         }}
       >
         Categoires
       </Typography>
-      <Stack direction="row" gap={{xs:1, sm: 2}}>
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        gap={{ xs: 1, sm: 2 }}
+        sx={{ mt: "6px" }}
+      >
         <Button
           variant="contained"
           sx={{
             borderRadius: "45px",
-            typography: { xs: "bxsmd", sm: "bmdsm" },
+            typography: { xs: "bsr", sm: "bmdsm" },
           }}
         >
           Course
@@ -24,7 +28,7 @@ function CategoryFilter() {
           variant="contained"
           sx={{
             borderRadius: "45px",
-            typography: { xs: "bxsmd", sm: "bmdsm" },
+            typography: { xs: "bsr", sm: "bmdsm" },
           }}
         >
           Product
