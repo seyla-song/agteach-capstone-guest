@@ -8,16 +8,10 @@ import CustomRadio from "./CustomRadio";
 function SortByFilter() {
   return (
     <Box>
-      <Typography
-        sx={
-          {
-            //   typography: { xs: "bxsmd", sm: "bmdsm" },
-          }
-        }
-      >
+      <Typography sx={{ typography: { xs: "bsmr", sm: "bmdsm" } }}>
         Sort By
       </Typography>
-      
+
       <Stack
         direction="row"
         gap={0}
@@ -36,22 +30,9 @@ function SortByFilter() {
             defaultValue="Newest"
             name="radio-buttons-group"
           >
-          <CustomRadio label="Newest"value="newest"/>
-          <CustomRadio label="Oldest"value="newest"/>
-          <CustomRadio label="A-Z"value="newest"/>
-            {/* <CustomRadio label="Newestasdf"/> */}
-
-            {/* <FormControlLabel
-              value="Newest"
-              control={<Radio />}
-              label="Newest"
-            />
-            <FormControlLabel
-              value="oldest"
-              control={<Radio />}
-              label="Oldest"
-            /> */}
-            {/* <FormControlLabel value="other" control={<Radio />} label="A-Z" /> */}
+            <CustomRadio label="Newest" value="newest" />
+            <CustomRadio label="Oldest" value="oldest" />
+            <CustomRadio label="A-Z" value="alphabet" />
           </RadioGroup>
         </FormControl>
       </Stack>
