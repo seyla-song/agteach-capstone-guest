@@ -3,11 +3,7 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 function CategoryFilter() {
   return (
     <Box sx={{ pr: 1 }}>
-      <Typography
-        sx={{
-          typography: { xs: "bsmr", sm: "blgsm4" },
-        }}
-      >
+      <Typography sx={{ typography: { xs: "bsmr", sm: "blgsm" } }}>
         Categoires
       </Typography>
       <Stack
@@ -27,9 +23,12 @@ function CategoryFilter() {
         <Button
           variant="contained"
           sx={{
+            backgroundColor: "dark.100",
+            color: "dark.200",
             borderRadius: "45px",
             typography: { xs: "bsr", sm: "bmdsm" },
           }}
+          onClick={() => console.log("clicked")}
         >
           Product
         </Button>

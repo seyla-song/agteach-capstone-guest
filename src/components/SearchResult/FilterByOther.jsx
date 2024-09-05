@@ -1,24 +1,10 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormGroup,
-  Stack,
-  Typography,
-} from "@mui/material";
-import FormControlLabel from "@mui/material/FormControlLabel";
+import { Box, Checkbox, FormGroup, Stack, Typography } from "@mui/material";
 import CustomFormController from "./CutomFormController";
 function FilterByOther() {
   return (
     <Box>
-      <Typography
-        sx={
-          {
-            //   typography: { xs: "bxsmd", sm: "bmdsm" },
-          }
-        }
-      >
-        Sort By
+      <Typography sx={{ typography: { xs: "bsmr", sm: "bmdsm" } }}>
+        Filter By
       </Typography>
       <Stack direction="row" gap={0}>
         <FormGroup>
@@ -30,12 +16,12 @@ function FilterByOther() {
           <CustomFormController
             label="Long course(up to 10 hours)"
             value="long"
-            control={<Checkbox  />}
+            control={<Checkbox />}
           />
           <CustomFormController
             label="Short course(up to 5 hours)"
             value="short"
-            control={<Checkbox  />}
+            control={<Checkbox />}
           />
         </FormGroup>
       </Stack>

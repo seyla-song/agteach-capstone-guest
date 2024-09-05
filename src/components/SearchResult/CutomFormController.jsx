@@ -10,7 +10,7 @@ import { FormControlLabel, Radio, Typography } from "@mui/material";
  *   - control is the ReactNode to render as the contro eg: control = {<Radio />}*
  * @returns {ReactNode} A FormControlLabel with a Typography as the label
  */
-function CustomFormController({ label, value, control, ...sx }) {
+function CustomFormController({ label, value, control, ...props }) {
   return (
     <FormControlLabel
       value={value}
@@ -20,7 +20,7 @@ function CustomFormController({ label, value, control, ...sx }) {
           {label}
         </Typography>
       }
-      {...sx}
+      {...props}
     />
   );
 }
