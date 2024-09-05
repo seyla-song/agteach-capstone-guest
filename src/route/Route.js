@@ -17,6 +17,8 @@ import {
   AgAiPage,
   RootLayout,
   PaymentPage,
+  ForgetPasswordPage,
+  ResetPasswordPage,
 } from "./index";
 
 export const router = createBrowserRouter([
@@ -33,16 +35,18 @@ export const router = createBrowserRouter([
       { path: "guest-profile", element: <GuestProfilePage /> },
       { path: "instructor-profile", element: <InstructorProfilePage /> },
       { path: "courses/:coursesId", element: <CourseDetailPage /> },
-      {
-        path: "courses/:coursesId/watch/:videoId",
-        element: <CourseVideoPage />,
-      },
       { path: "marketplace", element: <MarketPlacePage /> },
       { path: "marketplace/:productId", element: <ProductDetailPage /> },
     ],
+  },
+  {
+    path: "courses/:coursesId/watch/:videoId",
+    element: <CourseVideoPage />,
   },
   { path: "payment", element: <PaymentPage /> },
   { path: "login", element: <LoginPage /> },
   { path: "signup", element: <SignUpPage /> },
   { path: "info", element: <PersonalInformationPage /> },
+  { path: "forget-password", element: <ForgetPasswordPage /> },
+  { path: "reset-password", element: <ResetPasswordPage /> },
 ]);

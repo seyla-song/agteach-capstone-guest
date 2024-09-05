@@ -16,6 +16,8 @@ import AgAiPage from "../pages/AgAI";
 import RootLayout from "../route/Root";
 import ProductRootLayout from "../route/ProductRoot";
 import PaymentPage from "../pages/Payment";
+import ForgetPasswordPage from "../pages/forgetpassword";
+import ResetPasswordPage from "../pages/resetpassword";
 
 export {
   HomePage,
@@ -36,4 +38,6 @@ export {
   RootLayout,
   ProductRootLayout,
   PaymentPage,
+  ForgetPasswordPage,
+  ResetPasswordPage,
 };
