@@ -33,7 +33,7 @@ function SearchResultPage() {
       }}
     >
       <SearchBar
-        backDrop={"black"}
+        backDrop={"primary"}
         slogan={"Learn Smarter, Learn Faster. AgTeach"}
       />
       <Box sx={{ mx: { xs: "5px", sm: 0 } }}>
