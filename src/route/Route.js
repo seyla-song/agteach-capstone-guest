@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from 'react-router-dom';
 import {
   HomePage,
   SearchResultPage,
@@ -12,41 +12,42 @@ import {
   MyLearningPage,
   PersonalInformationPage,
   ProductDetailPage,
-  SignUpPage,
+  SignupPage,
   WishlistPage,
   AgAiPage,
   RootLayout,
   PaymentPage,
-  ForgetPasswordPage,
+  ForgotPasswordPage,
   ResetPasswordPage,
-} from "./index";
+} from './index';
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <RootLayout />,
+
     children: [
       { index: true, element: <HomePage /> },
-      { path: "search", element: <SearchResultPage /> },
-      { path: "cart", element: <CartPage /> },
-      { path: "mylearning", element: <MyLearningPage /> },
-      { path: "agai", element: <AgAiPage /> },
-      { path: "wishlist", element: <WishlistPage /> },
-      { path: "guest-profile", element: <GuestProfilePage /> },
-      { path: "instructor-profile", element: <InstructorProfilePage /> },
-      { path: "courses/:coursesId", element: <CourseDetailPage /> },
-      { path: "marketplace", element: <MarketPlacePage /> },
-      { path: "marketplace/:productId", element: <ProductDetailPage /> },
+      { path: 'search', element: <SearchResultPage /> },
+      { path: 'cart', element: <CartPage /> },
+      { path: 'mylearning', element: <MyLearningPage /> },
+      { path: 'agai', element: <AgAiPage /> },
+      { path: 'wishlist', element: <WishlistPage /> },
+      { path: 'guest-profile', element: <GuestProfilePage /> },
+      { path: 'instructor-profile', element: <InstructorProfilePage /> },
+      { path: 'courses/:coursesId', element: <CourseDetailPage /> },
+      { path: 'marketplace', element: <MarketPlacePage /> },
+      { path: 'marketplace/:productId', element: <ProductDetailPage /> },
     ],
   },
   {
-    path: "courses/:coursesId/watch/:videoId",
+    path: 'courses/:coursesId/watch/:videoId',
     element: <CourseVideoPage />,
   },
-  { path: "payment", element: <PaymentPage /> },
-  { path: "login", element: <LoginPage /> },
-  { path: "signup", element: <SignUpPage /> },
-  { path: "info", element: <PersonalInformationPage /> },
-  { path: "forget-password", element: <ForgetPasswordPage /> },
-  { path: "reset-password", element: <ResetPasswordPage /> },
+  { path: 'payment', element: <PaymentPage /> },
+  { path: 'login', element: <LoginPage /> },
+  { path: 'signup', element: <SignupPage /> },
+  { path: 'info', element: <PersonalInformationPage /> },
+  { path: 'forgot-password', element: <ForgotPasswordPage /> },
+  { path: 'reset-password', element: <ResetPasswordPage /> },
 ]);
