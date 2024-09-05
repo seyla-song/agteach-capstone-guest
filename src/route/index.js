@@ -6,7 +6,7 @@ import CartPage from "../pages/Cart";
 import CourseVideoPage from "../pages/CourseVideo";
 import GuestProfilePage from "../pages/GuestProfile";
 import InstructorProfilePage from "../pages/InstructorProfile";
-import LoginPage from "../pages/LoginSignup/LogIn/LogIn";
+import LoginPage from "../pages/Login";
 import MyLearningPage from "../pages/MyLearning";
 import PersonalInformationPage from "../pages/LoginSignup/PersonalInformation/PersonalInformation";
 import ProductDetailPage from "../pages/ProductDetail";
@@ -16,7 +16,7 @@ import AgAiPage from "../pages/AgAI";
 import RootLayout from "../route/Root";
 import ProductRootLayout from "../route/ProductRoot";
 import PaymentPage from "../pages/Payment";
-import ForgotPasswordPage from "../pages/LoginSignup/ForgotPassword/ForgotPassword";
+import ForgotPasswordPage from "../pages/ForgotPassword";
 import ResetPasswordPage from "../pages/LoginSignup/ResetPassword/ResetPassword";
 
 export {

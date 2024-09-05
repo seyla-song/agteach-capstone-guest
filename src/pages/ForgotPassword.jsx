@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, Link, Container, Stack, Grid, Divider, Snackbar, Alert } from '@mui/material';
-import LogoLink from '../../../components/LoginSignup/LogoLink';
-import FormInput from '../../../components/LoginSignup/FormInput';
+import LogoLink from '../components/LoginSignup/LogoLink';
+import FormInput from '../components/LoginSignup/FormInput';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Link as RouterLink } from 'react-router-dom';
 

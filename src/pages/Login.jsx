@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import FormInput from '../../../components/LoginSignup/FormInput';
-import LogoLink from '../../../components/LoginSignup/LogoLink';
+import FormInput from '../components/LoginSignup/FormInput';
+import LogoLink from '../components/LoginSignup/LogoLink';
 import { Button, Checkbox, FormControlLabel, Typography, Box, Stack, Grid, Container,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
