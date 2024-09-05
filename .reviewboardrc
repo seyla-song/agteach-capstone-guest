@@ -1,6 +1,5 @@
-REVIEWBOARD_URL = "https://review.clp.kr/"
+REVIEWBOARD_URL = "https://review.clp.kr"
 REPOSITORY = "AlphaBeez/AgTeach/Guest"
 REPOSITORY_TYPE = "git"
-BRANCH = "feature/feat-cart-page"
-LAND_DEST_BRANCH = "feature/feat-cart-page"
-
+BRANCH = "feature/feat-wishlist-page"
+LAND_DEST_BRANCH = "feature/feat-wishlist-page"
