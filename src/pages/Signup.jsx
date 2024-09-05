@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Typography, Box, Stack, Grid, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
-import FormInput from '../../../components/LoginSignup/FormInput';
-import LogoLink from '../../../components/LoginSignup/LogoLink';
+import FormInput from '../components/LoginSignup/FormInput';
+import LogoLink from '../components/LoginSignup/LogoLink';
 
 
 import dayjs from 'dayjs';

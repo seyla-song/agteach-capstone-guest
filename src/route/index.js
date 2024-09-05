@@ -17,7 +17,7 @@ import ProductRootLayout from "../route/ProductRoot";
 import PaymentPage from "../pages/Payment";
 import ForgotPasswordPage from "../pages/ForgotPassword";
 import ResetPasswordPage from "../pages/ResetPassword";
-import SignupPage from "../pages/SignUp";
+import SignupPage from "../pages/Signup";
 
 export {
   HomePage,
