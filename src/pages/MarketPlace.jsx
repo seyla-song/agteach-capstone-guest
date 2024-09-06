@@ -1,24 +1,86 @@
-import { Link } from "react-router-dom";
+import {
+  Container,
+  Divider,
+  Box,
+  Typography,
+  Stack,
+  Button,
+} from "@mui/material";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 
-const PRODUCT_DATA = [
-  { id: "p1", title: "product 1" },
-  { id: "p2", title: "product 2" },
-  { id: "p3", title: "product 3" },
-];
-
-function MarketPlacePage() {
+export default function MarketPlace() {
   return (
     <>
-      <h1>Market place page</h1>
-      <ul>
-        {PRODUCT_DATA.map((pd) => (
-          <li key={pd.id}>
-            <Link to={`/marketplace/${pd.id}`}>{pd.title}</Link>
-          </li>
-        ))}
-      </ul>
+      <Container sx={{ mt: 5 }}>
+        <Stack>
+          <Box sx={{ pr: 1 }}>
+            <Typography sx={{ typography: { xs: "bsmr", sm: "blgsm" } }}>
+              Categoires
+            </Typography>
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              gap={{ xs: 1, sm: 2 }}
+              sx={{ mt: "6px" }}
+            >
+              <Button
+                variant="contained"
+                sx={{
+                  borderRadius: "45px",
+                  typography: { xs: "bsr", sm: "bmdsm" },
+                }}
+              >
+                Plant
+              </Button>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "dark.100",
+                  color: "dark.200",
+                  borderRadius: "45px",
+                  typography: { xs: "bsr", sm: "bmdsm" },
+                }}
+                onClick={() => console.log("clicked")}
+              >
+                Fertilizer
+              </Button>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "dark.100",
+                  color: "dark.200",
+                  borderRadius: "45px",
+                  typography: { xs: "bsr", sm: "bmdsm" },
+                }}
+                onClick={() => console.log("clicked")}
+              >
+                Seed
+              </Button>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "dark.100",
+                  color: "dark.200",
+                  borderRadius: "45px",
+                  typography: { xs: "bsr", sm: "bmdsm" },
+                }}
+                onClick={() => console.log("clicked")}
+              >
+                Tool
+              </Button>
+            </Stack>
+          </Box>
+        </Stack>
+
+        <Divider sx={{ my: 6 }} />
+
+        <Stack>
+          
+        </Stack>
+      </Container>
     </>
   );
 }
-
-export default MarketPlacePage;
