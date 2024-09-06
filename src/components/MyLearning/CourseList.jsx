@@ -2,6 +2,19 @@ import { Button, Grid, Stack, Typography, Link } from '@mui/material';
 import { CustomCard } from '../CustomCard';
 import { Link as RouterLink } from 'react-router-dom';
 
+/**
+ * CourseList component renders a list of courses that the user has
+ * in their my learning section.
+ *
+ * @param {{ data: Array<Course> }} props
+ *   - data is an array of Course objects that will be passed to CustomCard
+ *     component. Each Course object should have the following properties:
+ *     - id (number)
+ *     - name (string)
+ *     - image (string)
+ *     - instructor (string)
+ */
+
 export default function CourseList({ data }) {
   return (
     <Stack gap={3}>
