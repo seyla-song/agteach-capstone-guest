@@ -112,17 +112,21 @@ function Navigation() {
           </Box>
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Button
-              startIcon={
-                <AccountCircleOutlinedIcon sx={{ color: "common.black" }} />
-              }
-              variant="contained"
-              sx={{ backgroundColor: "common.white", borderRadius: 50 }}
-            >
-              <Link underline="none" component={RouterLink} to="/login">
-                <Typography variant="bsr">Login</Typography>
-              </Link>
-            </Button>
+            <Link underline="none" component={RouterLink} to="/login">
+              <Button
+                startIcon={
+                  <AccountCircleOutlinedIcon sx={{ color: "common.black" }} />
+                }
+                variant="contained"
+                sx={{
+                  backgroundColor: "common.white",
+                  color: "common.black",
+                  borderRadius: 50,
+                }}
+              >
+                Login
+              </Button>
+            </Link>
             <IconButton
               sx={{ color: "common.white" }}
               component={RouterLink}

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import LogoLink from '../../../components/LoginSignup/LogoLink';
-import FormInput from '../../../components/LoginSignup/FormInput';
+import LogoLink from '../components/LoginSignup/LogoLink';
+import FormInput from '../components/LoginSignup/FormInput';
 import { Link } from 'react-router-dom';
-import { Container, Typography, Button, Box, Stack, Grid } from '@mui/material';
+import { Container, Typography, Button, Box, Stack } from '@mui/material';
 
 const PersonalInfoForm = () => {
   const [firstName, setFirstName] = useState('');

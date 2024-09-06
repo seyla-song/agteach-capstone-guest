@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Typography, Box, Stack, Grid, Container } from '@mui/material';
-import LogoLink from '../../../components/LoginSignup/LogoLink';
-import FormInput from '../../../components/LoginSignup/FormInput';
+import LogoLink from '../components/LoginSignup/LogoLink';
+import FormInput from '../components/LoginSignup/FormInput';
 import { Link } from 'react-router-dom';
 
 const ResetPasswordPage = () => {

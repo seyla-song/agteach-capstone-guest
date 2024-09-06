@@ -21,7 +21,7 @@ function HomePage() {
         },
       }}
     >
-      <SearchBarComponent backDrop={search} slogan={false} />
+      <SearchBarComponent backDrop={search} />
       <CarouselComponent data="courses" cardVariant="course">
         Most people interested in this course
       </CarouselComponent>

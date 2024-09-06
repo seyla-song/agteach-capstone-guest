@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
-import FormInput from '../../../components/LoginSignup/FormInput';
-import LogoLink from '../../../components/LoginSignup/LogoLink';
-import { Button, Checkbox, FormControlLabel, Typography, Box, Stack, Grid, Container,
-} from '@mui/material';
+import { Button, Typography, Box, Stack, Grid, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
+import FormInput from '../components/LoginSignup/FormInput';
+import LogoLink from '../components/LoginSignup/LogoLink';
 
-const Login = () => {
+
+import dayjs from 'dayjs';
+
+const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [dateOfBirth, setDateOfBirth] = useState(dayjs());
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
@@ -20,6 +25,13 @@ const Login = () => {
     event.preventDefault();
     let valid = true;
 
+    if (!name) {
+      setNameError(true);
+      valid = false;
+    } else {
+      setNameError(false);
+    }
+
     if (!email || !email.includes('@')) {
       setEmailError(true);
       valid = false;
@@ -29,8 +41,7 @@ const Login = () => {
 
     if (!password) {
       setPasswordError(true);
-      valid = false;
-    } else {
+      valid = false; } else {
       setPasswordError(false);
     }
 
@@ -52,17 +63,31 @@ const Login = () => {
           spacing={4}
         >
           <LogoLink />
-          
+
           <Grid container justifyContent="center">
             <Grid item xs={12} md={6}>
               <Stack spacing={2}>
-                <Typography variant="h2">Login</Typography>
+                <Typography variant="h2">Sign Up</Typography>
                 <Typography variant="bmdr">
-                  Please login to continue to your account
+                  Sign up to enjoy AgTeach features
                 </Typography>
+
                 <Box component="form" onSubmit={handleSubmit}>
                   <Stack spacing={2}>
-                  <FormInput
+                    <FormInput
+                      label="Your Name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      error={nameError}
+                      helperText={nameError ? 'Name is required' : ''}
+                    />
+                    <FormInput
+                      label="Date of Birth"
+                      isDate={true}
+                      dateValue={dateOfBirth}
+                      onDateChange={(newValue) => setDateOfBirth(newValue)}
+                    />
+                    <FormInput
                       label="Email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -79,19 +104,9 @@ const Login = () => {
                       showPassword={showPassword}
                       handleClickShowPassword={handleClickShowPassword}
                     />
-                    
                   </Stack>
-                  <Stack py={2} alignItems="start">
-                    <FormControlLabel
-                      control={<Checkbox />}
-                      label="Keep me logged in"
-                    />
-                    <Link to="/forgot-password">
-                      <Typography variant="bmdmd">Forgot Password?</Typography>
-                    </Link>
-                  </Stack>
-
-                  <Link to="/">
+                  
+                  <Link to="/info">
                     <Button
                       type="submit"
                       variant="contained"
@@ -101,11 +116,12 @@ const Login = () => {
                         padding: '12px',
                       }}
                     >
-                      Login
+                      Sign Up
                     </Button>
                   </Link>
+
                   <Typography py={2}>
-                    Need an account? <Link to="/signup">Create one</Link>
+                    Already have an account? <Link to="/login">Login</Link>
                   </Typography>
                 </Box>
               </Stack>
@@ -117,4 +133,5 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
+
