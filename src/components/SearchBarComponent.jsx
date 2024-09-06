@@ -10,7 +10,10 @@ import { Link as RouterLink } from "react-router-dom";
 
 const data = ["Plant", "Fertilizer", "Shovel"];
 
-export default function SearchBar({ backDrop, slogan }) {
+export default function SearchBar({ backDrop, searchLabel }) {
+  const getHeight = () =>
+    backDrop ? { xs: "300px", md: "300px" } : { xs: "0px", md: "0px" };
+
   return (
     <Box
       sx={{
@@ -19,29 +22,30 @@ export default function SearchBar({ backDrop, slogan }) {
         alignItems: "center",
         justifyContent: "center",
         position: "relative",
-        height: { xs: "300px", md: "300px" },
+        height: getHeight(),
       }}
     >
-      {backDrop === "primary" ? (
-        <Box
-          height="100%"
-          width="100%"
-          bgcolor="primary.main"
-          position="relative"
-        ></Box>
-      ) : (
-        <Box
-          component="img"
-          sx={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            objectPosition: "center",
-            position: "relative",
-          }}
-          src={backDrop}
-        />
-      )}
+      {backDrop &&
+        (backDrop === "primary" ? (
+          <Box
+            height="100%"
+            width="100%"
+            bgcolor="primary.main"
+            position="relative"
+          ></Box>
+        ) : (
+          <Box
+            component="img"
+            sx={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center",
+              position: "relative",
+            }}
+            src={backDrop}
+          />
+        ))}
 
       <Stack
         maxWidth="1180px"
@@ -53,12 +57,12 @@ export default function SearchBar({ backDrop, slogan }) {
           padding: { xs: "0 20px", md: "0 120px" },
         }}
       >
-        {slogan && (
+        {searchLabel && (
           <Typography
             color="white"
             sx={{ typography: { xs: "blgsm", md: "h4" } }}
           >
-            Learn Smarter . Learn Faster . AgTeach
+            {searchLabel}
           </Typography>
         )}
         <Box display="flex" gap="20px" width="100%" height="40px">

@@ -17,6 +17,13 @@ const FOOTER_MENU = [
   { page: "AgAI", path: "/agai" },
 ];
 
+/**
+ * Renders the Footer component which displays the AgTeach logo, navigation links,
+ * and copyright information.
+ *
+ * @return {JSX.Element} The rendered Footer component.
+ */
+
 export default function Footer() {
   return (
     <AppBar
@@ -45,7 +52,7 @@ export default function Footer() {
           <Container maxWidth="sm" sx={{ padding: 0 }}>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               {FOOTER_MENU.map((data) => (
-                <Link component={RouterLink} to={data.path}>
+                <Link component={RouterLink} to={data.path} key={data.page}>
                   <Typography
                     sx={{
                       fontSize: {

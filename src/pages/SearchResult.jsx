@@ -34,7 +34,7 @@ function SearchResultPage() {
     >
       <SearchBar
         backDrop={"primary"}
-        slogan={"Learn Smarter, Learn Faster. AgTeach"}
+        searchLabel={"Learn Smarter, Learn Faster. AgTeach"}
       />
       <Box sx={{ mx: { xs: "5px", sm: 0 } }}>
         <Typography
@@ -77,8 +77,6 @@ function SearchResultPage() {
           </Grid>
         </Grid>
       </Box>
-
-      {/* <Link to="/marketplace/:productId">Product 1 detail</Link> */}
     </Container>
   );
 }
