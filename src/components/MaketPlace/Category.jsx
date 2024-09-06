@@ -1,16 +1,21 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Padding } from "@mui/icons-material";
+import { Box, Button, Chip, Stack, Typography } from "@mui/material";
 
 const categoryStyle = {
   backgroundColor: "dark.100",
   color: "dark.200",
   borderRadius: "45px",
+  padding:{ xs: "5px 10px", sm: "5px 10px" },
   typography: { xs: "bsr", sm: "bmdsm" },
-}
+};
 
 const categoryStyle2 = {
   borderRadius: "45px",
+  backgroundColor: "primary.main",
+  color: "common.white",
+  padding:{ xs: "5px 10px", sm: "5px 10px" },
   typography: { xs: "bsr", sm: "bmdsm" },
-}
+};
 
 function Category() {
   return (
@@ -22,33 +27,30 @@ function Category() {
         direction={{ xs: "column", sm: "row" }}
         sx={{ mt: "6px", display: "flex", flexWrap: "wrap", gap: "10px" }}
       >
-        <Button
+        <Chip
           variant="contained"
+          label="Plant"
           sx={categoryStyle2}
-        >
-          Plant
-        </Button>
-        <Button
+          onClick={() => console.log("clicked")}
+        />
+        <Chip
           variant="contained"
+          label="Fertilizer"
           sx={categoryStyle}
           onClick={() => console.log("clicked")}
-        >
-          Fertilizer
-        </Button>
-        <Button
+        />
+        <Chip
           variant="contained"
+          label="Seed"
           sx={categoryStyle}
           onClick={() => console.log("clicked")}
-        >
-          Seed
-        </Button>
-        <Button
+        />
+        <Chip
           variant="contained"
+          label="Tool"
           sx={categoryStyle}
           onClick={() => console.log("clicked")}
-        >
-          Tool
-        </Button>
+        />
       </Box>
     </Box>
   );
