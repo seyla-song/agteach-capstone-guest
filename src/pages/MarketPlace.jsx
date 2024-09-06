@@ -1,85 +1,74 @@
 import {
   Container,
   Divider,
-  Box,
-  Typography,
   Stack,
-  Button,
+  Grid,
+  Typography,
+  Box,
 } from "@mui/material";
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import Category from "../components/MaketPlace/Category";
+import SortBy from "../components/MaketPlace/SortBy";
+import FilterBy from "../components/MaketPlace/FilterBy";
+import SearchBar from "../components/SearchBarComponent";
+import SearchList from "../components/MaketPlace/SearchList";
+import { products } from "../utils/carouselDummy";
 
 export default function MarketPlace() {
+  const variant = { product: "product", course: "course" };
   return (
     <>
-      <Container sx={{ mt: 5 }}>
-        <Stack>
-          <Box sx={{ pr: 1 }}>
-            <Typography sx={{ typography: { xs: "bsmr", sm: "blgsm" } }}>
-              Categoires
-            </Typography>
+      <Container
+        maxWidth={false}
+        sx={{
+          maxWidth: "1420px",
+          margin: {
+            xs: "30px auto 50px auto",
+            md: "50px auto 100px auto",
+          },
+        }}
+      >
+        <Grid container>
+          <Grid
+            item
+            xs={12}
+            sm={3}
+            sx={{
+              borderRight: { xs: 0, sm: `1px solid lightgrey` },
+              pr: { xs: 0, sm: "10px" },
+            }}
+          >
             <Stack
-              direction={{ xs: "column", sm: "row" }}
-              gap={{ xs: 1, sm: 2 }}
-              sx={{ mt: "6px" }}
+              direction={{ xs: "row", sm: "column" }}
+              gap={{ xs: 1, sm: 4 }}
+              sx={{
+                "& > *": {
+                  borderRight: { xs: "1px solid lightgrey", sm: "none" }, // Add right border to each item
+                },
+                "& > *:last-child": {
+                  borderRight: "none", // Remove border from the last item
+                },
+              }}
             >
-              <Button
-                variant="contained"
-                sx={{
-                  borderRadius: "45px",
-                  typography: { xs: "bsr", sm: "bmdsm" },
-                }}
-              >
-                Plant
-              </Button>
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: "dark.100",
-                  color: "dark.200",
-                  borderRadius: "45px",
-                  typography: { xs: "bsr", sm: "bmdsm" },
-                }}
-                onClick={() => console.log("clicked")}
-              >
-                Fertilizer
-              </Button>
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: "dark.100",
-                  color: "dark.200",
-                  borderRadius: "45px",
-                  typography: { xs: "bsr", sm: "bmdsm" },
-                }}
-                onClick={() => console.log("clicked")}
-              >
-                Seed
-              </Button>
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: "dark.100",
-                  color: "dark.200",
-                  borderRadius: "45px",
-                  typography: { xs: "bsr", sm: "bmdsm" },
-                }}
-                onClick={() => console.log("clicked")}
-              >
-                Tool
-              </Button>
+              <Category />
+              <Divider sx={{ display: { xs: "none", sm: "block" } }} />
+              <SortBy />
+              <Divider sx={{ display: { xs: "none", sm: "block" } }} />
+              <FilterBy />
             </Stack>
-          </Box>
-        </Stack>
-
-        <Divider sx={{ my: 6 }} />
-
-        <Stack>
-          
-        </Stack>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={9}
+            sx={{ width: "100%", mt: { xs: "20px", sm: "0px" } }}
+          >
+            <Box sx={{ p: "0px 12px 12px 12px" }}>
+              <SearchBar backDrop={false} />
+            </Box>
+            <Typography sx={{ px: 2 }}>Found (200) items</Typography>
+            <SearchList dataObj={products} cardVariant={variant.product} />
+          </Grid>
+        </Grid>
       </Container>
     </>
   );
