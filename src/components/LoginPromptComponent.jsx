@@ -2,6 +2,14 @@ import { Container, Box, Stack, Typography, Button } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import Logout from "../assets/Authentication/logout.svg";
 
+
+/**
+ * A React functional component that renders a login prompt with a message and a login button.
+ *
+ * @param {string} pageName - The name of the page to be displayed in the message.
+ * @return {JSX.Element} The JSX element representing the login prompt.
+ */
+
 export default function LoginPromptComponent({ pageName}) {
   return (
     <Container

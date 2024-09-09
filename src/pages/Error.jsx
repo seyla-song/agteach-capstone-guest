@@ -2,6 +2,12 @@ import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import Error from "../assets/Authentication/error.svg";
 
+/**
+ * Renders an error page with an error image, message, and buttons to go back to the homepage or refresh the page.
+ *
+ * @return {JSX.Element} The JSX element representing the error page.
+ */
+
 export default function ErrorPage() {
   return (
     <Container
