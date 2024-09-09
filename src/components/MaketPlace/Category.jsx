@@ -1,22 +1,27 @@
-import { Padding } from "@mui/icons-material";
-import { Box, Button, Chip, Stack, Typography } from "@mui/material";
+import { Box, Chip, Typography } from "@mui/material";
 
 const categoryStyle = {
   backgroundColor: "dark.100",
   color: "dark.200",
-  borderRadius: "45px",
-  padding:{ xs: "5px 10px", sm: "5px 10px" },
+  border: theme => `2px solid ${theme.palette.grey[500]}`,
   typography: { xs: "bsr", sm: "bmdsm" },
+  '&:hover': {
+    backgroundColor: "primary.main", // New background color on hover
+    color: "common.white", // New text color on hover
+    border: theme => `2px solid ${theme.palette.primary.main}`,
+  },
 };
-
-const categoryStyle2 = {
-  borderRadius: "45px",
+const categoryStyle1 = {
   backgroundColor: "primary.main",
   color: "common.white",
-  padding:{ xs: "5px 10px", sm: "5px 10px" },
+  border: theme => `2px solid ${theme.palette.primary.main}`,
   typography: { xs: "bsr", sm: "bmdsm" },
+  '&:hover': {
+    backgroundColor: "primary.main", // New background color on hover
+    color: "common.white", // New text color on hover
+    border: theme => `2px solid ${theme.palette.primary.main}`,
+  },
 };
-
 function Category() {
   return (
     <Box sx={{ pr: 1 }}>
@@ -30,7 +35,7 @@ function Category() {
         <Chip
           variant="contained"
           label="Plant"
-          sx={categoryStyle2}
+          sx={categoryStyle1}
           onClick={() => console.log("clicked")}
         />
         <Chip
