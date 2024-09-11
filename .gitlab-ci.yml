@@ -25,6 +25,7 @@ build_react_app:
   image: node
   script:
     - echo "Building React App"
+    - node -v
     - CI=false npm run build
   artifacts:
     paths:
