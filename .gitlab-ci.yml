@@ -1,0 +1,48 @@
+#Define stage for pipeline
+stages:
+  - install
+  - build
+  - deploy
+
+
+#Define Installing Stage
+install_dependencies:
+  stage: install
+  image: node
+  script:
+    - node -v
+    - echo "Installing dependencies"
+    - npm i
+
+  cache:
+    paths:
+      - node_modules/
+
+
+# Build React App
+build_react_app:
+  stage: build
+  image: node
+  script:
+    - echo "Building React App"
+    - CI=false npm run build
+  artifacts:
+    paths:
+      - build
+
+
+# Deploy to AWS EC2
+deploy_to_aws:
+  stage: deploy
+  image: node
+  script:
+    - echo "Deploying to AWS EC2"
+    - mkdir -p .ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > .ssh/agtech.pem
+    - chmod 400 .ssh/agtech.pem
+    - ssh-keyscan -H $AWS_SSH_IP >> ~/.ssh/known_hosts
+    - scp -i .ssh/agtech.pem -r build/* $AWS_SSH_USER@$AWS_SSH_IP:/home/ubuntu/app/guest
+
+cache:
+  paths:
+    - node_modules/
