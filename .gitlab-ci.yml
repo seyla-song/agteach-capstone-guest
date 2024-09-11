@@ -13,7 +13,6 @@ install_dependencies:
     - echo "Installing dependencies"
     - npm i
     - echo "Building React App"
-    - node -v
     - unset CI
     - npm run build
   artifacts:
@@ -23,8 +22,6 @@ install_dependencies:
     paths:
       - node_modules/
   
-
-
 # Deploy to AWS EC2
 deploy_to_aws:
   stage: deploy
