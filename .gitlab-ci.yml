@@ -19,10 +19,10 @@ install_dependencies:
     paths:
       - build
   cache:
-    key: ${CI_COMMIT_REF_SLUG}
+    # key: ${CI_COMMIT_REF_SLUG}
     paths:
       - node_modules/
-       
+
 # Deploy to AWS EC2
 deploy_to_aws:
   stage: deploy
