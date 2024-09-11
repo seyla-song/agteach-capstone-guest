@@ -35,7 +35,7 @@ deploy_to_aws:
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > .ssh/agtech.pem
     - chmod 400 .ssh/agtech.pem
     - ssh-keyscan -H $AWS_SSH_IP >> ~/.ssh/known_hosts
-    - scp -i .ssh/agtech.pem -r build/* $AWS_SSH_USER@$AWS_SSH_IP:/home/ubuntu/app/guest
+    - scp -i .ssh/agtech.pem -r build/* $AWS_SSH_USER@$AWS_SSH_IP:/home/ubuntu
 
 cache:
   paths:
