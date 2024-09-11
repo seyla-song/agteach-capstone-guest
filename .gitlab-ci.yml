@@ -22,7 +22,7 @@ install_dependencies:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
       - node_modules/
-  
+       
 # Deploy to AWS EC2
 deploy_to_aws:
   stage: deploy
