@@ -1,7 +1,6 @@
 #Define stage for pipeline
 stages:
   - install
-  - build
   - deploy
 
 
@@ -13,23 +12,16 @@ install_dependencies:
     - node -v
     - echo "Installing dependencies"
     - npm i
-
-  cache:
-    paths:
-      - node_modules/
-
-
-# Build React App
-build_react_app:
-  stage: build
-  image: node
-  script:
     - echo "Building React App"
     - node -v
     - CI=false npm run build
   artifacts:
     paths:
       - build
+  cache:
+    paths:
+      - node_modules/
+  
 
 
 # Deploy to AWS EC2
