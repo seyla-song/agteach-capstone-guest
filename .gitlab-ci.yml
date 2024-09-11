@@ -14,6 +14,7 @@ install_dependencies:
     - npm i
     - echo "Building React App"
     - node -v
+    - unset CI
     - npm run build
   artifacts:
     paths:
