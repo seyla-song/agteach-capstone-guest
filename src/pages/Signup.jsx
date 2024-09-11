@@ -20,7 +20,7 @@ const SignupPage = () => {
       name: "",
       email: "",
       password: "",
-      dateOfBirth: new Date(),
+      dateOfBirth: null,
     },
   });
 
@@ -28,6 +28,7 @@ const SignupPage = () => {
 
   const submitHandler = async (data) => {
     try {
+      data.dateOfBirth = dayjs(data.dateOfBirth).format("YYYY/MM/DD");
       await signup(data).unwrap();
       console.log("Signup successful", data);
     } catch (error) {
@@ -66,12 +67,15 @@ const SignupPage = () => {
                     <Controller
                       name="dateOfBirth"
                       control={control}
+                      rules={{ required: "Please select your date of birth" }} // Add validation rule
                       render={({ field }) => (
                         <FormInput
                           label="Date of Birth"
                           isDate={true}
-                          dateValue={dayjs(field.value)}
+                          dateValue={field.value ? dayjs(field.value) : null}
                           onDateChange={(newDate) => field.onChange(newDate)}
+                          error={!!errors.dateOfBirth} // Set error state
+                          helperText={errors.dateOfBirth?.message} // Set helper text
                         />
                       )}
                     />
