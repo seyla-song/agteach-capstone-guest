@@ -105,7 +105,7 @@ const Login = () => {
                     </Button>
                   </Link>
                   <Typography py={2}>
-                    Need an account? <Link to="/signup">Create one</Link>
+                    Need an account? <Link to="/auth/signup">Create one</Link>
                   </Typography>
                 </Box>
               </Stack>
