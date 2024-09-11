@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import FormInput from "../components/LoginSignup/FormInput";
 import LogoLink from "../components/LoginSignup/LogoLink";
-import { useSignupMutation, useGetCardQuery } from "../services/api/apiSlice";
+import { useSignupMutation } from "../services/api/authSlice";
+import dayjs from "dayjs";
 
 const SignupPage = () => {
-  const { data: cardData } = useGetCardQuery();
   const [signup, { isLoading }] = useSignupMutation();
   const [showPassword, setShowPassword] = React.useState(false);
   const {
@@ -20,7 +20,7 @@ const SignupPage = () => {
       name: "",
       email: "",
       password: "",
-      dateOfBirth: null,
+      dateOfBirth: new Date(),
     },
   });
 
@@ -29,6 +29,7 @@ const SignupPage = () => {
   const submitHandler = async (data) => {
     try {
       await signup(data).unwrap();
+      console.log("Signup successful", data);
     } catch (error) {
       console.error("Signup failed:", error);
     }
@@ -68,9 +69,9 @@ const SignupPage = () => {
                       render={({ field }) => (
                         <FormInput
                           label="Date of Birth"
-                          isDate
-                          dateValue={field.value}
-                          onDateChange={field.onChange}
+                          isDate={true}
+                          dateValue={dayjs(field.value)}
+                          onDateChange={(newDate) => field.onChange(newDate)}
                         />
                       )}
                     />

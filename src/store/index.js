@@ -1,8 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore as createStore } from "@reduxjs/toolkit";
 
-import { apiSlice } from "../services/api/apiSlice";
+import { apiSlice } from "../services/api/authSlice";
 
-export const store = configureStore({
+export const store = createStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
