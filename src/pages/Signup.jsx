@@ -1,17 +1,21 @@
 import React from "react";
 import { Button, Typography, Box, Stack, Grid, Container } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useForm, Controller } from "react-hook-form";
 import FormInput from "../components/LoginSignup/FormInput";
 import LogoLink from "../components/LoginSignup/LogoLink";
-import { useForm, Controller } from "react-hook-form";
-import dayjs from "dayjs";
-import { useShowDummyQuery } from "../services/api/apiSlice";
+import { useSignupMutation, useGetCardQuery } from "../services/api/apiSlice";
 
-const Signup = () => {
-  const { data, isLoading } = useShowDummyQuery();
-
+const SignupPage = () => {
+  const { data: cardData } = useGetCardQuery();
+  const [signup, { isLoading }] = useSignupMutation();
   const [showPassword, setShowPassword] = React.useState(false);
-  const { control, handleSubmit, register, formState } = useForm({
+  const {
+    control,
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       name: "",
       email: "",
@@ -20,66 +24,56 @@ const Signup = () => {
     },
   });
 
-  const { errors } = formState;
+  const handleShowPassword = () => setShowPassword((prev) => !prev);
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
-
-  const handleClickShowPassword = () => {
-    setShowPassword((prevShowPassword) => !prevShowPassword);
+  const submitHandler = async (data) => {
+    try {
+      await signup(data).unwrap();
+    } catch (error) {
+      console.error("Signup failed:", error);
+    }
   };
 
   return (
-    <Box>
-      <Container maxWidth="md">
-        <Typography>{data}</Typography>
-        <Stack
-          paddingTop={{ xs: 8, md: 10 }}
-          alignItems="center"
-          justifyContent="start"
-          textAlign="center"
-          spacing={4}
-        >
-          <LogoLink />
-
-          <Grid container justifyContent="center">
-            <Grid item xs={12} sm={8} md={6}>
-              <Stack spacing={2}>
-                <Typography variant="h2">Sign Up</Typography>
-                <Typography variant="bmdr">
-                  Sign up to enjoy AgTeach features
-                </Typography>
-
-                <Box width={"100%"}>
-                  <Stack
-                    component={"form"}
-                    onSubmit={handleSubmit(onSubmit)}
-                    spacing={2}
-                  >
+    <Container maxWidth="md">
+      <Stack
+        paddingTop={{ xs: 8, md: 10 }}
+        alignItems="center"
+        justifyContent="start"
+        textAlign="center"
+        spacing={4}
+      >
+        <LogoLink />
+        <Grid container justifyContent="center">
+          <Grid item xs={12} sm={8} md={6}>
+            <Stack spacing={2}>
+              <Typography variant="h2">Sign Up</Typography>
+              <Typography variant="bmdr">
+                Sign up to enjoy AgTeach features
+              </Typography>
+              <Box width="100%">
+                <form onSubmit={handleSubmit(submitHandler)}>
+                  <Stack spacing={2}>
                     <FormInput
-                      label="Your Name"
+                      label="Name"
                       {...register("name", {
                         required: "Please enter your name",
                       })}
                       error={!!errors.name}
                       helperText={errors.name?.message}
                     />
-
                     <Controller
                       name="dateOfBirth"
                       control={control}
-                      sx={{ width: "100" }}
                       render={({ field }) => (
                         <FormInput
                           label="Date of Birth"
-                          isDate={true}
+                          isDate
                           dateValue={field.value}
-                          onDateChange={(newDate) => field.onChange(newDate)}
+                          onDateChange={field.onChange}
                         />
                       )}
                     />
-
                     <FormInput
                       label="Email"
                       {...register("email", {
@@ -114,31 +108,29 @@ const Signup = () => {
                       error={!!errors.password}
                       helperText={errors.password?.message}
                       showPassword={showPassword}
-                      handleClickShowPassword={handleClickShowPassword}
+                      handleClickShowPassword={handleShowPassword}
                     />
                     <Button
                       type="submit"
                       variant="contained"
                       fullWidth
-                      sx={{
-                        padding: "12px",
-                      }}
+                      sx={{ padding: "12px" }}
+                      disabled={isLoading}
                     >
-                      Sign Up
+                      {isLoading ? "Loading..." : "Sign Up"}
                     </Button>
                   </Stack>
-
                   <Typography py={2}>
                     Already have an account? <Link to="/login">Login</Link>
                   </Typography>
-                </Box>
-              </Stack>
-            </Grid>
+                </form>
+              </Box>
+            </Stack>
           </Grid>
-        </Stack>
-      </Container>
-    </Box>
+        </Grid>
+      </Stack>
+    </Container>
   );
 };
 
-export default Signup;
+export default SignupPage;
