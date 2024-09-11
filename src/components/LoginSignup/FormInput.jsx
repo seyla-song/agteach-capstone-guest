@@ -31,7 +31,7 @@ const FormInput = forwardRef(
               sx={{ width: "100%" }}
               label={label}
               value={dateValue}
-              // onChange={onDateChange}
+              onChange={onDateChange}
               renderInput={(params) => (
                 <TextField
                   {...params}
