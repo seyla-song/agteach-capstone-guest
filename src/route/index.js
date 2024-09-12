@@ -18,6 +18,8 @@ import PaymentPage from "../pages/Payment";
 import ForgotPasswordPage from "../pages/ForgotPassword";
 import ResetPasswordPage from "../pages/ResetPassword";
 import SignupPage from "../pages/Signup";
+import ErrorPage from "../pages/Error";
+import LoginPromptComponent from "../components/LoginPromptComponent";
 import VerificationPage from "../pages/Verification";
 
 export {
@@ -41,5 +43,7 @@ export {
   PaymentPage,
   ForgotPasswordPage,
   ResetPasswordPage,
+  ErrorPage,
+  LoginPromptComponent,
   VerificationPage,
 };

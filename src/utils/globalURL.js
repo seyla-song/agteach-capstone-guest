@@ -1,0 +1,1 @@
+export const teachAgtechURL = "https://teach.agteach.site/";
