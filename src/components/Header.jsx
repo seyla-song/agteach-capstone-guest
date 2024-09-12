@@ -1,5 +1,4 @@
 import { Link as RouterLink } from "react-router-dom";
-import { NavLink } from "react-router-dom";
 import Link from "@mui/material/Link";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -92,10 +91,13 @@ function Navigation() {
               }}
             >
               {HEADER_MENU_MOBILE.map((data) => (
-                <MenuItem key={data.path} onClick={handleCloseNavMenu}>
-                  <Link component={NavLink} to={data.path}>
-                    <Typography variant="bsr">{data.page}</Typography>
-                  </Link>
+                <MenuItem
+                  key={data.path}
+                  onClick={handleCloseNavMenu}
+                  component={RouterLink}
+                  to={data.path}
+                >
+                  <Typography variant="bsr">{data.page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -103,7 +105,7 @@ function Navigation() {
           {/* desktop */}
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: "2rem" }}>
             {HEADER_MENU_DESKTOP.map((data) => (
-              <Link key={data.path} component={NavLink} to={data.path}>
+              <Link key={data.path} component={RouterLink} to={data.path}>
                 <Typography variant="bsr" color="common.white">
                   {data.page}
                 </Typography>
