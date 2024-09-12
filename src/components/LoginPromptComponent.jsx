@@ -54,7 +54,7 @@ export default function LoginPromptComponent({ pageName}) {
           </Typography>
           <Button
             component={RouterLink}
-            to="/login"
+            to="/auth/login"
             variant="contained"
             sx={{
               typography: { xs: "bsr", sm: "bmdr" },

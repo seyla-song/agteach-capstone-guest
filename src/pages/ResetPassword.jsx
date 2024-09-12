@@ -99,7 +99,7 @@ const ResetPasswordPage = () => {
                                             showPassword={showPassword}
                                             handleClickShowPassword={handleClickShowPassword}
                                         />
-                                        <Link to="/login">
+                                        <Link to="/auth/login">
                                             <Button
                                                 type="submit"
                                                 variant="contained"
