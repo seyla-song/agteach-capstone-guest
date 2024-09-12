@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Typography, Box, Stack, Grid, Container } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import FormInput from "../components/LoginSignup/FormInput";
 import LogoLink from "../components/LoginSignup/LogoLink";
@@ -8,6 +8,7 @@ import { useSignupMutation } from "../services/api/authSlice";
 import dayjs from "dayjs";
 
 const SignupPage = () => {
+  const navigate = useNavigate();
   const [signup, { isLoading }] = useSignupMutation();
   const [showPassword, setShowPassword] = React.useState(false);
   const {
@@ -20,7 +21,7 @@ const SignupPage = () => {
       name: "",
       email: "",
       password: "",
-      dateOfBirth: new Date(),
+      dateOfBirth: null,
     },
   });
 
@@ -28,8 +29,10 @@ const SignupPage = () => {
 
   const submitHandler = async (data) => {
     try {
+      data.dateOfBirth = dayjs(data.dateOfBirth).format("YYYY/MM/DD");
       await signup(data).unwrap();
       console.log("Signup successful", data);
+      navigate("info");
     } catch (error) {
       console.error("Signup failed:", error);
     }
@@ -66,12 +69,15 @@ const SignupPage = () => {
                     <Controller
                       name="dateOfBirth"
                       control={control}
+                      rules={{ required: "Please select your date of birth" }} // Add validation rule
                       render={({ field }) => (
                         <FormInput
                           label="Date of Birth"
                           isDate={true}
-                          dateValue={dayjs(field.value)}
+                          dateValue={field.value ? dayjs(field.value) : null}
                           onDateChange={(newDate) => field.onChange(newDate)}
+                          error={!!errors.dateOfBirth} // Set error state
+                          helperText={errors.dateOfBirth?.message} // Set helper text
                         />
                       )}
                     />
@@ -118,7 +124,7 @@ const SignupPage = () => {
                       sx={{ padding: "12px" }}
                       disabled={isLoading}
                     >
-                      {isLoading ? "Loading..." : "Sign Up"}
+                      {isLoading ? "Signing Up..." : "Sign Up"}
                     </Button>
                   </Stack>
                   <Typography py={2}>
