@@ -114,7 +114,7 @@ const ForgotPasswordPage = () => {
                                     >
                                         {isLoading ? 'Sending...' : 'Send reset link'}
                                     </Button>
-                                    <Link component={RouterLink} to='/login'>
+                                    <Link component={RouterLink} to='/auth/login'>
                                         <Button fullWidth 
                                             startIcon={<ArrowBackIosNewIcon />}
                                             variant='outlined'>

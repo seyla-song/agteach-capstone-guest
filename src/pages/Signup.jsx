@@ -130,7 +130,7 @@ const SignupPage = () => {
                     </Button>
                   </Stack>
                   <Typography py={2}>
-                    Already have an account? <Link to="/login">Login</Link>
+                    Already have an account? <Link to="/auth/login">Login</Link>
                   </Typography>
                 </form>
               </Box>

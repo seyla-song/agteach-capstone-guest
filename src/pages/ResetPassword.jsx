@@ -133,25 +133,19 @@ const ResetPasswordPage = () => {
                                             showPassword={showPassword}
                                             handleClickShowPassword={handleClickShowPassword}
                                         />
-
-                                        {successMessage && (
-                                            <Alert severity="success">
-                                                {successMessage}
-                                            </Alert>
-                                        )}
-
-                                        <Button
-                                            type="submit"
-                                            variant="contained"
-                                            fullWidth
-                                            style={{
-                                                marginTop: '16px',
-                                                padding: '12px',
-                                            }}
-                                            disabled={isButtonDisabled}
-                                        >
-                                            {successMessage ? 'Back to Login' : 'Reset Password'}
-                                        </Button>
+                                        <Link to="/auth/login">
+                                            <Button
+                                                type="submit"
+                                                variant="contained"
+                                                fullWidth
+                                                style={{
+                                                    marginTop: '16px',
+                                                    padding: '12px',
+                                                }}
+                                            >
+                                                Reset Password
+                                            </Button>
+                                        </Link>
                                     </Stack>
                                 </form>
                             </Box>
