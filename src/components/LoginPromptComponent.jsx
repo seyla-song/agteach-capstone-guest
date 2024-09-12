@@ -13,6 +13,7 @@ import Logout from "../assets/Authentication/logout.svg";
 export default function LoginPromptComponent({ pageName}) {
   return (
     <Container
+    maxWidth={false}
       sx={{
         display: "flex",
         flexDirection: "column",
