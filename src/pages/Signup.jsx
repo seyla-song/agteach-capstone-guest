@@ -4,12 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import FormInput from "../components/LoginSignup/FormInput";
 import LogoLink from "../components/LoginSignup/LogoLink";
-import { useSignupMutation } from "../services/api/authSlice";
+import { useSignupMutation, useGetCardQuery, useUpdateCardMutation } from "../services/api/authSlice";
 import dayjs from "dayjs";
 
 const SignupPage = () => {
   const navigate = useNavigate();
   const [signup, { isLoading }] = useSignupMutation();
+
+  
   const [showPassword, setShowPassword] = React.useState(false);
   const {
     control,

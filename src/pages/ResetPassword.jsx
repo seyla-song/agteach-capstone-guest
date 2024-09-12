@@ -1,21 +1,46 @@
-import React, { useState } from 'react';
-import { Button, Typography, Box, Stack, Grid, Container } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Button, Typography, Box, Stack, Grid, Container, Alert } from '@mui/material';
 import LogoLink from '../components/LoginSignup/LogoLink';
 import FormInput from '../components/LoginSignup/FormInput';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
+    /**
+     * Renders a form to reset the user's password.
+     *
+     * This component renders a form with two input fields for the new password and
+     * confirm password. If the user enters valid input, the form will be submitted to
+     * the server to reset the password. If the form is valid but the server returns an
+     * error, an error message will be displayed. If the form is valid and the server
+     * returns a success message, a success message will be displayed and the user will
+     * be redirected to the login page.
+     *
+     * @returns {React.ReactElement} A JSX element that renders the form and handles
+     *   the form submission.
+     */
 const ResetPasswordPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [newPasswordError, setNewPasswordError] = useState(false);
     const [confirmPasswordError, setConfirmPasswordError] = useState(false);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const [successMessage, setSuccessMessage] = useState(''); // State for success message
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (newPassword && confirmPassword && newPassword === confirmPassword) {
+            setIsButtonDisabled(false);
+        } else {
+            setIsButtonDisabled(true);
+        }
+    }, [newPassword, confirmPassword]);
 
     const handleClickShowPassword = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         let valid = true;
 
@@ -34,7 +59,23 @@ const ResetPasswordPage = () => {
         }
 
         if (valid) {
-            console.log('Password reset successfully');
+            try {
+                const response = await fetch('/api/reset-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ newPassword }),
+                });
+
+                if (response.ok) {
+                    setSuccessMessage('We have received your reset password.'); // Set success message
+                } else {
+                    console.error('Failed to reset password');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
         } else {
             console.log('Form contains errors');
         }
@@ -54,7 +95,6 @@ const ResetPasswordPage = () => {
                     <Grid container justifyContent="center">
                         <Grid item xs={12} md={6}>
                             <Box>
-                                {/* Reset Password Title */}
                                 <Typography 
                                     variant="h2" 
                                     component="h2" 
@@ -64,20 +104,15 @@ const ResetPasswordPage = () => {
                                     Reset Password
                                 </Typography>
 
-                                {/* Strong Passwords Instruction */}
                                 <Typography
                                     variant="bmdr"
-                                    sx={{
-                                        textAlign: 'left',
-                                        
-                                    }}
+                                    sx={{ textAlign: 'left' }}
                                 >
                                     Strong passwords include numbers, letters, and punctuation marks.
                                 </Typography>
 
                                 <form onSubmit={handleSubmit}>
                                     <Stack spacing={3} marginTop={2}>
-                                        {/* New Password Input */}
                                         <FormInput
                                             label="New Password"
                                             type="password"
@@ -88,7 +123,6 @@ const ResetPasswordPage = () => {
                                             showPassword={showPassword}
                                             handleClickShowPassword={handleClickShowPassword}
                                         />
-                                        {/* Confirm Password Input */}
                                         <FormInput
                                             label="Confirm Password"
                                             type="password"

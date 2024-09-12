@@ -15,4 +15,3 @@ const LogoLink = ({ linkTo = "/", imgSrc = "/icon/agteach.png", altText = "Logo"
 };
 
 export default LogoLink;
-
