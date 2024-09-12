@@ -10,7 +10,7 @@ import NotLoginStateComponent from "../components/LoginPromptComponent";
  */
 
 export default function ProtectedRoute({ pageName }) {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
 
   return isAuthenticated ? (
     <Outlet />

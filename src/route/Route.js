@@ -21,8 +21,12 @@ import {
   ResetPasswordPage,
   ErrorPage,
   LoginPromptComponent,
+  VerificationPage,
 } from "./index";
+
 import ProtectedRoute from "./ProtectedRoute";
+
+import AuthRootLayout from "./AuthRoot";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +52,10 @@ export const router = createBrowserRouter([
         element: <ProtectedRoute pageName="wishlist" />, 
         children: [{ index: true, element: <WishlistPage /> }],
       },
+      { path: "cart", element: <CartPage /> },
+      { path: "mylearning", element: <MyLearningPage /> },
+      { path: "agai", element: <AgAiPage /> },
+      { path: "wishlist", element: <WishlistPage /> },
       { path: "guest-profile", element: <GuestProfilePage /> },
       { path: "instructor-profile", element: <InstructorProfilePage /> },
       { path: "courses/:coursesId", element: <CourseDetailPage /> },
@@ -61,10 +69,18 @@ export const router = createBrowserRouter([
     path: "courses/:coursesId/watch/:videoId",
     element: <CourseVideoPage />,
   },
+  {
+    path: "auth/",
+    element: <AuthRootLayout />,
+    children: [
+      { path: "signup", element: <SignupPage /> },
+      { path: "signup/info", element: <PersonalInformationPage /> },
+      { path: "signup/verification", element: <VerificationPage /> },
+      { path: "login", element: <LoginPage /> },
+      { path: "info", element: <PersonalInformationPage /> },
+      { path: "forgot-password", element: <ForgotPasswordPage /> },
+      { path: "reset-password", element: <ResetPasswordPage /> },
+    ],
+  },
   { path: "payment", element: <PaymentPage /> },
-  { path: "login", element: <LoginPage /> },
-  { path: "signup", element: <SignupPage /> },
-  { path: "info", element: <PersonalInformationPage /> },
-  { path: "forgot-password", element: <ForgotPasswordPage /> },
-  { path: "reset-password", element: <ResetPasswordPage /> },
 ]);

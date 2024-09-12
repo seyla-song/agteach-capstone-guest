@@ -20,6 +20,7 @@ import ResetPasswordPage from "../pages/ResetPassword";
 import SignupPage from "../pages/Signup";
 import ErrorPage from "../pages/Error";
 import LoginPromptComponent from "../components/LoginPromptComponent";
+import VerificationPage from "../pages/Verification";
 
 export {
   HomePage,
@@ -44,4 +45,5 @@ export {
   ResetPasswordPage,
   ErrorPage,
   LoginPromptComponent,
+  VerificationPage,
 };

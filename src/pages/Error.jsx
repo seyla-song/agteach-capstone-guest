@@ -35,7 +35,7 @@ export default function ErrorPage() {
         />
         <Stack sx={{ textAlign: "center" }} gap={1}>
           <Typography variant="blgsm" gutterBottom>
-            Oops ! Something went wrong
+            Oops ! Page not found.
           </Typography>
           <Typography variant="bsr" gutterBottom>
             We are really sorry for the inconvenience
