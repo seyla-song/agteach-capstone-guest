@@ -35,10 +35,10 @@ export default function ErrorPage() {
         />
         <Stack sx={{ textAlign: "center" }} gap={1}>
           <Typography variant="blgsm" gutterBottom>
-            Oops ! Page not found.
+            Oops! Page not found.
           </Typography>
           <Typography variant="bsr" gutterBottom>
-            We are really sorry for the inconvenience
+            We can't find the page you're looking for.
           </Typography>
           <Stack direction="row" gap={2} alignSelf="center">
             <Button

@@ -21,17 +21,16 @@ const HEADER_MENU_DESKTOP = [
   { page: "My Learning", path: "mylearning" },
   { page: "Marketplace", path: "marketplace" },
   { page: "AgAI", path: "agai" },
-  { page: "Become a member", path: "" },
 ];
 
 const HEADER_MENU_MOBILE = [
   { page: "My Learning", path: "mylearning" },
   { page: "Marketplace", path: "marketplace" },
   { page: "AgAI", path: "agai" },
-  { page: "Become a member", path: "" },
+  { page: "Become a member", path: "https://teach.agteach.site/" },
   { page: "Wishlist", path: "wishlist" },
   { page: "Cart", path: "cart" },
-  { page: "Login", path: "login" },
+  { page: "Login", path: "/auth/login" },
 ];
 
 function Navigation() {
@@ -111,10 +110,17 @@ function Navigation() {
                 </Typography>
               </Link>
             ))}
+            <Link
+              href="https://teach.agteach.site/"
+              color="common.white"
+              underline="none"
+            >
+              <Typography variant="bsr">Become a member</Typography>
+            </Link>
           </Box>
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Link underline="none" component={RouterLink} to="/login">
+            <Link underline="none" component={RouterLink} to="/auth/login">
               <Button
                 startIcon={
                   <AccountCircleOutlinedIcon sx={{ color: "common.black" }} />
