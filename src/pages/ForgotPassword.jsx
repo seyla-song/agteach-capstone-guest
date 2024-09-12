@@ -76,7 +76,7 @@ const ForgotPasswordPage = () => {
                             <Typography variant="h4" textAlign="center" sx={{ whiteSpace: 'nowrap' }}>
                                 Forgot Your Password?
                             </Typography>
-                            <Typography variant="body1">
+                            <Typography variant="bmdmd">
                                 Please enter the email address associated with this account and we will email you a link to reset your password.
                             </Typography>
                         </Grid>
