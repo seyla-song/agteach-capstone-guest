@@ -3,7 +3,7 @@ import { TextField, Button, Box, Typography, Link, Container, Stack, Grid, Divid
 import LogoLink from '../components/LoginSignup/LogoLink';
 import { useForm } from 'react-hook-form';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import ErrorIcon from '@mui/icons-material/Error';
 import { useForgotpasswordMutation } from '../services/api/authSlice';
 import forgetPasswordImg from '../assets/forgotpassword.png';
@@ -18,7 +18,6 @@ import forgetPasswordImg from '../assets/forgotpassword.png';
  * @returns {React.ReactElement} A JSX element representing the password reset form.
  */
 const ForgotPasswordPage = () => {
-    const navigate = useNavigate();
     const [forgotpassword, { isLoading, error, isSuccess, isError }] = useForgotpasswordMutation();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -28,7 +27,6 @@ const ForgotPasswordPage = () => {
     const onSubmit = async (data) => {
         try {
             const response = await forgotpassword({ email: data.email }).unwrap();
-            navigate('/reset-password');
             console.log(response);
             if (response) {
                 setSnackbarSeverity('success');
