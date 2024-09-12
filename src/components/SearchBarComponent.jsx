@@ -11,9 +11,6 @@ import { Link as RouterLink } from "react-router-dom";
 const data = ["Plant", "Fertilizer", "Shovel"];
 
 export default function SearchBar({ backDrop, searchLabel }) {
-  const getHeight = () =>
-    backDrop ? { xs: "300px", md: "300px" } : { xs: "0px", md: "0px" };
-
   return (
     <Box
       sx={{
@@ -21,8 +18,10 @@ export default function SearchBar({ backDrop, searchLabel }) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        position: "relative",
-        height: getHeight(),
+        position: 'relative', 
+        height: backDrop
+          ? { xs: "300px", md: "300px" }
+          : { xs: "auto", md: "auto" },
       }}
     >
       {backDrop &&
@@ -46,15 +45,14 @@ export default function SearchBar({ backDrop, searchLabel }) {
             src={backDrop}
           />
         ))}
-
       <Stack
         maxWidth="1180px"
         spacing="30px"
         padding="0 20px"
         sx={{
-          position: "absolute",
+          position: backDrop ? "absolute" : "static",
           width: "100%",
-          padding: { xs: "0 20px", md: "0 120px" },
+          padding: backDrop ? { xs: "0 20px", md: "0 120px" } : '0',
         }}
       >
         {searchLabel && (
