@@ -13,6 +13,15 @@ import SearchBar from "../components/SearchBarComponent";
 import SearchList from "../components/MaketPlace/SearchList";
 import { products } from "../utils/carouselDummy";
 
+/**
+ * A React functional component that renders a marketplace page.
+ *
+ * The component includes a responsive layout with a search bar, a category filter,
+ * a sort by filter, and a filter by filter. It also displays a list of products
+ * with a carousel of recommended products.
+ *
+ * @return {JSX.Element} The JSX element representing the marketplace page.
+ */
 export default function MarketPlace() {
   const variant = { product: "product", course: "course" };
   return (
