@@ -9,10 +9,7 @@ import dayjs from "dayjs";
 
 const SignupPage = () => {
   const navigate = useNavigate();
-  // when use with mutation
-  const [signup, { isLoading, error, isSuccess, isError }] = useSignupMutation();
-  // when use with query
-  const { data: cardData, isSuccess: cardSuccess, isLoading: cardLoading } = useGetCardQuery();
+  const [signup, { isLoading }] = useSignupMutation();
 
   
   const [showPassword, setShowPassword] = React.useState(false);

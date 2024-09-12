@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import ResetPasswordPage from '../../pages/ResetPassword';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
@@ -11,19 +12,17 @@ export const apiSlice = createApi({
         body: signupData,
       }),
     }),
-    getCard: builder.query({
-      query: () => 'card',
-      // method: 'GET',
-    }),
-    updateCard: builder.mutation({
-      query: (cardData) => ({
-        url: 'card',
-        method: 'PATCH',
-        body: cardData,
+
+    forgotpassword: builder.mutation({
+      query: (forgotpasswordData) => ({
+        url: 'forgotpassword',
+        method: 'POST',
+        body: forgotpasswordData,
       }),
     }),
+    
 
   }),
 });
 
-export const { useSignupMutation, useGetCardQuery, useUpdateCardMutation } = apiSlice;
+export const { useSignupMutation, useForgotpasswordMutation, } = apiSlice;
