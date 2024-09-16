@@ -14,17 +14,19 @@ import FormInput from "../components/LoginSignup/FormInput";
 import LogoLink from "../components/LoginSignup/LogoLink";
 import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../services/api/authSlice";
-import { ToastContainer, toast } from 'react-toastify';
+import { CustomAlert } from "../components/LoginSignup/CustomAlert";
 
 function Login() {
   const [login, { isLoading, isError }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
+  const [open, setOpen] = useState(false);
   const [visible] = useState(false);
   const navigator = useNavigate();
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    setError,
+    formState: { errors }
   } = useForm({
     defaultValues: {
       email: "",
@@ -32,28 +34,37 @@ function Login() {
     },
   });
 
-  
   const handleShowPassword = () => setShowPassword((prev) => !prev);
   const submitHandler = async (data) => {
-    console.log(data)  
-
+    console.log(data);
     try {
-      await login(data).unwrap();
+      // Call the login function and await its result
+      await login(data).unwrap(); // Assuming login(data) returns a promise with an unwrap method
       console.log("Login successful", data);
-      navigator("/"); // <-- redirect to home page
+      navigator("/"); // Redirect to home page
     } catch (error) {
-      console.error("Login failed:", error);
+      console.error("Incorrect email or password", error);
+      setOpen(true);
+      setError(
+        'email',
+        { type: 'manual', message: 'Incorrect email or password' },
+        { shouldFocus: true }
+      );
+      setError(
+        'password',
+        { type: 'manual', message: 'Incorrect email or password' },
+        { shouldFocus: true }
+      );
     }
   };
+  
 
   return (
     <Box>
-      {isError && <Typography color="error">Login failed</Typography>}
       <Container maxWidth="md">
         <Stack
           paddingTop={{ xs: 8, md: 10 }}
           alignItems="center"
-          
           justifyContent="start"
           textAlign="center"
           spacing={4}
@@ -72,6 +83,12 @@ function Login() {
                   spacing={2}
                   onSubmit={handleSubmit(submitHandler)}
                 >
+                  <CustomAlert
+                    label={errors.email?.message}
+                    open={open}
+                    onClose={() => setOpen(false)}
+                  />
+
                   <FormInput
                     variant="outlined"
                     label="Email"
@@ -142,7 +159,11 @@ function Login() {
                     justifyContent={"center"}
                   >
                     Need an account?
-                    <Link to="/auth/signup" textDecoration="underline" color= "primary.main" >
+                    <Link
+                      to="/auth/signup"
+                      textDecoration="underline"
+                      color="primary.main"
+                    >
                       <Typography color="primary.main" padding={"0 0 0 5px"}>
                         Create one
                       </Typography>
