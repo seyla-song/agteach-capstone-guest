@@ -9,18 +9,18 @@ import dayjs from "dayjs";
 
 const SignupPage = () => {
   const navigate = useNavigate();
-  const [signup, { isLoading }] = useSignupMutation();
+  const [signup, { isLoading, isError }] = useSignupMutation();
 
-  
   const [showPassword, setShowPassword] = React.useState(false);
   const {
     control,
     handleSubmit,
     register,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: "",
+      username: "",
       email: "",
       password: "",
       dateOfBirth: null,
@@ -32,8 +32,8 @@ const SignupPage = () => {
   const submitHandler = async (data) => {
     try {
       data.dateOfBirth = dayjs(data.dateOfBirth).format("YYYY/MM/DD");
-      await signup(data).unwrap();
-      console.log("Signup successful", data);
+      const response = await signup(data).unwrap();
+      console.log("Signup successful", response);
       navigate("info");
     } catch (error) {
       console.error("Signup failed:", error);
@@ -41,7 +41,7 @@ const SignupPage = () => {
   };
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md"> 
       <Stack
         paddingTop={{ xs: 8, md: 10 }}
         alignItems="center"
@@ -62,7 +62,7 @@ const SignupPage = () => {
                   <Stack spacing={2}>
                     <FormInput
                       label="Name"
-                      {...register("name", {
+                      {...register("username", {
                         required: "Please enter your name",
                       })}
                       error={!!errors.name}
@@ -98,6 +98,8 @@ const SignupPage = () => {
                     <FormInput
                       label="Password"
                       type="password"
+                      showPassword={showPassword}
+                      handleClickShowPassword={handleShowPassword}
                       {...register("password", {
                         required: "Please enter your password",
                         minLength: {
@@ -116,8 +118,22 @@ const SignupPage = () => {
                       })}
                       error={!!errors.password}
                       helperText={errors.password?.message}
+                    />
+                    <FormInput
+                      label="Confirm Password"
+                      type="password"
                       showPassword={showPassword}
                       handleClickShowPassword={handleShowPassword}
+                      {...register("passwordConfirm", {
+                        required: "Please confirm your password",
+                        validate: (value) => {
+                          if (value !== watch("password")) {
+                            return "Passwords do not match";
+                          }
+                        }
+                      })}
+                      error={!!errors.confirmPassword}
+                      helperText={errors.confirmPassword?.message}
                     />
                     <Button
                       type="submit"
