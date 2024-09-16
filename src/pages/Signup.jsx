@@ -4,14 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import FormInput from "../components/LoginSignup/FormInput";
 import LogoLink from "../components/LoginSignup/LogoLink";
-import { useSignupMutation, useGetCardQuery, useUpdateCardMutation } from "../services/api/authSlice";
+import { useSignupMutation } from "../services/api/authSlice";
 import dayjs from "dayjs";
 
 const SignupPage = () => {
   const navigate = useNavigate();
   const [signup, { isLoading }] = useSignupMutation();
-
-  
   const [showPassword, setShowPassword] = React.useState(false);
   const {
     control,
@@ -20,7 +18,7 @@ const SignupPage = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: "",
+      username: "",
       email: "",
       password: "",
       dateOfBirth: null,
@@ -31,9 +29,9 @@ const SignupPage = () => {
 
   const submitHandler = async (data) => {
     try {
+      console.log("Signup successful", data);
       data.dateOfBirth = dayjs(data.dateOfBirth).format("YYYY/MM/DD");
       await signup(data).unwrap();
-      console.log("Signup successful", data);
       navigate("info");
     } catch (error) {
       console.error("Signup failed:", error);
@@ -62,7 +60,7 @@ const SignupPage = () => {
                   <Stack spacing={2}>
                     <FormInput
                       label="Name"
-                      {...register("name", {
+                      {...register("username", {
                         required: "Please enter your name",
                       })}
                       error={!!errors.name}
