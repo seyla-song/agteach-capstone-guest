@@ -11,6 +11,9 @@ import { CustomAlert } from "../components/CustomAlert";
 const SignupPage = () => {
   const navigate = useNavigate();
   const [signup, { isLoading, isError }] = useSignupMutation();
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
   const [showPassword, setShowPassword] = useState(false);
   const {
     control,
@@ -33,10 +36,17 @@ const SignupPage = () => {
     try {
       data.dateOfBirth = dayjs(data.dateOfBirth).format("YYYY/MM/DD");
       const response = await signup(data).unwrap();
+      if (response.status === 'success') {
+        setSnackbarSeverity('success');
+        setSnackbarMessage(response.message);
+      }
       console.log("Signup successful", response);
-      navigate("info");
+      navigate("verification");
     } catch (error) {
       console.error("Signup failed:", error);
+      setSnackbarSeverity('error');
+      setSnackbarMessage('Email already exists. Please try another email.');
+      setSnackbarOpen(true);
     }
   };
 
@@ -59,9 +69,10 @@ const SignupPage = () => {
               </Typography>
               <Box width="100%">
               <CustomAlert
-                    label={errors.email?.message}
-                    open={open}
-                    onClose={() => setOpen(false)}
+                    label={snackbarMessage}
+                    open={snackbarOpen}
+                    onClose={() => setSnackbarOpen(false)}
+                    severity={snackbarSeverity}
                   />
                 <form onSubmit={handleSubmit(submitHandler)}>
                   <Stack spacing={2}>

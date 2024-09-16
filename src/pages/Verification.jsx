@@ -105,7 +105,7 @@ export default function VerificationPage() {
                 >
                   Submit
                 </Button>
-                {/* <ResendCodeButton email={data.email} /> */}
+                <ResendCodeButton email={data.email} />
                 <Button
                   fullWidth
                   variant="outlined"
