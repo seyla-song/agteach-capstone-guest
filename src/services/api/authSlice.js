@@ -7,7 +7,7 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
     signup: builder.mutation({
       query: (signupData) => ({
-        url: 'signup',
+        url: '/api/users/signup',
         method: 'POST',
         body: signupData,
       }),
