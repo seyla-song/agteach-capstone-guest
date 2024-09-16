@@ -1,6 +1,7 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Link, Stack, Typography } from "@mui/material";
 import member from "../assets/Home/member.png";
 import { Link as RouterLink } from "react-router-dom";
+import { teachAgtechURL } from "../utils/globalURL";
 
 export default function MemberComponent() {
   return (
@@ -35,8 +36,6 @@ export default function MemberComponent() {
         </Typography>
         <Box>
           <Button
-            component={RouterLink}
-            to="/"
             variant="contained"
             color="secondary"
             sx={{
@@ -44,7 +43,7 @@ export default function MemberComponent() {
               typography: { xs: "bxsr", sm: "bsr" },
             }}
           >
-            Become a member
+            <Link href={teachAgtechURL} underline="none">Become a member</Link>
           </Button>
         </Box>
       </Stack>

@@ -86,7 +86,7 @@ const Login = () => {
                       control={<Checkbox />}
                       label="Keep me logged in"
                     />
-                    <Link to="/forgot-password">
+                    <Link to="/auth/forgot-password">
                       <Typography variant="bmdmd">Forgot Password?</Typography>
                     </Link>
                   </Stack>
@@ -118,4 +118,3 @@ const Login = () => {
 };
 
 export default Login;
-

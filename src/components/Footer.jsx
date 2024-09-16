@@ -9,11 +9,11 @@ import {
 import { Link as RouterLink } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import theme from "../theme/theme";
+import { teachAgtechURL } from "../utils/globalURL";
 
 const FOOTER_MENU = [
   { page: "My Learning", path: "/mylearning" },
   { page: "Marketplace", path: "/marketplace" },
-  { page: "Become a member", path: "" },
   { page: "AgAI", path: "/agai" },
 ];
 
@@ -67,6 +67,13 @@ export default function Footer() {
                   </Typography>
                 </Link>
               ))}
+              <Link
+                href={teachAgtechURL}
+                color="common.white"
+                underline="none"
+              >
+                <Typography variant="bsr">Become a member</Typography>
+              </Link>
             </Box>
           </Container>
           <Typography variant="btr" sx={{ textAlign: "center" }}>
