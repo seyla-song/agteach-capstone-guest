@@ -4,7 +4,7 @@ import LogoLink from '../components/LoginSignup/LogoLink';
 import { useForm } from 'react-hook-form';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Link as RouterLink } from 'react-router-dom';
-import ErrorIcon from '@mui/icons-material/Error';
+import { CustomAlert } from '../components/CustomAlert';
 import { useForgotPasswordMutation } from '../services/api/authSlice';
 import forgetPasswordImg from '../assets/forgotpassword.png';
 
@@ -130,32 +130,7 @@ const ForgotPasswordPage = () => {
             </Container>
 
             {/* Snackbar for displaying messages */}
-            <Snackbar
-                open={snackbarOpen}
-                autoHideDuration={6000}
-                onClose={handleCloseSnackbar}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-            >
-                <Alert
-                    onClose={handleCloseSnackbar}
-                    severity={snackbarSeverity}
-                    sx={{
-                        width: '100%',
-                        bgcolor: snackbarSeverity === 'success' ? 'white' : 'red',
-                        color: 'black',
-                        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)', 
-                        border: `1px solid ${snackbarSeverity === 'success' ? 'green' : 'red'}`,
-
-                        display: 'flex',
-                        alignItems: 'center',
-                    }}
-                    iconMapping={{
-                        error: <ErrorIcon sx={{ color: 'black', marginRight: 1 }} />
-                    }}
-                >
-                    {snackbarMessage}
-                </Alert>
-            </Snackbar>
+            <CustomAlert label={snackbarMessage} open={snackbarOpen} onClose={handleCloseSnackbar} severity={snackbarSeverity}/>
         </Box>
     );
 };
