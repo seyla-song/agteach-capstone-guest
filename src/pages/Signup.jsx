@@ -45,9 +45,8 @@ const SignupPage = () => {
         setSnackbarSeverity('success');
         setSnackbarMessage(response.message);
       }
-      navigate("verification");
-      await signup(data).unwrap();
-      console.log("Signup successful", data);
+      navigate("info");
+      console.log("Signup successful", response);
       // Dispatch the setEmail action to store the email in Redux
       dispatch(setEmail(data.email));
     } catch (error) {

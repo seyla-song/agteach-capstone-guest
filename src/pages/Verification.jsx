@@ -4,7 +4,6 @@ import {
   Button,
   Stack,
   Grid2,
-  CircularProgress,
 } from "@mui/material";
 import FormInput from "../components/LoginSignup/FormInput";
 import { useForm } from "react-hook-form";
