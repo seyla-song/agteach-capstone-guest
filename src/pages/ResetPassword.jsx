@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Button, Typography, Box, Stack, Grid, Container, Link } from '@mui/material';
 import LogoLink from '../components/LoginSignup/LogoLink';
 import FormInput from '../components/LoginSignup/FormInput';
+import { CustomAlert } from '../components/CustomAlert';
 import { useNavigate } from 'react-router-dom';
+import { useResetPasswordMutation } from '../services/api/authSlice';
+import { useParams } from 'react-router-dom';
 
     /**
      * Renders a form to reset the user's password.
@@ -18,66 +21,78 @@ import { useNavigate } from 'react-router-dom';
      *   the form submission.
      */
 const ResetPasswordPage = () => {
+    const [resetPassword, { isLoading, error, isSuccess }] = useResetPasswordMutation();
+    const { resetToken } = useParams();
     const [showPassword, setShowPassword] = useState(false);
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [newPasswordError, setNewPasswordError] = useState(false);
     const [confirmPasswordError, setConfirmPasswordError] = useState(false);
-    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-    const [successMessage, setSuccessMessage] = useState(''); // State for success message
+    const [isConfirmPasswordEmpty, setIsConfirmPasswordEmpty] = useState(false);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+
 
     const navigate = useNavigate();
-
-    useEffect(() => {
-        if (newPassword && confirmPassword && newPassword === confirmPassword) {
-            setIsButtonDisabled(false);
-        } else {
-            setIsButtonDisabled(true);
-        }
-    }, [newPassword, confirmPassword]);
-
+    
     const handleClickShowPassword = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
     };
 
+    const handleCloseSnackbar = () => {
+        setSnackbarOpen(false);
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-        let valid = true;
+
+        const resetData = {token: resetToken, password: newPassword, passwordConfirm: confirmPassword};
 
         if (!newPassword) {
             setNewPasswordError(true);
-            valid = false;
+
         } else {
             setNewPasswordError(false);
         }
 
-        if (newPassword !== confirmPassword || !confirmPassword) {
+        if (!confirmPassword) {
+            setIsConfirmPasswordEmpty(true);
+            return;
+        }   
+        else {
+            setIsConfirmPasswordEmpty(false);
+        }
+
+        if (newPassword !== confirmPassword) {
             setConfirmPasswordError(true);
-            valid = false;
+
         } else {
             setConfirmPasswordError(false);
         }
 
-        if (valid) {
-            try {
-                const response = await fetch('/api/reset-password', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ newPassword }),
-                });
+        if (Boolean(newPassword) && Boolean(confirmPassword) && newPassword === confirmPassword) {
 
-                if (response.ok) {
-                    setSuccessMessage('We have received your reset password.'); // Set success message
-                } else {
-                    console.error('Failed to reset password');
+            try {
+                const response = await resetPassword(resetData);        
+                
+                if (response.data?.status === 'success') {
+                    setSnackbarSeverity('success');
+                    setSnackbarMessage('Password reset successful.');
+                    setTimeout(() => {
+                        navigate('/auth/login')
+                    }, 2000);
                 }
-            } catch (error) {
-                console.error('Error:', error);
+                else {
+                    setSnackbarSeverity('error');
+                    setSnackbarMessage('Failed to reset password');
+                }
+            } catch (err) {
+                setSnackbarSeverity('error');
+                setSnackbarMessage('Something Went wrong. Please try again');
+            } finally {
+                setSnackbarOpen(true);
             }
-        } else {
-            console.log('Form contains errors');
         }
     };
 
@@ -128,8 +143,8 @@ const ResetPasswordPage = () => {
                                             type="password"
                                             value={confirmPassword}
                                             onChange={(e) => setConfirmPassword(e.target.value)}
-                                            error={confirmPasswordError}
-                                            helperText={confirmPasswordError ? 'Passwords must match' : ''}
+                                            error={confirmPasswordError || isConfirmPasswordEmpty}
+                                            helperText={isConfirmPasswordEmpty ? `Confirm password is required` : '' || confirmPasswordError ? `Password isn't match` : ''}
                                             showPassword={showPassword}
                                             handleClickShowPassword={handleClickShowPassword}
                                         />
@@ -138,15 +153,19 @@ const ResetPasswordPage = () => {
                                                 type="submit"
                                                 variant="contained"
                                                 fullWidth
+                                                disabled={isLoading || isSuccess}
                                                 style={{
                                                     marginTop: '16px',
                                                     padding: '12px',
                                                 }}
                                             >
-                                                Reset Password
+                                                {isLoading? 'Sending Request...' : 'Reset Password'}
                                             </Button>
                                         </Link>
                                     </Stack>
+
+                                    {/* Snackbar for displaying messages */}
+                                    <CustomAlert label={snackbarMessage} open={snackbarOpen} onClose={handleCloseSnackbar} severity={snackbarSeverity}/>
                                 </form>
                             </Box>
                         </Grid>

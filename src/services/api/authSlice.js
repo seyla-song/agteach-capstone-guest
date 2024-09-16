@@ -43,9 +43,17 @@ export const apiSlice = createApi({
         body: email,
       }),
     }),
+
+    resetPassword: builder.mutation({
+      query: (resetData) => ({
+        url: `api/users/resetPassword/${resetData.token}`,
+        method: 'PATCH',
+        body: resetData,
+      }),
+    }),
     
 
   }),
 });
 
-export const { useSignupMutation, useForgotPasswordMutation, useLoginMutation,  } = apiSlice;
+export const { useSignupMutation, useForgotPasswordMutation, useLoginMutation, useResetPasswordMutation } = apiSlice;
