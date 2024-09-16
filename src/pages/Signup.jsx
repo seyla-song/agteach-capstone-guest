@@ -5,11 +5,16 @@ import { useForm, Controller } from "react-hook-form";
 import FormInput from "../components/LoginSignup/FormInput";
 import LogoLink from "../components/LoginSignup/LogoLink";
 import { useSignupMutation } from "../services/api/authSlice";
+import { useDispatch } from "react-redux";
+import { setEmail } from "../services/api/userSlice";
+
 import dayjs from "dayjs";
 import { CustomAlert } from "../components/CustomAlert";
 
 const SignupPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [signup, { isLoading, isError }] = useSignupMutation();
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
@@ -40,8 +45,11 @@ const SignupPage = () => {
         setSnackbarSeverity('success');
         setSnackbarMessage(response.message);
       }
-      console.log("Signup successful", response);
       navigate("verification");
+      await signup(data).unwrap();
+      console.log("Signup successful", data);
+      // Dispatch the setEmail action to store the email in Redux
+      dispatch(setEmail(data.email));
     } catch (error) {
       console.error("Signup failed:", error);
       setSnackbarSeverity('error');
