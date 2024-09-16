@@ -36,11 +36,11 @@ export const apiSlice = createApi({
     // }),
 
 
-    forgotpassword: builder.mutation({
-      query: (forgotpasswordData) => ({
-        url: 'forgotpassword',
+    forgotPassword: builder.mutation({
+      query: (email) => ({
+        url: 'api/users/forgotPassword',
         method: 'POST',
-        body: forgotpasswordData,
+        body: email,
       }),
     }),
     
@@ -48,4 +48,4 @@ export const apiSlice = createApi({
   }),
 });
 
-export const { useSignupMutation, useForgotpasswordMutation, useLoginMutation,  } = apiSlice;
+export const { useSignupMutation, useForgotPasswordMutation, useLoginMutation,  } = apiSlice;

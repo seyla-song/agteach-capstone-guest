@@ -13,7 +13,7 @@ import Close from '@mui/icons-material/Close';
  * @param {function} onClose - Function to be called when the close button is clicked or the snackbar is automatically closed after 4 seconds
  * @returns {ReactElement} A JSX element representing a snackbar with a filled error Alert and a close button
  */
-export const CustomAlert = ({ label, open, onClose }) => {
+export const CustomAlert = ({ label, open, onClose, severity }) => {
   return (
     <Snackbar
       // Auto hide duration is 4 seconds
@@ -27,7 +27,7 @@ export const CustomAlert = ({ label, open, onClose }) => {
         // Make the alert have a filled style
         variant="filled"
         // Make the alert red
-        severity="error"
+        severity={severity}
         // Set the width of the alert to 500px
         width={500}
         action={
