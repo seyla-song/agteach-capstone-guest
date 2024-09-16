@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import { teachAgtechURL } from "../utils/globalURL";
 
 import { useState } from "react";
 import Logo from "../assets/logo.png";
@@ -21,17 +22,15 @@ const HEADER_MENU_DESKTOP = [
   { page: "My Learning", path: "mylearning" },
   { page: "Marketplace", path: "marketplace" },
   { page: "AgAI", path: "agai" },
-  { page: "Become a member", path: "" },
 ];
 
 const HEADER_MENU_MOBILE = [
   { page: "My Learning", path: "mylearning" },
   { page: "Marketplace", path: "marketplace" },
   { page: "AgAI", path: "agai" },
-  { page: "Become a member", path: "" },
   { page: "Wishlist", path: "wishlist" },
   { page: "Cart", path: "cart" },
-  { page: "Login", path: "login" },
+  { page: "Login", path: "/auth/login" },
 ];
 
 function Navigation() {
@@ -90,6 +89,11 @@ function Navigation() {
                 display: { xs: "block", md: "none" },
               }}
             >
+              <MenuItem component={Link} href={teachAgtechURL} underline="none">
+                <Typography variant="bsr">
+                  Become a member
+                </Typography>
+              </MenuItem>
               {HEADER_MENU_MOBILE.map((data) => (
                 <MenuItem
                   key={data.path}
@@ -111,10 +115,13 @@ function Navigation() {
                 </Typography>
               </Link>
             ))}
+            <Link href={teachAgtechURL} color="common.white" underline="none">
+              <Typography variant="bsr">Become a member</Typography>
+            </Link>
           </Box>
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Link underline="none" component={RouterLink} to="/login">
+            <Link underline="none" component={RouterLink} to="/auth/login">
               <Button
                 startIcon={
                   <AccountCircleOutlinedIcon sx={{ color: "common.black" }} />

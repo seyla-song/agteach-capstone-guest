@@ -10,6 +10,8 @@ import dayjs from "dayjs";
 const SignupPage = () => {
   const navigate = useNavigate();
   const [signup, { isLoading }] = useSignupMutation();
+
+  
   const [showPassword, setShowPassword] = React.useState(false);
   const {
     control,
@@ -128,7 +130,7 @@ const SignupPage = () => {
                     </Button>
                   </Stack>
                   <Typography py={2}>
-                    Already have an account? <Link to="/login">Login</Link>
+                    Already have an account? <Link to="/auth/login">Login</Link>
                   </Typography>
                 </form>
               </Box>
