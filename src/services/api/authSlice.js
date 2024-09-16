@@ -1,9 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import ResetPasswordPage from '../../pages/ResetPassword';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001' }),
+  baseQuery: fetchBaseQuery({ 
+    baseUrl: 'http://localhost:3001',
+    credentials: 'include', // Move this line here
+  }),
   endpoints: (builder) => ({
     signup: builder.mutation({
       query: (signupData) => ({
@@ -12,6 +14,27 @@ export const apiSlice = createApi({
         body: signupData,
       }),
     }),
+    login: builder.mutation({
+      query: (loginData) => ({
+        url: '/api/users/login',
+        method: 'POST',
+        body: loginData,
+      }),
+    }),
+
+    // login: builder.mutation({
+    //   query: (loginData) => ({
+    //     url: '/api/users/login',
+    //     method: 'POST',
+    //     body: loginData,
+    //     // credentials: "include",              
+    //     // headers: {
+    //     //   'getSetCookie': 'true',
+    //     // }
+        
+    //   }),
+    // }),
+
 
     forgotpassword: builder.mutation({
       query: (forgotpasswordData) => ({
@@ -25,4 +48,4 @@ export const apiSlice = createApi({
   }),
 });
 
-export const { useSignupMutation, useForgotpasswordMutation, } = apiSlice;
+export const { useSignupMutation, useForgotpasswordMutation, useLoginMutation,  } = apiSlice;
