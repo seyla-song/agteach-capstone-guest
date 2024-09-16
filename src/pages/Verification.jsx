@@ -1,12 +1,4 @@
-import {
-  Box,
-  Typography,
-  Button,
-  Stack,
-  Grid2,
-  responsiveFontSizes,
-  Grid,
-} from "@mui/material";
+import { Box, Typography, Button, Stack, Grid2 } from "@mui/material";
 import FormInput from "../components/LoginSignup/FormInput";
 import { useForm } from "react-hook-form";
 import { useVerifyEmailMutation } from "../services/api/verifySlice";
@@ -38,7 +30,7 @@ export default function VerificationPage() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: "80vh",
+        height: { sm: "80vh", xs: "100vh" },
         paddingX: 5,
       }}
     >
