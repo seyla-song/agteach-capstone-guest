@@ -4,7 +4,7 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:3001",
-    credentials: "include", // Move this line here
+    credentials: "include", 
   }),
   endpoints: (builder) => ({
     signup: builder.mutation({
@@ -40,12 +40,20 @@ export const apiSlice = createApi({
     }),
 
     resetPassword: builder.mutation({
-      query: (additionalInfoData) => ({
+      query: (resetPasswordData) => ({
         url: "api/users/resetPassword",
         method: "POST",
-        body: additionalInfoData,
+        body: resetPasswordData,
       }),
     }),
+
+    addPersonalInfo: builder.mutation({
+      query: (personalInfoData) => ({
+        url: "api/users/personalInfo",
+        method: "POST",
+        body: personalInfoData,
+      }),
+    })
   }),
 });
 
@@ -54,4 +62,5 @@ export const {
   useForgotPasswordMutation,
   useLoginMutation,
   useResetPasswordMutation,
+  useAddPersonalInfoMutation
 } = apiSlice;

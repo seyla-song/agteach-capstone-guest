@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import LogoLink from "../components/LoginSignup/LogoLink";
 import FormInput from "../components/LoginSignup/FormInput";
-import { Form, Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import {useSelector} from "react-redux"
+import { useAddPersonalInfoMutation } from "../services/api/authSlice";
+import { useNavigate } from "react-router-dom";
 import {
   Container,
   Typography,
@@ -11,23 +14,43 @@ import {
   TextField,
   Autocomplete,
 } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { CustomAlert } from "../components/CustomAlert";
 
 export default function PersonalInfoForm() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate();
+  const [addPerosnalInfo] = useAddPersonalInfoMutation();
+  const dob = useSelector((state) => state.dob.value);
 
   const onSubmit = async (data) => {
     try {
-    } catch (error) {}
+      console.log(data);
+      const response = await addPerosnalInfo({ ...data, dateOfBirth: dob }).unwrap();
+      console.log("Success:", response);
+      if (response.status === "success") {
+        setSnackbarSeverity('success');
+        setSnackbarMessage('Personal information added successfully');
+      } else {
+        setSnackbarSeverity('error');
+        setSnackbarMessage('Something went wrong. Please try again.');
+      }
+      setSnackbarOpen(true);
+      navigate("/auth/signup/verification");
+    } catch (error) {
+      console.error("Error:", error);
+      setSnackbarSeverity('error');
+      setSnackbarMessage('Something went wrong. Please try again.');
+      setSnackbarOpen(true);
+    }
   };
 
   return (
     <Box>
       <Container maxWidth={false} sx={{ maxWidth: "700px" }}>
+        <CustomAlert />
         <Stack paddingTop={{ xs: 8, md: 10 }} alignItems="center" spacing={4}>
           {/* Logo */}
           <LogoLink />
@@ -54,14 +77,24 @@ export default function PersonalInfoForm() {
                       required: "First name is required",
                       pattern: {
                         value: /^[A-Za-z]+$/i,
-                        message: "Please enter a valid first name",
-                      },
+                        message: "First name can only contain letters",
+                      }
                     })}
+                    error={!!errors.firstName}
+                    helperText={errors?.firstName?.message}
                   />
                   <FormInput
                     label="Last Name"
                     placeholder="e.g. Smith"
-                    {...register("lastName")}
+                    {...register("lastName", {
+                      required: "Last name is required",
+                      pattern: {
+                        value: /^[A-Za-z]+$/i,
+                        message: "Last name can only contain letters",
+                      }
+                    })}
+                    error={!!errors.lastName}
+                    helperText={errors?.lastName?.message}
                   />
                 </Box>
                 <Autocomplete
@@ -90,6 +123,8 @@ export default function PersonalInfoForm() {
                   {...register("address", {
                     required: "Address is required",
                   })}
+                  error={!!errors.address}
+                  helperText={errors?.address?.message}
                 />
               </Stack>
 
@@ -99,14 +134,16 @@ export default function PersonalInfoForm() {
                 <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
                   <FormInput
                     label="Phone number"
-                    placeholder="e.g. +855 123 456 789"
+                    placeholder="e.g. +855 123456789"
                     {...register("phone", {
                       required: "Phone number is required",
                       pattern: {
-                        value: /^\+855\d{9}$/,
+                        value: /^\+\d{1,3}\s*\d{1,4}(\s*\d{1,4}){1,4}$/,
                         message: "Please enter a valid phone number",
                       }
                     })}
+                    error={!!errors.phone}
+                    helperText={errors?.phone?.message}
                   />
                 </Box>
               </Stack>

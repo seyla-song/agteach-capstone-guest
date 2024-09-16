@@ -6,9 +6,12 @@ import FormInput from "../components/LoginSignup/FormInput";
 import LogoLink from "../components/LoginSignup/LogoLink";
 import { useSignupMutation } from "../services/api/authSlice";
 import dayjs from "dayjs";
+import { setDob } from "../store/slices/dobSlice";
+import { useDispatch } from "react-redux";
 
 const SignupPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [signup, { isLoading }] = useSignupMutation();
   const [showPassword, setShowPassword] = React.useState(false);
   const {
@@ -29,6 +32,7 @@ const SignupPage = () => {
 
   const submitHandler = async (data) => {
     try {
+      dispatch(setDob(data.dateOfBirth));
       console.log("Signup successful", data);
       data.dateOfBirth = dayjs(data.dateOfBirth).format("YYYY/MM/DD");
       await signup(data).unwrap();
