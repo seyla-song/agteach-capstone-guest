@@ -24,7 +24,28 @@ export const apiSlice = createApi({
         body: forgotpasswordData,
       }),
     }),
+
+    verifyEmail: builder.mutation({
+      query: (emailVerifyCode) => ({
+        url: "/api/users/verifyEmail",
+        method: "POST",
+        body: { emailVerifyCode },
+      }),
+    }),
+
+    resendVerifyCode: builder.mutation({
+      query: (email) => ({
+        url: "/api/users/resendCode",
+        method: "POST",
+        body: { email },
+      }),
+    }),
   }),
 });
 
-export const { useSignupMutation, useForgotpasswordMutation } = apiSlice;
+export const {
+  useSignupMutation,
+  useForgotpasswordMutation,
+  useVerifyEmailMutation,
+  useResendVerifyCodeMutation
+} = apiSlice;

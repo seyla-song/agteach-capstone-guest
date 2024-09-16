@@ -1,23 +1,37 @@
-import { Box, Typography, Button, Stack } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Button,
+  Stack,
+  Grid2,
+  CircularProgress,
+} from "@mui/material";
 import FormInput from "../components/LoginSignup/FormInput";
 import { useForm } from "react-hook-form";
-import { useVerifyEmailMutation } from "../services/api/verifySlice";
+import { useVerifyEmailMutation } from "../services/api/authSlice";
 import LogoLink from "../components/LoginSignup/LogoLink";
 import { ArrowBack } from "@mui/icons-material";
+import ResendCodeButton from "../components/LoginSignup/ResendCodeButton";
+
+import { useNavigate } from "react-router-dom";
 
 export default function VerificationPage() {
-  const { register, handleSubmit } = useForm();
+
+  const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [verifyEmail, { isLoading, isSuccess, isError, error }] =
     useVerifyEmailMutation();
 
   const onSubmit = async (data) => {
     try {
-      // Call the mutation to send the code and email to the server
-      const response = await verifyEmail({
-        code: data.code,
-        email: data.email,
-      }).unwrap();
+      const response = await verifyEmail(data.emailVerifyCode).unwrap();
       console.log("Verification successful", response);
+      navigate("/");
     } catch (err) {
       console.error("Verification failed", err);
     }
@@ -30,65 +44,82 @@ export default function VerificationPage() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: "80vh",
+        height: { sm: "80vh", xs: "100vh" },
         paddingX: 5,
       }}
     >
       <LogoLink />
-      <Stack direction={"row"} alignItems={"center"} gap={2}>
-        <Stack>
-          <Box
-            component={"iframe"}
-            border={"none"}
-            src="https://lottie.host/embed/7e3e9b9a-bfc5-43b9-83b8-f9865bff7bf6/OkwRtcwUA1.json"
-          ></Box>
-          <Typography variant="h3">
-            Check your email for the verification code .
-          </Typography>
-          <Typography variant="bsr" sx={{ color: "dark.300" }}>
-            Please enter code number that you receive in the email.
-          </Typography>
-        </Stack>
-        <Stack gap={2}>
-          <Typography variant="blgsm">Enter verification code</Typography>
-          <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-            <FormInput
-              mt={2}
-              label="Code"
-              type="text"
-              {...register("code")}
-              required
-            />
-            <Stack gap={1} pt={1}>
-              <Button
-                fullWidth
-                type="submit"
-                variant="contained"
-                disabled={isLoading}
-              >
-                Submit
-              </Button>
-              <Button
-                fullWidth
-                type="submit"
-                variant="outlined"
-                disabled={isLoading}
-                startIcon={<ArrowBack />}
-              >
-                Go Back
-              </Button>
-            </Stack>
+      <Grid2 container direction={"row"} alignItems={"center"} gap={2}>
+        <Grid2 item="true" sx={{ width: { xs: "100%", sm: "55%" } }}>
+          <Stack>
+            <Box
+              height={{ sm: "430px", xs: "246px" }}
+              objectfit={"contain"}
+              component={"iframe"}
+              border={"none"}
+              src="https://lottie.host/embed/7e3e9b9a-bfc5-43b9-83b8-f9865bff7bf6/OkwRtcwUA1.json"
+            ></Box>
+          </Stack>
+          <Box textAlign={"center"}>
+            <Typography sx={{ typography: { xs: "h4", sm: "blgsm" } }}>
+              Check your email for verification code .
+            </Typography>
+            <Typography variant="bsr" sx={{ color: "dark.300" }}>
+              Please enter code number that you receive in the email.
+            </Typography>
           </Box>
-        </Stack>
-        {isSuccess && (
-          <Typography color="success.main">Verification successful!</Typography>
-        )}
-        {isError && (
-          <Typography color="error.main">
-            {error?.data?.message || "Verification failed!"}
-          </Typography>
-        )}
-      </Stack>
+        </Grid2>
+        <Grid2 item="true" gap={2} sx={{ width: { xs: "100%", sm: "40%" } }}>
+          <Box width={"100%"}>
+            <Typography pb={2} variant="blgsm">
+              Enter verification code
+            </Typography>
+            <Box component="form" onSubmit={handleSubmit(onSubmit)}>
+              <FormInput
+                mt={2}
+                label="Code"
+                type="text"
+                {...register("emailVerifyCode", {
+                  required: "Verification code is required",
+                })}
+              />
+              {errors.code && (
+                <Typography color="error">{errors.code.message}</Typography>
+              )}
+              {isSuccess && (
+                <Typography color="success.main">
+                  Verification successful!
+                </Typography>
+              )}
+              {isError && (
+                <Typography color="error.main">
+                  {error?.data?.message || "Verification failed!"}
+                </Typography>
+              )}
+              <Stack gap={1} pt={1}>
+                <Button
+                  fullWidth
+                  type="submit"
+                  variant="contained"
+                  disabled={isLoading}
+                >
+                  Submit
+                </Button>
+                {/* <ResendCodeButton email={data.email} /> */}
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  disabled={isLoading}
+                  startIcon={<ArrowBack />}
+                  onClick={() => navigate("/auth/signup")}
+                >
+                  Go Back
+                </Button>
+              </Stack>
+            </Box>
+          </Box>
+        </Grid2>
+      </Grid2>
     </Box>
   );
 }
