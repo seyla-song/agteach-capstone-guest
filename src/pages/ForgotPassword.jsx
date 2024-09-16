@@ -4,8 +4,8 @@ import LogoLink from '../components/LoginSignup/LogoLink';
 import { useForm } from 'react-hook-form';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Link as RouterLink } from 'react-router-dom';
-import ErrorIcon from '@mui/icons-material/Error';
-import { useForgotpasswordMutation } from '../services/api/authSlice';
+import { CustomAlert } from '../components/CustomAlert';
+import { useForgotPasswordMutation } from '../services/api/authSlice';
 import forgetPasswordImg from '../assets/forgotpassword.png';
 
 
@@ -18,7 +18,7 @@ import forgetPasswordImg from '../assets/forgotpassword.png';
  * @returns {React.ReactElement} A JSX element representing the password reset form.
  */
 const ForgotPasswordPage = () => {
-    const [forgotpassword, { isLoading, error, isSuccess, isError }] = useForgotpasswordMutation();
+    const [forgotPassword, { isLoading, error, isSuccess, isError }] = useForgotPasswordMutation();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
@@ -26,16 +26,19 @@ const ForgotPasswordPage = () => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await forgotpassword({ email: data.email }).unwrap();
-            console.log(response);
-            if (response) {
+            const response = await forgotPassword({ email: data.email }).unwrap();
+            if (response.status === 'success') {
                 setSnackbarSeverity('success');
-                setSnackbarMessage('Check your email inbox.');
+                setSnackbarMessage(response.message);
                 reset(); 
+            }
+            else {
+                setSnackbarSeverity('error');
+                setSnackbarMessage(response.message);
             }
         } catch (err) {
             setSnackbarSeverity('error');
-            setSnackbarMessage(error?.data?.message || "Your email may be wrong or you haven't signed up.");
+            setSnackbarMessage(err?.data?.message);
         } finally {
             setSnackbarOpen(true);
         }
@@ -84,7 +87,7 @@ const ForgotPasswordPage = () => {
                             <Stack spacing={2} sx={{ width: '100%', maxWidth: '400px' }}>
                                 <Typography variant="h4" textAlign="center">Enter your email address</Typography>
                                 <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-                                <TextField
+                                    <TextField
                                         label="Email"
                                         variant="outlined"
                                         fullWidth
@@ -127,32 +130,7 @@ const ForgotPasswordPage = () => {
             </Container>
 
             {/* Snackbar for displaying messages */}
-            <Snackbar
-                open={snackbarOpen}
-                autoHideDuration={6000}
-                onClose={handleCloseSnackbar}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-            >
-                <Alert
-                    onClose={handleCloseSnackbar}
-                    severity={snackbarSeverity}
-                    sx={{
-                        width: '100%',
-                        bgcolor: snackbarSeverity === 'success' ? 'white' : 'red',
-                        color: 'black',
-                        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)', 
-                        border: `1px solid ${snackbarSeverity === 'success' ? 'green' : 'red'}`,
-
-                        display: 'flex',
-                        alignItems: 'center',
-                    }}
-                    iconMapping={{
-                        error: <ErrorIcon sx={{ color: 'black', marginRight: 1 }} />
-                    }}
-                >
-                    {snackbarMessage}
-                </Alert>
-            </Snackbar>
+            <CustomAlert label={snackbarMessage} open={snackbarOpen} onClose={handleCloseSnackbar} severity={snackbarSeverity}/>
         </Box>
     );
 };
