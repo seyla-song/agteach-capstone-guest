@@ -17,7 +17,7 @@ import { useLoginMutation } from "../services/api/authSlice";
 import { CustomAlert } from "../components/CustomAlert";
 
 function Login() {
-  const [login, { isLoading, isError }] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(false);
   const [visible] = useState(false);
@@ -39,8 +39,8 @@ function Login() {
     console.log(data);
     try {
       // Call the login function and await its result
-      await login(data).unwrap(); // Assuming login(data) returns a promise with an unwrap method
-      console.log("Login successful", data);
+      const response = await login(data).unwrap(); // Assuming login(data) returns a promise with an unwrap method
+      console.log("Login successful", response);
       navigator("/"); // Redirect to home page
     } catch (error) {
       console.error("Incorrect email or password", error);
@@ -109,16 +109,16 @@ function Login() {
                     fullWidth
                     type={visible ? "text" : "password"}
                     {...register("password", {
-                      required: "Please enter your password",
-                      minLength: {
-                        value: 8,
-                        message: "Password must be at least 8 characters",
-                      },
-                      pattern: {
-                        value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                        message:
-                          "Password must contain at least one letter and one number",
-                      },
+                      // required: "Please enter your password",
+                      // minLength: {
+                      //   value: 8,
+                      //   message: "Password must be at least 8 characters",
+                      // },
+                      // pattern: {
+                      //   value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                      //   message:
+                      //     "Password must contain at least one letter and one number",
+                      // },
                     })}
                     error={!!errors.password}
                     helperText={errors.password?.message}
