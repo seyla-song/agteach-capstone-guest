@@ -13,6 +13,20 @@ export const apiSlice = createApi({
       }),
     }),
 
+    login: builder.mutation({
+      query: (loginData) => ({
+        url: '/api/users/login',
+        method: 'POST',
+        body: loginData,
+        // credentials: "include",
+        // headers: {
+        //   'getSetCookie': 'true',
+        // }
+        
+      }),
+    }),
+
+
     forgotpassword: builder.mutation({
       query: (forgotpasswordData) => ({
         url: 'forgotpassword',
@@ -25,4 +39,4 @@ export const apiSlice = createApi({
   }),
 });
 
-export const { useSignupMutation, useForgotpasswordMutation, } = apiSlice;
+export const { useSignupMutation, useForgotpasswordMutation, useLoginMutation } = apiSlice;
