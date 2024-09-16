@@ -4,12 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import FormInput from "../components/LoginSignup/FormInput";
 import LogoLink from "../components/LoginSignup/LogoLink";
-import { useSignupMutation } from "../services/api/authSlice";
+import { useSignupMutation, useGetCardQuery, useUpdateCardMutation } from "../services/api/authSlice";
 import dayjs from "dayjs";
 
 const SignupPage = () => {
   const navigate = useNavigate();
   const [signup, { isLoading }] = useSignupMutation();
+
+  
   const [showPassword, setShowPassword] = React.useState(false);
   const {
     control,
@@ -128,7 +130,7 @@ const SignupPage = () => {
                     </Button>
                   </Stack>
                   <Typography py={2}>
-                    Already have an account? <Link to="/login">Login</Link>
+                    Already have an account? <Link to="/auth/login">Login</Link>
                   </Typography>
                 </form>
               </Box>
