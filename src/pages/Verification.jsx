@@ -14,10 +14,13 @@ import { ArrowBack } from "@mui/icons-material";
 import ResendCodeButton from "../components/LoginSignup/ResendCodeButton";
 
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function VerificationPage() {
 
   const navigate = useNavigate();
+
+  const email = useSelector((state) => state.user.email);
 
   const {
     register,
@@ -105,7 +108,7 @@ export default function VerificationPage() {
                 >
                   Submit
                 </Button>
-                {/* <ResendCodeButton email={data.email} /> */}
+                <ResendCodeButton email={email} />
                 <Button
                   fullWidth
                   variant="outlined"

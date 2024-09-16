@@ -5,13 +5,16 @@ import { useForm, Controller } from "react-hook-form";
 import FormInput from "../components/LoginSignup/FormInput";
 import LogoLink from "../components/LoginSignup/LogoLink";
 import { useSignupMutation } from "../services/api/authSlice";
+import { useDispatch } from "react-redux";
+import { setEmail } from "../services/api/userSlice";
+
 import dayjs from "dayjs";
 
 const SignupPage = () => {
   const navigate = useNavigate();
   const [signup, { isLoading }] = useSignupMutation();
+  const dispatch = useDispatch();
 
-  
   const [showPassword, setShowPassword] = React.useState(false);
   const {
     control,
@@ -34,6 +37,8 @@ const SignupPage = () => {
       data.dateOfBirth = dayjs(data.dateOfBirth).format("YYYY/MM/DD");
       await signup(data).unwrap();
       console.log("Signup successful", data);
+      // Dispatch the setEmail action to store the email in Redux
+      dispatch(setEmail(data.email));
       navigate("info");
     } catch (error) {
       console.error("Signup failed:", error);
