@@ -15,7 +15,7 @@ export const apiSlice = createApi({
 
     forgotPassword: builder.mutation({
       query: (email) => ({
-        url: 'forgotPassword',
+        url: 'api/users/forgotPassword',
         method: 'POST',
         body: email,
       }),

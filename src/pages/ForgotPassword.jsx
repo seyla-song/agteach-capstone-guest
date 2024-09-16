@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Link as RouterLink } from 'react-router-dom';
 import ErrorIcon from '@mui/icons-material/Error';
-import { useForgotpasswordMutation } from '../services/api/authSlice';
+import { useForgotPasswordMutation } from '../services/api/authSlice';
 import forgetPasswordImg from '../assets/forgotpassword.png';
 
 
@@ -18,7 +18,7 @@ import forgetPasswordImg from '../assets/forgotpassword.png';
  * @returns {React.ReactElement} A JSX element representing the password reset form.
  */
 const ForgotPasswordPage = () => {
-    const [forgotpassword, { isLoading, error, isSuccess, isError }] = useForgotpasswordMutation();
+    const [forgotPassword, { isLoading, error, isSuccess, isError }] = useForgotPasswordMutation();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
@@ -26,16 +26,19 @@ const ForgotPasswordPage = () => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await forgotpassword({ email: data.email }).unwrap();
-            console.log(response);
-            if (response) {
+            const response = await forgotPassword({ email: data.email }).unwrap();
+            if (response.status === 'success') {
                 setSnackbarSeverity('success');
-                setSnackbarMessage('Check your email inbox.');
+                setSnackbarMessage(response.message);
                 reset(); 
+            }
+            else {
+                setSnackbarSeverity('error');
+                setSnackbarMessage(response.message);
             }
         } catch (err) {
             setSnackbarSeverity('error');
-            setSnackbarMessage(error?.data?.message || "Your email may be wrong or you haven't signed up.");
+            setSnackbarMessage(err?.data?.message);
         } finally {
             setSnackbarOpen(true);
         }
@@ -84,7 +87,7 @@ const ForgotPasswordPage = () => {
                             <Stack spacing={2} sx={{ width: '100%', maxWidth: '400px' }}>
                                 <Typography variant="h4" textAlign="center">Enter your email address</Typography>
                                 <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-                                <TextField
+                                    <TextField
                                         label="Email"
                                         variant="outlined"
                                         fullWidth
