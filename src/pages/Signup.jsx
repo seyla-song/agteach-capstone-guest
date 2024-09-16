@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Typography, Box, Stack, Grid, Container } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
@@ -6,12 +6,12 @@ import FormInput from "../components/LoginSignup/FormInput";
 import LogoLink from "../components/LoginSignup/LogoLink";
 import { useSignupMutation } from "../services/api/authSlice";
 import dayjs from "dayjs";
+import { CustomAlert } from "../components/CustomAlert";
 
 const SignupPage = () => {
   const navigate = useNavigate();
   const [signup, { isLoading, isError }] = useSignupMutation();
-
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const {
     control,
     handleSubmit,
@@ -41,7 +41,7 @@ const SignupPage = () => {
   };
 
   return (
-    <Container maxWidth="md"> 
+    <Container maxWidth="md">      
       <Stack
         paddingTop={{ xs: 8, md: 10 }}
         alignItems="center"
@@ -58,6 +58,11 @@ const SignupPage = () => {
                 Sign up to enjoy AgTeach features
               </Typography>
               <Box width="100%">
+              <CustomAlert
+                    label={errors.email?.message}
+                    open={open}
+                    onClose={() => setOpen(false)}
+                  />
                 <form onSubmit={handleSubmit(submitHandler)}>
                   <Stack spacing={2}>
                     <FormInput
