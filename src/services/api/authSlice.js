@@ -31,6 +31,14 @@ export const apiSlice = createApi({
       }),
     }),
 
+    resetPassword: builder.mutation({
+      query: (resetData) => ({
+        url: `api/users/resetPassword/${resetData.resetToken}`,
+        method: "PATCH",
+        body: resetData.body,
+      }),
+    }),
+
     verifyEmail: builder.mutation({
       query: (emailVerifyCode) => ({
         url: "/api/users/verifyEmail",
@@ -51,8 +59,9 @@ export const apiSlice = createApi({
 
 export const {
   useSignupMutation,
-  useVerifyEmailMutation,
-  useResendVerifyCodeMutation,
   useForgotPasswordMutation,
   useLoginMutation,
+  useResetPasswordMutation,
+  useVerifyEmailMutation,
+  useResendVerifyCodeMutation,
 } = apiSlice;
