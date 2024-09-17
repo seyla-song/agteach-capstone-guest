@@ -10,7 +10,9 @@ import { useSelector } from "react-redux";
  */
 
 export default function ProtectedRoute({ pageName }) {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  const isAuthenticated = false;
 
   return isAuthenticated ? (
     <Outlet />

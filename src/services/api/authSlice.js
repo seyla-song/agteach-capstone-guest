@@ -49,7 +49,7 @@ export const apiSlice = createApi({
 
     addPersonalInfo: builder.mutation({
       query: (personalInfoData) => ({
-        url: "api/users/personalInfo",
+        url: "/api/users/signup/additionalInfo",
         method: "POST",
         body: personalInfoData,
       }),

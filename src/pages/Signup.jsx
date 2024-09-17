@@ -6,11 +6,9 @@ import FormInput from "../components/LoginSignup/FormInput";
 import LogoLink from "../components/LoginSignup/LogoLink";
 import { useSignupMutation } from "../services/api/authSlice";
 import dayjs from "dayjs";
-import { setDob } from "../store/slices/dobSlice";
 import { useDispatch } from "react-redux";
-import { setEmail } from "../services/api/userSlice";
-
-import dayjs from "dayjs";
+import { setEmail } from "../store/slices/userSlice";
+import { setDob } from "../store/slices/userSlice";
 import { CustomAlert } from "../components/CustomAlert";
 
 const SignupPage = () => {
@@ -18,8 +16,8 @@ const SignupPage = () => {
   const dispatch = useDispatch();
   const [signup, { isLoading, isError }] = useSignupMutation();
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState('');
-  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
   const [showPassword, setShowPassword] = useState(false);
   const {
     control,
@@ -32,6 +30,7 @@ const SignupPage = () => {
       username: "",
       email: "",
       password: "",
+      passwordConfirm: "",
       dateOfBirth: null,
     },
   });
@@ -40,28 +39,27 @@ const SignupPage = () => {
 
   const submitHandler = async (data) => {
     try {
-      dispatch(setDob(data.dateOfBirth, data.username));
-      console.log("Signup successful", data);
+      console.log(data);
       data.dateOfBirth = dayjs(data.dateOfBirth).format("YYYY/MM/DD");
+      const { email, password, passwordConfirm, dateOfBirth } = data
       const response = await signup(data).unwrap();
-      if (response.status === 'success') {
-        setSnackbarSeverity('success');
+      if (response.status === "success") {
+        setSnackbarSeverity("success");
         setSnackbarMessage(response.message);
       }
+      dispatch(setDob(dateOfBirth));
+      dispatch(setEmail(email));
       navigate("info");
-      console.log("Signup successful", response);
-      // Dispatch the setEmail action to store the email in Redux
-      dispatch(setEmail(data.email));
     } catch (error) {
       console.error("Signup failed:", error);
-      setSnackbarSeverity('error');
-      setSnackbarMessage('Email already exists. Please try another email.');
+      setSnackbarSeverity("error");
+      setSnackbarMessage("Email already exists. Please try another email.");
       setSnackbarOpen(true);
     }
   };
 
   return (
-    <Container maxWidth="md">      
+    <Container maxWidth="md">
       <Stack
         paddingTop={{ xs: 8, md: 10 }}
         alignItems="center"
@@ -78,12 +76,12 @@ const SignupPage = () => {
                 Sign up to enjoy AgTeach features
               </Typography>
               <Box width="100%">
-              <CustomAlert
-                    label={snackbarMessage}
-                    open={snackbarOpen}
-                    onClose={() => setSnackbarOpen(false)}
-                    severity={snackbarSeverity}
-                  />
+                <CustomAlert
+                  label={snackbarMessage}
+                  open={snackbarOpen}
+                  onClose={() => setSnackbarOpen(false)}
+                  severity={snackbarSeverity}
+                />
                 <form onSubmit={handleSubmit(submitHandler)}>
                   <Stack spacing={2}>
                     <FormInput
@@ -156,7 +154,7 @@ const SignupPage = () => {
                           if (value !== watch("password")) {
                             return "Passwords do not match";
                           }
-                        }
+                        },
                       })}
                       error={!!errors.confirmPassword}
                       helperText={errors.confirmPassword?.message}
