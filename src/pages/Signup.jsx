@@ -32,7 +32,7 @@ const SignupPage = () => {
 
   const submitHandler = async (data) => {
     try {
-      dispatch(setDob(data.dateOfBirth));
+      dispatch(setDob(data.dateOfBirth, data.username));
       console.log("Signup successful", data);
       data.dateOfBirth = dayjs(data.dateOfBirth).format("YYYY/MM/DD");
       await signup(data).unwrap();

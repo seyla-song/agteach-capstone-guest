@@ -23,12 +23,12 @@ export default function PersonalInfoForm() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
   const [addPerosnalInfo] = useAddPersonalInfoMutation();
-  const dob = useSelector((state) => state.dob.value);
+  const {dob, username} = useSelector((state) => state.dob.value);
 
   const onSubmit = async (data) => {
     try {
       console.log(data);
-      const response = await addPerosnalInfo({ ...data, dateOfBirth: dob }).unwrap();
+      const response = await addPerosnalInfo({ ...data, dateOfBirth: dob, username }).unwrap();
       console.log("Success:", response);
       if (response.status === "success") {
         setSnackbarSeverity('success');
