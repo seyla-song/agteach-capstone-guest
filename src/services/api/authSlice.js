@@ -1,45 +1,32 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
-  reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ 
-    baseUrl: 'http://localhost:3001',
-    credentials: 'include', // Move this line here
+  reducerPath: "api",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://localhost:3001",
+    credentials: "include", // Move this line here
   }),
   endpoints: (builder) => ({
     signup: builder.mutation({
       query: (signupData) => ({
-        url: 'signup',
-        method: 'POST',
+        url: "/api/users/signup",
+        method: "POST",
         body: signupData,
       }),
     }),
+
     login: builder.mutation({
       query: (loginData) => ({
-        url: '/api/users/login',
-        method: 'POST',
+        url: "/api/users/login",
+        method: "POST",
         body: loginData,
       }),
     }),
 
-    // login: builder.mutation({
-    //   query: (loginData) => ({
-    //     url: '/api/users/login',
-    //     method: 'POST',
-    //     body: loginData,
-    //     // credentials: "include",              
-    //     // headers: {
-    //     //   'getSetCookie': 'true',
-    //     // }
-        
-    //   }),
-    // }),
-
-
     forgotPassword: builder.mutation({
       query: (email) => ({
-        url: 'api/users/forgotPassword',
-        method: 'POST',
+        url: "api/users/forgotPassword",
+        method: "POST",
         body: email,
       }),
     }),
@@ -47,13 +34,34 @@ export const apiSlice = createApi({
     resetPassword: builder.mutation({
       query: (resetData) => ({
         url: `api/users/resetPassword/${resetData.resetToken}`,
-        method: 'PATCH',
+        method: "PATCH",
         body: resetData.body,
       }),
     }),
-    
 
+    verifyEmail: builder.mutation({
+      query: (emailVerifyCode) => ({
+        url: "/api/users/verifyEmail",
+        method: "POST",
+        body: { emailVerifyCode },
+      }),
+    }),
+
+    resendVerifyCode: builder.mutation({
+      query: (email) => ({
+        url: "/api/users/resendCode",
+        method: "POST",
+        body: { email },
+      }),
+    }),
   }),
 });
 
-export const { useSignupMutation, useForgotPasswordMutation, useLoginMutation, useResetPasswordMutation } = apiSlice;
+export const {
+  useSignupMutation,
+  useForgotPasswordMutation,
+  useLoginMutation,
+  useResetPasswordMutation,
+  useVerifyEmailMutation,
+  useResendVerifyCodeMutation,
+} = apiSlice;
