@@ -1,21 +1,18 @@
-import {
-  Box,
-  Typography,
-  Button,
-  Stack,
-  Grid2,
-} from "@mui/material";
+import { Box, Typography, Button, Stack, Grid2 } from "@mui/material";
 import FormInput from "../components/LoginSignup/FormInput";
 import { useForm } from "react-hook-form";
 import { useVerifyEmailMutation } from "../services/api/authSlice";
 import LogoLink from "../components/LoginSignup/LogoLink";
 import { ArrowBack } from "@mui/icons-material";
+import { CustomAlert } from "../components/CustomAlert";
 import ResendCodeButton from "../components/LoginSignup/ResendCodeButton";
 
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 export default function VerificationPage() {
+  const [open, setOpen] = useState(true);
 
   const navigate = useNavigate();
 
@@ -37,6 +34,13 @@ export default function VerificationPage() {
     } catch (err) {
       console.error("Verification failed", err);
     }
+  };
+
+  const handleOnClick = () => {
+    setOpen(true);
+    setTimeout(() => {
+      setOpen(false);
+    }, 4000);
   };
 
   return (
@@ -76,7 +80,11 @@ export default function VerificationPage() {
             <Typography pb={2} variant="blgsm">
               Enter verification code
             </Typography>
-            <Box component="form" onSubmit={handleSubmit(onSubmit)}>
+            <Box
+              component="form"
+              onSubmit={handleSubmit(onSubmit)}
+              onClick={handleOnClick}
+            >
               <FormInput
                 mt={2}
                 label="Code"
@@ -89,14 +97,20 @@ export default function VerificationPage() {
                 <Typography color="error">{errors.code.message}</Typography>
               )}
               {isSuccess && (
-                <Typography color="success.main">
-                  Verification successful!
-                </Typography>
+                <CustomAlert
+                  label="Verification successful!"
+                  open={open}
+                  onClose={() => setOpen(false)}
+                  severity="success"
+                />
               )}
               {isError && (
-                <Typography color="error.main">
-                  {error?.data?.message || "Verification failed!"}
-                </Typography>
+                <CustomAlert
+                  label="Wrong Verification Code!"
+                  open={open}
+                  onClose={() => setOpen(false)}
+                  severity="error"
+                />
               )}
               <Stack gap={1} pt={1}>
                 <Button

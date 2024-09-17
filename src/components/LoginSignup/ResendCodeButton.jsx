@@ -1,10 +1,15 @@
 // components/ResendCodeButton.js
 
 import React from "react";
-import { Button, CircularProgress, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import { useResendVerifyCodeMutation } from "../../services/api/authSlice";
 
+import { useState } from "react";
+import { CustomAlert } from "../CustomAlert";
+
 const ResendCodeButton = ({ email }) => {
+  const [open, setOpen] = useState(true);
+
   const [resendVerifyCode, { isLoading, isError, isSuccess, error }] =
     useResendVerifyCodeMutation();
 
@@ -12,24 +17,45 @@ const ResendCodeButton = ({ email }) => {
     resendVerifyCode(email);
   };
 
+  const handleOnClick = () => {
+    setOpen(true);
+    setTimeout(() => {
+      setOpen(false);
+    }, 4000);
+  };
+
   return (
-    <div>
-      <Button onClick={handleResend} disabled={isLoading}>
+    <Box onClick={handleOnClick}>
+      <Button
+        fullWidth
+        onClick={handleResend}
+        disabled={isLoading}
+        variant="contained"
+        color="secondary"
+      >
         {isLoading ? (
           <CircularProgress size={24} />
         ) : (
-          "Resend Verification Code"
+          "Resend"
         )}
       </Button>
       {isSuccess && (
-        <Typography color="success">Code sent successfully!</Typography>
+        <CustomAlert
+          label="Code sent successfully , Please Check your email!"
+          open={open}
+          onClose={() => setOpen(false)}
+          severity="success"
+        />
       )}
       {isError && (
-        <Typography color="error">
-          {error?.data?.message || "An error occurred"}
-        </Typography>
+        <CustomAlert
+          label="An error occurred"
+          open={open}
+          onClose={() => setOpen(false)}
+          severity="error"
+        />
       )}
-    </div>
+    </Box>
   );
 };
 
