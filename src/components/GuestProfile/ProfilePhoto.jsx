@@ -1,4 +1,5 @@
-import GuestProfileImg from "../../assets/profile-pic.jpg";
+import { useState, useEffect } from "react";
+import GuestProfileImg from "../../assets/guest-profile.jpg";
 import {
   Box,
   Button,
@@ -20,6 +21,30 @@ import {
  *   with a Stack of several components.
  */
 function ProfilePhoto() {
+  const [profileImage, setProfileImage] = useState(GuestProfileImg);
+
+  // Load image from localStorage when the component mounts
+  useEffect(() => {
+    const savedImage = localStorage.getItem("profileImage");
+    if (savedImage) {
+      setProfileImage(savedImage);
+    }
+  }, []);
+
+  // Function to handle image upload
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result;
+        setProfileImage(base64String); // convert the image to base64 string encoder
+        localStorage.setItem("profileImage", base64String); // Save to localStorage
+      };
+      reader.readAsDataURL(file); // Convert image to Base64
+    }
+  };
+
   return (
     <>
       <Stack sx={{ m: 2 }}>
@@ -42,10 +67,9 @@ function ProfilePhoto() {
       >
         <Stack>
           <Avatar
-            src={GuestProfileImg}
+            src={profileImage}
             alt="Profile Pic"
-            sx={{ width: 300, height: 300, border: "15px solid lightgrey"}}
-            // border-color='grey.500 10px'
+            sx={{ width: 300, height: 300, border: "15px solid lightgrey" }}
           />
           <Typography variant="bmdsm" textAlign="center" margin="10px">
             Image Preview
@@ -69,6 +93,7 @@ function ProfilePhoto() {
             type="file"
             id="myfile"
             name="myfile"
+            onChange={handleImageUpload} // Handle file input change
             sx={{ flexGrow: 1, width: "auto" }}
           />
           <Button variant="contained" sx={{ px: 10, py: 2 }}>
