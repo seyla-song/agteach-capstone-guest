@@ -1,119 +1,185 @@
-import React, { useState } from 'react';
-import LogoLink from '../components/LoginSignup/LogoLink';
-import FormInput from '../components/LoginSignup/FormInput';
-import { Link } from 'react-router-dom';
-import { Container, Typography, Button, Box, Stack } from '@mui/material';
+import React, { useState } from "react";
+import LogoLink from "../components/LoginSignup/LogoLink";
+import FormInput from "../components/LoginSignup/FormInput";
+import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import { useAddPersonalInfoMutation } from "../services/api/authSlice";
+import { useNavigate } from "react-router-dom";
+import {
+  Container,
+  Typography,
+  Button,
+  Box,
+  Stack,
+  TextField,
+  Autocomplete,
+} from "@mui/material";
 
-const PersonalInfoForm = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [errors, setErrors] = useState({
-    firstName: false,
-    lastName: false,
-    email: false,
-    phone: false,
+export default function PersonalInfoForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      phone: "",
+      address: "",
+      city: "",
+      imageUrl: null,
+    },
   });
+  const navigate = useNavigate();
+  const [addPerosnalInfo] = useAddPersonalInfoMutation();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Implement form submission logic
-    console.log('Form submitted with:', { firstName, lastName, email, phone });
+  const { dob } = useSelector((state) => state.user);
+
+  const onSubmit = async (data) => {
+    try {
+      console.log(data);
+      console.log(dob);
+      const response = await addPerosnalInfo({
+        ...data,
+        dateOfBirth: dob,
+      }).unwrap();
+      console.log("Success:", response);
+      navigate("/auth/signup/verification");
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
     <Box>
-      <Container maxWidth="md">
-        <Stack
-          paddingTop={{ xs: 8, md: 10 }}
-          alignItems="center"
-          spacing={4}
-        >
+      <Container maxWidth={false} sx={{ maxWidth: "700px" }}>
+        <Stack paddingTop={{ xs: 8, md: 10 }} alignItems="center" spacing={4}>
           {/* Logo */}
           <LogoLink />
-          
+
           <Typography variant="h2" textAlign="center">
-            Personal Information
+            Additional Information
           </Typography>
-          
-          <Box component="form" sx={{ width: '100%' }} onSubmit={handleSubmit}>
+
+          <Stack
+            spacing={2}
+            component="form"
+            width={"100%"}
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <Stack spacing={4}>
               {/* Personal Information */}
               <Stack spacing={2}>
-                <Typography variant="h4">Personal Information</Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
+                <Typography variant="blgsm">Name & Address</Typography>
+                <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
                   <FormInput
                     label="First Name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    error={errors.firstName}
-                    helperText={errors.firstName ? 'First name is required' : ''}
+                    placeholder="e.g. Jane"
+                    {...register("firstName", {
+                      pattern: {
+                        value: /^[A-Za-z]+$/i,
+                        message: "First name can only contain letters",
+                      },
+                    })}
+                    error={!!errors.firstName}
+                    helperText={errors?.firstName?.message}
                   />
                   <FormInput
                     label="Last Name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    error={errors.lastName}
-                    helperText={errors.lastName ? 'Last name is required' : ''}
+                    placeholder="e.g. Smith"
+                    {...register("lastName", {
+                      pattern: {
+                        value: /^[A-Za-z]+$/i,
+                        message: "Last name can only contain letters",
+                      },
+                    })}
+                    error={!!errors.lastName}
+                    helperText={errors?.lastName?.message}
                   />
                 </Box>
+                <Autocomplete
+                  id="country-select-demo"
+                  fullWidth
+                  options={city}
+                  getOptionLabel={(option) => option.label}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="City"
+                      slotProps={{
+                        htmlInput: {
+                          ...params.inputProps,
+                        },
+                      }}
+                      {...register("city", {})}
+                    />
+                  )}
+                />
+                <FormInput
+                  label="Address"
+                  placeholder="e.g. 1234 Main St"
+                  {...register("address", {})}
+                  error={!!errors.address}
+                  helperText={errors?.address?.message}
+                />
               </Stack>
 
               {/* Contact Information */}
               <Stack spacing={2}>
-                <Typography variant="h4">Contact Information</Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
+                <Typography variant="blgsm">Contact Information</Typography>
+                <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
                   <FormInput
-                    label="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    error={errors.email}
-                    helperText={errors.email ? 'Email is required' : ''}
-                  />
-                  <FormInput
-                    label="Phone Number"
-                    type='tel'
-                  
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    error={errors.phone}
-                    helperText={errors.phone ? 'Phone number is required' : ''}
+                    label="Phone number"
+                    placeholder="e.g. +855 123456789"
+                    {...register("phone", {
+                      pattern: {
+                        value: /^\+\d{1,3}\s*\d{1,4}(\s*\d{1,4}){1,4}$/,
+                        message: "Please enter a valid phone number",
+                      },
+                    })}
+                    error={!!errors.phone}
+                    helperText={errors?.phone?.message}
                   />
                 </Box>
               </Stack>
             </Stack>
 
-            {/* Buttons aligned to the right on all screen sizes */}
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: 4 }}>
-              <Stack direction="row" spacing={2}>
-                <Link to="/guest-profile">
-                  <Button
-                    variant="outlined"
-                    sx={{ padding: { xs: '8px 20px', md: '8px 35px' },
-                    }}
-                  >
-                    Skip
-                  </Button>
-                </Link>
+            <Stack
+              direction="row"
+              spacing={2}
+              display={"flex"}
+              justifyContent="end"
+            >
+              <Button
+                type="submit"
+                variant="outlined"
+                sx={{ padding: { xs: "8px 20px", md: "8px 35px" } }}
+              >
+                Skip
+              </Button>
 
-                <Link to="/guest-profile">
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    sx={{ padding: { xs: '8px 20px', md: '8px 35px' },
-                    }}
-                  >
-                    Submit
-                  </Button>
-                </Link>
-              </Stack>
-            </Box>
-          </Box>
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ padding: { xs: "8px 20px", md: "8px 35px" } }}
+              >
+                Submit
+              </Button>
+            </Stack>
+          </Stack>
         </Stack>
       </Container>
     </Box>
   );
-};
+}
 
-export default PersonalInfoForm;
+const city = [
+  { label: "Phnom Penh" },
+  { label: "Siem Reap" },
+  { label: "Battambang" },
+  { label: "Sihanoukville" },
+  { label: "Kampot" },
+  { label: "Kratie" },
+  { label: "Pursat" },
+  { label: "Koh Kong" },
+];
