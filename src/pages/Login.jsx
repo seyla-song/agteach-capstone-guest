@@ -17,7 +17,7 @@ import { useLoginMutation } from "../services/api/authSlice";
 import { CustomAlert } from "../components/CustomAlert";
 
 function Login() {
-  const [login, { isLoading }] = useLoginMutation();
+  const [login, { isLoading, isError }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(false);
   const [visible] = useState(false);
@@ -85,6 +85,7 @@ function Login() {
                 >
                   <CustomAlert
                     label={errors.email?.message}
+                    severity={isError ? "error" : "success"}
                     open={open}
                     onClose={() => setOpen(false)}
                   />
