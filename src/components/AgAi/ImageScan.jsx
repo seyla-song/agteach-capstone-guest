@@ -1,10 +1,10 @@
-import { Button, Stack, Typography, Box } from '@mui/material';
-import ImageIcon from '@mui/icons-material/Image';
-import UploadIcon from '@mui/icons-material/FileUploadOutlined';
-import ScanIcon from '@mui/icons-material/CenterFocusStrongOutlined';
-import { useForm } from 'react-hook-form';
-import { useState } from 'react';
-import { DiseaseInfoComponent } from './DiseaseInfoComponent';
+import { Button, Stack, Typography, Box } from "@mui/material";
+import ImageIcon from "@mui/icons-material/Image";
+import UploadIcon from "@mui/icons-material/FileUploadOutlined";
+import ScanIcon from "@mui/icons-material/CenterFocusStrongOutlined";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { DiseaseInfoComponent } from "./DiseaseInfoComponent";
 
 /**
  * ImageScan component is a reusable component
@@ -23,7 +23,7 @@ export const ImageScan = () => {
   const [isScan, setScan] = useState(false);
   const [data, setData] = useState();
 
-  const selectedFile = watch('file');
+  const selectedFile = watch("file");
 
   /**
    * The URL of the selected image.
@@ -91,7 +91,7 @@ export const ImageScan = () => {
               width="100%"
               bgcolor="black"
               height={350}
-              sx={{ position: 'relative' }}
+              sx={{ position: "relative" }}
             >
               <Box
                 component="img"
@@ -99,8 +99,8 @@ export const ImageScan = () => {
                 height={350}
                 width="100%"
                 sx={{
-                  position: 'absolute',
-                  objectFit: 'contain',
+                  position: "absolute",
+                  objectFit: "contain",
                   zIndex: 1, // Lower z-index
                 }}
               />
@@ -111,10 +111,10 @@ export const ImageScan = () => {
                   height={350}
                   bgcolor="black"
                   sx={{
-                    border: 'none',
+                    border: "none",
                     opacity: 0.5,
-                    width: '100%',
-                    position: 'absolute',
+                    width: "100%",
+                    position: "absolute",
                     zIndex: 2, // Higher z-index
                   }}
                 />
@@ -126,15 +126,14 @@ export const ImageScan = () => {
             component="input"
             id="file"
             type="file"
-            {...register('file')}
+            {...register("file")}
           />
           {!data && (
             <Stack gap direction="row" py={3}>
               <Button
-                onClick={() => document.getElementById('file').click()}
+                onClick={() => document.getElementById("file").click()}
                 disabled-={!selectedFile}
                 variant="outlined"
-                
                 color="primary"
                 endIcon={<UploadIcon />}
               >
@@ -186,24 +185,24 @@ export const ImageScan = () => {
 };
 
 const plantDiseaseInfo = {
-  plant: 'Brandywine Tomato',
+  plant: "Brandywine Tomato",
   problem: {
-    title: 'Problem',
-    details: ['Late Blight (Phytophthora infestans)'],
+    title: "Problem",
+    details: ["Late Blight (Phytophthora infestans)"],
   },
   symptoms: {
-    title: 'Symptoms',
+    title: "Symptoms",
     details: [
-      'Irregular, water-soaked spots on leaves and stems that turn brown and necrotic.',
-      'Fruits may develop dark, sunken lesions.',
+      "Irregular, water-soaked spots on leaves and stems that turn brown and necrotic.",
+      "Fruits may develop dark, sunken lesions.",
     ],
   },
   cureManagement: {
-    title: 'Cure/Management',
+    title: "Cure/Management",
     details: [
-      'Resistant Varieties: Use late blight-resistant varieties if available.',
-      'Fungicides: Apply metalaxyl or mefenoxam-based fungicides as a preventative measure.',
-      'Cultural Control: Remove and destroy infected plants and maintain good air circulation. Avoid overhead watering.',
+      "Resistant Varieties: Use late blight-resistant varieties if available.",
+      "Fungicides: Apply metalaxyl or mefenoxam-based fungicides as a preventative measure.",
+      "Cultural Control: Remove and destroy infected plants and maintain good air circulation. Avoid overhead watering.",
     ],
   },
 };
