@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import NotLoginStateComponent from "../components/LoginPromptComponent";
-
+import { useSelector } from "react-redux";
 
 /**
  * A protected route component that conditionally renders an Outlet or a NotLoginStateComponent based on the user's authentication status.
@@ -10,6 +10,8 @@ import NotLoginStateComponent from "../components/LoginPromptComponent";
  */
 
 export default function ProtectedRoute({ pageName }) {
+  // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   const isAuthenticated = false;
 
   return isAuthenticated ? (
