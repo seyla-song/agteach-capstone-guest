@@ -40,10 +40,10 @@ export const apiSlice = createApi({
     }),
 
     resetPassword: builder.mutation({
-      query: (resetPasswordData) => ({
-        url: "api/users/resetPassword",
-        method: "POST",
-        body: resetPasswordData,
+      query: (resetData) => ({
+        url: `api/users/resetPassword/${resetData.resetToken}`,
+        method: "PATCH",
+        body: resetData.body,
       }),
     }),
 
@@ -53,7 +53,23 @@ export const apiSlice = createApi({
         method: "POST",
         body: personalInfoData,
       }),
-    })
+    }),
+
+    verifyEmail: builder.mutation({
+      query: (emailVerifyCode) => ({
+        url: "/api/users/verifyEmail",
+        method: "POST",
+        body: { emailVerifyCode },
+      }),
+    }),
+
+    resendVerifyCode: builder.mutation({
+      query: (email) => ({
+        url: "/api/users/resendCode",
+        method: "POST",
+        body: { email },
+      }),
+    }),
   }),
 });
 
@@ -62,5 +78,7 @@ export const {
   useForgotPasswordMutation,
   useLoginMutation,
   useResetPasswordMutation,
-  useAddPersonalInfoMutation
+  useAddPersonalInfoMutation,
+  useVerifyEmailMutation,
+  useResendVerifyCodeMutation,
 } = apiSlice;
