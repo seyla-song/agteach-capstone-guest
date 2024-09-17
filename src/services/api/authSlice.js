@@ -43,8 +43,6 @@ export const apiSlice = createApi({
         body: forgotpasswordData,
       }),
     }),
-    
-
   }),
 });
 

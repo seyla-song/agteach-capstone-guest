@@ -109,16 +109,6 @@ function Login() {
                     fullWidth
                     type={visible ? "text" : "password"}
                     {...register("password", {
-                      // required: "Please enter your password",
-                      // minLength: {
-                      //   value: 8,
-                      //   message: "Password must be at least 8 characters",
-                      // },
-                      // pattern: {
-                      //   value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                      //   message:
-                      //     "Password must contain at least one letter and one number",
-                      // },
                     })}
                     error={!!errors.password}
                     helperText={errors.password?.message}
