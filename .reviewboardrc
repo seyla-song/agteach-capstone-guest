@@ -1,8 +1,5 @@
 REVIEWBOARD_URL = "https://review.clp.kr"
 REPOSITORY = "AlphaBeez/AgTeach/Guest"
 REPOSITORY_TYPE = "git"
-BRANCH = "feature/feat-auth-info"
-LAND_DEST_BRANCH = "feature/feat-auth-info"
-
-
-
+BRANCH = "feature/feat-header-auth-status"
+LAND_DEST_BRANCH = "feature/feat-header-auth-status"
