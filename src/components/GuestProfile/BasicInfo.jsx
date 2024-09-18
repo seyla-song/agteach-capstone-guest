@@ -1,34 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Button,
   OutlinedInput,
-  Stack,
   Typography,
   FormControl,
   InputLabel,
   Autocomplete,
   TextField,
   FormHelperText,
+  Stack,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { useIsLoginQuery } from "../../services/api/authSlice"; // Import the isLogin query
 
-/**
- * BasicInfo component renders a basic information form with fields
- * for the user's first name, last name, and phone number.
- *
- * The component uses the `Stack` component to stack the form fields
- * vertically and the `OutlinedInput` component to render the input
- * fields. The component also renders a save button at the bottom of
- * the form using the `Button` component.
- *
- * @returns {React.ReactElement} The BasicInfo component.
- */
 function BasicInfo() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isError },
+    setValue, // Allows you to set form values
+    formState: { errors },
   } = useForm({
     defaultValues: {
       firstName: "",
@@ -39,17 +30,45 @@ function BasicInfo() {
     },
   });
 
-  const onSubmit = async (data) => {
-    console.log(data);
+  // Fetch user information using getMe (isLogin) query
+  const { data, error, isLoading } = useIsLoginQuery();
+
+  // Populate form fields with user data once loaded
+  // console.log(data && data.data.data);
+  if (data) {
+    const { first_name, last_name, phone, location_id, address } = data.data.data.customer;
+    console.log(data.data.data.customer);
+    console.log(data.data.data.customer.first_name);
+    
+    setValue("firstName", first_name || "");
+    setValue("lastName", last_name || "");
+    setValue("phoneNumber", phone || "");
+    setValue("city", location_id || "");
+    setValue("address", address || "");
+  }
+  // useEffect(() => {
+  //   console.log(data);
+  //   if (data) {
+  //     setValue("firstName", data.firstName || "");
+  //     setValue("lastName", data.lastName || "");
+  //     setValue("phoneNumber", data.phoneNumber || "");
+  //     setValue("city", data.city || "");
+  //     setValue("address", data.address || "");
+  //   }
+  // }, [data, setValue]);
+
+  const onSubmit = async (formData) => {
+    console.log("Form Data Submitted:", formData);
     try {
-      // const response = await addPerosnalInfo({
-      //   ...data,
-      // }).unwrap();
-      console.log("Success:", data);
+      // Send formData to the API or perform other actions
+      console.log("Success:", formData);
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error submitting form:", error);
     }
   };
+
+  // if (isLoading) return <Typography>Loading...</Typography>; // Handle loading state
+  // if (error) return <Typography>Error: {error.message}</Typography>; // Handle error state
 
   return (
     <>
@@ -61,7 +80,6 @@ function BasicInfo() {
             id="first-name"
             label="First Name"
             placeholder="e.g. Jane"
-            errors={errors}
             {...register("firstName", {
               required: "First name is required",
               pattern: {
@@ -93,7 +111,7 @@ function BasicInfo() {
           )}
         </FormControl>
         <Autocomplete
-          id="country-select-demo"
+          id="city-select"
           fullWidth
           options={city}
           getOptionLabel={(option) => option.label}
@@ -101,11 +119,6 @@ function BasicInfo() {
             <TextField
               {...params}
               label="City"
-              slotProps={{
-                htmlInput: {
-                  ...params.inputProps,
-                },
-              }}
               {...register("city", { required: "City is required" })}
               error={!!errors.city}
               helperText={errors?.city?.message}
@@ -139,7 +152,6 @@ function BasicInfo() {
             label="Phone Number"
             placeholder="e.g. 123-456-7890"
             {...register("phoneNumber", {
-              // Corrected key to match
               required: "Phone number is required",
               pattern: {
                 value: /^[0-9]{10,15}$/, // Adjusted pattern to allow numbers and a valid range
@@ -179,6 +191,7 @@ function BasicInfo() {
 
 export default BasicInfo;
 
+// Sample cities for Autocomplete
 const city = [
   { label: "Phnom Penh" },
   { label: "Siem Reap" },
