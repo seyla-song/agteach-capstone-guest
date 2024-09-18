@@ -1,25 +1,32 @@
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  MenuItem,
+  Button,
+  Container,
+  Link,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from "@mui/material";
+import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import Link from "@mui/material/Link";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { teachAgtechURL } from "../utils/globalURL";
 import { LogoutOutlined } from "@mui/icons-material";
 import GuestProfilePicture from "../assets/profile-pic.jpg";
-
-import { useState } from "react";
 import Logo from "../assets/logo.png";
-
+import { teachAgtechURL } from "../utils/globalURL";
+import { useLogoutMutation } from "../services/api/authSlice";
+import { useNavigate } from "react-router-dom";
 const HEADER_MENU_DESKTOP = [
   { page: "My Learning", path: "mylearning" },
   { page: "Marketplace", path: "marketplace" },
@@ -36,9 +43,11 @@ const HEADER_MENU_MOBILE = [
 
 function Navigation() {
   const [anchorElNav, setAnchorElNav] = useState(null);
-
   const [anchorEl, setAnchorEl] = useState(null);
+  const [openLogoutDialog, setOpenLogoutDialog] = useState(false);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
+  const [logout, { isLoading }] = useLogoutMutation();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -48,12 +57,31 @@ function Navigation() {
     setAnchorEl(null);
   };
 
+  const handleLogoutDialogOpen = () => {
+    setOpenLogoutDialog(true);
+  };
+
+  const handleLogoutDialogClose = () => {
+    setOpenLogoutDialog(false);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout(); // Call the logout mutation
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("userInfo");
+      navigate("/auth/login"); // Redirect to login page
+    } catch (error) { 
+      console.error("Logout failed:", error);
+    }
+  };
+
   const isAuth = true;
-   
+
   let accountStatus = null;
 
   if (!isAuth) {
-    accountStatus = 
+    accountStatus = (
       <Link underline="none" component={RouterLink} to="/auth/login">
         <Button
           startIcon={
@@ -63,77 +91,136 @@ function Navigation() {
           sx={{
             backgroundColor: "common.white",
             color: "common.black",
-            borderRadius: 50
+            borderRadius: 50,
           }}
         >
           Login
         </Button>
       </Link>
+    );
   } else {
-    accountStatus = 
-    <Box>
-
-      <Button
-        onClick={handleClick}
-        variant="text"
-        sx={{
-          backgroundColor: "teal.main",
-          color: "common.white",
-          borderRadius: 50,
-          borderColor: "common.white",
-          borderStyle: "solid",
-          borderWidth: 1,
-          maxWidth: "100px",
-          display: "flex",
-          justifyContent: "start"
-        }}
-        
+    accountStatus = (
+      <Box>
+        <Button
+          onClick={handleClick}
+          variant="text"
+          sx={{
+            backgroundColor: "teal.main",
+            color: "common.white",
+            borderRadius: 50,
+            borderColor: "common.white",
+            borderStyle: "solid",
+            borderWidth: 1,
+            maxWidth: "100px",
+            display: "flex",
+            justifyContent: "start",
+          }}
         >
-          <img style={{width: "24px", borderRadius: "50%", marginRight: "5px"}} src={GuestProfilePicture} alt="profile picture" />
+          <img
+            style={{ width: "24px", borderRadius: "50%", marginRight: "5px" }}
+            src={GuestProfilePicture}
+            alt="profile picture"
+          />
           John
-      </Button>
+        </Button>
 
-      {/* Dropdown Menu */}
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          elevation: 3,
-          style: {
-            borderRadius: 3,
-            marginTop: 10,
-            marginRight: 10
-          },
-        }}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        disableScrollLock
-      >
-        <MenuItem>
-          <div>
-            <Link to="/guest-profile" sx={{ textDecoration: "none" }} component={RouterLink} onClick={handleClose}>
-              <Typography variant="subtitle1" sx={{ fontSize: "14px", textDecoration: "none" }}>John Doe</Typography>
-              <Typography variant="body2" sx={{ fontSize: "12px", marginBottom: 1, color: "dark.200"}}>
-                johndoe123@gmail.com
-              </Typography>
-            </Link>
-          </div>
-        </MenuItem>
-        <MenuItem onClick={handleClose} sx={{width: "full"}}>
-          <Link to="/auth/login" component={RouterLink} sx={{display: "flex",  alignItems: "center", color: 'red.main', width: "100%", textDecoration: "none"}}>
-            <LogoutOutlined fontSize="small" style={{ marginRight: 8 }} />
-            <Typography sx={{fontSize: "14px", flexGrow: 1}}>log out</Typography>
-          </Link>
-        </MenuItem>
-      </Menu>
-    </Box>
+        {/* Dropdown Menu */}
+        <Menu
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          PaperProps={{
+            elevation: 3,
+            style: {
+              borderRadius: 3,
+              marginTop: 10,
+              marginRight: 10,
+            },
+          }}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          disableScrollLock
+        >
+          <MenuItem>
+            <div>
+              <Link
+                to="/guest-profile"
+                sx={{ textDecoration: "none" }}
+                component={RouterLink}
+                onClick={handleClose}
+              >
+                <Typography
+                  variant="subtitle1"
+                  sx={{ fontSize: "14px", textDecoration: "none" }}
+                >
+                  John Doe
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{ fontSize: "12px", marginBottom: 1, color: "dark.200" }}
+                >
+                  johndoe123@gmail.com
+                </Typography>
+              </Link>
+            </div>
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleClose();
+              handleLogoutDialogOpen();
+            }}
+            sx={{ width: "full" }}
+          >
+            <Typography
+              component={Link}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                color: "red.main",
+                width: "100%",
+                textDecoration: "none",
+              }}
+            >
+              <LogoutOutlined fontSize="small" style={{ marginRight: 8 }} />
+              Log Out
+            </Typography>
+          </MenuItem>
+        </Menu>
+
+        {/* Logout Confirmation Dialog */}
+        <Dialog
+          open={openLogoutDialog}
+          onClose={handleLogoutDialogClose}
+          aria-labelledby="logout-dialog-title"
+        >
+          <DialogTitle id="logout-dialog-title" color="primary">
+            Confirm Logout
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Are you sure you want to log out?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={handleLogoutDialogClose}
+              sx={{ color: "red.main" }}
+            >
+              Cancel
+            </Button>
+            <Button onClick={handleLogout} color="primary" autoFocus>
+              Log Out
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Box>
+    );
   }
 
   const handleOpenNavMenu = (event) => {
@@ -149,11 +236,19 @@ function Navigation() {
       <Container maxWidth={false} sx={{ maxWidth: "1420px" }}>
         <Toolbar
           disableGutters
-          sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
         >
           {/* logo */}
           <Box>
-            <Link component={RouterLink} to="/" sx={{ display: "flex", alignItems: "center" }}>
+            <Link
+              component={RouterLink}
+              to="/"
+              sx={{ display: "flex", alignItems: "center" }}
+            >
               <img width="94px" height="45px" src={Logo} alt="AgTeach Logo" />
             </Link>
           </Box>
@@ -173,7 +268,6 @@ function Navigation() {
           </Box>
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
-
             {accountStatus}
 
             {/* menubar */}
@@ -207,10 +301,12 @@ function Navigation() {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                <MenuItem component={Link} href={teachAgtechURL} underline="none">
-                  <Typography variant="bsr">
-                    Become a member
-                  </Typography>
+                <MenuItem
+                  component={Link}
+                  href={teachAgtechURL}
+                  underline="none"
+                >
+                  <Typography variant="bsr">Become a member</Typography>
                 </MenuItem>
                 {HEADER_MENU_MOBILE.map((data) => (
                   <MenuItem
@@ -225,7 +321,7 @@ function Navigation() {
               </Menu>
             </Box>
 
-            <Box sx={{ display: { xs: "none", md: "flex" }}}>
+            <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <IconButton
                 sx={{ color: "common.white" }}
                 component={RouterLink}
