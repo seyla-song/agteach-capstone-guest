@@ -6,12 +6,15 @@ import reportWebVitals from "./reportWebVitals";
 
 import { store } from "./store/index";
 import { Provider } from "react-redux";
+import CheckAuth from "./store/slices/checkAuth";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      {/* <CheckAuth> */}
+        <App />
+      {/* </CheckAuth> */}
     </Provider>
   </React.StrictMode>
 );
