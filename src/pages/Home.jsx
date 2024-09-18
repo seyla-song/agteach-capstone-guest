@@ -22,13 +22,13 @@ function HomePage() {
       }}
     >
       <SearchBarComponent backDrop={search} />
-      <CarouselComponent data="courses" cardVariant="course">
+      {/* <CarouselComponent data="courses" cardVariant="course">
         Most people interested in this course
-      </CarouselComponent>
+      </CarouselComponent> */}
       <HeroComponent />
-      <CarouselComponent data="products" cardVariant="product">
+      {/* <CarouselComponent data="products" cardVariant="product">
         Most people interested in this product
-      </CarouselComponent>
+      </CarouselComponent> */}
       <MemberComponent />
     </Container>
   );
