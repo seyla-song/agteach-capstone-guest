@@ -1,4 +1,14 @@
-import { Box, Button, OutlinedInput, Stack, Typography } from "@mui/material";
+import React, { useState } from "react";
+import {
+  Box,
+  Button,
+  OutlinedInput,
+  Stack,
+  Typography,
+  FormControl,
+  InputLabel,
+  FormHelperText,
+} from "@mui/material";
 
 /**
  * @function AccountSecurity
@@ -6,11 +16,31 @@ import { Box, Button, OutlinedInput, Stack, Typography } from "@mui/material";
  * @returns {JSX.Element} A JSX element that renders the form and button.
  */
 function AccountSecurity() {
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSave = () => {
+    if (!email) {
+      setError('Email is required');
+    } else {
+      setError('');
+    }
+  };
   return (
     <>
       <Stack sx={{ m: 2, gap: 2 }}>
         <Typography variant="h4">Account Security</Typography>
-        <OutlinedInput placeholder="Enter your Email" />
+        <FormControl variant="outlined" error={!!error}>
+          <InputLabel htmlFor="account-security">Email</InputLabel>
+          <OutlinedInput
+            id="account-security"
+            label="Email"
+            placeholder="e.g. janeagteach@gmail.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          {error && <FormHelperText>{error}</FormHelperText>}
+        </FormControl>
       </Stack>
 
       <Box
@@ -24,7 +54,7 @@ function AccountSecurity() {
           direction="row"
           spacing={2}
         >
-          <Button variant="contained" sx={{ px: 10, py: 2 }}>
+          <Button variant="contained" sx={{ px: 10, py: 2 }} onClick={handleSave}>
             Save
           </Button>
         </Stack>
