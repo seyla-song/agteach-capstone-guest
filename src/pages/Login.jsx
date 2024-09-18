@@ -15,8 +15,11 @@ import LogoLink from "../components/LoginSignup/LogoLink";
 import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../services/api/authSlice";
 import { CustomAlert } from "../components/CustomAlert";
+import { useDispatch } from "react-redux";
+// import { setAuth } from "../store/slices/authSlice";
 
 function Login() {
+  // const dispatch = useDispatch();
   const [login, { isLoading, isError }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(false);
@@ -41,6 +44,7 @@ function Login() {
       // Call the login function and await its result
       const response = await login(data).unwrap(); // Assuming login(data) returns a promise with an unwrap method
       console.log("Login successful", response);
+      // dispatch(setAuth(true));
       navigator("/"); // Redirect to home page
     } catch (error) {
       console.error("Incorrect email or password", error);

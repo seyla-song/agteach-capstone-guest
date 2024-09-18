@@ -7,7 +7,7 @@ import authSlice from "../store/slices/authSlice";
 export const store = createStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
-    [authSlice.name]: authSlice,
+    auth: authSlice,
     user: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
