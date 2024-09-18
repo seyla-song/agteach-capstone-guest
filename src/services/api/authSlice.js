@@ -15,14 +15,6 @@ export const apiSlice = createApi({
       }),
     }),
 
-    forgotpassword: builder.mutation({
-      query: (forgotpasswordData) => ({
-        url: "/api/users/forgotPassword",
-        method: "POST",
-        body: forgotpasswordData,
-      }),
-    }),
-
     login: builder.mutation({
       query: (loginData) => ({
         url: "/api/users/login",
@@ -63,6 +55,13 @@ export const apiSlice = createApi({
       }),
     }),
     
+    resendVerifyCode: builder.mutation({
+      query: (email) => ({
+        url: "/api/users/resendCode",
+        method: "POST",
+        body: email,
+      }),
+    }),
 
   }),
 });
