@@ -14,7 +14,7 @@ import { CustomAlert } from "../components/CustomAlert";
 const SignupPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [signup, { isLoading, isError }] = useSignupMutation();
+  const [signup, { isLoading }] = useSignupMutation();
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
