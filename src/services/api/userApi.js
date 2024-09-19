@@ -38,11 +38,16 @@ export const userApi = createApi({
         body: passwordData,
       }),
     }),
-    
-
+    getOneUser: builder.query({
+      query: () => ({
+        url: "/api/users/getMe",
+        method: "GET",
+      })
+    })
   }),
 });
 
 export const {
-  useUpdatePasswordMutation
+  useUpdatePasswordMutation,
+  useGetOneUserQuery
 } = userApi;

@@ -12,7 +12,8 @@ import {
   Stack,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useIsLoginQuery } from "../../services/api/authSlice"; // Import the isLogin query
+import { useGetOneUserQuery } from "../../services/api/userApi"; // Import the isLogin query
+
 
 function BasicInfo() {
   const {
@@ -30,12 +31,12 @@ function BasicInfo() {
     },
   });
 
-  const { data, isLoading } = useIsLoginQuery();
+  const { data, isLoading } = useGetOneUserQuery();
   const [selectedCity, setSelectedCity] = useState(null);
-
   useEffect(() => {
+    console.log(data)
     if (data) {
-      console.log(data)
+      // console.log(data)
       const customerData = data.data.customers[0]
       const { firstName, lastName, phone, location_id, address } = customerData;
       setValue("firstName", firstName || "");
