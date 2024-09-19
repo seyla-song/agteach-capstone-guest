@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
-  reducerPath: "api",
+  reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:3001",
     credentials: "include", 
@@ -72,10 +72,10 @@ export const apiSlice = createApi({
 
     isLogin: builder.query({
       query: () => ({
-        url: "/api/users/getMe",
+        url: "/api/customer/getMe/additionalInfo",
         method: "GET",
       }),
-    })
+    }),
 
   }),
 });

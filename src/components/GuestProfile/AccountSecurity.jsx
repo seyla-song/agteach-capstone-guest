@@ -10,7 +10,6 @@ import {
   FormHelperText,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import LoadingButton from '@mui/lab/LoadingButton';
 import { useIsLoginQuery } from "../../services/api/authSlice"; // Import the isLogin query
 
 /**
@@ -31,15 +30,18 @@ function AccountSecurity() {
     },
   });
 
-  const { data, error, isLoading } = useIsLoginQuery();
-
+  const { data, isLoading } = useIsLoginQuery();
+  
   useEffect(() => {
     if (data) {
-      const { email } = data.data.data.customer;
-      console.log(data.data.data.customer);
+      const customerData = data.data.customers[0]
+      const { email } = customerData;
+      console.log(customerData);
       setValue("email", email || "");
     }
   }, [data, setValue]);
+
+  if (isLoading) return <Stack justifyContent={"center"} alignItems={"center"}>Loading...</Stack>;
 
   const onSubmit = async (formData) => {
     console.log("Form Data Submitted:", formData);
@@ -49,9 +51,6 @@ function AccountSecurity() {
       console.error("Error submitting form:", error);
     }
   };
-
-  if (isLoading) return <LoadingButton>Loading...</LoadingButton>;
-  if (error) return <LoadingButton>Error: {error.message}</LoadingButton>;
 
   return (
     <>

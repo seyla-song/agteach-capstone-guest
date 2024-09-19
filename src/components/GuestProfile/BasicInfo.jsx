@@ -12,7 +12,6 @@ import {
   Stack,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import LoadingButton from '@mui/lab/LoadingButton';
 import { useIsLoginQuery } from "../../services/api/authSlice"; // Import the isLogin query
 
 function BasicInfo() {
@@ -31,15 +30,17 @@ function BasicInfo() {
     },
   });
 
-  const { data, error, isLoading } = useIsLoginQuery();
+  const { data, isLoading } = useIsLoginQuery();
   const [selectedCity, setSelectedCity] = useState(null);
 
   useEffect(() => {
     if (data) {
-      const { first_name, last_name, phone, location_id, address } = data.data.data.customer;
-      console.log(data.data.data.customer);
-      setValue("firstName", first_name || "");
-      setValue("lastName", last_name || "");
+      const customerData = data.data.customers[0]
+      const { firstName, lastName, phone, location_id, address } = customerData;
+      console.log(firstName)
+      console.log(customerData);
+      setValue("firstName", firstName || "");
+      setValue("lastName", lastName || "");
       setValue("phoneNumber", phone || "");
       setValue("city", location_id || "");
       setValue("address", address || "");
@@ -56,8 +57,7 @@ function BasicInfo() {
     }
   };
 
-  if (isLoading) return <LoadingButton>Loading...</LoadingButton>;
-  if (error) return <LoadingButton>Error: {error.message}</LoadingButton>;
+  if (isLoading) return <Stack justifyContent={"center"} alignItems={"center"}>Loading...</Stack>;
 
   return (
     <>
