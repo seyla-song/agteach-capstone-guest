@@ -7,12 +7,18 @@ import { CssBaseline } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useIsLoginQuery } from "./services/api/authSlice";
 import { checkLoginStatus } from "./store/slices/authSlice";
+import { useEffect } from "react";
 
 function App() {
   const dispatch = useDispatch();
-  const { isSuccess } = useIsLoginQuery();
-  dispatch(checkLoginStatus(isSuccess));
-  
+  const { data } = useIsLoginQuery();
+
+  useEffect(() => {
+    if (data) {
+      dispatch(checkLoginStatus(data.IsAuthenticated));
+    }
+  }, [data, dispatch]);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
