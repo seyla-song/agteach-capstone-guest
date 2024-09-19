@@ -8,9 +8,6 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    // setAuth: (state, action) => {
-    //   state.isAuthenticated = action.payload;
-    // },
     checkLoginStatus: (state, action) => {
       state.isAuthenticated = action.payload;
     },
