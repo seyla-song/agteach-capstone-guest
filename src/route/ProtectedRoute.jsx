@@ -14,10 +14,11 @@ import { checkLoginStatus } from "../store/slices/authSlice";
 
 export default function ProtectedRoute({ pageName }) {
   const dispatch = useDispatch();
-  const { isSuccess } = useIsLoginQuery();
-  console.log(isSuccess);
+  const response = useIsLoginQuery();
+  console.log(response);
   
-  dispatch(checkLoginStatus(isSuccess));
+  
+  // dispatch(checkLoginStatus(isSuccess));
   const { isAuthenticated } = useSelector((state) => state.auth);
 
   return isAuthenticated ? (
