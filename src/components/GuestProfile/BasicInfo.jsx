@@ -35,10 +35,9 @@ function BasicInfo() {
 
   useEffect(() => {
     if (data) {
+      console.log(data)
       const customerData = data.data.customers[0]
       const { firstName, lastName, phone, location_id, address } = customerData;
-      console.log(firstName)
-      console.log(customerData);
       setValue("firstName", firstName || "");
       setValue("lastName", lastName || "");
       setValue("phoneNumber", phone || "");
