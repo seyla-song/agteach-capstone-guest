@@ -1,38 +1,159 @@
-import { Box, Button, OutlinedInput, Stack, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Button,
+  OutlinedInput,
+  Typography,
+  FormControl,
+  InputLabel,
+  Autocomplete,
+  TextField,
+  FormHelperText,
+  Stack,
+} from "@mui/material";
+import { useForm } from "react-hook-form";
+import { useIsLoginQuery } from "../../services/api/authSlice"; // Import the isLogin query
 
-/**
- * BasicInfo component renders a basic information form with fields
- * for the user's first name, last name, and phone number.
- *
- * The component uses the `Stack` component to stack the form fields
- * vertically and the `OutlinedInput` component to render the input
- * fields. The component also renders a save button at the bottom of
- * the form using the `Button` component.
- *
- * @returns {React.ReactElement} The BasicInfo component.
- */
 function BasicInfo() {
+  const {
+    register,
+    handleSubmit,
+    setValue, // Allows you to set form values
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      phoneNumber: "",
+      city: "",
+      address: "",
+    },
+  });
+
+  const { data, isLoading } = useIsLoginQuery();
+  const [selectedCity, setSelectedCity] = useState(null);
+
+  useEffect(() => {
+    if (data) {
+      const customerData = data.data.customers[0]
+      const { firstName, lastName, phone, location_id, address } = customerData;
+      console.log(firstName)
+      console.log(customerData);
+      setValue("firstName", firstName || "");
+      setValue("lastName", lastName || "");
+      setValue("phoneNumber", phone || "");
+      setValue("city", location_id || "");
+      setValue("address", address || "");
+      setSelectedCity(city.find((c) => c.label === location_id) || null); // Set city autocomplete
+    }
+  }, [data, setValue]);
+
+  const onSubmit = async (formData) => {
+    console.log("Form Data Submitted:", formData);
+    try {
+      console.log("Success:", formData);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  };
+
+  if (isLoading) return <Stack justifyContent={"center"} alignItems={"center"}>Loading...</Stack>;
+
   return (
     <>
       <Stack sx={{ m: 2, gap: 2 }}>
-        <Typography variant="h4">Basics Information</Typography>
-        <OutlinedInput placeholder="Enter your First Name" />
-        <OutlinedInput placeholder="Enter your Last Name" />
-        <OutlinedInput placeholder="Enter your Phone Number" />
+        <Typography variant="h4">Basic Information</Typography>
+        <FormControl variant="outlined" error={!!errors.firstName}>
+          <InputLabel htmlFor="first-name">First Name</InputLabel>
+          <OutlinedInput
+            id="first-name"
+            label="First Name"
+            placeholder="e.g. Jane"
+            {...register("firstName", {
+              required: "First name is required",
+              pattern: {
+                value: /^[A-Za-z]+$/i,
+                message: "First name can only contain letters",
+              },
+            })}
+          />
+          {errors.firstName && <FormHelperText>{errors.firstName.message}</FormHelperText>}
+        </FormControl>
+        <FormControl variant="outlined" error={!!errors.lastName}>
+          <InputLabel htmlFor="last-name">Last Name</InputLabel>
+          <OutlinedInput
+            id="last-name"
+            label="Last Name"
+            placeholder="e.g. Smith"
+            {...register("lastName", {
+              required: "Last name is required",
+              pattern: {
+                value: /^[A-Za-z]+$/i,
+                message: "Last name can only contain letters",
+              },
+            })}
+          />
+          {errors.lastName && <FormHelperText>{errors.lastName.message}</FormHelperText>}
+        </FormControl>
+
+        <Autocomplete
+          id="city-select"
+          fullWidth
+          options={city}
+          getOptionLabel={(option) => option.label}
+          value={selectedCity}
+          onChange={(e, newValue) => {
+            setSelectedCity(newValue);
+            setValue("city", newValue?.label || "");
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="City"
+              error={!!errors.city}
+              helperText={errors?.city?.message}
+            />
+          )}
+        />
+
+        <FormControl variant="outlined" error={!!errors.address}>
+          <InputLabel htmlFor="address">Address</InputLabel>
+          <OutlinedInput
+            id="address"
+            label="Address"
+            placeholder="N. 61Eo, Street 166"
+            {...register("address", {
+              required: "Address is required",
+              pattern: {
+                value: /^[A-Za-z\s,]+$/,
+                message: "Enter a valid address",
+              },
+            })}
+          />
+          {errors.address && <FormHelperText>{errors.address.message}</FormHelperText>}
+        </FormControl>
+
+        <FormControl variant="outlined" error={!!errors.phoneNumber}>
+          <InputLabel htmlFor="phone-number">Phone Number</InputLabel>
+          <OutlinedInput
+            id="phone-number"
+            label="Phone Number"
+            placeholder="e.g. 123-456-7890"
+            {...register("phoneNumber", {
+              required: "Phone number is required",
+              pattern: {
+                value: /^[0-9-\s]+$/,
+                message: "Phone number must be a valid format",
+              },
+            })}
+          />
+          {errors.phoneNumber && <FormHelperText>{errors.phoneNumber.message}</FormHelperText>}
+        </FormControl>
       </Stack>
 
-      <Box
-        sx={{
-          width: "100%",
-          boxSizing: "border-box",
-        }}
-      >
-        <Stack
-          sx={{ m: 2, justifyContent: "flex-end" }}
-          direction="row"
-          spacing={2}
-        >
-          <Button variant="contained" sx={{ px: 10, py: 2 }}>
+      <Box sx={{ width: "100%", boxSizing: "border-box" }}>
+        <Stack sx={{ m: 2, justifyContent: "flex-end" }} direction="row" spacing={2}>
+          <Button variant="contained" sx={{ px: 10, py: 2 }} onClick={handleSubmit(onSubmit)}>
             Save
           </Button>
         </Stack>
@@ -42,3 +163,15 @@ function BasicInfo() {
 }
 
 export default BasicInfo;
+
+const city = [
+  { label: "Phnom Penh" },
+  { label: "Siem Reap" },
+  { label: "Battambang" },
+  { label: "Sihanoukville" },
+  { label: "Kampot" },
+  { label: "Kratie" },
+  { label: "Pursat" },
+  { label: "Koh Kong" },
+];
+

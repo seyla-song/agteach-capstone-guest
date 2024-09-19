@@ -1,46 +1,169 @@
-import { Box, Button, OutlinedInput, Stack } from '@mui/material';
+import React, { useState, useEffect } from "react";
+import {
+  Box,
+  Button,
+  OutlinedInput,
+  Stack,
+  Typography,
+  FormControl,
+  InputLabel,
+  InputAdornment,
+  IconButton,
+  FormHelperText,
+} from "@mui/material";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Visibility from "@mui/icons-material/Visibility";
+import { useForm } from "react-hook-form";
+import { useUpdatePasswordMutation } from "../../services/api/userApi";
 
-/**
- * Renders a form to change the user's password.
- *
- * @returns {React.ReactElement} A JSX element representing the password change form.
- */
 function ChangePassword() {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    watch
+  } = useForm({
+    defaultValues: {
+      passwordCurrent: "",
+      password: "",
+      passwordConfirm: "",
+    },
+  });
+
+  const [resetPassword] = useUpdatePasswordMutation();
+  const [submitError, setSubmitError] = useState("");
+
+  // useEffect(() => {
+  //   if (data) {
+  //     const customerData = data.data.customers[0];
+  //     const { passwordCurrent, password, passwordConfirm } = customerData;
+  //     setValue("passwordCurrent", passwordCurrent || "");
+  //     setValue("password", password || "");
+  //     setValue("passwordConfirm", passwordConfirm || "");
+  //   }
+  // }, [data, setValue]);
+
+  const onSubmit = async (formData) => {
+    try {
+      await resetPassword(formData).unwrap();
+      console.log("Success:", formData);
+    } catch (error) {
+      setSubmitError("Error submitting form. Please try again.");
+      console.error("Error submitting form:", error);
+    }
+  };
+
+  const [showPassword, setShowPassword] = useState({
+    current: false,
+    new: false,
+    retype: false,
+  });
+
+  const handleTogglePasswordVisibility = (field) => {
+    setShowPassword((prevState) => ({
+      ...prevState,
+      [field]: !prevState[field],
+    }));
+  };
+
   return (
     <>
-      <Stack sx={{ m: 2, gap: 2 }}>
-        <OutlinedInput
-          type="password"
-          id="currentPassword"
-          name="currentPassword"
-          placeholder="Enter Current Password"
-        />
-        <OutlinedInput
-          type="password"
-          id="newPassword"
-          name="newPassword"
-          placeholder="Enter New Password"
-        />
-        <OutlinedInput
-          type="password"
-          id="retypePassword"
-          name="retypePassword"
-          placeholder="Re-type Password"
-        />
-      </Stack>
+        <Stack sx={{ m: 2, gap: 2 }}>
+          <Typography variant="h4">Change Password</Typography>
+          {submitError && <Typography color="error">{submitError}</Typography>}
+          {/* Current Password Field */}
+          <FormControl variant="outlined" error={Boolean(errors.passwordCurrent)}>
+            <InputLabel htmlFor="current-password">Enter Current Password</InputLabel>
+            <OutlinedInput
+              id="current-password"
+              type={showPassword.current ? "text" : "password"}
+              {...register("passwordCurrent", { required: true })}
+              label="Enter Current Password"
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => handleTogglePasswordVisibility("current")}
+                    edge="end"
+                  >
+                    {showPassword.current ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+            {errors.passwordCurrent && (
+              <FormHelperText error>This field is required</FormHelperText>
+            )}
+          </FormControl>
 
-      <Box
-        sx={{
-          width: '100%',
-          boxSizing: 'border-box',
-        }}
-      >
-        <Stack
-          sx={{ m: 2, justifyContent: 'flex-end' }}
-          direction="row"
-          spacing={2}
-        >
-          <Button variant="contained" sx={{ px: 10, py: 2 }}>
+          {/* New Password Field */}
+          <FormControl variant="outlined" error={Boolean(errors.password)}>
+            <InputLabel htmlFor="new-password">Enter New Password</InputLabel>
+            <OutlinedInput
+              id="new-password"
+              type={showPassword.new ? "text" : "password"}
+              {...register("password", { required: true })}
+              label="Enter New Password"
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => handleTogglePasswordVisibility("new")}
+                    edge="end"
+                  >
+                    {showPassword.new ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+            {errors.password && (
+              <FormHelperText error>This field is required</FormHelperText>
+            )}
+          </FormControl>
+
+          {/* Re-type Password Field */}
+          <FormControl variant="outlined" error={Boolean(errors.passwordConfirm)}>
+            <InputLabel htmlFor="retype-password">Re-type Password</InputLabel>
+            <OutlinedInput
+              id="retype-password"
+              type={showPassword.retype ? "text" : "password"}
+              {...register("passwordConfirm", {
+                required: true,
+                validate: (value) => {
+                  if (value !== watch("password")) {
+                    return "Passwords do not match";
+                  }
+                },
+              })}
+              label="Re-type Password"
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => handleTogglePasswordVisibility("retype")}
+                    edge="end"
+                  >
+                    {showPassword.retype ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+            {errors.passwordConfirm && (
+              <FormHelperText error>{errors.passwordConfirm.message || "This field is required"}</FormHelperText>
+            )}
+          </FormControl>
+        </Stack>
+      
+
+      {/* Save Button */}
+      <Box sx={{ width: "100%", boxSizing: "border-box" }}>
+        <Stack sx={{ m: 2, justifyContent: "flex-end" }} direction="row" spacing={2}>
+          <Button
+            variant="contained"
+            sx={{ px: 10, py: 2 }}
+            onClick={handleSubmit(onSubmit)}
+          >
             Save
           </Button>
         </Stack>
@@ -50,3 +173,4 @@ function ChangePassword() {
 }
 
 export default ChangePassword;
+
