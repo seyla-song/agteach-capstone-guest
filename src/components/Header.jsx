@@ -27,6 +27,9 @@ import Logo from "../assets/logo.png";
 import { teachAgtechURL } from "../utils/globalURL";
 import { useLogoutMutation } from "../services/api/authSlice";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useIsLoginQuery } from "../services/api/authSlice";
+
 const HEADER_MENU_DESKTOP = [
   { page: "My Learning", path: "mylearning" },
   { page: "Marketplace", path: "marketplace" },
@@ -48,6 +51,16 @@ function Navigation() {
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
   const [logout, { isLoading }] = useLogoutMutation();
+  const {
+    data: guestData,
+    isLoading: isLoginLoading,
+    isError,
+  } = useIsLoginQuery();
+
+  let data = {};
+  if (guestData) {
+    data = guestData.data.data.customer;
+  }
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -71,12 +84,12 @@ function Navigation() {
       localStorage.removeItem("authToken");
       localStorage.removeItem("userInfo");
       navigate("/auth/login"); // Redirect to login page
-    } catch (error) { 
+    } catch (error) {
       console.error("Logout failed:", error);
     }
   };
 
-  const isAuth = true;
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
 
   let accountStatus = null;
 
@@ -121,7 +134,7 @@ function Navigation() {
             src={GuestProfilePicture}
             alt="profile picture"
           />
-          John
+          {data.first_name}
         </Button>
 
         {/* Dropdown Menu */}
@@ -159,13 +172,13 @@ function Navigation() {
                   variant="subtitle1"
                   sx={{ fontSize: "14px", textDecoration: "none" }}
                 >
-                  John Doe
+                  {/* {data.data.customer} */}
                 </Typography>
                 <Typography
                   variant="body2"
                   sx={{ fontSize: "12px", marginBottom: 1, color: "dark.200" }}
                 >
-                  johndoe123@gmail.com
+                  {/* {email} */}
                 </Typography>
               </Link>
             </div>
@@ -230,6 +243,7 @@ function Navigation() {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
 
   return (
     <AppBar position="sticky">
