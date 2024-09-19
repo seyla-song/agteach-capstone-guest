@@ -75,8 +75,15 @@ export const apiSlice = createApi({
         url: "/api/users/isLoginedIn",
         method: "GET",
       }),
-      
     }),
+
+    getUserInfo: builder.query({
+      query: () => ({
+        url: "/api/users/getMe",
+        method: "GET",
+      }),
+    }),
+
   }),
 });
 
@@ -90,4 +97,5 @@ export const {
   useResendVerifyCodeMutation,
   useLogoutMutation,
   useIsLoginQuery,
+  useGetUserInfoQuery,
 } = apiSlice;

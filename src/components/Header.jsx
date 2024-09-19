@@ -28,7 +28,7 @@ import { teachAgtechURL } from "../utils/globalURL";
 import { useLogoutMutation } from "../services/api/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useIsLoginQuery } from "../services/api/authSlice";
+import { useGetUserInfoQuery } from "../services/api/authSlice";
 
 const HEADER_MENU_DESKTOP = [
   { page: "My Learning", path: "mylearning" },
@@ -55,7 +55,7 @@ function Navigation() {
     data: guestData,
     isLoading: isLoginLoading,
     isError,
-  } = useIsLoginQuery();
+  } = useGetUserInfoQuery();
 
   let data = {};
   if (guestData) {
