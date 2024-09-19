@@ -39,7 +39,6 @@ const SignupPage = () => {
 
   const submitHandler = async (data) => {
     try {
-      console.log(data);
       data.dateOfBirth = dayjs(data.dateOfBirth).format("YYYY/MM/DD");
       const { email, password, passwordConfirm, dateOfBirth } = data
       const response = await signup(data).unwrap();
@@ -51,7 +50,6 @@ const SignupPage = () => {
       dispatch(setEmail(email));
       navigate("info");
     } catch (error) {
-      console.error("Signup failed:", error);
       setSnackbarSeverity("error");
       setSnackbarMessage("Email already exists. Please try another email.");
       setSnackbarOpen(true);

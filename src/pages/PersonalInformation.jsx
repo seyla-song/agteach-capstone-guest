@@ -37,13 +37,10 @@ export default function PersonalInfoForm() {
 
   const onSubmit = async (data) => {
     try {
-      console.log(data);
-      console.log(dob);
       const response = await addPerosnalInfo({
         ...data,
         dateOfBirth: dob,
       }).unwrap();
-      console.log("Success:", response);
       navigate("/auth/signup/verification");
     } catch (error) {
       console.error("Error:", error);

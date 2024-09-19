@@ -1,6 +1,8 @@
 import { Outlet } from "react-router-dom";
 import NotLoginStateComponent from "../components/LoginPromptComponent";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { checkLoginStatus } from "../store/slices/authSlice";
+import { useIsLoginQuery } from "../services/api/authSlice";
 
 /**
  * A protected route component that conditionally renders an Outlet or a NotLoginStateComponent based on the user's authentication status.

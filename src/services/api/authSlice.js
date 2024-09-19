@@ -80,7 +80,6 @@ export const apiSlice = createApi({
   }),
 });
 
-console.log(apiSlice.endpoints.isLogin);
 export const {
   useSignupMutation,
   useForgotPasswordMutation,
