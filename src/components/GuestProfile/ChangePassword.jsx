@@ -13,7 +13,9 @@ import {
 } from "@mui/material";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
-
+import { useForm } from "react-hook-form";
+import LoadingButton from '@mui/lab/LoadingButton';
+import { useIsLoginQuery } from "../../services/api/authSlice"; // Import the isLogin query
 /**
  * Renders a form to change the user's password.
  *
@@ -150,7 +152,8 @@ function ChangePassword() {
           />
           {errors.retype && (
             <FormHelperText error>This field is required</FormHelperText>
-          )}
+     
+     )}
         </FormControl>
       </Stack>
 
