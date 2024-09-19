@@ -4,7 +4,7 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:3001",
-    credentials: "include", 
+    credentials: "include",
   }),
   endpoints: (builder) => ({
     signup: builder.mutation({
@@ -61,7 +61,7 @@ export const apiSlice = createApi({
         body: { emailVerifyCode },
       }),
     }),
-    
+
     resendVerifyCode: builder.mutation({
       query: (email) => ({
         url: "/api/users/resendCode",
@@ -72,11 +72,11 @@ export const apiSlice = createApi({
 
     isLogin: builder.query({
       query: () => ({
-        url: "/api/users/getMe",
+        url: "/api/users/isLoginedIn",
         method: "GET",
       }),
-    })
-
+      
+    }),
   }),
 });
 
@@ -89,5 +89,5 @@ export const {
   useVerifyEmailMutation,
   useResendVerifyCodeMutation,
   useLogoutMutation,
-  useIsLoginQuery
+  useIsLoginQuery,
 } = apiSlice;
