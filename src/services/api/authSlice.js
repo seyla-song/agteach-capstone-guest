@@ -72,9 +72,10 @@ export const apiSlice = createApi({
 
     isLogin: builder.query({
       query: () => ({
-        url: "/api/users/getMe",
+        url: "/api/users/isLoginedIn",
         method: "GET",
       }),
+      
     }),
   }),
 });
