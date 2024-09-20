@@ -27,6 +27,7 @@ export const userApi = createApi({
     }),
 
     getUserInfo: builder.query({
+
       query: () => ({
         url: "/api/customer/getMe/additionalInfo",
         method: "GET",
