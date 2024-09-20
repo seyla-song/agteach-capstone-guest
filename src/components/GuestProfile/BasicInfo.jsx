@@ -12,7 +12,7 @@ import {
   Stack,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useGetOneUserQuery } from "../../services/api/userApi"; // Import the isLogin query
+import { useGetUserInfoQuery, useUpdateInfoMutation } from "../../services/api/userApi";// Import the isLogin query
 
 
 function BasicInfo() {
@@ -25,32 +25,32 @@ function BasicInfo() {
     defaultValues: {
       firstName: "",
       lastName: "",
-      phoneNumber: "",
+      phone: "",
       city: "",
       address: "",
     },
   });
 
-  const { data, isLoading } = useGetOneUserQuery();
+  const { data: oneData, isLoading } = useGetUserInfoQuery();
+  const [updateInfo, { isLoading: isLoadingInfo }] = useUpdateInfoMutation();
   const [selectedCity, setSelectedCity] = useState(null);
   useEffect(() => {
-    console.log(data)
-    if (data) {
-      // console.log(data)
-      const customerData = data.data.customers
+    if (oneData) {
+      const customerData = oneData.data.customers[0]
       const { firstName, lastName, phone, location_id, address } = customerData;
       setValue("firstName", firstName || "");
       setValue("lastName", lastName || "");
-      setValue("phoneNumber", phone || "");
+      setValue("phone", phone || "");
       setValue("city", location_id || "");
       setValue("address", address || "");
       setSelectedCity(city.find((c) => c.label === location_id) || null); // Set city autocomplete
     }
-  }, [data, setValue]);
+  }, [oneData, setValue]);
 
   const onSubmit = async (formData) => {
     console.log("Form Data Submitted:", formData);
     try {
+      await updateInfo(formData).unwrap();
       console.log("Success:", formData);
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -133,13 +133,13 @@ function BasicInfo() {
           {errors.address && <FormHelperText>{errors.address.message}</FormHelperText>}
         </FormControl>
 
-        <FormControl variant="outlined" error={!!errors.phoneNumber}>
+        <FormControl variant="outlined" error={!!errors.phone}>
           <InputLabel htmlFor="phone-number">Phone Number</InputLabel>
           <OutlinedInput
             id="phone-number"
             label="Phone Number"
             placeholder="e.g. 123-456-7890"
-            {...register("phoneNumber", {
+            {...register("phone", {
               required: "Phone number is required",
               pattern: {
                 value: /^[0-9-\s]+$/,
@@ -147,14 +147,14 @@ function BasicInfo() {
               },
             })}
           />
-          {errors.phoneNumber && <FormHelperText>{errors.phoneNumber.message}</FormHelperText>}
+          {errors.phone && <FormHelperText>{errors.phone.message}</FormHelperText>}
         </FormControl>
       </Stack>
 
       <Box sx={{ width: "100%", boxSizing: "border-box" }}>
         <Stack sx={{ m: 2, justifyContent: "flex-end" }} direction="row" spacing={2}>
-          <Button variant="contained" sx={{ px: 10, py: 2 }} onClick={handleSubmit(onSubmit)}>
-            Save
+          <Button variant="contained" sx={{ px: 10, py: 2 }} disabled={isLoadingInfo} onClick={handleSubmit(onSubmit)}>
+            {isLoadingInfo ? "Saving..." : "Save"}
           </Button>
         </Stack>
       </Box>

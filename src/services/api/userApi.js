@@ -15,12 +15,13 @@
 //       }),
 //     }),
 
-
 //   }),
 // });
 
 // export const { useUpdatePasswordMutation } = userApi;
 
+//  https://api.agteach.site
+//  http://localhost:3001
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -28,26 +29,32 @@ export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:3001",
-    credentials: "include", 
+    credentials: "include",
   }),
   endpoints: (builder) => ({
-        updatePassword: builder.mutation({
+    updatePassword: builder.mutation({
       query: (passwordData) => ({
         url: "/api/users/updatePassword",
         method: "PATCH",
         body: passwordData,
       }),
     }),
-    getOneUser: builder.query({
+
+    updateInfo: builder.mutation({
+      query: (infoData) => ({
+        url: "/api/customer/updateMe",
+        method: "PATCH",
+        body: infoData,
+      }),
+    }),
+
+    getUserInfo: builder.query({
       query: () => ({
-        url: "/api/customer/getMe",
+        url: "/api/customer/getMe/additionalInfo",
         method: "GET",
-      })
-    })
+      }),
+    }),
   }),
 });
 
-export const {
-  useUpdatePasswordMutation,
-  useGetOneUserQuery
-} = userApi;
+export const { useUpdatePasswordMutation, useGetUserInfoQuery, useUpdateInfoMutation } = userApi;
