@@ -154,8 +154,8 @@ const SignupPage = () => {
                           }
                         },
                       })}
-                      error={!!errors.confirmPassword}
-                      helperText={errors.confirmPassword?.message}
+                      error={!!errors.passwordConfirm}
+                      helperText={errors.passwordConfirm?.message}
                     />
                     <Button
                       type="submit"
