@@ -59,7 +59,11 @@ function Navigation() {
 
   let data = {};
   if (guestData) {
-    data = guestData.data.data.customer;
+    console.log("guestData", guestData);
+    data = guestData.data;
+    console.log("data", data);
+    
+    
   }
 
   const handleClick = (event) => {
@@ -127,6 +131,7 @@ function Navigation() {
             maxWidth: "100px",
             display: "flex",
             justifyContent: "start",
+            typography: "bssm",
           }}
         >
           <img
@@ -134,7 +139,7 @@ function Navigation() {
             src={GuestProfilePicture}
             alt="profile picture"
           />
-          {data.first_name}
+          {data.username}
         </Button>
 
         {/* Dropdown Menu */}
@@ -172,13 +177,13 @@ function Navigation() {
                   variant="subtitle1"
                   sx={{ fontSize: "14px", textDecoration: "none" }}
                 >
-                  {/* {data.data.customer} */}
+                  {data.username}
                 </Typography>
                 <Typography
                   variant="body2"
                   sx={{ fontSize: "12px", marginBottom: 1, color: "dark.200" }}
                 >
-                  {/* {email} */}
+                  {data.email}
                 </Typography>
               </Link>
             </div>
@@ -192,6 +197,7 @@ function Navigation() {
           >
             <Typography
               component={Link}
+              variant="bsr"
               sx={{
                 display: "flex",
                 alignItems: "center",
@@ -200,7 +206,7 @@ function Navigation() {
                 textDecoration: "none",
               }}
             >
-              <LogoutOutlined fontSize="small" style={{ marginRight: 8 }} />
+              <LogoutOutlined fontSize="small" sx={{ mr: 1, typography: "bmdsm" }} />
               Log Out
             </Typography>
           </MenuItem>

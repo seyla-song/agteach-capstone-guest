@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
+//  https://api.agteach.site
+//  http://localhost:3001
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3001",
+    baseUrl: "https://api.agteach.site",
     credentials: "include",
   }),
   endpoints: (builder) => ({
@@ -79,7 +80,7 @@ export const apiSlice = createApi({
 
     getUserInfo: builder.query({
       query: () => ({
-        url: "/api/users/getMe",
+        url: "/api/customer/getMe/additionalInfo",
         method: "GET",
       }),
     }),
