@@ -16,6 +16,8 @@ import {
 } from "@mui/material";
 
 export default function PersonalInfoForm() {
+  const { dob } = useSelector((state) => state.user);
+  const { email } = useSelector((state) => state.user);
   const {
     register,
     handleSubmit,
@@ -33,13 +35,13 @@ export default function PersonalInfoForm() {
   const navigate = useNavigate();
   const [addPerosnalInfo] = useAddPersonalInfoMutation();
 
-  const { dob } = useSelector((state) => state.user);
 
   const onSubmit = async (data) => {
     try {
       const response = await addPerosnalInfo({
         ...data,
         dateOfBirth: dob,
+        email: email,
       }).unwrap();
       navigate("/auth/signup/verification");
     } catch (error) {

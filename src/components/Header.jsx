@@ -27,6 +27,9 @@ import Logo from "../assets/logo.png";
 import { teachAgtechURL } from "../utils/globalURL";
 import { useLogoutMutation } from "../services/api/authSlice";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useGetUserInfoQuery } from "../services/api/authSlice";
+
 const HEADER_MENU_DESKTOP = [
   { page: "My Learning", path: "mylearning" },
   { page: "Marketplace", path: "marketplace" },
@@ -48,6 +51,20 @@ function Navigation() {
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
   const [logout, { isLoading }] = useLogoutMutation();
+  const {
+    data: guestData,
+    isLoading: isLoginLoading,
+    isError,
+  } = useGetUserInfoQuery();
+
+  let data = {};
+  if (guestData) {
+    console.log("guestData", guestData);
+    data = guestData.data;
+    console.log("data", data);
+    
+    
+  }
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -71,12 +88,12 @@ function Navigation() {
       localStorage.removeItem("authToken");
       localStorage.removeItem("userInfo");
       navigate("/auth/login"); // Redirect to login page
-    } catch (error) { 
+    } catch (error) {
       console.error("Logout failed:", error);
     }
   };
 
-  const isAuth = true;
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
 
   let accountStatus = null;
 
@@ -114,6 +131,7 @@ function Navigation() {
             maxWidth: "100px",
             display: "flex",
             justifyContent: "start",
+            typography: "bssm",
           }}
         >
           <img
@@ -121,7 +139,7 @@ function Navigation() {
             src={GuestProfilePicture}
             alt="profile picture"
           />
-          John
+          {data.username}
         </Button>
 
         {/* Dropdown Menu */}
@@ -159,13 +177,13 @@ function Navigation() {
                   variant="subtitle1"
                   sx={{ fontSize: "14px", textDecoration: "none" }}
                 >
-                  John Doe
+                  {data.username}
                 </Typography>
                 <Typography
                   variant="body2"
                   sx={{ fontSize: "12px", marginBottom: 1, color: "dark.200" }}
                 >
-                  johndoe123@gmail.com
+                  {data.email}
                 </Typography>
               </Link>
             </div>
@@ -179,6 +197,7 @@ function Navigation() {
           >
             <Typography
               component={Link}
+              variant="bsr"
               sx={{
                 display: "flex",
                 alignItems: "center",
@@ -187,7 +206,7 @@ function Navigation() {
                 textDecoration: "none",
               }}
             >
-              <LogoutOutlined fontSize="small" style={{ marginRight: 8 }} />
+              <LogoutOutlined fontSize="small" sx={{ mr: 1, typography: "bmdsm" }} />
               Log Out
             </Typography>
           </MenuItem>
@@ -230,6 +249,7 @@ function Navigation() {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
 
   return (
     <AppBar position="sticky">
