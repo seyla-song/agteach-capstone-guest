@@ -28,7 +28,7 @@ import { teachAgtechURL } from "../utils/globalURL";
 import { useLogoutMutation } from "../services/api/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useGetUserInfoQuery } from "../services/api/authSlice";
+import { useGetUserInfoQuery } from "../services/api/userApi";
 
 const HEADER_MENU_DESKTOP = [
   { page: "My Learning", path: "mylearning" },

@@ -33,15 +33,13 @@ export default function PersonalInfoForm() {
     },
   });
   const navigate = useNavigate();
-  const [addPerosnalInfo] = useAddPersonalInfoMutation();
+  const [addPerosnalInfo, { isLoading }] = useAddPersonalInfoMutation();
 
 
   const onSubmit = async (data) => {
     try {
-      const response = await addPerosnalInfo({
-        ...data,
-        dateOfBirth: dob,
-        email: email,
+      await addPerosnalInfo({
+        ...data, dateOfBirth: dob, email
       }).unwrap();
       navigate("/auth/signup/verification");
     } catch (error) {
@@ -162,7 +160,7 @@ export default function PersonalInfoForm() {
                 variant="contained"
                 sx={{ padding: { xs: "8px 20px", md: "8px 35px" } }}
               >
-                Submit
+                {isLoading ? "Submitting..." : "Submit"}
               </Button>
             </Stack>
           </Stack>
