@@ -10,7 +10,7 @@ import {
   FormHelperText,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useIsLoginQuery } from "../../services/api/authSlice"; // Import the isLogin query
+import { useGetOneUserQuery } from "../../services/api/userApi"; // Import the isLogin query
 
 /**
  * @function AccountSecurity
@@ -30,11 +30,12 @@ function AccountSecurity() {
     },
   });
 
-  const { data, isLoading } = useIsLoginQuery();
+  const { data, isLoading } = useGetOneUserQuery();
   
   useEffect(() => {
     if (data) {
-      const customerData = data.data.customers[0]
+      console.log(data)
+      const customerData = data.data.customers
       const { email } = customerData;
       console.log(customerData);
       setValue("email", email || "");

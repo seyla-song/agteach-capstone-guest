@@ -40,7 +40,7 @@ export const userApi = createApi({
     }),
     getOneUser: builder.query({
       query: () => ({
-        url: "/api/users/getMe",
+        url: "/api/customer/getMe",
         method: "GET",
       })
     })

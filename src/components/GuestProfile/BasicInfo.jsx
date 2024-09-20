@@ -37,7 +37,7 @@ function BasicInfo() {
     console.log(data)
     if (data) {
       // console.log(data)
-      const customerData = data.data.customers[0]
+      const customerData = data.data.customers
       const { firstName, lastName, phone, location_id, address } = customerData;
       setValue("firstName", firstName || "");
       setValue("lastName", lastName || "");
