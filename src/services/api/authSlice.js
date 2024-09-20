@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
+//  https://api.agteach.site
+//  http://localhost:3001
 export const apiSlice = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3001",
+    baseUrl: "https://api.agteach.site",
     credentials: "include",
   }),
   endpoints: (builder) => ({
@@ -75,8 +76,15 @@ export const apiSlice = createApi({
         url: "/api/users/isLoginedIn",
         method: "GET",
       }),
-      
     }),
+
+    getUserInfo: builder.query({
+      query: () => ({
+        url: "/api/customer/getMe/additionalInfo",
+        method: "GET",
+      }),
+    }),
+
   }),
 });
 
@@ -90,4 +98,5 @@ export const {
   useResendVerifyCodeMutation,
   useLogoutMutation,
   useIsLoginQuery,
+  useGetUserInfoQuery,
 } = apiSlice;
