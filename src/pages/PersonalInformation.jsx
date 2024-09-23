@@ -29,17 +29,18 @@ export default function PersonalInfoForm() {
       phone: "",
       address: "",
       city: "",
-      imageUrl: null,
+      imageUrl: "",
     },
   });
   const navigate = useNavigate();
   const [addPerosnalInfo, { isLoading }] = useAddPersonalInfoMutation();
 
-
   const onSubmit = async (data) => {
     try {
       await addPerosnalInfo({
-        ...data, dateOfBirth: dob, email
+        ...data,
+        dateOfBirth: dob,
+        email,
       }).unwrap();
       navigate("/auth/signup/verification");
     } catch (error) {
