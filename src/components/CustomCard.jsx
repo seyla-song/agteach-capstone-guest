@@ -1,43 +1,19 @@
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography, IconButton } from '@mui/material';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
-/**
- * CustomCard component is a reusable component
- * that renders a card with a image, title and a subtitle.
- *
- * @param {{ dataObj: Object, variant: string }} props
- *   - dataObj is an object that contains image, name, price and instructor
- *   - variant is a string that can be one of 'product' or 'default'
- *
- * @returns {JSX.Element} A JSX element that renders a card
- */
-export const CustomCard = ({ dataObj, variant }) => {
-  /**
-   * Returns a JSX element based on the variant prop
-   * that renders a card with a image, title and a subtitle.
-   *
-   * @returns {JSX.Element} A JSX element that renders a card
-   */
+export const CustomCard = ({ dataObj, variant, showDelete, onDelete }) => {
   const cardVariant = () => {
     switch (variant) {
       case 'product':
-        return <ProductCard dataObj={dataObj} />;
+        return <ProductCard dataObj={dataObj} showDelete={showDelete} onDelete={onDelete} />;
       default:
-        return <CourseCard dataObj={dataObj} />;
+        return <CourseCard dataObj={dataObj} showDelete={showDelete} onDelete={onDelete} />;
     }
   };
   return cardVariant();
 };
 
-  /**
-   * ProductCard component is a reusable component
-   * that renders a card with a image, title and a subtitle.
-   *
-   * @param {{ dataObj: Object }} props
-   *   - dataObj is an object that contains image, name, price and instructor
-   *
-   * @returns {JSX.Element} A JSX element that renders a card
-   */
-const ProductCard = ({ dataObj }) => {
+const ProductCard = ({ dataObj, showDelete, onDelete }) => {
   return (
     <Box pr>
       <Box
@@ -46,24 +22,20 @@ const ProductCard = ({ dataObj }) => {
         src={dataObj.image}
         alt={dataObj.name}
       />
-      <Stack p>
+      <Stack p spacing={1} alignItems="flex-start">
         <Typography variant="bmdmd">{dataObj.name}</Typography>
         <Typography variant="bsr">{dataObj.price}</Typography>
+        {showDelete && (
+          <IconButton sx={{ color: 'red.main' }} onClick={() => onDelete(dataObj.id)}>
+            <DeleteOutlineOutlinedIcon />
+          </IconButton>
+        )} 
       </Stack>
     </Box>
   );
 };
 
-  /**
-   * CourseCard component is a reusable component
-   * that renders a card with a image, title and a subtitle.
-   *
-   * @param {{ dataObj: Object }} props
-   *   - dataObj is an object that contains image, name, price and instructor
-   *
-   * @returns {JSX.Element} A JSX element that renders a card
-   */
-const CourseCard = ({ dataObj }) => {
+const CourseCard = ({ dataObj, showDelete, onDelete }) => {
   return (
     <Box pr>
       <Box
@@ -72,10 +44,24 @@ const CourseCard = ({ dataObj }) => {
         src={dataObj.image}
         alt={dataObj.name}
       />
-      <Stack p>
-        <Typography variant="bmdmd">{dataObj.name}</Typography>
-        <Typography variant="bsr">{dataObj.instructor}</Typography>
-      </Stack>
+      <Box
+        display={'flex'}
+        justifyContent="space-between"
+        p={1}
+        alignContent={'center'}
+      >
+        <Stack>
+          <Typography variant="bmdmd">{dataObj.name}</Typography>
+          <Typography variant="bsr">{dataObj.instructor}</Typography>
+        </Stack>
+        <Box>
+          {showDelete && (
+            <IconButton sx={{ color: 'red.main' }} size="small" onClick={() => onDelete(dataObj.id)}>
+              <DeleteOutlineOutlinedIcon />
+            </IconButton>
+          )}
+        </Box>
+      </Box>
     </Box>
   );
-};
+};  

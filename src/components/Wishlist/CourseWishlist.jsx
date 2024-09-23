@@ -1,7 +1,7 @@
 import { Button, Grid, Stack, Typography, Link } from '@mui/material';
-import { CustomCard } from '../CustomCard';
 import { Link as RouterLink } from 'react-router-dom';
 import { useState } from 'react';
+import { CustomCard } from '../CustomCard';
 import { ViewMore } from '../ViewMore';
 
 export const CourseWishlist = ({ data }) => {
@@ -16,9 +16,9 @@ export const CourseWishlist = ({ data }) => {
     <Stack gap={3}>
       <Stack gap>
         <Typography variant="h4">My courses saved for later</Typography>
-        <Typography variant="body2">Found ({courses.length}) Courses</Typography>
+        <Typography variant="bsr">Found ({courses.length}) Courses</Typography>
       </Stack>
-
+{/* component View More */}
       <ViewMore
         items={courses}
         renderItem={(item) => (
@@ -27,10 +27,11 @@ export const CourseWishlist = ({ data }) => {
             to={`/courses/${item.id}`}
             underline="none"
           >
+{/* component Custom Card */}
             <CustomCard
               dataObj={item}
               showDelete={true}
-              onDelete={handleDelete} // Pass the delete handler
+              onDelete={handleDelete} 
               variant="course"
             />
           </Link>
