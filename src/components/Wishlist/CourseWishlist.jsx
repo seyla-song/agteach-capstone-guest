@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { CustomCard } from '../CustomCard';
 import { ViewMore } from '../ViewMore';
 
-export const CourseWishlist = ({ data }) => {
+export default function CourseWishlist({ data }) {
   const [courses, setCourses] = useState(data);
 
   const handleDelete = (id) => {

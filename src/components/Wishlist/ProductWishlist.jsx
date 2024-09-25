@@ -3,11 +3,11 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useState } from 'react';
 import { CustomCard } from '../CustomCard';
 import { ViewMore } from '../ViewMore';
-export const ProductWishlist = ({ data }) => {
-  const [courses, setCourses] = useState(data);
+export default function ProductWishlist({ data }) {
+  const [courses, setProducts] = useState(data);
 
   const handleDelete = (id) => {
-    setCourses((prevCourses) => prevCourses.filter(course => course.id !== id));
+    setProducts((prevProducts) => prevProducts.filter(product => product.id !== id));
   };
 
   return (
