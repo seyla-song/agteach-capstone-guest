@@ -13,6 +13,7 @@ import FilterByOther from "../components/SearchResult/FilterByOther";
 import SearchList from "../components/SearchResult/SearchList";
 import { products } from "../utils/carouselDummy";
 import SearchBar from "../components/SearchBarComponent";
+import { useState, useEffect } from "react";
 
 function SearchResultPage() {
   const variant = { product: "product", course: "course" };
@@ -20,7 +21,49 @@ function SearchResultPage() {
   const currentLocation = useLocation().search;
   const queryParams = new URLSearchParams(currentLocation);
   const query = queryParams.get('name');
-  console.log(query)
+
+  const [category, setCategory] = useState('course');
+  const [sortBy, setSortBy] = useState('newest');
+  const [filterBy, setFilterBy] = useState('lth');
+  const [filteredData, setFilteredData] = useState([]);
+
+  const handleCategorychange = (state) => {
+    setCategory(state);
+  };
+
+  const handleSortByChange = (state) => {
+    setSortBy(state);
+  };
+
+  const handleFilterByChange = (state) => {
+    setFilterBy(state);
+  };
+
+  // Effect to filter and sort data whenever category, sortBy, or filterBy changes
+  useEffect(() => {
+    // Filter products by category
+    let filteredProducts = products.filter((item) => {
+      return item.type === category; // Assuming your product object has a 'type' key
+    });
+
+    // Sort products based on sortBy selection
+    if (sortBy === 'newest') {
+      filteredProducts.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sorting by date
+    } else if (sortBy === 'oldest') {
+      filteredProducts.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+
+    // Filter by price or other criteria based on filterBy
+    if (filterBy === 'lth') {
+      filteredProducts.sort((a, b) => a.price - b.price); // Low to High
+    } else if (filterBy === 'htl') {
+      filteredProducts.sort((a, b) => b.price - a.price); // High to Low
+    }
+
+    // Update the filtered data state
+    setFilteredData(filteredProducts);
+  }, [category, sortBy, filterBy]);
+
   return (
     <Container
       maxWidth={false}
@@ -69,11 +112,11 @@ function SearchResultPage() {
                 },
               }}
             >
-              <CategoryFilter />
+              <CategoryFilter category={category} handleChange={handleCategorychange}/>
               <Divider sx={{ display: { xs: "none", sm: "block" } }} />
-              <SortByFilter />
+              <SortByFilter sortBy={sortBy} handleChange={handleSortByChange} />
               <Divider sx={{ display: { xs: "none", sm: "block" } }} />
-              <FilterByOther />
+              <FilterByOther filterBy={filterBy} handleChange={handleFilterByChange}/>
             </Stack>
           </Grid>
           <Grid size={{ xs: 12, sm: 8 }} sx={{ width: "100%" }}>

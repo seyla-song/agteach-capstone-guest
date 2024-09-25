@@ -20,8 +20,6 @@ export default function SearchBar({ backDrop, searchLabel, searchContext, defaul
   const [searchString, setSearchString] = useState(defaultSearchString);
 
   const handleSearchString = (e) => {
-    console.log(searchString);
-    console.log(e.target.value)
     setSearchString(e.target.value);
   }
 
