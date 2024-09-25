@@ -4,11 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import FormInput from "../components/LoginSignup/FormInput";
 import LogoLink from "../components/LoginSignup/LogoLink";
-import { useSignupMutation } from "../services/api/authSlice";
+import { useSignupMutation } from "../services/api/authApi";
 import dayjs from "dayjs";
 import { useDispatch } from "react-redux";
-import { setEmail } from "../store/slices/userSlice";
-import { setDob } from "../store/slices/userSlice";
+import { setEmail, setDob } from "../features/auth/userSlice";
 import { CustomAlert } from "../components/CustomAlert";
 
 const SignupPage = () => {

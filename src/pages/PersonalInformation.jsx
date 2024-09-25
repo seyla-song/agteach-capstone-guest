@@ -3,7 +3,7 @@ import LogoLink from "../components/LoginSignup/LogoLink";
 import FormInput from "../components/LoginSignup/FormInput";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { useAddPersonalInfoMutation } from "../services/api/authSlice";
+import { useAddPersonalInfoMutation } from "../services/api/authApi";
 import { useNavigate } from "react-router-dom";
 import {
   Container,
@@ -96,7 +96,6 @@ export default function PersonalInfoForm() {
                   />
                 </Box>
                 <Autocomplete
-                  id="country-select-demo"
                   fullWidth
                   options={city}
                   getOptionLabel={(option) => option.label}

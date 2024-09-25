@@ -36,7 +36,7 @@ function BasicInfo() {
   const [selectedCity, setSelectedCity] = useState(null);
   useEffect(() => {
     if (oneData) {
-      const customerData = oneData.data.customers[0]
+      const customerData = oneData.data.customers
       const { firstName, lastName, phone, location_id, address } = customerData;
       setValue("firstName", firstName || "");
       setValue("lastName", lastName || "");
