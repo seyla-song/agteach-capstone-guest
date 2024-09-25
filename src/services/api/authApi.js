@@ -77,7 +77,6 @@ export const apiSlice = createApi({
         method: "GET",
       }),
     }),
-
   }),
 });
 
