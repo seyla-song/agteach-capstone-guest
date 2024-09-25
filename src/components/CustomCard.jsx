@@ -1,7 +1,9 @@
 import { Box, Stack, Typography, IconButton } from '@mui/material';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
-export default function CustomCard  ({ dataObj, variant, showDelete, onDelete }) {
+
+
+export default function CustomCard({ dataObj, variant, showDelete, onDelete }) {
   const cardVariant = () => {
     switch (variant) {
       case 'product':
@@ -14,6 +16,12 @@ export default function CustomCard  ({ dataObj, variant, showDelete, onDelete })
 };
 
 const ProductCard = ({ dataObj, showDelete, onDelete }) => {
+  const handleDeleteClick = (event) => {
+    event.preventDefault();  
+    event.stopPropagation();  
+    onDelete(dataObj.id);
+  };
+
   return (
     <Box pr>
       <Box
@@ -22,20 +30,33 @@ const ProductCard = ({ dataObj, showDelete, onDelete }) => {
         src={dataObj.image}
         alt={dataObj.name}
       />
-      <Stack p spacing={1} alignItems="flex-start">
+      <Stack 
+        p 
+        spacing={1} 
+        alignItems="flex-start"
+      >
         <Typography variant="bmdmd">{dataObj.name}</Typography>
         <Typography variant="bsr">{dataObj.price}</Typography>
         {showDelete && (
-          <IconButton sx={{ color: 'red.main' }} onClick={() => onDelete(dataObj.id)}>
+          <IconButton 
+            sx={{ color: 'red.main' }} 
+            onClick={handleDeleteClick} // Handle icon button click
+          >
             <DeleteOutlineOutlinedIcon />
           </IconButton>
-        )} 
+        )}
       </Stack>
     </Box>
   );
 };
 
 const CourseCard = ({ dataObj, showDelete, onDelete }) => {
+  const handleDeleteClick = (event) => {
+    event.preventDefault();  
+    event.stopPropagation();  
+    onDelete(dataObj.id);
+  };
+
   return (
     <Box pr>
       <Box
@@ -56,7 +77,11 @@ const CourseCard = ({ dataObj, showDelete, onDelete }) => {
         </Stack>
         <Box>
           {showDelete && (
-            <IconButton sx={{ color: 'red.main' }} size="small" onClick={() => onDelete(dataObj.id)}>
+            <IconButton 
+              sx={{ color: 'red.main' }} 
+              size="small" 
+              onClick={handleDeleteClick} 
+            >
               <DeleteOutlineOutlinedIcon />
             </IconButton>
           )}
@@ -64,4 +89,4 @@ const CourseCard = ({ dataObj, showDelete, onDelete }) => {
       </Box>
     </Box>
   );
-};  
+};
