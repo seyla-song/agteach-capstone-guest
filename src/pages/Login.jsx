@@ -13,7 +13,7 @@ import {
 import FormInput from "../components/LoginSignup/FormInput";
 import LogoLink from "../components/LoginSignup/LogoLink";
 import { Link, useNavigate } from "react-router-dom";
-import { useLoginMutation } from "../services/api/authSlice";
+import { useLoginMutation } from "../services/api/authApi";
 import { CustomAlert } from "../components/CustomAlert";
 
 function Login() {

@@ -5,8 +5,8 @@ import { ThemeProvider } from "@emotion/react";
 import theme from "./theme/theme";
 import { CssBaseline } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { useIsLoginQuery } from "./services/api/authSlice";
-import { checkLoginStatus } from "./store/slices/authSlice";
+import { useIsLoginQuery } from "./services/api/authApi";
+import { checkLoginStatus } from "./features/auth/authSlice";
 import { useEffect } from "react";
 
 function App() {
