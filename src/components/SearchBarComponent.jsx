@@ -7,7 +7,7 @@ import {
   Autocomplete,
 } from "@mui/material";
 import { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const data = ["Plant", "Fertilizer", "Shovel"];
 
@@ -16,6 +16,7 @@ export default function SearchBar({ backDrop, searchLabel, searchContext, defaul
   if (!searchContext) searchContext = 'search';
   if (!defaultSearchString) defaultSearchString = '';
 
+  const navigate = useNavigate();
   const [searchString, setSearchString] = useState(defaultSearchString);
 
   const handleSearchString = (e) => {
@@ -27,6 +28,13 @@ export default function SearchBar({ backDrop, searchLabel, searchContext, defaul
   const handleAutocompleteChange = (event, newValue) => {
     setSearchString(newValue || "");
   };
+
+  const handleStartSearch = (e) => {
+    e.preventDefault();
+    if (searchString) {
+      navigate(`/${searchContext}?name=${searchString}`)
+    }
+  }
 
   return (
     <Box
@@ -80,58 +88,59 @@ export default function SearchBar({ backDrop, searchLabel, searchContext, defaul
             {searchLabel}
           </Typography>
         )}
-        <Box display="flex" gap="20px" width="100%" height="40px">
-          <Autocomplete
-            id="search-bar"
-            sx={{ width: "100%", height: "40px", mx: "auto" }}
-            options={data}
-            autoHighlight
-            value={searchString}
-            onInputChange={handleAutocompleteChange}
-            getOptionLabel={(option) => {
-              return option
-            }}
-            renderOption={(props, option) => {
-              const { key, ...optionProps } = props;
-              return (
-                <Box key={key} component="li" {...optionProps}>
-                  {option}
-                </Box>
-              );
-            }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                onChange={(e) => handleSearchString(e)}
-                value={searchString}
-                placeholder="Search course, plant, crop, service"
-                InputProps={{
-                  ...params.InputProps,
-                  sx: {
-                    height: "40px",
-                    bgcolor: "grey.100",
-                    borderRadius: "4px",
-                  },
-                  endAdornment: null,
-                  autoComplete: "new-password",
-                }}
-              />
-            )}
-          />
+        <form onSubmit={handleStartSearch}>
+          <Box display="flex" gap="20px" width="100%" height="40px">
+            <Autocomplete
+              id="search-bar"
+              sx={{ width: "100%", height: "40px", mx: "auto" }}
+              options={data}
+              autoHighlight
+              value={searchString}
+              onInputChange={handleAutocompleteChange}
+              getOptionLabel={(option) => {
+                return option
+              }}
+              renderOption={(props, option) => {
+                const { key, ...optionProps } = props;
+                return (
+                  <Box key={key} component="li" {...optionProps}>
+                    {option}
+                  </Box>
+                );
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  onChange={(e) => handleSearchString(e)}
+                  value={searchString}
+                  placeholder="Search course, plant, crop, service"
+                  InputProps={{
+                    ...params.InputProps,
+                    sx: {
+                      height: "40px",
+                      bgcolor: "grey.100",
+                      borderRadius: "4px",
+                    },
+                    endAdornment: null,
+                    autoComplete: "new-password",
+                  }}
+                />
+              )}
+            />
 
-          <Box sx={{ width: { xs: "80px", sm: "100px", md: "220px" } }}>
-            <Button
-              component={RouterLink}
-              to={`/${searchContext}?name=${searchString}`}
-              fullWidth
-              variant="contained"
-              color="secondary"
-              sx={{ height: "100%", color: "primary.main" }}
-            >
-              Search
-            </Button>
+            <Box sx={{ width: { xs: "80px", sm: "100px", md: "220px" } }}>
+              <Button
+                onClick={handleStartSearch}
+                fullWidth
+                variant="contained"
+                color="secondary"
+                sx={{ height: "100%", color: "primary.main" }}
+              >
+                Search
+              </Button>
+            </Box>
           </Box>
-        </Box>
+        </form>
       </Stack>
     </Box>
   );
