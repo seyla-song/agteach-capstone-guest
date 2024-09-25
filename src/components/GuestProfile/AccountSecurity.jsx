@@ -10,13 +10,13 @@ import { useGetUserInfoQuery } from "../../services/api/userApi"; // Import the 
  */
 
 function AccountSecurity() {
-  const { register, setValue, watch } = useForm();
+  const { setValue, watch } = useForm();
 
   const { data, isLoading } = useGetUserInfoQuery();
 
   useEffect(() => {
     if (data) {
-      const customerData = data.data.customers[0];
+      const customerData = data.data.customers;
       const { email } = customerData;
       console.log(customerData);
       setValue("email", email || "");

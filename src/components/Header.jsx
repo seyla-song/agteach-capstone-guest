@@ -25,7 +25,7 @@ import { LogoutOutlined } from "@mui/icons-material";
 import GuestProfilePicture from "../assets/profile-pic.jpg";
 import Logo from "../assets/logo.png";
 import { teachAgtechURL } from "../utils/globalURL";
-import { useLogoutMutation } from "../services/api/authSlice";
+import { useLogoutMutation } from "../services/api/authApi";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetUserInfoQuery } from "../services/api/userApi";

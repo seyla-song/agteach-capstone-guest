@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Box, Button, CircularProgress, Typography } from "@mui/material";
-import { useResendVerifyCodeMutation } from "../../services/api/authSlice";
+import { useResendVerifyCodeMutation } from "../../services/api/authApi";
 
 import { useState } from "react";
 import { CustomAlert } from "../CustomAlert";
