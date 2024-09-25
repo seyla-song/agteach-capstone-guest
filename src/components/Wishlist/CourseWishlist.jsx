@@ -1,32 +1,45 @@
 import { Button, Grid, Stack, Typography, Link } from '@mui/material';
-import { CustomCard } from '../CustomCard';
 import { Link as RouterLink } from 'react-router-dom';
+import { useState } from 'react';
+import CustomCard from '../CustomCard';
+import ViewMore from '../ViewMore';
 
-export const CourseWishlist = ({ data }) => {
+
+
+export default function CourseWishlist({ data }) {
+  const [courses, setCourses] = useState(data);
+
+  const handleDelete = (id) => {
+    setCourses((prevCourses) => prevCourses.filter(course => course.id !== id));
+  };
+
   return (
+
     <Stack gap={3}>
       <Stack gap>
-        <Typography variant="h4">My courses save for later</Typography>
-        <Typography variant="bsr">Found ({data.length}) Courses</Typography>
+        <Typography variant="h4">My courses saved for later</Typography>
+        <Typography variant="bsr">Found ({courses.length}) Courses</Typography>
       </Stack>
+{/* component View More */}
+      <ViewMore
+        items={courses}
+        renderItem={(item) => (
+          <Link
+            component={RouterLink}
+            to={`/courses/${item.id}`}
+            underline="none"
+          >
+{/* component Custom Card */}
+            <CustomCard
+              dataObj={item}
+              showDelete={true}
+              onDelete={handleDelete} 
+              variant="course"
+            />
+          </Link>
+        )}
+      />
 
-      <Grid container spacing>
-        {data.map((item, idx) => (
-          <Grid item key={idx} xs={6} md={2}>
-            <Link
-              component={RouterLink}
-              to={`/courses/${item.id}`}
-              underline="none"
-            >
-              <CustomCard dataObj={item} />
-            </Link>
-          </Grid>
-        ))}
-      </Grid>
-
-      <Button variant="outlined" sx={{ px: 4, py: 2 }}>
-        View (5) more
-      </Button>
     </Stack>
   );
 };

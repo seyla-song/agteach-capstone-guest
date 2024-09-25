@@ -6,7 +6,7 @@ import {
   Button,
   useMediaQuery,
 } from "@mui/material";
-import { CustomCard } from "../../components/CustomCard";
+import CustomCard from "../../components/CustomCard";
 import Img1 from "../../assets/InstructorProfile/Rectangle 1.png";
 import Img2 from "../../assets/InstructorProfile/Rectangle 2.png";
 import Img3 from "../../assets/InstructorProfile/Rectangle 3.png";

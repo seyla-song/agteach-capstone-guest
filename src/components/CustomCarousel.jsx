@@ -4,7 +4,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Box, Button, Stack } from '@mui/material';
 import Slider from 'react-slick';
 import { motion } from 'framer-motion';
-import { CustomCard } from './CustomCard';
+import CustomCard from './CustomCard';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 
 /**
