@@ -6,11 +6,23 @@ import {
   Typography,
   Autocomplete,
 } from "@mui/material";
+import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 const data = ["Plant", "Fertilizer", "Shovel"];
 
-export default function SearchBar({ backDrop, searchLabel }) {
+export default function SearchBar({ backDrop, searchLabel, searchContext, defaultSearchString }) {
+
+  if (!searchContext) searchContext = 'search';
+  if (!defaultSearchString) defaultSearchString = '';
+
+  const [searchString, setSearchString] = useState(defaultSearchString)
+
+  const handleSearchString = (e) => {
+    console.log(searchString)
+    setSearchString(e.target.value);
+  }
+
   return (
     <Box
       sx={{
@@ -69,7 +81,10 @@ export default function SearchBar({ backDrop, searchLabel }) {
             sx={{ width: "100%", height: "40px", mx: "auto" }}
             options={data}
             autoHighlight
-            getOptionLabel={(option) => option}
+            getOptionLabel={(option) => {
+              setSearchString(option);
+              return option
+            }}
             renderOption={(props, option) => {
               const { key, ...optionProps } = props;
               return (
@@ -81,6 +96,8 @@ export default function SearchBar({ backDrop, searchLabel }) {
             renderInput={(params) => (
               <TextField
                 {...params}
+                value={searchString}
+                onChange={(e) => handleSearchString(e)}
                 placeholder="Search course, plant, crop, service"
                 InputProps={{
                   ...params.InputProps,
@@ -99,7 +116,7 @@ export default function SearchBar({ backDrop, searchLabel }) {
           <Box sx={{ width: { xs: "80px", sm: "100px", md: "220px" } }}>
             <Button
               component={RouterLink}
-              to="search"
+              to={`/${searchContext}?${searchString}`}
               fullWidth
               variant="contained"
               color="secondary"
