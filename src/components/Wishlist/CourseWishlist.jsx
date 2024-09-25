@@ -1,8 +1,10 @@
 import { Button, Grid, Stack, Typography, Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useState } from 'react';
-import { CustomCard } from '../CustomCard';
-import { ViewMore } from '../ViewMore';
+import CustomCard from '../CustomCard';
+import ViewMore from '../ViewMore';
+
+
 
 export default function CourseWishlist({ data }) {
   const [courses, setCourses] = useState(data);

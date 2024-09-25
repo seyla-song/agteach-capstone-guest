@@ -1,8 +1,8 @@
 import { Button, Grid, Link, Stack, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useState } from 'react';
-import { CustomCard } from '../CustomCard';
-import { ViewMore } from '../ViewMore';
+import CustomCard from '../CustomCard';
+import ViewMore from '../ViewMore';
 export default function ProductWishlist({ data }) {
   const [courses, setProducts] = useState(data);
 

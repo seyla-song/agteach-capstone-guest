@@ -1,5 +1,5 @@
 import { Button, Grid, Stack, Typography, Link } from '@mui/material';
-import { CustomCard } from '../CustomCard';
+import CustomCard from '../CustomCard';
 import { Link as RouterLink } from 'react-router-dom';
 
 /**

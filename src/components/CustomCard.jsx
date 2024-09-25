@@ -1,7 +1,7 @@
 import { Box, Stack, Typography, IconButton } from '@mui/material';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
-export const CustomCard = ({ dataObj, variant, showDelete, onDelete }) => {
+export default function CustomCard  ({ dataObj, variant, showDelete, onDelete }) {
   const cardVariant = () => {
     switch (variant) {
       case 'product':
