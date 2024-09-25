@@ -16,12 +16,17 @@ export default function SearchBar({ backDrop, searchLabel, searchContext, defaul
   if (!searchContext) searchContext = 'search';
   if (!defaultSearchString) defaultSearchString = '';
 
-  const [searchString, setSearchString] = useState(defaultSearchString)
+  const [searchString, setSearchString] = useState(defaultSearchString);
 
   const handleSearchString = (e) => {
-    console.log(searchString)
+    console.log(searchString);
+    console.log(e.target.value)
     setSearchString(e.target.value);
   }
+
+  const handleAutocompleteChange = (event, newValue) => {
+    setSearchString(newValue || "");
+  };
 
   return (
     <Box
@@ -81,8 +86,9 @@ export default function SearchBar({ backDrop, searchLabel, searchContext, defaul
             sx={{ width: "100%", height: "40px", mx: "auto" }}
             options={data}
             autoHighlight
+            value={searchString}
+            onInputChange={handleAutocompleteChange}
             getOptionLabel={(option) => {
-              setSearchString(option);
               return option
             }}
             renderOption={(props, option) => {
@@ -96,8 +102,8 @@ export default function SearchBar({ backDrop, searchLabel, searchContext, defaul
             renderInput={(params) => (
               <TextField
                 {...params}
-                value={searchString}
                 onChange={(e) => handleSearchString(e)}
+                value={searchString}
                 placeholder="Search course, plant, crop, service"
                 InputProps={{
                   ...params.InputProps,
@@ -116,7 +122,7 @@ export default function SearchBar({ backDrop, searchLabel, searchContext, defaul
           <Box sx={{ width: { xs: "80px", sm: "100px", md: "220px" } }}>
             <Button
               component={RouterLink}
-              to={`/${searchContext}?${searchString}`}
+              to={`/${searchContext}?name=${searchString}`}
               fullWidth
               variant="contained"
               color="secondary"

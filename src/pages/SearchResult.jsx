@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import CategoryFilter from "../components/SearchResult/CategoryFilter";
 import SortByFilter from "../components/SearchResult/SortbyFilter";
 import {
@@ -17,7 +17,10 @@ import SearchBar from "../components/SearchBarComponent";
 function SearchResultPage() {
   const variant = { product: "product", course: "course" };
   //   const products = [];
-  
+  const currentLocation = useLocation().search;
+  const queryParams = new URLSearchParams(currentLocation);
+  const query = queryParams.get('name');
+  console.log(query)
   return (
     <Container
       maxWidth={false}
@@ -35,6 +38,7 @@ function SearchResultPage() {
       <SearchBar
         backDrop={"primary"}
         searchLabel={"Learn Smarter, Learn Faster. AgTeach"}
+        defaultSearchString={query}
       />
       <Box sx={{ mx: { xs: "5px", sm: 0 } }}>
         <Typography
