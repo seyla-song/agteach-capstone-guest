@@ -14,7 +14,7 @@ export default function ProductWishlist({ data }) {
     <Stack gap={3}>
       <Stack gap>
         <Typography variant="h4">My product save for later</Typography>
-        <Typography variant="bsr">Found ({data.length}) Products</Typography>
+        <Typography variant="bsr">Found ({courses.length}) Products</Typography>
       </Stack>
 {/* component View More */}
       <ViewMore
