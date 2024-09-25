@@ -5,7 +5,7 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 
 export default function CustomCard({ dataObj, variant, showDelete, onDelete }) {
   const cardVariant = () => {
-    switch (variant) {
+    switch (variant) { 
       case 'product':
         return <ProductCard dataObj={dataObj} showDelete={showDelete} onDelete={onDelete} />;
       default:

@@ -4,8 +4,6 @@ import { useState } from 'react';
 import CustomCard from '../CustomCard';
 import ViewMore from '../ViewMore';
 
-
-
 export default function CourseWishlist({ data }) {
   const [courses, setCourses] = useState(data);
 
