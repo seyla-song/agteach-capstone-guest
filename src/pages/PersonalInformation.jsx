@@ -29,7 +29,7 @@ export default function PersonalInfoForm() {
       phone: "",
       address: "",
       city: "",
-      imageUrl: "",
+      imageUrl: "https://placehold.co/600x400/png",
     },
   });
   const navigate = useNavigate();
