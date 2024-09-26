@@ -17,7 +17,7 @@ function FilterByOther({ filterByPrice, handleFilterByPriceChange, filterByRunti
                       onChange={handleFilterByPriceChange}
                     />}
           />
-          {context === 'searchResultPage' && 
+          {context === 'course' && 
             <Fragment>
               <CustomFormController
                 label="Long course(up to 10 hours)"

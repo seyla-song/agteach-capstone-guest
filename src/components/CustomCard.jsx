@@ -27,7 +27,7 @@ const ProductCard = ({ dataObj, showDelete, onDelete }) => {
       <Box
         width="100%"
         component="img"
-        src={dataObj.image}
+        src={dataObj.imageUrl}
         alt={dataObj.name}
       />
       <Stack 
@@ -36,7 +36,7 @@ const ProductCard = ({ dataObj, showDelete, onDelete }) => {
         alignItems="flex-start"
       >
         <Typography variant="bmdmd">{dataObj.name}</Typography>
-        <Typography variant="bsr">{dataObj.price}</Typography>
+        <Typography variant="bsr">${dataObj.price}</Typography>
         {showDelete && (
           <IconButton 
             sx={{ color: 'red.main' }} 
@@ -62,7 +62,7 @@ const CourseCard = ({ dataObj, showDelete, onDelete }) => {
       <Box
         width="100%"
         component="img"
-        src={dataObj.image}
+        src={dataObj.imageUrl}
         alt={dataObj.name}
       />
       <Box

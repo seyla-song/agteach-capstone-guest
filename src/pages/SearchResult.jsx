@@ -11,68 +11,78 @@ import {
 } from "@mui/material";
 import FilterByOther from "../components/SearchResult/FilterByOther";
 import SearchList from "../components/SearchResult/SearchList";
-import { products } from "../utils/carouselDummy";
 import SearchBar from "../components/SearchBarComponent";
 import { useState, useEffect } from "react";
+import { useGetAllProductQuery } from '../services/api/productApi'
 
 function SearchResultPage() {
-  const variant = { product: "product", course: "course" };
-  //   const products = [];
   const currentLocation = useLocation().search;
   const queryParams = new URLSearchParams(currentLocation);
   const query = queryParams.get('name');
+
+  const { data, isLoading, isError, isSuccess, error } = useGetAllProductQuery(query);
 
   const [category, setCategory] = useState('product');
   const [sortBy, setSortBy] = useState('newest');
   const [filterByPrice, setFilterByPrice] = useState(false);
   const [filterByRuntime, setFilterByRuntime] = useState('none');
+  const [rawData, setRawData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 
-  const handleCategorychange = (state) => {
-    if (state === category) return;
-    setCategory(state);
+  const handleCategoryChange = (state) => {
+    if (state !== category) setCategory(state);
   };
 
   const handleSortByChange = (state) => {
-    console.log(state)
-    if (state === sortBy) return;
-    setSortBy(state);
+    if (state !== sortBy) setSortBy(state);
   };
 
   const handleFilterByPriceChange = () => {
-    setFilterByPrice((state) => !state);
+    setFilterByPrice(prev => !prev);
   };
 
   const handleFilterByRuntimeChange = (state) => {
     if (state === filterByRuntime) setFilterByRuntime('none');
-    else if (state === 'long') setFilterByRuntime('long');
-    else if (state === 'short') setFilterByRuntime('short')
+    else setFilterByRuntime(state);
   };
 
-
-  // Effect to filter and sort data whenever category, sortBy, or filterBy changes
   useEffect(() => {
+    if (data) {
+      setRawData(data.data || []);
+    }
+  }, [data]);
 
-    let filteredProducts = []
-
+  useEffect(() => {
+    let rawDataToFilter = [...rawData]; 
+    
     // Sort products based on sortBy selection
     if (sortBy === 'newest') {
-      filteredProducts = filteredProducts.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sorting by date
+      rawDataToFilter.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Assuming sorting by 'createdAt' for newest
     } else if (sortBy === 'oldest') {
-      filteredProducts.sort((a, b) => new Date(a.date) - new Date(b.date));
-    };
+      rawDataToFilter.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+    } else if (sortBy === 'alphabet') {
+      rawDataToFilter.sort((a, b) => a.name.localeCompare(b.name));
+    } 
 
-    // Filter by price or other criteria based on filterBy
-    // if (filterBy === 'lth') {
-    //   filteredProducts.sort((a, b) => a.price - b.price); // Low to High
-    // } else if (filterBy === 'htl') {
-    //   filteredProducts.sort((a, b) => b.price - a.price); // High to Low
-    // }
-    setTimeout(() => {
-      console.log(filterByRuntime);
-    }, 2000);
-    // Update the filtered data state
-  }, [category, sortBy, filterByPrice, filterByRuntime]);
+    // Filter by price
+    if (filterByPrice) {
+      rawDataToFilter.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+    }
+
+    // Filter by runtime if applicable
+    if (category === 'course') {
+      if (filterByRuntime === 'long') {
+        rawDataToFilter.sort((a, b) => b.len - a.len);
+      } else if (filterByRuntime === 'short') {
+        rawDataToFilter.sort((a, b) => a.len - b.len);
+      }
+    }
+
+    setFilteredData(rawDataToFilter);
+  }, [category, sortBy, filterByPrice, filterByRuntime, rawData]);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Error: {error.message}</p>;
 
   return (
     <Container
@@ -115,28 +125,28 @@ function SearchResultPage() {
               gap={{ xs: 1, sm: 4 }}
               sx={{
                 "& > *": {
-                  borderRight: { xs: "1px solid lightgrey", sm: "none" }, // Add right border to each item
+                  borderRight: { xs: "1px solid lightgrey", sm: "none" },
                 },
                 "& > *:last-child": {
-                  borderRight: "none", // Remove border from the last item
+                  borderRight: "none",
                 },
               }}
             >
-              <CategoryFilter category={category} handleChange={handleCategorychange}/>
+              <CategoryFilter category={category} handleChange={handleCategoryChange} />
               <Divider sx={{ display: { xs: "none", sm: "block" } }} />
               <SortByFilter sortBy={sortBy} handleChange={handleSortByChange} />
               <Divider sx={{ display: { xs: "none", sm: "block" } }} />
-              <FilterByOther 
-                filterByPrice={filterByPrice} 
-                handleFilterByPriceChange={handleFilterByPriceChange} 
+              <FilterByOther
+                filterByPrice={filterByPrice}
+                handleFilterByPriceChange={handleFilterByPriceChange}
                 filterByRuntime={filterByRuntime}
                 handleFilterByRuntimeChange={handleFilterByRuntimeChange}
-                context={'searchResultPage'}
-                />
+                context={category}
+              />
             </Stack>
           </Grid>
           <Grid size={{ xs: 12, sm: 8 }} sx={{ width: "100%" }}>
-            <SearchList dataObj={products} cardVariant={variant.product} />
+            <SearchList dataObj={filteredData} cardVariant={category} />
           </Grid>
         </Grid>
       </Box>
