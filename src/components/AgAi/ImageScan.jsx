@@ -51,12 +51,12 @@ export const ImageScan = () => {
    * @returns {Function} A cleanup function.
    */
   const onSubmit = async (data) => {
+    setScan(true);
     const formData = new FormData();
     formData.append('image', data.file[0]);
 
     try {
-      const res = await predictImage(formData);
-      setScan(true);
+      const res = await predictImage(formData).unwrap();
 
       if (isError) {
         throw new Error('Network response was not ok');
@@ -64,10 +64,8 @@ export const ImageScan = () => {
 
       if (!isLoading) {
         setScan(false);
-        setData(plantDiseaseInfo);
       }
-
-      console.log(res);
+      setData(res.data);
     } catch (err) {
       console.error(err);
     }
@@ -184,38 +182,9 @@ export const ImageScan = () => {
           direction="row"
         >
           <Typography variant="bxsr">@Analyzing</Typography>
-          <Box
-            width={100}
-            border="none"
-            component="iframe"
-            src="https://lottie.host/embed/d0c33b28-8b32-4889-b1af-d4966e850a65/j92NFQCzgA.json"
-          />
         </Stack>
       )}
-      {data && <DiseaseInfoComponent data={plantDiseaseInfo} />}
+      {data && <DiseaseInfoComponent data={data} />}
     </Stack>
   );
-};
-
-const plantDiseaseInfo = {
-  plant: 'Brandywine Tomato',
-  problem: {
-    title: 'Problem',
-    details: ['Late Blight (Phytophthora infestans)'],
-  },
-  symptoms: {
-    title: 'Symptoms',
-    details: [
-      'Irregular, water-soaked spots on leaves and stems that turn brown and necrotic.',
-      'Fruits may develop dark, sunken lesions.',
-    ],
-  },
-  cureManagement: {
-    title: 'Cure/Management',
-    details: [
-      'Resistant Varieties: Use late blight-resistant varieties if available.',
-      'Fungicides: Apply metalaxyl or mefenoxam-based fungicides as a preventative measure.',
-      'Cultural Control: Remove and destroy infected plants and maintain good air circulation. Avoid overhead watering.',
-    ],
-  },
 };
