@@ -28,14 +28,18 @@ function SearchResultPage() {
   const [filteredData, setFilteredData] = useState([]);
 
   const handleCategorychange = (state) => {
+    if (state === category) return;
     setCategory(state);
   };
 
   const handleSortByChange = (state) => {
+    console.log(state)
+    if (state === sortBy) return;
     setSortBy(state);
   };
 
   const handleFilterByChange = (state) => {
+    if (state === filterBy) return;
     setFilterBy(state);
   };
 
