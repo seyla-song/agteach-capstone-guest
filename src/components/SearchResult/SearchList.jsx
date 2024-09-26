@@ -13,7 +13,7 @@ function SearchList({ dataObj, cardVariant, limit, handleLimitChange }) {
           </Grid>
         ))}
       </Grid>
-      {dataObj.length >= limit && <Button variant="outlined" fullWidth onClick={handleLimitChange}>View More</Button>}
+      {dataObj.length > limit && <Button variant="outlined" fullWidth onClick={handleLimitChange}>View More</Button>}
     </>
   );
 }
