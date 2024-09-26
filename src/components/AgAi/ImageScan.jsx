@@ -5,6 +5,7 @@ import ScanIcon from '@mui/icons-material/CenterFocusStrongOutlined';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { DiseaseInfoComponent } from './DiseaseInfoComponent';
+import { usePredictImageMutation } from '../../services/api/aiApi';
 
 /**
  * ImageScan component is a reusable component
@@ -22,6 +23,7 @@ export const ImageScan = () => {
   const { handleSubmit, watch, register, reset } = useForm();
   const [isScan, setScan] = useState(false);
   const [data, setData] = useState();
+  const [predictImage, { isLoading, isError }] = usePredictImageMutation();
 
   const selectedFile = watch('file');
 
@@ -49,34 +51,26 @@ export const ImageScan = () => {
    * @returns {Function} A cleanup function.
    */
   const onSubmit = async (data) => {
-    const formdata = new FormData();
-    formdata.append('image', data.file[0]);
+    const formData = new FormData();
+    formData.append('image', data.file[0]);
 
     try {
-      const response = await fetch('http://ai.agteach.site/', {
-        method: 'POST',
-        body: formdata, // Directly send the file if the backend supports it
-      });
+      const res = await predictImage(formData);
+      setScan(true);
 
-      if (!response.ok) {
+      if (isError) {
         throw new Error('Network response was not ok');
       }
 
-      const responseData = await response.json(); // Parse the JSON response
-      console.log(responseData);
+      if (!isLoading) {
+        setScan(false);
+        setData(plantDiseaseInfo);
+      }
+
+      console.log(res);
     } catch (err) {
       console.error(err);
     }
-
-    setScan(true);
-    // Simulate a delay for fetching data
-    const timer = setTimeout(() => {
-      setScan(false);
-      setData(plantDiseaseInfo);
-    }, 5000); // 2-second delay
-
-    // Cleanup the timer
-    return () => clearTimeout(timer);
   };
 
   const handleReset = () => {
