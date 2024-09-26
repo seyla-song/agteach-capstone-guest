@@ -22,10 +22,11 @@ function SearchResultPage() {
 
   const { data, isLoading, isError, isSuccess, error } = useGetAllProductQuery(query);
 
-  const [category, setCategory] = useState('product');
+  const [category, setCategory] = useState('course');
   const [sortBy, setSortBy] = useState('newest');
   const [filterByPrice, setFilterByPrice] = useState(false);
   const [filterByRuntime, setFilterByRuntime] = useState('none');
+  const [limit, setLimit] = useState(9)
   const [rawData, setRawData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 
@@ -46,15 +47,20 @@ function SearchResultPage() {
     else setFilterByRuntime(state);
   };
 
+  const handleLimitChange = () => {
+    setLimit(limit + 9);
+  };
+
   useEffect(() => {
     if (data) {
       setRawData(data.data || []);
     }
+    console.log(data)
   }, [data]);
 
   useEffect(() => {
     let rawDataToFilter = [...rawData]; 
-    
+
     // Sort products based on sortBy selection
     if (sortBy === 'newest') {
       rawDataToFilter.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Assuming sorting by 'createdAt' for newest
@@ -72,17 +78,26 @@ function SearchResultPage() {
     // Filter by runtime if applicable
     if (category === 'course') {
       if (filterByRuntime === 'long') {
-        rawDataToFilter.sort((a, b) => b.len - a.len);
+        rawDataToFilter.sort((a, b) => b.duration - a.duration);
       } else if (filterByRuntime === 'short') {
-        rawDataToFilter.sort((a, b) => a.len - b.len);
+        rawDataToFilter.sort((a, b) => a.duration - b.duration);
       }
     }
 
     setFilteredData(rawDataToFilter);
   }, [category, sortBy, filterByPrice, filterByRuntime, rawData]);
 
-  if (isLoading) return <p>Loading...</p>;
-  if (isError) return <p>Error: {error.message}</p>;
+  let content
+
+  if (isLoading) { 
+    content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Loading...</div>
+  }
+
+  else if (data.results === 0) content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>No results were found!</div>
+
+  else if (error) content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Something went wrong. please try again later!</div>
+
+  else if (data) content = <SearchList dataObj={filteredData} cardVariant={category} limit={limit} handleLimitChange={handleLimitChange}/>
 
   return (
     <Container
@@ -146,7 +161,7 @@ function SearchResultPage() {
             </Stack>
           </Grid>
           <Grid size={{ xs: 12, sm: 8 }} sx={{ width: "100%" }}>
-            <SearchList dataObj={filteredData} cardVariant={category} />
+            {content}
           </Grid>
         </Grid>
       </Box>

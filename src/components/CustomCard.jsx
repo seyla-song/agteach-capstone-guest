@@ -1,9 +1,11 @@
 import { Box, Stack, Typography, IconButton } from '@mui/material';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import { useNavigate } from 'react-router';
 
 
 
 export default function CustomCard({ dataObj, variant, showDelete, onDelete }) {
+
   const cardVariant = () => {
     switch (variant) {
       case 'product':
@@ -22,8 +24,10 @@ const ProductCard = ({ dataObj, showDelete, onDelete }) => {
     onDelete(dataObj.id);
   };
 
+  const navigate = useNavigate();
+
   return (
-    <Box pr>
+    <Box pr onClick={() => navigate(`/marketplace/${dataObj.productId}`)}>
       <Box
         width="100%"
         component="img"
@@ -57,8 +61,10 @@ const CourseCard = ({ dataObj, showDelete, onDelete }) => {
     onDelete(dataObj.id);
   };
 
+  const navigate = useNavigate();
+
   return (
-    <Box pr>
+    <Box pr onClick={() => navigate(`/courses/${dataObj.productId}`)}>
       <Box
         width="100%"
         component="img"
@@ -73,7 +79,7 @@ const CourseCard = ({ dataObj, showDelete, onDelete }) => {
       >
         <Stack>
           <Typography variant="bmdmd">{dataObj.name}</Typography>
-          <Typography variant="bsr">{dataObj.instructor}</Typography>
+          <Typography variant="bsr">${dataObj.price}</Typography>
         </Stack>
         <Box>
           {showDelete && (

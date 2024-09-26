@@ -21,7 +21,7 @@ export default function SearchBar({ backDrop, searchLabel, searchContext, defaul
 
   const handleSearchString = (e) => {
     setSearchString(e.target.value);
-  }
+  };
 
   const handleAutocompleteChange = (event, newValue) => {
     setSearchString(newValue || "");
@@ -29,10 +29,8 @@ export default function SearchBar({ backDrop, searchLabel, searchContext, defaul
 
   const handleStartSearch = (e) => {
     e.preventDefault();
-    if (searchString) {
-      navigate(`/${searchContext}?name=${searchString}`)
-    }
-  }
+    navigate(`/${searchContext}?name=${searchString}`)
+  };
 
   return (
     <Box
