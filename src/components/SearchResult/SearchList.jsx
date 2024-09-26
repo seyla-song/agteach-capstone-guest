@@ -1,6 +1,5 @@
-import { Box, Button, Grid2 as Grid, Stack } from "@mui/material";
+import { Button, Grid2 as Grid} from "@mui/material";
 import CustomCard from "../CustomCard";
-import { DataObject } from "@mui/icons-material";
 
 function SearchList({ dataObj, cardVariant, limit, handleLimitChange }) {
 

@@ -13,14 +13,16 @@ import FilterByOther from "../components/SearchResult/FilterByOther";
 import SearchList from "../components/SearchResult/SearchList";
 import SearchBar from "../components/SearchBarComponent";
 import { useState, useEffect } from "react";
-import { useGetAllProductQuery } from '../services/api/productApi'
+import { useSearchProductQuery } from '../services/api/productApi'
+import { useSearchCourseQuery } from "../services/api/courseApi";
 
 function SearchResultPage() {
   const currentLocation = useLocation().search;
   const queryParams = new URLSearchParams(currentLocation);
   const query = queryParams.get('name');
 
-  const { data, isLoading, isError, isSuccess, error } = useGetAllProductQuery(query);
+  const { data: courseData, isLoading: isCourseLoading, isError: isCourseError } = useSearchCourseQuery(query);
+  const { data: productData, isLoading: isProductLoading, isError: isProductError } = useSearchProductQuery(query);
 
   const [category, setCategory] = useState('course');
   const [sortBy, setSortBy] = useState('newest');
@@ -52,11 +54,19 @@ function SearchResultPage() {
   };
 
   useEffect(() => {
-    if (data) {
-      setRawData(data.data || []);
+    if (category === 'course') {
+      if (courseData) {
+        setRawData(courseData.data || []);
+        console.log(courseData)
+      }
+    } else if (category === 'product') {
+      if (productData) {
+        setRawData(productData.data || [])
+      }
     }
-    console.log(data)
-  }, [data]);
+
+    console.log(courseData)
+  }, [courseData, category]);
 
   useEffect(() => {
     let rawDataToFilter = [...rawData]; 
@@ -89,15 +99,24 @@ function SearchResultPage() {
 
   let content
 
-  if (isLoading) { 
-    content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Loading...</div>
+  if (category === 'course') { 
+    if (isCourseLoading) {
+      content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Loading...</div>
+    }
+    else if (courseData.results === 0) content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>No results were found!</div>
+    else if (isCourseError) content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Something went wrong. please try again later!</div>
+    else if (courseData) content = <SearchList dataObj={filteredData} cardVariant={category} limit={limit} handleLimitChange={handleLimitChange}/>
+
   }
 
-  else if (data.results === 0) content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>No results were found!</div>
-
-  else if (error) content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Something went wrong. please try again later!</div>
-
-  else if (data) content = <SearchList dataObj={filteredData} cardVariant={category} limit={limit} handleLimitChange={handleLimitChange}/>
+  if (category === 'product') {
+    if (isProductLoading) { 
+      content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Loading...</div>
+    }
+    else if (productData.results === 0) content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>No results were found!</div>
+    else if (isProductError) content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Something went wrong. please try again later!</div>
+    else if (productData) content = <SearchList dataObj={filteredData} cardVariant={category} limit={limit} handleLimitChange={handleLimitChange}/>  
+  }
 
   return (
     <Container
