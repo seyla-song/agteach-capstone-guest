@@ -22,9 +22,10 @@ function SearchResultPage() {
   const queryParams = new URLSearchParams(currentLocation);
   const query = queryParams.get('name');
 
-  const [category, setCategory] = useState('course');
+  const [category, setCategory] = useState('product');
   const [sortBy, setSortBy] = useState('newest');
-  const [filterBy, setFilterBy] = useState('lth');
+  const [filterByPrice, setFilterByPrice] = useState(false);
+  const [filterByRuntime, setFilterByRuntime] = useState('none');
   const [filteredData, setFilteredData] = useState([]);
 
   const handleCategorychange = (state) => {
@@ -38,35 +39,40 @@ function SearchResultPage() {
     setSortBy(state);
   };
 
-  const handleFilterByChange = (state) => {
-    if (state === filterBy) return;
-    setFilterBy(state);
+  const handleFilterByPriceChange = () => {
+    setFilterByPrice((state) => !state);
   };
+
+  const handleFilterByRuntimeChange = (state) => {
+    if (state === filterByRuntime) setFilterByRuntime('none');
+    else if (state === 'long') setFilterByRuntime('long');
+    else if (state === 'short') setFilterByRuntime('short')
+  };
+
 
   // Effect to filter and sort data whenever category, sortBy, or filterBy changes
   useEffect(() => {
-    // Filter products by category
-    let filteredProducts = products.filter((item) => {
-      return item.type === category; // Assuming your product object has a 'type' key
-    });
+
+    let filteredProducts = []
 
     // Sort products based on sortBy selection
     if (sortBy === 'newest') {
-      filteredProducts.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sorting by date
+      filteredProducts = filteredProducts.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sorting by date
     } else if (sortBy === 'oldest') {
       filteredProducts.sort((a, b) => new Date(a.date) - new Date(b.date));
-    }
+    };
 
     // Filter by price or other criteria based on filterBy
-    if (filterBy === 'lth') {
-      filteredProducts.sort((a, b) => a.price - b.price); // Low to High
-    } else if (filterBy === 'htl') {
-      filteredProducts.sort((a, b) => b.price - a.price); // High to Low
-    }
-
+    // if (filterBy === 'lth') {
+    //   filteredProducts.sort((a, b) => a.price - b.price); // Low to High
+    // } else if (filterBy === 'htl') {
+    //   filteredProducts.sort((a, b) => b.price - a.price); // High to Low
+    // }
+    setTimeout(() => {
+      console.log(filterByRuntime);
+    }, 2000);
     // Update the filtered data state
-    setFilteredData(filteredProducts);
-  }, [category, sortBy, filterBy]);
+  }, [category, sortBy, filterByPrice, filterByRuntime]);
 
   return (
     <Container
@@ -120,7 +126,13 @@ function SearchResultPage() {
               <Divider sx={{ display: { xs: "none", sm: "block" } }} />
               <SortByFilter sortBy={sortBy} handleChange={handleSortByChange} />
               <Divider sx={{ display: { xs: "none", sm: "block" } }} />
-              <FilterByOther filterBy={filterBy} handleChange={handleFilterByChange}/>
+              <FilterByOther 
+                filterByPrice={filterByPrice} 
+                handleFilterByPriceChange={handleFilterByPriceChange} 
+                filterByRuntime={filterByRuntime}
+                handleFilterByRuntimeChange={handleFilterByRuntimeChange}
+                context={'searchResultPage'}
+                />
             </Stack>
           </Grid>
           <Grid size={{ xs: 12, sm: 8 }} sx={{ width: "100%" }}>
