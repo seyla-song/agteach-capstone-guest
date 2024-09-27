@@ -58,7 +58,7 @@ export default function MarketPlace() {
     if (productData) {
       setRawData(productData.data);
     };
-  }, [productData]);
+  }, [productData, query]);
 
   useEffect(() => {
     console.clear()
@@ -97,6 +97,15 @@ export default function MarketPlace() {
 
     setFilteredData(dataToFilter)
   }, [rawData, category, sortBy, filterByPrice, limit]);
+
+  let content;
+
+  if (isProductLoading) { 
+    content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Loading...</div>
+  }
+  else if (productData.results === 0) content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>No results were found!</div>
+  else if (isProductError) content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Something went wrong. please try again later!</div>
+  else if (productData) content = <SearchList dataObj={filteredData} cardVariant={'product'} limit={limit} handleLimitChange={handleLimitChange}/>  
   
   return (
     <>
@@ -149,7 +158,7 @@ export default function MarketPlace() {
               <SearchBar backDrop={false} searchContext={'marketplace'} defaultSearchString={query}/>
             </Box>
             <Typography sx={{ px: 2 }}>{`Found (${filteredData.length}) items`}</Typography>
-            <SearchList dataObj={filteredData} cardVariant={'product'} limit={limit} handleLimitChange={handleLimitChange}/>
+            {content}
           </Grid>
         </Grid>
       </Container>
