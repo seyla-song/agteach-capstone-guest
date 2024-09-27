@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const aiApi = createApi({
   reducerPath: 'aiApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://ai.agteach.site',
+    baseUrl: 'https://ai.agteach.site',
   }),
   endpoints: (builder) => ({
     predictImage: builder.mutation({
