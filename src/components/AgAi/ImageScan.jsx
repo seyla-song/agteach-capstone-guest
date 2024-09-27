@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { DiseaseInfoComponent } from './DiseaseInfoComponent';
 import { usePredictImageMutation } from '../../services/api/aiApi';
-
+import { convertToJPG } from '../../utils/imageUtils';
 
 /**
  * ImageScan component is a reusable component
@@ -53,8 +53,11 @@ export const ImageScan = () => {
    */
   const onSubmit = async (data) => {
     setScan(true);
+
+    const file = data.file[0]
+    const resizeFile = await convertToJPG(file)
     const formData = new FormData();
-    formData.append('image', data.file[0]);
+    formData.append('image', resizeFile);
 
     try {
       const res = await predictImage(formData).unwrap();
