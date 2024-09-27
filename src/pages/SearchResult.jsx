@@ -13,7 +13,7 @@ import FilterByOther from "../components/SearchResult/FilterByOther";
 import SearchList from "../components/SearchResult/SearchList";
 import SearchBar from "../components/SearchBarComponent";
 import { useState, useEffect } from "react";
-import { useSearchProductQuery } from '../services/api/productApi'
+import { useSearchProductQuery } from '../services/api/productApi';
 import { useSearchCourseQuery } from "../services/api/courseApi";
 
 function SearchResultPage() {
@@ -28,7 +28,7 @@ function SearchResultPage() {
   const [sortBy, setSortBy] = useState('newest');
   const [filterByPrice, setFilterByPrice] = useState(false);
   const [filterByRuntime, setFilterByRuntime] = useState('none');
-  const [limit, setLimit] = useState(9)
+  const [limit, setLimit] = useState(9);
   const [rawData, setRawData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 
@@ -57,15 +57,14 @@ function SearchResultPage() {
     if (category === 'course') {
       if (courseData) {
         setRawData(courseData.data || []);
-        console.log(courseData)
-      }
+        console.log(courseData);
+      };
     } else if (category === 'product') {
       if (productData) {
-        setRawData(productData.data || [])
-      }
-    }
+        setRawData(productData.data || []);
+      };
+    };
 
-    console.log(courseData)
   }, [courseData, category]);
 
   useEffect(() => {
@@ -97,7 +96,7 @@ function SearchResultPage() {
     setFilteredData(rawDataToFilter);
   }, [category, sortBy, filterByPrice, filterByRuntime, rawData]);
 
-  let content
+  let content;
 
   if (category === 'course') { 
     if (isCourseLoading) {

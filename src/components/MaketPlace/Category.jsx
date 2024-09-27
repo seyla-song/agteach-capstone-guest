@@ -22,7 +22,7 @@ const categoryStyle1 = {
     border: theme => `2px solid ${theme.palette.primary.main}`,
   },
 };
-function Category() {
+function Category({ category, handleChange }) {
   return (
     <Box sx={{ pr: 1 }}>
       <Typography sx={{ typography: { xs: "bsmr", sm: "blgsm" } }}>
@@ -35,26 +35,26 @@ function Category() {
         <Chip
           variant="contained"
           label="Plant"
-          sx={categoryStyle1}
-          onClick={() => console.log("clicked")}
+          sx={category === 'plant' ? categoryStyle1 : categoryStyle}
+          onClick={() => handleChange('plant')}
         />
         <Chip
           variant="contained"
           label="Fertilizer"
-          sx={categoryStyle}
-          onClick={() => console.log("clicked")}
+          sx={category === 'fertilizer' ? categoryStyle1 : categoryStyle}
+          onClick={() => handleChange('fertilizer')}
         />
         <Chip
           variant="contained"
           label="Seed"
-          sx={categoryStyle}
-          onClick={() => console.log("clicked")}
+          sx={category === 'seed' ? categoryStyle1 : categoryStyle}
+          onClick={() => handleChange('seed')}
         />
         <Chip
           variant="contained"
           label="Tool"
-          sx={categoryStyle}
-          onClick={() => console.log("clicked")}
+          sx={category === 'tool' ? categoryStyle1 : categoryStyle}
+          onClick={() => handleChange('tool')}
         />
       </Box>
     </Box>

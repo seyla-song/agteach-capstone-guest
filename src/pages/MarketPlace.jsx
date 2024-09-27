@@ -6,12 +6,15 @@ import {
   Typography,
   Box,
 } from "@mui/material";
+import { useState, useEffect } from "react";
 import Category from "../components/MaketPlace/Category";
 import SortBy from "../components/MaketPlace/SortBy";
 import FilterBy from "../components/MaketPlace/FilterBy";
 import SearchBar from "../components/SearchBarComponent";
 import SearchList from "../components/MaketPlace/SearchList";
 import { products } from "../utils/carouselDummy";
+import { useLocation } from "react-router";
+import { useSearchProductQuery } from '../services/api/productApi'
 
 /**
  * A React functional component that renders a marketplace page.
@@ -23,7 +26,41 @@ import { products } from "../utils/carouselDummy";
  * @return {JSX.Element} The JSX element representing the marketplace page.
  */
 export default function MarketPlace() {
-  const variant = { product: "product", course: "course" };
+  const currentLocation = useLocation().search;
+  const queryParams = new URLSearchParams(currentLocation);
+  const query = queryParams.get('name') || '';
+  const { data: productData, isLoading: isProductLoading, isError: isProductError, error: productError } = useSearchProductQuery(query);
+
+  const [category, setCategory] = useState('plant');
+  const [sortBy, setSortBy] = useState('newest');
+  const [filterByPrice, setFilterByPrice] = useState(false);
+  const [limit, setLimit] = useState(9);
+  const [rawData, setRawData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+
+  const handleCategoryChange = (state) => {
+    if (state !== category) setCategory(state);
+  };
+
+  const handleSortByChange = (state) => {
+    if (state !== sortBy) setSortBy(state);
+  };
+
+  const handleFilterByPriceChange = () => {
+    setFilterByPrice(prev => !prev);
+  };
+
+  const handleLimitChange = () => {
+    setLimit(limit + 9);
+  };
+
+  useEffect(() => {
+    if (productData) {
+      setRawData(productData.data);
+    }
+    console.log('raw data: ',productData);
+  }, [productData]);
+  
   return (
     <>
       <Container
@@ -58,11 +95,11 @@ export default function MarketPlace() {
                 },
               }}
             >
-              <Category />
+              <Category category={category} handleChange={handleCategoryChange}/>
               <Divider sx={{ display: { xs: "none", sm: "block" } }} />
-              <SortBy />
+              <SortBy sortBy={sortBy} handleChange={handleSortByChange}/>
               <Divider sx={{ display: { xs: "none", sm: "block" } }} />
-              <FilterBy />
+              <FilterBy filterBy={filterByPrice} handleChange={handleFilterByPriceChange}/>
             </Stack>
           </Grid>
           <Grid
@@ -72,10 +109,10 @@ export default function MarketPlace() {
             sx={{ width: "100%", mt: { xs: "20px", sm: "0px" } }}
           >
             <Box sx={{ p: "0px 12px 12px 12px" }}>
-              <SearchBar backDrop={false} />
+              <SearchBar backDrop={false} searchContext={'marketplace'} defaultSearchString={query}/>
             </Box>
             <Typography sx={{ px: 2 }}>Found (200) items</Typography>
-            <SearchList dataObj={products} cardVariant={variant.product} />
+            <SearchList dataObj={rawData} cardVariant={'product'} limit={limit} handleLimitChange={handleLimitChange}/>
           </Grid>
         </Grid>
       </Container>
