@@ -63,19 +63,39 @@ export default function MarketPlace() {
   useEffect(() => {
     console.clear()
     let dataToFilter = [...rawData] || [];
-    dataToFilter.forEach(data => console.log(data))
+    dataToFilter.forEach(data => console.log(parseFloat(data.price)))
     // filter by categories
     if (category === 'plant') dataToFilter = dataToFilter.filter((product) => product.categoryId === 1);
     else if (category === 'fertilizer') dataToFilter = dataToFilter.filter((product) => product.categoryId === 2);
     else if (category === 'seed') dataToFilter = dataToFilter.filter((product) => product.categoryId === 3);
     else if (category === 'tool') dataToFilter = dataToFilter.filter((product) => product.categoryId === 4);
       
-    // sort by
-    if (sortBy === 'newest') dataToFilter.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-    else if (sortBy === 'oldest') dataToFilter.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-    // else if (sortBy === 'popularity') dataToFilter.sort((a, b) => a.popularity - b.popularity);
-    else if (sortBy === 'alphabet') dataToFilter.sort((a, b) => a.name.localeCompare(b.name));
+    // Sort by both date and price
+    dataToFilter.sort((a, b) => {
+      if (sortBy === 'newest') {
+        // Sort by date first (newest)
+        const dateDiff = new Date(b.createdAt) - new Date(a.createdAt);
+        if (dateDiff !== 0) return dateDiff;
+      } else if (sortBy === 'oldest') {
+        // Sort by date first (oldest)
+        const dateDiff = new Date(a.createdAt) - new Date(b.createdAt);
+        if (dateDiff !== 0) return dateDiff;
+      } else if (sortBy === 'alphabet') {
+        // Sort by name alphabetically
+        const nameDiff = a.name.localeCompare(b.name);
+        if (nameDiff !== 0) return nameDiff;
+      }
 
+      // If filterByPrice is active, sort by price after sorting by date/name
+      if (filterByPrice) {
+        const priceA = parseFloat(a.price) || 0;
+        const priceB = parseFloat(b.price) || 0;
+        return priceA - priceB; // Sort by lowest price
+      }
+
+      return 0; // If no price or date difference, keep original order
+    });
+    
     setFilteredData(dataToFilter)
   }, [rawData, category, sortBy, filterByPrice, limit]);
   
