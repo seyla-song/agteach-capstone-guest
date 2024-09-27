@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { DiseaseInfoComponent } from './DiseaseInfoComponent';
 import { usePredictImageMutation } from '../../services/api/aiApi';
 
+
 /**
  * ImageScan component is a reusable component
  * that renders a image upload form and a canvas
