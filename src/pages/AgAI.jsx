@@ -8,7 +8,7 @@ function AgAiPage() {
   const zipName = 'test_images.zip'; // Name the ZIP file for download
   return (
     <Container>
-      <Stack height="100vh" gap={5} mt={10}>
+      <Stack  gap={5} my={10}>
         <Stack>
           <Typography variant="h3">
             <Chip label="BETA" color="secondary" />
