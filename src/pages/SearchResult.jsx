@@ -70,28 +70,41 @@ function SearchResultPage() {
   useEffect(() => {
     let rawDataToFilter = [...rawData]; 
 
-    // Sort products based on sortBy selection
-    if (sortBy === 'newest') {
-      rawDataToFilter.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Assuming sorting by 'createdAt' for newest
-    } else if (sortBy === 'oldest') {
-      rawDataToFilter.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-    } else if (sortBy === 'alphabet') {
-      rawDataToFilter.sort((a, b) => a.name.localeCompare(b.name));
-    } 
+    // Sort by both date and price
+    rawDataToFilter.sort((a, b) => {
+      if (sortBy === 'newest') {
+        // Sort by date first (newest)
+        const dateDiff = new Date(b.createdAt) - new Date(a.createdAt);
+        if (dateDiff !== 0) return dateDiff;
+      } else if (sortBy === 'oldest') {
+        // Sort by date first (oldest)
+        const dateDiff = new Date(a.createdAt) - new Date(b.createdAt);
+        if (dateDiff !== 0) return dateDiff;
+      } else if (sortBy === 'alphabet') {
+        // Sort by name alphabetically
+        const nameDiff = a.name.localeCompare(b.name);
+        if (nameDiff !== 0) return nameDiff;
+      };
 
-    // Filter by price
-    if (filterByPrice) {
-      rawDataToFilter.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-    }
+      // If filterByPrice is active, sort by price after sorting by date/name
+      if (filterByPrice) {
+        const priceA = parseFloat(a.price) || 0;
+        const priceB = parseFloat(b.price) || 0;
+        return priceA - priceB; // Sort by lowest price
+      };
+      
+      // Filter by runtime if applicable
+      if (category === 'course') {
+        if (filterByRuntime === 'long') {
+          return b.duration - a.duration;
+        } else if (filterByRuntime === 'short') {
+          return a.duration - b.duration;
+        };
+      };
 
-    // Filter by runtime if applicable
-    if (category === 'course') {
-      if (filterByRuntime === 'long') {
-        rawDataToFilter.sort((a, b) => b.duration - a.duration);
-      } else if (filterByRuntime === 'short') {
-        rawDataToFilter.sort((a, b) => a.duration - b.duration);
-      }
-    }
+      return 0; // If no price or date difference, keep original order
+    });
+
 
     setFilteredData(rawDataToFilter);
   }, [category, sortBy, filterByPrice, filterByRuntime, rawData]);

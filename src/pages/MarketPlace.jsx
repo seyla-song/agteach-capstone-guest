@@ -63,7 +63,6 @@ export default function MarketPlace() {
   useEffect(() => {
     console.clear()
     let dataToFilter = [...rawData] || [];
-    dataToFilter.forEach(data => console.log(parseFloat(data.price)))
     // filter by categories
     if (category === 'plant') dataToFilter = dataToFilter.filter((product) => product.categoryId === 1);
     else if (category === 'fertilizer') dataToFilter = dataToFilter.filter((product) => product.categoryId === 2);
@@ -95,7 +94,7 @@ export default function MarketPlace() {
 
       return 0; // If no price or date difference, keep original order
     });
-    
+
     setFilteredData(dataToFilter)
   }, [rawData, category, sortBy, filterByPrice, limit]);
   
@@ -149,7 +148,7 @@ export default function MarketPlace() {
             <Box sx={{ p: "0px 12px 12px 12px" }}>
               <SearchBar backDrop={false} searchContext={'marketplace'} defaultSearchString={query}/>
             </Box>
-            <Typography sx={{ px: 2 }}>Found (200) items</Typography>
+            <Typography sx={{ px: 2 }}>{`Found (${filteredData.length}) items`}</Typography>
             <SearchList dataObj={filteredData} cardVariant={'product'} limit={limit} handleLimitChange={handleLimitChange}/>
           </Grid>
         </Grid>
