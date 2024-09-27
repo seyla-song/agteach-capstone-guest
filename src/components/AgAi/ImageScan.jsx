@@ -92,8 +92,8 @@ export const ImageScan = () => {
           {!selectedImageUrl && (
             <Stack alignItems="center">
               <ImageIcon sx={{ width: 200, height: 200 }} />
-              <Typography variant="bsr" color="initial">
-                Drag an image here or upload a file
+              <Typography variant="bxsr" color="dark.300">
+              Upload your image here .jpg 150 x 150
               </Typography>
             </Stack>
           )}
