@@ -8,7 +8,7 @@ function AgAiPage() {
   const zipName = 'test_images.zip'; // Name the ZIP file for download
   return (
     <Container>
-      <Stack  gap={5} my={10}>
+      <Stack gap={5} my={10}>
         <Stack>
           <Typography variant="h3">
             <Chip label="BETA" color="secondary" />
@@ -41,10 +41,13 @@ function AgAiPage() {
             </a>
             <Box component="br" /> - AgAI can make mistakes. This machine
             learning model works with a limited dataset, and the constrained
-            diversity of images from the PlantVillage dataset means it lacks
-            generalization. Consequently, the model can only predict 38 classes
-            of plants, distinguishing between healthy and diseased plants as
-            follows:
+            diversity of images from the{' '}
+            <a href="https://www.kaggle.com/datasets/abdallahalidev/plantvillage-dataset/data">
+              PlantVillage
+            </a>{` `}
+            dataset means it lacks generalization. Consequently, the model can
+            only predict 38 classes of plants, distinguishing between healthy
+            and diseased plants as follows:
             <ExpandableText
               initialLength={10}
               text="Apple Apple
