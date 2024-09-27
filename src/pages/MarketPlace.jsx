@@ -57,9 +57,27 @@ export default function MarketPlace() {
   useEffect(() => {
     if (productData) {
       setRawData(productData.data);
-    }
-    console.log('raw data: ',productData);
+    };
   }, [productData]);
+
+  useEffect(() => {
+    console.clear()
+    let dataToFilter = [...rawData] || [];
+    dataToFilter.forEach(data => console.log(data))
+    // filter by categories
+    if (category === 'plant') dataToFilter = dataToFilter.filter((product) => product.categoryId === 1);
+    else if (category === 'fertilizer') dataToFilter = dataToFilter.filter((product) => product.categoryId === 2);
+    else if (category === 'seed') dataToFilter = dataToFilter.filter((product) => product.categoryId === 3);
+    else if (category === 'tool') dataToFilter = dataToFilter.filter((product) => product.categoryId === 4);
+      
+    // sort by
+    if (sortBy === 'newest') dataToFilter.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    else if (sortBy === 'oldest') dataToFilter.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+    // else if (sortBy === 'popularity') dataToFilter.sort((a, b) => a.popularity - b.popularity);
+    else if (sortBy === 'alphabet') dataToFilter.sort((a, b) => a.name.localeCompare(b.name));
+
+    setFilteredData(dataToFilter)
+  }, [rawData, category, sortBy, filterByPrice, limit]);
   
   return (
     <>
@@ -112,7 +130,7 @@ export default function MarketPlace() {
               <SearchBar backDrop={false} searchContext={'marketplace'} defaultSearchString={query}/>
             </Box>
             <Typography sx={{ px: 2 }}>Found (200) items</Typography>
-            <SearchList dataObj={rawData} cardVariant={'product'} limit={limit} handleLimitChange={handleLimitChange}/>
+            <SearchList dataObj={filteredData} cardVariant={'product'} limit={limit} handleLimitChange={handleLimitChange}/>
           </Grid>
         </Grid>
       </Container>
