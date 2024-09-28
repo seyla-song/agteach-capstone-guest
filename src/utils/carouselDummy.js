@@ -8,32 +8,32 @@ export const products = [
     {
       name: "Natural green pest spray - 100% No chemical",
       price: "$10",
-      image: pestSpray,
+      imageUrl: pestSpray,
     },
     {
       name: "Gardening Material Starter Pack for home grower",
       price: "$15",
-      image: starterKit1,
+      imageUrl: starterKit1,
     },
     {
       name: "Homemade organic fertiliser 100% Natural",
       price: "$20",
-      image: fertiliser,
+      imageUrl: fertiliser,
     },
     {
       name: "Gardening Material Starter Pack for home grower",
       price: "$25",
-      image: starterKit2,
+      imageUrl: starterKit2,
     },
     {
       name: "Organic Farm fresh pumpkin 100% chemical free",
       price: "$30",
-      image: pumpkin,
+      imageUrl: pumpkin,
     },
     {
       name: "Product 6",
       price: "$35",
-      image: "https://via.placeholder.com/150",
+      imageUrl: "https://via.placeholder.com/150",
     },
     {
       name: "Product 7",
@@ -51,42 +51,42 @@ export const courses = [
   {
     name: "Indoor Plant Propagation Techniques",
     instructor: "Emily Greene",
-    image: "https://via.placeholder.com/150",
+    thumbnailUrl: "https://via.placeholder.com/150",
   },
   {
     name: "Vertical Gardening for Urban Spaces",
     instructor: "Emily Greene",
-    image: "https://via.placeholder.com/150",
+    thumbnailUrl: "https://via.placeholder.com/150",
   },
   {
     name: "Organic Indoor Plant Care and Maintenance",
     instructor: "Emily Greene",
-    image: "https://via.placeholder.com/150",
+    thumbnailUrl: "https://via.placeholder.com/150",
   },
   {
     name: "Advanced Indoor Plant Lighting Strategies",
     instructor: "Emily Greene",
-    image: "https://via.placeholder.com/150",
+    thumbnailUrl: "https://via.placeholder.com/150",
   },
   {
     name: "Product 5",
     instructor: "Emily Greene",
-    image: "https://via.placeholder.com/150",
+    thumbnailUrl: "https://via.placeholder.com/150",
   },
   {
     name: "Product 6",
     instructor: "Emily Greene",
-    image: "https://via.placeholder.com/150",
+    thumbnailUrl: "https://via.placeholder.com/150",
   },
   {
     name: "Product 7",
     instructor: "Emily Greene",
-    image: "https://via.placeholder.com/150",
+    thumbnailUrl: "https://via.placeholder.com/150",
   },
   {
     name: "Product 8",
     instructor: "Emily Greene",
-    image: "https://via.placeholder.com/150",
+    thumbnailUrl: "https://via.placeholder.com/150",
   },
 ];
 
