@@ -1,7 +1,7 @@
 import { Box, Checkbox, FormGroup, Stack, Typography } from "@mui/material";
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-function FilterByOther() {
+function FilterByOther({filterBy, handleChange}) {
   return (
     <Box>
       <Typography sx={{ typography: { xs: "body2", sm: "h6" } }}>
@@ -11,7 +11,9 @@ function FilterByOther() {
         <FormGroup>
           <FormControlLabel 
             label="Price Low to High"
-            control={<Checkbox defaultChecked />}
+            control={<Checkbox checked={filterBy} 
+            onChange={handleChange}
+          />}
           />
         </FormGroup>
       </Stack>

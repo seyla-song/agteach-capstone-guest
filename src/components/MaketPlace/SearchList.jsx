@@ -1,7 +1,7 @@
 import { Box, Button, Grid2 as Grid, Stack } from "@mui/material";
 import CustomCard from "../CustomCard";
 
-function SearchList({ dataObj, cardVariant }) {
+function SearchList({ dataObj, cardVariant, limit, handleLimitChange }) {
   return (
     <>
       <Box width="100%" p={2}>
@@ -12,9 +12,7 @@ function SearchList({ dataObj, cardVariant }) {
             </Grid>
           ))}
         </Grid>
-        <Button variant="outlined" paddingX={2} fullWidth>
-          View More
-        </Button>
+        {dataObj.lenght > limit && <Button variant="outlined" paddingX={2} fullWidth onClick={handleLimitChange}>View More</Button>}
       </Box>
     </>
   );

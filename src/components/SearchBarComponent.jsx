@@ -90,7 +90,6 @@ export default function SearchBar({ backDrop, searchLabel, searchContext, defaul
               id="search-bar"
               sx={{ width: "100%", height: "40px", mx: "auto" }}
               options={data}
-              autoHighlight
               value={searchString}
               onInputChange={handleAutocompleteChange}
               getOptionLabel={(option) => {
