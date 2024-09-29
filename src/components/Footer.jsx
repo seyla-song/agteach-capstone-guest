@@ -7,7 +7,7 @@ import {
   AppBar,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import Logo from "../assets/logo.png";
+import Logo from "../assets/agteach_logo.svg";
 import theme from "../theme/theme";
 import { teachAgtechURL } from "../utils/globalURL";
 

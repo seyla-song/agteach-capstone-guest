@@ -23,7 +23,7 @@ import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { LogoutOutlined } from "@mui/icons-material";
 import GuestProfilePicture from "../assets/profile-pic.jpg";
-import Logo from "../assets/logo.png";
+import Logo from "../assets/agteach_logo.svg";
 import { teachAgtechURL } from "../utils/globalURL";
 import { useLogoutMutation } from "../services/api/authApi";
 import { useNavigate } from "react-router-dom";
@@ -62,8 +62,6 @@ function Navigation() {
     console.log("guestData", guestData);
     data = guestData.data;
     console.log("data", data);
-    
-    
   }
 
   const handleClick = (event) => {

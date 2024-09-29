@@ -7,42 +7,42 @@ import pumpkin from '../assets/ProductDetail/pumpkin.png'
 export const products = [
     {
       name: "Natural green pest spray - 100% No chemical",
-      price: "$10",
+      price: "10",
       imageUrl: pestSpray,
     },
     {
       name: "Gardening Material Starter Pack for home grower",
-      price: "$15",
+      price: "15",
       imageUrl: starterKit1,
     },
     {
       name: "Homemade organic fertiliser 100% Natural",
-      price: "$20",
+      price: "20",
       imageUrl: fertiliser,
     },
     {
       name: "Gardening Material Starter Pack for home grower",
-      price: "$25",
+      price: "25",
       imageUrl: starterKit2,
     },
     {
       name: "Organic Farm fresh pumpkin 100% chemical free",
-      price: "$30",
+      price: "30",
       imageUrl: pumpkin,
     },
     {
       name: "Product 6",
-      price: "$35",
+      price: "35",
       imageUrl: "https://via.placeholder.com/150",
     },
     {
       name: "Product 7",
-      price: "$40",
+      price: "40",
       image: "https://via.placeholder.com/150",
     },
     {
       name: "Product 8",
-      price: "$45",
+      price: "45",
       image: "https://via.placeholder.com/150",
     },
   ];

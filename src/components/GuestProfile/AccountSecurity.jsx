@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Stack, Typography, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useGetUserInfoQuery } from "../../services/api/userApi"; // Import the isLogin query
+import { useGetUserInfoQuery } from "../../services/api/userApi"; 
 
 /**
  * @function AccountSecurity
@@ -16,7 +16,7 @@ function AccountSecurity() {
 
   useEffect(() => {
     if (data) {
-      const customerData = data.data.customers;
+      const customerData = data.data.customer;
       const { email } = customerData;
       console.log(customerData);
       setValue("email", email || "");
@@ -36,7 +36,7 @@ function AccountSecurity() {
         <Typography variant="h4">Account Security</Typography>
         <TextField
           label="Email"
-          readOnly
+          disabled
           placeholder="e.g. janeagteach@gmail.com"
           value={watch("email")}
         />

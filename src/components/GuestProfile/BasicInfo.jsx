@@ -31,13 +31,15 @@ function BasicInfo() {
     },
   });
 
-  const { data: oneData, isLoading } = useGetUserInfoQuery();
+  const { data , isLoading } = useGetUserInfoQuery();
   const [updateInfo, { isLoading: isLoadingInfo }] = useUpdateInfoMutation();
   const [selectedCity, setSelectedCity] = useState(null);
   useEffect(() => {
-    if (oneData) {
-      const customerData = oneData.data.customers
-      const { firstName, lastName, phone, location_id, address } = customerData;
+    if (data) {
+      const customerData = data.data.customer
+      console.log("customerData", customerData);
+      
+      const { firstName, lastName, phone, location_id, address, dataOfBirth } = customerData;
       setValue("firstName", firstName || "");
       setValue("lastName", lastName || "");
       setValue("phone", phone || "");
@@ -45,7 +47,7 @@ function BasicInfo() {
       setValue("address", address || "");
       setSelectedCity(city.find((c) => c.label === location_id) || null); // Set city autocomplete
     }
-  }, [oneData, setValue]);
+  }, [data, setValue]);
 
   const onSubmit = async (formData) => {
     console.log("Form Data Submitted:", formData);

@@ -8,6 +8,7 @@ import {
   Typography,
   Avatar,
 } from "@mui/material";
+import { useGetUserInfoQuery } from "../../services/api/userApi";
 
 /**
  * ProfilePhoto component is a reusable component
@@ -22,14 +23,18 @@ import {
  */
 function ProfilePhoto() {
   const [profileImage, setProfileImage] = useState(GuestProfileImg);
+  const {data} = useGetUserInfoQuery()
 
   // Load image from localStorage when the component mounts
   useEffect(() => {
-    const savedImage = localStorage.getItem("profileImage");
-    if (savedImage) {
-      setProfileImage(savedImage);
+    if (data) {
+      const customerData = data.data.customer;
+      const { imageUrl } = customerData;
+      if (imageUrl) {
+        setProfileImage(imageUrl);
+      }
     }
-  }, []);
+  }, [data]);
 
   // Function to handle image upload
   const handleImageUpload = (event) => {
@@ -93,7 +98,8 @@ function ProfilePhoto() {
             type="file"
             id="myfile"
             name="myfile"
-            onChange={handleImageUpload} // Handle file input change
+            
+            onChange={handleImageUpload} 
             sx={{ flexGrow: 1, width: "auto" }}
           />
           <Button variant="contained" sx={{ px: 10, py: 2 }}>

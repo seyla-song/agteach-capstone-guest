@@ -5,6 +5,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const userApi = createApi({
   reducerPath: "userApi",
+  tagTypes: ["User"],
   baseQuery: fetchBaseQuery({
     baseUrl: "https://api.agteach.site",
     credentials: "include",
@@ -16,6 +17,7 @@ export const userApi = createApi({
         method: "PATCH",
         body: passwordData,
       }),
+      invalidatesTags: ["User"],
     }),
 
     updateInfo: builder.mutation({
@@ -24,16 +26,21 @@ export const userApi = createApi({
         method: "PATCH",
         body: infoData,
       }),
+      invalidatesTags: ["User"],
     }),
 
     getUserInfo: builder.query({
-
       query: () => ({
         url: "/api/customer/getMe/additionalInfo",
         method: "GET",
       }),
+      providesTags: ["User"],
     }),
   }),
 });
 
-export const { useUpdatePasswordMutation, useGetUserInfoQuery, useUpdateInfoMutation } = userApi;
+export const {
+  useUpdatePasswordMutation,
+  useGetUserInfoQuery,
+  useUpdateInfoMutation,
+} = userApi;

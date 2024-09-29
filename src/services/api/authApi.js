@@ -1,12 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-//  https://api.agteach.site
-//  http://localhost:3001
+
+// //  https://api.agteach.site
+// //  http://localhost:3001
+
 export const apiSlice = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://api.agteach.site",
     credentials: "include",
   }),
+  tagTypes: ["Auth"], 
   endpoints: (builder) => ({
     signup: builder.mutation({
       query: (signupData) => ({
@@ -21,7 +24,9 @@ export const apiSlice = createApi({
         url: "/api/users/login",
         method: "POST",
         body: loginData,
+        headers: { "X-Frontend-URL": window.location },
       }),
+      invalidatesTags: ["Auth"], 
     }),
 
     logout: builder.mutation({
@@ -29,6 +34,7 @@ export const apiSlice = createApi({
         url: "/api/users/logout",
         method: "POST",
       }),
+      invalidatesTags: ["Auth"],
     }),
 
     forgotPassword: builder.mutation({
@@ -45,6 +51,7 @@ export const apiSlice = createApi({
         method: "PATCH",
         body: resetData.body,
       }),
+      invalidatesTags: ["Auth"], 
     }),
 
     addPersonalInfo: builder.mutation({
@@ -76,6 +83,7 @@ export const apiSlice = createApi({
         url: "/api/users/isLoginedIn",
         method: "GET",
       }),
+      providesTags: ["Auth"], 
     }),
   }),
 });
@@ -90,5 +98,4 @@ export const {
   useResendVerifyCodeMutation,
   useLogoutMutation,
   useIsLoginQuery,
-  // useGetUserInfoQuery,
 } = apiSlice;
