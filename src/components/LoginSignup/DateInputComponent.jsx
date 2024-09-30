@@ -11,6 +11,7 @@ const DateInput = React.forwardRef((props, ref) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
+        disableFuture
         ref={ref}
         label={label}
         value={dateValue}

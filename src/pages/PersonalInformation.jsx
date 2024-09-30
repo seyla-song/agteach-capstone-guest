@@ -127,10 +127,10 @@ export default function PersonalInfoForm() {
                 <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
                   <FormInput
                     label="Phone number"
-                    placeholder="e.g. +855 123456789"
+                    placeholder="e.g. 0123456789"
                     {...register("phone", {
                       pattern: {
-                        value: /^\+\d{1,3}\s*\d{1,4}(\s*\d{1,4}){1,4}$/,
+                        value: /^[0-9]+$/i,
                         message: "Please enter a valid phone number",
                       },
                     })}
