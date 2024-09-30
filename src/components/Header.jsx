@@ -135,7 +135,7 @@ function Navigation() {
             src={GuestProfilePicture}
             alt="profile picture"
           />
-          {isLoading || !data
+          {isLoginLoading || !data
             ? "Guest"
             : data.username.length > 6
               ? data.username.slice(0, 6) + "..."
