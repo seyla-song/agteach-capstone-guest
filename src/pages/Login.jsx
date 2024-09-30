@@ -120,7 +120,7 @@ function Login() {
                       label="Keep me logged in"
                     />
                     <Link
-                      to="/forgot-password"
+                      to="/auth/forgot-password"
                       style={{ textDecoration: "none" }}
                     >
                       <Typography variant="bsr" color="primary.main">
