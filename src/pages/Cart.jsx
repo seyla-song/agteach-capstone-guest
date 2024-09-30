@@ -103,7 +103,7 @@ const purchasedHistory = [
     totalPrice: 128,
   },
   {
-    orderId: 'ORD67890',
+    orderId: 'ORD67891',
     date: 'Aug 15, 2022',
     items: [
       { name: 'Product 4', qty: 2, price: 12, total: 24 },
@@ -112,7 +112,7 @@ const purchasedHistory = [
     totalPrice: 49,
   },
   {
-    orderId: 'ORD34567',
+    orderId: 'ORD34568',
     date: 'Aug 18, 2022',
     items: [
       { name: 'Product 6', qty: 3, price: 18, total: 54 },

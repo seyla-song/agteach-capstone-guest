@@ -12,7 +12,6 @@ import SortBy from "../components/MaketPlace/SortBy";
 import FilterBy from "../components/MaketPlace/FilterBy";
 import SearchBar from "../components/SearchBarComponent";
 import SearchList from "../components/MaketPlace/SearchList";
-import { products } from "../utils/carouselDummy";
 import { useLocation } from "react-router";
 import { useSearchProductQuery } from '../services/api/productApi'
 

@@ -61,7 +61,6 @@ function Navigation() {
   if (guestData) {
     console.log("guestData", guestData);
     data = guestData.data;
-    console.log("data", data);
   }
 
   const handleClick = (event) => {
@@ -126,7 +125,6 @@ function Navigation() {
             borderColor: "common.white",
             borderStyle: "solid",
             borderWidth: 1,
-            maxWidth: "100px",
             display: "flex",
             justifyContent: "start",
             typography: "bssm",
@@ -137,7 +135,11 @@ function Navigation() {
             src={GuestProfilePicture}
             alt="profile picture"
           />
-          {data.username}
+          {isLoading || !data
+            ? "Guest"
+            : data.username.length > 6
+              ? data.username.slice(0, 6) + "..."
+              : data.username}
         </Button>
 
         {/* Dropdown Menu */}
@@ -204,7 +206,10 @@ function Navigation() {
                 textDecoration: "none",
               }}
             >
-              <LogoutOutlined fontSize="small" sx={{ mr: 1, typography: "bmdsm" }} />
+              <LogoutOutlined
+                fontSize="small"
+                sx={{ mr: 1, typography: "bmdsm" }}
+              />
               Log Out
             </Typography>
           </MenuItem>
@@ -247,7 +252,6 @@ function Navigation() {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
 
   return (
     <AppBar position="sticky">

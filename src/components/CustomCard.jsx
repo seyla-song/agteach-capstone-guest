@@ -36,14 +36,14 @@ const ProductCard = ({ dataObj, showDelete, onDelete }) => {
   const navigate = useNavigate();
 
   return (
-    <Box pr onClick={() => navigate(`/marketplace/${dataObj.productId}`)}>
+    <Box mr={1} sx={{ cursor: "pointer" }} onClick={() => navigate(`/marketplace/${dataObj.productId}`)}>
       <Box
         width="100%"
         component="img"
         src={dataObj.imageUrl}
         alt={dataObj.name}
       />
-      <Stack p spacing={1} alignItems="flex-start">
+      <Stack p={1} spacing={1} alignItems="flex-start">
         <Typography variant="bmdmd">{dataObj.name}</Typography>
         <Typography variant="bsr">${dataObj.price}</Typography>
         {showDelete && (
@@ -69,7 +69,7 @@ const CourseCard = ({ dataObj, showDelete, onDelete }) => {
   const navigate = useNavigate();
 
   return (
-    <Box pr onClick={() => navigate(`/courses/${dataObj.productId}`)}>
+    <Box mr={1} sx={{ cursor: "pointer" }} onClick={() => navigate(`/courses/${dataObj.productId}`)}>
       <Box
         width="100%"
         component="img"

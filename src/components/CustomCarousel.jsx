@@ -95,7 +95,7 @@ export const CustomCarousel = ({ data, cardVariant, slideToShow = 4 }) => {
           </Box>
         ))}
       </Slider>
-      <Stack justifyContent="end" direction="row" gap>
+      <Stack justifyContent="end" direction="row" spacing={2}>
         {/* Previous button */}
         <Button
           size="medium"
