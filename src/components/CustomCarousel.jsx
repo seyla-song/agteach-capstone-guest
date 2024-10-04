@@ -1,11 +1,13 @@
-import { useRef } from 'react';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import { Box, Button, Stack } from '@mui/material';
-import Slider from 'react-slick';
-import { motion } from 'framer-motion';
-import CustomCard from './CustomCard';
-import { ChevronLeft, ChevronRight } from '@mui/icons-material';
+import { useRef } from "react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { Box, Button, Stack } from "@mui/material";
+import Slider from "react-slick";
+import { motion } from "framer-motion";
+import CustomCard from "./CustomCard";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { Carousel } from "react-responsive-carousel";
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 /**
  * CustomCarousel component is a reusable component
@@ -111,6 +113,7 @@ export const CustomCarousel = ({ data, cardVariant, slideToShow = 4 }) => {
           endIcon={<ChevronRight />}
         />
       </Stack>
+
     </Stack>
   );
 };
