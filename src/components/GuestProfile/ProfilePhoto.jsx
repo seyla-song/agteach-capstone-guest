@@ -29,6 +29,7 @@ function ProfilePhoto() {
   useEffect(() => {
     if (data) {
       const customerData = data.data.customer;
+      console.log("customerData", customerData, data);
       const { imageUrl } = customerData;
       if (imageUrl) {
         setProfileImage(imageUrl);
