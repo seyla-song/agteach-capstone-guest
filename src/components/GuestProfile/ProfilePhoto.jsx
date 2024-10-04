@@ -26,7 +26,7 @@ import {
  */
 function ProfilePhoto() {
   const [profileImage, setProfileImage] = useState(GuestProfileImg);
-  const { data } = useGetUserInfoQuery();
+  const { data, refetch } = useGetUserInfoQuery();
   const [updateInfo] = useUpdateInfoMutation();
 
   // Load image from localStorage when the component mounts
@@ -49,21 +49,41 @@ function ProfilePhoto() {
 
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = () => {
+      reader.onloadend = async () => {
         const base64String = reader.result;
         setProfileImage(base64String); // convert the image to base64 string encoder
         localStorage.setItem("profileImage", base64String); // Save to localStorage
       };
       reader.readAsDataURL(file); // Convert image to Base64
     }
-   
+
     try {
       await updateInfo(formData).unwrap();
       console.log("Success:", formData);
+      refetch();
+      // window.location.reload()
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
+
+//   if (file) {
+//     const reader = new FileReader();
+//     reader.onloadend = async () => {
+//       const base64String = reader.result;
+//       setProfileImage(base64String); // Preview logic here
+
+//       try {
+//         await updateInfo(formData).unwrap();
+//         // Invalidate tags here to trigger refetch
+//         refetch(); // This will refetch the user info
+//       } catch (error) {
+//         console.error("Error submitting form:", error);
+//       }
+//     };
+//     reader.readAsDataURL(file);
+//   }
+// };
 
   return (
     <>

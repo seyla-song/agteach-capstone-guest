@@ -15,7 +15,7 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -29,6 +29,7 @@ import { useLogoutMutation } from "../services/api/authApi";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetUserInfoQuery } from "../services/api/userApi";
+
 
 const HEADER_MENU_DESKTOP = [
   { page: "My Learning", path: "mylearning" },
@@ -50,12 +51,22 @@ function Navigation() {
   const [openLogoutDialog, setOpenLogoutDialog] = useState(false);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
+  const [profileImage, setProfileImage] = useState(GuestProfilePicture); // Default to GuestProfilePicture
   const [logout, { isLoading }] = useLogoutMutation();
   const {
     data: guestData,
     isLoading: isLoginLoading,
     isError,
+    refetch,
   } = useGetUserInfoQuery();
+
+  useEffect(() => {
+    const storedImage = localStorage.getItem("profileImage");
+    if (storedImage) {
+      setProfileImage(storedImage);
+    }
+    refetch();
+  }, [refetch]);
 
   let data = {};
   if (guestData) {
@@ -132,7 +143,7 @@ function Navigation() {
         >
           <img
             style={{ width: "24px", borderRadius: "50%", marginRight: "5px" }}
-            src={GuestProfilePicture}
+            src={profileImage || GuestProfilePicture}
             alt="profile picture"
           />
           {isLoginLoading || !data
