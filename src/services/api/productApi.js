@@ -10,7 +10,15 @@ export const productApi = createApi({
         method: "GET",
       }),
     }),
+
+    getProductCarousel: builder.query({
+      query: () => ({
+        url: "/api/product/getAllProduct",
+        method: "GET",
+      }),
+    }),
+
   }),
 });
 
-export const { useSearchProductQuery } = productApi;
+export const { useSearchProductQuery, useGetProductCarouselQuery } = productApi;

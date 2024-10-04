@@ -8,7 +8,10 @@ import {
   Typography,
   Avatar,
 } from "@mui/material";
-import { useGetUserInfoQuery } from "../../services/api/userApi";
+import {
+  useGetUserInfoQuery,
+  useUpdateInfoMutation,
+} from "../../services/api/userApi";
 
 /**
  * ProfilePhoto component is a reusable component
@@ -23,12 +26,14 @@ import { useGetUserInfoQuery } from "../../services/api/userApi";
  */
 function ProfilePhoto() {
   const [profileImage, setProfileImage] = useState(GuestProfileImg);
-  const {data} = useGetUserInfoQuery()
+  const { data } = useGetUserInfoQuery();
+  const [updateInfo] = useUpdateInfoMutation();
 
   // Load image from localStorage when the component mounts
   useEffect(() => {
     if (data) {
       const customerData = data.data.customer;
+      console.log("customerData", customerData, data);
       const { imageUrl } = customerData;
       if (imageUrl) {
         setProfileImage(imageUrl);
@@ -37,8 +42,11 @@ function ProfilePhoto() {
   }, [data]);
 
   // Function to handle image upload
-  const handleImageUpload = (event) => {
+  const handleImageUpload = async (event) => {
+    const formData = new FormData();
     const file = event.target.files[0];
+    formData.append("photo", file);
+
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -47,6 +55,13 @@ function ProfilePhoto() {
         localStorage.setItem("profileImage", base64String); // Save to localStorage
       };
       reader.readAsDataURL(file); // Convert image to Base64
+    }
+   
+    try {
+      await updateInfo(formData).unwrap();
+      console.log("Success:", formData);
+    } catch (error) {
+      console.error("Error submitting form:", error);
     }
   };
 
@@ -66,7 +81,7 @@ function ProfilePhoto() {
           alignItems: "center",
           justifyContent: "flex-start",
           backgroundColor: "grey.100",
-          padding: '30px',
+          padding: "30px",
           boxSizing: "border-box",
         }}
       >
@@ -98,8 +113,7 @@ function ProfilePhoto() {
             type="file"
             id="myfile"
             name="myfile"
-            
-            onChange={handleImageUpload} 
+            onChange={handleImageUpload}
             sx={{ flexGrow: 1, width: "auto" }}
           />
           <Button variant="contained" sx={{ px: 10, py: 2 }}>
