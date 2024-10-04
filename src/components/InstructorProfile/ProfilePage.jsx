@@ -1,9 +1,22 @@
-import { Stack, Avatar, Typography, Button, Grid, Link, Snackbar, Alert } from "@mui/material";
+import {
+  Stack,
+  Avatar,
+  Typography,
+  Button,
+  Grid,
+  Link,
+  Snackbar,
+  Alert,
+  CircularProgress,
+  Box,
+} from "@mui/material";
 import React, { useState } from "react";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import InstructorProfileImg from "../../assets/InstructorProfile/instructorprofile.jpg";
+import { useGetInstructorQuery } from "../../services/api/instructorApi";
+import { useParams } from "react-router-dom";
 
 /**
  * ProfilePage is a component that renders an instructor's profile page.
@@ -18,9 +31,10 @@ import InstructorProfileImg from "../../assets/InstructorProfile/instructorprofi
 function ProfilePage() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  
+  let { instructorId } = useParams();
 
-
-
+  const { data, isLoading } = useGetInstructorQuery(instructorId);
   /**
    * Copies the given text to the user's clipboard.
    *
@@ -39,7 +53,10 @@ function ProfilePage() {
         console.error("Failed to copy text: ", err);
       });
   };
+  const instructorData = !isLoading ? data.data : "";
+  //
 
+  !isLoading ? console.log(instructorData) : console.log("Loading...");
   /**
    * Closes the snackbar.
    */
@@ -47,6 +64,22 @@ function ProfilePage() {
     setSnackbarOpen(false);
   };
 
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          mt: 10,
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+  const { firstName, lastName, phone, email, imageUrl, bio } = instructorData;
+  console.log(imageUrl);
   return (
     <Grid container pt={10}>
       <Grid item xs={12} pb="10px">
@@ -62,7 +95,7 @@ function ProfilePage() {
       <Grid item xs={12} md={4}>
         <Avatar
           alt="Instructor Profile Image"
-          src={InstructorProfileImg}
+          src={imageUrl || InstructorProfileImg}
           sx={{
             width: 300,
             height: 300,
@@ -74,11 +107,15 @@ function ProfilePage() {
       <Grid item xs={12} md={8}>
         <Stack sx={{ pt: 2, ml: 1 }} disableGutters>
           <Typography variant="h4">Instructor</Typography>
-          <Typography variant="h2">Emily Greene</Typography>
+          <Typography variant="h2">
+            {firstName} {lastName}
+          </Typography>
           <Typography variant="blgsm" sx={{ mt: 3, mb: 2 }}>
             About Me
           </Typography>
           <Typography variant="bsr">
+            {bio ||
+              `
             I'm Emily Greene, I'm a developer with a passion for teaching. I'm
             the lead instructor at the London App Brewery, London's leading
             Programming Bootcamp. I've helped hundreds of thousands of students
@@ -94,6 +131,7 @@ function ProfilePage() {
             of geeky humour but also lots of explanations and animations to make
             sure everything is easy to understand. I'll be there for you every
             step of the way.
+            `}
           </Typography>
 
           <Grid container sx={{ py: 2, gap: 2 }} direction="row">
@@ -101,17 +139,17 @@ function ProfilePage() {
               variant="outlined"
               sx={{ px: 4, py: 2, borderRadius: 50 }}
               startIcon={<EmailOutlinedIcon />}
-              onClick={() => handleCopyToClipboard("emiylgreen@gmail.com")}
+              onClick={() => handleCopyToClipboard(email)}
             >
-              <Typography variant="bxsmd">emiylgreen@gmail.com</Typography>
+              <Typography variant="bxsmd">{email}</Typography>
             </Button>
             <Button
               variant="outlined"
               sx={{ px: 4, py: 2, borderRadius: 50 }}
               startIcon={<LocalPhoneOutlinedIcon />}
-              onClick={() => handleCopyToClipboard("012 456 789")}
+              onClick={() => handleCopyToClipboard(phone)}
             >
-              <Typography variant="bxsmd">012 456 789</Typography>
+              <Typography variant="bxsmd">{phone}</Typography>
             </Button>
             <Snackbar
               open={snackbarOpen}
