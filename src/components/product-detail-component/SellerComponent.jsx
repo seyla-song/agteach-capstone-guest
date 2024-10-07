@@ -22,7 +22,7 @@ const SELLER_DATA = {
  * @function
  * @returns {React.ReactElement} A JSX element that renders a seller component
  */
-export default function SellerComponent() {
+export default function SellerComponent({seller}) {
   const [wishlist, setWishlist] = useState(false);
 
   /**
@@ -33,6 +33,7 @@ export default function SellerComponent() {
   const handleWishlistButton = () => {
     setWishlist((wishlist) => !wishlist);
   };
+  
   return (
     <Stack spacing={1.5}>
       <Divider />

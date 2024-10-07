@@ -48,7 +48,7 @@ function ProductDetailPage() {
             <Stack spacing="20px">
               <TitleComponent title={""} price={""}/>
               <DescriptionComponent describtion={""}/>
-              <SellerComponent />
+              <SellerComponent seller={{}}/>
               <Stack spacing="10px">
                 <ButtonComponent path="/cart" color="secondary">
                   Add to cart
