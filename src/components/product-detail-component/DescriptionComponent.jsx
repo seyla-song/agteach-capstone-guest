@@ -7,7 +7,7 @@ import { description } from "../../utils/carouselDummy";
  *
  * @return {React.ReactElement} A JSX element containing the product description
  */
-export default function DescriptionComponent() {
+export default function DescriptionComponent({ describtion }) {
   return (
     <Box>
       <ExpandableText text={description} initialLength={300} />

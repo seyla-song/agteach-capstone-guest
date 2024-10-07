@@ -47,7 +47,7 @@ function ProductDetailPage() {
           <Grid item xs={12} md={5}>
             <Stack spacing="20px">
               <TitleComponent title={""} price={""}/>
-              <DescriptionComponent />
+              <DescriptionComponent describtion={""}/>
               <SellerComponent />
               <Stack spacing="10px">
                 <ButtonComponent path="/cart" color="secondary">
