@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import GuestProfileImg from "../../assets/guest-profile.jpg";
+// import GuestProfileImg from "../../assets/guest-profile.jpg";
 import {
   Box,
   Button,
@@ -15,8 +15,8 @@ import {
 import { CustomAlert } from "../../components/CustomAlert";
 
 function ProfilePhoto() {
-  const [profileImage, setProfileImage] = useState(GuestProfileImg);
-  const { refetch } = useGetUserInfoQuery();
+  const [profileImage, setProfileImage] = useState();
+  const { data, refetch } = useGetUserInfoQuery();
   const [updateInfo] = useUpdateInfoMutation();
 
   // Alert state
@@ -24,15 +24,41 @@ function ProfilePhoto() {
   const [alertMessage, setAlertMessage] = useState("");
   const [alertSeverity, setAlertSeverity] = useState("error");
 
-  useEffect(() => {
-    const storedImage = localStorage.getItem("profileImage");
-    if (storedImage) {
-      setProfileImage(storedImage);
-    }
-  }, []);
+  let customerData = {};
+  if (data) {
+    customerData = data.data.customer;
+  }
+  setProfileImage(customerData.imageUrl);
+  console.log("customerDataaaaa", customerData.imageUrl);
+
+  // useEffect(() => {
+  //   // const storedImage = localStorage.getItem("profileImage");
+  //   // if (storedImage) {
+  //   //   setProfileImage(storedImage);
+  //   // }
+  //   if (data) {
+  //     customerData = data.data.customer; 
+  //     setProfileImage(customerData.imageUrl)
+  //   }
+    
+  // }, []);
+  // console.log("customerData", customerData.imageUrl);
+
+
 
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];
+
+    // const handleUploadClick = async () => {
+    //   if (!file) {
+    //     setAlertMessage("Please select a file before uploading.");
+    //     setAlertSeverity("error");
+    //     setAlertOpen(true);
+    //     return;
+    //   }
+    // };
+    setProfileImage(URL.createObjectURL(file));
+    
 
     if (file) {
       const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/bmp'];
@@ -42,24 +68,35 @@ function ProfilePhoto() {
         setAlertOpen(true);
         return;
       }
-
-      const reader = new FileReader();
-      reader.onloadend = async () => {
-        const base64String = reader.result;
-        setProfileImage(base64String);
-        localStorage.setItem("profileImage", base64String);
-
-        const formData = new FormData();
+      const formData = new FormData();
         formData.append("photo", file);
-
         try {
           await updateInfo(formData).unwrap();
-          window.location.reload();
+          console.log("Success:", formData);
+          
+          refetch();
         } catch (error) {
           console.error("Error submitting form:", error);
         }
-      };
-      reader.readAsDataURL(file);
+
+      // const reader = new FileReader();
+      // reader.onloadend = async () => {
+      //   // const base64String = reader.result;
+      //   // setProfileImage(base64String);
+      //   // localStorage.setItem("profileImage", base64String);
+
+      //   const formData = new FormData();
+      //   formData.append("photo", file);
+
+      //   try {
+      //     await updateInfo(formData).unwrap();
+      //     // window.location.reload();
+      //   } catch (error) {
+      //     console.error("Error submitting form:", error);
+      //   }
+      // };
+      // reader.readAsDataURL(file);
+
     }
   };
 
@@ -90,6 +127,7 @@ function ProfilePhoto() {
       >
         <Stack>
           <Avatar
+            // src={customerData.imageUrl}
             src={profileImage}
             alt="Profile Pic"
             sx={{ width: 300, height: 300, border: "15px solid lightgrey" }}
@@ -129,7 +167,7 @@ function ProfilePhoto() {
 
       {/* Custom Alert Component */}
       <CustomAlert
-      sx={{ m: 2 }}
+      sx={{ mt: 2 }}
         label={alertMessage}
         open={alertOpen}
         onClose={handleAlertClose}
@@ -140,4 +178,3 @@ function ProfilePhoto() {
 }
 
 export default ProfilePhoto;
-
