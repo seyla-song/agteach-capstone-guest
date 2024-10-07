@@ -6,6 +6,8 @@ import SellerComponent from "../components/product-detail-component/SellerCompon
 import ProductCarouselComponent from "../components/product-detail-component/ProductCarouselComponent";
 import { CustomCarousel } from "../components/CustomCarousel";
 import products from "../utils/carouselProductDummy";
+import { useGetCategoryProductsQuery } from "../services/api/productApi";
+import { useEffect, useState } from "react";
 
 /**
  * A React functional component that renders a product detail page.
@@ -18,6 +20,15 @@ import products from "../utils/carouselProductDummy";
  */
 
 function ProductDetailPage() {
+  const [allProducts, setAllProducts] = useState([]);
+  const {data: relatedProducts, isLoading: isRelatedProductsLoading, isError: isRelatedProductsError, Error: relatedProductsError} = useGetCategoryProductsQuery();
+
+  useEffect(() => {
+    if (relatedProducts) {
+      setAllProducts(relatedProducts.data)
+    }
+  }, [relatedProducts])
+
   return (
     <Container
       maxWidth="1420px"
@@ -54,7 +65,7 @@ function ProductDetailPage() {
           <Typography sx={{ typography: { xs: "blgsm", md: "h4" } }}>
             You might also want to buy these product
           </Typography>
-          <CustomCarousel data={products} cardVariant="product" />
+          <CustomCarousel data={allProducts} cardVariant="product" />
         </Stack>
       </Stack>
     </Container>

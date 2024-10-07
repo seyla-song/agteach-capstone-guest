@@ -18,7 +18,14 @@ export const productApi = createApi({
       }),
     }),
 
+    getCategoryProducts: builder.query({
+      query: (categoryId) => ({
+        url: "/api/product/getAllProduct",
+        method: 'GET',
+      }),
+    }),
+
   }),
 });
 
-export const { useSearchProductQuery, useGetProductCarouselQuery } = productApi;
+export const { useSearchProductQuery, useGetProductCarouselQuery, useGetCategoryProductsQuery } = productApi;
