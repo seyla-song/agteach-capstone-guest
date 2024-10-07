@@ -5,6 +5,8 @@ import ChangePassword from "../components/GuestProfile/ChangePassword.jsx";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import { Container } from "@mui/material";
+import { ProfileImageProvider } from '../components/GuestProfile/ProfileImageContext';
+import ProfileImageContext from "../components/GuestProfile/ProfileImageContext.jsx";
 
 
 /**
@@ -28,8 +30,9 @@ export default function GuestProfile() {
     <>
         <Container maxWidth="1420px" sx={{display:"flex", justifyContent:"center", alignItems:"center"}} >
         <Stack maxWidth="1420px" width="100%" sx={{ m: 5, mx: 0 }}>
-          <ProfilePhoto  />
-
+          <ProfileImageProvider>          
+            <ProfilePhoto  />
+        
           <Divider sx={{ m: 5, mx: 0 }} />
 
           <BasicInfo />
@@ -41,6 +44,7 @@ export default function GuestProfile() {
           <Divider sx={{ m: 5, mx: 0 }} />
 
           <ChangePassword />
+          </ProfileImageProvider>
         </Stack>
         </Container>
     </>
