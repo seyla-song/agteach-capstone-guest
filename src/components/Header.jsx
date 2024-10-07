@@ -30,7 +30,6 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetUserInfoQuery } from "../services/api/userApi";
 
-
 const HEADER_MENU_DESKTOP = [
   { page: "My Learning", path: "mylearning" },
   { page: "Marketplace", path: "marketplace" },
@@ -51,29 +50,18 @@ function Navigation() {
   const [openLogoutDialog, setOpenLogoutDialog] = useState(false);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
-  const [profileImage, setProfileImage] = useState(GuestProfilePicture); // Default to GuestProfilePicture
-  const [logout, { isLoading }] = useLogoutMutation();
+  const [logout] = useLogoutMutation();
   const {
     data: guestData,
     isLoading: isLoginLoading,
-    isError,
-    refetch,
   } = useGetUserInfoQuery();
-
-  useEffect(() => {
-    const storedImage = localStorage.getItem("profileImage");
-    if (storedImage) {
-      setProfileImage(storedImage);
-    }
-    refetch();
-  }, [refetch]);
 
   let data = {};
   if (guestData) {
     console.log("guestData", guestData);
     data = guestData.data;
   }
-
+  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -143,14 +131,14 @@ function Navigation() {
         >
           <img
             style={{ width: "24px", borderRadius: "50%", marginRight: "5px" }}
-            src={profileImage || GuestProfilePicture}
+            src={data.customer.imageUrl}
             alt="profile picture"
           />
           {isLoginLoading || !data
             ? "Guest"
             : data.username.length > 6
-              ? data.username.slice(0, 6) + "..."
-              : data.username}
+            ? data.username.slice(0, 6) + "..."
+            : data.username}
         </Button>
 
         {/* Dropdown Menu */}
@@ -379,4 +367,3 @@ function Navigation() {
 }
 
 export default Navigation;
-

@@ -17,7 +17,7 @@ import { CustomAlert } from "../../components/CustomAlert";
 function ProfilePhoto() {
   const [profileImage, setProfileImage] = useState();
   const { data, refetch } = useGetUserInfoQuery();
-  const [updateInfo] = useUpdateInfoMutation();
+  const [updateInfo, { isLoading, isError, isSuccess, error }] = useUpdateInfoMutation();
 
   // Alert state
   const [alertOpen, setAlertOpen] = useState(false);
@@ -25,59 +25,56 @@ function ProfilePhoto() {
   const [alertSeverity, setAlertSeverity] = useState("error");
 
   let customerData = {};
-  if (data) {
-    customerData = data.data.customer;
-  }
-  setProfileImage(customerData.imageUrl);
+  // if (data) {
+  //   customerData = data.data.customer;
+  // }
+  // setProfileImage(customerData.imageUrl);
   console.log("customerDataaaaa", customerData.imageUrl);
 
-  // useEffect(() => {
-  //   // const storedImage = localStorage.getItem("profileImage");
-  //   // if (storedImage) {
-  //   //   setProfileImage(storedImage);
-  //   // }
-  //   if (data) {
-  //     customerData = data.data.customer; 
-  //     setProfileImage(customerData.imageUrl)
-  //   }
-    
-  // }, []);
-  // console.log("customerData", customerData.imageUrl);
-
-
+  useEffect(() => {
+    // const storedImage = localStorage.getItem("profileImage");
+    // if (storedImage) {
+    //   setProfileImage(storedImage);
+    // }
+    if (data) {
+      customerData = data.data.customer;
+      setProfileImage(customerData.imageUrl);
+    }
+  }, [data]);
 
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];
-
-    // const handleUploadClick = async () => {
-    //   if (!file) {
-    //     setAlertMessage("Please select a file before uploading.");
-    //     setAlertSeverity("error");
-    //     setAlertOpen(true);
-    //     return;
-    //   }
-    // };
     setProfileImage(URL.createObjectURL(file));
-    
 
     if (file) {
-      const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/bmp'];
+      const validImageTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+        "image/webp",
+        "image/bmp",
+      ];
       if (!validImageTypes.includes(file.type)) {
-        setAlertMessage("Please upload a valid image file (JPEG, PNG, GIF, WEBP, BMP).");
+        setAlertMessage(
+          "Please select a valid image file (JPEG, PNG, GIF, WEBP, BMP)."
+        );
         setAlertSeverity("error");
         setAlertOpen(true);
         return;
       }
       const formData = new FormData();
-        formData.append("photo", file);
-        try {
-          await updateInfo(formData).unwrap();
-          console.log("Success:", formData);
-          
-          refetch();
-        } catch (error) {
-          console.error("Error submitting form:", error);
+      formData.append("photo", file);
+      try {
+        const response = await updateInfo(formData).unwrap();
+        console.log("Success:", formData);
+        if (response) {
+          window.location.reload();
         }
+      } catch (error) {
+        setAlertMessage('Error submitting form. Please try again.');
+        setAlertSeverity("error");
+        setAlertOpen(true);
+      }
 
       // const reader = new FileReader();
       // reader.onloadend = async () => {
@@ -96,7 +93,6 @@ function ProfilePhoto() {
       //   }
       // };
       // reader.readAsDataURL(file);
-
     }
   };
 
@@ -160,14 +156,14 @@ function ProfilePhoto() {
             sx={{ flexGrow: 1, width: "auto" }}
           />
           <Button variant="contained" sx={{ px: 10, py: 2 }}>
-            Upload
+          {isLoading ? "Uploading..." : "Upload"}
           </Button>
         </Stack>
       </Box>
 
       {/* Custom Alert Component */}
       <CustomAlert
-      sx={{ mt: 2 }}
+        sx={{ mt: 2 }}
         label={alertMessage}
         open={alertOpen}
         onClose={handleAlertClose}
