@@ -3,14 +3,6 @@ import { Box } from "@mui/material";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 
-import growLight1 from "../../assets/ProductDetail/growlight1.png";
-import growLight2 from "../../assets/ProductDetail/growlight2.png";
-import growLight3 from "../../assets/ProductDetail/growlight3.png";
-import growLight4 from "../../assets/ProductDetail/growlight4.png";
-import growLight5 from "../../assets/ProductDetail/growlight5.png";
-
-const IMAGE = [growLight1, growLight2, growLight3, growLight4, growLight5];
-
 const carouselStyle = {
   ".carousel": {
     textAlign: "center",
@@ -40,13 +32,13 @@ const carouselStyle = {
  * @return {JSX.Element} The rendered product carousel component.
  */
 
-export default function ProductCarouselComponent() {
+export default function ProductCarouselComponent({productImages}) {
   return (
     <Box sx={carouselStyle}>
       <Carousel>
-        {IMAGE.map((data, index) => (
+      {productImages?.map((image, index) => (
           <div key={index}>
-            <img src={data} alt="product images" />
+            <img src={image.imageUrl} alt={`Product ${index + 1}`} />
           </div>
         ))}
       </Carousel>

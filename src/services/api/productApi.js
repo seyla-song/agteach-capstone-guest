@@ -26,8 +26,8 @@ export const productApi = createApi({
     }),
 
     getOneProduct: builder.query({
-      query: () => ({
-        url: "/",
+      query: (id) => ({
+        url: `/api/product/getProductDetail/${id}`,
         method: "GET"
       }),
     }),

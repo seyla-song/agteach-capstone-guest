@@ -6,24 +6,21 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import puSok from "../../assets/ProductDetail/pu-sok.png";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useState } from "react";
-
-const SELLER_DATA = {
-  shop: "Pu Sok Farm",
-  location: "Kep, Kampot, Cambodia",
-  image: puSok,
-};
+import { useNavigate } from "react-router";
 
 /**
  * SellerComponent renders a component that displays seller information
  * @function
  * @returns {React.ReactElement} A JSX element that renders a seller component
  */
-export default function SellerComponent({seller}) {
+export default function SellerComponent({ seller }) {
   const [wishlist, setWishlist] = useState(false);
+  const navigate = useNavigate();
+
+  const goToInstructorProfile = (id) => navigate(`/instructor-profile/${id}`);
 
   /**
    * A React component that displays seller information and allows users to add or remove the seller from their wishlist.
@@ -41,11 +38,12 @@ export default function SellerComponent({seller}) {
         sx={{ display: "flex", gap: "20px", justifyContent: "space-between" }}
       >
         <Stack direction="row" alignItems="center">
-          <Avatar src={SELLER_DATA.image} />
+          <Avatar src={seller.image_url} onClick={() => goToInstructorProfile(seller.instructorId)}/>
           <Stack direction="column" sx={{ marginLeft: 2 }}>
-            <Typography variant="bmdsm">{SELLER_DATA.shop}</Typography>
+            <Typography variant="bmdsm" onClick={() => goToInstructorProfile(seller.instructorId)}>{seller.firstName + " " + seller.lastName}</Typography>
             <Typography variant="bxsr" color="dark.200">
-              {SELLER_DATA.location}
+              {/* will fix later */}
+              {'Kep, Kampot, Cambodia'}
             </Typography>
           </Stack>
         </Stack>

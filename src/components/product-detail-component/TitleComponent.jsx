@@ -16,8 +16,8 @@ const typographyStyle = { typography: { xs: "blgsm", md: "h3" } };
 export default function TitleComponent({ title, price }) {
   return (
     <Box display="flex" justifyContent="space-between">
-      <Typography sx={typographyStyle}>{TITLE_DATA.product}</Typography>
-      <Typography sx={typographyStyle}>{TITLE_DATA.price}</Typography>
+      <Typography sx={typographyStyle}>{title}</Typography>
+      <Typography sx={typographyStyle}>${price}</Typography>
     </Box>
   );
 }

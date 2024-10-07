@@ -24,37 +24,40 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 export const CustomCarousel = ({ data, cardVariant, slideToShow = 4 }) => {
   const sliderRef = useRef();
 
+  const adjustedSlidesToShow = Math.min(slideToShow, data.length);
+
   const settings = {
     dots: false,
-    infinite: false,
+    infinite: false,  // Enable infinite only if data is sufficient
     speed: 500,
-    slidesToShow: slideToShow,
+    slidesToShow: adjustedSlidesToShow,
     slidesToScroll: 4,
     arrows: false,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: Math.min(3, data.length),
           slidesToScroll: 3,
         },
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: Math.min(2, data.length),
           slidesToScroll: 2,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: Math.min(1, data.length),
           slidesToScroll: 1,
         },
       },
     ],
   };
+
 
   /**
    * Handle next button click event on the slider
