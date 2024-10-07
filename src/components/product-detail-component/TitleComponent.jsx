@@ -13,7 +13,7 @@ const typographyStyle = { typography: { xs: "blgsm", md: "h3" } };
  * @return {JSX.Element} A JSX element that renders the title and price of a product.
  */
 
-export default function TitleComponent() {
+export default function TitleComponent({ title, price }) {
   return (
     <Box display="flex" justifyContent="space-between">
       <Typography sx={typographyStyle}>{TITLE_DATA.product}</Typography>
