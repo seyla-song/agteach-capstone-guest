@@ -5,8 +5,7 @@ import DescriptionComponent from "../components/product-detail-component/Descrip
 import SellerComponent from "../components/product-detail-component/SellerComponent";
 import ProductCarouselComponent from "../components/product-detail-component/ProductCarouselComponent";
 import { CustomCarousel } from "../components/CustomCarousel";
-import products from "../utils/carouselProductDummy";
-import { useGetCategoryProductsQuery } from "../services/api/productApi";
+import { useGetOneProductQuery, useGetCategoryProductsQuery } from "../services/api/productApi";
 import { useEffect, useState } from "react";
 
 /**

@@ -6,7 +6,6 @@ import Slider from "react-slick";
 import { motion } from "framer-motion";
 import CustomCard from "./CustomCard";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
-import { Carousel } from "react-responsive-carousel";
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 /**
