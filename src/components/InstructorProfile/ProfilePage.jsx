@@ -16,8 +16,7 @@ import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import InstructorProfileImg from "../../assets/InstructorProfile/instructorprofile.jpg";
 import { useGetInstructorQuery } from "../../services/api/instructorApi";
-import { useParams } from "react-router-dom";
-
+import { useParams, Navigate } from "react-router-dom";
 /**
  * ProfilePage is a component that renders an instructor's profile page.
  *
@@ -31,10 +30,10 @@ import { useParams } from "react-router-dom";
 function ProfilePage() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  
+
   let { instructorId } = useParams();
 
-  const { data, isLoading } = useGetInstructorQuery(instructorId);
+  const { data, isLoading, isError } = useGetInstructorQuery(instructorId);
   /**
    * Copies the given text to the user's clipboard.
    *
@@ -53,7 +52,7 @@ function ProfilePage() {
         console.error("Failed to copy text: ", err);
       });
   };
-  const instructorData = !isLoading ? data.data : "";
+  const instructorData = !isLoading ? data?.data : "";
   //
 
   !isLoading ? console.log(instructorData) : console.log("Loading...");
@@ -78,7 +77,13 @@ function ProfilePage() {
       </Box>
     );
   }
+  console.log(isError);
+  if (isError) {
+    return <Navigate to="/error" />;
+  }
+
   const { firstName, lastName, phone, email, imageUrl, bio } = instructorData;
+
   console.log(imageUrl);
   return (
     <Grid container pt={10}>
