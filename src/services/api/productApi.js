@@ -18,8 +18,8 @@ export const productApi = createApi({
       }),
     }),
 
-    getCategoryProducts: builder.query({
-      query: (categoryId) => ({
+    getRecommendedProducts: builder.query({
+      query: (productId) => ({
         url: "/api/product/getAllProduct",
         method: "GET",
       }),
@@ -35,4 +35,4 @@ export const productApi = createApi({
   }),
 });
 
-export const { useSearchProductQuery, useGetProductCarouselQuery, useGetCategoryProductsQuery, useGetOneProductQuery } = productApi;
+export const { useSearchProductQuery, useGetProductCarouselQuery, useGetRecommendedProductsQuery, useGetOneProductQuery } = productApi;

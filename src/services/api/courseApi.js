@@ -17,7 +17,15 @@ export const courseApi = createApi({
         method: "GET",
       }),
     }),
+
+    getRecommendedCourse: builder.query({ // will chnange url later
+      query: () => ({
+        url: "/api/course/getAllCourse",
+        method: "GET",
+      }),
+    }),
+
   }),
 });
 
-export const { useSearchCourseQuery, useGetCourseCarouselQuery } = courseApi;
+export const { useSearchCourseQuery, useGetCourseCarouselQuery, useGetRecommendedCourseQuery } = courseApi;

@@ -7,7 +7,7 @@ import DescriptionComponent from "../components/product-detail-component/Descrip
 import SellerComponent from "../components/product-detail-component/SellerComponent";
 import ProductCarouselComponent from "../components/product-detail-component/ProductCarouselComponent";
 import { CustomCarousel } from "../components/CustomCarousel";
-import { useGetOneProductQuery, useGetCategoryProductsQuery } from "../services/api/productApi";
+import { useGetOneProductQuery, useGetRecommendedProductsQuery } from "../services/api/productApi";
 import { Fragment } from "react";
 
 /**
@@ -25,7 +25,7 @@ function ProductDetailPage() {
 
   const [allRelatedProducts, setAllRelatedProducts] = useState([]);
   const [selectedProductInfo, setSelectedProductInfo] = useState({});
-  const { data: relatedProducts } = useGetCategoryProductsQuery();
+  const { data: relatedProducts } = useGetRecommendedProductsQuery();
   const { data , isLoading, isError, error} = useGetOneProductQuery(productId);
 
   useEffect(() => {
