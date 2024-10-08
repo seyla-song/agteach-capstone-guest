@@ -5,6 +5,8 @@ import {
   Grid,
   Button,
   useMediaQuery,
+  Box,
+  CircularProgress,
 } from "@mui/material";
 import CustomCard from "../../components/CustomCard";
 import Img11 from "../../assets/InstructorProfile/Rectangle 11.png";
@@ -17,26 +19,31 @@ import Img17 from "../../assets/InstructorProfile/Rectangle 17.png";
 import Img18 from "../../assets/InstructorProfile/Rectangle 18.png";
 import Img19 from "../../assets/InstructorProfile/Rectangle 19.png";
 import Img20 from "../../assets/InstructorProfile/Rectangle 20.png";
+import { useSearchProductQuery } from "../../services/api/productApi";
 
-  /**
-   * A component that renders a responsive list of products, with a responsive
-   * design that shows different numbers of items based on screen size.
-   *
-   * It uses the `useMediaQuery` hook from `@mui/material` to determine the
-   * screen size and adjust the number of items accordingly.
-   *
-   * It renders a list of products with a title, a "View more" button, and a
-   * responsive layout that shows different numbers of items per row based on
-   * screen size.
-   *
-   * @returns {React.ReactElement} The component element.
-   */
+/**
+ * A component that renders a responsive list of products, with a responsive
+ * design that shows different numbers of items based on screen size.
+ *
+ * It uses the `useMediaQuery` hook from `@mui/material` to determine the
+ * screen size and adjust the number of items accordingly.
+ *
+ * It renders a list of products with a title, a "View more" button, and a
+ * responsive layout that shows different numbers of items per row based on
+ * screen size.
+ *
+ * @returns {React.ReactElement} The component element.
+ */
 function Products() {
+  const { data, isLoading } = useSearchProductQuery("");
+  if (!isLoading) console.log("products", data);
+
   // Check for breakpoints
   const desktop = useMediaQuery("(min-width:1420px)");
   const tablet = useMediaQuery("(min-width:1000px)");
   // const mobile = useMediaQuery('(min-width:390px)')
 
+  // if (!isLoading) return <></>;
   // Determine how many items to show based on screen size
   const checkScreen = () => {
     if (desktop) {
@@ -58,6 +65,23 @@ function Products() {
       return 3; // 3 items per row on smaller screens
     }
   };
+
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          mt: 10,
+        }}
+      >
+        Product Loading...
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   return (
     <Stack>
       <Stack>
@@ -66,6 +90,17 @@ function Products() {
 
         <Container sx={{ mt: 2 }} disableGutters>
           <Grid container spacing={2}>
+            {data.data.map((item, idx) => (
+              <Grid
+                item
+                // xs={12 / itemsPerRow()} // Responsive columns
+                key={idx}
+              >
+                <CustomCard dataObj={item} variant="product" />
+              </Grid>
+            ))}
+
+            {/*             
             {checkScreen().map((item, idx) => (
               <Grid
                 item
@@ -74,7 +109,7 @@ function Products() {
               >
                 <CustomCard dataObj={item} variant="product" />
               </Grid>
-            ))}
+            ))} */}
           </Grid>
         </Container>
       </Stack>
@@ -95,60 +130,60 @@ const products = [
     name: "Grow Lights - LED or fluorescent grow lights",
     instructor: "Emily Greene",
     price: "30$",
-    image: Img11,
+    imageUrl: Img11,
   },
   {
     name: "Grow Lights - LED or fluorescent grow lights",
     instructor: "Emily Greene",
     price: "30$",
-    image: Img12,
+    imageUrl: Img12,
   },
   {
     name: "Grow Lights - LED or fluorescent grow lights",
     instructor: "Emily Greene",
     price: "30$",
-    image: Img13,
+    imageUrl: Img13,
   },
   {
     name: "Grow Lights - LED or fluorescent grow lights",
     instructor: "Emily Greene",
     price: "30$",
-    image: Img14,
+    imageUrl: Img14,
   },
   {
     name: "Grow Lights - LED or fluorescent grow lights",
     instructor: "Emily Greene",
     price: "30$",
-    image: Img15,
+    imageUrl: Img15,
   },
   {
     name: "Grow Lights - LED or fluorescent grow lights",
     instructor: "Emily Greene",
     price: "30$",
-    image: Img16,
+    imageUrl: Img16,
   },
   {
     name: "Grow Lights - LED or fluorescent grow lights",
     instructor: "Emily Greene",
     price: "30$",
-    image: Img17,
+    imageUrl: Img17,
   },
   {
     name: "Grow Lights - LED or fluorescent grow lights",
     instructor: "Emily Greene",
     price: "30$",
-    image: Img18,
+    imageUrl: Img18,
   },
   {
     name: "Grow Lights - LED or fluorescent grow lights",
     instructor: "Emily Greene",
     price: "30$",
-    image: Img19,
+    imageUrl: Img19,
   },
   {
     name: "Grow Lights - LED or fluorescent grow lights",
     instructor: "Emily Greene",
     price: "30$",
-    image: Img20,
+    imageUrl: Img20,
   },
 ];
