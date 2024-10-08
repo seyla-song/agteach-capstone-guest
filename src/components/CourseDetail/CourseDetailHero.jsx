@@ -17,25 +17,26 @@ export const CourseDetailHero = () => {
   const stripe = useStripe();
 
   const handleCheckout = async () => {
-    setLoading(true);
-    try {
-      const res = (await enrollment({ courseId: 336 })).data;
-      const data = await res;
-      if (data.id) {
-        // Redirect to Stripe's checkout page using the session ID
-        const result = await stripe.redirectToCheckout({ sessionId: data.id });
+    // await stripe.redirectToCheckout({sessionId: 'cs_test_a1Gxlfa45o0DCqFtJjHJPDy5CRbMI0dYADc5B8ET8U8FxNPlSeW4MHs6Yu'})
+    // setLoading(true);
+    // try {
+    //   const res = (await enrollment({ courseId: 336 })).data;
+    //   const data = await res;
+    //   if (data.id) {
+    //     // Redirect to Stripe's checkout page using the session ID
+    //     const result = await stripe.redirectToCheckout({ sessionId: data.id });
 
-        if (result.error) {
-          console.error('Stripe checkout error', result.error);
-        }
-      } else {
-        console.error('Failed to create checkout session');
-      }
-    } catch (error) {
-      console.error('Error during checkout', error);
-    } finally {
-      setLoading(false);
-    }
+    //     if (result.error) {
+    //       console.error('Stripe checkout error', result.error);
+    //     }
+    //   } else {
+    //     console.error('Failed to create checkout session');
+    //   }
+    // } catch (error) {
+    //   console.error('Error during checkout', error);
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   return (
