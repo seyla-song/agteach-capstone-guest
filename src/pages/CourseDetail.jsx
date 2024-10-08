@@ -1,6 +1,3 @@
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements } from '@stripe/react-stripe-js';
-
 import { Divider, Grid, Stack } from '@mui/material';
 import {
   CourseDetailHero,
@@ -10,6 +7,8 @@ import {
 import MemberComponent from '../components/MemberComponent';
 
 import { SuggestedCourseProduct } from '../components/SuggestCourseProduct';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 

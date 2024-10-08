@@ -29,7 +29,6 @@ export const CourseDetailHero = () => {
 
       const data = await response.json();
 
-      console.log(data);
       if (data.id) {
         // Redirect to Stripe's checkout page using the session ID
         const result = await stripe.redirectToCheckout({ sessionId: data.id });
