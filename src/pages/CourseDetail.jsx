@@ -5,8 +5,8 @@ import {
   CourseDetailContent,
 } from '../components/CourseDetail/index';
 import MemberComponent from '../components/MemberComponent';
-import { useGetRecommendedCourseQuery } from '../services/api/courseApi';
-import { useGetRecommendedProductsQuery } from '../services/api/productApi';
+import { useGetRecommendedCoursesQuery } from '../services/api/courseApi';
+import { useGetProductCarouselQuery } from '../services/api/productApi';
 
 import { SuggestedCourseProduct } from '../components/SuggestCourseProduct';
 import { useEffect, useState } from 'react';
@@ -25,20 +25,25 @@ function shuffle(array) {
 function CourseDetailPage() {
   const [recommendedCourses, setRecommendedCourses] = useState([]);
   const [recommendedProducts, setRecommendedProducts] = useState([]);
-  const {data: recommendedCoursesData, isLoading: isRecommendedCoursesLoading, isError: isRecommendedCoursesError, error: recommendedCoursesError } = useGetRecommendedCourseQuery();
-  const {data: recommendedProductsData, isLoading: isRecommendedProductsLoading, isError: isRecommendedProductsError, error: recommendedProductsError } = useGetRecommendedProductsQuery();
+  const {data: recommendedCoursesData, isLoading: isRecommendedCoursesLoading, isError: isRecommendedCoursesError, error: recommendedCoursesError } = useGetRecommendedCoursesQuery(314);
+  const {data: recommendedProductsData, isLoading: isRecommendedProductsLoading, isError: isRecommendedProductsError, error: recommendedProductsError } = useGetProductCarouselQuery();
 
   useEffect(() => {
+    console.clear()
     if (recommendedCoursesData) { 
       setRecommendedCourses(shuffle(recommendedCoursesData.data));
       console.log('course: ', recommendedCoursesData.data)
     }
 
+    if (isRecommendedCoursesError) console.log("courses: ", recommendedCoursesError)
+
     if (recommendedProductsData) { 
       setRecommendedProducts(shuffle(recommendedProductsData.data));
       console.log('product: ', recommendedProductsData.data)
     }
-  },[recommendedCoursesData, recommendedProductsData] );
+
+    if (isRecommendedProductsError) console.log('prod: ', recommendedProductsError)
+  },[recommendedCoursesData, recommendedProductsData, recommendedCoursesError, recommendedProductsError] );
   
   return (
     <Stack alignItems="center">

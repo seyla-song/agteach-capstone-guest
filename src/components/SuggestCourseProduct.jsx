@@ -23,7 +23,7 @@ export const SuggestedCourseProduct = ({ courses, products }) => {
 
   return (
     <Stack gap={5} py={10} width="100%">
-      {courses && 
+      {courses.length > 0 && 
         <Stack gap={2}>
           <Typography variant="h4" maxWidth={300}>
             People also learn this course
@@ -31,7 +31,7 @@ export const SuggestedCourseProduct = ({ courses, products }) => {
           <CustomCarousel data={courses} slideToShow={5} />
         </Stack>
       }
-      {products &&
+      {products.length > 0 &&
         <Stack gap={2}>
           <Typography variant="h4" maxWidth={300}>
             You might want to buy the product related to this course

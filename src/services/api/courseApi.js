@@ -18,9 +18,16 @@ export const courseApi = createApi({
       }),
     }),
 
-    getRecommendedCourse: builder.query({
-      query: (price) => ({
-        url: `/api/course/getAllCourse/${price}`,
+    getRecommendedCourses: builder.query({
+      query: (courseId) => ({
+        url: `/api/course/getRecommendCourse/${courseId}`,
+        method: "GET",
+      }),
+    }),
+
+    getOneCourse: builder.query({
+      query: (courseId) => ({
+        url: `/api/course/getOneCourse/${courseId}`,
         method: "GET",
       }),
     }),
@@ -28,4 +35,4 @@ export const courseApi = createApi({
   }),
 });
 
-export const { useSearchCourseQuery, useGetCourseCarouselQuery, useGetRecommendedCourseQuery } = courseApi;
+export const { useSearchCourseQuery, useGetCourseCarouselQuery, useGetRecommendedCoursesQuery } = courseApi;
