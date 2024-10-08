@@ -58,7 +58,7 @@ export const router = createBrowserRouter([
       { path: "wishlist", element: <WishlistPage /> },
       { path: "guest-profile", element: <GuestProfilePage /> },
       { path: "instructor-profile", element: <InstructorProfilePage /> },
-      { path: "courses/:coursesId", element: <CourseDetailPage /> },
+      { path: "courses/:courseId", element: <CourseDetailPage /> },
       { path: "marketplace", element: <MarketPlacePage /> },
       { path: "marketplace/:productId", element: <ProductDetailPage /> },
       { path: "not-login", element: <LoginPromptComponent /> },

@@ -2,7 +2,7 @@ import { Grid, Stack, Typography } from '@mui/material';
 import TimerIcon from '@mui/icons-material/TimerOutlined';
 import MovieIcon from '@mui/icons-material/MovieOutlined';
 
-export const CourseDetailHighlight = () => {
+export const CourseDetailHighlight = ({courseData}) => {
   return (
     <Grid item xs={12}>
       <Stack py={10}>

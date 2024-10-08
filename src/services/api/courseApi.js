@@ -35,4 +35,4 @@ export const courseApi = createApi({
   }),
 });
 
-export const { useSearchCourseQuery, useGetCourseCarouselQuery, useGetRecommendedCoursesQuery } = courseApi;
+export const { useSearchCourseQuery, useGetCourseCarouselQuery, useGetRecommendedCoursesQuery, useGetOneCourseQuery } = courseApi;

@@ -1,4 +1,4 @@
-import { Button, Grid, Typography, Stack } from '@mui/material';
+import { Button, Grid, Typography, Stack, Link } from '@mui/material';
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
 import { MediaPlayer, MediaProvider } from '@vidstack/react';
@@ -6,22 +6,23 @@ import {
   defaultLayoutIcons,
   DefaultVideoLayout,
 } from '@vidstack/react/player/layouts/default';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-export const CourseDetailHero = () => {
+export const CourseDetailHero = ({courseData}) => {
+
+  const navigate = useNavigate()
+
   return (
     <Grid color={'white'} item xs={12}>
       <Grid alignItems={'center'} paddingY={15} container>
         <Grid item xs={5}>
           <Stack gap>
-            <Typography variant="h2">$74.99</Typography>
+            <Typography variant="h2">${courseData.price}</Typography>
             <Typography variant="h4">
-              Indoor Gardening and Hydroponics
+              {courseData.courseObjective}
             </Typography>
             <Typography variant="bsr">
-              Learn about various types of hydroponic setups, nutrient
-              solutions, lighting, and plant care techniques hands-on projects
-              to design and build a personal hydroponic garden
+              {courseData.description}
             </Typography>
             <Typography variant="bsr">
               Created by:{' '}
@@ -31,8 +32,9 @@ export const CourseDetailHero = () => {
                   textDecoration: 'underline',
                   textUnderlineOffset: 3,
                 }}
+                onClick={() => navigate(`/instructor-profile/${courseData.instructorId}`)}
               >
-                Emily Greene
+                {courseData.instructorName || 'Emily Greene'}
               </Link>
             </Typography>
           </Stack>
@@ -42,11 +44,11 @@ export const CourseDetailHero = () => {
           <Stack display={'flex'} flexDirection={'column'} gap={1}>
             <MediaPlayer
               title="Sprite Fight"
-              src="https://files.vidstack.io/sprite-fight/720p.mp4"
+              src={courseData.previewVideoUrl}
             >
               <MediaProvider />
               <DefaultVideoLayout
-                thumbnails="https://files.vidstack.io/sprite-fight/thumbnails.vtt"
+                thumbnails={courseData.thumbnailUrl}
                 icons={defaultLayoutIcons}
               />
             </MediaPlayer>
