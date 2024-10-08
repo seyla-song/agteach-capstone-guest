@@ -18,9 +18,9 @@ export const courseApi = createApi({
       }),
     }),
 
-    getRecommendedCourse: builder.query({ // will chnange url later
-      query: () => ({
-        url: "/api/course/getAllCourse",
+    getRecommendedCourse: builder.query({
+      query: (price) => ({
+        url: `/api/course/getAllCourse/${price}`,
         method: "GET",
       }),
     }),

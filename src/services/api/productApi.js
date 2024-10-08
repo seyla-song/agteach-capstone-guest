@@ -20,7 +20,7 @@ export const productApi = createApi({
 
     getRecommendedProducts: builder.query({
       query: (productId) => ({
-        url: "/api/product/getAllProduct",
+        url: `/api/product/getRecommendProduct/${productId}`,
         method: "GET",
       }),
     }),

@@ -25,12 +25,13 @@ function ProductDetailPage() {
 
   const [allRelatedProducts, setAllRelatedProducts] = useState([]);
   const [selectedProductInfo, setSelectedProductInfo] = useState({});
-  const { data: relatedProducts } = useGetRecommendedProductsQuery();
+  const { data: relatedProducts } = useGetRecommendedProductsQuery(productId);
   const { data , isLoading, isError, error} = useGetOneProductQuery(productId);
 
   useEffect(() => {
     if (relatedProducts) {
       setAllRelatedProducts(relatedProducts.data);
+      console.log(relatedProducts)
     };
     
     if (data) {
@@ -43,6 +44,8 @@ function ProductDetailPage() {
   if (isLoading) content = <div style={{width: '100%', height: 'calc(100vh - 68px)', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Loading...</div>
   
   if (isError) content = <div style={{width: '100%', height: 'calc(100vh - 68px)', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Error: {error}</div>
+  
+  if (!data) content = <div style={{width: '100%', height: 'calc(100vh - 68px)', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Product Not Found.</div>
   
   if (data) content = 
                       <Container
@@ -85,7 +88,6 @@ function ProductDetailPage() {
                         </Stack>
                       </Container>;
 
-  if (!data) content = <div style={{width: '100%', height: 'calc(100vh - 68px)', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Product Not Found.</div>
   
 
   return (
