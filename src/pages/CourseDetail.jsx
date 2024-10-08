@@ -1,3 +1,6 @@
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+
 import { Divider, Grid, Stack } from '@mui/material';
 import {
   CourseDetailHero,
@@ -8,26 +11,30 @@ import MemberComponent from '../components/MemberComponent';
 
 import { SuggestedCourseProduct } from '../components/SuggestCourseProduct';
 
+const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
+
 function CourseDetailPage() {
   return (
-    <Stack alignItems="center">
-      <Stack width="100%" alignItems="center" bgcolor={'primary.dark'}>
+    <Elements stripe={stripePromise}>
+      <Stack alignItems="center">
+        <Stack width="100%" alignItems="center" bgcolor={'primary.dark'}>
+          <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
+            <CourseDetailHero />
+          </Grid>
+        </Stack>
         <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
-          <CourseDetailHero />
+          <CourseDetailHighlight />
+          <CourseDetailContent />
+          <Grid item xs={12}>
+            <Divider />
+          </Grid>
+          <SuggestedCourseProduct courses={courses} products={products} />
+          <Grid item xs={12} pt={10} pb={20}>
+            <MemberComponent />
+          </Grid>
         </Grid>
       </Stack>
-      <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
-        <CourseDetailHighlight />
-        <CourseDetailContent />
-        <Grid item xs={12}>
-          <Divider />
-        </Grid>
-        <SuggestedCourseProduct courses={courses} products={products} />
-        <Grid item xs={12} pt={10} pb={20}>
-          <MemberComponent />
-        </Grid>
-      </Grid>
-    </Stack>
+    </Elements>
   );
 }
 
