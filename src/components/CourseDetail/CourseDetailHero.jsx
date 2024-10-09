@@ -17,11 +17,13 @@ export const CourseDetailHero = () => {
   const stripe = useStripe();
 
   const handleCheckout = async () => {
-    // const result = await stripe.redirectToCheckout({ sessionId: 'cs_test_a1ZNjc1ipfTPp9fq6rX9EyuyGNOVhsu9X7yzLg1DKKX60vTvg2dXRq3rfl' });
     setLoading(true);
     try {
-      const res = (await enrollment({ courseId: 336 })).data;
-      
+      console.log('Click');
+      const res = (await enrollment({ courseId: 405 })).data
+
+      console.log(res)
+
       const data = await res;
       if (data.id) {
         // Redirect to Stripe's checkout page using the session ID
