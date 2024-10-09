@@ -29,8 +29,11 @@ export const CourseDetailHero = ({courseData}) => {
               <Link
                 sx={{
                   color: 'white',
-                  textDecoration: 'underline',
                   textUnderlineOffset: 3,
+                  cursor: "pointer",
+                  ":hover": {
+                    textDecoration: "underline"
+                  }
                 }}
                 onClick={() => navigate(`/instructor-profile/${courseData.instructorId}`)}
               >
