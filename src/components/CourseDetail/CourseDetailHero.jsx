@@ -23,7 +23,6 @@ export const CourseDetailHero = () => {
     try {
       const res = await enrollment({ courseId: 405 }).unwrap();
 
-      console.log(res)
       const data = await res;
     
       if (data.id) {
