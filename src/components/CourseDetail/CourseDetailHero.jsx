@@ -6,7 +6,7 @@ import {
   defaultLayoutIcons,
   DefaultVideoLayout,
 } from '@vidstack/react/player/layouts/default';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useStripe } from '@stripe/react-stripe-js';
 import { useEnrollmentMutation } from '../../services/api/enrollmentApi';
