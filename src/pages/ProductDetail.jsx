@@ -70,11 +70,15 @@ function ProductDetailPage() {
             </Grid>
           </Grid>
           <Stack spacing="30px" sx={{ mt: { xs: "50px", md: "160px" } }}>
-            <Typography sx={{ typography: { xs: "blgsm", md: "h4" } }}>
-              You might also want to buy these products
-            </Typography>
-            <CustomCarousel data={allRelatedProducts} cardVariant="product" />
-          </Stack>
+            {allRelatedProducts.length > 0 && 
+              <Fragment>
+                <Typography sx={{ typography: { xs: "blgsm", md: "h4" } }}>
+                  You might also want to buy these products
+                </Typography>
+                <CustomCarousel data={allRelatedProducts} cardVariant="product" />
+              </Fragment>
+            }
+            </Stack>
         </Stack>
       </Container>
     );

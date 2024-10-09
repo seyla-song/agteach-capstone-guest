@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Box, Button, Stack } from "@mui/material";
@@ -8,27 +8,24 @@ import CustomCard from "./CustomCard";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
-/**
- * CustomCarousel component is a reusable component
- * that renders a slider and a navigator at the bottom
- * with next and prev buttons.
- *
- * @param {{ data: Array, cardVariant: string }} props
- *   - data is an array of objects that will be passed to CustomCard
- *   - cardVariant is the variant of the card that will be used
- *     in the CustomCard component
- *
- * @returns {JSX.Element} A JSX element that renders a slider
- *   with navigator at the bottom.
- */
-export const CustomCarousel = ({ data, cardVariant, slideToShow = 4 }) => {
+export const CustomCarousel = ({ data, cardVariant, slideToShow = 4, maxItemWidth = 300 }) => {
   const sliderRef = useRef();
 
+  const forceResizeSlideSize = () => {
+    const slides = document.getElementsByClassName('slick-slide');
+    console.log(slides);
+    setTimeout(() => {
+      Array.from(slides).forEach((el) => {
+        el.style.width = `${maxItemWidth}px`;
+      });
+    }, 100);
+  };
+  
   const adjustedSlidesToShow = Math.min(slideToShow, data.length);
 
   const settings = {
     dots: false,
-    infinite: false,  // Enable infinite only if data is sufficient
+    infinite: false,
     speed: 500,
     slidesToShow: adjustedSlidesToShow,
     slidesToScroll: 4,
@@ -58,37 +55,31 @@ export const CustomCarousel = ({ data, cardVariant, slideToShow = 4 }) => {
     ],
   };
 
-
-  /**
-   * Handle next button click event on the slider
-   *
-   * @function
-   * @since 0.0.1
-   * @example
-   * <CustomCarousel data={data} cardVariant='product' />
-   */
   const handleNext = () => {
     sliderRef.current.slickNext();
   };
 
-  /**
-   * Handle previous button click event on the slider
-   *
-   * @function
-   * @since 0.0.1
-   * @example
-   * <CustomCarousel data={data} cardVariant='product' />
-   */
   const handlePrev = () => {
     sliderRef.current.slickPrev();
   };
 
+  useEffect(() => {
+    if (data?.length >= adjustedSlidesToShow) {
+      forceResizeSlideSize();
+    }
+  }, [data, adjustedSlidesToShow, maxItemWidth]);
+
   return (
     <Stack>
-      {/* Custom carousel component using react-slick */}
       <Slider ref={sliderRef} {...settings}>
         {data.map((product, idx) => (
-          <Box key={idx}>
+          <Box
+            key={idx}
+            sx={{
+              maxWidth: `${maxItemWidth}px !important`, // Setting max width for each carousel item
+              margin: '0 auto', // Center the items within each slide
+            }}
+          >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -100,14 +91,12 @@ export const CustomCarousel = ({ data, cardVariant, slideToShow = 4 }) => {
         ))}
       </Slider>
       <Stack justifyContent="end" direction="row" spacing={2}>
-        {/* Previous button */}
         <Button
           size="medium"
           onClick={handlePrev}
           variant="contained"
           startIcon={<ChevronLeft />}
         />
-        {/* Next button */}
         <Button
           size="medium"
           onClick={handleNext}
@@ -115,94 +104,6 @@ export const CustomCarousel = ({ data, cardVariant, slideToShow = 4 }) => {
           endIcon={<ChevronRight />}
         />
       </Stack>
-
     </Stack>
   );
 };
-
-//sample data
-
-// const products = [
-//   {
-//     name: 'Grow Lights - LED or fluorescent grow lights',
-//     price: '$10',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Grow Lights - LED or fluorescent grow lights',
-//     price: '$15',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Grow Lights - LED or fluorescent grow lights',
-//     price: '$20',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Grow Lights - LED or fluorescent grow lights',
-//     price: '$25',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Grow Lights - LED or fluorescent grow lights',
-//     price: '$30',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Product 6',
-//     price: '$35',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Product 7',
-//     price: '$40',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Product 8',
-//     price: '$45',
-//     image: 'https://via.placeholder.com/150',
-//   },
-// ];
-// const courses = [
-//   {
-//     name: 'Indoor Plant Propagation Techniques',
-//     instructor: 'Emily Greene',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Vertical Gardening for Urban Spaces',
-//     instructor: 'Emily Greene',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Organic Indoor Plant Care and Maintenance',
-//     instructor: 'Emily Greene',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Advanced Indoor Plant Lighting Strategies',
-//     instructor: 'Emily Greene',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Product 5',
-//     instructor: 'Emily Greene',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Product 6',
-//     instructor: 'Emily Greene',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Product 7',
-//     instructor: 'Emily Greene',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Product 8',
-//     instructor: 'Emily Greene',
-//     image: 'https://via.placeholder.com/150',
-//   },
-// ];
