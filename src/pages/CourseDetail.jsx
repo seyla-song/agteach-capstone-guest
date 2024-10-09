@@ -40,6 +40,8 @@ function CourseDetailPage() {
       setRecommendedCourses(shuffle(recommendedCoursesData.data));
       console.log('course: ', recommendedCoursesData.data)
     }
+    
+    if (isRecommendedCoursesError) console.log('error: ', recommendedCoursesError)
 
     if (recommendedProductsData) { 
       setRecommendedProducts(shuffle(recommendedProductsData.data));
@@ -58,11 +60,11 @@ function CourseDetailPage() {
   else if (currentCourseData) content = <Stack alignItems="center">
                                     <Stack width="100%" alignItems="center" bgcolor={'primary.dark'}>
                                       <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
-                                        <CourseDetailHero courseData={currentCourseData?.data}/>
+                                        <CourseDetailHero courseData={currentCourseData?.data[0]}/>
                                       </Grid>
                                     </Stack>
                                     <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
-                                      <CourseDetailHighlight courseData={currentCourseData?.data}/>
+                                      <CourseDetailHighlight courseData={currentCourseData?.data[0]}/>
                                       <CourseDetailContent />
                                       <Grid item xs={12}>
                                         <Divider />

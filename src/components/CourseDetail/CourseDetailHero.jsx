@@ -7,22 +7,26 @@ import {
   DefaultVideoLayout,
 } from '@vidstack/react/player/layouts/default';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export const CourseDetailHero = ({courseData}) => {
 
   const navigate = useNavigate()
+  useEffect(() => {
+    console.log('course Data', courseData);
+  }, [])
 
   return (
     <Grid color={'white'} item xs={12}>
       <Grid alignItems={'center'} paddingY={15} container>
         <Grid item xs={5}>
           <Stack gap>
-            <Typography variant="h2">${courseData.price}</Typography>
+            <Typography variant="h2">${courseData.course.price}</Typography>
             <Typography variant="h4">
-              {courseData.courseObjective}
+              {courseData.course.courseObjective}
             </Typography>
             <Typography variant="bsr">
-              {courseData.description}
+              {courseData.course.description}
             </Typography>
             <Typography variant="bsr">
               Created by:{' '}
@@ -35,9 +39,9 @@ export const CourseDetailHero = ({courseData}) => {
                     textDecoration: "underline"
                   }
                 }}
-                onClick={() => navigate(`/instructor-profile/${courseData.instructorId}`)}
+                onClick={() => navigate(`/instructor-profile/${courseData.course.instructorId}`)}
               >
-                {courseData.instructorName || 'Emily Greene'}
+                {courseData.course.instructorName || 'Emily Greene'}
               </Link>
             </Typography>
           </Stack>
@@ -47,11 +51,11 @@ export const CourseDetailHero = ({courseData}) => {
           <Stack display={'flex'} flexDirection={'column'} gap={1}>
             <MediaPlayer
               title="Sprite Fight"
-              src={courseData.previewVideoUrl}
+              src={courseData.course.previewVideoUrl}
             >
               <MediaProvider />
               <DefaultVideoLayout
-                thumbnails={courseData.thumbnailUrl}
+                thumbnails={courseData.course.thumbnailUrl}
                 icons={defaultLayoutIcons}
               />
             </MediaPlayer>

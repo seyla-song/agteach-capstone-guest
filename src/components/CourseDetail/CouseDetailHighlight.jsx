@@ -1,8 +1,22 @@
 import { Grid, Stack, Typography } from '@mui/material';
 import TimerIcon from '@mui/icons-material/TimerOutlined';
 import MovieIcon from '@mui/icons-material/MovieOutlined';
+import { Fragment } from 'react';
 
 export const CourseDetailHighlight = ({courseData}) => {
+  let objectiveConent;
+  const courseObjectives = courseData.course.courseObjective.includes('\r') ? courseData.course.courseObjective.replace('\r', '-+-&+-+ ').split('-+-&+-+ ') : courseData.course.courseObjective;
+
+  if (Array.isArray(courseObjectives)) {
+    objectiveConent = courseObjectives.map((objective, idx) => {
+      return <Typography variant="bxsr" key={idx}>
+      ✅ {objective}
+    </Typography>
+    })
+  }
+  else {
+    objectiveConent = `✅ ${courseObjectives}`;
+  }
   return (
     <Grid item xs={12}>
       <Stack py={10}>
@@ -21,19 +35,9 @@ export const CourseDetailHighlight = ({courseData}) => {
                 <Typography variant="h4">
                   What you learn in this course? What included
                 </Typography>
-                <Typography variant="bxsr">
-                  ✅ How to mix and manage nutrient solutions to ensure optimal
-                  plant growth and health in a soil-free environment
-                </Typography>
-                <Typography variant="bxsr">
-                  ✅ How to design and build various types of hydroponic
-                  systems, including nutrient film techniques and deep water
-                  culture.
-                </Typography>
-                <Typography variant="bxsr">
-                  ✅ Techniques for managing light, temperature, and humidity to
-                  create the ideal conditions for indoor plant growth.
-                </Typography>
+                <Fragment>
+                  {objectiveConent}
+                </Fragment>
               </Stack>
             </Stack>
           </Grid>
