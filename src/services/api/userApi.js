@@ -5,11 +5,12 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const userApi = createApi({
   reducerPath: "userApi",
-  tagTypes: ["User"],
+  // tagTypes: ["User"],
   baseQuery: fetchBaseQuery({
     baseUrl: "https://api.agteach.site",
     credentials: "include",
   }),
+  tagTypes: ["User"],
   endpoints: (builder) => ({
     updatePassword: builder.mutation({
       query: (passwordData) => ({
