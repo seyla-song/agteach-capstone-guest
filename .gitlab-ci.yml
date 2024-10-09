@@ -6,8 +6,8 @@ stages:
 install_dependencies:
   stage: install
   image: node:20
-  only:
-    - develop
+  # only:
+  #   - develop
   script:
     - node -v
     - echo "Installing dependencies"
@@ -19,8 +19,8 @@ install_dependencies:
 build_app:
   stage: build
   image: node:20
-  only:
-    - develop
+  # only:
+  #   - develop
   script:
     - echo "Building Instructor Application"
     - node -v
@@ -37,8 +37,8 @@ build_app:
 deploy_to_aws:
   stage: deploy
   image: node:20
-  only:
-    - develop
+  # only:
+  #   - develop
   before_script:
     - 'which ssh-agent || (brew install openssh)'
     - eval $(ssh-agent -s)
