@@ -6,7 +6,7 @@ import {
   defaultLayoutIcons,
   DefaultVideoLayout,
 } from '@vidstack/react/player/layouts/default';
-import { Link } from 'react-router-dom';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useStripe } from '@stripe/react-stripe-js';
 import { useEnrollmentMutation } from '../../services/api/enrollmentApi';
@@ -16,13 +16,12 @@ export const CourseDetailHero = () => {
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
 
+  const navigate = useNavigate();
+
   const handleCheckout = async () => {
     setLoading(true);
     try {
-      console.log('Click');
-      const res = (await enrollment({ courseId: 405 })).data
-
-      console.log(res)
+      const res = await enrollment({ courseId: 405 }).unwrap();
 
       const data = await res;
       if (data.id) {
@@ -37,6 +36,7 @@ export const CourseDetailHero = () => {
       }
     } catch (error) {
       console.error('Error during checkout', error);
+      error.status === 401 && navigate('/auth/login');
     } finally {
       setLoading(false);
     }
