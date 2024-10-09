@@ -67,9 +67,9 @@ function ProfilePhoto() {
       try {
         const response = await updateInfo(formData).unwrap();
         console.log("Success:", formData);
-        if (response) {
+        // if (response) {
           window.location.reload();
-        }
+        // }
       } catch (error) {
         setAlertMessage('Error submitting form. Please try again.');
         setAlertSeverity("error");
