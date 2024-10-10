@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import GuestProfileImg from "../../assets/guest-profile.jpg";
+// import GuestProfileImg from "../../assets/guest-profile.jpg";
 import {
   Box,
   Button,
@@ -12,57 +12,93 @@ import {
   useGetUserInfoQuery,
   useUpdateInfoMutation,
 } from "../../services/api/userApi";
+import { CustomAlert } from "../../components/CustomAlert";
 
-/**
- * ProfilePhoto component is a reusable component
- * that renders a container with a Stack of several components:
- *  - Profile photo with a preview
- *  - Add/Change Image functionality with a file input and an upload button
- *
- * It also handles the state of the above components and their corresponding actions
- *
- * @returns {JSX.Element} A JSX element that renders a container
- *   with a Stack of several components.
- */
 function ProfilePhoto() {
-  const [profileImage, setProfileImage] = useState(GuestProfileImg);
-  const { data } = useGetUserInfoQuery();
-  const [updateInfo] = useUpdateInfoMutation();
+  const [profileImage, setProfileImage] = useState();
+  const { data, refetch } = useGetUserInfoQuery();
+  const [updateInfo, { isLoading, isError, isSuccess, error }] = useUpdateInfoMutation();
 
-  // Load image from localStorage when the component mounts
+  // Alert state
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertSeverity, setAlertSeverity] = useState("error");
+
+  let customerData = {};
+  // if (data) {
+  //   customerData = data.data.customer;
+  // }
+  // setProfileImage(customerData.imageUrl);
+  console.log("customerDataaaaa", customerData.imageUrl);
+
   useEffect(() => {
+    // const storedImage = localStorage.getItem("profileImage");
+    // if (storedImage) {
+    //   setProfileImage(storedImage);
+    // }
     if (data) {
-      const customerData = data.data.customer;
-      console.log("customerData", customerData, data);
-      const { imageUrl } = customerData;
-      if (imageUrl) {
-        setProfileImage(imageUrl);
-      }
+      customerData = data.data.customer;
+      setProfileImage(customerData.imageUrl);
     }
   }, [data]);
 
-  // Function to handle image upload
   const handleImageUpload = async (event) => {
-    const formData = new FormData();
     const file = event.target.files[0];
-    formData.append("photo", file);
+    setProfileImage(URL.createObjectURL(file));
 
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result;
-        setProfileImage(base64String); // convert the image to base64 string encoder
-        localStorage.setItem("profileImage", base64String); // Save to localStorage
-      };
-      reader.readAsDataURL(file); // Convert image to Base64
+      const validImageTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+        "image/webp",
+        "image/bmp",
+      ];
+      if (!validImageTypes.includes(file.type)) {
+        setAlertMessage(
+          "Please select a valid image file (JPEG, PNG, GIF, WEBP, BMP)."
+        );
+        setAlertSeverity("error");
+        setAlertOpen(true);
+        return;
+      }
+      const formData = new FormData();
+      formData.append("photo", file);
+      try {
+        const response = await updateInfo(formData).unwrap();
+        console.log("Success:", formData);
+        // if (response) {
+          window.location.reload();
+        // }
+      } catch (error) {
+        setAlertMessage('Error submitting form. Please try again.');
+        setAlertSeverity("error");
+        setAlertOpen(true);
+      }
+
+      // const reader = new FileReader();
+      // reader.onloadend = async () => {
+      //   // const base64String = reader.result;
+      //   // setProfileImage(base64String);
+      //   // localStorage.setItem("profileImage", base64String);
+
+      //   const formData = new FormData();
+      //   formData.append("photo", file);
+
+      //   try {
+      //     await updateInfo(formData).unwrap();
+      //     // window.location.reload();
+      //   } catch (error) {
+      //     console.error("Error submitting form:", error);
+      //   }
+      // };
+      // reader.readAsDataURL(file);
     }
-   
-    try {
-      await updateInfo(formData).unwrap();
-      console.log("Success:", formData);
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
+  };
+
+  // Handle alert close
+  const handleAlertClose = () => {
+    setAlertOpen(false);
   };
 
   return (
@@ -87,6 +123,7 @@ function ProfilePhoto() {
       >
         <Stack>
           <Avatar
+            // src={customerData.imageUrl}
             src={profileImage}
             alt="Profile Pic"
             sx={{ width: 300, height: 300, border: "15px solid lightgrey" }}
@@ -112,15 +149,26 @@ function ProfilePhoto() {
           <OutlinedInput
             type="file"
             id="myfile"
+            accept="image/*"
             name="myfile"
+            hiddenLabel
             onChange={handleImageUpload}
             sx={{ flexGrow: 1, width: "auto" }}
           />
           <Button variant="contained" sx={{ px: 10, py: 2 }}>
-            Upload
+          {isLoading ? "Uploading..." : "Upload"}
           </Button>
         </Stack>
       </Box>
+
+      {/* Custom Alert Component */}
+      <CustomAlert
+        sx={{ mt: 2 }}
+        label={alertMessage}
+        open={alertOpen}
+        onClose={handleAlertClose}
+        severity={alertSeverity}
+      />
     </>
   );
 }
