@@ -11,22 +11,19 @@ import { useEffect } from 'react';
 
 export const CourseDetailHero = ({courseData}) => {
 
-  const navigate = useNavigate()
-  useEffect(() => {
-    console.log('course Data', courseData);
-  }, [])
+  const navigate = useNavigate();
 
   return (
     <Grid color={'white'} item xs={12}>
       <Grid alignItems={'center'} paddingY={15} container>
         <Grid item xs={5}>
           <Stack gap>
-            <Typography variant="h2">${courseData.course.price}</Typography>
+            <Typography variant="h2">${courseData.price}</Typography>
             <Typography variant="h4">
-              {courseData.course.courseObjective}
+              {courseData.courseObjective}
             </Typography>
             <Typography variant="bsr">
-              {courseData.course.description}
+              {courseData.description}
             </Typography>
             <Typography variant="bsr">
               Created by:{' '}
@@ -39,9 +36,9 @@ export const CourseDetailHero = ({courseData}) => {
                     textDecoration: "underline"
                   }
                 }}
-                onClick={() => navigate(`/instructor-profile/${courseData.course.instructorId}`)}
+                onClick={() => navigate(`/instructor-profile/${courseData.instructorId}`)}
               >
-                {courseData.course.instructorName || 'Emily Greene'}
+                {courseData.instructorName || 'Emily Greene'}
               </Link>
             </Typography>
           </Stack>
@@ -51,11 +48,11 @@ export const CourseDetailHero = ({courseData}) => {
           <Stack display={'flex'} flexDirection={'column'} gap={1}>
             <MediaPlayer
               title="Sprite Fight"
-              src={courseData.course.previewVideoUrl}
+              src={courseData.previewVideoUrl}
             >
               <MediaProvider />
               <DefaultVideoLayout
-                thumbnails={courseData.course.thumbnailUrl}
+                thumbnails={courseData.thumbnailUrl}
                 icons={defaultLayoutIcons}
               />
             </MediaPlayer>
