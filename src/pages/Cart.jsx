@@ -9,64 +9,70 @@ import {
 import { Link } from 'react-router-dom';
 import { CustomCartItem } from '../components/Cart/CustomCartItem';
 import { PurchasedHistory } from '../components/Cart/PurchasedHistory';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 function CartPage() {
   return (
-    <Container
-      maxWidth={false}
-      sx={{
-        maxWidth: '1420px',
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: { xs: '50px', md: '120px' },
-        pt: 10,
-      }}
-    >
-      <Grid container>
-        <Grid item md={8} pr={3} pb={5} xs>
-          {orderItems.map((item) => (
-            <CustomCartItem key={item.id} {...item} />
-          ))}
-        </Grid>
-        <Grid item md={4} xs>
-          <Stack
-            bgcolor="common.white"
-            p={3}
-            borderRadius={3}
-            height={180}
-            justifyContent="space-between"
-            sx={{
-              borderColor: 'grey.300',
-              borderStyle: 'solid',
-              borderWidth: '1px',
-            }}
-          >
-            <Stack direction="row" justifyContent="space-between">
-              <Typography variant="blgsm">Subtotal</Typography>
-              <Typography variant="blgsm">$40.00</Typography>
+    <Elements stripe={stripePromise}>
+      <Container
+        maxWidth={false}
+        sx={{
+          maxWidth: '1420px',
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: { xs: '50px', md: '120px' },
+          pt: 10,
+        }}
+      >
+        <Grid container>
+          <Grid item md={8} pr={3} pb={5} xs>
+            {orderItems.map((item) => (
+              <CustomCartItem key={item.id} {...item} />
+            ))}
+          </Grid>
+          <Grid item md={4} xs>
+            <Stack
+              bgcolor="common.white"
+              p={3}
+              borderRadius={3}
+              height={180}
+              justifyContent="space-between"
+              sx={{
+                borderColor: 'grey.300',
+                borderStyle: 'solid',
+                borderWidth: '1px',
+              }}
+            >
+              <Stack direction="row" justifyContent="space-between">
+                <Typography variant="blgsm">Subtotal</Typography>
+                <Typography variant="blgsm">$40.00</Typography>
+              </Stack>
+              <Divider />
+              <Link to="/payment">
+                <Button
+                  size="large"
+                  fullWidth
+                  variant="contained"
+                  color="secondary"
+                >
+                  Checkout
+                </Button>
+              </Link>
             </Stack>
+          </Grid>
+          <Grid item sx={{ py: 5 }} xs={12}>
             <Divider />
-            <Link to="/payment">
-              <Button
-                size="large"
-                fullWidth
-                variant="contained"
-                color="secondary"
-              >
-                Checkout
-              </Button>
-            </Link>
-          </Stack>
+          </Grid>
+          <Grid item xs={12}>
+            <PurchasedHistory data={purchasedHistory} />
+          </Grid>
         </Grid>
-        <Grid item sx={{ py: 5 }} xs={12}>
-          <Divider />
-        </Grid>
-        <Grid item xs={12}>
-          <PurchasedHistory data={purchasedHistory} />
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </Elements>
   );
 }
 
