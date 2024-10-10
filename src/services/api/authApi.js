@@ -6,10 +6,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.agteach.site",
+    baseUrl: "http://localhost:3001",
     credentials: "include",
   }),
-  tagTypes: ["Auth"], 
+  tagTypes: ["Auth"],
   endpoints: (builder) => ({
     signup: builder.mutation({
       query: (signupData) => ({
@@ -26,7 +26,7 @@ export const apiSlice = createApi({
         body: loginData,
         headers: { "X-Frontend-URL": window.location },
       }),
-      invalidatesTags: ["Auth"], 
+      invalidatesTags: ["Auth"],
     }),
 
     logout: builder.mutation({
@@ -51,7 +51,7 @@ export const apiSlice = createApi({
         method: "PATCH",
         body: resetData.body,
       }),
-      invalidatesTags: ["Auth"], 
+      invalidatesTags: ["Auth"],
     }),
 
     addPersonalInfo: builder.mutation({
@@ -83,7 +83,7 @@ export const apiSlice = createApi({
         url: "/api/users/isLoginedIn",
         method: "GET",
       }),
-      providesTags: ["Auth"], 
+      providesTags: ["Auth"],
     }),
   }),
 });
