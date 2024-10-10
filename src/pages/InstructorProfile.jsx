@@ -3,7 +3,7 @@ import ProfilePage from "../components/InstructorProfile/ProfilePage.jsx";
 import Courses from "../components/InstructorProfile/Coures.jsx";
 import Products from "../components/InstructorProfile/Products.jsx";
 import { useGetInstructorQuery } from "../services/api/instructorApi.js";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 /**
  * The InstructorProfile component renders a page with the instructor's profile,
@@ -34,12 +34,10 @@ export default function InstructorProfile() {
       </Box>
     );
   }
-
-  console.log("course", instructorData.courses);
-  console.log(isError);
-  // if (isError) {
-  //   return <Navigate to="/error" />;
-  // }
+  
+  if (isError) {
+    return <Navigate to="/error" />;
+  }
 
   return (
     <>

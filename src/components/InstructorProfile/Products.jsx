@@ -4,22 +4,10 @@ import {
   Container,
   Grid,
   Button,
-  useMediaQuery,
   Box,
-  CircularProgress,
 } from "@mui/material";
 import CustomCard from "../../components/CustomCard";
-import Img11 from "../../assets/InstructorProfile/Rectangle 11.png";
-import Img12 from "../../assets/InstructorProfile/Rectangle 12.png";
-import Img13 from "../../assets/InstructorProfile/Rectangle 13.png";
-import Img14 from "../../assets/InstructorProfile/Rectangle 14.png";
-import Img15 from "../../assets/InstructorProfile/Rectangle 15.png";
-import Img16 from "../../assets/InstructorProfile/Rectangle 16.png";
-import Img17 from "../../assets/InstructorProfile/Rectangle 17.png";
-import Img18 from "../../assets/InstructorProfile/Rectangle 18.png";
-import Img19 from "../../assets/InstructorProfile/Rectangle 19.png";
-import Img20 from "../../assets/InstructorProfile/Rectangle 20.png";
-import { useSearchProductQuery } from "../../services/api/productApi";
+
 import { useState } from "react";
 
 /**
@@ -100,65 +88,3 @@ function Products({ instructorName, productData }) {
 
 export default Products;
 
-const products = [
-  {
-    name: "Grow Lights - LED or fluorescent grow lights",
-    instructor: "Emily Greene",
-    price: "30$",
-    imageUrl: Img11,
-  },
-  {
-    name: "Grow Lights - LED or fluorescent grow lights",
-    instructor: "Emily Greene",
-    price: "30$",
-    imageUrl: Img12,
-  },
-  {
-    name: "Grow Lights - LED or fluorescent grow lights",
-    instructor: "Emily Greene",
-    price: "30$",
-    imageUrl: Img13,
-  },
-  {
-    name: "Grow Lights - LED or fluorescent grow lights",
-    instructor: "Emily Greene",
-    price: "30$",
-    imageUrl: Img14,
-  },
-  {
-    name: "Grow Lights - LED or fluorescent grow lights",
-    instructor: "Emily Greene",
-    price: "30$",
-    imageUrl: Img15,
-  },
-  {
-    name: "Grow Lights - LED or fluorescent grow lights",
-    instructor: "Emily Greene",
-    price: "30$",
-    imageUrl: Img16,
-  },
-  {
-    name: "Grow Lights - LED or fluorescent grow lights",
-    instructor: "Emily Greene",
-    price: "30$",
-    imageUrl: Img17,
-  },
-  {
-    name: "Grow Lights - LED or fluorescent grow lights",
-    instructor: "Emily Greene",
-    price: "30$",
-    imageUrl: Img18,
-  },
-  {
-    name: "Grow Lights - LED or fluorescent grow lights",
-    instructor: "Emily Greene",
-    price: "30$",
-    imageUrl: Img19,
-  },
-  {
-    name: "Grow Lights - LED or fluorescent grow lights",
-    instructor: "Emily Greene",
-    price: "30$",
-    imageUrl: Img20,
-  },
-];
