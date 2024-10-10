@@ -15,8 +15,6 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import InstructorProfileImg from "../../assets/InstructorProfile/instructorprofile.jpg";
-import { useGetInstructorQuery } from "../../services/api/instructorApi";
-import { useParams, Navigate } from "react-router-dom";
 /**
  * ProfilePage is a component that renders an instructor's profile page.
  *
@@ -27,13 +25,12 @@ import { useParams, Navigate } from "react-router-dom";
  *
  * @returns {JSX.Element} The ProfilePage component.
  */
-function ProfilePage() {
+function ProfilePage({instructorData}) {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
-  let { instructorId } = useParams();
 
-  const { data, isLoading, isError } = useGetInstructorQuery(instructorId);
+
   /**
    * Copies the given text to the user's clipboard.
    *
@@ -52,10 +49,7 @@ function ProfilePage() {
         console.error("Failed to copy text: ", err);
       });
   };
-  const instructorData = !isLoading ? data?.data : "";
-  //
 
-  !isLoading ? console.log(instructorData) : console.log("Loading...");
   /**
    * Closes the snackbar.
    */
@@ -63,24 +57,7 @@ function ProfilePage() {
     setSnackbarOpen(false);
   };
 
-  if (isLoading) {
-    return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          mt: 10,
-        }}
-      >
-        <CircularProgress />
-      </Box>
-    );
-  }
-  console.log(isError);
-  if (isError) {
-    return <Navigate to="/error" />;
-  }
+
 
   const { firstName, lastName, phone, email, imageUrl, bio } = instructorData;
 

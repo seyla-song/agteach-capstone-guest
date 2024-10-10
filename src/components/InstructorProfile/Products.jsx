@@ -34,9 +34,10 @@ import { useSearchProductQuery } from "../../services/api/productApi";
  *
  * @returns {React.ReactElement} The component element.
  */
-function Products() {
+function Products({ productData }) {
   const { data, isLoading } = useSearchProductQuery("");
   if (!isLoading) console.log("products", data);
+  console.log(productData)
 
   // Check for breakpoints
   const desktop = useMediaQuery("(min-width:1420px)");
@@ -65,9 +66,9 @@ function Products() {
       return 3; // 3 items per row on smaller screens
     }
   };
-
-  if (isLoading) {
-    return (
+  let productContent = "";
+  if (productData.length === 0) {
+    productContent = (
       <Box
         sx={{
           display: "flex",
@@ -76,30 +77,30 @@ function Products() {
           mt: 10,
         }}
       >
-        Product Loading...
-        <CircularProgress />
+        There is no course of this instructor yet!.
       </Box>
     );
+  } else {
+    productContent = data.data.map((item, idx) => (
+      <Grid
+        item
+        // xs={12 / itemsPerRow()} // Responsive columns
+        key={idx}
+      >
+        <CustomCard dataObj={item} variant="product" />
+      </Grid>
+    ));
   }
 
   return (
     <Stack>
       <Stack>
         <Typography variant="h4">Emily Greene products</Typography>
-        <Typography variant="bsr">Found (15) Courses</Typography>
+        <Typography variant="bsr">Found (15) Product</Typography>
 
         <Container sx={{ mt: 2 }} disableGutters>
           <Grid container spacing={2}>
-            {data.data.map((item, idx) => (
-              <Grid
-                item
-                // xs={12 / itemsPerRow()} // Responsive columns
-                key={idx}
-              >
-                <CustomCard dataObj={item} variant="product" />
-              </Grid>
-            ))}
-
+            {productContent}
             {/*             
             {checkScreen().map((item, idx) => (
               <Grid

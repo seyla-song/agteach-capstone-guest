@@ -7,7 +7,7 @@ export const instructorApi = createApi({
   endpoints: (builder) => ({
     getInstructor: builder.query({
       query: (id) => ({
-        url: `/api/instructor/${id}`,
+        url: `/api/instructor/getInstructorDetail/${id}`,
         method: "GET",
       }),
     }),

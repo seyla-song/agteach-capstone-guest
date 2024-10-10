@@ -5,6 +5,7 @@ import {
   Grid,
   Button,
   useMediaQuery,
+  Box,
 } from "@mui/material";
 import CustomCard from "../../components/CustomCard";
 import Img1 from "../../assets/InstructorProfile/Rectangle 1.png";
@@ -29,7 +30,7 @@ import Img10 from "../../assets/InstructorProfile/Rectangle 10.png";
    *
    * @returns {React.ReactElement} The component element.
    */
-function Courses() {
+function Courses({courseData, instructorName}) {
   // Check for breakpoints
   const desktop = useMediaQuery("(min-width:1420px)");
   const tablet = useMediaQuery("(min-width:1000px)");
@@ -38,11 +39,11 @@ function Courses() {
   // Determine how many items to show based on screen size
   const checkScreen = () => {
     if (desktop) {
-      return products.slice(0, 10); // Show up to 10 products on large screens
+      return courseData.slice(0, 10); // Show up to 10 products on large screens
     } else if (tablet) {
-      return products.slice(0, 8); // Show up to 8 products on tablet screens
+      return courseData.slice(0, 8); // Show up to 8 products on tablet screens
     } else {
-      return products.slice(0, 6); // Show up to 6 products on smaller screens
+      return courseData.slice(0, 6); // Show up to 6 products on smaller screens
     }
   };
 
@@ -56,16 +57,53 @@ function Courses() {
       return 3; // 3 items per row on smaller screens
     }
   };
-
+  // checkScreen().map((item, idx) => (
+  //   <Grid
+  //     item
+  //     xs={12 / itemsPerRow()} // Responsive columns
+  //     key={idx}
+  //   >
+  //     <CustomCard dataObj={item} variant="course" />
+  //   </Grid>
+  // ))
+  let courseContent = "";
+  if (courseData.length === 0) {
+    courseContent = (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          mt: 10,
+        }}
+      >
+        There is no course of this instructor yet!.
+      </Box>
+    );
+  } else {
+    courseContent = courseData.map((item, idx) => (
+      <Grid
+        item
+        xs={3}
+        // width='400px'
+        // height='200px'
+        // xs={12 / itemsPerRow()} // Responsive columns
+        key={idx}
+      >
+        <CustomCard dataObj={item} variant="course" />
+      </Grid>
+    ));
+  }
   return (
     <Stack>
       <Stack>
-        <Typography variant="h4">Emily Greene courses</Typography>
-        <Typography variant="bsr">Found (15) Courses</Typography>
+        <Typography variant="h4">{instructorName || 'Defautl' } courses</Typography>
+        <Typography variant="bsr">Found ({courseData.length}) Courses</Typography>
 
         <Container sx={{ mt: 2 }} disableGutters>
           <Grid container spacing={2}>
-            {checkScreen().map((item, idx) => (
+            {courseContent}
+            {/* {checkScreen().map((item, idx) => (
               <Grid
                 item
                 xs={12 / itemsPerRow()} // Responsive columns
@@ -73,7 +111,7 @@ function Courses() {
               >
                 <CustomCard dataObj={item} variant="course" />
               </Grid>
-            ))}
+            ))} */}
           </Grid>
         </Container>
       </Stack>
