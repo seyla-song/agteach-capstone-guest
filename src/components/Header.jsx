@@ -284,7 +284,7 @@ function Navigation() {
               </Link>
             ))}
             <Link href={teachAgtechURL} color="common.white" underline="none">
-              <Typography variant="bsr">Become a member</Typography>
+              <Typography variant="bsr">Become an Instructor</Typography>
             </Link>
           </Box>
 
@@ -327,7 +327,7 @@ function Navigation() {
                   href={teachAgtechURL}
                   underline="none"
                 >
-                  <Typography variant="bsr">Become a member</Typography>
+                  <Typography variant="bsr">Become an Instructor</Typography>
                 </MenuItem>
                 {HEADER_MENU_MOBILE.map((data) => (
                   <MenuItem

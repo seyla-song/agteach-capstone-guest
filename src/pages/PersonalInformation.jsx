@@ -133,6 +133,14 @@ export default function PersonalInfoForm() {
                         value: /^[0-9]+$/i,
                         message: "Please enter a valid phone number",
                       },
+                      minLength: {
+                        value: 15,
+                        message: "Phone number must be at least 15 digits long.",
+                      },
+                      maxLength: {
+                        value: 15,
+                        message: "Phone number must be exactly 15 digits long.",
+                      },
                     })}
                     error={!!errors.phone}
                     helperText={errors?.phone?.message}
