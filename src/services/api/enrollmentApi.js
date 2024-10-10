@@ -9,7 +9,7 @@ export const enrollmentApi = createApi({
   endpoints: (builder) => ({
     enrollment: builder.mutation({
       query: (enrollmentData) => ({
-        url: '/api/enrollment/checkout-session',
+        url: '/api/enrollment/checkoutSession',
         method: 'POST',
         body: enrollmentData,
       }),
