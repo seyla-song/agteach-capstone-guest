@@ -4,7 +4,7 @@ export const enrollmentApi = createApi({
   reducerPath: 'enrollmentApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://api.agteach.site',
-    credentials : 'include'
+    credentials: 'include',
   }),
   endpoints: (builder) => ({
     enrollment: builder.mutation({
@@ -13,7 +13,6 @@ export const enrollmentApi = createApi({
         method: 'POST',
         body: enrollmentData,
       }),
-      invalidatesTags: ["User"],
     }),
   }),
 });
