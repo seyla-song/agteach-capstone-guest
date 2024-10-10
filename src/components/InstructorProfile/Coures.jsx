@@ -61,7 +61,7 @@ import { useState } from "react";
             {instructorName || "Default"} Courses
           </Typography>
           <Typography variant="body1">
-            Found ({courseData.length}) Courses
+            Found ({courseData.length || 0}) Courses
           </Typography>
   
           <Container sx={{ mt: 2 }} disableGutters>

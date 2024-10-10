@@ -61,7 +61,7 @@ function Products({ instructorName, productData }) {
           {instructorName || "Default"} Products
         </Typography>
         <Typography variant="body1">
-          Found ({productContent.length}) Products
+          Found ({productContent.length || 0}) Products
         </Typography>
 
         <Container sx={{ mt: 2 }} disableGutters>
