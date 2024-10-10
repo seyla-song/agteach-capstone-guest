@@ -20,6 +20,7 @@ import Img18 from "../../assets/InstructorProfile/Rectangle 18.png";
 import Img19 from "../../assets/InstructorProfile/Rectangle 19.png";
 import Img20 from "../../assets/InstructorProfile/Rectangle 20.png";
 import { useSearchProductQuery } from "../../services/api/productApi";
+import { useState } from "react";
 
 /**
  * A component that renders a responsive list of products, with a responsive
@@ -34,41 +35,19 @@ import { useSearchProductQuery } from "../../services/api/productApi";
  *
  * @returns {React.ReactElement} The component element.
  */
-function Products({ productData }) {
-  const { data, isLoading } = useSearchProductQuery("");
-  if (!isLoading) console.log("products", data);
-  console.log(productData)
+function Products({ instructorName, productData }) {
+  // State to keep track of the number of courses to display
+  const [visibleCount, setVisibleCount] = useState(5);
 
-  // Check for breakpoints
-  const desktop = useMediaQuery("(min-width:1420px)");
-  const tablet = useMediaQuery("(min-width:1000px)");
-  // const mobile = useMediaQuery('(min-width:390px)')
+  // Show a limited number of courses based on visibleCount
+  const visibleCourses = productData.slice(0, visibleCount);
 
-  // if (!isLoading) return <></>;
-  // Determine how many items to show based on screen size
-  const checkScreen = () => {
-    if (desktop) {
-      return products.slice(0, 10); // Show up to 10 products on large screens
-    } else if (tablet) {
-      return products.slice(0, 8); // Show up to 8 products on tablet screens
-    } else {
-      return products.slice(0, 6); // Show up to 6 products on smaller screens
-    }
+  const handleLoadMore = () => {
+    setVisibleCount((prevCount) => prevCount + 5); // Load 5 more courses
   };
 
-  // Determine the number of items per row based on screen size
-  const itemsPerRow = () => {
-    if (desktop) {
-      return 5; // 5 items per row on large screens
-    } else if (tablet) {
-      return 4; // 4 items per row on tablet screens
-    } else {
-      return 3; // 3 items per row on smaller screens
-    }
-  };
-  let productContent = "";
-  if (productData.length === 0) {
-    productContent = (
+  const productContent =
+    visibleCourses.length === 0 ? (
       <Box
         sx={{
           display: "flex",
@@ -77,49 +56,44 @@ function Products({ productData }) {
           mt: 10,
         }}
       >
-        There is no course of this instructor yet!.
+        There is no course for this instructor yet!
       </Box>
+    ) : (
+      visibleCourses.map((item, idx) => (
+        <Grid item xl={2.4} md={4} xs={4} key={idx}>
+          <CustomCard dataObj={item} variant="product" />
+        </Grid>
+      ))
     );
-  } else {
-    productContent = data.data.map((item, idx) => (
-      <Grid
-        item
-        // xs={12 / itemsPerRow()} // Responsive columns
-        key={idx}
-      >
-        <CustomCard dataObj={item} variant="product" />
-      </Grid>
-    ));
-  }
 
   return (
     <Stack>
       <Stack>
-        <Typography variant="h4">Emily Greene products</Typography>
-        <Typography variant="bsr">Found (15) Product</Typography>
+        <Typography variant="h4">
+          {instructorName || "Default"} Products
+        </Typography>
+        <Typography variant="body1">
+          Found ({productContent.length}) Products
+        </Typography>
 
         <Container sx={{ mt: 2 }} disableGutters>
           <Grid container spacing={2}>
             {productContent}
-            {/*             
-            {checkScreen().map((item, idx) => (
-              <Grid
-                item
-                xs={12 / itemsPerRow()} // Responsive columns
-                key={idx}
-              >
-                <CustomCard dataObj={item} variant="product" />
-              </Grid>
-            ))} */}
           </Grid>
         </Container>
       </Stack>
 
-      <Stack sx={{ mt: 4, mb: 4 }}>
-        <Button variant="outlined" sx={{ px: 4, py: 2 }}>
-          View (5) more
-        </Button>
-      </Stack>
+      {visibleCount < productContent.length && (
+        <Stack sx={{ mt: 4, mb: 4 }}>
+          <Button
+            variant="outlined"
+            sx={{ px: 4, py: 2 }}
+            onClick={handleLoadMore}
+          >
+            View 5 more
+          </Button>
+        </Stack>
+      )}
     </Stack>
   );
 }

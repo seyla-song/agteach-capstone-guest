@@ -3,7 +3,7 @@ import ProfilePage from "../components/InstructorProfile/ProfilePage.jsx";
 import Courses from "../components/InstructorProfile/Coures.jsx";
 import Products from "../components/InstructorProfile/Products.jsx";
 import { useGetInstructorQuery } from "../services/api/instructorApi.js";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 /**
  * The InstructorProfile component renders a page with the instructor's profile,
@@ -35,7 +35,7 @@ export default function InstructorProfile() {
     );
   }
 
-  console.log('course', instructorData.courses)
+  console.log("course", instructorData.courses);
   console.log(isError);
   // if (isError) {
   //   return <Navigate to="/error" />;
@@ -43,14 +43,20 @@ export default function InstructorProfile() {
 
   return (
     <>
-      <Container sx={{alignItems: "center"}}>
-        <ProfilePage instructorData={instructorData.instructor}/>
+      <Container sx={{ alignItems: "center" }}>
+        <ProfilePage instructorData={instructorData.instructor} />
 
         <Divider sx={{ my: 6 }} />
 
-        <Courses courseData={instructorData.courses} instructorName={instructorData.instructor.name} />
+        <Courses
+          courseData={instructorData.courses}
+          instructorName={instructorData.instructor.lastName}
+        />
 
-        <Products productData={instructorData.products} instructorName={instructorData.instructor.name} />
+        <Products
+          productData={instructorData.products}
+          instructorName={instructorData.instructor.lastName}
+        />
       </Container>
     </>
   );

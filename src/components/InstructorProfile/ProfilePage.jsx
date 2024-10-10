@@ -15,6 +15,7 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import InstructorProfileImg from "../../assets/InstructorProfile/instructorprofile.jpg";
+import { useNavigate } from "react-router-dom";
 /**
  * ProfilePage is a component that renders an instructor's profile page.
  *
@@ -25,11 +26,9 @@ import InstructorProfileImg from "../../assets/InstructorProfile/instructorprofi
  *
  * @returns {JSX.Element} The ProfilePage component.
  */
-function ProfilePage({instructorData}) {
+function ProfilePage({ instructorData }) {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-
-
 
   /**
    * Copies the given text to the user's clipboard.
@@ -56,8 +55,7 @@ function ProfilePage({instructorData}) {
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
   };
-
-
+  const navigate = useNavigate();
 
   const { firstName, lastName, phone, email, imageUrl, bio } = instructorData;
 
@@ -69,6 +67,7 @@ function ProfilePage({instructorData}) {
           <Button
             sx={{ px: 2, borderRadius: 50 }}
             startIcon={<ArrowBackIosIcon />}
+            onClick={() => navigate(-1)}
           >
             <Typography variant=" bsr">Back</Typography>
           </Button>
