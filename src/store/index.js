@@ -5,6 +5,7 @@ import { aiApi } from '../services/api/aiApi';
 import { productApi } from '../services/api/productApi';
 import { courseApi } from '../services/api/courseApi';
 import { enrollmentApi } from '../services/api/enrollmentApi';
+import { purchasedApi } from '../services/api/purchasedApi';
 
 import userSlice from '../features/auth/userSlice';
 import authSlice from '../features/auth/authSlice';
@@ -17,6 +18,7 @@ export const store = createStore({
     [productApi.reducerPath]: productApi.reducer,
     [courseApi.reducerPath]: courseApi.reducer,
     [enrollmentApi.reducerPath]: enrollmentApi.reducer,
+    [purchasedApi.reducerPath]: purchasedApi.reducer,
 
     auth: authSlice,
     user: userSlice,
@@ -28,6 +30,7 @@ export const store = createStore({
       productApi.middleware,
       courseApi.middleware,
       aiApi.middleware,
-      enrollmentApi.middleware
+      enrollmentApi.middleware,
+      purchasedApi.middleware
     ),
 });
