@@ -6,11 +6,53 @@ import {
   Button,
   Divider,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CustomCartItem } from '../components/Cart/CustomCartItem';
 import { PurchasedHistory } from '../components/Cart/PurchasedHistory';
+import { Elements, useStripe } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { usePurchasedMutation } from '../services/api/purchasedApi';
+import { useState } from 'react';
+
+const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 function CartPage() {
+  return (
+    <Elements stripe={stripePromise}>
+      <CartContent />
+    </Elements>
+  );
+}
+
+export default CartPage;
+
+const CartContent = () => {
+  const [purchased] = usePurchasedMutation();
+  const [loading, setLoading] = useState(false);
+  const stripe = useStripe();
+
+  const navigate = useNavigate();
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      const data = await purchased({ cartItems }).unwrap();
+      if (data.id) {
+        const result = await stripe.redirectToCheckout({ sessionId: data.id });
+        if (result.error) {
+          console.error('Stripe checkout error', result.error);
+        }
+      } else {
+        console.error('Failed to create checkout session');
+      }
+    } catch (err) {
+      console.error('Error during checkout', err);
+      err.status === 401 && navigate('/auth/login');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Container
       maxWidth={false}
@@ -47,16 +89,16 @@ function CartPage() {
               <Typography variant="blgsm">$40.00</Typography>
             </Stack>
             <Divider />
-            <Link to="/payment">
-              <Button
-                size="large"
-                fullWidth
-                variant="contained"
-                color="secondary"
-              >
-                Checkout
-              </Button>
-            </Link>
+            <Button
+              size="large"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              disabled={!stripe || loading}
+              onClick={handleCheckout}
+            >
+              {loading ? 'Processing...' : 'Checkout'}
+            </Button>
           </Stack>
         </Grid>
         <Grid item sx={{ py: 5 }} xs={12}>
@@ -68,9 +110,7 @@ function CartPage() {
       </Grid>
     </Container>
   );
-}
-
-export default CartPage;
+};
 
 const purchasedHistory = [
   {
@@ -147,5 +187,32 @@ const orderItems = [
     name: 'Grow Light - LED Grow Tent',
     price: 25,
     image: 'https://via.placeholder.com/150',
+  },
+];
+
+const cartItems = [
+  {
+    name: 'Fertilizer',
+    imageUrl:
+      'http://agteach-dev-assets.s3.ap-southeast-2.amazonaws.com/products/148/product-cover-image.jpeg',
+    productId: 148,
+    price: 12,
+    quantity: 1,
+  },
+  {
+    name: 'Wildflower Seed Mix',
+    imageUrl:
+      'http://agteach-dev-assets.s3.ap-southeast-2.amazonaws.com/products/150/product-cover-image.jpeg',
+    productId: 150,
+    price: 32,
+    quantity: 2,
+  },
+  {
+    name: '(Test)Garden Fork V2',
+    imageUrl:
+      'http://agteach-dev-assets.s3.ap-southeast-2.amazonaws.com/products/152/product-cover-image.jpeg',
+    productId: 152,
+    price: 234,
+    quantity: 1,
   },
 ];
