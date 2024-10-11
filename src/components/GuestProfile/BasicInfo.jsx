@@ -69,16 +69,6 @@ function BasicInfo() {
     }
   };
 
-  // const onSubmit = async (formData) => {
-  //   console.log("Form Data Submitted:", formData);
-  //   try {
-  //     await updateInfo(formData).unwrap();
-  //     console.log("Success:", formData);
-  //   } catch (error) {
-  //     console.error("Error submitting form:", error);
-  //   }
-  // };
-
   if (isLoading) return <Stack justifyContent={"center"} alignItems={"center"}>Loading...</Stack>;
 
   const validatePhone = (value) => {
