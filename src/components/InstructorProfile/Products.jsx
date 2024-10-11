@@ -60,11 +60,12 @@ function Products({ instructorName, productData }) {
         <Typography variant="h4">
           {instructorName || "Default"} Products
         </Typography>
-        <Typography variant="body1">
+        <Typography variant="bmdmd" color="dark.300">
+        {/* <Typography variant="bxsm"> */}
           Found ({productContent.length || 0}) Products
         </Typography>
 
-        <Container sx={{ mt: 2 }} disableGutters>
+        <Container sx={{ mt: 2 }}>
           <Grid container spacing={2}>
             {productContent}
           </Grid>

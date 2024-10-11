@@ -60,11 +60,11 @@ import { useState } from "react";
           <Typography variant="h4">
             {instructorName || "Default"} Courses
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="bmdmd" color="dark.300">
             Found ({courseData.length || 0}) Courses
           </Typography>
   
-          <Container sx={{ mt: 2 }} disableGutters>
+          <Container sx={{ mt: 2 }}>
             <Grid container spacing={2}>
               {courseContent}
             </Grid>

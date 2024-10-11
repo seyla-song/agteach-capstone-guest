@@ -84,7 +84,7 @@ function ProfilePage({ instructorData }) {
         />
       </Grid>
       <Grid item xs={12} md={8}>
-        <Stack sx={{ pt: 2, ml: 1 }} disableGutters>
+        <Stack sx={{ pt: 2, ml: 1 }} >
           <Typography variant="h4">Instructor</Typography>
           <Typography variant="h2">
             {firstName} {lastName}
