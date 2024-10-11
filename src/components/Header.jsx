@@ -56,10 +56,14 @@ function Navigation() {
     isLoading: isLoginLoading,
   } = useGetUserInfoQuery();
 
+  console.log("guestData", guestData);
+
   let data = {};
   if (guestData) {
     console.log("guestData", guestData);
     data = guestData.data;
+    console.log('data in header', data);
+    
   }
   
   const handleClick = (event) => {
@@ -129,14 +133,15 @@ function Navigation() {
             typography: "bssm",
           }}
         >
+
           <img
             style={{ width: "24px", borderRadius: "50%", marginRight: "5px" }}
-            src={data.customer.imageUrl}
-            alt="profile picture"
+            src={ !isLoginLoading ? data?.customer?.imageUrl : GuestProfilePicture}
+            alt="profile image"
           />
-          {isLoginLoading || !data
+          {isLoginLoading
             ? "Guest"
-            : data.username.length > 6
+            : data?.username?.length > 6
             ? data.username.slice(0, 6) + "..."
             : data.username}
         </Button>
