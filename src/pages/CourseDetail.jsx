@@ -6,7 +6,6 @@ import {
 } from '../components/CourseDetail/index';
 import MemberComponent from '../components/MemberComponent';
 import { useGetRecommendedCoursesQuery, useGetOneCourseQuery } from '../services/api/courseApi';
-import { useGetProductCarouselQuery } from '../services/api/productApi';
 import { SuggestedCourseProduct } from '../components/SuggestCourseProduct';
 import { useEffect, useState, Fragment } from 'react';
 import { useParams } from 'react-router';
@@ -26,26 +25,19 @@ function CourseDetailPage() {
   const { courseId } = useParams();
 
   const [recommendedCourses, setRecommendedCourses] = useState([]);
-  const [recommendedProducts, setRecommendedProducts] = useState([]);
   const {data: currentCourseData, isLoading: isCurrentCourseData, isError: isCurrentCourseError, error: currentCoursesError } = useGetOneCourseQuery(courseId);
   const {data: recommendedCoursesData, isLoading: isRecommendedCoursesLoading, isError: isRecommendedCoursesError, error: recommendedCoursesError } = useGetRecommendedCoursesQuery(courseId);
-  const {data: recommendedProductsData, isLoading: isRecommendedProductsLoading, isError: isRecommendedProductsError, error: recommendedProductsError } = useGetProductCarouselQuery();
 
   useEffect(() => {
     console.clear()
-
+    console.log(currentCourseData)
     if (recommendedCoursesData) { 
       setRecommendedCourses(shuffle(recommendedCoursesData.data));
       console.log('course: ', recommendedCoursesData.data)
     }
     
-    if (recommendedProductsData) { 
-      setRecommendedProducts(shuffle(recommendedProductsData.data));
-      console.log('product: ', recommendedProductsData.data)
-    }
-    
     window.scrollTo(0, 0);
-  },[recommendedCoursesData, recommendedProductsData, currentCourseData] );
+  },[recommendedCoursesData, currentCourseData] );
   
   let content;
 
@@ -67,7 +59,7 @@ function CourseDetailPage() {
                                       <Grid item xs={12}>
                                         <Divider />
                                       </Grid>
-                                      <SuggestedCourseProduct courses={recommendedCourses} products={recommendedProducts} />
+                                      <SuggestedCourseProduct courses={recommendedCourses} products={currentCourseData.data.product_suggestions} />
                                       <Grid item xs={12} pt={10} pb={20}>
                                         <MemberComponent />
                                       </Grid>
