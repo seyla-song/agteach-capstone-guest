@@ -94,9 +94,10 @@ const CartContent = () => {
               fullWidth
               variant="contained"
               color="secondary"
+              disabled={!stripe || loading}
               onClick={handleCheckout}
             >
-              Checkout
+              {loading ? 'Processing...' : 'Checkout'}
             </Button>
           </Stack>
         </Grid>
