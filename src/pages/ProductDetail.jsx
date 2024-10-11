@@ -17,6 +17,7 @@ function ProductDetailPage() {
   const [selectedProductInfo, setSelectedProductInfo] = useState({});
   const { data: relatedProducts } = useGetRecommendedProductsQuery(productId);
   const { data , isLoading, isError, error, } = useGetOneProductQuery(productId);
+  let content;
 
   useEffect(() => {
     if (relatedProducts) {
@@ -26,9 +27,10 @@ function ProductDetailPage() {
     if (data) {
       setSelectedProductInfo(data.data);
     };
-  }, [relatedProducts, data]);
 
-  let content;
+    window.scrollTo(0, 0);
+  }, [relatedProducts, data, isLoading]);
+
 
   if (isLoading) {
     content = <div style={{width: '100%', height: 'calc(100vh - 68px)', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Loading...</div>;
@@ -50,7 +52,7 @@ function ProductDetailPage() {
         <Stack maxWidth="1420px" width="100%">
           <Grid container>
             <Grid item xs={12} md={5}>
-              <ProductCarouselComponent productImages={selectedProductInfo.product_images || []}/>
+              <ProductCarouselComponent productImages={selectedProductInfo.product_images || []} productThumbnail={selectedProductInfo.imageUrl}/>
             </Grid>
             <Grid item xs={0} md={1} />
             <Grid item xs={12} md={5}>

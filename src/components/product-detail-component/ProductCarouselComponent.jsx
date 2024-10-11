@@ -32,10 +32,13 @@ const carouselStyle = {
  * @return {JSX.Element} The rendered product carousel component.
  */
 
-export default function ProductCarouselComponent({productImages}) {
+export default function ProductCarouselComponent({productImages, productThumbnail}) {
   return (
     <Box sx={carouselStyle}>
       <Carousel>
+      <div>
+            <img src={productThumbnail} alt={`Product thumbnail`} />
+          </div>
       {productImages?.map((image, index) => (
           <div key={index}>
             <img src={image.imageUrl} alt={`Product ${index + 1}`} />

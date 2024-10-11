@@ -15,8 +15,7 @@ function HomePage() {
   // Assuming the data structure includes images for courses and products
   const courses = coursesData?.data || []; // Adjust based on actual structure
   const products = productsData?.data || []; // Adjust based on actual structure
-  console.log(products);
-
+  
   return (
     <Container
       maxWidth={false}
@@ -34,7 +33,7 @@ function HomePage() {
     >
       <SearchBarComponent backDrop={search} />
 
-      {courses && (
+      {courses.length > 0 && (
         <CarouselComponent data={courses} cardVariant="course">
           Most people interested in this course
         </CarouselComponent>
@@ -42,7 +41,7 @@ function HomePage() {
 
       <HeroComponent />
 
-      {products && (
+      {products.length > 0 && (
         <CarouselComponent data={products} cardVariant="product">
           Most people interested in this product
         </CarouselComponent>

@@ -34,19 +34,17 @@ function CourseDetailPage() {
   useEffect(() => {
     console.clear()
 
-    if (currentCourseData) console.log(currentCourseData)
-
     if (recommendedCoursesData) { 
       setRecommendedCourses(shuffle(recommendedCoursesData.data));
       console.log('course: ', recommendedCoursesData.data)
     }
     
-    if (isRecommendedCoursesError) console.log('error: ', recommendedCoursesError)
-
     if (recommendedProductsData) { 
       setRecommendedProducts(shuffle(recommendedProductsData.data));
       console.log('product: ', recommendedProductsData.data)
     }
+    
+    window.scrollTo(0, 0);
   },[recommendedCoursesData, recommendedProductsData, currentCourseData] );
   
   let content;
