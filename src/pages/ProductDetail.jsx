@@ -7,7 +7,10 @@ import DescriptionComponent from "../components/product-detail-component/Descrip
 import SellerComponent from "../components/product-detail-component/SellerComponent";
 import ProductCarouselComponent from "../components/product-detail-component/ProductCarouselComponent";
 import { CustomCarousel } from "../components/CustomCarousel";
-import { useGetOneProductQuery, useGetRecommendedProductsQuery } from "../services/api/productApi";
+import {
+  useGetOneProductQuery,
+  useGetRecommendedProductsQuery,
+} from "../services/api/productApi";
 import { Fragment } from "react";
 
 function ProductDetailPage() {
@@ -16,30 +19,67 @@ function ProductDetailPage() {
   const [allRelatedProducts, setAllRelatedProducts] = useState([]);
   const [selectedProductInfo, setSelectedProductInfo] = useState({});
   const { data: relatedProducts } = useGetRecommendedProductsQuery(productId);
-  const { data , isLoading, isError, error, } = useGetOneProductQuery(productId);
-  let content;
+  const { data, isLoading, isError, error } = useGetOneProductQuery(productId);
 
   useEffect(() => {
     if (relatedProducts) {
       setAllRelatedProducts(relatedProducts.data);
-    };
-    
+    }
+
     if (data) {
       setSelectedProductInfo(data.data);
-    };
+    }
 
     window.scrollTo(0, 0);
   }, [relatedProducts, data, isLoading]);
 
-
   if (isLoading) {
-    content = <div style={{width: '100%', height: 'calc(100vh - 68px)', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Loading...</div>;
-  } else if (isError) {
-    if (error.status === 404) content = <div style={{width: '100%', height: 'calc(100vh - 68px)', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Product Not Found.</div>;
-    else content = <div style={{width: '100%', height: 'calc(100vh - 68px)', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Error: {error?.message || 'An error occurred'}</div>;
-  }  else {
-
-    content = (
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "calc(100vh - 68px)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        Loading...
+      </div>
+    );
+  } 
+  if (isError) {
+    if (error.status === 404)
+      return (
+        <div
+          style={{
+            width: "100%",
+            height: "calc(100vh - 68px)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Product Not Found.
+        </div>
+      );
+    else
+      return (
+        <div
+          style={{
+            width: "100%",
+            height: "calc(100vh - 68px)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Error: {error?.message || "An error occurred"}
+        </div>
+      );
+  } 
+  else {
+    return (
       <Container
         maxWidth="1420px"
         width="100%"
@@ -52,14 +92,24 @@ function ProductDetailPage() {
         <Stack maxWidth="1420px" width="100%">
           <Grid container>
             <Grid item xs={12} md={5}>
-              <ProductCarouselComponent productImages={selectedProductInfo.product_images || []} productThumbnail={selectedProductInfo.imageUrl}/>
+              <ProductCarouselComponent
+                productImages={selectedProductInfo.product_images || []}
+                productThumbnail={selectedProductInfo.imageUrl}
+              />
             </Grid>
             <Grid item xs={0} md={1} />
             <Grid item xs={12} md={5}>
               <Stack spacing="20px">
-                <TitleComponent title={selectedProductInfo.name || ''} price={selectedProductInfo.price || ''}/>
-                <DescriptionComponent description={selectedProductInfo.description || ''}/>
-                <SellerComponent seller={selectedProductInfo.instructor || {}}/>
+                <TitleComponent
+                  title={selectedProductInfo.name || ""}
+                  price={selectedProductInfo.price || ""}
+                />
+                <DescriptionComponent
+                  description={selectedProductInfo.description || ""}
+                />
+                <SellerComponent
+                  seller={selectedProductInfo.instructor || {}}
+                />
                 <Stack spacing="10px">
                   <ButtonComponent path="/cart" color="secondary">
                     Add to cart
@@ -72,25 +122,23 @@ function ProductDetailPage() {
             </Grid>
           </Grid>
           <Stack spacing="30px" sx={{ mt: { xs: "50px", md: "160px" } }}>
-            {allRelatedProducts.length > 0 && 
+            {allRelatedProducts.length > 0 && (
               <Fragment>
                 <Typography sx={{ typography: { xs: "blgsm", md: "h4" } }}>
                   You might also want to buy these products
                 </Typography>
-                <CustomCarousel data={allRelatedProducts} cardVariant="product" />
+                <CustomCarousel
+                  data={allRelatedProducts}
+                  cardVariant="product"
+                />
               </Fragment>
-            }
-            </Stack>
+            )}
+          </Stack>
         </Stack>
       </Container>
     );
   }
 
-  return (
-    <Fragment>
-      {content}
-    </Fragment>
-  );
 }
 
 export default ProductDetailPage;
