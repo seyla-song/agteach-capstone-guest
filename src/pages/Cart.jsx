@@ -6,77 +6,110 @@ import {
   Button,
   Divider,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CustomCartItem } from '../components/Cart/CustomCartItem';
 import { PurchasedHistory } from '../components/Cart/PurchasedHistory';
-import { Elements } from '@stripe/react-stripe-js';
+import { Elements, useStripe } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { usePurchasedMutation } from '../services/api/purchasedApi';
+import { useState } from 'react';
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 function CartPage() {
   return (
     <Elements stripe={stripePromise}>
-      <Container
-        maxWidth={false}
-        sx={{
-          maxWidth: '1420px',
-          minHeight: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: { xs: '50px', md: '120px' },
-          pt: 10,
-        }}
-      >
-        <Grid container>
-          <Grid item md={8} pr={3} pb={5} xs>
-            {orderItems.map((item) => (
-              <CustomCartItem key={item.id} {...item} />
-            ))}
-          </Grid>
-          <Grid item md={4} xs>
-            <Stack
-              bgcolor="common.white"
-              p={3}
-              borderRadius={3}
-              height={180}
-              justifyContent="space-between"
-              sx={{
-                borderColor: 'grey.300',
-                borderStyle: 'solid',
-                borderWidth: '1px',
-              }}
-            >
-              <Stack direction="row" justifyContent="space-between">
-                <Typography variant="blgsm">Subtotal</Typography>
-                <Typography variant="blgsm">$40.00</Typography>
-              </Stack>
-              <Divider />
-              <Link to="/payment">
-                <Button
-                  size="large"
-                  fullWidth
-                  variant="contained"
-                  color="secondary"
-                >
-                  Checkout
-                </Button>
-              </Link>
-            </Stack>
-          </Grid>
-          <Grid item sx={{ py: 5 }} xs={12}>
-            <Divider />
-          </Grid>
-          <Grid item xs={12}>
-            <PurchasedHistory data={purchasedHistory} />
-          </Grid>
-        </Grid>
-      </Container>
+      <CartContent />
     </Elements>
   );
 }
 
 export default CartPage;
+
+const CartContent = () => {
+  const [purchased] = usePurchasedMutation();
+  const [loading, setLoading] = useState(false);
+  const stripe = useStripe();
+
+  const navigate = useNavigate();
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      const data = await purchased({ cartItems }).unwrap();
+      if (data.id) {
+        const result = await stripe.redirectToCheckout({ sessionId: data.id });
+        if (result.error) {
+          console.error('Stripe checkout error', result.error);
+        }
+      } else {
+        console.error('Failed to create checkout session');
+      }
+    } catch (err) {
+      console.error('Error during checkout', err);
+      err.status === 401 && navigate('/auth/login');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Container
+      maxWidth={false}
+      sx={{
+        maxWidth: '1420px',
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: { xs: '50px', md: '120px' },
+        pt: 10,
+      }}
+    >
+      <Grid container>
+        <Grid item md={8} pr={3} pb={5} xs>
+          {orderItems.map((item) => (
+            <CustomCartItem key={item.id} {...item} />
+          ))}
+        </Grid>
+        <Grid item md={4} xs>
+          <Stack
+            bgcolor="common.white"
+            p={3}
+            borderRadius={3}
+            height={180}
+            justifyContent="space-between"
+            sx={{
+              borderColor: 'grey.300',
+              borderStyle: 'solid',
+              borderWidth: '1px',
+            }}
+          >
+            <Stack direction="row" justifyContent="space-between">
+              <Typography variant="blgsm">Subtotal</Typography>
+              <Typography variant="blgsm">$40.00</Typography>
+            </Stack>
+            <Divider />
+            <Button
+              size="large"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              onClick={handleCheckout}
+            >
+              Checkout
+            </Button>
+          </Stack>
+        </Grid>
+        <Grid item sx={{ py: 5 }} xs={12}>
+          <Divider />
+        </Grid>
+        <Grid item xs={12}>
+          <PurchasedHistory data={purchasedHistory} />
+        </Grid>
+      </Grid>
+    </Container>
+  );
+};
 
 const purchasedHistory = [
   {
@@ -153,5 +186,32 @@ const orderItems = [
     name: 'Grow Light - LED Grow Tent',
     price: 25,
     image: 'https://via.placeholder.com/150',
+  },
+];
+
+const cartItems = [
+  {
+    name: 'Grow lights - LED',
+    imageUrl:
+      'http://agteach-dev-assets.s3.ap-southeast-2.amazonaws.com/products/150/product-cover-image.jpeg',
+    productId: 148,
+    price: 17,
+    quantity: 1,
+  },
+  {
+    name: 'Wildflower Seed Mix',
+    imageUrl:
+      'http://agteach-dev-assets.s3.ap-southeast-2.amazonaws.com/products/150/product-cover-image.jpeg',
+    productId: 150,
+    price: 32,
+    quantity: 2,
+  },
+  {
+    name: 'Garden Fork V2',
+    imageUrl:
+      'http://agteach-dev-assets.s3.ap-southeast-2.amazonaws.com/products/150/product-cover-image.jpeg',
+    productId: 152,
+    price: 12,
+    quantity: 1,
   },
 ];
