@@ -4,6 +4,7 @@ import { userApi } from '../services/api/userApi';
 import { aiApi } from '../services/api/aiApi';
 import { productApi } from '../services/api/productApi';
 import { courseApi } from '../services/api/courseApi';
+import { instructorApi } from '../services/api/instructorApi';
 import { enrollmentApi } from '../services/api/enrollmentApi';
 import { purchasedApi } from '../services/api/purchasedApi';
 
@@ -17,6 +18,7 @@ export const store = createStore({
     [aiApi.reducerPath]: aiApi.reducer,
     [productApi.reducerPath]: productApi.reducer,
     [courseApi.reducerPath]: courseApi.reducer,
+    [instructorApi.reducerPath]: instructorApi.reducer,
     [enrollmentApi.reducerPath]: enrollmentApi.reducer,
     [purchasedApi.reducerPath]: purchasedApi.reducer,
 
@@ -31,6 +33,7 @@ export const store = createStore({
       courseApi.middleware,
       aiApi.middleware,
       enrollmentApi.middleware,
-      purchasedApi.middleware
+      purchasedApi.middleware,
+      instructorApi.middleware,
     ),
 });
