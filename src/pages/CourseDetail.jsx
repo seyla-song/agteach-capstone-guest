@@ -29,21 +29,21 @@ function shuffle(array) {
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 function CourseDetailPage() {
-  const { courseId } = useParams();
+  const { coursesId } = useParams();
 
   const [recommendedCourses, setRecommendedCourses] = useState([]);
   const {
     data: currentCourseData,
-    isLoading: isCurrentCourseData,
+    isLoading: isCurrentCourseDataLoading,
     isError: isCurrentCourseError,
     error: currentCoursesError,
-  } = useGetOneCourseQuery(courseId);
+  } = useGetOneCourseQuery(coursesId);
   const {
     data: recommendedCoursesData,
     isLoading: isRecommendedCoursesLoading,
     isError: isRecommendedCoursesError,
     error: recommendedCoursesError,
-  } = useGetRecommendedCoursesQuery(courseId);
+  } = useGetRecommendedCoursesQuery(coursesId);
 
   useEffect(() => {
     console.clear();
@@ -58,8 +58,8 @@ function CourseDetailPage() {
 
   let content;
 
-  if (isCurrentCourseData)
-    content = (
+  if (isCurrentCourseDataLoading)
+    return (
       <div
         style={{
           width: "100%",
@@ -72,8 +72,8 @@ function CourseDetailPage() {
         Loading...
       </div>
     );
-  else if (isCurrentCourseData)
-    content = (
+  if (isCurrentCourseError)
+    return (
       <div
         style={{
           width: "100%",
@@ -86,8 +86,8 @@ function CourseDetailPage() {
         Error: {currentCoursesError}
       </div>
     );
-  else if (!currentCourseData)
-    content = (
+  if (!currentCourseData)
+    return (
       <div
         style={{
           width: "100%",
@@ -100,8 +100,9 @@ function CourseDetailPage() {
         Course Not Found.
       </div>
     );
-  else if (currentCourseData)
-    content = (
+
+  return (
+    <Elements stripe={stripePromise}>
       <Stack alignItems="center">
         <Stack width="100%" alignItems="center" bgcolor={"primary.dark"}>
           <Grid sx={{ maxWidth: "1420px" }} container paddingX={1}>
@@ -119,28 +120,6 @@ function CourseDetailPage() {
             <Divider />
           </Grid>
           {/* <SuggestedCourseProduct courses={recommendedCourses} products={currentCourseData.data.product_suggestions} /> */}
-          <Grid item xs={12} pt={10} pb={20}>
-            <MemberComponent />
-          </Grid>
-        </Grid>
-      </Stack>
-    );
-
-  return (
-    <Elements stripe={stripePromise}>
-      <Stack alignItems="center">
-        <Stack width="100%" alignItems="center" bgcolor={"primary.dark"}>
-          <Grid sx={{ maxWidth: "1420px" }} container paddingX={1}>
-            <CourseDetailHero />
-          </Grid>
-        </Stack>
-        <Grid sx={{ maxWidth: "1420px" }} container paddingX={1}>
-          <CourseDetailHighlight />
-          <CourseDetailContent />
-          <Grid item xs={12}>
-            <Divider />
-          </Grid>
-          {/* <SuggestedCourseProduct courses={courses} products={products} /> */}
           <Grid item xs={12} pt={10} pb={20}>
             <MemberComponent />
           </Grid>
