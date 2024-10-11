@@ -12,7 +12,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { showDuration } from '../../utils/showDuration';
 import { useState } from 'react';
 
-export const CourseDetailContent = ({sections}) => {
+export const CourseDetailContent = ({sections, numberOfVideos, courseLength}) => {
   const [sectionLimit, setSectionLimit] = useState(10);
 
   const handleChangeSectionLimit = () => {
@@ -25,7 +25,7 @@ export const CourseDetailContent = ({sections}) => {
         <Stack>
           <Typography variant="h4">Course Content</Typography>
           <Typography variant="bxsr">
-            20 sections • 60 videos • 30h total length
+            {sections.length} sections • {numberOfVideos} videos • {showDuration(courseLength)} total length
           </Typography>
         </Stack>
         <Stack>

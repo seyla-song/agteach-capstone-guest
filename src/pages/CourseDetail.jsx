@@ -34,7 +34,7 @@ function CourseDetailPage() {
   useEffect(() => {
     console.clear()
 
-    if (currentCourseData) console.log(currentCourseData.data.sections)
+    if (currentCourseData) console.log(currentCourseData)
 
     if (recommendedCoursesData) { 
       setRecommendedCourses(shuffle(recommendedCoursesData.data));
@@ -60,12 +60,12 @@ function CourseDetailPage() {
   else if (currentCourseData) content = <Stack alignItems="center">
                                     <Stack width="100%" alignItems="center" bgcolor={'primary.dark'}>
                                       <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
-                                        <CourseDetailHero courseData={currentCourseData?.data.course || {}}/>
+                                        <CourseDetailHero courseData={currentCourseData?.data}/>
                                       </Grid>
                                     </Stack>
                                     <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
-                                      <CourseDetailHighlight courseData={currentCourseData?.data.course}/>
-                                      <CourseDetailContent sections={currentCourseData?.data.sections} />
+                                      <CourseDetailHighlight courseData={currentCourseData?.data}/>
+                                      <CourseDetailContent sections={currentCourseData?.data.sections} numberOfVideos={currentCourseData.data.numberOfVideo} courseLength={currentCourseData.data.duration}/>
                                       <Grid item xs={12}>
                                         <Divider />
                                       </Grid>
