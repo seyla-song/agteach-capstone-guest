@@ -50,16 +50,33 @@ function BasicInfo() {
   }, [data, setValue]);
 
   const onSubmit = async (formData) => {
-    console.log("Form Data Submitted:", formData);
+    const { firstName, lastName, phone, city, address } = formData;
+
+    const updatedData = {
+      firstName,
+      lastName,
+      phone,
+      location_id: city, // Make sure this matches your API's expected field
+      address,
+    };
+
+    console.log("Form Data Submitted:", updatedData);
     try {
-      await updateInfo(formData).unwrap();
-      console.log("Success:", formData);
+      await updateInfo(updatedData).unwrap();
+      console.log("Success:", updatedData);
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
 
   if (isLoading) return <Stack justifyContent={"center"} alignItems={"center"}>Loading...</Stack>;
+
+  const validatePhone = (value) => {
+    const phonePattern = /^[0-9]+$/; // Only digits
+    if (!value) return true; // Allow empty input if not required
+    if (value.length > 15) return "Phone number cannot exceed 15 digits";
+    return phonePattern.test(value) || "Please enter a valid phone number";
+  };
 
   return (
     <>
@@ -140,13 +157,10 @@ function BasicInfo() {
           <OutlinedInput
             id="phone-number"
             label="Phone Number"
-            placeholder="e.g. 123-456-7890"
+            placeholder="e.g. 1234567890"
             {...register("phone", {
               required: "Phone number is required",
-              pattern: {
-                value: /^[0-9-\s]+$/,
-                message: "Phone number must be a valid format",
-              },
+              validate: validatePhone,
             })}
           />
           {errors.phone && <FormHelperText>{errors.phone.message}</FormHelperText>}
