@@ -1,8 +1,23 @@
 import { Grid, Stack, Typography } from '@mui/material';
 import TimerIcon from '@mui/icons-material/TimerOutlined';
 import MovieIcon from '@mui/icons-material/MovieOutlined';
+import { Fragment } from 'react';
+import { showDuration } from '../../utils/showDuration';
 
-export const CourseDetailHighlight = () => {
+export const CourseDetailHighlight = ({courseData}) => {
+  let objectiveConent;
+  const courseObjectives = courseData.courseObjective.includes('\r') ? courseData.courseObjective.replace('\r', '-+-&+-+ ').split('-+-&+-+ ') : courseData.courseObjective;
+
+  if (Array.isArray(courseObjectives)) {
+    objectiveConent = courseObjectives.map((objective, idx) => {
+      return <Typography variant="bxsr" key={idx}>
+      ✅ {objective}
+    </Typography>
+    })
+  }
+  else {
+    objectiveConent = `✅ ${courseObjectives}`;
+  }
   return (
     <Grid item xs={12}>
       <Stack py={10}>
@@ -21,19 +36,9 @@ export const CourseDetailHighlight = () => {
                 <Typography variant="h4">
                   What you learn in this course? What included
                 </Typography>
-                <Typography variant="bxsr">
-                  ✅ How to mix and manage nutrient solutions to ensure optimal
-                  plant growth and health in a soil-free environment
-                </Typography>
-                <Typography variant="bxsr">
-                  ✅ How to design and build various types of hydroponic
-                  systems, including nutrient film techniques and deep water
-                  culture.
-                </Typography>
-                <Typography variant="bxsr">
-                  ✅ Techniques for managing light, temperature, and humidity to
-                  create the ideal conditions for indoor plant growth.
-                </Typography>
+                <Fragment>
+                  {objectiveConent}
+                </Fragment>
               </Stack>
             </Stack>
           </Grid>
@@ -50,11 +55,11 @@ export const CourseDetailHighlight = () => {
                 <Typography variant="h4">This course include:</Typography>
                 <Stack direction="row" gap={2}>
                   <TimerIcon />
-                  <Typography variant="bsr">30 hours</Typography>
+                  <Typography variant="bsr">{showDuration(courseData.duration)}</Typography>
                 </Stack>
                 <Stack direction="row" gap={2}>
                   <MovieIcon />
-                  <Typography variant="bsr">60 videos</Typography>
+                  <Typography variant="bsr">{courseData.numberOfVideo} videos</Typography>
                 </Stack>
               </Stack>
             </Stack>

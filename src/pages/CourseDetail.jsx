@@ -1,33 +1,125 @@
-import { Divider, Grid, Stack } from '@mui/material';
+import { Divider, Grid, Stack } from "@mui/material";
 import {
   CourseDetailHero,
   CourseDetailHighlight,
   CourseDetailContent,
-} from '../components/CourseDetail/index';
-import MemberComponent from '../components/MemberComponent';
+} from "../components/CourseDetail/index";
+import MemberComponent from "../components/MemberComponent";
+import {
+  useGetRecommendedCoursesQuery,
+  useGetOneCourseQuery,
+} from "../services/api/courseApi";
+import { SuggestedCourseProduct } from "../components/SuggestCourseProduct";
+import { useEffect, useState, Fragment } from "react";
+import { useParams } from "react-router";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
-import { SuggestedCourseProduct } from '../components/SuggestCourseProduct';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
+function shuffle(array) {
+  const newArray = [...array]; // Create a copy of the array
+
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]]; // Swap elements
+  }
+
+  return newArray; // Return the shuffled copy
+}
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 function CourseDetailPage() {
+  const { coursesId } = useParams();
+
+  const [recommendedCourses, setRecommendedCourses] = useState([]);
+  const {
+    data: currentCourseData,
+    isLoading: isCurrentCourseDataLoading,
+    isError: isCurrentCourseError,
+    error: currentCoursesError,
+  } = useGetOneCourseQuery(coursesId);
+  const {
+    data: recommendedCoursesData,
+    isLoading: isRecommendedCoursesLoading,
+    isError: isRecommendedCoursesError,
+    error: recommendedCoursesError,
+  } = useGetRecommendedCoursesQuery(coursesId);
+
+  useEffect(() => {
+    console.clear();
+    console.log(currentCourseData);
+    if (recommendedCoursesData) {
+      setRecommendedCourses(shuffle(recommendedCoursesData.data));
+      console.log("course: ", recommendedCoursesData.data);
+    }
+
+    window.scrollTo(0, 0);
+  }, [recommendedCoursesData, currentCourseData]);
+
+  let content;
+
+  if (isCurrentCourseDataLoading)
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "calc(100vh - 68px)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        Loading...
+      </div>
+    );
+  if (isCurrentCourseError)
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "calc(100vh - 68px)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        Error: {currentCoursesError}
+      </div>
+    );
+  if (!currentCourseData)
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "calc(100vh - 68px)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        Course Not Found.
+      </div>
+    );
+
   return (
     <Elements stripe={stripePromise}>
       <Stack alignItems="center">
-        <Stack width="100%" alignItems="center" bgcolor={'primary.dark'}>
-          <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
-            <CourseDetailHero />
+        <Stack width="100%" alignItems="center" bgcolor={"primary.dark"}>
+          <Grid sx={{ maxWidth: "1420px" }} container paddingX={1}>
+            <CourseDetailHero courseData={currentCourseData?.data} />
           </Grid>
         </Stack>
-        <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
-          <CourseDetailHighlight />
-          <CourseDetailContent />
+        <Grid sx={{ maxWidth: "1420px" }} container paddingX={1}>
+          <CourseDetailHighlight courseData={currentCourseData?.data} />
+          <CourseDetailContent
+            sections={currentCourseData?.data.sections}
+            numberOfVideos={currentCourseData.data.numberOfVideo}
+            courseLength={currentCourseData.data.duration}
+          />
           <Grid item xs={12}>
             <Divider />
           </Grid>
-          <SuggestedCourseProduct courses={courses} products={products} />
+          {/* <SuggestedCourseProduct courses={recommendedCourses} products={currentCourseData.data.product_suggestions} /> */}
           <Grid item xs={12} pt={10} pb={20}>
             <MemberComponent />
           </Grid>
@@ -38,88 +130,3 @@ function CourseDetailPage() {
 }
 
 export default CourseDetailPage;
-
-const products = [
-  {
-    name: 'Grow Lights - LED or fluorescent grow lights',
-    price: '$10',
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    name: 'Grow Lights - LED or fluorescent grow lights',
-    price: '$15',
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    name: 'Grow Lights - LED or fluorescent grow lights',
-    price: '$20',
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    name: 'Grow Lights - LED or fluorescent grow lights',
-    price: '$25',
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    name: 'Grow Lights - LED or fluorescent grow lights',
-    price: '$30',
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    name: 'Product 6',
-    price: '$35',
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    name: 'Product 7',
-    price: '$40',
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    name: 'Product 8',
-    price: '$45',
-    image: 'https://via.placeholder.com/150',
-  },
-];
-const courses = [
-  {
-    name: 'Indoor Plant Propagation Techniques',
-    instructor: 'Emily Greene',
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    name: 'Vertical Gardening for Urban Spaces',
-    instructor: 'Emily Greene',
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    name: 'Organic Indoor Plant Care and Maintenance',
-    instructor: 'Emily Greene',
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    name: 'Advanced Indoor Plant Lighting Strategies',
-    instructor: 'Emily Greene',
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    name: 'Product 5',
-    instructor: 'Emily Greene',
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    name: 'Product 6',
-    instructor: 'Emily Greene',
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    name: 'Product 7',
-    instructor: 'Emily Greene',
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    name: 'Product 8',
-    instructor: 'Emily Greene',
-    image: 'https://via.placeholder.com/150',
-  },
-];

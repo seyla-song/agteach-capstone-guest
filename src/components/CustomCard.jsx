@@ -70,7 +70,7 @@ const CourseCard = ({ dataObj, showDelete, onDelete }) => {
   const navigate = useNavigate();
 
   return (
-    <Box mr={1} sx={{ cursor: "pointer" }} onClick={() => navigate(`/courses/${dataObj.productId}`)}>
+    <Box mr={1} sx={{ cursor: "pointer" }} onClick={() => navigate(`/courses/${dataObj.courseId}`)}>
       <Box
         width="100%"
         component="img"

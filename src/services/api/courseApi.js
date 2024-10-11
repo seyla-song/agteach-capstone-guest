@@ -17,7 +17,22 @@ export const courseApi = createApi({
         method: "GET",
       }),
     }),
+
+    getRecommendedCourses: builder.query({
+      query: (courseId) => ({
+        url: `/api/course/getRecommendCourse/${courseId}`,
+        method: "GET",
+      }),
+    }),
+
+    getOneCourse: builder.query({
+      query: (courseId) => ({
+        url: `/api/course/getOneCourse/${courseId}`,
+        method: "GET",
+      }),
+    }),
+
   }),
 });
 
-export const { useSearchCourseQuery, useGetCourseCarouselQuery } = courseApi;
+export const { useSearchCourseQuery, useGetCourseCarouselQuery, useGetRecommendedCoursesQuery, useGetOneCourseQuery } = courseApi;
