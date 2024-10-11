@@ -26,6 +26,7 @@ export default function CustomCard({ dataObj, variant, showDelete, onDelete }) {
   return cardVariant();
 }
 
+
 const ProductCard = ({ dataObj, showDelete, onDelete }) => {
   const handleDeleteClick = (event) => {
     event.preventDefault();

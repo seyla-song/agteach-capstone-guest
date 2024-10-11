@@ -1,4 +1,4 @@
-import { Button, Grid, Typography, Stack, Link } from '@mui/material';
+import { Button, Grid, Typography, Stack } from '@mui/material';
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
 import { MediaPlayer, MediaProvider } from '@vidstack/react';
@@ -6,12 +6,43 @@ import {
   defaultLayoutIcons,
   DefaultVideoLayout,
 } from '@vidstack/react/player/layouts/default';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useStripe } from '@stripe/react-stripe-js';
+import { useEnrollmentMutation } from '../../services/api/enrollmentApi';
 
-export const CourseDetailHero = ({courseData}) => {
+export const CourseDetailHero = () => {
+  const [enrollment] = useEnrollmentMutation();
+  const [loading, setLoading] = useState(false);
+  const stripe = useStripe();
 
   const navigate = useNavigate();
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      const data = await enrollment({ courseId: 405 }).unwrap();
+    
+      console.log(data);
+      
+
+      if (data.id) {
+        // Redirect to Stripe's checkout page using the session ID
+        const result = await stripe.redirectToCheckout({ sessionId: data.id });
+
+        if (result.error) {
+          console.error('Stripe checkout error', result.error);
+        }
+      } else {
+        console.error('Failed to create checkout session');
+      }
+    } catch (error) {
+      console.error('Error during checkout', error);
+      error.status === 401 && navigate('/auth/login');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Grid color={'white'} item xs={12}>
@@ -57,9 +88,15 @@ export const CourseDetailHero = ({courseData}) => {
               />
             </MediaPlayer>
             <Stack display={'flex'} flexDirection={'column'} gap={1}>
-              <Link to='/payment'>
-                <Button fullWidth color="secondary" variant="contained">
-                  Enroll Now
+              <Link>
+                <Button
+                  onClick={handleCheckout}
+                  fullWidth
+                  color="secondary"
+                  variant="contained"
+                  disabled={!stripe || loading}
+                >
+                  {loading ? 'Processing...' : 'Enroll Now'}
                 </Button>
               </Link>
               <Button

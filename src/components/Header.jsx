@@ -15,7 +15,7 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -50,19 +50,22 @@ function Navigation() {
   const [openLogoutDialog, setOpenLogoutDialog] = useState(false);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
-  const [logout, { isLoading }] = useLogoutMutation();
+  const [logout] = useLogoutMutation();
   const {
     data: guestData,
     isLoading: isLoginLoading,
-    isError,
   } = useGetUserInfoQuery();
+
+  console.log("guestData", guestData);
 
   let data = {};
   if (guestData) {
     console.log("guestData", guestData);
     data = guestData.data;
+    console.log('data in header', data);
+    
   }
-
+  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -130,16 +133,17 @@ function Navigation() {
             typography: "bssm",
           }}
         >
+
           <img
             style={{ width: "24px", borderRadius: "50%", marginRight: "5px" }}
-            src={GuestProfilePicture}
-            alt="profile picture"
+            src={ !isLoginLoading ? data?.customer?.imageUrl : GuestProfilePicture}
+            alt="profile image"
           />
-          {isLoginLoading || !data
+          {isLoginLoading
             ? "Guest"
-            : data.username.length > 6
-              ? data.username.slice(0, 6) + "..."
-              : data.username}
+            : data?.username?.length > 6
+            ? data.username.slice(0, 6) + "..."
+            : data.username}
         </Button>
 
         {/* Dropdown Menu */}
@@ -257,7 +261,7 @@ function Navigation() {
     <AppBar position="sticky">
       <Container maxWidth={false} sx={{ maxWidth: "1420px" }}>
         <Toolbar
-          disableGutters
+          disablegutters="true"
           sx={{
             display: "flex",
             justifyContent: "space-between",
@@ -285,7 +289,7 @@ function Navigation() {
               </Link>
             ))}
             <Link href={teachAgtechURL} color="common.white" underline="none">
-              <Typography variant="bsr">Become a member</Typography>
+              <Typography variant="bsr">Become an Instructor</Typography>
             </Link>
           </Box>
 
@@ -328,7 +332,7 @@ function Navigation() {
                   href={teachAgtechURL}
                   underline="none"
                 >
-                  <Typography variant="bsr">Become a member</Typography>
+                  <Typography variant="bsr">Become an Instructor</Typography>
                 </MenuItem>
                 {HEADER_MENU_MOBILE.map((data) => (
                   <MenuItem

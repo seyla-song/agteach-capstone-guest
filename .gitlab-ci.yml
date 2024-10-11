@@ -23,6 +23,7 @@ build_app:
     - develop
   script:
     - echo "Building Instructor Application"
+    - export REACT_APP_PUBLISHABLE_KEY=$REACT_APP_PUBLISHABLE_KEY
     - node -v
     - npm -v
     - npm i  # Use 'npm ci' instead of 'npm install' for CI environments
