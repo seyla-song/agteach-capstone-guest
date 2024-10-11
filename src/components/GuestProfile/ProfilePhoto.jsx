@@ -50,13 +50,11 @@ function ProfilePhoto() {
       const validImageTypes = [
         "image/jpeg",
         "image/png",
-        "image/gif",
-        "image/webp",
-        "image/bmp",
+        "image/jpg",
       ];
       if (!validImageTypes.includes(file.type)) {
         setAlertMessage(
-          "Please select a valid image file (JPEG, PNG, GIF, WEBP, BMP)."
+          "Please select a valid image file (JPEG, PNG, JPG)."
         );
         setAlertSeverity("error");
         setAlertOpen(true);

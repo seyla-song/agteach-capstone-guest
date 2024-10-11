@@ -48,6 +48,13 @@ export default function PersonalInfoForm() {
     }
   };
 
+  const validatePhone = (value) => {
+    const phonePattern = /^[0-9]+$/; // Only digits
+    if (!value) return true; // Allow empty input if not required
+    if (value.length > 15) return "Phone number cannot exceed 15 digits";
+    return phonePattern.test(value) || "Please enter a valid phone number";
+  };
+
   return (
     <Box>
       <Container maxWidth={false} sx={{ maxWidth: "700px" }}>
@@ -129,10 +136,7 @@ export default function PersonalInfoForm() {
                     label="Phone number"
                     placeholder="e.g. 0123456789"
                     {...register("phone", {
-                      pattern: {
-                        value: /^[0-9]+$/i,
-                        message: "Please enter a valid phone number",
-                      },
+                      validate: validatePhone,
                     })}
                     error={!!errors.phone}
                     helperText={errors?.phone?.message}

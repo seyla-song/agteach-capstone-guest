@@ -72,7 +72,7 @@ export default function Footer() {
                 color="common.white"
                 underline="none"
               >
-                <Typography variant="bsr">Become a member</Typography>
+                <Typography variant="bsr">Become an Instructor</Typography>
               </Link>
             </Box>
           </Container>
