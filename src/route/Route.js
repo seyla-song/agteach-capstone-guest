@@ -29,11 +29,13 @@ import {
 import ProtectedRoute from './ProtectedRoute';
 
 import AuthRootLayout from './AuthRoot';
+import { ProductList } from '../pages/ProductList';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootLayout />,
+    // element: <RootLayout />,
+    element: <ProductList />,
 
     children: [
       { index: true, element: <HomePage /> },
