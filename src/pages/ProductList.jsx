@@ -8,10 +8,10 @@ import {
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  addItem,
+  addItemToCart,
   clearCart,
-  removeFromCart,
-  updateQuantity,
+  removeItemFromCart,
+  updateItemQuantity,
 } from '../features/cart/cartSlice';
 
 export const ProductList = () => {
@@ -27,7 +27,7 @@ export const ProductList = () => {
 
   const handleAddToCart = (productId) => {
     try {
-      dispatch(addItem({ productId }));
+      dispatch(addItemToCart({ productId }));
     } catch (error) {
       console.error('Failed to add item to cart:', error);
     }
@@ -41,15 +41,15 @@ export const ProductList = () => {
   };
 
   const handleIncreament = (productId, quantity) => {
-    dispatch(updateQuantity({ productId, quantity: quantity + 1 }));
+    dispatch(updateItemQuantity({ productId, quantity: quantity + 1 }));
   };
   const handleDecreament = (productId, quantity) => {
     if (quantity > 1)
-      dispatch(updateQuantity({ productId, quantity: quantity - 1 }));
+      dispatch(updateItemQuantity({ productId, quantity: quantity - 1 }));
   };
 
   const handleItemRemove = (productId) => {
-    dispatch(removeFromCart({ productId }));
+    dispatch(removeItemFromCart({ productId }));
   };
 
   console.log(cart);
