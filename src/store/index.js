@@ -12,6 +12,10 @@ import userSlice from '../features/auth/userSlice';
 import authSlice from '../features/auth/authSlice';
 import cartSlice from '../features/cart/cartSlice';
 
+import { loadCartState, saveCartState } from '../utils/cartPersistence';
+
+const persistedCartState = loadCartState();
+
 export const store = createStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
@@ -27,6 +31,9 @@ export const store = createStore({
     user: userSlice,
     cart: cartSlice,
   },
+
+  preloadedState: persistedCartState ? { cart: persistedCartState } : undefined,
+
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       apiSlice.middleware,
@@ -38,4 +45,8 @@ export const store = createStore({
       purchasedApi.middleware,
       instructorApi.middleware
     ),
+});
+
+store.subscribe(() => {
+  saveCartState(store.getState().cart);
 });
