@@ -34,8 +34,7 @@ import { ProductList } from '../pages/ProductList';
 export const router = createBrowserRouter([
   {
     path: '/',
-    // element: <RootLayout />,
-    element: <ProductList />,
+    element: <RootLayout />,
 
     children: [
       { index: true, element: <HomePage /> },
