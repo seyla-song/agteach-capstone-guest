@@ -40,11 +40,6 @@ export const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: 'search', element: <SearchResultPage /> },
       {
-        path: 'cart',
-        element: <ProtectedRoute pageName="cart" />,
-        children: [{ index: true, element: <CartPage /> }],
-      },
-      {
         path: 'mylearning',
         element: <ProtectedRoute pageName="course" />,
         children: [{ index: true, element: <MyLearningPage /> }],
