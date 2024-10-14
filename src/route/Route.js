@@ -29,7 +29,6 @@ import {
 import ProtectedRoute from './ProtectedRoute';
 
 import AuthRootLayout from './AuthRoot';
-import { ProductList } from '../pages/ProductList';
 
 export const router = createBrowserRouter([
   {
