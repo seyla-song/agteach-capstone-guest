@@ -1,6 +1,13 @@
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
-import { Container, Stack, Typography, Grid, Button } from '@mui/material';
+import {
+  Container,
+  Stack,
+  Typography,
+  Grid,
+  Button,
+  IconButton,
+} from '@mui/material';
 import { useDispatch } from 'react-redux';
 import TitleComponent from '../components/product-detail-component/TitleComponent';
 import DescriptionComponent from '../components/product-detail-component/DescriptionComponent';
@@ -12,8 +19,10 @@ import {
   useGetRecommendedProductsQuery,
 } from '../services/api/productApi';
 
+import CustomModal from '../components/CustomModal';
 import { addItemToCart } from '../features/cart/cartSlice';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 
 function ProductDetailPage() {
   const { productId } = useParams();
@@ -23,6 +32,8 @@ function ProductDetailPage() {
   const [selectedProductInfo, setSelectedProductInfo] = useState({});
   const { data: relatedProducts } = useGetRecommendedProductsQuery(productId);
   const { data, isLoading, isError, error } = useGetOneProductQuery(productId);
+  const [open, setOpen] = useState(false);
+  const toggleModal = () => setOpen((prev) => !prev); // Toggle function
 
   useEffect(() => {
     if (relatedProducts) {
@@ -91,7 +102,11 @@ function ProductDetailPage() {
    */
   const handleAddToCart = (productId) => {
     try {
-      dispatch(addItemToCart({ productId }));
+      if (selectedProductInfo.quantity === 7) {
+        toggleModal();
+        return;
+      }
+      // dispatch(addItemToCart({ productId }));
     } catch (error) {
       console.error('Failed to add item to cart:', error);
     }
@@ -107,6 +122,16 @@ function ProductDetailPage() {
         my: { xs: '50px', md: '125px' },
       }}
     >
+      <CustomModal
+        open={open}
+        onClose={toggleModal} // Use the same function to close the modal
+        title="Reach Quantity Limit"
+        description="Sorry, you have reached the quantity limit. Please remove an item and try again."
+      >
+        <IconButton onClick={toggleModal} aria-label="delete">
+          <CloseIcon />
+        </IconButton>
+      </CustomModal>
       <Stack maxWidth="1420px" width="100%">
         <Grid container>
           <Grid item xs={12} md={5}>
