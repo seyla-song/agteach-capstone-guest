@@ -18,6 +18,8 @@ import {
   removeItemFromCart,
   updateItemQuantity,
 } from '../features/cart/cartSlice';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 
 function ProductDetailPage() {
   const { productId } = useParams();
@@ -131,7 +133,19 @@ function ProductDetailPage() {
               />
               <SellerComponent seller={selectedProductInfo.instructor || {}} />
               <Stack spacing="10px">
-                <Button onClick={handleAddToCart} variant="contained">Add to cart</Button>
+                <Button
+                  onClick={handleAddToCart}
+                  variant="contained"
+                  endIcon={<ShoppingCartOutlinedIcon />}
+                >
+                  Add to cart
+                </Button>
+                <Button
+                  variant="outlined"
+                  endIcon={<FavoriteBorderOutlinedIcon />}
+                >
+                  Favourite
+                </Button>
               </Stack>
             </Stack>
           </Grid>
