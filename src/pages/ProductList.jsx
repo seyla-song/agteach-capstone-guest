@@ -19,6 +19,7 @@ export const ProductList = () => {
             <Button variant="contained">Add to cart</Button>
           </Stack>
         ))}
+        <Button variant="outlined">Clear Storage</Button>
       </Stack>
     </Container>
   );
