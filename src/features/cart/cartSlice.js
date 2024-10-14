@@ -17,13 +17,15 @@ const cartSlice = createSlice({
      *   - productId: The ID of the item to add to the cart.
      */
     addItemToCart: (state, action) => {
-      const { productId , availableStock} = action.payload;
+      const { productId, availableStock } = action.payload;
       const existingProduct = state.items.find(
         (item) => item.productId === productId
       );
 
-      if (existingProduct.quantity < availableStock) {
-        existingProduct.quantity += 1;
+      if (existingProduct) {
+        if (existingProduct.quantity < availableStock) {
+          existingProduct.quantity += 1;
+        }
       } else {
         state.items.push({ productId, quantity: 1 });
       }

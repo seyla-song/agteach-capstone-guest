@@ -8,7 +8,7 @@ import {
   Button,
   IconButton,
 } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TitleComponent from '../components/product-detail-component/TitleComponent';
 import DescriptionComponent from '../components/product-detail-component/DescriptionComponent';
 import SellerComponent from '../components/product-detail-component/SellerComponent';
@@ -34,6 +34,19 @@ function ProductDetailPage() {
   const { data, isLoading, isError, error } = useGetOneProductQuery(productId);
   const [open, setOpen] = useState(false);
   const toggleModal = () => setOpen((prev) => !prev); // Toggle function
+
+  // Find the product in the cart
+  const cartItem = useSelector((state) =>
+    state.cart.items.find(
+      (item) => item.productId === selectedProductInfo.productId
+    )
+  );  
+
+  const currentQuantity = cartItem?.quantity || 0;
+  const availableStock = selectedProductInfo.quantity;
+
+  console.log(currentQuantity, availableStock);
+  
 
   useEffect(() => {
     if (relatedProducts) {
@@ -93,24 +106,25 @@ function ProductDetailPage() {
       );
   }
 
-  console.log(selectedProductInfo.productId, selectedProductInfo.quantity);
-
-  /**
-   * Handle adding an item to the cart.
-   * @param {number} productId The ID of the product to add to the cart.
-   * @throws {Error} If there is an error adding the item to the cart.
-   */
-  const handleAddToCart = (productId) => {
+  const handleAddToCart = () => {
     try {
-      if (selectedProductInfo.quantity === 7) {
-        toggleModal();
+      if (currentQuantity < availableStock) {
+        console.log('Adding to cart:', currentQuantity, '<', availableStock);
+        
+        dispatch(
+          addItemToCart({
+            productId: selectedProductInfo.productId,
+            availableStock,
+          })
+        );
         return;
       }
-      // dispatch(addItemToCart({ productId }));
+      toggleModal();
     } catch (error) {
       console.error('Failed to add item to cart:', error);
     }
   };
+
 
   return (
     <Container
