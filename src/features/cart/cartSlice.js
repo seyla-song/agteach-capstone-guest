@@ -43,6 +43,7 @@ const cartSlice = createSlice({
       if (item) {
         item.quantity = quantity;
       }
+      state.total = state.items.reduce((sum, item) => sum + item.quantity, 0);
     },
 
     /**
@@ -51,9 +52,11 @@ const cartSlice = createSlice({
      *   - productId: The ID of the item to remove from the cart.
      */
     removeFromCart: (state, action) => {
+      console.log(action.payload);
       state.items = state.items.filter(
-        (item) => item.productId !== action.payload
+        (item) => item.productId !== action.payload.productId
       );
+      state.total = state.items.reduce((sum, item) => sum + item.quantity, 0);
     },
 
     /**

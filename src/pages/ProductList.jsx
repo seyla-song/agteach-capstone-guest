@@ -7,7 +7,12 @@ import {
   Typography,
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem, clearCart, updateQuantity } from '../features/cart/cartSlice';
+import {
+  addItem,
+  clearCart,
+  removeFromCart,
+  updateQuantity,
+} from '../features/cart/cartSlice';
 
 export const ProductList = () => {
   const products = [
@@ -39,7 +44,12 @@ export const ProductList = () => {
     dispatch(updateQuantity({ productId, quantity: quantity + 1 }));
   };
   const handleDecreament = (productId, quantity) => {
-    if(quantity > 1) dispatch(updateQuantity({ productId, quantity: quantity - 1 }));
+    if (quantity > 1)
+      dispatch(updateQuantity({ productId, quantity: quantity - 1 }));
+  };
+
+  const handleItemRemove = (productId) => {
+    dispatch(removeFromCart({ productId }));
   };
 
   console.log(cart);
@@ -67,7 +77,7 @@ export const ProductList = () => {
           Clear Storage
         </Button>
         <Divider />
-        <Typography>Number of Items: </Typography>
+        <Typography>Number of Items: {cart.total} </Typography>
         <Divider />
         <Typography>My Cart</Typography>
         {cart.items.map((item) => (
@@ -88,6 +98,12 @@ export const ProductList = () => {
                 +
               </Button>
             </Stack>
+            <Button
+              onClick={() => handleItemRemove(item.productId)}
+              variant="outlined"
+            >
+              Remove
+            </Button>
           </Box>
         ))}
       </Stack>
