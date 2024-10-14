@@ -10,6 +10,7 @@ import { purchasedApi } from '../services/api/purchasedApi';
 
 import userSlice from '../features/auth/userSlice';
 import authSlice from '../features/auth/authSlice';
+import cartSlice from '../features/cart/cartSlice';
 
 export const store = createStore({
   reducer: {
@@ -24,6 +25,7 @@ export const store = createStore({
 
     auth: authSlice,
     user: userSlice,
+    cart: cartSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -34,6 +36,6 @@ export const store = createStore({
       aiApi.middleware,
       enrollmentApi.middleware,
       purchasedApi.middleware,
-      instructorApi.middleware,
+      instructorApi.middleware
     ),
 });
