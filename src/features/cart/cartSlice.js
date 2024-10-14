@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   items: [],
+  total: 0,
 };
 
 const cartSlice = createSlice({
@@ -26,6 +27,7 @@ const cartSlice = createSlice({
       } else {
         state.items.push({ productId, quantity: 1 });
       }
+      state.total = state.items.reduce((sum, item) => sum + item.quantity, 0);
     },
     /**
      * Update the quantity of a product in the cart.
@@ -59,7 +61,7 @@ const cartSlice = createSlice({
      * associated localStorage entry.
      */
     clearCart: (state) => {
-      state.cart = [];
+      state.items = [];
     },
   },
 });
