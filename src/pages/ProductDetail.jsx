@@ -1,7 +1,7 @@
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
-import { Container, Stack, Typography, Grid } from '@mui/material';
-import ButtonComponent from '../components/product-detail-component/ButtonComponent';
+import { Container, Stack, Typography, Grid, Button } from '@mui/material';
+import { useDispatch } from 'react-redux';
 import TitleComponent from '../components/product-detail-component/TitleComponent';
 import DescriptionComponent from '../components/product-detail-component/DescriptionComponent';
 import SellerComponent from '../components/product-detail-component/SellerComponent';
@@ -11,10 +11,17 @@ import {
   useGetOneProductQuery,
   useGetRecommendedProductsQuery,
 } from '../services/api/productApi';
-import { Fragment } from 'react';
+
+import {
+  addItemToCart,
+  clearCart,
+  removeItemFromCart,
+  updateItemQuantity,
+} from '../features/cart/cartSlice';
 
 function ProductDetailPage() {
   const { productId } = useParams();
+  const dispatch = useDispatch();
 
   const [allRelatedProducts, setAllRelatedProducts] = useState([]);
   const [selectedProductInfo, setSelectedProductInfo] = useState({});
@@ -78,6 +85,22 @@ function ProductDetailPage() {
         </div>
       );
   }
+
+  console.log(selectedProductInfo.productId, selectedProductInfo.quantity);
+
+  /**
+   * Handle adding an item to the cart.
+   * @param {number} productId The ID of the product to add to the cart.
+   * @throws {Error} If there is an error adding the item to the cart.
+   */
+  const handleAddToCart = (productId) => {
+    try {
+      dispatch(addItemToCart({ productId }));
+    } catch (error) {
+      console.error('Failed to add item to cart:', error);
+    }
+  };
+
   return (
     <Container
       maxWidth="1420px"
@@ -108,24 +131,19 @@ function ProductDetailPage() {
               />
               <SellerComponent seller={selectedProductInfo.instructor || {}} />
               <Stack spacing="10px">
-                <ButtonComponent path="/cart" color="secondary">
-                  Add to cart
-                </ButtonComponent>
-                <ButtonComponent path="/payment" color="primary">
-                  Buy now
-                </ButtonComponent>
+                <Button onClick={handleAddToCart} variant="contained">Add to cart</Button>
               </Stack>
             </Stack>
           </Grid>
         </Grid>
         <Stack spacing="30px" sx={{ mt: { xs: '50px', md: '160px' } }}>
           {allRelatedProducts.length > 0 && (
-            <Fragment>
+            <Stack>
               <Typography sx={{ typography: { xs: 'blgsm', md: 'h4' } }}>
                 You might also want to buy these products
               </Typography>
               <CustomCarousel data={allRelatedProducts} cardVariant="product" />
-            </Fragment>
+            </Stack>
           )}
         </Stack>
       </Stack>
