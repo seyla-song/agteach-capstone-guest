@@ -133,11 +133,7 @@ function ProductDetailPage() {
               />
               <SellerComponent seller={selectedProductInfo.instructor || {}} />
               <Stack spacing="10px">
-                <Button
-                  onClick={handleAddToCart}
-                  variant="contained"
-                  endIcon={<ShoppingCartOutlinedIcon />}
-                >
+                <Button onClick={handleAddToCart} variant="contained">
                   Add to cart
                 </Button>
                 <Button
