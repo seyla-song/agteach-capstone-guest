@@ -12,13 +12,7 @@ import {
   useGetRecommendedProductsQuery,
 } from '../services/api/productApi';
 
-import {
-  addItemToCart,
-  clearCart,
-  removeItemFromCart,
-  updateItemQuantity,
-} from '../features/cart/cartSlice';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { addItemToCart } from '../features/cart/cartSlice';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 
 function ProductDetailPage() {
