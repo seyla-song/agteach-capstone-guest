@@ -1,6 +1,13 @@
-import { Box, Button, Container, Divider, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  Stack,
+  Typography,
+} from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem, clearCart } from '../features/cart/cartSlice';
+import { addItem, clearCart, updateQuantity } from '../features/cart/cartSlice';
 
 export const ProductList = () => {
   const products = [
@@ -9,8 +16,9 @@ export const ProductList = () => {
     { id: 3, name: 'Garden Fork V2', price: 12 },
   ];
 
-  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
 
+  const dispatch = useDispatch();
 
   const handleAddToCart = (productId) => {
     try {
@@ -27,6 +35,14 @@ export const ProductList = () => {
     }
   };
 
+  const handleIncreament = (productId, quantity) => {
+    dispatch(updateQuantity({ productId, quantity: quantity + 1 }));
+  };
+  const handleDecreament = (productId, quantity) => {
+    if(quantity > 1) dispatch(updateQuantity({ productId, quantity: quantity - 1 }));
+  };
+
+  console.log(cart);
 
   return (
     <Container>
@@ -46,13 +62,34 @@ export const ProductList = () => {
             </Button>
           </Stack>
         ))}
-        <Divider/>
+        <Divider />
         <Button onClick={handleClearCart} variant="outlined">
           Clear Storage
         </Button>
-        <Divider/>
+        <Divider />
         <Typography>Number of Items: </Typography>
-        <Divider/>
+        <Divider />
+        <Typography>My Cart</Typography>
+        {cart.items.map((item) => (
+          <Box>
+            <Typography>{item.productId}</Typography>
+            <Typography>{item.quantity}</Typography>
+            <Stack direction="row">
+              <Button
+                variant="outlined"
+                onClick={() => handleDecreament(item.productId, item.quantity)}
+              >
+                -
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={() => handleIncreament(item.productId, item.quantity)}
+              >
+                +
+              </Button>
+            </Stack>
+          </Box>
+        ))}
       </Stack>
     </Container>
   );
