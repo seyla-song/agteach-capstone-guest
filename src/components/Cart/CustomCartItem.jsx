@@ -40,7 +40,8 @@ export const CustomCartItem = ({
   const dispatch = useDispatch();
 
   const handleIncreament = () => {
-    dispatch(updateItemQuantity({ productId, quantity: quantity + 1 }));
+    if (quantity < availableStock)
+      dispatch(updateItemQuantity({ productId, quantity: quantity + 1 }));
   };
   const handleDecreament = () => {
     if (quantity > 1)
@@ -76,7 +77,7 @@ export const CustomCartItem = ({
             </Stack>
             <Typography variant="bxsr"># {productId}</Typography>
             <ButtonGroup size="small">
-              <Button onClick={handleDecreament}>
+              <Button onClick={handleDecreament} disabled={!(quantity > 1)}>
                 <RemoveIcon fontSize="small" />
               </Button>
               <TextField
@@ -85,7 +86,10 @@ export const CustomCartItem = ({
                 type="tel"
                 value={quantity}
               />
-              <Button onClick={handleIncreament}>
+              <Button
+                onClick={handleIncreament}
+                disabled={!(quantity < availableStock)}
+              >
                 <AddIcon fontSize="small" />
               </Button>
             </ButtonGroup>
