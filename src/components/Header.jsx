@@ -53,6 +53,8 @@ function Navigation() {
   const [logout] = useLogoutMutation();
   const { data: guestData, isLoading: isLoginLoading } = useGetUserInfoQuery();
 
+  const cartItemTotal = useSelector((state) => state.cart.total);
+
   let data = {};
   if (guestData) {
     data = guestData.data;
@@ -348,6 +350,7 @@ function Navigation() {
                 to="cart"
               >
                 <ShoppingCartOutlinedIcon fontSize="small" />
+                {cartItemTotal > 0 && <Typography position='absolute' top={2} right={0} bgcolor='red.main' variant='btr' borderRadius={100} width={15}>{cartItemTotal}</Typography>}
               </IconButton>
 
               <IconButton
