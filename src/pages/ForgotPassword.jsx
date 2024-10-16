@@ -37,8 +37,9 @@ const ForgotPasswordPage = () => {
                 setSnackbarMessage(response.message);
             }
         } catch (err) {
+            console.log(err)
             setSnackbarSeverity('error');
-            setSnackbarMessage(err?.data?.message);
+            setSnackbarMessage(`Please Wait ${Math.floor(err?.data?.remainingCooldown / 1000) }s before resending reset link.`);
         } finally {
             setSnackbarOpen(true);
         }
