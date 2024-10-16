@@ -31,7 +31,7 @@ export default CartPage;
 
 const CartContent = () => {
   const [purchased] = usePurchasedMutation();
-  const [getCartItems, { data, isLoading, isError }] =
+  const [getCartItems, { isLoading }] =
     useGetCartItemsMutation();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
