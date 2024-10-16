@@ -60,6 +60,8 @@ function Navigation() {
     data = guestData.data;
   }
 
+  console.log(cartItemTotal)
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
