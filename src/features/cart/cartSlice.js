@@ -20,7 +20,8 @@ const cartSlice = createSlice({
      *   - productId: The ID of the item to add to the cart.
      */
     addItemToCart: (state, action) => {
-      const { productId, availableStock } = action.payload;
+      const { productId, availableStock, name, imageUrl, price } =
+        action.payload;
       const existingProduct = state.items.find(
         (item) => item.productId === productId
       );
@@ -30,7 +31,14 @@ const cartSlice = createSlice({
           existingProduct.quantity += 1;
         }
       } else {
-        state.items.push({ productId, quantity: 1, availableStock });
+        state.items.push({
+          productId,
+          name,
+          imageUrl,
+          price,
+          quantity: 1,
+          availableStock,
+        });
       }
       state.totalQuantity = state.items.reduce(
         (sum, item) => sum + item.quantity,
