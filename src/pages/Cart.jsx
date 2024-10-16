@@ -48,7 +48,14 @@ const CartContent = () => {
   const handleCheckout = async () => {
     setLoading(true);
     try {
-      const data = await purchased({ cartItems }).unwrap();
+      const cartItemsResult = await handleGetCartItems();
+      if (!cartItemsResult || !cartItemsResult.items) {
+        throw new Error('Failed to retrieve cart items');
+      }
+
+      const data = await purchased({
+        cartItems: cartItemsResult.items,
+      }).unwrap();
       if (data.id) {
         const result = await stripe.redirectToCheckout({ sessionId: data.id });
         if (result.error) {
@@ -69,8 +76,8 @@ const CartContent = () => {
     try {
       const res = await getCartItems(cart.items).unwrap();
       if (res.status === 'success') {
-        console.log(res);
-        return;
+        console.log(res.items);
+        return res; // Return the entire response
       }
     } catch (err) {
       console.log(err);
@@ -79,6 +86,9 @@ const CartContent = () => {
         open: true,
         severity: 'error',
       });
+      throw new Error(
+        'Failed to get cart items: ' + (err.message || 'Unknown error')
+      );
     }
   };
 
@@ -138,9 +148,9 @@ const CartContent = () => {
               variant="contained"
               color="secondary"
               disabled={!stripe || loading}
-              onClick={handleGetCartItems}
+              onClick={handleCheckout}
             >
-              {isLoading ? 'Processing...' : 'Checkout'}
+              {isLoading && loading ? 'Processing...' : 'Checkout'}
             </Button>
           </Stack>
         </Grid>
@@ -205,7 +215,6 @@ const purchasedHistory = [
     totalPrice: 128,
   },
 ];
-
 
 const cartItems = [
   {
