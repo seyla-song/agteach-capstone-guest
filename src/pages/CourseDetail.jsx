@@ -119,7 +119,7 @@ function CourseDetailPage() {
           <Grid item xs={12}>
             <Divider />
           </Grid>
-          {/* <SuggestedCourseProduct courses={recommendedCourses} products={currentCourseData.data.product_suggestions} /> */}
+          <SuggestedCourseProduct courses={recommendedCourses} products={currentCourseData.data.product_suggestions} />
           <Grid item xs={12} pt={10} pb={20}>
             <MemberComponent />
           </Grid>
