@@ -53,13 +53,9 @@ function Navigation() {
   const [logout] = useLogoutMutation();
   const { data: guestData, isLoading: isLoginLoading } = useGetUserInfoQuery();
 
-  console.log('guestData', guestData);
-
   let data = {};
   if (guestData) {
-    console.log('guestData', guestData);
     data = guestData.data;
-    console.log('data in header', data);
   }
 
   const handleClick = (event) => {
