@@ -15,6 +15,7 @@ import { usePurchasedMutation } from '../services/api/purchasedApi';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetCartItemsMutation } from '../services/api/cartApi';
+import { CustomAlert } from '../components/CustomAlert';
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
@@ -34,6 +35,11 @@ const CartContent = () => {
     useGetCartItemsMutation();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
+  const [snackbar, setSnackbar] = useState({
+    label: '',
+    open: false,
+    severity: 'error',
+  });
 
   const navigate = useNavigate();
 
@@ -61,10 +67,18 @@ const CartContent = () => {
 
   const handleGetCartItems = async () => {
     try {
-      const res = (await getCartItems(cart.items)).data;
-      console.log(res);
+      const res = await getCartItems(cart.items).unwrap();
+      if (res.status === 'success') {
+        console.log(res);
+        return;
+      }
     } catch (err) {
       console.log(err);
+      setSnackbar({
+        label: err.data.message,
+        open: true,
+        severity: 'error',
+      });
     }
   };
 
@@ -80,6 +94,12 @@ const CartContent = () => {
         pt: 10,
       }}
     >
+      <CustomAlert
+        label={snackbar.label}
+        open={snackbar.open}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+        severity={snackbar.severity}
+      />
       <Grid container>
         <Grid item md={8} pr={3} pb={5} xs>
           {cart.items.map((item) => (
@@ -120,7 +140,7 @@ const CartContent = () => {
               disabled={!stripe || loading}
               onClick={handleGetCartItems}
             >
-              {loading ? 'Processing...' : 'Checkout'}
+              {isLoading ? 'Processing...' : 'Checkout'}
             </Button>
           </Stack>
         </Grid>
