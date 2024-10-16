@@ -44,8 +44,6 @@ function ProductDetailPage() {
 
   const currentQuantity = cartItem?.quantity || 0;
   const availableStock = selectedProductInfo.quantity;
-
-  console.log(currentQuantity, availableStock);
   
 
   useEffect(() => {
@@ -109,8 +107,6 @@ function ProductDetailPage() {
   const handleAddToCart = () => {
     try {
       if (currentQuantity < availableStock) {
-        console.log('Adding to cart:', currentQuantity, '<', availableStock);
-        
         dispatch(
           addItemToCart({
             productId: selectedProductInfo.productId,
