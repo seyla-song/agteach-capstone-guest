@@ -29,7 +29,14 @@ import {
  *
  * @returns {React.ReactElement} A JSX element that renders the cart item.
  */
-export const CustomCartItem = ({ productId, quantity }) => {
+export const CustomCartItem = ({
+  productId,
+  quantity,
+  imageUrl,
+  name,
+  price,
+  availableStock,
+}) => {
   const dispatch = useDispatch();
 
   const handleIncreament = () => {
@@ -48,18 +55,18 @@ export const CustomCartItem = ({ productId, quantity }) => {
     <Stack gap={2} py={1}>
       <Stack direction="row" justifyContent="space-between">
         <Stack direction="row" alignItems="center" gap={2}>
-          {/* <Box
+          <Box
             component="img"
-            src={image}
+            src={imageUrl}
             alt="Cart"
             height={130}
             width={130}
-          /> */}
+          />
           <Stack gap={1}>
             <Stack direction="row">
-              {/* <Typography maxWidth={280} variant="bssm">
+              <Typography maxWidth={280} variant="bssm">
                 {name}
-              </Typography> */}
+              </Typography>
               <IconButton
                 sx={{ width: 18, height: 18 }}
                 color="error"
@@ -86,10 +93,10 @@ export const CustomCartItem = ({ productId, quantity }) => {
         </Stack>
         <Stack textAlign="right" alignItems="end" pt={1}>
           <Typography variant="blgsm" color="initial">
-            {/* ${price * count} */}
+            ${price * quantity}
           </Typography>
           <Typography variant="bxsr" color="initial">
-            {/* ${price} X ({count}) items */}
+            ${price} X ({quantity}) items
           </Typography>
         </Stack>
       </Stack>

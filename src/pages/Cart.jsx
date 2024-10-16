@@ -87,6 +87,10 @@ const CartContent = () => {
               key={item.productId}
               productId={item.productId}
               quantity={item.quantity}
+              availableStock={item.availableStock}
+              name={item.name}
+              imageUrl={item.imageUrl}
+              price={item.price}
             />
           ))}
         </Grid>
