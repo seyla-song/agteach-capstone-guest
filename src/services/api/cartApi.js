@@ -9,7 +9,7 @@ export const cartApi = createApi({
     getCartItems: builder.query({
       query: (cartItems) => ({
         url: '/api/cart/getCartItems',
-        method: 'GET',
+        method: 'POST',
         body: cartItems,
       }),
     }),
