@@ -61,7 +61,7 @@ const CartContent = () => {
 
   const handleGetCartItems = async () => {
     try {
-      const res = await getCartItems(cart.items);
+      const res = (await getCartItems(cart.items)).data;
       console.log(res);
     } catch (err) {
       console.log(err);
@@ -86,7 +86,7 @@ const CartContent = () => {
             <CustomCartItem key={item.id} {...item} />
           ))}
         </Grid>
-        {/* <Grid item md={4} xs>
+        <Grid item md={4} xs>
           <Stack
             bgcolor="common.white"
             p={3}
@@ -115,13 +115,13 @@ const CartContent = () => {
               {loading ? 'Processing...' : 'Checkout'}
             </Button>
           </Stack>
-        </Grid> */}
-        {/* <Grid item sx={{ py: 5 }} xs={12}>
+        </Grid>
+        <Grid item sx={{ py: 5 }} xs={12}>
           <Divider />
-        </Grid> */}
-        {/* <Grid item xs={12}>
+        </Grid>
+        <Grid item xs={12}>
           <PurchasedHistory data={purchasedHistory} />
-        </Grid> */}
+        </Grid>
       </Grid>
     </Container>
   );
