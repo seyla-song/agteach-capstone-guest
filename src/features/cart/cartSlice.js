@@ -96,6 +96,33 @@ const cartSlice = createSlice({
       state.totalAmount = 0;
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchCartItems.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchCartItems.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items = action.payload;
+
+        // Calculate total total amount
+        state.totalAmount = state.items.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+        );
+
+        // Calculate total quantity
+        state.totalQuantity = state.items.reduce(
+          (sum, item) => sum + item.quantity,
+          0
+        );
+      })
+      .addCase(fetchCartItems.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
+  },
 });
 
 export const {
