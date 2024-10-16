@@ -9,9 +9,9 @@ export const loadCartState = () => {
     if (serializedState === null) return undefined;
 
     const cartState = JSON.parse(serializedState);
-    const total = cartState.items.reduce((sum, item) => sum + item.quantity, 0);
+    const totalQuantity = cartState.items.reduce((sum, item) => sum + item.quantity, 0);
 
-    return { ...cartState, total };
+    return { ...cartState, totalQuantity };
   } catch (err) {
     console.error('Could not load cart state:', err);
     return undefined;

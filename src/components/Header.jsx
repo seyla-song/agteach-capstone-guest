@@ -53,7 +53,7 @@ function Navigation() {
   const [logout] = useLogoutMutation();
   const { data: guestData, isLoading: isLoginLoading } = useGetUserInfoQuery();
 
-  const cartItemTotal = useSelector((state) => state.cart.total);
+  const cartItemTotal = useSelector((state) => state.cart.totalQuantity);
 
   let data = {};
   if (guestData) {
