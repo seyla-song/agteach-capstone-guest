@@ -28,9 +28,9 @@ export const saveCartState = (cartState) => {
   try {
     const cartToSave = {
       items: cartState.items.map((item) => ({
+        productId: item.productId,
         name: item.name,
         imageUrl:item.imageUrl,
-        productId: item.productId,
         price: item.price,
         quantity: item.quantity,
         availableStock: item.availableStock

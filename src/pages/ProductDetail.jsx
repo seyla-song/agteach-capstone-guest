@@ -110,6 +110,9 @@ function ProductDetailPage() {
         dispatch(
           addItemToCart({
             productId: selectedProductInfo.productId,
+            name: selectedProductInfo.name,
+            imageUrl: selectedProductInfo.imageUrl,
+            price: selectedProductInfo.price,
             availableStock,
           })
         );
