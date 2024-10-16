@@ -20,6 +20,8 @@ import { CustomCarousel } from './CustomCarousel';
  */
 export const SuggestedCourseProduct = ({ courses, products }) => {
 
+  const recommendedProducts = products.map((prod) => prod.product);
+  
   return (
     <Stack gap={5} py={10} width="100%">
       {courses.length > 0 && 
@@ -30,14 +32,14 @@ export const SuggestedCourseProduct = ({ courses, products }) => {
           <CustomCarousel data={courses} slideToShow={5} />
         </Stack>
       }
-      {/* {products.length > 0 &&
+      {products.length > 0 &&
         <Stack gap={2}>
           <Typography variant="h4" maxWidth={300}>
             You might want to buy the product related to this course
           </Typography>
-          <CustomCarousel data={products} cardVariant="product" slideToShow={5} />
+          <CustomCarousel data={recommendedProducts} cardVariant="product" slideToShow={5} />
         </Stack>
-      } */}
+      }
     </Stack>
   );
 };
