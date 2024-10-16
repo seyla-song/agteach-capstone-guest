@@ -30,7 +30,7 @@ export const CustomCartItem = ({ name, id, price, image }) => {
     setCount(Math.max(Number(event.target.value), 1));
   };
   return (
-    <Stack gap={2} py>
+    <Stack gap={2} py={1}>
       <Stack direction="row" justifyContent="space-between">
         <Stack direction="row" alignItems="center" gap={2}>
           <Box
@@ -40,7 +40,7 @@ export const CustomCartItem = ({ name, id, price, image }) => {
             height={130}
             width={130}
           />
-          <Stack gap>
+          <Stack gap={1}>
             <Stack direction="row">
               <Typography maxWidth={280} variant="bssm">
                 {name}
@@ -72,7 +72,7 @@ export const CustomCartItem = ({ name, id, price, image }) => {
             </ButtonGroup>
           </Stack>
         </Stack>
-        <Stack textAlign="right" alignItems="end" pt>
+        <Stack textAlign="right" alignItems="end" pt={1}>
           <Typography variant="blgsm" color="initial">
             ${price * count}
           </Typography>

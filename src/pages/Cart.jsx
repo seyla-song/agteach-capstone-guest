@@ -13,6 +13,8 @@ import { Elements, useStripe } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { usePurchasedMutation } from '../services/api/purchasedApi';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useGetCartItemsMutation } from '../services/api/cartApi';
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
@@ -28,10 +30,14 @@ export default CartPage;
 
 const CartContent = () => {
   const [purchased] = usePurchasedMutation();
+  const [getCartItems, { data, isLoading, isError }] =
+    useGetCartItemsMutation();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
 
   const navigate = useNavigate();
+
+  const cart = useSelector((state) => state.cart);
 
   const handleCheckout = async () => {
     setLoading(true);
@@ -53,6 +59,15 @@ const CartContent = () => {
     }
   };
 
+  const handleGetCartItems = async () => {
+    try {
+      const res = await getCartItems(cart.items);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Container
       maxWidth={false}
@@ -71,7 +86,7 @@ const CartContent = () => {
             <CustomCartItem key={item.id} {...item} />
           ))}
         </Grid>
-        <Grid item md={4} xs>
+        {/* <Grid item md={4} xs>
           <Stack
             bgcolor="common.white"
             p={3}
@@ -95,18 +110,18 @@ const CartContent = () => {
               variant="contained"
               color="secondary"
               disabled={!stripe || loading}
-              onClick={handleCheckout}
+              onClick={handleGetCartItems}
             >
               {loading ? 'Processing...' : 'Checkout'}
             </Button>
           </Stack>
-        </Grid>
-        <Grid item sx={{ py: 5 }} xs={12}>
+        </Grid> */}
+        {/* <Grid item sx={{ py: 5 }} xs={12}>
           <Divider />
-        </Grid>
-        <Grid item xs={12}>
+        </Grid> */}
+        {/* <Grid item xs={12}>
           <PurchasedHistory data={purchasedHistory} />
-        </Grid>
+        </Grid> */}
       </Grid>
     </Container>
   );

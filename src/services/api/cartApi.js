@@ -6,7 +6,7 @@ export const cartApi = createApi({
     baseUrl: 'http://localhost:3001',
   }),
   endpoints: (builder) => ({
-    getCartItems: builder.query({
+    getCartItems: builder.mutation({
       query: (cartItems) => ({
         url: '/api/cart/getCartItems',
         method: 'POST',
@@ -16,4 +16,4 @@ export const cartApi = createApi({
   }),
 });
 
-export const { useGetCartItemsQuery } = cartApi;
+export const { useGetCartItemsMutation } = cartApi;
