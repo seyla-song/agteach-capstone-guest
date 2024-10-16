@@ -48,6 +48,16 @@ function SortByFilter({ sortBy, handleChange }) {
               label="A-Z"
               value="alphabet"
             />
+            <FormControlLabel
+              control={<Radio />}
+              label="Price Low to high"
+              value="plth"
+            />
+            <FormControlLabel
+              control={<Radio />}
+              label="Price high to low"
+              value="phtl"
+            />
           </RadioGroup>
         </FormControl>
       </Stack>

@@ -56,8 +56,6 @@ function CourseDetailPage() {
     window.scrollTo(0, 0);
   }, [recommendedCoursesData, currentCourseData]);
 
-  let content;
-
   if (isCurrentCourseDataLoading)
     return (
       <div
@@ -112,14 +110,14 @@ function CourseDetailPage() {
         <Grid sx={{ maxWidth: "1420px" }} container paddingX={1}>
           <CourseDetailHighlight courseData={currentCourseData?.data} />
           <CourseDetailContent
-            sections={currentCourseData?.data.sections}
-            numberOfVideos={currentCourseData.data.numberOfVideo}
-            courseLength={currentCourseData.data.duration}
+            sections={currentCourseData?.data?.sections}
+            numberOfVideos={currentCourseData?.data?.numberOfVideo}
+            courseLength={currentCourseData?.data?.duration}
           />
           <Grid item xs={12}>
             <Divider />
           </Grid>
-          {/* <SuggestedCourseProduct courses={recommendedCourses} products={currentCourseData.data.product_suggestions} /> */}
+          <SuggestedCourseProduct courses={recommendedCourses} products={currentCourseData?.data?.product_suggestions} />
           <Grid item xs={12} pt={10} pb={20}>
             <MemberComponent />
           </Grid>

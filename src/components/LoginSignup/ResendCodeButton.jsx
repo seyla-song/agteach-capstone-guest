@@ -49,7 +49,7 @@ const ResendCodeButton = ({ email }) => {
       )}
       {isError && (
         <CustomAlert
-          label="An error occurred"
+          label={`Please please wait ${Math.floor(error.data.remainingCooldown / 1000)}s to resend the code again.`}
           open={open}
           onClose={() => setOpen(false)}
           severity="error"
