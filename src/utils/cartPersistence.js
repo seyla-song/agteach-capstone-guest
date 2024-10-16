@@ -28,8 +28,12 @@ export const saveCartState = (cartState) => {
   try {
     const cartToSave = {
       items: cartState.items.map((item) => ({
+        name: item.name,
+        imageUrl:item.imageUrl,
         productId: item.productId,
+        price: item.price,
         quantity: item.quantity,
+        availableStock: item.availableStock
       })),
     };
     const serializedState = JSON.stringify(cartToSave);

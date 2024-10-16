@@ -30,7 +30,7 @@ const cartSlice = createSlice({
           existingProduct.quantity += 1;
         }
       } else {
-        state.items.push({ productId, quantity: 1 });
+        state.items.push({ productId, quantity: 1, availableStock });
       }
       state.totalQuantity = state.items.reduce(
         (sum, item) => sum + item.quantity,

@@ -82,8 +82,12 @@ const CartContent = () => {
     >
       <Grid container>
         <Grid item md={8} pr={3} pb={5} xs>
-          {orderItems.map((item) => (
-            <CustomCartItem key={item.id} {...item} />
+          {cart.items.map((item) => (
+            <CustomCartItem
+              key={item.productId}
+              productId={item.productId}
+              quantity={item.quantity}
+            />
           ))}
         </Grid>
         <Grid item md={4} xs>
