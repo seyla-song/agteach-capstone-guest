@@ -1,22 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
-// Thunk to fetch cart items from the backend
-export const fetchCartItems = createAsyncThunk(
-  'cart/fetchCartItems',
-  async (_, { rejectWithValue }) => {
-    try {
-      // const response = await api.get('/cart');
-      // return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   items: [],
   totalQuantity: 0,
-  totalAmount:0,
+  totalAmount: 0,
   isLoading: false,
   error: null,
 };
@@ -95,33 +82,6 @@ const cartSlice = createSlice({
       state.totalQuantity = 0;
       state.totalAmount = 0;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchCartItems.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
-      .addCase(fetchCartItems.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.items = action.payload;
-
-        // Calculate total total amount
-        state.totalAmount = state.items.reduce(
-          (sum, item) => sum + item.price * item.quantity,
-          0
-        );
-
-        // Calculate total quantity
-        state.totalQuantity = state.items.reduce(
-          (sum, item) => sum + item.quantity,
-          0
-        );
-      })
-      .addCase(fetchCartItems.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      });
   },
 });
 
