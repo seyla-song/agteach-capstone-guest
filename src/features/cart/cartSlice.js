@@ -1,8 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
+// Thunk to fetch cart items from the backend
+export const fetchCartItems = createAsyncThunk('cart/fetchCartItems', async (_, { rejectWithValue }) => {
+  try {
+    // const response = await api.get('/cart');
+    // return response.data;
+  } catch (error) {
+    return rejectWithValue(error.response.data);
+  }
+});
 
 const initialState = {
   items: [],
-  total: 0,
+  totalQuantity: 0,
 };
 
 const cartSlice = createSlice({
@@ -29,7 +39,7 @@ const cartSlice = createSlice({
       } else {
         state.items.push({ productId, quantity: 1 });
       }
-      state.total = state.items.reduce((sum, item) => sum + item.quantity, 0);
+      state.totalQuantity = state.items.reduce((sum, item) => sum + item.quantity, 0);
     },
     /**
      * Update the quantity of a product in the cart.
@@ -45,7 +55,7 @@ const cartSlice = createSlice({
       if (item) {
         item.quantity = quantity;
       }
-      state.total = state.items.reduce((sum, item) => sum + item.quantity, 0);
+      state.totalQuantity = state.items.reduce((sum, item) => sum + item.quantity, 0);
     },
 
     /**
@@ -58,7 +68,7 @@ const cartSlice = createSlice({
       state.items = state.items.filter(
         (item) => item.productId !== action.payload.productId
       );
-      state.total = state.items.reduce((sum, item) => sum + item.quantity, 0);
+      state.totalQuantity = state.items.reduce((sum, item) => sum + item.quantity, 0);
     },
 
     /**
@@ -67,7 +77,7 @@ const cartSlice = createSlice({
      */
     clearCart: (state) => {
       state.items = [];
-      state.total = 0;
+      state.totalQuantity = 0;
     },
   },
 });
