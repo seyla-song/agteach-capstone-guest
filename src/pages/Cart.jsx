@@ -215,30 +215,3 @@ const purchasedHistory = [
     totalPrice: 128,
   },
 ];
-
-const cartItems = [
-  {
-    name: 'Fertilizer',
-    imageUrl:
-      'http://agteach-dev-assets.s3.ap-southeast-2.amazonaws.com/products/148/product-cover-image.jpeg',
-    productId: 148,
-    price: 12,
-    quantity: 1,
-  },
-  {
-    name: 'Wildflower Seed Mix',
-    imageUrl:
-      'http://agteach-dev-assets.s3.ap-southeast-2.amazonaws.com/products/150/product-cover-image.jpeg',
-    productId: 150,
-    price: 32,
-    quantity: 2,
-  },
-  {
-    name: '(Test)Garden Fork V2',
-    imageUrl:
-      'http://agteach-dev-assets.s3.ap-southeast-2.amazonaws.com/products/152/product-cover-image.jpeg',
-    productId: 152,
-    price: 234,
-    quantity: 1,
-  },
-];
