@@ -9,14 +9,6 @@ function FilterByOther({ filterByPrice, handleFilterByPriceChange, filterByRunti
       </Typography>
       <Stack direction="row" gap={0}>
         <FormGroup>
-          <CustomFormController
-            label="Price Low to high"
-            value="price"
-            control={<Checkbox 
-                      checked={filterByPrice}  
-                      onChange={handleFilterByPriceChange}
-                    />}
-          />
           {context === 'course' && 
             <Fragment>
               <CustomFormController

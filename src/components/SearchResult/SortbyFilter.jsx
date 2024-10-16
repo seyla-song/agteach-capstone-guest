@@ -30,7 +30,10 @@ function SortByFilter({ sortBy, handleChange}) {
           >
             <CustomRadio label="Newest" value="newest" />
             <CustomRadio label="Oldest" value="oldest" />
+            <CustomRadio label="Popularity" value="popularity" />
             <CustomRadio label="A-Z" value="alphabet" />
+            <CustomRadio label="Price low to high" value="plth" />
+            <CustomRadio label="Price high to low" value="phtl" />
           </RadioGroup>
         </FormControl>
       </Stack>

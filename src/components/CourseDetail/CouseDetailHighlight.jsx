@@ -6,7 +6,7 @@ import { showDuration } from '../../utils/showDuration';
 
 export const CourseDetailHighlight = ({courseData}) => {
   let objectiveConent;
-  const courseObjectives = courseData.courseObjective.includes('\r') ? courseData.courseObjective.replace('\r', '-+-&+-+ ').split('-+-&+-+ ') : courseData.courseObjective;
+  const courseObjectives = courseData?.courseObjective?.includes('\r') ? courseData?.courseObjective?.replace('\r', '-+-&+-+ ').split('-+-&+-+ ') : courseData?.courseObjective;
 
   if (Array.isArray(courseObjectives)) {
     objectiveConent = courseObjectives.map((objective, idx) => {
@@ -55,11 +55,11 @@ export const CourseDetailHighlight = ({courseData}) => {
                 <Typography variant="h4">This course include:</Typography>
                 <Stack direction="row" gap={2}>
                   <TimerIcon />
-                  <Typography variant="bsr">{showDuration(courseData.duration)}</Typography>
+                  <Typography variant="bsr">{showDuration(courseData?.duration)}</Typography>
                 </Stack>
                 <Stack direction="row" gap={2}>
                   <MovieIcon />
-                  <Typography variant="bsr">{courseData.numberOfVideo} videos</Typography>
+                  <Typography variant="bsr">{courseData?.numberOfVideo} videos</Typography>
                 </Stack>
               </Stack>
             </Stack>

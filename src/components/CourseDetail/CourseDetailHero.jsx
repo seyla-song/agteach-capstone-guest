@@ -49,12 +49,12 @@ export const CourseDetailHero = ({courseData}) => {
       <Grid alignItems={'center'} paddingY={15} container>
         <Grid item xs={5}>
           <Stack gap>
-            <Typography variant="h2">${courseData.price}</Typography>
+            <Typography variant="h2">${courseData?.price}</Typography>
             <Typography variant="h4">
-              {courseData.name}
+              {courseData?.name}
             </Typography>
             <Typography variant="bsr">
-              {courseData.description}
+              {courseData?.description}
             </Typography>
             <Typography variant="bsr">
               Created by:{' '}
@@ -67,9 +67,9 @@ export const CourseDetailHero = ({courseData}) => {
                     textDecoration: "underline"
                   }
                 }}
-                onClick={() => navigate(`/instructor-profile/${courseData.instructorId}`)}
+                onClick={() => navigate(`/instructor-profile/${courseData?.instructorId}`)}
               >
-                {courseData.instructor.firstName + ' ' + courseData.instructor.lastName}
+                {courseData?.instructor.firstName + ' ' + courseData?.instructor.lastName}
               </Link>
             </Typography>
           </Stack>
@@ -79,11 +79,11 @@ export const CourseDetailHero = ({courseData}) => {
           <Stack display={'flex'} flexDirection={'column'} gap={1}>
             <MediaPlayer
               title="Sprite Fight"
-              src={courseData.previewVideoUrl}
+              src={courseData?.previewVideoUrl}
             >
               <MediaProvider />
               <DefaultVideoLayout
-                thumbnails={courseData.thumbnailUrl}
+                thumbnails={courseData?.thumbnailUrl}
                 icons={defaultLayoutIcons}
               />
             </MediaPlayer>

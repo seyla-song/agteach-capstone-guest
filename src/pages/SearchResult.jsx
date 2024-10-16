@@ -12,7 +12,7 @@ import {
 import FilterByOther from "../components/SearchResult/FilterByOther";
 import SearchList from "../components/SearchResult/SearchList";
 import SearchBar from "../components/SearchBarComponent";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { useSearchProductQuery } from '../services/api/productApi';
 import { useSearchCourseQuery } from "../services/api/courseApi";
 
@@ -26,7 +26,7 @@ function SearchResultPage() {
 
   const [category, setCategory] = useState('course');
   const [sortBy, setSortBy] = useState('newest');
-  const [filterByPrice, setFilterByPrice] = useState(false);
+
   const [filterByRuntime, setFilterByRuntime] = useState('none');
   const [limit, setLimit] = useState(9);
   const [rawData, setRawData] = useState([]);
@@ -38,10 +38,6 @@ function SearchResultPage() {
 
   const handleSortByChange = (state) => {
     if (state !== sortBy) setSortBy(state);
-  };
-
-  const handleFilterByPriceChange = () => {
-    setFilterByPrice(prev => !prev);
   };
 
   const handleFilterByRuntimeChange = (state) => {
@@ -68,6 +64,8 @@ function SearchResultPage() {
   }, [courseData, category]);
 
   useEffect(() => {
+    setLimit(9);
+
     let rawDataToFilter = [...rawData]; 
 
     // Sort by both date and price
@@ -84,13 +82,14 @@ function SearchResultPage() {
         // Sort by name alphabetically
         const nameDiff = a.name.localeCompare(b.name);
         if (nameDiff !== 0) return nameDiff;
-      };
-
-      // If filterByPrice is active, sort by price after sorting by date/name
-      if (filterByPrice) {
+      } else if (sortBy === 'plth') {
         const priceA = parseFloat(a.price) || 0;
         const priceB = parseFloat(b.price) || 0;
         return priceA - priceB; // Sort by lowest price
+      } else if (sortBy === 'phtl') {
+        const priceA = parseFloat(a.price) || 0;
+        const priceB = parseFloat(b.price) || 0;
+        return priceB - priceA; // Sort by highest price
       };
       
       // Filter by runtime if applicable
@@ -102,12 +101,12 @@ function SearchResultPage() {
         };
       };
 
-      return 0; // If no price or date difference, keep original order
+      return 0;
     });
 
 
     setFilteredData(rawDataToFilter);
-  }, [category, sortBy, filterByPrice, filterByRuntime, rawData]);
+  }, [category, sortBy, filterByRuntime, rawData]);
 
   let content;
 
@@ -181,14 +180,16 @@ function SearchResultPage() {
               <CategoryFilter category={category} handleChange={handleCategoryChange} />
               <Divider sx={{ display: { xs: "none", sm: "block" } }} />
               <SortByFilter sortBy={sortBy} handleChange={handleSortByChange} />
-              <Divider sx={{ display: { xs: "none", sm: "block" } }} />
-              <FilterByOther
-                filterByPrice={filterByPrice}
-                handleFilterByPriceChange={handleFilterByPriceChange}
-                filterByRuntime={filterByRuntime}
-                handleFilterByRuntimeChange={handleFilterByRuntimeChange}
-                context={category}
-              />
+              {category === 'course' && 
+                <Fragment>
+                  <Divider sx={{ display: { xs: "none", sm: "block" } }} />
+                  <FilterByOther
+                    filterByRuntime={filterByRuntime}
+                    handleFilterByRuntimeChange={handleFilterByRuntimeChange}
+                    context={category}
+                  />
+                </Fragment>
+              }
             </Stack>
           </Grid>
           <Grid size={{ xs: 12, sm: 8 }} sx={{ width: "100%" }}>

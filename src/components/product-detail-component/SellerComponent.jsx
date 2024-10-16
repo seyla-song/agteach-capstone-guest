@@ -38,9 +38,9 @@ export default function SellerComponent({ seller }) {
         sx={{ display: "flex", gap: "20px", justifyContent: "space-between" }}
       >
         <Stack direction="row" alignItems="center">
-          <Avatar src={seller.image_url} onClick={() => goToInstructorProfile(seller.instructorId)}/>
+          <Avatar sx={{cursor: 'pointer'}} src={seller.image_url} onClick={() => goToInstructorProfile(seller.instructorId)}/>
           <Stack direction="column" sx={{ marginLeft: 2 }}>
-            <Typography variant="bmdsm" onClick={() => goToInstructorProfile(seller.instructorId)}>{seller.firstName + " " + seller.lastName}</Typography>
+            <Typography sx={{cursor: 'pointer'}} variant="bmdsm" onClick={() => goToInstructorProfile(seller.instructorId)}>{seller.firstName + " " + seller.lastName}</Typography>
             <Typography variant="bxsr" color="dark.200">
               {/* will fix later */}
               {'Kep, Kampot, Cambodia'}

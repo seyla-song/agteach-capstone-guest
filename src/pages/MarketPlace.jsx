@@ -45,10 +45,6 @@ export default function MarketPlace() {
     if (state !== sortBy) setSortBy(state);
   };
 
-  const handleFilterByPriceChange = () => {
-    setFilterByPrice(prev => !prev);
-  };
-
   const handleLimitChange = () => {
     setLimit(limit + 9);
   };
@@ -82,16 +78,17 @@ export default function MarketPlace() {
         // Sort by name alphabetically
         const nameDiff = a.name.localeCompare(b.name);
         if (nameDiff !== 0) return nameDiff;
-      }
-
-      // If filterByPrice is active, sort by price after sorting by date/name
-      if (filterByPrice) {
+      } else if (sortBy === 'plth') {
         const priceA = parseFloat(a.price) || 0;
         const priceB = parseFloat(b.price) || 0;
         return priceA - priceB; // Sort by lowest price
+      } else if (sortBy === 'phtl') {
+        const priceA = parseFloat(a.price) || 0;
+        const priceB = parseFloat(b.price) || 0;
+        return priceB - priceA; // Sort by lowest price
       }
 
-      return 0; // If no price or date difference, keep original order
+      return 0; 
     });
 
     setFilteredData(dataToFilter)
@@ -143,8 +140,6 @@ export default function MarketPlace() {
               <Category category={category} handleChange={handleCategoryChange}/>
               <Divider sx={{ display: { xs: "none", sm: "block" } }} />
               <SortBy sortBy={sortBy} handleChange={handleSortByChange}/>
-              <Divider sx={{ display: { xs: "none", sm: "block" } }} />
-              <FilterBy filterBy={filterByPrice} handleChange={handleFilterByPriceChange}/>
             </Stack>
           </Grid>
           <Grid
