@@ -129,7 +129,7 @@ const CartContent = () => {
           >
             <Stack direction="row" justifyContent="space-between">
               <Typography variant="blgsm">Subtotal</Typography>
-              <Typography variant="blgsm">$40.00</Typography>
+              <Typography variant="blgsm">${cart.totalAmount}</Typography>
             </Stack>
             <Divider />
             <Button
@@ -206,32 +206,6 @@ const purchasedHistory = [
   },
 ];
 
-const orderItems = [
-  {
-    id: 'PRD001',
-    name: 'Grow Light - LED',
-    price: 10,
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    id: 'PRD002',
-    name: 'Grow Light - Fluorescent',
-    price: 15,
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    id: 'PRD003',
-    name: 'Grow Light - HPS',
-    price: 20,
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    id: 'PRD004',
-    name: 'Grow Light - LED Grow Tent',
-    price: 25,
-    image: 'https://via.placeholder.com/150',
-  },
-];
 
 const cartItems = [
   {

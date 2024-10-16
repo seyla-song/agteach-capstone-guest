@@ -44,6 +44,10 @@ const cartSlice = createSlice({
         (sum, item) => sum + item.quantity,
         0
       );
+      state.totalAmount = state.items.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      );
     },
     /**
      * Update the quantity of a product in the cart.
@@ -63,6 +67,10 @@ const cartSlice = createSlice({
         (sum, item) => sum + item.quantity,
         0
       );
+      state.totalAmount = state.items.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      );
     },
 
     /**
@@ -76,6 +84,10 @@ const cartSlice = createSlice({
       );
       state.totalQuantity = state.items.reduce(
         (sum, item) => sum + item.quantity,
+        0
+      );
+      state.totalAmount = state.items.reduce(
+        (sum, item) => sum + item.price * item.quantity,
         0
       );
     },
