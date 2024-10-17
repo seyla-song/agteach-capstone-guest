@@ -23,6 +23,7 @@ import CustomModal from '../components/CustomModal';
 import { addItemToCart } from '../features/cart/cartSlice';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import CloseIcon from '@mui/icons-material/Close';
+import TimerOutlinedIcon from '@mui/icons-material/TimerOutlined';
 
 function ProductDetailPage() {
   const { productId } = useParams();
@@ -40,11 +41,10 @@ function ProductDetailPage() {
     state.cart.items.find(
       (item) => item.productId === selectedProductInfo.productId
     )
-  );  
+  );
 
   const currentQuantity = cartItem?.quantity || 0;
   const availableStock = selectedProductInfo.quantity;
-  
 
   useEffect(() => {
     if (relatedProducts) {
@@ -124,7 +124,6 @@ function ProductDetailPage() {
     }
   };
 
-
   return (
     <Container
       maxWidth="1420px"
@@ -165,6 +164,14 @@ function ProductDetailPage() {
               />
               <SellerComponent seller={selectedProductInfo.instructor || {}} />
               <Stack spacing="10px">
+                {selectedProductInfo.quantity < 10 && (
+                  <Stack direction="row" gap={1} justifyContent="center">
+                    <TimerOutlinedIcon color="error" />
+                    <Typography color="error" variant="bmdr">
+                      Hurry only ({selectedProductInfo.quantity}) item left !
+                    </Typography>
+                  </Stack>
+                )}
                 <Button onClick={handleAddToCart} variant="contained">
                   Add to cart
                 </Button>
