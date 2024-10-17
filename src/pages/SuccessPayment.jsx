@@ -1,29 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography, Grid, Stack, Button, Link } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import { loadStripe } from '@stripe/stripe-js';
 import { Link as RouterLink } from 'react-router-dom';
+import { clearCart } from '../features/cart/cartSlice';
+import { useDispatch } from 'react-redux';
 
 export default function SuccessPayment() {
+  const dispatch = useDispatch();
 
-  // const [sessionData, setSessionData] = useState(null);
+  // Fetch session data using session ID
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('session_id');
 
-  // // Fetch session data using session ID
-  // useEffect(() => {
-  //   const urlParams = new URLSearchParams(window.location.search);
-  //   const sessionId = urlParams.get('session_id');
-
-  //   if (sessionId) {
-  //     fetch(`/api/checkout-session?sessionId=${sessionId}`)
-  //       .then((response) => response.json())
-  //       .then((data) => setSessionData(data))
-  //       .catch((error) => console.error('Error fetching session data:', error));
-  //   }
-  // }, []);
-
-  // if (!sessionData) {
-  //   return <Typography>Loading...</Typography>;
-  // }
+    if (sessionId) {
+      dispatch(clearCart());
+    }
+  }, [dispatch]);
 
   return (
     <Box
