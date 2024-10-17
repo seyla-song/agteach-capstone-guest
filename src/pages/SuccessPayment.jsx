@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography, Grid, Stack, Button, Link } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import { loadStripe } from '@stripe/stripe-js';
 import { Link as RouterLink } from 'react-router-dom';
 import { clearCart } from '../features/cart/cartSlice';
 import { useDispatch } from 'react-redux';
 
-const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 export default function SuccessPayment() {
-  const [sessionData, setSessionData] = useState(null);
   const dispatch = useDispatch();
 
   // Fetch session data using session ID
@@ -18,26 +15,8 @@ export default function SuccessPayment() {
 
     if (sessionId) {
       dispatch(clearCart());
-      const fetchSession = async () => {
-        const stripe = await stripePromise;
-
-        stripe.retrieveCheckoutSession(sessionId).then((result) => {
-          if (result.error) {
-            console.error('Error:', result.error);
-          } else {
-            setSessionData(result);
-          }
-        });
-      };
-      fetchSession();
     }
   }, [dispatch]);
-
-  if (!sessionData) {
-    return <Typography>Loading...</Typography>;
-  }
-
-  console.log(sessionData);
 
   return (
     <Box
