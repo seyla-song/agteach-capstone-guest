@@ -7,6 +7,8 @@ import {
   Grid,
   Button,
   IconButton,
+  Alert,
+  AlertTitle,
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import TitleComponent from '../components/product-detail-component/TitleComponent';
@@ -24,6 +26,7 @@ import { addItemToCart } from '../features/cart/cartSlice';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import TimerOutlinedIcon from '@mui/icons-material/TimerOutlined';
+import TakeoutDiningIcon from '@mui/icons-material/TakeoutDining';
 
 function ProductDetailPage() {
   const { productId } = useParams();
@@ -44,7 +47,7 @@ function ProductDetailPage() {
   );
 
   const currentQuantity = cartItem?.quantity || 0;
-  const availableStock = selectedProductInfo.quantity;
+  const availableStock = selectedProductInfo?.quantity;
 
   useEffect(() => {
     if (relatedProducts) {
@@ -164,17 +167,25 @@ function ProductDetailPage() {
               />
               <SellerComponent seller={selectedProductInfo.instructor || {}} />
               <Stack spacing="10px">
-                {selectedProductInfo.quantity < 10 && (
+                {availableStock < 10 && availableStock > 0 && (
                   <Stack direction="row" gap={1} justifyContent="center">
                     <TimerOutlinedIcon color="error" />
                     <Typography color="error" variant="bmdr">
-                      Hurry only ({selectedProductInfo.quantity}) item left !
+                      Hurry only ({availableStock}) item left !
                     </Typography>
                   </Stack>
                 )}
-                <Button onClick={handleAddToCart} variant="contained">
-                  Add to cart
-                </Button>
+                {availableStock > 0 ? (
+                  <Button onClick={handleAddToCart} variant="contained">
+                    Add to cart
+                  </Button>
+                ) : (
+                  <Alert icon={<TakeoutDiningIcon />} severity="warning">
+                    <AlertTitle>Out of Stock</AlertTitle>
+                    Sorry, this item is out of stock. Favourite the product now
+                    to buy later.
+                  </Alert>
+                )}
                 <Button
                   variant="outlined"
                   endIcon={<FavoriteBorderOutlinedIcon />}
