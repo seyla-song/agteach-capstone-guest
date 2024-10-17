@@ -69,7 +69,7 @@ export const CourseVideoMainContent = (data) => {
               </Stack>
               <CourseObjectiveComponent />
               <Divider sx={{ pt:10}} />
-              <SuggestedCourseProduct courses={courses} products={products} />
+              {/* <SuggestedCourseProduct courses={courses} products={products} /> */}
             </Stack>
           </Grid>
         </Grid>
