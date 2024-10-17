@@ -118,7 +118,7 @@ const CartContent = () => {
       <Grid container>
         <Grid item md={totalItemQuantity < 1 ? 12 : 8} pr={3} pb={5} xs={12}>
           <Typography variant="h4">Your Shopping Cart</Typography>
-          <Typography>
+          <Typography color='dark.400'>
             {totalItemQuantity > 0
               ? `Found (${totalItemQuantity}) ${
                   totalItemQuantity === 1 ? 'item' : 'items'
