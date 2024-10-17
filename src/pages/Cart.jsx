@@ -5,6 +5,8 @@ import {
   Container,
   Button,
   Divider,
+  Box,
+  Link,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { CustomCartItem } from '../components/Cart/CustomCartItem';
@@ -16,6 +18,8 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetCartItemsMutation } from '../services/api/cartApi';
 import { CustomAlert } from '../components/CustomAlert';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { Link as RouterLink } from 'react-router-dom';
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
@@ -111,14 +115,14 @@ const CartContent = () => {
         severity={snackbar.severity}
       />
       <Grid container>
-        <Grid item md={8} pr={3} pb={5} xs>
+        <Grid item md={totalItemQuantity < 1 ? 12 : 8} pr={3} pb={5} xs={12}>
           <Typography variant="h4">Your Shopping Cart</Typography>
           <Typography>
             {totalItemQuantity > 0
               ? `Found (${totalItemQuantity}) ${
                   totalItemQuantity === 1 ? 'item' : 'items'
                 }`
-              : 'There are no items in your bag'}
+              : 'There are no items in your cart'}
           </Typography>
           {cart.items.map((item) => (
             <CustomCartItem
@@ -131,38 +135,63 @@ const CartContent = () => {
               price={item.price}
             />
           ))}
-        </Grid>
-
-        <Grid item md={4} xs>
-          <Stack
-            bgcolor="common.white"
-            p={3}
-            borderRadius={3}
-            height={180}
-            justifyContent="space-between"
-            sx={{
-              borderColor: 'grey.300',
-              borderStyle: 'solid',
-              borderWidth: '1px',
-            }}
-          >
-            <Stack direction="row" justifyContent="space-between">
-              <Typography variant="blgsm">Subtotal</Typography>
-              <Typography variant="blgsm">${cart.totalAmount}</Typography>
-            </Stack>
-            <Divider />
-            <Button
-              size="large"
-              fullWidth
-              variant="contained"
-              color="secondary"
-              disabled={!stripe || loading}
-              onClick={handleCheckout}
+          {totalItemQuantity < 1 && (
+            <Stack
+              bgcolor="grey.100"
+              py={10}
+              mt={2}
+              alignItems="center"
+              textAlign="center"
+              gap={1}
             >
-              {isLoading && loading ? 'Processing...' : 'Checkout'}
-            </Button>
-          </Stack>
+              <ShoppingCartOutlinedIcon
+                sx={{ width: 100, height: 100, color: 'dark.200' }}
+              />
+              <Typography variant="bsr" color="dark.200">
+                Your cart looks a little lonely.
+                <Box component="br" /> How about adding something special?
+              </Typography>
+              <Link to='/marketplace' component={RouterLink}>
+                <Button color="secondary" disableElevation variant="contained">
+                  Go Shopping
+                </Button>
+              </Link>
+            </Stack>
+          )}
         </Grid>
+        {totalItemQuantity > 0 && (
+          <Grid item md={4} xs>
+            <Stack
+              bgcolor="common.white"
+              p={3}
+              borderRadius={3}
+              height={180}
+              justifyContent="space-between"
+              sx={{
+                borderColor: 'grey.300',
+                borderStyle: 'solid',
+                borderWidth: '1px',
+              }}
+            >
+              <Stack direction="row" justifyContent="space-between">
+                <Typography variant="blgsm">Subtotal</Typography>
+                <Typography variant="blgsm">${cart.totalAmount}</Typography>
+              </Stack>
+              <Divider />
+              <Button
+                size="large"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                disabled={!stripe || loading}
+                onClick={handleCheckout}
+              >
+                {isLoading && loading ? 'Processing...' : 'Checkout'}
+              </Button>
+            </Stack>
+          </Grid>
+        )}
+
         <Grid item sx={{ py: 5 }} xs={12}>
           <Divider />
         </Grid>
