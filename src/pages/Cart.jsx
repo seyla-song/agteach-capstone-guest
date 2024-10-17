@@ -43,6 +43,7 @@ const CartContent = () => {
   const navigate = useNavigate();
 
   const cart = useSelector((state) => state.cart);
+  const totalItemQuantity = cart.totalQuantity;
 
   const handleCheckout = async () => {
     setLoading(true);
@@ -113,9 +114,9 @@ const CartContent = () => {
         <Grid item md={8} pr={3} pb={5} xs>
           <Typography variant="h4">Your Shopping Cart</Typography>
           <Typography>
-            {cart.totalQuantity > 0
-              ? `Found (${cart.totalQuantity}) ${
-                  cart.totalQuantity === 1 ? 'item' : 'items'
+            {totalItemQuantity > 0
+              ? `Found (${totalItemQuantity}) ${
+                  totalItemQuantity === 1 ? 'item' : 'items'
                 }`
               : 'There are no items in your bag'}
           </Typography>
@@ -131,7 +132,7 @@ const CartContent = () => {
             />
           ))}
         </Grid>
-        
+
         <Grid item md={4} xs>
           <Stack
             bgcolor="common.white"
