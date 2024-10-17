@@ -6,7 +6,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { clearCart } from '../features/cart/cartSlice';
 import { useDispatch } from 'react-redux';
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 export default function SuccessPayment() {
   const [sessionData, setSessionData] = useState(null);
   const dispatch = useDispatch();
