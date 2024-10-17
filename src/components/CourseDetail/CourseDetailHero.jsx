@@ -69,7 +69,7 @@ export const CourseDetailHero = ({courseData}) => {
                 }}
                 onClick={() => navigate(`/instructor-profile/${courseData?.instructorId}`)}
               >
-                {courseData?.instructor.firstName + ' ' + courseData?.instructor.lastName}
+                {courseData?.instructor?.firstName + ' ' + courseData?.instructor?.lastName}
               </Link>
             </Typography>
           </Stack>
