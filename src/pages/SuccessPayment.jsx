@@ -3,27 +3,43 @@ import { Box, Typography, Grid, Stack, Button, Link } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { loadStripe } from '@stripe/stripe-js';
 import { Link as RouterLink } from 'react-router-dom';
+import { clearCart } from '../features/cart/cartSlice';
+import { useDispatch } from 'react-redux';
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 export default function SuccessPayment() {
+  const [sessionData, setSessionData] = useState(null);
+  const dispatch = useDispatch();
 
-  // const [sessionData, setSessionData] = useState(null);
+  // Fetch session data using session ID
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('session_id');
 
-  // // Fetch session data using session ID
-  // useEffect(() => {
-  //   const urlParams = new URLSearchParams(window.location.search);
-  //   const sessionId = urlParams.get('session_id');
+    if (sessionId) {
+      dispatch(clearCart());
+      stripePromise
+        .retrieveCheckoutSession(sessionId)
+        .then((session) => {
+          if (session.payment_status === 'paid') {
+            setSessionData(session);
+          } else {
+            window.location.href = '/fail-payment';
+          }
+        })
+        .catch((err) => {
+          console.error('Failed to retrieve checkout session', err);
+          window.location.href = '/fail-payment';
+        });
+    }
+  }, [dispatch]);
 
-  //   if (sessionId) {
-  //     fetch(`/api/checkout-session?sessionId=${sessionId}`)
-  //       .then((response) => response.json())
-  //       .then((data) => setSessionData(data))
-  //       .catch((error) => console.error('Error fetching session data:', error));
-  //   }
-  // }, []);
+  console.log(sessionData)
 
-  // if (!sessionData) {
-  //   return <Typography>Loading...</Typography>;
-  // }
+  if (!sessionData) {
+    return <Typography>Loading...</Typography>;
+  }
 
   return (
     <Box
