@@ -1,6 +1,5 @@
 import { Box, Typography } from "@mui/material";
 import { CustomCarousel } from "../CustomCarousel";
-import { products, courses } from "../../utils/carouselDummy";
 
 export default function CarouselComponent({ data, cardVariant, children }) {
   return (
