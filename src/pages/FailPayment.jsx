@@ -27,7 +27,7 @@ export default function FailPayment() {
         >
           <HighlightOffIcon sx={{ fontSize: 60, color: 'red.main' }} />
 
-          <Typography color="red.main" variant="blgsm" mt={2}>
+          <Typography textAlign='center' color="red.main" variant="blgsm" mt={2}>
             We have not received your payment
           </Typography>
           <Typography variant="bsr" textAlign="center" color="dark.200" mt>
