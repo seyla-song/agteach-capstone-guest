@@ -31,8 +31,7 @@ export default CartPage;
 
 const CartContent = () => {
   const [purchased] = usePurchasedMutation();
-  const [getCartItems, { isLoading }] =
-    useGetCartItemsMutation();
+  const [getCartItems, { isLoading }] = useGetCartItemsMutation();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const [snackbar, setSnackbar] = useState({
@@ -112,6 +111,14 @@ const CartContent = () => {
       />
       <Grid container>
         <Grid item md={8} pr={3} pb={5} xs>
+          <Typography variant="h4">Your Shopping Cart</Typography>
+          <Typography>
+            {cart.totalQuantity > 0
+              ? `Found (${cart.totalQuantity}) ${
+                  cart.totalQuantity === 1 ? 'item' : 'items'
+                }`
+              : 'There are no items in your bag'}
+          </Typography>
           {cart.items.map((item) => (
             <CustomCartItem
               key={item.productId}
@@ -124,6 +131,7 @@ const CartContent = () => {
             />
           ))}
         </Grid>
+        
         <Grid item md={4} xs>
           <Stack
             bgcolor="common.white"
