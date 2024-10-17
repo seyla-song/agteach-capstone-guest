@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { API_BASE_URL } from "../../constants/apiConstants";
 
 export const productApi = createApi({
   reducerPath: "productApi", // Match this with store setup
-  baseQuery: fetchBaseQuery({ baseUrl: "https://api.agteach.site" }),
+  baseQuery: fetchBaseQuery({ baseUrl: API_BASE_URL }),
   endpoints: (builder) => ({
     searchProduct: builder.query({
       query: (name) => ({
@@ -28,11 +29,15 @@ export const productApi = createApi({
     getOneProduct: builder.query({
       query: (id) => ({
         url: `/api/product/getProductDetail/${id}`,
-        method: "GET"
+        method: "GET",
       }),
     }),
-
   }),
 });
 
-export const { useSearchProductQuery, useGetProductCarouselQuery, useGetRecommendedProductsQuery, useGetOneProductQuery } = productApi;
+export const {
+  useSearchProductQuery,
+  useGetProductCarouselQuery,
+  useGetRecommendedProductsQuery,
+  useGetOneProductQuery,
+} = productApi;

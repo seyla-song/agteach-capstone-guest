@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { API_BASE_URL } from "../../constants/apiConstants";
 
 // //  https://api.agteach.site
 // //  http://localhost:3001
@@ -6,7 +7,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.agteach.site",
+    baseUrl: API_BASE_URL,
     // baseUrl: "http://localhost:3001",
     credentials: "include",
   }),

@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { API_BASE_URL } from "../../constants/apiConstants";
 
 export const courseApi = createApi({
   reducerPath: "courseApi", // Match this with store setup
-  baseQuery: fetchBaseQuery({ baseUrl: "https://api.agteach.site" }),
+  baseQuery: fetchBaseQuery({ baseUrl: API_BASE_URL }),
   endpoints: (builder) => ({
     searchCourse: builder.query({
       query: (name) => ({
