@@ -7,7 +7,6 @@ import { clearCart } from '../features/cart/cartSlice';
 import { useDispatch } from 'react-redux';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
-
 export default function SuccessPayment() {
   const [sessionData, setSessionData] = useState(null);
   const dispatch = useDispatch();
@@ -19,27 +18,26 @@ export default function SuccessPayment() {
 
     if (sessionId) {
       dispatch(clearCart());
-      stripePromise
-        .retrieveCheckoutSession(sessionId)
-        .then((session) => {
-          if (session.payment_status === 'paid') {
-            setSessionData(session);
+      const fetchSession = async () => {
+        const stripe = await stripePromise;
+
+        stripe.retrieveCheckoutSession(sessionId).then((result) => {
+          if (result.error) {
+            console.error('Error:', result.error);
           } else {
-            window.location.href = '/fail-payment';
+            setSessionData(result);
           }
-        })
-        .catch((err) => {
-          console.error('Failed to retrieve checkout session', err);
-          window.location.href = '/fail-payment';
         });
+      };
+      fetchSession();
     }
   }, [dispatch]);
-
-  console.log(sessionData)
 
   if (!sessionData) {
     return <Typography>Loading...</Typography>;
   }
+
+  console.log(sessionData);
 
   return (
     <Box
