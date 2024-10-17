@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { useStripe } from '@stripe/react-stripe-js';
 import { useEnrollmentMutation } from '../../services/api/enrollmentApi';
 
-export const CourseDetailHero = ({courseData}) => {
+export const CourseDetailHero = ({ courseData }) => {
   const [enrollment] = useEnrollmentMutation();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
@@ -22,9 +22,8 @@ export const CourseDetailHero = ({courseData}) => {
     setLoading(true);
     try {
       const data = await enrollment({ courseId: 405 }).unwrap();
-    
+
       console.log(data);
-      
 
       if (data.id) {
         // Redirect to Stripe's checkout page using the session ID
@@ -50,26 +49,26 @@ export const CourseDetailHero = ({courseData}) => {
         <Grid item xs={5}>
           <Stack gap>
             <Typography variant="h2">${courseData?.price}</Typography>
-            <Typography variant="h4">
-              {courseData?.name}
-            </Typography>
-            <Typography variant="bsr">
-              {courseData?.description}
-            </Typography>
+            <Typography variant="h4">{courseData?.name}</Typography>
+            <Typography variant="bsr">{courseData?.description}</Typography>
             <Typography variant="bsr">
               Created by:{' '}
               <Link
                 sx={{
                   color: 'white',
                   textUnderlineOffset: 3,
-                  cursor: "pointer",
-                  ":hover": {
-                    textDecoration: "underline"
-                  }
+                  cursor: 'pointer',
+                  ':hover': {
+                    textDecoration: 'underline',
+                  },
                 }}
-                onClick={() => navigate(`/instructor-profile/${courseData?.instructorId}`)}
+                onClick={() =>
+                  navigate(`/instructor-profile/${courseData?.instructorId}`)
+                }
               >
-                {courseData?.instructor?.firstName + ' ' + courseData?.instructor?.lastName}
+                {courseData?.instructor?.firstName +
+                  ' ' +
+                  courseData?.instructor?.lastName}
               </Link>
             </Typography>
           </Stack>
@@ -77,10 +76,7 @@ export const CourseDetailHero = ({courseData}) => {
         <Grid item xs={2} />
         <Grid item xs={5}>
           <Stack display={'flex'} flexDirection={'column'} gap={1}>
-            <MediaPlayer
-              title="Sprite Fight"
-              src={courseData?.previewVideoUrl}
-            >
+            <MediaPlayer title="Sprite Fight" src={courseData?.previewVideoUrl}>
               <MediaProvider />
               <DefaultVideoLayout
                 thumbnails={courseData?.thumbnailUrl}
@@ -96,7 +92,12 @@ export const CourseDetailHero = ({courseData}) => {
                   variant="contained"
                   disabled={!stripe || loading}
                 >
-                  {loading ? 'Processing...' : 'Enroll Now'}
+                  <Typography
+                    variant="bmd"
+                    color={!stripe || loading ? 'common.white' : 'primary'}
+                  >
+                    {loading ? 'Processing...' : 'Enroll Now'}
+                  </Typography>
                 </Button>
               </Link>
               <Button
