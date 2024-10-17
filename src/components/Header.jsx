@@ -14,34 +14,34 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
-} from "@mui/material";
-import { useEffect, useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
-import MenuIcon from "@mui/icons-material/Menu";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { LogoutOutlined } from "@mui/icons-material";
-import GuestProfilePicture from "../assets/profile-pic.jpg";
-import Logo from "../assets/agteach_logo.svg";
-import { teachAgtechURL } from "../utils/globalURL";
-import { useLogoutMutation } from "../services/api/authApi";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useGetUserInfoQuery } from "../services/api/userApi";
+} from '@mui/material';
+import { useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import MenuIcon from '@mui/icons-material/Menu';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import StarOutlineOutlinedIcon from '@mui/icons-material/StarOutlineOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import { LogoutOutlined } from '@mui/icons-material';
+import GuestProfilePicture from '../assets/profile-pic.jpg';
+import Logo from '../assets/agteach_logo.svg';
+import { teachAgtechURL } from '../utils/globalURL';
+import { useLogoutMutation } from '../services/api/authApi';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useGetUserInfoQuery } from '../services/api/userApi';
 
 const HEADER_MENU_DESKTOP = [
-  { page: "My Learning", path: "mylearning" },
-  { page: "Marketplace", path: "marketplace" },
-  { page: "AgAI", path: "agai" },
+  { page: 'My Learning', path: 'mylearning' },
+  { page: 'Marketplace', path: 'marketplace' },
+  { page: 'AgAI', path: 'agai' },
 ];
 
 const HEADER_MENU_MOBILE = [
-  { page: "My Learning", path: "mylearning" },
-  { page: "Marketplace", path: "marketplace" },
-  { page: "AgAI", path: "agai" },
-  { page: "Wishlist", path: "wishlist" },
-  { page: "Cart", path: "cart" },
+  { page: 'My Learning', path: 'mylearning' },
+  { page: 'Marketplace', path: 'marketplace' },
+  { page: 'AgAI', path: 'agai' },
+  { page: 'Wishlist', path: 'wishlist' },
+  { page: 'Cart', path: 'cart' },
 ];
 
 function Navigation() {
@@ -51,21 +51,15 @@ function Navigation() {
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
   const [logout] = useLogoutMutation();
-  const {
-    data: guestData,
-    isLoading: isLoginLoading,
-  } = useGetUserInfoQuery();
+  const { data: guestData, isLoading: isLoginLoading } = useGetUserInfoQuery();
 
-  console.log("guestData", guestData);
+  const cartItemTotal = useSelector((state) => state.cart.totalQuantity);
 
   let data = {};
   if (guestData) {
-    console.log("guestData", guestData);
     data = guestData.data;
-    console.log('data in header', data);
-    
   }
-  
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -85,11 +79,11 @@ function Navigation() {
   const handleLogout = async () => {
     try {
       await logout(); // Call the logout mutation
-      localStorage.removeItem("authToken");
-      localStorage.removeItem("userInfo");
-      navigate("/auth/login"); // Redirect to login page
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('userInfo');
+      navigate('/auth/login'); // Redirect to login page
     } catch (error) {
-      console.error("Logout failed:", error);
+      console.error('Logout failed:', error);
     }
   };
 
@@ -102,12 +96,12 @@ function Navigation() {
       <Link underline="none" component={RouterLink} to="/auth/login">
         <Button
           startIcon={
-            <AccountCircleOutlinedIcon sx={{ color: "common.black" }} />
+            <AccountCircleOutlinedIcon sx={{ color: 'common.black' }} />
           }
           variant="contained"
           sx={{
-            backgroundColor: "common.white",
-            color: "common.black",
+            backgroundColor: 'common.white',
+            color: 'common.black',
             borderRadius: 50,
           }}
         >
@@ -122,27 +116,29 @@ function Navigation() {
           onClick={handleClick}
           variant="text"
           sx={{
-            backgroundColor: "teal.main",
-            color: "common.white",
+            backgroundColor: 'teal.main',
+            color: 'common.white',
             borderRadius: 50,
-            borderColor: "common.white",
-            borderStyle: "solid",
+            borderColor: 'common.white',
+            borderStyle: 'solid',
             borderWidth: 1,
-            display: "flex",
-            justifyContent: "start",
-            typography: "bssm",
+            display: 'flex',
+            justifyContent: 'start',
+            typography: 'bssm',
           }}
         >
-
-          <img
-            style={{ width: "24px", borderRadius: "50%", marginRight: "5px" }}
-            src={ !isLoginLoading ? data?.customer?.imageUrl : GuestProfilePicture}
+          <Box
+            component="img"
+            style={{ width: '24px', borderRadius: '50%', marginRight: '5px' }}
+            src={
+              !isLoginLoading ? data?.customer?.imageUrl : GuestProfilePicture
+            }
             alt="profile image"
           />
           {isLoginLoading
-            ? "Guest"
+            ? 'Guest'
             : data?.username?.length > 6
-            ? data.username.slice(0, 6) + "..."
+            ? data.username.slice(0, 6) + '...'
             : data.username}
         </Button>
 
@@ -160,12 +156,12 @@ function Navigation() {
             },
           }}
           anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "right",
+            vertical: 'bottom',
+            horizontal: 'right',
           }}
           transformOrigin={{
-            vertical: "top",
-            horizontal: "right",
+            vertical: 'top',
+            horizontal: 'right',
           }}
           disableScrollLock
         >
@@ -173,19 +169,19 @@ function Navigation() {
             <div>
               <Link
                 to="/guest-profile"
-                sx={{ textDecoration: "none" }}
+                sx={{ textDecoration: 'none' }}
                 component={RouterLink}
                 onClick={handleClose}
               >
                 <Typography
                   variant="subtitle1"
-                  sx={{ fontSize: "14px", textDecoration: "none" }}
+                  sx={{ fontSize: '14px', textDecoration: 'none' }}
                 >
                   {data.username}
                 </Typography>
                 <Typography
                   variant="body2"
-                  sx={{ fontSize: "12px", marginBottom: 1, color: "dark.200" }}
+                  sx={{ fontSize: '12px', marginBottom: 1, color: 'dark.200' }}
                 >
                   {data.email}
                 </Typography>
@@ -197,22 +193,22 @@ function Navigation() {
               handleClose();
               handleLogoutDialogOpen();
             }}
-            sx={{ width: "full" }}
+            sx={{ width: 'full' }}
           >
             <Typography
               component={Link}
               variant="bsr"
               sx={{
-                display: "flex",
-                alignItems: "center",
-                color: "red.main",
-                width: "100%",
-                textDecoration: "none",
+                display: 'flex',
+                alignItems: 'center',
+                color: 'red.main',
+                width: '100%',
+                textDecoration: 'none',
               }}
             >
               <LogoutOutlined
                 fontSize="small"
-                sx={{ mr: 1, typography: "bmdsm" }}
+                sx={{ mr: 1, typography: 'bmdsm' }}
               />
               Log Out
             </Typography>
@@ -236,7 +232,7 @@ function Navigation() {
           <DialogActions>
             <Button
               onClick={handleLogoutDialogClose}
-              sx={{ color: "red.main" }}
+              sx={{ color: 'red.main' }}
             >
               Cancel
             </Button>
@@ -259,13 +255,13 @@ function Navigation() {
 
   return (
     <AppBar position="sticky">
-      <Container maxWidth={false} sx={{ maxWidth: "1420px" }}>
+      <Container maxWidth={false} sx={{ maxWidth: '1420px' }}>
         <Toolbar
           disablegutters="true"
           sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
           }}
         >
           {/* logo */}
@@ -273,14 +269,14 @@ function Navigation() {
             <Link
               component={RouterLink}
               to="/"
-              sx={{ display: "flex", alignItems: "center" }}
+              sx={{ display: 'flex', alignItems: 'center' }}
             >
               <img width="94px" height="45px" src={Logo} alt="AgTeach Logo" />
             </Link>
           </Box>
 
           {/* desktop */}
-          <Box sx={{ display: { xs: "none", md: "flex" }, gap: "2rem" }}>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: '2rem' }}>
             {HEADER_MENU_DESKTOP.map((data) => (
               <Link key={data.path} component={RouterLink} to={data.path}>
                 <Typography variant="bsr" color="common.white">
@@ -293,11 +289,11 @@ function Navigation() {
             </Link>
           </Box>
 
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
             {accountStatus}
 
             {/* menubar */}
-            <Box sx={{ display: { xs: "block", md: "none" } }}>
+            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -313,18 +309,18 @@ function Navigation() {
                 id="menu-appbar"
                 anchorEl={anchorElNav}
                 anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
+                  vertical: 'bottom',
+                  horizontal: 'left',
                 }}
                 keepMounted
                 transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
+                  vertical: 'top',
+                  horizontal: 'left',
                 }}
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
                 sx={{
-                  display: { xs: "block", md: "none" },
+                  display: { xs: 'block', md: 'none' },
                 }}
               >
                 <MenuItem
@@ -347,17 +343,18 @@ function Navigation() {
               </Menu>
             </Box>
 
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <IconButton
-                sx={{ color: "common.white" }}
+                sx={{ color: 'common.white' }}
                 component={RouterLink}
                 to="cart"
               >
                 <ShoppingCartOutlinedIcon fontSize="small" />
+                {cartItemTotal > 0 && <Typography position='absolute' top={2} right={0} bgcolor='red.main' variant='btr' borderRadius={100} width={15}>{cartItemTotal}</Typography>}
               </IconButton>
 
               <IconButton
-                sx={{ color: "common.white" }}
+                sx={{ color: 'common.white' }}
                 component={RouterLink}
                 to="wishlist"
               >

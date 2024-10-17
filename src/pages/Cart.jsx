@@ -5,6 +5,8 @@ import {
   Container,
   Button,
   Divider,
+  Box,
+  Link,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { CustomCartItem } from '../components/Cart/CustomCartItem';
@@ -13,6 +15,12 @@ import { Elements, useStripe } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { usePurchasedMutation } from '../services/api/purchasedApi';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useGetCartItemsMutation } from '../services/api/cartApi';
+import { CustomAlert } from '../components/CustomAlert';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { Link as RouterLink } from 'react-router-dom';
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
@@ -28,15 +36,31 @@ export default CartPage;
 
 const CartContent = () => {
   const [purchased] = usePurchasedMutation();
+  const [getCartItems, { isLoading }] = useGetCartItemsMutation();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
+  const [snackbar, setSnackbar] = useState({
+    label: '',
+    open: false,
+    severity: 'error',
+  });
 
   const navigate = useNavigate();
+
+  const cart = useSelector((state) => state.cart);
+  const totalItemQuantity = cart.totalQuantity;
 
   const handleCheckout = async () => {
     setLoading(true);
     try {
-      const data = await purchased({ cartItems }).unwrap();
+      const cartItemsResult = await handleGetCartItems();
+      if (!cartItemsResult || !cartItemsResult.items) {
+        throw new Error('Failed to retrieve cart items');
+      }
+
+      const data = await purchased({
+        cartItems: cartItemsResult.items,
+      }).unwrap();
       if (data.id) {
         const result = await stripe.redirectToCheckout({ sessionId: data.id });
         if (result.error) {
@@ -53,6 +77,26 @@ const CartContent = () => {
     }
   };
 
+  const handleGetCartItems = async () => {
+    try {
+      const res = await getCartItems(cart.items).unwrap();
+      if (res.status === 'success') {
+        console.log(res.items);
+        return res; // Return the entire response
+      }
+    } catch (err) {
+      console.log(err);
+      setSnackbar({
+        label: err.data.message,
+        open: true,
+        severity: 'error',
+      });
+      throw new Error(
+        'Failed to get cart items: ' + (err.message || 'Unknown error')
+      );
+    }
+  };
+
   return (
     <Container
       maxWidth={false}
@@ -65,42 +109,95 @@ const CartContent = () => {
         pt: 10,
       }}
     >
+      <CustomAlert
+        label={snackbar.label}
+        open={snackbar.open}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+        severity={snackbar.severity}
+      />
       <Grid container>
-        <Grid item md={8} pr={3} pb={5} xs>
-          {orderItems.map((item) => (
-            <CustomCartItem key={item.id} {...item} />
+        <Grid item md={totalItemQuantity < 1 ? 12 : 8} pr={3} pb={5} xs={12}>
+          <Typography variant="h4">Your Shopping Cart</Typography>
+          <Typography color='dark.400'>
+            {totalItemQuantity > 0
+              ? `Found (${totalItemQuantity}) ${
+                  totalItemQuantity === 1 ? 'item' : 'items'
+                }`
+              : 'There are no items in your cart'}
+          </Typography>
+          {cart.items.map((item) => (
+            <CustomCartItem
+              key={item.productId}
+              productId={item.productId}
+              quantity={item.quantity}
+              availableStock={item.availableStock}
+              name={item.name}
+              imageUrl={item.imageUrl}
+              price={item.price}
+            />
           ))}
-        </Grid>
-        <Grid item md={4} xs>
-          <Stack
-            bgcolor="common.white"
-            p={3}
-            borderRadius={3}
-            height={180}
-            justifyContent="space-between"
-            sx={{
-              borderColor: 'grey.300',
-              borderStyle: 'solid',
-              borderWidth: '1px',
-            }}
-          >
-            <Stack direction="row" justifyContent="space-between">
-              <Typography variant="blgsm">Subtotal</Typography>
-              <Typography variant="blgsm">$40.00</Typography>
-            </Stack>
-            <Divider />
-            <Button
-              size="large"
-              fullWidth
-              variant="contained"
-              color="secondary"
-              disabled={!stripe || loading}
-              onClick={handleCheckout}
+          {totalItemQuantity < 1 && (
+            <Stack
+              bgcolor="grey.100"
+              py={10}
+              mt={2}
+              alignItems="center"
+              textAlign="center"
+              gap={1}
             >
-              {loading ? 'Processing...' : 'Checkout'}
-            </Button>
-          </Stack>
+              <ShoppingCartOutlinedIcon
+                sx={{ width: 100, height: 100, color: 'dark.200' }}
+              />
+              <Typography variant="bsr" color="dark.200">
+                Your cart looks a little lonely.
+                <Box component="br" /> How about adding something special?
+              </Typography>
+              <Link to="/marketplace" component={RouterLink}>
+                <Button
+                  endIcon={<ArrowCircleRightOutlinedIcon />}
+                  color="secondary"
+                  disableElevation
+                  variant="contained"
+                >
+                  Go Shopping
+                </Button>
+              </Link>
+            </Stack>
+          )}
         </Grid>
+        {totalItemQuantity > 0 && (
+          <Grid item md={4} xs>
+            <Stack
+              bgcolor="common.white"
+              p={3}
+              borderRadius={3}
+              height={180}
+              justifyContent="space-between"
+              sx={{
+                borderColor: 'grey.300',
+                borderStyle: 'solid',
+                borderWidth: '1px',
+              }}
+            >
+              <Stack direction="row" justifyContent="space-between">
+                <Typography variant="blgsm">Subtotal</Typography>
+                <Typography variant="blgsm">${cart.totalAmount}</Typography>
+              </Stack>
+              <Divider />
+              <Button
+                size="large"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                disabled={!stripe || loading}
+                onClick={handleCheckout}
+              >
+                {isLoading && loading ? 'Processing...' : 'Checkout'}
+              </Button>
+            </Stack>
+          </Grid>
+        )}
+
         <Grid item sx={{ py: 5 }} xs={12}>
           <Divider />
         </Grid>
@@ -160,59 +257,5 @@ const purchasedHistory = [
       { name: 'Product 8', qty: 1, price: 30, total: 30 },
     ],
     totalPrice: 128,
-  },
-];
-
-const orderItems = [
-  {
-    id: 'PRD001',
-    name: 'Grow Light - LED',
-    price: 10,
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    id: 'PRD002',
-    name: 'Grow Light - Fluorescent',
-    price: 15,
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    id: 'PRD003',
-    name: 'Grow Light - HPS',
-    price: 20,
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    id: 'PRD004',
-    name: 'Grow Light - LED Grow Tent',
-    price: 25,
-    image: 'https://via.placeholder.com/150',
-  },
-];
-
-const cartItems = [
-  {
-    name: 'Fertilizer',
-    imageUrl:
-      'http://agteach-dev-assets.s3.ap-southeast-2.amazonaws.com/products/148/product-cover-image.jpeg',
-    productId: 148,
-    price: 12,
-    quantity: 1,
-  },
-  {
-    name: 'Wildflower Seed Mix',
-    imageUrl:
-      'http://agteach-dev-assets.s3.ap-southeast-2.amazonaws.com/products/150/product-cover-image.jpeg',
-    productId: 150,
-    price: 32,
-    quantity: 2,
-  },
-  {
-    name: '(Test)Garden Fork V2',
-    imageUrl:
-      'http://agteach-dev-assets.s3.ap-southeast-2.amazonaws.com/products/152/product-cover-image.jpeg',
-    productId: 152,
-    price: 234,
-    quantity: 1,
   },
 ];

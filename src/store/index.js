@@ -7,9 +7,15 @@ import { courseApi } from '../services/api/courseApi';
 import { instructorApi } from '../services/api/instructorApi';
 import { enrollmentApi } from '../services/api/enrollmentApi';
 import { purchasedApi } from '../services/api/purchasedApi';
+import { cartApi } from '../services/api/cartApi';
 
 import userSlice from '../features/auth/userSlice';
 import authSlice from '../features/auth/authSlice';
+import cartSlice from '../features/cart/cartSlice';
+
+import { loadCartState, saveCartState } from '../utils/cartPersistence';
+
+const persistedCartState = loadCartState();
 
 export const store = createStore({
   reducer: {
@@ -21,10 +27,15 @@ export const store = createStore({
     [instructorApi.reducerPath]: instructorApi.reducer,
     [enrollmentApi.reducerPath]: enrollmentApi.reducer,
     [purchasedApi.reducerPath]: purchasedApi.reducer,
+    [cartApi.reducerPath]: cartApi.reducer,
 
     auth: authSlice,
     user: userSlice,
+    cart: cartSlice,
   },
+
+  preloadedState: persistedCartState ? { cart: persistedCartState } : undefined,
+
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       apiSlice.middleware,
@@ -35,5 +46,10 @@ export const store = createStore({
       enrollmentApi.middleware,
       purchasedApi.middleware,
       instructorApi.middleware,
+      cartApi.middleware
     ),
+});
+
+store.subscribe(() => {
+  saveCartState(store.getState().cart);
 });

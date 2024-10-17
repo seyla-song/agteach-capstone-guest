@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   Stack,
   TextField,
@@ -12,6 +11,11 @@ import {
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { useDispatch } from 'react-redux';
+import {
+  removeItemFromCart,
+  updateItemQuantity,
+} from '../../features/cart/cartSlice';
 
 /**
  * A reusable React component that renders a single item in the cart.
@@ -24,23 +28,41 @@ import RemoveIcon from '@mui/icons-material/Remove';
  *
  * @returns {React.ReactElement} A JSX element that renders the cart item.
  */
-export const CustomCartItem = ({ name, id, price, image }) => {
-  const [count, setCount] = useState(1);
-  const handleChange = (event) => {
-    setCount(Math.max(Number(event.target.value), 1));
+export const CustomCartItem = ({
+  productId,
+  quantity,
+  imageUrl,
+  name,
+  price,
+  availableStock,
+}) => {
+  const dispatch = useDispatch();
+
+  const handleIncreament = () => {
+    if (quantity < availableStock)
+      dispatch(updateItemQuantity({ productId, quantity: quantity + 1 }));
   };
+  const handleDecreament = () => {
+    if (quantity > 1)
+      dispatch(updateItemQuantity({ productId, quantity: quantity - 1 }));
+  };
+
+  const handleItemRemove = () => {
+    dispatch(removeItemFromCart({ productId }));
+  };
+
   return (
-    <Stack gap={2} py>
+    <Stack gap={2} py={1}>
       <Stack direction="row" justifyContent="space-between">
         <Stack direction="row" alignItems="center" gap={2}>
           <Box
             component="img"
-            src={image}
+            src={imageUrl}
             alt="Cart"
             height={130}
             width={130}
           />
-          <Stack gap>
+          <Stack gap={1}>
             <Stack direction="row">
               <Typography maxWidth={280} variant="bssm">
                 {name}
@@ -48,36 +70,36 @@ export const CustomCartItem = ({ name, id, price, image }) => {
               <IconButton
                 sx={{ width: 18, height: 18 }}
                 color="error"
+                onClick={handleItemRemove}
                 children={<DeleteIcon sx={{ width: 16, height: 16 }} />}
               />
             </Stack>
-            <Typography variant="bxsr">{id}</Typography>
+            <Typography variant="bxsr"># {productId}</Typography>
             <ButtonGroup size="small">
-              <Button
-                onClick={() => setCount((prev) => prev - 1)}
-                disabled={count === 1}
-              >
+              <Button onClick={handleDecreament} disabled={!(quantity > 1)}>
                 <RemoveIcon fontSize="small" />
               </Button>
               <TextField
                 size="small"
                 sx={{ width: 80 }}
                 type="tel"
-                onChange={handleChange}
-                value={count}
+                value={quantity}
               />
-              <Button onClick={() => setCount((prev) => prev + 1)}>
+              <Button
+                onClick={handleIncreament}
+                disabled={!(quantity < availableStock)}
+              >
                 <AddIcon fontSize="small" />
               </Button>
             </ButtonGroup>
           </Stack>
         </Stack>
-        <Stack textAlign="right" alignItems="end" pt>
+        <Stack textAlign="right" alignItems="end" pt={1}>
           <Typography variant="blgsm" color="initial">
-            ${price * count}
+            ${price * quantity}
           </Typography>
           <Typography variant="bxsr" color="initial">
-            ${price} X ({count}) items
+            ${price} X ({quantity}) items
           </Typography>
         </Stack>
       </Stack>
