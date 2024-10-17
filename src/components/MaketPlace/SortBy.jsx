@@ -5,7 +5,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 
-function SortByFilter() {
+function SortByFilter({ sortBy, handleChange }) {
   return (
     <Box>
       <Typography sx={{ typography: { xs: "body2", sm: "h6" } }}>
@@ -26,6 +26,7 @@ function SortByFilter() {
             aria-labelledby="sort-by-label"
             defaultValue="newest"
             name="radio-buttons-group"
+            onChange={(e) => handleChange(e.target.value)}
           >
             <FormControlLabel
               control={<Radio />}
@@ -46,6 +47,16 @@ function SortByFilter() {
               control={<Radio />}
               label="A-Z"
               value="alphabet"
+            />
+            <FormControlLabel
+              control={<Radio />}
+              label="Price Low to high"
+              value="plth"
+            />
+            <FormControlLabel
+              control={<Radio />}
+              label="Price high to low"
+              value="phtl"
             />
           </RadioGroup>
         </FormControl>

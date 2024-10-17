@@ -5,6 +5,8 @@ import ScanIcon from '@mui/icons-material/CenterFocusStrongOutlined';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { DiseaseInfoComponent } from './DiseaseInfoComponent';
+import { usePredictImageMutation } from '../../services/api/aiApi';
+import { convertToJPG } from '../../utils/imageUtils';
 
 /**
  * ImageScan component is a reusable component
@@ -22,6 +24,7 @@ export const ImageScan = () => {
   const { handleSubmit, watch, register, reset } = useForm();
   const [isScan, setScan] = useState(false);
   const [data, setData] = useState();
+  const [predictImage, { isLoading, isError }] = usePredictImageMutation();
 
   const selectedFile = watch('file');
 
@@ -48,16 +51,28 @@ export const ImageScan = () => {
    * @param {Object} data The form data.
    * @returns {Function} A cleanup function.
    */
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     setScan(true);
-    // Simulate a delay for fetching data
-    const timer = setTimeout(() => {
-      setScan(false);
-      setData(plantDiseaseInfo);
-    }, 5000); // 2-second delay
 
-    // Cleanup the timer
-    return () => clearTimeout(timer);
+    const file = data.file[0]
+    const resizeFile = await convertToJPG(file)
+    const formData = new FormData();
+    formData.append('image', resizeFile);
+
+    try {
+      const res = await predictImage(formData).unwrap();
+
+      if (isError) {
+        throw new Error('Network response was not ok');
+      }
+
+      if (!isLoading) {
+        setScan(false);
+      }
+      setData(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleReset = () => {
@@ -81,8 +96,8 @@ export const ImageScan = () => {
           {!selectedImageUrl && (
             <Stack alignItems="center">
               <ImageIcon sx={{ width: 200, height: 200 }} />
-              <Typography variant="bsr" color="initial">
-                Drag an image here or upload a file
+              <Typography variant="bxsr" color="dark.300">
+              Upload your image here .jpg 150 x 150
               </Typography>
             </Stack>
           )}
@@ -134,7 +149,6 @@ export const ImageScan = () => {
                 onClick={() => document.getElementById('file').click()}
                 disabled-={!selectedFile}
                 variant="outlined"
-                
                 color="primary"
                 endIcon={<UploadIcon />}
               >
@@ -172,38 +186,9 @@ export const ImageScan = () => {
           direction="row"
         >
           <Typography variant="bxsr">@Analyzing</Typography>
-          <Box
-            width={100}
-            border="none"
-            component="iframe"
-            src="https://lottie.host/embed/d0c33b28-8b32-4889-b1af-d4966e850a65/j92NFQCzgA.json"
-          />
         </Stack>
       )}
-      {data && <DiseaseInfoComponent data={plantDiseaseInfo} />}
+      {data && <DiseaseInfoComponent data={data} />}
     </Stack>
   );
-};
-
-const plantDiseaseInfo = {
-  plant: 'Brandywine Tomato',
-  problem: {
-    title: 'Problem',
-    details: ['Late Blight (Phytophthora infestans)'],
-  },
-  symptoms: {
-    title: 'Symptoms',
-    details: [
-      'Irregular, water-soaked spots on leaves and stems that turn brown and necrotic.',
-      'Fruits may develop dark, sunken lesions.',
-    ],
-  },
-  cureManagement: {
-    title: 'Cure/Management',
-    details: [
-      'Resistant Varieties: Use late blight-resistant varieties if available.',
-      'Fungicides: Apply metalaxyl or mefenoxam-based fungicides as a preventative measure.',
-      'Cultural Control: Remove and destroy infected plants and maintain good air circulation. Avoid overhead watering.',
-    ],
-  },
 };

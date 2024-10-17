@@ -1,6 +1,6 @@
 import { Container, Divider, Typography } from '@mui/material';
-import { ProductWishlist } from '../components/Wishlist/ProductWishlist';
-import { CourseWishlist } from '../components/Wishlist/CourseWishlist';
+import ProductWishlist from '../components/Wishlist/ProductWishlist';
+import CourseWishlist from '../components/Wishlist/CourseWishlist';
 
 function WishlistPage() {
   return (
@@ -91,6 +91,34 @@ const products = [
     price: '30$',
     image: 'https://via.placeholder.com/150',
   },
+  {
+    id: 10,
+    name: 'Grow Lights - LED or fluorescent grow lights',
+    instructor: 'Emily Greene',
+    price: '30$',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    id: 11,
+    name: 'Grow Lights - LED or fluorescent grow lights',
+    instructor: 'Emily Greene',
+    price: '30$',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    id: 12,
+    name: 'Grow Lights - LED or fluorescent grow lights',
+    instructor: 'Emily Greene',
+    price: '30$',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    id: 13,
+    name: 'Grow Lights - LED or fluorescent grow lights',
+    instructor: 'Emily Greene',
+    price: '30$',
+    image: 'https://via.placeholder.com/150',
+  },
 ];
 
 const courses = [
@@ -138,6 +166,36 @@ const courses = [
   },
   {
     id: 8,
+    name: 'Product 8',
+    instructor: 'Emily Greene',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    id: 9,
+    name: 'Advanced Indoor Plant Lighting Strategies',
+    instructor: 'Emily Greene',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    id: 10,
+    name: 'Product 5',
+    instructor: 'Emily Greene',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    id: 11,
+    name: 'Product 6',
+    instructor: 'Emily Greene',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    id: 12,
+    name: 'Product 7',
+    instructor: 'Emily Greene',
+    image: 'https://via.placeholder.com/150',
+  },
+  {
+    id: 13,
     name: 'Product 8',
     instructor: 'Emily Greene',
     image: 'https://via.placeholder.com/150',

@@ -1,81 +1,108 @@
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography, IconButton } from "@mui/material";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { useNavigate } from "react-router";
 
-/**
- * CustomCard component is a reusable component
- * that renders a card with a image, title and a subtitle.
- *
- * @param {{ dataObj: Object, variant: string }} props
- *   - dataObj is an object that contains image, name, price and instructor
- *   - variant is a string that can be one of 'product' or 'default'
- *
- * @returns {JSX.Element} A JSX element that renders a card
- */
-export const CustomCard = ({ dataObj, variant }) => {
-  /**
-   * Returns a JSX element based on the variant prop
-   * that renders a card with a image, title and a subtitle.
-   *
-   * @returns {JSX.Element} A JSX element that renders a card
-   */
+export default function CustomCard({ dataObj, variant, showDelete, onDelete }) {
   const cardVariant = () => {
     switch (variant) {
-      case 'product':
-        return <ProductCard dataObj={dataObj} />;
+      case "product":
+        return (
+          <ProductCard
+            dataObj={dataObj}
+            showDelete={showDelete}
+            onDelete={onDelete}
+          />
+        );
       default:
-        return <CourseCard dataObj={dataObj} />;
+        return (
+          <CourseCard
+            dataObj={dataObj}
+            showDelete={showDelete}
+            onDelete={onDelete}
+          />
+        );
     }
   };
   return cardVariant();
-};
+}
 
-  /**
-   * ProductCard component is a reusable component
-   * that renders a card with a image, title and a subtitle.
-   *
-   * @param {{ dataObj: Object }} props
-   *   - dataObj is an object that contains image, name, price and instructor
-   *
-   * @returns {JSX.Element} A JSX element that renders a card
-   */
-const ProductCard = ({ dataObj }) => {
+
+const ProductCard = ({ dataObj, showDelete, onDelete }) => {
+  const handleDeleteClick = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    onDelete(dataObj.id);
+  };
+
+  const navigate = useNavigate();
+
   return (
-    <Box pr>
+    <Box mr={1} sx={{ cursor: "pointer" }} onClick={() => navigate(`/marketplace/${dataObj.productId}`)}>
       <Box
         width="100%"
         component="img"
-        src={dataObj.image}
+        src={dataObj.imageUrl}
         alt={dataObj.name}
       />
-      <Stack p>
+      <Stack p={1} spacing={1} alignItems="flex-start">
         <Typography variant="bmdmd">{dataObj.name}</Typography>
-        <Typography variant="bsr">{dataObj.price}</Typography>
+        <Typography variant="bsr">${dataObj.price}</Typography>
+        {showDelete && (
+          <IconButton
+            sx={{ color: "red.main" }}
+            onClick={handleDeleteClick} // Handle icon button click
+          >
+            <DeleteOutlineOutlinedIcon />
+          </IconButton>
+        )}
       </Stack>
     </Box>
   );
 };
 
-  /**
-   * CourseCard component is a reusable component
-   * that renders a card with a image, title and a subtitle.
-   *
-   * @param {{ dataObj: Object }} props
-   *   - dataObj is an object that contains image, name, price and instructor
-   *
-   * @returns {JSX.Element} A JSX element that renders a card
-   */
-const CourseCard = ({ dataObj }) => {
+const CourseCard = ({ dataObj, showDelete, onDelete }) => {
+  const handleDeleteClick = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    onDelete(dataObj.id);
+  };
+
+  const navigate = useNavigate();
+
   return (
-    <Box pr>
+    <Box mr={1} sx={{ cursor: "pointer" }} onClick={() => navigate(`/courses/${dataObj.courseId}`)}>
       <Box
         width="100%"
         component="img"
-        src={dataObj.image}
+        src={dataObj.thumbnailUrl}
         alt={dataObj.name}
       />
-      <Stack p>
-        <Typography variant="bmdmd">{dataObj.name}</Typography>
-        <Typography variant="bsr">{dataObj.instructor}</Typography>
-      </Stack>
+      <Box
+        display={"flex"}
+        justifyContent="space-between"
+        p={1}
+        alignContent={"center"}
+      >
+        <Stack>
+          <Typography variant="bmdmd">{dataObj.name}</Typography>
+          {dataObj.price ? (
+            <Typography variant="bsr">${dataObj.price}</Typography>
+          ) : (
+            <Typography variant="bsr">{dataObj.instructor}</Typography>
+          )}
+        </Stack>
+        <Box>
+          {showDelete && (
+            <IconButton
+              sx={{ color: "red.main" }}
+              size="small"
+              onClick={handleDeleteClick}
+            >
+              <DeleteOutlineOutlinedIcon />
+            </IconButton>
+          )}
+        </Box>
+      </Box>
     </Box>
   );
 };

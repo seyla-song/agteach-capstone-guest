@@ -1,28 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Typography, Box, Stack, Grid, Container } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import FormInput from "../components/LoginSignup/FormInput";
 import LogoLink from "../components/LoginSignup/LogoLink";
-import { useSignupMutation, useGetCardQuery, useUpdateCardMutation } from "../services/api/authSlice";
+import { useSignupMutation } from "../services/api/authApi";
 import dayjs from "dayjs";
+import { useDispatch } from "react-redux";
+import { setEmail, setDob } from "../features/auth/userSlice";
+import { CustomAlert } from "../components/CustomAlert";
 
 const SignupPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [signup, { isLoading }] = useSignupMutation();
-
-  
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  const [showPassword, setShowPassword] = useState(false);
   const {
     control,
     handleSubmit,
     register,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: "",
+      username: "",
       email: "",
       password: "",
+      passwordConfirm: "",
       dateOfBirth: null,
     },
   });
@@ -32,11 +39,19 @@ const SignupPage = () => {
   const submitHandler = async (data) => {
     try {
       data.dateOfBirth = dayjs(data.dateOfBirth).format("YYYY/MM/DD");
-      await signup(data).unwrap();
-      console.log("Signup successful", data);
+      const { email, password, passwordConfirm, dateOfBirth } = data
+      const response = await signup(data).unwrap();
+      if (response.status === "success") {
+        setSnackbarSeverity("success");
+        setSnackbarMessage(response.message);
+      }
+      dispatch(setDob(dateOfBirth));
+      dispatch(setEmail(email));
       navigate("info");
     } catch (error) {
-      console.error("Signup failed:", error);
+      setSnackbarSeverity("error");
+      setSnackbarMessage("Email already exists. Please try another email.");
+      setSnackbarOpen(true);
     }
   };
 
@@ -58,11 +73,17 @@ const SignupPage = () => {
                 Sign up to enjoy AgTeach features
               </Typography>
               <Box width="100%">
+                <CustomAlert
+                  label={snackbarMessage}
+                  open={snackbarOpen}
+                  onClose={() => setSnackbarOpen(false)}
+                  severity={snackbarSeverity}
+                />
                 <form onSubmit={handleSubmit(submitHandler)}>
                   <Stack spacing={2}>
                     <FormInput
                       label="Name"
-                      {...register("name", {
+                      {...register("username", {
                         required: "Please enter your name",
                       })}
                       error={!!errors.name}
@@ -98,6 +119,8 @@ const SignupPage = () => {
                     <FormInput
                       label="Password"
                       type="password"
+                      showPassword={showPassword}
+                      handleClickShowPassword={handleShowPassword}
                       {...register("password", {
                         required: "Please enter your password",
                         minLength: {
@@ -116,8 +139,22 @@ const SignupPage = () => {
                       })}
                       error={!!errors.password}
                       helperText={errors.password?.message}
+                    />
+                    <FormInput
+                      label="Confirm Password"
+                      type="password"
                       showPassword={showPassword}
                       handleClickShowPassword={handleShowPassword}
+                      {...register("passwordConfirm", {
+                        required: "Please confirm your password",
+                        validate: (value) => {
+                          if (value !== watch("password")) {
+                            return "Passwords do not match";
+                          }
+                        },
+                      })}
+                      error={!!errors.passwordConfirm}
+                      helperText={errors.passwordConfirm?.message}
                     />
                     <Button
                       type="submit"

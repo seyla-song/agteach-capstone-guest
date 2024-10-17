@@ -1,35 +1,48 @@
-import { Box, Button, OutlinedInput, Stack, Typography } from "@mui/material";
+import React, { useEffect } from "react";
+import { Stack, Typography, TextField } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { useGetUserInfoQuery } from "../../services/api/userApi"; 
 
 /**
  * @function AccountSecurity
  * @description This component renders a form to input an email and a button to save the input.
  * @returns {JSX.Element} A JSX element that renders the form and button.
  */
+
 function AccountSecurity() {
+  const { setValue, watch } = useForm();
+
+  const { data, isLoading } = useGetUserInfoQuery();
+
+  useEffect(() => {
+    if (data) {
+      const customerData = data.data.customer;
+      const { email } = customerData;
+      console.log(customerData);
+      setValue("email", email || "");
+    }
+  }, [data, setValue]);
+
+  if (isLoading)
+    return (
+      <Stack justifyContent={"center"} alignItems={"center"}>
+        Loading...
+      </Stack>
+    );
+
   return (
     <>
       <Stack sx={{ m: 2, gap: 2 }}>
         <Typography variant="h4">Account Security</Typography>
-        <OutlinedInput placeholder="Enter your Email" />
+        <TextField
+          label="Email"
+          disabled
+          placeholder="e.g. janeagteach@gmail.com"
+          value={watch("email")}
+        />
       </Stack>
-
-      <Box
-        sx={{
-          width: "100%",
-          boxSizing: "border-box",
-        }}
-      >
-        <Stack
-          sx={{ m: 2, justifyContent: "flex-end" }}
-          direction="row"
-          spacing={2}
-        >
-          <Button variant="contained" sx={{ px: 10, py: 2 }}>
-            Save
-          </Button>
-        </Stack>
-      </Box>
     </>
   );
 }
+
 export default AccountSecurity;

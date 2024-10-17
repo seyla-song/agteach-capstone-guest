@@ -6,12 +6,14 @@ import {
   Typography,
   Box,
 } from "@mui/material";
+import { useState, useEffect } from "react";
 import Category from "../components/MaketPlace/Category";
 import SortBy from "../components/MaketPlace/SortBy";
 import FilterBy from "../components/MaketPlace/FilterBy";
 import SearchBar from "../components/SearchBarComponent";
 import SearchList from "../components/MaketPlace/SearchList";
-import { products } from "../utils/carouselDummy";
+import { useLocation } from "react-router";
+import { useSearchProductQuery } from '../services/api/productApi'
 
 /**
  * A React functional component that renders a marketplace page.
@@ -23,7 +25,84 @@ import { products } from "../utils/carouselDummy";
  * @return {JSX.Element} The JSX element representing the marketplace page.
  */
 export default function MarketPlace() {
-  const variant = { product: "product", course: "course" };
+  const currentLocation = useLocation().search;
+  const queryParams = new URLSearchParams(currentLocation);
+  const query = queryParams.get('name') || '';
+  const { data: productData, isLoading: isProductLoading, isError: isProductError, error: productError } = useSearchProductQuery(query);
+
+  const [category, setCategory] = useState('plant');
+  const [sortBy, setSortBy] = useState('newest');
+  const [filterByPrice, setFilterByPrice] = useState(false);
+  const [limit, setLimit] = useState(9);
+  const [rawData, setRawData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+
+  const handleCategoryChange = (state) => {
+    if (state !== category) setCategory(state);
+  };
+
+  const handleSortByChange = (state) => {
+    if (state !== sortBy) setSortBy(state);
+  };
+
+  const handleLimitChange = () => {
+    setLimit(limit + 9);
+  };
+
+  useEffect(() => {
+    if (productData) {
+      setRawData(productData.data);
+    };
+  }, [productData, query]);
+
+  useEffect(() => {
+    console.clear()
+    let dataToFilter = [...rawData] || [];
+    // filter by categories
+    if (category === 'plant') dataToFilter = dataToFilter.filter((product) => product.categoryId === 1);
+    else if (category === 'fertilizer') dataToFilter = dataToFilter.filter((product) => product.categoryId === 2);
+    else if (category === 'seed') dataToFilter = dataToFilter.filter((product) => product.categoryId === 3);
+    else if (category === 'tool') dataToFilter = dataToFilter.filter((product) => product.categoryId === 4);
+      
+    // Sort by both date and price
+    dataToFilter.sort((a, b) => {
+      if (sortBy === 'newest') {
+        // Sort by date first (newest)
+        const dateDiff = new Date(b.createdAt) - new Date(a.createdAt);
+        if (dateDiff !== 0) return dateDiff;
+      } else if (sortBy === 'oldest') {
+        // Sort by date first (oldest)
+        const dateDiff = new Date(a.createdAt) - new Date(b.createdAt);
+        if (dateDiff !== 0) return dateDiff;
+      } else if (sortBy === 'alphabet') {
+        // Sort by name alphabetically
+        const nameDiff = a.name.localeCompare(b.name);
+        if (nameDiff !== 0) return nameDiff;
+      } else if (sortBy === 'plth') {
+        const priceA = parseFloat(a.price) || 0;
+        const priceB = parseFloat(b.price) || 0;
+        return priceA - priceB; // Sort by lowest price
+      } else if (sortBy === 'phtl') {
+        const priceA = parseFloat(a.price) || 0;
+        const priceB = parseFloat(b.price) || 0;
+        return priceB - priceA; // Sort by lowest price
+      }
+
+      return 0; 
+    });
+
+    setFilteredData(dataToFilter)
+  }, [rawData, category, sortBy, filterByPrice, limit]);
+
+  let content;
+
+  if (isProductLoading) { 
+    content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Loading...</div>
+  }
+  else if (productData.results === 0) content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>No results were found!</div>
+  else if (isProductError) content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Something went wrong. please try again later!</div>
+  else if (productData) content = <SearchList dataObj={filteredData} cardVariant={'product'} limit={limit} handleLimitChange={handleLimitChange}/>  
+  
   return (
     <>
       <Container
@@ -58,11 +137,9 @@ export default function MarketPlace() {
                 },
               }}
             >
-              <Category />
+              <Category category={category} handleChange={handleCategoryChange}/>
               <Divider sx={{ display: { xs: "none", sm: "block" } }} />
-              <SortBy />
-              <Divider sx={{ display: { xs: "none", sm: "block" } }} />
-              <FilterBy />
+              <SortBy sortBy={sortBy} handleChange={handleSortByChange}/>
             </Stack>
           </Grid>
           <Grid
@@ -72,10 +149,10 @@ export default function MarketPlace() {
             sx={{ width: "100%", mt: { xs: "20px", sm: "0px" } }}
           >
             <Box sx={{ p: "0px 12px 12px 12px" }}>
-              <SearchBar backDrop={false} />
+              <SearchBar backDrop={false} searchContext={'marketplace'} defaultSearchString={query}/>
             </Box>
-            <Typography sx={{ px: 2 }}>Found (200) items</Typography>
-            <SearchList dataObj={products} cardVariant={variant.product} />
+            <Typography sx={{ px: 2 }}>{`Found (${filteredData.length}) items`}</Typography>
+            {content}
           </Grid>
         </Grid>
       </Container>

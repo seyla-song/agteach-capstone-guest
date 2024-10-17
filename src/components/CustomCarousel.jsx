@@ -1,90 +1,92 @@
-import { useRef } from 'react';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import { Box, Button, Stack } from '@mui/material';
-import Slider from 'react-slick';
-import { motion } from 'framer-motion';
-import { CustomCard } from './CustomCard';
-import { ChevronLeft, ChevronRight } from '@mui/icons-material';
+import { useRef, useState, useEffect } from "react";
+import { Box, Button, Stack } from "@mui/material";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { motion } from "framer-motion";
+import CustomCard from "./CustomCard";
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
 
-/**
- * CustomCarousel component is a reusable component
- * that renders a slider and a navigator at the bottom
- * with next and prev buttons.
- *
- * @param {{ data: Array, cardVariant: string }} props
- *   - data is an array of objects that will be passed to CustomCard
- *   - cardVariant is the variant of the card that will be used
- *     in the CustomCard component
- *
- * @returns {JSX.Element} A JSX element that renders a slider
- *   with navigator at the bottom.
- */
-export const CustomCarousel = ({ data, cardVariant, slideToShow = 4 }) => {
-  const sliderRef = useRef();
+export const CustomCarousel = ({ data, cardVariant }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+  const [slidesToShow, setSlidesToShow] = useState(4); // Default to showing 4 slides
+  const [slidesToScroll, setSlidesToScroll] = useState(4); // Default scrolls by 4 slides
 
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: slideToShow,
-    slidesToScroll: 4,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
+  const [sliderInstance, setSliderInstance] = useState(null);
 
-  /**
-   * Handle next button click event on the slider
-   *
-   * @function
-   * @since 0.0.1
-   * @example
-   * <CustomCarousel data={data} cardVariant='product' />
-   */
+  // Responsive breakpoints to adjust number of slides shown based on window width
+  useEffect(() => {
+    const updateSlidesToShow = () => {
+      const width = window.innerWidth;
+      if (width >= 1024) {
+        setSlidesToShow(4);
+        setSlidesToScroll(4);
+      } else if (width >= 600) {
+        setSlidesToShow(3);
+        setSlidesToScroll(3);
+      } else if (width >= 480) {
+        setSlidesToShow(2);
+        setSlidesToScroll(2);
+      } else {
+        setSlidesToShow(1);
+        setSlidesToScroll(1);
+      }
+    };
+
+    // Update the number of slides on window resize
+    updateSlidesToShow();
+    window.addEventListener("resize", updateSlidesToShow);
+
+    return () => window.removeEventListener("resize", updateSlidesToShow);
+  }, []);
+
+  // Keen-slider settings
+  const [sliderRef, instanceRef] = useKeenSlider({
+    loop: false,
+    mode: "snap",
+    slides: {
+      perView: slidesToShow, // Dynamic number of visible slides
+      spacing: 10, // Add some space between slides
+    },
+    slideChanged(slider) {
+      setCurrentSlide(slider.track.details.rel); // Update current slide on drag or button click
+    },
+    created(slider) {
+      setLoaded(true);
+      setSliderInstance(slider); // Set slider instance for external control
+    },
+  });
+
+  // Slide forward/backward by the dynamically set number of slides
   const handleNext = () => {
-    sliderRef.current.slickNext();
+    if (instanceRef.current) {
+      const newIdx = Math.min(currentSlide + slidesToScroll, data.length - slidesToShow);
+      instanceRef.current.moveToIdx(newIdx); // Move to the calculated index
+      setCurrentSlide(newIdx); // Update current slide
+    }
   };
 
-  /**
-   * Handle previous button click event on the slider
-   *
-   * @function
-   * @since 0.0.1
-   * @example
-   * <CustomCarousel data={data} cardVariant='product' />
-   */
   const handlePrev = () => {
-    sliderRef.current.slickPrev();
+    if (instanceRef.current) {
+      const newIdx = Math.max(currentSlide - slidesToScroll, 0);
+      instanceRef.current.moveToIdx(newIdx); // Move to the calculated index
+      setCurrentSlide(newIdx); // Update current slide
+    }
   };
+
+  // Disable Prev button if on the first slide
+  const isPrevDisabled = currentSlide === 0;
+
+  // Disable Next button if on the last visible slide
+  const isNextDisabled = instanceRef.current
+    ? currentSlide + slidesToShow >= data.length
+    : false;
 
   return (
     <Stack>
-      {/* Custom carousel component using react-slick */}
-      <Slider ref={sliderRef} {...settings}>
+      <div ref={sliderRef} className="keen-slider">
         {data.map((product, idx) => (
-          <Box key={idx}>
+          <Box key={idx} className="keen-slider__slide">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -94,110 +96,25 @@ export const CustomCarousel = ({ data, cardVariant, slideToShow = 4 }) => {
             </motion.div>
           </Box>
         ))}
-      </Slider>
-      <Stack justifyContent="end" direction="row" gap>
-        {/* Previous button */}
-        <Button
-          size="medium"
-          onClick={handlePrev}
-          variant="contained"
-          startIcon={<ChevronLeft />}
-        />
-        {/* Next button */}
-        <Button
-          size="medium"
-          onClick={handleNext}
-          variant="contained"
-          endIcon={<ChevronRight />}
-        />
-      </Stack>
+      </div>
+      {loaded && (
+        <Stack justifyContent="end" direction="row" spacing={2}>
+          <Button
+            size="medium"
+            onClick={handlePrev}
+            variant="contained"
+            startIcon={<ChevronLeft />}
+            disabled={isPrevDisabled} // Disable if on the first slide
+          />
+          <Button
+            size="medium"
+            onClick={handleNext}
+            variant="contained"
+            endIcon={<ChevronRight />}
+            disabled={isNextDisabled} // Disable if on the last slide
+          />
+        </Stack>
+      )}
     </Stack>
   );
 };
-
-//sample data
-
-// const products = [
-//   {
-//     name: 'Grow Lights - LED or fluorescent grow lights',
-//     price: '$10',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Grow Lights - LED or fluorescent grow lights',
-//     price: '$15',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Grow Lights - LED or fluorescent grow lights',
-//     price: '$20',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Grow Lights - LED or fluorescent grow lights',
-//     price: '$25',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Grow Lights - LED or fluorescent grow lights',
-//     price: '$30',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Product 6',
-//     price: '$35',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Product 7',
-//     price: '$40',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Product 8',
-//     price: '$45',
-//     image: 'https://via.placeholder.com/150',
-//   },
-// ];
-// const courses = [
-//   {
-//     name: 'Indoor Plant Propagation Techniques',
-//     instructor: 'Emily Greene',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Vertical Gardening for Urban Spaces',
-//     instructor: 'Emily Greene',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Organic Indoor Plant Care and Maintenance',
-//     instructor: 'Emily Greene',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Advanced Indoor Plant Lighting Strategies',
-//     instructor: 'Emily Greene',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Product 5',
-//     instructor: 'Emily Greene',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Product 6',
-//     instructor: 'Emily Greene',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Product 7',
-//     instructor: 'Emily Greene',
-//     image: 'https://via.placeholder.com/150',
-//   },
-//   {
-//     name: 'Product 8',
-//     instructor: 'Emily Greene',
-//     image: 'https://via.placeholder.com/150',
-//   },
-// ];

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Accordion,
   AccordionDetails,
@@ -6,8 +6,8 @@ import {
   Stack,
   Typography,
   Divider,
-} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 /**
  * PurchasedHistory component is a reusable component
@@ -31,60 +31,61 @@ export const PurchasedHistory = ({ data }) => {
       <Stack>
         <Typography variant="h3">Purchased History</Typography>
         <Typography variant="bxsmd" color="dark.300">
-          Found (5) Items
+          Found ({data.length}) Items {/* Displaying actual count */}
         </Typography>
       </Stack>
       <Stack>
-        {data.map((item) => (
+        {data.map((order) => (
           <Accordion
+            key={order.orderId} // Ensure this is unique
             elevation={0}
             sx={{
               borderWidth: 1,
-              borderColor: 'grey.300',
-              borderStyle: 'solid',
+              borderColor: "grey.300",
+              borderStyle: "solid",
             }}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1-content"
-              id="panel1-header"
+              aria-controls={`panel-${order.orderId}-content`} // Unique ID for accessibility
+              id={`panel-${order.orderId}-header`}
             >
               <Stack>
-                <Typography variant="bmdsm"> # {item.orderId}</Typography>
+                <Typography variant="bmdsm"> # {order.orderId}</Typography>
                 <Typography color="dark.300" variant="bxsr">
-                  {item.date}
+                  {order.date}
                 </Typography>
               </Stack>
             </AccordionSummary>
             <AccordionDetails>
-              {/* render purchased items with details */}
-              {item.items.map((item) => (
-                <Stack>
+              {/* Render purchased items with details */}
+              {order.items.map((itemDetail) => (
+                <Stack key={itemDetail.name}> {/* Ensure itemDetail.id is unique */}
                   <Stack
                     color="dark.300"
                     direction="row"
                     justifyContent="space-between"
                   >
                     <Stack>
-                      <Typography variant="bxsr">{item.name}</Typography>
+                      <Typography variant="bxsr">{itemDetail.name}</Typography>
                       <Typography variant="bxsr">
-                        {item.price} x ({item.qty}) items
+                        {itemDetail.price} x ({itemDetail.qty}) items
                       </Typography>
                     </Stack>
-                    <Typography variant="bxsr">${item.total}</Typography>
+                    <Typography variant="bxsr">${itemDetail.total}</Typography>
                   </Stack>
-                  <Divider sx={{ borderStyle: 'dotted', py: 1 }} />
+                  <Divider sx={{ borderStyle: "dotted", py: 1 }} />
                 </Stack>
               ))}
-              {/* render total price */}
+              {/* Render total price */}
               <Stack
-                color={'dark.300'}
+                color={"dark.300"}
                 direction="row"
                 justifyContent="space-between"
                 pt={2}
               >
                 <Typography variant="bmdsm">Total</Typography>
-                <Typography variant="bmdsm">${item.totalPrice}</Typography>
+                <Typography variant="bmdsm">${order.totalPrice}</Typography>
               </Stack>
             </AccordionDetails>
           </Accordion>

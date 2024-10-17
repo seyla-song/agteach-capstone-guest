@@ -43,7 +43,7 @@ export default function MemberComponent() {
               typography: { xs: "bxsr", sm: "bsr" },
             }}
           >
-            <Link href={teachAgtechURL} underline="none">Become a member</Link>
+            <Link href={teachAgtechURL} underline="none">Become an Instructor</Link>
           </Button>
         </Box>
       </Stack>

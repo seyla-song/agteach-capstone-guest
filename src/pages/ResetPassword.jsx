@@ -1,84 +1,53 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Typography, Box, Stack, Grid, Container, Link } from '@mui/material';
+import { useForm } from 'react-hook-form';  // Import useForm from react-hook-form
 import LogoLink from '../components/LoginSignup/LogoLink';
 import FormInput from '../components/LoginSignup/FormInput';
+import { CustomAlert } from '../components/CustomAlert';
 import { useNavigate } from 'react-router-dom';
+import { useResetPasswordMutation } from '../services/api/authApi';
+import { useParams } from 'react-router-dom';
 
-    /**
-     * Renders a form to reset the user's password.
-     *
-     * This component renders a form with two input fields for the new password and
-     * confirm password. If the user enters valid input, the form will be submitted to
-     * the server to reset the password. If the form is valid but the server returns an
-     * error, an error message will be displayed. If the form is valid and the server
-     * returns a success message, a success message will be displayed and the user will
-     * be redirected to the login page.
-     *
-     * @returns {React.ReactElement} A JSX element that renders the form and handles
-     *   the form submission.
-     */
 const ResetPasswordPage = () => {
+    const { register, handleSubmit, formState: { errors }, watch } = useForm();
+    const [resetPassword, { isLoading, error, isSuccess }] = useResetPasswordMutation();
+    const { resetToken } = useParams();
     const [showPassword, setShowPassword] = useState(false);
-    const [newPassword, setNewPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [newPasswordError, setNewPasswordError] = useState(false);
-    const [confirmPasswordError, setConfirmPasswordError] = useState(false);
-    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-    const [successMessage, setSuccessMessage] = useState(''); // State for success message
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
     const navigate = useNavigate();
-
-    useEffect(() => {
-        if (newPassword && confirmPassword && newPassword === confirmPassword) {
-            setIsButtonDisabled(false);
-        } else {
-            setIsButtonDisabled(true);
-        }
-    }, [newPassword, confirmPassword]);
-
+    
     const handleClickShowPassword = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
     };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        let valid = true;
+    const handleCloseSnackbar = () => {
+        setSnackbarOpen(false);
+    };
 
-        if (!newPassword) {
-            setNewPasswordError(true);
-            valid = false;
-        } else {
-            setNewPasswordError(false);
-        }
+    const onSubmit = async (data) => {
+        const { newPassword, confirmPassword } = data;
 
-        if (newPassword !== confirmPassword || !confirmPassword) {
-            setConfirmPasswordError(true);
-            valid = false;
-        } else {
-            setConfirmPasswordError(false);
-        }
-
-        if (valid) {
-            try {
-                const response = await fetch('/api/reset-password', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ newPassword }),
-                });
-
-                if (response.ok) {
-                    setSuccessMessage('We have received your reset password.'); // Set success message
-                } else {
-                    console.error('Failed to reset password');
-                }
-            } catch (error) {
-                console.error('Error:', error);
+        try {
+            const response = await resetPassword({resetToken, body: {password: newPassword, passwordConfirm: confirmPassword} }).unwrap();
+            if (response.status === 'success') {
+                setSnackbarSeverity('success');
+                setSnackbarMessage('Password reset successful');
+                setTimeout(() => {
+                    navigate('/auth/login');
+                }, 2000);
+            } else {
+                setSnackbarSeverity('error');
+                setSnackbarMessage('Failed to reset password');
             }
-        } else {
-            console.log('Form contains errors');
-        }
+        } catch (err) {
+            setSnackbarSeverity('error');
+            setSnackbarMessage('Something went wrong. Please try again');
+        } finally {
+            setSnackbarOpen(true);
+        };
     };
 
     return (
@@ -111,25 +80,35 @@ const ResetPasswordPage = () => {
                                     Strong passwords include numbers, letters, and punctuation marks.
                                 </Typography>
 
-                                <form onSubmit={handleSubmit}>
+                                <form onSubmit={handleSubmit(onSubmit)}>
                                     <Stack spacing={3} marginTop={2}>
                                         <FormInput
                                             label="New Password"
                                             type="password"
-                                            value={newPassword}
-                                            onChange={(e) => setNewPassword(e.target.value)}
-                                            error={newPasswordError}
-                                            helperText={newPasswordError ? 'Password is required' : ''}
+                                            // Register the input with validation rules
+                                            {...register('newPassword', { 
+                                                required: 'Password is required',
+                                                minLength: {
+                                                    value: 8,
+                                                    message: 'Password must be at least 8 characters long'
+                                                }
+                                            })}
+                                            error={Boolean(errors.newPassword)}
+                                            helperText={errors.newPassword?.message}
                                             showPassword={showPassword}
                                             handleClickShowPassword={handleClickShowPassword}
                                         />
                                         <FormInput
                                             label="Confirm Password"
                                             type="password"
-                                            value={confirmPassword}
-                                            onChange={(e) => setConfirmPassword(e.target.value)}
-                                            error={confirmPasswordError}
-                                            helperText={confirmPasswordError ? 'Passwords must match' : ''}
+                                            // Register the input with validation and match password logic
+                                            {...register('confirmPassword', {
+                                                required: 'Confirm password is required',
+                                                validate: (value) =>
+                                                    value === watch('newPassword') || "Passwords don't match"
+                                            })}
+                                            error={Boolean(errors.confirmPassword)}
+                                            helperText={errors.confirmPassword?.message}
                                             showPassword={showPassword}
                                             handleClickShowPassword={handleClickShowPassword}
                                         />
@@ -138,15 +117,19 @@ const ResetPasswordPage = () => {
                                                 type="submit"
                                                 variant="contained"
                                                 fullWidth
+                                                disabled={isLoading || isSuccess}
                                                 style={{
                                                     marginTop: '16px',
                                                     padding: '12px',
                                                 }}
                                             >
-                                                Reset Password
+                                                {isLoading ? 'Sending Request...' : 'Reset Password'}
                                             </Button>
                                         </Link>
                                     </Stack>
+
+                                    {/* Snackbar for displaying messages */}
+                                    <CustomAlert label={snackbarMessage} open={snackbarOpen} onClose={handleCloseSnackbar} severity={snackbarSeverity} />
                                 </form>
                             </Box>
                         </Grid>
