@@ -20,6 +20,7 @@ import { useGetCartItemsMutation } from '../services/api/cartApi';
 import { CustomAlert } from '../components/CustomAlert';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Link as RouterLink } from 'react-router-dom';
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
@@ -151,8 +152,13 @@ const CartContent = () => {
                 Your cart looks a little lonely.
                 <Box component="br" /> How about adding something special?
               </Typography>
-              <Link to='/marketplace' component={RouterLink}>
-                <Button color="secondary" disableElevation variant="contained">
+              <Link to="/marketplace" component={RouterLink}>
+                <Button
+                  endIcon={<ArrowCircleRightOutlinedIcon />}
+                  color="secondary"
+                  disableElevation
+                  variant="contained"
+                >
                   Go Shopping
                 </Button>
               </Link>
