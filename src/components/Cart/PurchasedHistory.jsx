@@ -60,7 +60,7 @@ export const PurchasedHistory = ({ data }) => {
             <AccordionDetails>
               {/* Render purchased items with details */}
               {order.items.map((itemDetail) => (
-                <Stack key={itemDetail.id}> {/* Ensure itemDetail.id is unique */}
+                <Stack key={itemDetail.name}> {/* Ensure itemDetail.id is unique */}
                   <Stack
                     color="dark.300"
                     direction="row"

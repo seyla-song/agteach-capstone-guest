@@ -4,6 +4,7 @@ export const purchasedApi = createApi({
   reducerPath: 'purchasedApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://api.agteach.site',
+    // baseUrl: 'http://localhost:3001',
     credentials: 'include',
   }),
   endpoints: (builder) => ({
