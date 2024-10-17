@@ -138,8 +138,8 @@ function ProductDetailPage() {
       <CustomModal
         open={open}
         onClose={toggleModal} // Use the same function to close the modal
-        title="Reach Quantity Limit"
-        description="Sorry, you have reached the quantity limit. Please remove an item and try again."
+        title="Reach Stock Limit"
+        description="Sorry, you have reached the available stock limit. You can still add other item to the cart."
       >
         <IconButton onClick={toggleModal} aria-label="delete">
           <CloseIcon />
