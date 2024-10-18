@@ -45,7 +45,6 @@ function CourseDetailPage() {
 
     if (recommendedCoursesData) {
       setRecommendedCourses(shuffle(recommendedCoursesData.data));
-      console.log('course: ', recommendedCoursesData.data);
     }
 
     window.scrollTo(0, 0);
@@ -99,10 +98,10 @@ function CourseDetailPage() {
       <Stack alignItems="center">
         <Stack width="100%" alignItems="center" bgcolor={'primary.dark'}>
           <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
-            <CourseDetailHero courseData={currentCourseData?.data} />
+            {/* <CourseDetailHero courseData={currentCourseData?.data} /> */}
           </Grid>
         </Stack>
-        <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
+        {/* <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
           <CourseDetailHighlight courseData={currentCourseData?.data} />
           <CourseDetailContent
             sections={currentCourseData?.data?.sections}
@@ -119,7 +118,7 @@ function CourseDetailPage() {
           <Grid item xs={12} pt={10} pb={20}>
             <MemberComponent />
           </Grid>
-        </Grid>
+        </Grid> */}
       </Stack>
     </Elements>
   );
