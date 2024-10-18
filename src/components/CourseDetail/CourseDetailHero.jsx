@@ -15,14 +15,15 @@ export const CourseDetailHero = ({ courseData }) => {
   const [enrollment] = useEnrollmentMutation();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
+  const { courseId, instructorId } = courseData || {};
 
   const navigate = useNavigate();
 
   const handleCheckout = async () => {
     setLoading(true);
     try {
-      if (!courseData.courseId || !courseData.instructorId) return;
-      const data = await enrollment({ courseId: courseData.courseId }).unwrap();
+      if (!courseId || !instructorId) return;
+      const data = await enrollment({ courseId: courseId }).unwrap();
       if (data.id) {
         const result = await stripe.redirectToCheckout({ sessionId: data.id });
         if (result.error) {
@@ -51,7 +52,7 @@ export const CourseDetailHero = ({ courseData }) => {
             <Typography variant="bsr">{courseData?.description}</Typography>
             <Typography variant="bsr">
               Created by:{' '}
-              {!courseData.instructorId && (
+              {!instructorId && (
                 <Link
                   sx={{
                     color: 'white',
@@ -62,7 +63,7 @@ export const CourseDetailHero = ({ courseData }) => {
                     },
                   }}
                   onClick={() =>
-                    navigate(`/instructor-profile/${courseData?.instructorId}`)
+                    navigate(`/instructor-profile/${instructorId}`)
                   }
                 >
                   {courseData?.instructor?.firstName +
