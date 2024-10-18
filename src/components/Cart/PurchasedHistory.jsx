@@ -9,6 +9,7 @@ import {
   CircularProgress,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { ItemsLoading } from '../ItemsLoading';
 
 /**
  * PurchasedHistory component is a reusable component
@@ -33,10 +34,7 @@ export const PurchasedHistory = ({ data }) => {
       <Stack>
         <Typography variant="h3">Purchased History</Typography>
         {data < 1 ? (
-          <Stack direction="row" alignItems="center" gap={1}>
-            <CircularProgress size={10} />
-            <Typography variant="bxsr">Getting purchased items...</Typography>
-          </Stack>
+          <ItemsLoading title="purchased" />
         ) : (
           <Typography variant="bxsmd" color="dark.300">
             Found ({data?.length}) Items
