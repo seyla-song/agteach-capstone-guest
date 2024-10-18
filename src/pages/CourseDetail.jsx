@@ -11,30 +11,52 @@ import {
 } from '../services/api/courseApi';
 import { SuggestedCourseProduct } from '../components/SuggestCourseProduct';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { ContentLoading } from '../components/ContentLoading';
+import { useGetUserEnrollmentsQuery } from '../services/api/enrollmentApi';
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 function CourseDetailPage() {
   const { coursesId } = useParams();
+  const navigate = useNavigate();
 
   const [recommendedCourses, setRecommendedCourses] = useState([]);
+
+  const { data: enrolledCourses, isLoading: isLoadingEnrolled } =
+    useGetUserEnrollmentsQuery();
+
   const {
     data: currentCourseData,
     isLoading,
     isError,
     error,
   } = useGetOneCourseQuery(coursesId);
+
   const { data: recommendedCoursesData } =
     useGetRecommendedCoursesQuery(coursesId);
 
   useEffect(() => {
-    if (recommendedCoursesData)
+    if (
+      !isLoadingEnrolled &&
+      enrolledCourses?.courseIds.includes(Number(coursesId))
+    ) {
+      navigate(`/courses/${coursesId}/watch/overview`);
+    }
+    if (recommendedCoursesData) {
       setRecommendedCourses(recommendedCoursesData.data);
-  }, [recommendedCoursesData, currentCourseData]);
+    }
+  }, [
+    recommendedCoursesData,
+    currentCourseData,
+    enrolledCourses,
+    coursesId,
+    isLoadingEnrolled,
+    isLoading,
+    navigate,
+  ]);
 
   if (isLoading) return <ContentLoading />;
   if (isError) return <div>Error: {error}</div>;
