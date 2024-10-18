@@ -11,34 +11,32 @@ import { useState } from 'react';
 import { useStripe } from '@stripe/react-stripe-js';
 import { useEnrollmentMutation } from '../../services/api/enrollmentApi';
 
-export const CourseDetailHero = ({courseData}) => {
+export const CourseDetailHero = ({ courseData }) => {
   const [enrollment] = useEnrollmentMutation();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
+  const { courseId, instructorId } = courseData || {};
 
   const navigate = useNavigate();
 
   const handleCheckout = async () => {
     setLoading(true);
     try {
-      const data = await enrollment({ courseId: 405 }).unwrap();
-    
-      console.log(data);
-      
-
+      if (!courseId || !instructorId) return;
+      const data = await enrollment({ courseId: courseId }).unwrap();
       if (data.id) {
-        // Redirect to Stripe's checkout page using the session ID
         const result = await stripe.redirectToCheckout({ sessionId: data.id });
-
         if (result.error) {
           console.error('Stripe checkout error', result.error);
         }
+      } else if (data.redirectUrl) {
+        navigate(data.redirectUrl);
       } else {
         console.error('Failed to create checkout session');
       }
     } catch (error) {
       console.error('Error during checkout', error);
-      error.status === 401 && navigate('/auth/login');
+      if (error.status === 401) navigate('/auth/login');
     } finally {
       setLoading(false);
     }
@@ -48,39 +46,38 @@ export const CourseDetailHero = ({courseData}) => {
     <Grid color={'white'} item xs={12}>
       <Grid alignItems={'center'} paddingY={15} container>
         <Grid item xs={5}>
-          <Stack gap>
+          <Stack gap={1}>
             <Typography variant="h2">${courseData?.price}</Typography>
-            <Typography variant="h4">
-              {courseData?.name}
-            </Typography>
-            <Typography variant="bsr">
-              {courseData?.description}
-            </Typography>
+            <Typography variant="h4">{courseData?.name}</Typography>
+            <Typography variant="bsr">{courseData?.description}</Typography>
             <Typography variant="bsr">
               Created by:{' '}
-              <Link
-                sx={{
-                  color: 'white',
-                  textUnderlineOffset: 3,
-                  cursor: "pointer",
-                  ":hover": {
-                    textDecoration: "underline"
+              {!instructorId && (
+                <Link
+                  sx={{
+                    color: 'white',
+                    textUnderlineOffset: 3,
+                    cursor: 'pointer',
+                    ':hover': {
+                      textDecoration: 'underline',
+                    },
+                  }}
+                  onClick={() =>
+                    navigate(`/instructor-profile/${instructorId}`)
                   }
-                }}
-                onClick={() => navigate(`/instructor-profile/${courseData?.instructorId}`)}
-              >
-                {courseData?.instructor.firstName + ' ' + courseData?.instructor.lastName}
-              </Link>
+                >
+                  {courseData?.instructor?.firstName +
+                    ' ' +
+                    courseData?.instructor?.lastName}
+                </Link>
+              )}
             </Typography>
           </Stack>
         </Grid>
         <Grid item xs={2} />
         <Grid item xs={5}>
           <Stack display={'flex'} flexDirection={'column'} gap={1}>
-            <MediaPlayer
-              title="Sprite Fight"
-              src={courseData?.previewVideoUrl}
-            >
+            <MediaPlayer title="Sprite Fight" src={courseData?.previewVideoUrl}>
               <MediaProvider />
               <DefaultVideoLayout
                 thumbnails={courseData?.thumbnailUrl}
@@ -96,7 +93,12 @@ export const CourseDetailHero = ({courseData}) => {
                   variant="contained"
                   disabled={!stripe || loading}
                 >
-                  {loading ? 'Processing...' : 'Enroll Now'}
+                  <Typography
+                    variant="bmd"
+                    color={!stripe || loading ? 'common.white' : 'primary'}
+                  >
+                    {loading ? 'Processing...' : 'Enroll Now'}
+                  </Typography>
                 </Button>
               </Link>
               <Button

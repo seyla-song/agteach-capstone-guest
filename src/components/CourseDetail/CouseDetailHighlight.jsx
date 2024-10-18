@@ -24,7 +24,7 @@ export const CourseDetailHighlight = ({courseData}) => {
         <Grid container spacing={2}>
           <Grid xs={7} item>
             <Stack
-              gap
+              gap={1}
               justifyContent="center"
               alignItems="center"
               bgcolor="primary.dark"
@@ -32,7 +32,7 @@ export const CourseDetailHighlight = ({courseData}) => {
               paddingY={10}
               paddingX={3}
             >
-              <Stack gap maxWidth={500}>
+              <Stack gap={1} maxWidth={500}>
                 <Typography variant="h4">
                   What you learn in this course? What included
                 </Typography>
@@ -49,9 +49,9 @@ export const CourseDetailHighlight = ({courseData}) => {
               justifyContent="center"
               alignItems="center"
               height="100%"
-              gap
+              gap={1}
             >
-              <Stack px={3} gap>
+              <Stack px={3} gap={1}>
                 <Typography variant="h4">This course include:</Typography>
                 <Stack direction="row" gap={2}>
                   <TimerIcon />

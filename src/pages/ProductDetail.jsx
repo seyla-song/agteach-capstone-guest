@@ -198,8 +198,13 @@ function ProductDetailPage() {
         </Grid>
         <Stack spacing="30px" sx={{ mt: { xs: '50px', md: '160px' } }}>
           {allRelatedProducts.length > 0 && (
-            <Stack>
-              <Typography sx={{ typography: { xs: 'blgsm', md: 'h4' } }}>
+            <Stack gap={2}>
+              <Typography
+                sx={{
+                  maxWidth: { xs: '250px', md: '300px' },
+                  typography: { xs: 'blgsm', md: 'h4' },
+                }}
+              >
                 You might also want to buy these products
               </Typography>
               <CustomCarousel data={allRelatedProducts} cardVariant="product" />
