@@ -1,13 +1,4 @@
-import {
-  Box,
-  CircularProgress,
-  Container,
-  Divider,
-  Grid,
-  Skeleton,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Divider, Grid, Stack } from '@mui/material';
 import {
   CourseDetailHighlight,
   CourseDetailContent,
