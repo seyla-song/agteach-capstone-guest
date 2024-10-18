@@ -6,7 +6,6 @@ import {
   Stack,
   Typography,
   Divider,
-  CircularProgress,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { ItemsLoading } from '../ItemsLoading';
