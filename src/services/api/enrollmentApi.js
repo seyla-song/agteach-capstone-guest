@@ -24,4 +24,5 @@ export const enrollmentApi = createApi({
   }),
 });
 
-export const { useEnrollmentMutation } = enrollmentApi;
+export const { useEnrollmentMutation, useGetUserEnrollmentsQuery } =
+  enrollmentApi;
