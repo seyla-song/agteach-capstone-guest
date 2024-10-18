@@ -98,7 +98,7 @@ function CourseDetailPage() {
       <Stack alignItems="center">
         <Stack width="100%" alignItems="center" bgcolor={'primary.dark'}>
           <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
-            {/* <CourseDetailHero courseData={currentCourseData?.data} /> */}
+            <CourseDetailHero courseData={currentCourseData?.data} />
           </Grid>
         </Stack>
         <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>

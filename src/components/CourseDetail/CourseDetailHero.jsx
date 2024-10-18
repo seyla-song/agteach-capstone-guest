@@ -46,7 +46,7 @@ export const CourseDetailHero = ({ courseData }) => {
     <Grid color={'white'} item xs={12}>
       <Grid alignItems={'center'} paddingY={15} container>
         <Grid item xs={5}>
-          <Stack gap>
+          <Stack gap={1}>
             <Typography variant="h2">${courseData?.price}</Typography>
             <Typography variant="h4">{courseData?.name}</Typography>
             <Typography variant="bsr">{courseData?.description}</Typography>
