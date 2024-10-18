@@ -13,7 +13,10 @@ import { CustomCartItem } from '../components/Cart/CustomCartItem';
 import { PurchasedHistory } from '../components/Cart/PurchasedHistory';
 import { Elements, useStripe } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { usePurchasedMutation } from '../services/api/purchasedApi';
+import {
+  useGetCustomerPurchasedQuery,
+  usePurchasedMutation,
+} from '../services/api/purchasedApi';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetCartItemsMutation } from '../services/api/cartApi';
@@ -37,6 +40,8 @@ export default CartPage;
 const CartContent = () => {
   const [purchased] = usePurchasedMutation();
   const [getCartItems, { isLoading }] = useGetCartItemsMutation();
+  const { data: enrolledCourses, isLoading: isLoadingEnrolled } =
+    useGetCustomerPurchasedQuery();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const [snackbar, setSnackbar] = useState({
@@ -118,7 +123,7 @@ const CartContent = () => {
       <Grid container>
         <Grid item md={totalItemQuantity < 1 ? 12 : 8} pr={3} pb={5} xs={12}>
           <Typography variant="h4">Your Shopping Cart</Typography>
-          <Typography color='dark.400'>
+          <Typography color="dark.400">
             {totalItemQuantity > 0
               ? `Found (${totalItemQuantity}) ${
                   totalItemQuantity === 1 ? 'item' : 'items'
