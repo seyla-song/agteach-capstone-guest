@@ -12,12 +12,16 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { showDuration } from '../../utils/showDuration';
 import { useState } from 'react';
 
-export const CourseDetailContent = ({sections, numberOfVideos, courseLength}) => {
+export const CourseDetailContent = ({
+  sections,
+  numberOfVideos,
+  courseLength,
+}) => {
   const [sectionLimit, setSectionLimit] = useState(10);
 
   const handleChangeSectionLimit = () => {
-    setSectionLimit(sectionLimit + 10)
-  }
+    setSectionLimit(sectionLimit + 10);
+  };
 
   return (
     <Grid item xs={12}>
@@ -25,7 +29,8 @@ export const CourseDetailContent = ({sections, numberOfVideos, courseLength}) =>
         <Stack>
           <Typography variant="h4">Course Content</Typography>
           <Typography variant="bxsr">
-            {sections.length} sections • {numberOfVideos} videos • {showDuration(courseLength)} total length
+            {sections.length} sections • {numberOfVideos} videos •{' '}
+            {showDuration(courseLength)} total length
           </Typography>
         </Stack>
         <Stack>
@@ -43,28 +48,32 @@ export const CourseDetailContent = ({sections, numberOfVideos, courseLength}) =>
                 {/* {showDuration(section.section.duration)} */}
               </AccordionSummary>
               {section.lectures.map((lecture) => {
-                  
-                return (<Stack px={2}>
-                  <AccordionDetails key={lecture.lectureId} sx={{ bgcolor: 'white' }}>
-                    <Stack
-                      direction="row"
-                      justifyContent="space-between"
-                      py={2}
-                    >
-                      <Typography>{lecture.name}</Typography>
-                      <Typography>{showDuration(lecture.duration)}</Typography>
-                    </Stack>
-                    <Divider />
-                  </AccordionDetails>
-                </Stack>)
-                }
-              )}
+                return (
+                  <Stack key={lecture.lectureId} px={2}>
+                    <AccordionDetails sx={{ bgcolor: 'white' }}>
+                      <Stack
+                        direction="row"
+                        justifyContent="space-between"
+                        py={2}
+                      >
+                        <Typography>{lecture.name}</Typography>
+                        <Typography>
+                          {showDuration(lecture.duration)}
+                        </Typography>
+                      </Stack>
+                      <Divider />
+                    </AccordionDetails>
+                  </Stack>
+                );
+              })}
             </Accordion>
           ))}
         </Stack>
-        {
-          sectionLimit < sections.length && <Button onClick={handleChangeSectionLimit} variant="outlined">View ({sections.length - sectionLimit}) More</Button>
-        }
+        {sectionLimit < sections.length && (
+          <Button onClick={handleChangeSectionLimit} variant="outlined">
+            View ({sections.length - sectionLimit}) More
+          </Button>
+        )}
       </Stack>
     </Grid>
   );

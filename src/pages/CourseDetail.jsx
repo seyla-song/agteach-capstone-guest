@@ -101,7 +101,7 @@ function CourseDetailPage() {
             {/* <CourseDetailHero courseData={currentCourseData?.data} /> */}
           </Grid>
         </Stack>
-        {/* <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
+        <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
           <CourseDetailHighlight courseData={currentCourseData?.data} />
           <CourseDetailContent
             sections={currentCourseData?.data?.sections}
@@ -118,7 +118,7 @@ function CourseDetailPage() {
           <Grid item xs={12} pt={10} pb={20}>
             <MemberComponent />
           </Grid>
-        </Grid> */}
+        </Grid>
       </Stack>
     </Elements>
   );
