@@ -21,9 +21,8 @@ export const CourseDetailHero = ({ courseData }) => {
   const handleCheckout = async () => {
     setLoading(true);
     try {
-      const data = await enrollment({ courseId: 405 }).unwrap();
-
-      console.log(data);
+      if (!courseData.courseId || !courseData.instructorId) return;
+      const data = await enrollment({ courseId: courseData.courseId }).unwrap();
 
       if (data.id) {
         // Redirect to Stripe's checkout page using the session ID
@@ -53,23 +52,25 @@ export const CourseDetailHero = ({ courseData }) => {
             <Typography variant="bsr">{courseData?.description}</Typography>
             <Typography variant="bsr">
               Created by:{' '}
-              <Link
-                sx={{
-                  color: 'white',
-                  textUnderlineOffset: 3,
-                  cursor: 'pointer',
-                  ':hover': {
-                    textDecoration: 'underline',
-                  },
-                }}
-                onClick={() =>
-                  navigate(`/instructor-profile/${courseData?.instructorId}`)
-                }
-              >
-                {courseData?.instructor?.firstName +
-                  ' ' +
-                  courseData?.instructor?.lastName}
-              </Link>
+              {!courseData.instructorId && (
+                <Link
+                  sx={{
+                    color: 'white',
+                    textUnderlineOffset: 3,
+                    cursor: 'pointer',
+                    ':hover': {
+                      textDecoration: 'underline',
+                    },
+                  }}
+                  onClick={() =>
+                    navigate(`/instructor-profile/${courseData?.instructorId}`)
+                  }
+                >
+                  {courseData?.instructor?.firstName +
+                    ' ' +
+                    courseData?.instructor?.lastName}
+                </Link>
+              )}
             </Typography>
           </Stack>
         </Grid>
