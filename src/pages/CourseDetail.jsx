@@ -41,11 +41,8 @@ function CourseDetailPage() {
     useGetRecommendedCoursesQuery(coursesId);
 
   useEffect(() => {
-    if (recommendedCoursesData) {
+    if (recommendedCoursesData)
       setRecommendedCourses(recommendedCoursesData.data);
-    }
-
-    window.scrollTo(0, 0);
   }, [recommendedCoursesData, currentCourseData]);
 
   if (isCurrentCourseDataLoading) return <ContentLoading />;
