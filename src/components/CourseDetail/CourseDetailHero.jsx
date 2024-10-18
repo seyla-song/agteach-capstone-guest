@@ -15,28 +15,28 @@ export const CourseDetailHero = ({ courseData }) => {
   const [enrollment] = useEnrollmentMutation();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
+  const { courseId, instructorId } = courseData || {};
 
   const navigate = useNavigate();
 
   const handleCheckout = async () => {
     setLoading(true);
     try {
-      if (!courseData.courseId || !courseData.instructorId) return;
-      const data = await enrollment({ courseId: courseData.courseId }).unwrap();
-
+      if (!courseId || !instructorId) return;
+      const data = await enrollment({ courseId: courseId }).unwrap();
       if (data.id) {
-        // Redirect to Stripe's checkout page using the session ID
         const result = await stripe.redirectToCheckout({ sessionId: data.id });
-
         if (result.error) {
           console.error('Stripe checkout error', result.error);
         }
+      } else if (data.redirectUrl) {
+        navigate(data.redirectUrl);
       } else {
         console.error('Failed to create checkout session');
       }
     } catch (error) {
       console.error('Error during checkout', error);
-      error.status === 401 && navigate('/auth/login');
+      if (error.status === 401) navigate('/auth/login');
     } finally {
       setLoading(false);
     }
@@ -46,13 +46,13 @@ export const CourseDetailHero = ({ courseData }) => {
     <Grid color={'white'} item xs={12}>
       <Grid alignItems={'center'} paddingY={15} container>
         <Grid item xs={5}>
-          <Stack gap>
+          <Stack gap={1}>
             <Typography variant="h2">${courseData?.price}</Typography>
             <Typography variant="h4">{courseData?.name}</Typography>
             <Typography variant="bsr">{courseData?.description}</Typography>
             <Typography variant="bsr">
               Created by:{' '}
-              {!courseData.instructorId && (
+              {!instructorId && (
                 <Link
                   sx={{
                     color: 'white',
@@ -63,7 +63,7 @@ export const CourseDetailHero = ({ courseData }) => {
                     },
                   }}
                   onClick={() =>
-                    navigate(`/instructor-profile/${courseData?.instructorId}`)
+                    navigate(`/instructor-profile/${instructorId}`)
                   }
                 >
                   {courseData?.instructor?.firstName +

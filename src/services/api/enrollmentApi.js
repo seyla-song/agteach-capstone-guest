@@ -15,7 +15,14 @@ export const enrollmentApi = createApi({
         body: enrollmentData,
       }),
     }),
+    getUserEnrollments: builder.query({
+      query: () => ({
+        url: '/api/enrollment/getUserEnrollments',
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const { useEnrollmentMutation } = enrollmentApi;
+export const { useEnrollmentMutation, useGetUserEnrollmentsQuery } =
+  enrollmentApi;
