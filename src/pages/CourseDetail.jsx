@@ -42,7 +42,7 @@ function CourseDetailPage() {
     useGetRecommendedCoursesQuery(coursesId);
 
   useEffect(() => {
-    console.log(currentCourseData);
+
     if (recommendedCoursesData) {
       setRecommendedCourses(shuffle(recommendedCoursesData.data));
       console.log('course: ', recommendedCoursesData.data);
