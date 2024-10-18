@@ -1,19 +1,19 @@
-import { Divider, Grid, Stack } from "@mui/material";
+import { Divider, Grid, Stack } from '@mui/material';
 import {
   CourseDetailHero,
   CourseDetailHighlight,
   CourseDetailContent,
-} from "../components/CourseDetail/index";
-import MemberComponent from "../components/MemberComponent";
+} from '../components/CourseDetail/index';
+import MemberComponent from '../components/MemberComponent';
 import {
   useGetRecommendedCoursesQuery,
   useGetOneCourseQuery,
-} from "../services/api/courseApi";
-import { SuggestedCourseProduct } from "../components/SuggestCourseProduct";
-import { useEffect, useState, Fragment } from "react";
-import { useParams } from "react-router";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+} from '../services/api/courseApi';
+import { SuggestedCourseProduct } from '../components/SuggestCourseProduct';
+import { useEffect, useState, Fragment } from 'react';
+import { useParams } from 'react-router';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
 function shuffle(array) {
   const newArray = [...array]; // Create a copy of the array
@@ -38,19 +38,14 @@ function CourseDetailPage() {
     isError: isCurrentCourseError,
     error: currentCoursesError,
   } = useGetOneCourseQuery(coursesId);
-  const {
-    data: recommendedCoursesData,
-    isLoading: isRecommendedCoursesLoading,
-    isError: isRecommendedCoursesError,
-    error: recommendedCoursesError,
-  } = useGetRecommendedCoursesQuery(coursesId);
+  const { data: recommendedCoursesData } =
+    useGetRecommendedCoursesQuery(coursesId);
 
   useEffect(() => {
-    console.clear();
     console.log(currentCourseData);
     if (recommendedCoursesData) {
       setRecommendedCourses(shuffle(recommendedCoursesData.data));
-      console.log("course: ", recommendedCoursesData.data);
+      console.log('course: ', recommendedCoursesData.data);
     }
 
     window.scrollTo(0, 0);
@@ -60,11 +55,11 @@ function CourseDetailPage() {
     return (
       <div
         style={{
-          width: "100%",
-          height: "calc(100vh - 68px)",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          width: '100%',
+          height: 'calc(100vh - 68px)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         Loading...
@@ -74,11 +69,11 @@ function CourseDetailPage() {
     return (
       <div
         style={{
-          width: "100%",
-          height: "calc(100vh - 68px)",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          width: '100%',
+          height: 'calc(100vh - 68px)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         Error: {currentCoursesError}
@@ -88,11 +83,11 @@ function CourseDetailPage() {
     return (
       <div
         style={{
-          width: "100%",
-          height: "calc(100vh - 68px)",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          width: '100%',
+          height: 'calc(100vh - 68px)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         Course Not Found.
@@ -102,12 +97,12 @@ function CourseDetailPage() {
   return (
     <Elements stripe={stripePromise}>
       <Stack alignItems="center">
-        <Stack width="100%" alignItems="center" bgcolor={"primary.dark"}>
-          <Grid sx={{ maxWidth: "1420px" }} container paddingX={1}>
+        <Stack width="100%" alignItems="center" bgcolor={'primary.dark'}>
+          <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
             <CourseDetailHero courseData={currentCourseData?.data} />
           </Grid>
         </Stack>
-        <Grid sx={{ maxWidth: "1420px" }} container paddingX={1}>
+        <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
           <CourseDetailHighlight courseData={currentCourseData?.data} />
           <CourseDetailContent
             sections={currentCourseData?.data?.sections}
@@ -117,7 +112,10 @@ function CourseDetailPage() {
           <Grid item xs={12}>
             <Divider />
           </Grid>
-          <SuggestedCourseProduct courses={recommendedCourses} products={currentCourseData?.data?.product_suggestions} />
+          <SuggestedCourseProduct
+            courses={recommendedCourses}
+            products={currentCourseData?.data?.product_suggestions}
+          />
           <Grid item xs={12} pt={10} pb={20}>
             <MemberComponent />
           </Grid>
