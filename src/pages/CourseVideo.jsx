@@ -1,4 +1,4 @@
-import { Stack, Grid } from "@mui/material";
+import { Stack, Grid, Typography } from "@mui/material";
 import TimerIcon from "@mui/icons-material/TimerOutlined";
 import {
   CourseVideoHeaderComponent,
@@ -7,6 +7,7 @@ import {
 } from "../components/CourseVideo/index";
 import Footer from "../components/Footer";
 import { useGetOneCourseQuery } from "../services/api/courseApi";
+import { useParams } from "react-router-dom";
 
 /**
  * The course video page.
@@ -18,21 +19,56 @@ import { useGetOneCourseQuery } from "../services/api/courseApi";
  */
 function CourseVideoPage() {
   const { data: courses, isLoading: isCoursesLoading } =
-    useGetOneCourseQuery(760);
+    useGetOneCourseQuery(716);
   isCoursesLoading ? console.log("loading") : console.log(courses);
+  const { videoId } = useParams();
+  console.log(videoId);
 
   if (!isCoursesLoading) {
     const sections = courses.data.sections;
-    console.log("sections", sections);
+
+    // console.log("sections", sections);
+
     sections.map((section) => {
-      console.log("Section", section);
-      section.map((lecture) => {
-        console.log("Lecture", lecture);
-        return null;
-      })
-      return null;
+      const lectures = section.lectures;
+      lectures.map((lecture) => {
+        // console.log("Lecture", lecture);
+      });
+      //   console.log("Section", section);
+      //   section.map((lecture) => {
+      //     console.log("Lecture", lecture);
+      //     return null;
+      //   })
+      //   return null;
     });
+  } else {
+    return (
+      <>
+        <Typography>Lodding...</Typography>
+      </>
+    );
   }
+  const contentList = !isCoursesLoading ? courses.data.sections : [];
+
+  // Function to get video URL by lectureId
+  function getVideoUrlByLectureId(sections, lectureId) {
+    for (const section of sections) {
+
+      const lecture = section.lectures.find(
+        (lecture) => String(lecture.lectureId) === String(lectureId)
+    );
+      if (lecture) {
+        return lecture.videoUrl;
+      }
+    }
+    return null; // Return null if no matching lecture is found
+  }
+
+  // Example usage:
+  const lectureId = videoId;
+  const videoUrl = getVideoUrlByLectureId(contentList, lectureId);
+
+  console.log(videoUrl);
   return (
     <Stack>
       {/* The course video header */}
@@ -50,7 +86,7 @@ function CourseVideoPage() {
         </Grid>
         {/* The sidebar containing the course details and outline */}
         <Grid item xs={2}>
-          <CourseVideoSidebar data={coursesContent} />
+          <CourseVideoSidebar data={contentList} />
         </Grid>
       </Grid>
     </Stack>

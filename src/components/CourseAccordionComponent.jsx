@@ -5,8 +5,9 @@ import {
   Divider,
   Stack,
   Typography,
-} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useNavigate } from "react-router-dom";
 
 /**
  * A component that renders a list of courses as an accordion.
@@ -23,33 +24,51 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
  * stack of rows with the topic title and duration.
  */
 export const CourseAccordionComponent = ({ data }) => {
+  const navigate = useNavigate();
+  const couresContent = data;
+
+
+  const handleSelectLecture = (lectureId) => {
+    navigate(`/courses/716/watch/${lectureId}`);
+  };
+
   return (
     <Stack>
       {/* Render each course as an accordion */}
-      {data.map((course) => (
+      {data.map((course, courseIdx) => (
         <Accordion
           key={course.title}
-          sx={{ backgroundColor: 'grey.200', boxShadow: 'none' }}
+          sx={{ backgroundColor: "grey.200", boxShadow: "none" }}
         >
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon fontSize='small' />}
+            expandIcon={<ExpandMoreIcon fontSize="small" />}
             aria-controls="panel1-content"
             id="panel1-header"
           >
             <Stack>
               {/* Title and duration of the course */}
-              <Typography variant="bssm">{course.title}</Typography>
-              <Typography variant='bxsr'>{course.duration}</Typography>
+              <Typography variant="bssm">{course.name}</Typography>
+              {/* <Typography variant='bxsr'>{course.duration}</Typography> */}
             </Stack>
           </AccordionSummary>
           {/* Each topic is rendered as a row inside the accordion */}
-          {course.topics.map((topic) => (
+          {course.lectures.map((lecture, lectureIdx) => (
             <Stack px={2}>
-              <AccordionDetails key={topic.title} sx={{ bgcolor: 'white' }}>
+              <AccordionDetails
+                key={lecture.title}
+                sx={{
+                  bgcolor:
+                    (courseIdx === 0) & (lectureIdx === 0)
+                      ? "grey.500"
+                      : "white",
+                }}
+                onClick={()=>handleSelectLecture(lecture.lectureId)}
+              >
                 <Stack direction="row" justifyContent="space-between" py={2}>
                   {/* Topic title and duration */}
-                  <Typography variant='bsr'>{topic.title}</Typography>
-                  <Typography variant='bsr'>{topic.duration}</Typography>
+                  <Typography variant="bsr">{lecture.name}</Typography>
+                  {/* <Typography variant='bsr'>{topic.title}</Typography> */}
+                  {/* <Typography variant='bsr'>{lecture.duration}</Typography> */}
                 </Stack>
                 <Divider />
               </AccordionDetails>

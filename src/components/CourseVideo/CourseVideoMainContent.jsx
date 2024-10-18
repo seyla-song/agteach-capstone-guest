@@ -28,7 +28,7 @@ export const CourseVideoMainContent = (data) => {
         <MediaPlayer
           style={{ borderRadius: 0 }}
           title="Sprite Fight"
-          src="https://files.vidstack.io/sprite-fight/720p.mp4"
+          src="https://agteach-dev-assets.s3.ap-southeast-2.amazonaws.com/courses/716/section-1186/lecture-1745.mp4"
 
         >
           <MediaProvider />
