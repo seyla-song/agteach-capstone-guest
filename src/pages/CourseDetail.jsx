@@ -1,7 +1,17 @@
-import { Divider, Grid, Stack } from '@mui/material';
+import {
+  Box,
+  CircularProgress,
+  Container,
+  Divider,
+  Grid,
+  Skeleton,
+  Stack,
+  Typography,
+} from '@mui/material';
 import {
   CourseDetailHighlight,
   CourseDetailContent,
+  CourseDetailHero,
 } from '../components/CourseDetail/index';
 import MemberComponent from '../components/MemberComponent';
 import {
@@ -13,7 +23,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-
+import { ContentLoading } from '../components/ContentLoading';
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
@@ -38,7 +48,7 @@ function CourseDetailPage() {
     window.scrollTo(0, 0);
   }, [recommendedCoursesData, currentCourseData]);
 
-  if (isCurrentCourseDataLoading) return <div>Loading...</div>;
+  if (isCurrentCourseDataLoading) return <ContentLoading />;
   if (isCurrentCourseError) return <div>Error: {currentCoursesError}</div>;
 
   return (
@@ -46,7 +56,7 @@ function CourseDetailPage() {
       <Stack alignItems="center">
         <Stack width="100%" alignItems="center" bgcolor={'primary.dark'}>
           <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
-            {/* <CourseDetailHero courseData={currentCourseData?.data} /> */}
+            <CourseDetailHero courseData={currentCourseData?.data} />
           </Grid>
         </Stack>
         <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
