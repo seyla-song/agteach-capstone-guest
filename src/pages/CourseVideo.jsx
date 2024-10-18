@@ -35,6 +35,9 @@ function CourseVideoPage() {
   }
   const contentList = !isCoursesLoading ? courses.data.sections : [];
   const courseData = !isCoursesLoading ? courses.data : [];
+  const productSuggestions = !isCoursesLoading
+    ? courses.data.product_suggestions
+    : [];
 
   // Function to get video URL by lectureId
   function getVideoNameUrlByLectureId(sections, lectureId) {
@@ -54,7 +57,7 @@ function CourseVideoPage() {
   } else {
     lectureId = videoId;
   }
-  
+
   const videoNameUrl = getVideoNameUrlByLectureId(contentList, lectureId);
   if (videoNameUrl === null) {
     return navigate("/error");
@@ -76,6 +79,7 @@ function CourseVideoPage() {
             highlights={highlights}
             courses={courses}
             products={products}
+            productSuggestions={productSuggestions}
           />
           <Footer />
         </Grid>

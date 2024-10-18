@@ -18,10 +18,19 @@ import { CustomCarousel } from './CustomCarousel';
  *
  * @returns {React.ReactElement} The suggested courses and products component.
  */
-export const SuggestedCourseProduct = ({ courses, products }) => {
+export const SuggestedCourseProduct = ({ courses, products,productSuggestions }) => {
 
   const recommendedProducts = products.map((prod) => prod.product);
-  
+  const productList = productSuggestions.map(suggestion => ({
+    name: suggestion.product.name,
+    price: suggestion.product.price,
+    imageUrl: suggestion.product.imageUrl
+}));
+
+// Logging the product list
+console.log(productList);
+
+  // console.log(productSuggestions)
   return (
     <Stack gap={5} py={10} width="100%">
       {courses.length > 0 && 
@@ -37,7 +46,7 @@ export const SuggestedCourseProduct = ({ courses, products }) => {
           <Typography variant="h4" maxWidth={300}>
             You might want to buy the product related to this course
           </Typography>
-          <CustomCarousel data={recommendedProducts} cardVariant="product" slideToShow={5} />
+          <CustomCarousel data={productList} cardVariant="product" slideToShow={5} />
         </Stack>
       }
     </Stack>

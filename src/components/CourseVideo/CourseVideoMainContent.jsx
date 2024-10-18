@@ -19,7 +19,7 @@ import { SuggestedCourseProduct } from '../../components/SuggestCourseProduct';
  * @returns {React.ReactElement} The main content of the course video page.
  */
 export const CourseVideoMainContent = (data) => {
-  const { videoNameUrl, highlights, courses, products, courseData } = data;
+  const { videoNameUrl, highlights, courses, products, courseData,productSuggestions } = data;
   const { name, url } = videoNameUrl;
   const { name: courseName, description, instructor, courseObjective } = courseData
   return (
@@ -69,7 +69,7 @@ export const CourseVideoMainContent = (data) => {
               </Stack>
               <CourseObjectiveComponent courseObjective={courseObjective}/>
               <Divider sx={{ pt:10}} />
-              {/* <SuggestedCourseProduct courses={courses} products={products} /> */}
+              <SuggestedCourseProduct productSuggestions={productSuggestions} courses={courses} products={products} />
             </Stack>
           </Grid>
         </Grid>
