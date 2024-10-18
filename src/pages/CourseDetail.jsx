@@ -24,9 +24,9 @@ function CourseDetailPage() {
   const [recommendedCourses, setRecommendedCourses] = useState([]);
   const {
     data: currentCourseData,
-    isLoading: isCurrentCourseDataLoading,
-    isError: isCurrentCourseError,
-    error: currentCoursesError,
+    isLoading,
+    isError,
+    error,
   } = useGetOneCourseQuery(coursesId);
   const { data: recommendedCoursesData } =
     useGetRecommendedCoursesQuery(coursesId);
@@ -36,8 +36,8 @@ function CourseDetailPage() {
       setRecommendedCourses(recommendedCoursesData.data);
   }, [recommendedCoursesData, currentCourseData]);
 
-  if (isCurrentCourseDataLoading) return <ContentLoading />;
-  if (isCurrentCourseError) return <div>Error: {currentCoursesError}</div>;
+  if (isLoading) return <ContentLoading />;
+  if (isError) return <div>Error: {error}</div>;
 
   return (
     <Elements stripe={stripePromise}>
