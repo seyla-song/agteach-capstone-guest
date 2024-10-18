@@ -19,21 +19,21 @@ import { SuggestedCourseProduct } from '../../components/SuggestCourseProduct';
  * @returns {React.ReactElement} The main content of the course video page.
  */
 export const CourseVideoMainContent = (data) => {
-  const { highlights, courses, products } = data;
-
+  const { videoNameUrl, highlights, courses, products, courseData } = data;
+  const { name, url } = videoNameUrl;
+  const { name: courseName, description, instructor, courseObjective } = courseData
   return (
     <Stack sx={{ flexGrow: 1 }}>
       {/* The video player is centered and stretched to the full width */}
       <Stack width="100%" alignItems="center">
         <MediaPlayer
           style={{ borderRadius: 0 }}
-          title="Sprite Fight"
-          src="https://agteach-dev-assets.s3.ap-southeast-2.amazonaws.com/courses/716/section-1186/lecture-1745.mp4"
-
+          title={name}
+          src={url}
         >
           <MediaProvider />
           <DefaultVideoLayout
-            thumbnails="https://files.vidstack.io/sprite-fight/thumbnails.vtt"
+            // thumbnails="https://files.vidstack.io/sprite-fight/thumbnails.vtt"
             icons={defaultLayoutIcons}
           />
         </MediaPlayer>
@@ -43,7 +43,7 @@ export const CourseVideoMainContent = (data) => {
           {/* The course about section is on the left side and takes up 7/12 of the width */}
           <Grid item xs={10}>
             <Stack gap={5}>
-              <CourseAboutComponent />
+              <CourseAboutComponent courseName={courseName} description={description} instructor={instructor}/>
               <Stack gap={2} direction="row">
                 {highlights.map((item) => (
                   <Stack
@@ -67,7 +67,7 @@ export const CourseVideoMainContent = (data) => {
                   </Stack>
                 ))}
               </Stack>
-              <CourseObjectiveComponent />
+              <CourseObjectiveComponent courseObjective={courseObjective}/>
               <Divider sx={{ pt:10}} />
               {/* <SuggestedCourseProduct courses={courses} products={products} /> */}
             </Stack>

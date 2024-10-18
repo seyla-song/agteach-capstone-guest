@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 /**
  * A component that renders a list of courses as an accordion.
@@ -24,12 +24,13 @@ import { useNavigate } from "react-router-dom";
  * stack of rows with the topic title and duration.
  */
 export const CourseAccordionComponent = ({ data }) => {
+  const { coursesId } = useParams();
   const navigate = useNavigate();
   const couresContent = data;
 
 
   const handleSelectLecture = (lectureId) => {
-    navigate(`/courses/716/watch/${lectureId}`);
+    navigate(`/courses/${coursesId}/watch/${lectureId}`);
   };
 
   return (
@@ -56,7 +57,9 @@ export const CourseAccordionComponent = ({ data }) => {
             <Stack px={2}>
               <AccordionDetails
                 key={lecture.title}
+                
                 sx={{
+                  cursor: "pointer",
                   bgcolor:
                     (courseIdx === 0) & (lectureIdx === 0)
                       ? "grey.500"
