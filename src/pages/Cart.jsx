@@ -40,8 +40,7 @@ export default CartPage;
 const CartContent = () => {
   const [purchased] = usePurchasedMutation();
   const [getCartItems, { isLoading }] = useGetCartItemsMutation();
-  const { data: enrolledCourses, isLoading: isLoadingEnrolled } =
-    useGetCustomerPurchasedQuery();
+  const { data } = useGetCustomerPurchasedQuery();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const [snackbar, setSnackbar] = useState({
@@ -101,6 +100,7 @@ const CartContent = () => {
       );
     }
   };
+
 
   return (
     <Container
@@ -207,7 +207,7 @@ const CartContent = () => {
           <Divider />
         </Grid>
         <Grid item xs={12}>
-          <PurchasedHistory data={purchasedHistory} />
+          <PurchasedHistory data={data?.products || []} />
         </Grid>
       </Grid>
     </Container>
