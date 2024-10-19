@@ -32,36 +32,36 @@ export const CourseAccordionComponent = ({ data }) => {
     navigate(`/courses/${coursesId}/watch/${lectureId}`);
   };
 
-// Combined function to calculate total duration and format the output
-const getTotalFormattedDuration = (lectures) => {
-  // Check if lectures is an array
-  console.log(lectures);
-  if (!Array.isArray(lectures)) {
-      return 'Lectures data is invalid';
-  }
+  // Combined function to calculate total duration and format the output
+  const getTotalFormattedDuration = (lectures) => {
+    // Check if lectures is an array
+    console.log(lectures);
+    if (!Array.isArray(lectures)) {
+      return "Lectures data is invalid";
+    }
 
-  let totalSeconds = lectures.reduce((acc, { duration }) => {
-      const { hours = 0, minutes = 0, seconds = 0 } = duration;  // Use default values if not present
-      return acc + (hours * 3600) + (minutes * 60) + seconds;
-  }, 0);
+    let totalSeconds = lectures.reduce((acc, { duration }) => {
+      const { hours = 0, minutes = 0, seconds = 0 } = duration; // Use default values if not present
+      return acc + hours * 3600 + minutes * 60 + seconds;
+    }, 0);
 
-  const hours = Math.floor(totalSeconds / 3600);
-  totalSeconds %= 3600;
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
+    const hours = Math.floor(totalSeconds / 3600);
+    totalSeconds %= 3600;
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
 
-  // Formatting the result into a readable string
-  const output = [];
-  
-  if (hours > 0) output.push(`${hours} hour${hours !== 1 ? 's' : ''}`);
-  if (minutes > 0) output.push(`${minutes} minute${minutes !== 1 ? 's' : ''}`);
-  if (seconds > 0 || output.length === 0)  // Always display seconds if no hours/minutes
-      output.push(`${seconds} second${seconds !== 1 ? 's' : ''}`);
-  
-  return output.join(', ');
-};
+    // Formatting the result into a readable string
+    const output = [];
 
+    if (hours > 0) output.push(`${hours} hour${hours !== 1 ? "s" : ""}`);
+    if (minutes > 0)
+      output.push(`${minutes} minute${minutes !== 1 ? "s" : ""}`);
+    if (seconds > 0 || output.length === 0)
+      // Always display seconds if no hours/minutes
+      output.push(`${seconds} second${seconds !== 1 ? "s" : ""}`);
 
+    return output.join(", ");
+  };
 
   return (
     <Stack>
@@ -92,7 +92,7 @@ const getTotalFormattedDuration = (lectures) => {
                 sx={{
                   cursor: "pointer",
                   bgcolor:
-                    (lecture.lectureId === parseInt(videoId))
+                    lecture.lectureId === parseInt(videoId)
                       ? "grey.500"
                       : "white",
                 }}
