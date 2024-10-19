@@ -284,9 +284,6 @@ function Navigation() {
                 </Typography>
               </Link>
             ))}
-            <Link href={teachAgtechURL} color="common.white" underline="none">
-              <Typography variant="bsr">Become an Instructor</Typography>
-            </Link>
           </Box>
 
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -323,13 +320,6 @@ function Navigation() {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                <MenuItem
-                  component={Link}
-                  href={teachAgtechURL}
-                  underline="none"
-                >
-                  <Typography variant="bsr">Become an Instructor</Typography>
-                </MenuItem>
                 {HEADER_MENU_MOBILE.map((data) => (
                   <MenuItem
                     key={data.path}
