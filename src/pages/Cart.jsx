@@ -24,6 +24,7 @@ import { CustomAlert } from '../components/CustomAlert';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Link as RouterLink } from 'react-router-dom';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+import { useIsLoginQuery } from '../services/api/authApi';
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
@@ -48,6 +49,7 @@ const CartContent = () => {
     open: false,
     severity: 'error',
   });
+  const { data: loggedIn } = useIsLoginQuery();
 
   const navigate = useNavigate();
 
@@ -101,6 +103,7 @@ const CartContent = () => {
     }
   };
 
+  console.log(loggedIn);
 
   return (
     <Container
@@ -206,9 +209,11 @@ const CartContent = () => {
         <Grid item sx={{ py: 5 }} xs={12}>
           <Divider />
         </Grid>
-        <Grid item xs={12}>
-          <PurchasedHistory data={data?.products || []} />
-        </Grid>
+        {loggedIn && loggedIn?.IsAuthenticated && (
+          <Grid item xs={12}>
+            <PurchasedHistory data={data?.products || []} />
+          </Grid>
+        )}
       </Grid>
     </Container>
   );
