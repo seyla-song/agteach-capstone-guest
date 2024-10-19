@@ -1,4 +1,4 @@
-import { FormControlLabel, Radio, Typography } from "@mui/material";
+import { FormControlLabel, Typography } from "@mui/material";
 
 /**
  * CustomFormController is a reusable component that renders a

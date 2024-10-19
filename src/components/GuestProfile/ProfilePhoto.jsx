@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-// import GuestProfileImg from "../../assets/guest-profile.jpg";
 import {
   Box,
   Button,

@@ -1,10 +1,5 @@
 import { Box, Typography } from "@mui/material";
 
-const TITLE_DATA = {
-  product: "Grow Lights - LED or fluorescent grow lights",
-  price: "$10.00",
-};
-
 const typographyStyle = { typography: { xs: "blgsm", md: "h3" } };
 
 /**
