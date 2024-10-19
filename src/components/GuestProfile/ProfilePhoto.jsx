@@ -15,8 +15,8 @@ import { CustomAlert } from "../../components/CustomAlert";
 
 function ProfilePhoto() {
   const [profileImage, setProfileImage] = useState();
-  const { data, refetch } = useGetUserInfoQuery();
-  const [updateInfo, { isLoading, isError, isSuccess, error }] = useUpdateInfoMutation();
+  const { data} = useGetUserInfoQuery();
+  const [updateInfo, { isLoading}] = useUpdateInfoMutation();
 
   // Alert state
   const [alertOpen, setAlertOpen] = useState(false);
