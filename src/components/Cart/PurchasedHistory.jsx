@@ -32,7 +32,7 @@ export const PurchasedHistory = ({ data }) => {
     <Stack gap={3} pb={10}>
       <Stack>
         <Typography variant="h3">Purchased History</Typography>
-        {data < 1 ? (
+        {data.length < 1 ? (
           <ItemsLoading title="purchased" />
         ) : (
           <Typography variant="bxsmd" color="dark.300">

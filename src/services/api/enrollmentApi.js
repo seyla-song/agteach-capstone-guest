@@ -23,12 +23,15 @@ export const enrollmentApi = createApi({
     }),
     getCustomerEnrollments: builder.query({
       query: () => ({
-        url: '/api/enrollment/getCustomerEnrollments',
+        url: '/api/enrollment/getCustomerEnrollment',
         method: 'GET',
       }),
-    })
+    }),
   }),
 });
 
-export const { useEnrollmentMutation, useGetUserEnrollmentsQuery } =
-  enrollmentApi;
+export const {
+  useEnrollmentMutation,
+  useGetUserEnrollmentsQuery,
+  useGetCustomerEnrollmentsQuery,
+} = enrollmentApi;
