@@ -16,7 +16,6 @@ import {
   WishlistPage,
   AgAiPage,
   RootLayout,
-  PaymentPage,
   ForgotPasswordPage,
   ResetPasswordPage,
   ErrorPage,
@@ -87,5 +86,4 @@ export const router = createBrowserRouter([
       { path: 'reset-password/:resetToken', element: <ResetPasswordPage /> },
     ],
   },
-  { path: 'payment', element: <PaymentPage /> },
 ]);

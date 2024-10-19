@@ -24,7 +24,6 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import { LogoutOutlined } from '@mui/icons-material';
 import GuestProfilePicture from '../assets/profile-pic.jpg';
 import Logo from '../assets/agteach_logo.svg';
-import { teachAgtechURL } from '../utils/globalURL';
 import { useLogoutMutation } from '../services/api/authApi';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -284,9 +283,6 @@ function Navigation() {
                 </Typography>
               </Link>
             ))}
-            <Link href={teachAgtechURL} color="common.white" underline="none">
-              <Typography variant="bsr">Become an Instructor</Typography>
-            </Link>
           </Box>
 
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -323,13 +319,6 @@ function Navigation() {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                <MenuItem
-                  component={Link}
-                  href={teachAgtechURL}
-                  underline="none"
-                >
-                  <Typography variant="bsr">Become an Instructor</Typography>
-                </MenuItem>
                 {HEADER_MENU_MOBILE.map((data) => (
                   <MenuItem
                     key={data.path}
