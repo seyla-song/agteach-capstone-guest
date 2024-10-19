@@ -27,12 +27,11 @@ import { ItemsLoading } from '../ItemsLoading';
  *     - totalPrice: The total price of the purchased history.
  */
 export const PurchasedHistory = ({ data }) => {
-  console.log(data);
   return (
     <Stack gap={3} pb={10}>
       <Stack>
         <Typography variant="h3">Purchased History</Typography>
-        {data.length < 1 ? (
+        {data?.length < 1 ? (
           <ItemsLoading title="purchased" />
         ) : (
           <Typography variant="bxsmd" color="dark.300">
