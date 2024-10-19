@@ -61,7 +61,7 @@ export default function MarketPlace() {
   }, [productData, query]);
 
   useEffect(() => {
-    console.clear();
+
     let dataToFilter = [...rawData] || [];
     // filter by categories
     if (category === 'plant')

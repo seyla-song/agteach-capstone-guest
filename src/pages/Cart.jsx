@@ -87,7 +87,6 @@ const CartContent = () => {
     try {
       const res = await getCartItems(cart.items).unwrap();
       if (res.status === 'success') {
-        console.log(res.items);
         return res; // Return the entire response
       }
     } catch (err) {
@@ -103,7 +102,6 @@ const CartContent = () => {
     }
   };
 
-  console.log(loggedIn);
 
   return (
     <Container

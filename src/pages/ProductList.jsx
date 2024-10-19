@@ -52,8 +52,6 @@ export const ProductList = () => {
     dispatch(removeItemFromCart({ productId }));
   };
 
-  console.log(cart);
-
   return (
     <Container>
       <Stack gap={2}>

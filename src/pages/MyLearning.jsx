@@ -10,8 +10,6 @@ import { useGetCustomerEnrollmentsQuery } from '../services/api/enrollmentApi';
 export default function MyLearning() {
   const { data: courses } = useGetCustomerEnrollmentsQuery();
 
-  console.log(courses);
-
   return (
     <Container
       maxWidth={false}
