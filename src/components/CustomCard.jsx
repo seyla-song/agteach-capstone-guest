@@ -74,7 +74,7 @@ const CourseCard = ({ dataObj, showDelete, onDelete }) => {
       <Box
         width="100%"
         component="img"
-        src={dataObj.thumbnailUrl}
+        src={dataObj.thumbnail_url}
         alt={dataObj.name}
       />
       <Box
