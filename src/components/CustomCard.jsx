@@ -74,7 +74,7 @@ const CourseCard = ({ dataObj, showDelete, onDelete }) => {
       <Box
         width="100%"
         component="img"
-        src={dataObj.thumbnailUrl}
+        src={dataObj.thumbnail_url || dataObj.thumbnailUrl}
         alt={dataObj.name}
       />
       <Box
@@ -88,7 +88,7 @@ const CourseCard = ({ dataObj, showDelete, onDelete }) => {
           {dataObj.price ? (
             <Typography variant="bsr">${dataObj.price}</Typography>
           ) : (
-            <Typography variant="bsr">{dataObj.instructor}</Typography>
+            <Typography variant="bsr">{dataObj.first_name} {dataObj.last_name}</Typography>
           )}
         </Stack>
         <Box>

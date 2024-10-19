@@ -18,7 +18,6 @@ export default function InstructorProfile() {
   const instructorData = !isLoading ? data : "";
   //
 
-  !isLoading ? console.log(instructorData) : console.log("Loading...");
 
   if (isLoading) {
     return (

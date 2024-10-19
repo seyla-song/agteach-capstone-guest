@@ -53,7 +53,6 @@ function SearchResultPage() {
     if (category === 'course') {
       if (courseData) {
         setRawData(courseData.data || []);
-        console.log(courseData);
       };
     } else if (category === 'product') {
       if (productData) {
