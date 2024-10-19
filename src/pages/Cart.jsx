@@ -13,7 +13,10 @@ import { CustomCartItem } from '../components/Cart/CustomCartItem';
 import { PurchasedHistory } from '../components/Cart/PurchasedHistory';
 import { Elements, useStripe } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { usePurchasedMutation } from '../services/api/purchasedApi';
+import {
+  useGetCustomerPurchasedQuery,
+  usePurchasedMutation,
+} from '../services/api/purchasedApi';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetCartItemsMutation } from '../services/api/cartApi';
@@ -21,6 +24,7 @@ import { CustomAlert } from '../components/CustomAlert';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Link as RouterLink } from 'react-router-dom';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+import { useIsLoginQuery } from '../services/api/authApi';
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
@@ -37,6 +41,7 @@ export default CartPage;
 const CartContent = () => {
   const [purchased] = usePurchasedMutation();
   const [getCartItems, { isLoading }] = useGetCartItemsMutation();
+  const { data } = useGetCustomerPurchasedQuery();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const [snackbar, setSnackbar] = useState({
@@ -44,6 +49,7 @@ const CartContent = () => {
     open: false,
     severity: 'error',
   });
+  const { data: loggedIn } = useIsLoginQuery();
 
   const navigate = useNavigate();
 
@@ -81,7 +87,6 @@ const CartContent = () => {
     try {
       const res = await getCartItems(cart.items).unwrap();
       if (res.status === 'success') {
-        console.log(res.items);
         return res; // Return the entire response
       }
     } catch (err) {
@@ -96,6 +101,7 @@ const CartContent = () => {
       );
     }
   };
+
 
   return (
     <Container
@@ -118,7 +124,7 @@ const CartContent = () => {
       <Grid container>
         <Grid item md={totalItemQuantity < 1 ? 12 : 8} pr={3} pb={5} xs={12}>
           <Typography variant="h4">Your Shopping Cart</Typography>
-          <Typography color='dark.400'>
+          <Typography color="dark.400">
             {totalItemQuantity > 0
               ? `Found (${totalItemQuantity}) ${
                   totalItemQuantity === 1 ? 'item' : 'items'
@@ -201,61 +207,12 @@ const CartContent = () => {
         <Grid item sx={{ py: 5 }} xs={12}>
           <Divider />
         </Grid>
-        <Grid item xs={12}>
-          <PurchasedHistory data={purchasedHistory} />
-        </Grid>
+        {loggedIn && loggedIn?.IsAuthenticated && (
+          <Grid item xs={12}>
+            <PurchasedHistory data={data?.products || []} />
+          </Grid>
+        )}
       </Grid>
     </Container>
   );
 };
-
-const purchasedHistory = [
-  {
-    orderId: 'ORD12345',
-    date: 'Aug 12, 2022',
-    items: [
-      { name: 'Product 1', qty: 2, price: 10, total: 20 },
-      { name: 'Product 2', qty: 3, price: 15, total: 45 },
-      { name: 'Product 3', qty: 1, price: 20, total: 20 },
-    ],
-    totalPrice: 85,
-  },
-  {
-    orderId: 'ORD67890',
-    date: 'Aug 15, 2022',
-    items: [
-      { name: 'Product 4', qty: 2, price: 12, total: 24 },
-      { name: 'Product 5', qty: 1, price: 25, total: 25 },
-    ],
-    totalPrice: 49,
-  },
-  {
-    orderId: 'ORD34567',
-    date: 'Aug 18, 2022',
-    items: [
-      { name: 'Product 6', qty: 3, price: 18, total: 54 },
-      { name: 'Product 7', qty: 2, price: 22, total: 44 },
-      { name: 'Product 8', qty: 1, price: 30, total: 30 },
-    ],
-    totalPrice: 128,
-  },
-  {
-    orderId: 'ORD67891',
-    date: 'Aug 15, 2022',
-    items: [
-      { name: 'Product 4', qty: 2, price: 12, total: 24 },
-      { name: 'Product 5', qty: 1, price: 25, total: 25 },
-    ],
-    totalPrice: 49,
-  },
-  {
-    orderId: 'ORD34568',
-    date: 'Aug 18, 2022',
-    items: [
-      { name: 'Product 6', qty: 3, price: 18, total: 54 },
-      { name: 'Product 7', qty: 2, price: 22, total: 44 },
-      { name: 'Product 8', qty: 1, price: 30, total: 30 },
-    ],
-    totalPrice: 128,
-  },
-];

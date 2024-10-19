@@ -1,6 +1,7 @@
 import { Button, Grid, Stack, Typography, Link } from '@mui/material';
 import CustomCard from '../CustomCard';
 import { Link as RouterLink } from 'react-router-dom';
+import { ItemsLoading } from '../ItemsLoading';
 
 /**
  * CourseList component renders a list of courses that the user has
@@ -20,26 +21,34 @@ export default function CourseList({ data }) {
     <Stack gap={3}>
       <Stack gap>
         <Typography variant="h3">My Learning</Typography>
-        <Typography variant="bsr">Found ({data.length}) Courses</Typography>
+        {data.length < 1 ? (
+          <ItemsLoading title="course" />
+        ) : (
+          <Typography variant="bsr">Found ({data.length}) Courses</Typography>
+        )}
       </Stack>
 
-      <Grid container spacing>
-        {data.map((item, idx) => (
-          <Grid item key={idx} xs={6} md={2}>
-            <Link
-              component={RouterLink}
-              to={`/courses/${item.id}`}
-              underline="none"
-            >
-              <CustomCard dataObj={item} />
-            </Link>
-          </Grid>
-        ))}
-      </Grid>
+      {data && (
+        <Grid container spacing>
+          {data?.map((item, idx) => (
+            <Grid item key={idx} xs={6} md={2}>
+              <Link
+                component={RouterLink}
+                to={`/courses/${item.course_id}/watch/overview`}
+                underline="none"
+              >
+                <CustomCard dataObj={item} />
+              </Link>
+            </Grid>
+          ))}
+        </Grid>
+      )}
 
-      <Button variant="outlined" sx={{ px: 4, py: 2 }}>
-        View (5) more
-      </Button>
+      {data.length > 10 && (
+        <Button variant="outlined" sx={{ px: 4, py: 2 }}>
+          View (5) more
+        </Button>
+      )}
     </Stack>
   );
-};
+}

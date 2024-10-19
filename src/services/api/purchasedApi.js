@@ -16,7 +16,14 @@ export const purchasedApi = createApi({
         body: purchasedData,
       }),
     }),
+    getCustomerPurchased: builder.query({
+      query: () => ({
+        url: '/api/purchased/getCustomerPurchased',
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const { usePurchasedMutation } = purchasedApi;
+export const { usePurchasedMutation, useGetCustomerPurchasedQuery } =
+  purchasedApi;
