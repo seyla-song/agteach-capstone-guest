@@ -1,6 +1,5 @@
-import { Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
 import CourseList from '../components/MyLearning/CourseList';
-import { courses } from '../utils/carouselDummy';
 import { useGetCustomerEnrollmentsQuery } from '../services/api/enrollmentApi';
 
 /**
