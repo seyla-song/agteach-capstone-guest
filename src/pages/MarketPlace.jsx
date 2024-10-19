@@ -5,15 +5,14 @@ import {
   Grid,
   Typography,
   Box,
-} from "@mui/material";
-import { useState, useEffect } from "react";
-import Category from "../components/MaketPlace/Category";
-import SortBy from "../components/MaketPlace/SortBy";
-import FilterBy from "../components/MaketPlace/FilterBy";
-import SearchBar from "../components/SearchBarComponent";
-import SearchList from "../components/MaketPlace/SearchList";
-import { useLocation } from "react-router";
-import { useSearchProductQuery } from '../services/api/productApi'
+} from '@mui/material';
+import { useState, useEffect } from 'react';
+import Category from '../components/MaketPlace/Category';
+import SortBy from '../components/MaketPlace/SortBy';
+import SearchBar from '../components/SearchBarComponent';
+import SearchList from '../components/MaketPlace/SearchList';
+import { useLocation } from 'react-router';
+import { useSearchProductQuery } from '../services/api/productApi';
 
 /**
  * A React functional component that renders a marketplace page.
@@ -28,7 +27,12 @@ export default function MarketPlace() {
   const currentLocation = useLocation().search;
   const queryParams = new URLSearchParams(currentLocation);
   const query = queryParams.get('name') || '';
-  const { data: productData, isLoading: isProductLoading, isError: isProductError, error: productError } = useSearchProductQuery(query);
+  const {
+    data: productData,
+    isLoading: isProductLoading,
+    isError: isProductError,
+    error: productError,
+  } = useSearchProductQuery(query);
 
   const [category, setCategory] = useState('plant');
   const [sortBy, setSortBy] = useState('newest');
@@ -52,18 +56,22 @@ export default function MarketPlace() {
   useEffect(() => {
     if (productData) {
       setRawData(productData.data);
-    };
+    }
   }, [productData, query]);
 
   useEffect(() => {
-    console.clear()
+    console.clear();
     let dataToFilter = [...rawData] || [];
     // filter by categories
-    if (category === 'plant') dataToFilter = dataToFilter.filter((product) => product.categoryId === 1);
-    else if (category === 'fertilizer') dataToFilter = dataToFilter.filter((product) => product.categoryId === 2);
-    else if (category === 'seed') dataToFilter = dataToFilter.filter((product) => product.categoryId === 3);
-    else if (category === 'tool') dataToFilter = dataToFilter.filter((product) => product.categoryId === 4);
-      
+    if (category === 'plant')
+      dataToFilter = dataToFilter.filter((product) => product.categoryId === 1);
+    else if (category === 'fertilizer')
+      dataToFilter = dataToFilter.filter((product) => product.categoryId === 2);
+    else if (category === 'seed')
+      dataToFilter = dataToFilter.filter((product) => product.categoryId === 3);
+    else if (category === 'tool')
+      dataToFilter = dataToFilter.filter((product) => product.categoryId === 4);
+
     // Sort by both date and price
     dataToFilter.sort((a, b) => {
       if (sortBy === 'newest') {
@@ -88,30 +96,75 @@ export default function MarketPlace() {
         return priceB - priceA; // Sort by lowest price
       }
 
-      return 0; 
+      return 0;
     });
 
-    setFilteredData(dataToFilter)
+    setFilteredData(dataToFilter);
   }, [rawData, category, sortBy, filterByPrice, limit]);
 
   let content;
 
-  if (isProductLoading) { 
-    content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Loading...</div>
-  }
-  else if (productData.results === 0) content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>No results were found!</div>
-  else if (isProductError) content = <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Something went wrong. please try again later!</div>
-  else if (productData) content = <SearchList dataObj={filteredData} cardVariant={'product'} limit={limit} handleLimitChange={handleLimitChange}/>  
-  
+  if (isProductLoading) {
+    content = (
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        Loading...
+      </div>
+    );
+  } else if (productData.results === 0)
+    content = (
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        No results were found!
+      </div>
+    );
+  else if (isProductError)
+    content = (
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        Something went wrong. please try again later!
+      </div>
+    );
+  else if (productData)
+    content = (
+      <SearchList
+        dataObj={filteredData}
+        cardVariant={'product'}
+        limit={limit}
+        handleLimitChange={handleLimitChange}
+      />
+    );
+
   return (
     <>
       <Container
         maxWidth={false}
         sx={{
-          maxWidth: "1420px",
+          maxWidth: '1420px',
           margin: {
-            xs: "30px auto 50px auto",
-            md: "50px auto 100px auto",
+            xs: '30px auto 50px auto',
+            md: '50px auto 100px auto',
           },
         }}
       >
@@ -122,36 +175,45 @@ export default function MarketPlace() {
             sm={3}
             sx={{
               borderRight: { xs: 0, sm: `1px solid lightgrey` },
-              pr: { xs: 0, sm: "10px" },
+              pr: { xs: 0, sm: '10px' },
             }}
           >
             <Stack
-              direction={{ xs: "row", sm: "column" }}
+              direction={{ xs: 'row', sm: 'column' }}
               gap={{ xs: 1, sm: 4 }}
               sx={{
-                "& > *": {
-                  borderRight: { xs: "1px solid lightgrey", sm: "none" }, // Add right border to each item
+                '& > *': {
+                  borderRight: { xs: '1px solid lightgrey', sm: 'none' }, // Add right border to each item
                 },
-                "& > *:last-child": {
-                  borderRight: "none", // Remove border from the last item
+                '& > *:last-child': {
+                  borderRight: 'none', // Remove border from the last item
                 },
               }}
             >
-              <Category category={category} handleChange={handleCategoryChange}/>
-              <Divider sx={{ display: { xs: "none", sm: "block" } }} />
-              <SortBy sortBy={sortBy} handleChange={handleSortByChange}/>
+              <Category
+                category={category}
+                handleChange={handleCategoryChange}
+              />
+              <Divider sx={{ display: { xs: 'none', sm: 'block' } }} />
+              <SortBy sortBy={sortBy} handleChange={handleSortByChange} />
             </Stack>
           </Grid>
           <Grid
             item
             xs={12}
             sm={9}
-            sx={{ width: "100%", mt: { xs: "20px", sm: "0px" } }}
+            sx={{ width: '100%', mt: { xs: '20px', sm: '0px' } }}
           >
-            <Box sx={{ p: "0px 12px 12px 12px" }}>
-              <SearchBar backDrop={false} searchContext={'marketplace'} defaultSearchString={query}/>
+            <Box sx={{ p: '0px 12px 12px 12px' }}>
+              <SearchBar
+                backDrop={false}
+                searchContext={'marketplace'}
+                defaultSearchString={query}
+              />
             </Box>
-            <Typography sx={{ px: 2 }}>{`Found (${filteredData.length}) items`}</Typography>
+            <Typography
+              sx={{ px: 2 }}
+            >{`Found (${filteredData.length}) items`}</Typography>
             {content}
           </Grid>
         </Grid>
