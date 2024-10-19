@@ -13,6 +13,7 @@ import SearchBar from '../components/SearchBarComponent';
 import SearchList from '../components/MaketPlace/SearchList';
 import { useLocation } from 'react-router';
 import { useSearchProductQuery } from '../services/api/productApi';
+import { ItemsLoading } from '../components/ItemsLoading';
 
 /**
  * A React functional component that renders a marketplace page.
@@ -211,9 +212,11 @@ export default function MarketPlace() {
                 defaultSearchString={query}
               />
             </Box>
-            <Typography
-              sx={{ px: 2 }}
-            >{`Found (${filteredData.length}) items`}</Typography>
+            {filteredData.length < 1 ? (
+              <ItemsLoading title={'marketplace'} />
+            ) : (
+              <Typography>{`Found (${filteredData.length}) items`}</Typography>
+            )}
             {content}
           </Grid>
         </Grid>
