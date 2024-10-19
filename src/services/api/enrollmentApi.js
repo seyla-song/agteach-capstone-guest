@@ -23,15 +23,15 @@ export const enrollmentApi = createApi({
     }),
     checkEnrollment: builder.query({
       query: (courseId) => ({
-      url: "/api/enrollment/checkEnrollment",
+        url: "/api/enrollment/checkEnrollment",
         method: "GET",
         body: courseId,
       }),
     }),
     getCustomerEnrollments: builder.query({
       query: () => ({
-        url: '/api/enrollment/getCustomerEnrollments',
-        method: 'GET',
+        url: "/api/enrollment/getCustomerEnrollments",
+        method: "GET",
       }),
     }),
   }),

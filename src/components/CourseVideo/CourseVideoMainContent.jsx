@@ -3,8 +3,8 @@ import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
 import { MediaPlayer, MediaProvider } from "@vidstack/react";
 import TimerIcon from "@mui/icons-material/TimerOutlined";
-import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
-import MovieCreationOutlinedIcon from '@mui/icons-material/MovieCreationOutlined';
+import LibraryBooksOutlinedIcon from "@mui/icons-material/LibraryBooksOutlined";
+import MovieCreationOutlinedIcon from "@mui/icons-material/MovieCreationOutlined";
 import {
   defaultLayoutIcons,
   DefaultVideoLayout,
@@ -31,6 +31,7 @@ export const CourseVideoMainContent = (data) => {
     courseData,
     productSuggestions,
   } = data;
+  console.log('productSuggestions',productSuggestions)
   const { name, url } = videoNameUrl;
   const {
     name: courseName,
@@ -41,26 +42,23 @@ export const CourseVideoMainContent = (data) => {
   console.log("course", Object.keys(courseData.duration));
   console.log("course", courseData);
 
-const highlights = [
-  {
-    title: "Sections",
-    icons: <LibraryBooksOutlinedIcon fontSize="small" />,
-    value: courseData.sections.length,
-  },
-  {
-    title: "",
-    icons: <TimerIcon fontSize="small" />,
-    value: displayDuration(courseData.duration),
-  },
-  {
-    title: "Vidoes",
-    icons: <MovieCreationOutlinedIcon fontSize="small" />,
-    value: courseData.numberOfVideo,
-  },
-];
-
-
-
+  const highlights = [
+    {
+      title: "Sections",
+      icons: <LibraryBooksOutlinedIcon fontSize="small" />,
+      value: courseData.sections.length,
+    },
+    {
+      title: "",
+      icons: <TimerIcon fontSize="small" />,
+      value: displayDuration(courseData.duration),
+    },
+    {
+      title: "Vidoes",
+      icons: <MovieCreationOutlinedIcon fontSize="small" />,
+      value: courseData.numberOfVideo,
+    },
+  ];
 
   return (
     <Stack sx={{ flexGrow: 1 }}>
@@ -85,7 +83,6 @@ const highlights = [
                 instructor={instructor}
               />
               <Stack gap={2} direction="row">
-
                 {highlights.map((item) => (
                   <Stack
                     sx={{
@@ -102,7 +99,7 @@ const highlights = [
                     gap
                   >
                     {item.icons}
-                    <Typography variant="bsr">                      
+                    <Typography variant="bsr">
                       {item.value} {item.title}
                     </Typography>
                   </Stack>
@@ -110,11 +107,15 @@ const highlights = [
               </Stack>
               <CourseObjectiveComponent courseObjective={courseObjective} />
               <Divider sx={{ pt: 10 }} />
-              <SuggestedCourseProduct
-                productSuggestions={productSuggestions}
-                courses={courses}
-                products={products}
-              />
+              {/* {productSuggestions.length === 0 ? (
+                <Typography variant="h4">No products found</Typography>
+              ) : (
+                <SuggestedCourseProduct
+                  productSuggestions={productSuggestions}
+                  courses={courses}
+                  products={products}
+                />
+              )} */}
             </Stack>
           </Grid>
         </Grid>

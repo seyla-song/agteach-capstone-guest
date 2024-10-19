@@ -41,6 +41,7 @@ function CourseVideoPage() {
     ? courses.data.product_suggestions
     : [];
 
+    console.log('productSuggestions',productSuggestions)
   // Function to get video URL by lectureId
   function getVideoNameUrlByLectureId(sections, lectureId) {
     for (const section of sections) {
