@@ -1,19 +1,13 @@
 import {
   Container,
   Link,
-  Box,
   Typography,
-  Toolbar,
-  AppBar,
   Button,
   Stack,
-  Divider,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import Logo from '../assets/agteach_logo.svg';
-import theme from '../theme/theme';
 import { teachAgtechURL } from '../utils/globalURL';
-import { m } from 'framer-motion';
 
 const FOOTER_MENU = [
   { page: 'My Learning', path: '/mylearning' },
