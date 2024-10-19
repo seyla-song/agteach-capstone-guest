@@ -34,7 +34,7 @@ export default function CourseList({ data }) {
             <Grid item key={idx} xs={6} md={2}>
               <Link
                 component={RouterLink}
-                to={`/courses/${item.id}/watch/overview`}
+                to={`/courses/${item.course_id}/watch/overview`}
                 underline="none"
               >
                 <CustomCard dataObj={item} />
