@@ -34,7 +34,7 @@ export default function CourseList({ data }) {
             <Grid item key={idx} xs={6} md={2}>
               <Link
                 component={RouterLink}
-                to={`/courses/${item.id}`}
+                to={`/courses/${item.id}/watch/overview`}
                 underline="none"
               >
                 <CustomCard dataObj={item} />
@@ -44,9 +44,11 @@ export default function CourseList({ data }) {
         </Grid>
       )}
 
-      <Button variant="outlined" sx={{ px: 4, py: 2 }}>
-        View (5) more
-      </Button>
+      {data.length > 10 && (
+        <Button variant="outlined" sx={{ px: 4, py: 2 }}>
+          View (5) more
+        </Button>
+      )}
     </Stack>
   );
 }
