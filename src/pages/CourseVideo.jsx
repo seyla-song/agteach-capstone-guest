@@ -6,7 +6,7 @@ import {
   CourseVideoSidebar,
 } from "../components/CourseVideo/index";
 import Footer from "../components/Footer";
-import { useGetOneCourseQuery } from "../services/api/courseApi";
+import { useGetEnrollmentCourseQuery, useGetOneCourseQuery } from "../services/api/courseApi";
 import { useNavigate, useParams } from "react-router-dom";
 
 /**
@@ -20,10 +20,14 @@ import { useNavigate, useParams } from "react-router-dom";
 function CourseVideoPage() {
   const { coursesId, videoId } = useParams();
 
-  const { data: courses, isLoading: isCoursesLoading } =
-    useGetOneCourseQuery(coursesId);
+  const { data: courses, isLoading: isCoursesLoading, isError, error } =
+    useGetEnrollmentCourseQuery(coursesId);
 
   const navigate = useNavigate();
+  if(isError){
+    console.log(error)
+    return navigate(`/courses/${coursesId}`);
+  }
   if (isCoursesLoading) {
     return (
       <>
