@@ -24,7 +24,6 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import { LogoutOutlined } from '@mui/icons-material';
 import GuestProfilePicture from '../assets/profile-pic.jpg';
 import Logo from '../assets/agteach_logo.svg';
-import { teachAgtechURL } from '../utils/globalURL';
 import { useLogoutMutation } from '../services/api/authApi';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
