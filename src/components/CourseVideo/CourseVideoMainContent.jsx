@@ -31,7 +31,7 @@ export const CourseVideoMainContent = (data) => {
     courseData,
     productSuggestions,
   } = data;
-  console.log('productSuggestions',productSuggestions)
+  console.log("productSuggestions", productSuggestions);
   const { name, url } = videoNameUrl;
   const {
     name: courseName,
@@ -107,15 +107,12 @@ export const CourseVideoMainContent = (data) => {
               </Stack>
               <CourseObjectiveComponent courseObjective={courseObjective} />
               <Divider sx={{ pt: 10 }} />
-              {/* {productSuggestions.length === 0 ? (
-                <Typography variant="h4">No products found</Typography>
-              ) : (
-                <SuggestedCourseProduct
-                  productSuggestions={productSuggestions}
-                  courses={courses}
-                  products={products}
-                />
-              )} */}
+
+              <SuggestedCourseProduct
+                productSuggestions={productSuggestions}
+                courses={courses}
+                products={products}
+              />
             </Stack>
           </Grid>
         </Grid>

@@ -6,7 +6,11 @@ import {
   CourseVideoSidebar,
 } from "../components/CourseVideo/index";
 import Footer from "../components/Footer";
-import { useGetEnrollmentCourseQuery, useGetOneCourseQuery } from "../services/api/courseApi";
+import {
+  useGetEnrollmentCourseQuery,
+  useGetOneCourseQuery,
+  useGetRecommendedCoursesQuery,
+} from "../services/api/courseApi";
 import { useNavigate, useParams } from "react-router-dom";
 
 /**
@@ -20,12 +24,17 @@ import { useNavigate, useParams } from "react-router-dom";
 function CourseVideoPage() {
   const { coursesId, videoId } = useParams();
 
-  const { data: courses, isLoading: isCoursesLoading, isError, error } =
-    useGetEnrollmentCourseQuery(coursesId);
-
+  const {
+    data: courses,
+    isLoading: isCoursesLoading,
+    isError,
+    error,
+  } = useGetEnrollmentCourseQuery(coursesId);
+  const { data: recommendedCoursesData, isLoading: isRecommendedLoading } =
+    useGetRecommendedCoursesQuery(coursesId);
   const navigate = useNavigate();
-  if(isError){
-    console.log(error)
+  if (isError) {
+    console.log(error);
     return navigate(`/courses/${coursesId}`);
   }
   if (isCoursesLoading) {
@@ -40,8 +49,12 @@ function CourseVideoPage() {
   const productSuggestions = !isCoursesLoading
     ? courses.data.product_suggestions
     : [];
-
-    console.log('productSuggestions',productSuggestions)
+  const recommendedCourses = !isRecommendedLoading
+    ? recommendedCoursesData.data
+    : [];
+    
+  console.log("productSuggestions", productSuggestions);
+  console.log("recommendedCourses", recommendedCourses);
   // Function to get video URL by lectureId
   function getVideoNameUrlByLectureId(sections, lectureId) {
     for (const section of sections) {
@@ -66,7 +79,6 @@ function CourseVideoPage() {
     return navigate("/error");
   }
 
-
   return (
     <Stack>
       {/* The course video header */}
@@ -79,9 +91,9 @@ function CourseVideoPage() {
             courseData={courseData}
             videoNameUrl={videoNameUrl}
             highlights={highlights}
-            courses={courses}
-            products={products}
-            productSuggestions={productSuggestions}
+            courses={recommendedCourses}
+            products={productSuggestions}
+            // productSuggestions={productSuggestions}
           />
           <Footer />
         </Grid>
@@ -113,7 +125,6 @@ const highlights = [
     value: 20,
   },
 ];
-
 
 const products = [
   {

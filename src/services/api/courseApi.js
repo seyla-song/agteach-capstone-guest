@@ -36,6 +36,7 @@ export const courseApi = createApi({
       query: (courseId) => ({
         url: `/api/course/getEnrollmentCourse/${courseId}`,
         method: "GET",
+        credentials: "include",
       }),
     }),
   }),
