@@ -1,20 +1,18 @@
 import {
   Container,
   Link,
-  Box,
   Typography,
-  Toolbar,
-  AppBar,
-} from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
-import Logo from "../assets/agteach_logo.svg";
-import theme from "../theme/theme";
-import { teachAgtechURL } from "../utils/globalURL";
+  Button,
+  Stack,
+} from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import Logo from '../assets/agteach_logo.svg';
+import { teachAgtechURL } from '../utils/globalURL';
 
 const FOOTER_MENU = [
-  { page: "My Learning", path: "/mylearning" },
-  { page: "Marketplace", path: "/marketplace" },
-  { page: "AgAI", path: "/agai" },
+  { page: 'My Learning', path: '/mylearning' },
+  { page: 'Marketplace', path: '/marketplace' },
+  { page: 'AgAI', path: '/agai' },
 ];
 
 /**
@@ -26,62 +24,63 @@ const FOOTER_MENU = [
 
 export default function Footer() {
   return (
-    <AppBar
-      position="static"
-      sx={{
-        height: "330px",
-        display: "flex",
-        justifyContent: "center",
-        padding: 0,
-      }}
-    >
-      <Container maxWidth={false}>
-        <Toolbar
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "50px",
-            padding: 0,
+    <Stack backgroundColor="primary.dark" color="white">
+      <Container sx={{ py: 5 }}>
+        <Stack
+          direction={{
+            sx: 'column',
+            md: 'row',
           }}
+          pb={5}
+          justifyContent="space-between"
+          alignItems={'center'}
+          gap={3}
         >
-          <Box sx={{ display: "flex" }}>
+          <Stack textAlign={{ xs: 'center', md: 'left' }} maxWidth={250}>
             <Link component={RouterLink} to="/">
               <img width="94px" height="45px" src={Logo} alt="AgTeach Logo" />
             </Link>
-          </Box>
-          <Container maxWidth="sm" sx={{ padding: 0 }}>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              {FOOTER_MENU.map((data) => (
-                <Link component={RouterLink} to={data.path} key={data.page}>
-                  <Typography
-                    sx={{
-                      fontSize: {
-                        xs: theme.typography.bxsr.fontSize,
-                        sm: theme.typography.bsr.fontSize,
-                        md: theme.typography.bmdr.fontSize,
-                      },
-                    }}
-                    color="common.white"
-                  >
-                    {data.page}
-                  </Typography>
-                </Link>
-              ))}
-              <Link
-                href={teachAgtechURL}
-                color="common.white"
-                underline="none"
-              >
-                <Typography variant="bsr">Become an Instructor</Typography>
+            <Typography variant="bxsr">
+              8th Floor, OCIC Blvd, Sangkat Chroy Changvar, Khan Chroy Changvar,
+              Phnom Penh, Cambodia
+            </Typography>
+          </Stack>
+          <Stack
+            direction={{ xs: 'row'}}
+            textAlign="center"
+            gap={2}
+          >
+            {FOOTER_MENU.map((data) => (
+              <Link component={RouterLink} to={data.path} key={data.page}>
+                <Typography variant="bxsr" color="common.white">
+                  {data.page}
+                </Typography>
               </Link>
-            </Box>
-          </Container>
-          <Typography variant="btr" sx={{ textAlign: "center" }}>
+            ))}
+          </Stack>
+
+          <Stack
+            maxWidth={250}
+            gap={2}
+            textAlign={{ xs: 'center', md: 'left' }}
+          >
+            <Typography variant="blgsm">
+              Ready to share your passion ? Join with us.
+            </Typography>
+            <Link href={teachAgtechURL} color="common.white" underline="none">
+              <Button variant="contained" color="secondary">
+                Becom an Instructor
+              </Button>
+            </Link>
+          </Stack>
+        </Stack>
+        <Stack textAlign="center" width="100%">
+          <Typography variant="btr">
             © All right reserved AgTeach - 2024 | Terms and Service | Privacy
             Policy
           </Typography>
-        </Toolbar>
+        </Stack>
       </Container>
-    </AppBar>
+    </Stack>
   );
 }

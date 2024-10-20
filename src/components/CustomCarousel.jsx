@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Box, Button, Stack } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { motion } from "framer-motion";

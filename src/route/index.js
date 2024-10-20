@@ -14,7 +14,6 @@ import WishlistPage from '../pages/Wishlist';
 import AgAiPage from '../pages/AgAI';
 import RootLayout from '../route/Root';
 import ProductRootLayout from '../route/ProductRoot';
-import PaymentPage from '../pages/Payment';
 import ForgotPasswordPage from '../pages/ForgotPassword';
 import ResetPasswordPage from '../pages/ResetPassword';
 import SignupPage from '../pages/Signup';
@@ -42,7 +41,6 @@ export {
   AgAiPage,
   RootLayout,
   ProductRootLayout,
-  PaymentPage,
   ForgotPasswordPage,
   ResetPasswordPage,
   ErrorPage,
