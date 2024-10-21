@@ -1,4 +1,4 @@
-import { Stack, Grid, Typography, Divider } from "@mui/material";
+import { Stack, Grid, Typography } from "@mui/material";
 import TimerIcon from "@mui/icons-material/TimerOutlined";
 import {
   CourseVideoHeaderComponent,
