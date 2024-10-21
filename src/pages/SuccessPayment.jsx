@@ -15,6 +15,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ReceiptElement from '../assets/receipt-element.svg';
 import AgteachBg from '../assets/agteach-bg.svg';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+import { useGetPaymentSessionMutation } from '../services/api/paymentApi';
 
 const data = {
   session: {
@@ -64,18 +65,24 @@ const data = {
 export default function SuccessPayment() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const urlParams = new URLSearchParams(window.location.search);
+  const sessionId = urlParams.get('session_id');
+
+  const { data, error, isLoading } = useGetPaymentSessionMutation(sessionId);
+
+  if (isLoading) return <p>Loading payment details...</p>;
+  if (error) return <p>Error loading payment details.</p>;
+
+  console.log(data);
 
   // Fetch session data using session ID
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const sessionId = urlParams.get('session_id');
-
-    if (sessionId) {
-      dispatch(clearCart());
-      return;
-    }
+  if (sessionId) {
+    dispatch(clearCart());
+    console.log(sessionId);
+    return;
+  } else {
     navigate('/marketplace');
-  }, [dispatch, navigate]);
+  }
 
   return (
     <Grid container height="100vh">
