@@ -23,7 +23,7 @@ export const SuggestedCourseProduct = ({ courses, products }) => {
   const recommendedProducts = products.map((prod) => prod.product);
   
   return (
-    <Stack gap={5} py={10} width="100%">
+    <Stack gap={5} py={10} width="100%">    
       {courses.length > 0 && 
         <Stack gap={2}>
           <Typography variant="h4" maxWidth={300}>

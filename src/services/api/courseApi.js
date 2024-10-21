@@ -32,8 +32,20 @@ export const courseApi = createApi({
         method: "GET",
       }),
     }),
-
+    getEnrollmentCourse: builder.query({
+      query: (courseId) => ({
+        url: `/api/course/getEnrollmentCourse/${courseId}`,
+        method: "GET",
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
-export const { useSearchCourseQuery, useGetCourseCarouselQuery, useGetRecommendedCoursesQuery, useGetOneCourseQuery } = courseApi;
+export const {
+  useSearchCourseQuery,
+  useGetCourseCarouselQuery,
+  useGetRecommendedCoursesQuery,
+  useGetOneCourseQuery,
+  useGetEnrollmentCourseQuery
+} = courseApi;
