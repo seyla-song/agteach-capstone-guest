@@ -13,7 +13,7 @@ import {
 } from '../../services/api/userApi';
 import { CustomAlert } from '../../components/CustomAlert';
 
-function ProfilePhoto() {
+export const ProfilePhoto = () => {
   const [profileImage, setProfileImage] = useState();
   const { data } = useGetUserInfoQuery();
   const [updateInfo, { isLoading }] = useUpdateInfoMutation();
@@ -133,6 +133,5 @@ function ProfilePhoto() {
       />
     </>
   );
-}
+};
 
-export default ProfilePhoto;

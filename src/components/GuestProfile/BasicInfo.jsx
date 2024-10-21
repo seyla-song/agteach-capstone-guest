@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { useGetUserInfoQuery, useUpdateInfoMutation } from "../../services/api/userApi";// Import the isLogin query
 
 
-function BasicInfo() {
+export const BasicInfo = () => {
   const {
     register,
     handleSubmit,
@@ -177,8 +177,6 @@ function BasicInfo() {
     </>
   );
 }
-
-export default BasicInfo;
 
 const city = [
   { label: "Phnom Penh" },

@@ -9,7 +9,7 @@ import { useGetUserInfoQuery } from "../../services/api/userApi";
  * @returns {JSX.Element} A JSX element that renders the form and button.
  */
 
-function AccountSecurity() {
+export const AccountSecurity = () => {
   const { setValue, watch } = useForm();
 
   const { data, isLoading } = useGetUserInfoQuery();
@@ -45,4 +45,3 @@ function AccountSecurity() {
   );
 }
 
-export default AccountSecurity;

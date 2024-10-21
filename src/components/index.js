@@ -31,3 +31,7 @@ export { Courses } from './InstructorProfile/Coures';
 export { Products } from './InstructorProfile/Products';
 export { CarouselComponent } from './HomeComponent/CarouselComponent';
 export { CoreValueComponent } from './HomeComponent/CoreValueComponent';
+export { BasicInfo } from './GuestProfile/BasicInfo'
+export { ChangePassword } from './GuestProfile/ChangePassword'
+export { ProfilePhoto } from './GuestProfile/ProfilePhoto'
+export { AccountSecurity } from './GuestProfile/AccountSecurity'
