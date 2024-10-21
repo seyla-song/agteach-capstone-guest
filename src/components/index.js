@@ -23,3 +23,6 @@ export { ProductWishlist } from './Wishlist/ProductWishlist';
 export { CourseWishlist } from './Wishlist/CourseWishlist';
 export { CategoryFilter } from './SearchResult/CategoryFilter';
 export { FilterByOther } from './SearchResult/FilterByOther';
+export { FormInput } from './LoginSignup/FormInput';
+export { LogoLink } from './LoginSignup/LogoLink';
+export { ResendCodeButton } from './LoginSignup/ResendCodeButton';
