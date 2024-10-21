@@ -1,21 +1,24 @@
-import { Divider, Grid, Stack } from '@mui/material';
-import {
-  CourseDetailHighlight,
-  CourseDetailContent,
-  CourseDetailHero,
-} from '../components/CourseDetail/index';
-import MemberComponent from '../components/MemberComponent';
-import {
-  useGetRecommendedCoursesQuery,
-  useGetOneCourseQuery,
-} from '../services/api/courseApi';
-import { SuggestedCourseProduct } from '../components/SuggestCourseProduct';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { ContentLoading } from '../components/ContentLoading';
+
+import { Divider, Grid, Stack } from '@mui/material';
+
 import { useGetUserEnrollmentsQuery } from '../services/api/enrollmentApi';
+import {
+  useGetRecommendedCoursesQuery,
+  useGetOneCourseQuery,
+} from '../services/api/courseApi';
+
+import {
+  ContentLoading,
+  SuggestedCourseProduct,
+  CourseDetailHighlight,
+  CourseDetailContent,
+  CourseDetailHero,
+  MemberComponent,
+} from '../components/index';
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
