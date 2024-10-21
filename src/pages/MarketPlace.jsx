@@ -1,3 +1,7 @@
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router';
+import { useSearchProductQuery } from '../services/api/productApi';
+
 import {
   Container,
   Divider,
@@ -6,14 +10,13 @@ import {
   Typography,
   Box,
 } from '@mui/material';
-import { useState, useEffect } from 'react';
-import Category from '../components/MaketPlace/Category';
-import SortBy from '../components/MaketPlace/SortBy';
-import SearchBar from '../components/SearchBarComponent';
-import SearchList from '../components/MaketPlace/SearchList';
-import { useLocation } from 'react-router';
-import { useSearchProductQuery } from '../services/api/productApi';
-import { ItemsLoading } from '../components/ItemsLoading';
+import {
+  ItemsLoading,
+  SearchList,
+  Category,
+  SortByFilter,
+  SearchBar,
+} from '../components/index';
 
 /**
  * A React functional component that renders a marketplace page.
@@ -61,7 +64,6 @@ export default function MarketPlace() {
   }, [productData, query]);
 
   useEffect(() => {
-
     let dataToFilter = [...rawData] || [];
     // filter by categories
     if (category === 'plant')
@@ -196,7 +198,7 @@ export default function MarketPlace() {
                 handleChange={handleCategoryChange}
               />
               <Divider sx={{ display: { xs: 'none', sm: 'block' } }} />
-              <SortBy sortBy={sortBy} handleChange={handleSortByChange} />
+              <SortByFilter sortBy={sortBy} handleChange={handleSortByChange} />
             </Stack>
           </Grid>
           <Grid

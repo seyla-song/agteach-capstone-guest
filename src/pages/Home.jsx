@@ -1,7 +1,6 @@
 import { Container } from '@mui/material';
 import HeroComponent from '../components/HomeComponent/CoreValueComponent';
-import { MemberComponent } from '../components/index';
-import SearchBarComponent from '../components/SearchBarComponent';
+import { MemberComponent, SearchBar } from '../components/index';
 import CarouselComponent from '../components/HomeComponent/CarouselComponent';
 import search from '../assets/Home/search.png';
 import { useGetProductCarouselQuery } from '../services/api/productApi';
@@ -30,7 +29,7 @@ function HomePage() {
         },
       }}
     >
-      <SearchBarComponent backDrop={search} />
+      <SearchBar backDrop={search} />
 
       {courses.length > 0 && (
         <CarouselComponent data={courses} cardVariant="course">

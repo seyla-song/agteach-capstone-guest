@@ -4,7 +4,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 
-function SortByFilter({ sortBy, handleChange }) {
+export const SortByFilter = ({ sortBy, handleChange }) => {
   return (
     <Box>
       <Typography sx={{ typography: { xs: "body2", sm: "h6" } }}>
@@ -64,4 +64,3 @@ function SortByFilter({ sortBy, handleChange }) {
   );
 }
 
-export default SortByFilter;

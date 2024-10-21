@@ -12,5 +12,10 @@ export { CourseDetailHero } from './CourseDetail/CourseDetailHero';
 export { MemberComponent } from './MemberComponent';
 export { CustomCartItem } from './Cart/CustomCartItem';
 export { PurchasedHistory } from './Cart/PurchasedHistory';
-export {CustomAlert} from './CustomAlert'
-export {CourseList} from './MyLearning/CourseList'
+export { CustomAlert } from './CustomAlert';
+export { CourseList } from './MyLearning/CourseList';
+export { Category } from './MaketPlace/Category';
+export { SortByFilter } from './MaketPlace/SortBy';
+export { SearchList } from './MaketPlace/SearchList';
+export { SearchBar } from './SearchBarComponent';
+export { ItemsLoading } from './ItemsLoading';
