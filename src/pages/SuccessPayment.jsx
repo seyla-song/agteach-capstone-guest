@@ -1,4 +1,9 @@
 import React from 'react';
+import { clearCart } from '../features/cart/cartSlice';
+import { useDispatch } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
+import { useGetPaymentSessionQuery } from '../services/api/paymentApi';
+
 import {
   Typography,
   Grid,
@@ -8,14 +13,12 @@ import {
   Link,
   Button,
 } from '@mui/material';
-import { clearCart } from '../features/cart/cartSlice';
-import { useDispatch } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
+
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+
 import ReceiptElement from '../assets/receipt-element.svg';
 import AgteachBg from '../assets/agteach-bg.svg';
-import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
-import { useGetPaymentSessionQuery } from '../services/api/paymentApi';
 
 import { ContentLoading } from '../components/ContentLoading';
 
