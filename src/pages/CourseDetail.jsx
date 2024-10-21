@@ -65,6 +65,7 @@ function CourseDetailPage() {
   if (isLoading) return <ContentLoading />;
   if (isError) return <div>Error: {error}</div>;
 
+
   return (
     <Elements stripe={stripePromise}>
       <Stack alignItems="center">
