@@ -10,7 +10,7 @@ export const paymentApi = createApi({
   endpoints: (builder) => ({
     getPaymentSession: builder.query({
       query: (sessionId) => ({
-        url: `/payments/session?sessionId=${sessionId}`,
+        url: `/payments/session/${sessionId}`,
         method: 'GET',
       }),
     }),
