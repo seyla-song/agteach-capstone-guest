@@ -130,7 +130,11 @@ export default function SuccessPayment() {
             </Stack>
           </Stack>
           <Link component={RouterLink} to="/" underline="none">
-            <Button variant="outlined" endIcon={<ArrowCircleRightOutlinedIcon />} sx={{ width: 400 }}>
+            <Button
+              variant="outlined"
+              endIcon={<ArrowCircleRightOutlinedIcon />}
+              sx={{ width: 400 }}
+            >
               Back to AgTeach
             </Button>
           </Link>
@@ -162,11 +166,8 @@ export default function SuccessPayment() {
         </Stack>
       </Grid>
       <Grid item bgcolor="grey.100" xs={12} md={6} justifyContent="center">
-        <Stack
-          alignItems="center"
-          justifyContent="center"
+        <Box
           height="100%"
-          bgcolor="green"
           sx={{
             backgroundImage: `url(${AgteachBg})`,
             backgroundRepeat: 'no-repeat',
@@ -174,7 +175,7 @@ export default function SuccessPayment() {
             backgroundSize: 'cover',
           }}
           p={3}
-        ></Stack>
+        />
       </Grid>
     </Grid>
   );
