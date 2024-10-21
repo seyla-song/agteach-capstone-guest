@@ -32,12 +32,12 @@ export default function SuccessPayment() {
 
   if (isLoading && !data) return <ContentLoading />;
 
-  console.log(data);
+  const { session, paymentIntent } = data || {};
 
   return (
     <Grid container height="100vh">
       <Grid item xs={12} md={6}>
-        {/* <Stack alignItems="center" justifyContent="center" height="100%" p={3}>
+        <Stack alignItems="center" justifyContent="center" height="100%" p={3}>
           <Stack gap={1} alignItems="center">
             <CheckCircleOutlineIcon sx={{ fontSize: 60, color: 'teal.main' }} />
             <Typography variant="blgsm" textAlign="center" mt={2}>
@@ -111,7 +111,7 @@ export default function SuccessPayment() {
               </Box>
             </Typography>
           </Stack>
-        </Stack> */}
+        </Stack>
       </Grid>
       <Grid item bgcolor="grey.100" xs={12} md={6} justifyContent="center">
         <Box
