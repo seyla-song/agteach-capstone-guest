@@ -64,85 +64,81 @@ export default function SuccessPayment() {
   }, [dispatch]);
 
   return (
-    <Box
-      bgcolor="grey.100"
-      sx={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Grid container maxWidth="lg" sx={{ padding: 4 }} bgcolor="white">
-        <Grid
-          item
-          xs={12}
-          sx={{
-            padding: 5,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
+    <Grid container height="100vh">
+      <Grid item bgcolor="yellow" xs={6}>
+        <Stack
+          alignItems="center"
+          bgcolor="green"
+          justifyContent="center"
+          height="100%"
+          p={3}
         >
-          <CheckCircleOutlineIcon sx={{ fontSize: 60, color: 'teal.main' }} />
-
-          <Typography variant="blgsm" mt={2}>
-            Thanks for your payment
-          </Typography>
-          <Typography variant="bsr" textAlign="center" color="dark.200" mt>
-            A payment to AgTeach will appear on your statement.
-          </Typography>
-          <Stack
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-            maxWidth={400}
-            borderRadius={3}
-            width="100%"
-            p={3}
-            mt={2}
-            sx={{
-              border: '1px dashed #ccc',
-            }}
-          >
-            <Typography variant="h3" color="dark.200">
-              - {data.paymentIntent.amount / 100} {data.paymentIntent.currency.toUpperCase()}
+          <Stack>
+            <CheckCircleOutlineIcon sx={{ fontSize: 60, color: 'teal.main' }} />
+            <Typography variant="blgsm" mt={2}>
+              Thanks for your payment
             </Typography>
+            <Typography>
+              A payment to AgTeach will appear on your statement.
+            </Typography>
+            <Stack
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              maxWidth={400}
+              borderRadius={3}
+              width="100%"
+              p={3}
+              mt={2}
+              sx={{
+                border: '1px dashed #ccc',
+              }}
+            >
+              <Typography variant="h3" color="dark.200">
+                - {data.paymentIntent.amount / 100}{' '}
+                {data.paymentIntent.currency.toUpperCase()}
+              </Typography>
+            </Stack>
           </Stack>
-          <Box pt={3}>
-            <Link component={RouterLink} to="/" underline="none">
-              <Button variant="outlined" sx={{ width: 400 }}>
-                Back to AgTeach
-              </Button>
-            </Link>
-          </Box>
-
-          <Stack direction="row" gap pt={2}>
-            <Typography variant="bxsmd">POWERED BY STRIPE</Typography>
-            <Typography variant="bxsmd">|</Typography>
-            <Typography variant="bxsr">
-              <Box
-                component="a"
-                href="#"
-                color="dark.200"
-                sx={{ textDecoration: 'none' }}
-              >
-                Terms and Conditon
-              </Box>
-            </Typography>
-            <Typography variant="bxsr">
-              <Box
-                component="a"
-                href="#"
-                color="dark.200"
-                sx={{ textDecoration: 'none' }}
-              >
-                Privacy Policy
-              </Box>
-            </Typography>
-          </Stack>
-        </Grid>
+        </Stack>
       </Grid>
-    </Box>
+      <Grid item bgcolor="pink" xs={6} justifyContent="center">
+        <Stack
+          alignItems="center"
+          bgcolor="orange"
+          justifyContent="center"
+          height="100%"
+          p={3}
+        >
+          <Stack>
+            <CheckCircleOutlineIcon sx={{ fontSize: 60, color: 'teal.main' }} />
+            <Typography variant="blgsm" mt={2}>
+              Thanks for your payment
+            </Typography>
+            <Typography>
+              A payment to AgTeach will appear on your statement.
+            </Typography>
+            <Stack
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              maxWidth={400}
+              borderRadius={3}
+              width="100%"
+              p={3}
+              mt={2}
+              sx={{
+                border: '1px dashed #ccc',
+              }}
+            >
+              <Typography variant="h3" color="dark.200">
+                - {data.paymentIntent.amount / 100}{' '}
+                {data.paymentIntent.currency.toUpperCase()}
+              </Typography>
+            </Stack>
+          </Stack>
+        </Stack>
+      </Grid>
+    </Grid>
   );
 }
