@@ -26,3 +26,6 @@ export { FilterByOther } from './SearchResult/FilterByOther';
 export { FormInput } from './LoginSignup/FormInput';
 export { LogoLink } from './LoginSignup/LogoLink';
 export { ResendCodeButton } from './LoginSignup/ResendCodeButton';
+export { ProfilePage } from './InstructorProfile/ProfilePage';
+export { Courses } from './InstructorProfile/Coures';
+export { Products } from './InstructorProfile/Products';
