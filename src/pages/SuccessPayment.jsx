@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Typography,
   Grid,
@@ -10,73 +10,28 @@ import {
 } from '@mui/material';
 import { clearCart } from '../features/cart/cartSlice';
 import { useDispatch } from 'react-redux';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ReceiptElement from '../assets/receipt-element.svg';
 import AgteachBg from '../assets/agteach-bg.svg';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import { useGetPaymentSessionQuery } from '../services/api/paymentApi';
 
-const data = {
-  session: {
-    amount_total: 5000,
-    currency: 'usd',
-    customer_details: {
-      email: 'customer@example.com',
-      address: {
-        line1: '123 Main St',
-        city: 'San Francisco',
-        state: 'CA',
-        postal_code: '94111',
-        country: 'US',
-      },
-    },
-    payment_status: 'paid',
-    status: 'complete',
-  },
-  paymentIntent: {
-    amount: 5000,
-    currency: 'usd',
-    status: 'succeeded',
-    payment_method_types: ['card'],
-    charges: {
-      data: [
-        {
-          id: 'ch_1JklMNopQrsTuv456',
-          amount: 5000,
-          currency: 'usd',
-          payment_method_details: {
-            card: {
-              brand: 'visa',
-              last4: '4242',
-              exp_month: 12,
-              exp_year: 2025,
-            },
-          },
-          status: 'succeeded',
-          receipt_url:
-            'https://pay.stripe.com/receipts/acct_1H2I3J4K5L6/ch_1JklMNopQrsTuv456',
-        },
-      ],
-    },
-  },
-};
+import { ContentLoading } from '../components/ContentLoading';
 
 export default function SuccessPayment() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const urlParams = new URLSearchParams(window.location.search);
   const sessionId = urlParams.get('session_id');
 
-  console.log(sessionId);
+  const { data, isLoading } = useGetPaymentSessionQuery(sessionId);
+  const { session, paymentIntent } = data;
 
-  const {
-    data: mydata,
-    error,
-    isLoading,
-  } = useGetPaymentSessionQuery(sessionId);
+  if (sessionId) {
+    dispatch(clearCart());
+  }
 
-  console.log(mydata);
+  if (isLoading) return <ContentLoading />;
 
   return (
     <Grid container height="100vh">
@@ -106,30 +61,18 @@ export default function SuccessPayment() {
                   AgTeach
                 </Typography>
                 <Typography variant="bssm" color="dark.200">
-                  - {data.paymentIntent.amount / 100}{' '}
-                  {data.paymentIntent.currency.toUpperCase()}
+                  - {paymentIntent?.amount / 100}{' '}
+                  {paymentIntent?.currency?.toUpperCase()}
                 </Typography>
               </Stack>
             </Stack>
 
             <Stack width="100%" py={3} borderRadius="10px">
               <Divider />
-              <SimpleRow
-                label="Email"
-                value={data.session.customer_details.email}
-              />
+              <SimpleRow label="Email" value={session.customer_details.email} />
               <SimpleRow
                 label="Address"
-                value={
-                  data.session.customer_details.address.line1 +
-                  data.session.customer_details.address.city +
-                  data.session.customer_details.address.state
-                }
-              />
-
-              <SimpleRow
-                label="Postal Code"
-                value={data.session.customer_details.address.postal_code}
+                value={data.session.customer_details.address.country}
               />
             </Stack>
           </Stack>
