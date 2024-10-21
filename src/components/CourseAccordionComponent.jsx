@@ -35,7 +35,6 @@ export const CourseAccordionComponent = ({ data }) => {
   // Combined function to calculate total duration and format the output
   const getTotalFormattedDuration = (lectures) => {
     // Check if lectures is an array
-    console.log(lectures);
     if (!Array.isArray(lectures)) {
       return "Lectures data is invalid";
     }
