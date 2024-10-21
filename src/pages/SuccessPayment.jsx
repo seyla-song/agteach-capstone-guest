@@ -68,12 +68,12 @@ export default function SuccessPayment() {
   const urlParams = new URLSearchParams(window.location.search);
   const sessionId = urlParams.get('session_id');
 
-  const { data, error, isLoading } = useGetPaymentSessionMutation(sessionId);
+  const { data:mydata, error, isLoading } = useGetPaymentSessionMutation(sessionId);
 
   if (isLoading) return <p>Loading payment details...</p>;
   if (error) return <p>Error loading payment details.</p>;
 
-  console.log(data);
+  console.log(mydata);
 
   // Fetch session data using session ID
   if (sessionId) {
