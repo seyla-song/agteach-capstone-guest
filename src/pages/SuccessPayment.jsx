@@ -20,7 +20,7 @@ import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOu
 import ReceiptElement from '../assets/receipt-element.svg';
 import AgteachBg from '../assets/agteach-bg.svg';
 
-import { ContentLoading } from '../components/ContentLoading';
+import { ContentLoading } from '../components/index';
 
 export default function SuccessPayment() {
   const dispatch = useDispatch();
