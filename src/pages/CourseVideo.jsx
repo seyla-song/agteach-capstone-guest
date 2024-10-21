@@ -1,16 +1,17 @@
-import { Stack, Grid, Typography } from "@mui/material";
-import TimerIcon from "@mui/icons-material/TimerOutlined";
+import { Stack, Grid } from '@mui/material';
+import TimerIcon from '@mui/icons-material/TimerOutlined';
 import {
   CourseVideoHeaderComponent,
   CourseVideoMainContent,
   CourseVideoSidebar,
-} from "../components/CourseVideo/index";
-import Footer from "../components/Footer";
+} from '../components/CourseVideo/index';
+import Footer from '../components/Footer';
 import {
   useGetEnrollmentCourseQuery,
   useGetRecommendedCoursesQuery,
-} from "../services/api/courseApi";
-import { useNavigate, useParams } from "react-router-dom";
+} from '../services/api/courseApi';
+import { useNavigate, useParams } from 'react-router-dom';
+import {ContentLoading} from '../components/ContentLoading';
 
 /**
  * The course video page.
@@ -37,11 +38,7 @@ function CourseVideoPage() {
     return navigate(`/courses/${coursesId}`);
   }
   if (isCoursesLoading) {
-    return (
-      <>
-        <Typography>Loading...</Typography>
-      </>
-    );
+    return <ContentLoading />;
   }
   const contentList = !isCoursesLoading ? courses.data.sections : [];
   const courseData = !isCoursesLoading ? courses.data : [];
@@ -51,9 +48,9 @@ function CourseVideoPage() {
   const recommendedCourses = !isRecommendedLoading
     ? recommendedCoursesData.data
     : [];
-    
-  console.log("productSuggestions", productSuggestions);
-  console.log("recommendedCourses", recommendedCourses);
+
+  console.log('productSuggestions', productSuggestions);
+  console.log('recommendedCourses', recommendedCourses);
   // Function to get video URL by lectureId
   function getVideoNameUrlByLectureId(sections, lectureId) {
     for (const section of sections) {
@@ -67,7 +64,7 @@ function CourseVideoPage() {
     return null; // Return null if no matching lecture is found
   }
   let lectureId;
-  if (videoId === "overview") {
+  if (videoId === 'overview') {
     lectureId = contentList[0].lectures[0].lectureId;
   } else {
     lectureId = videoId;
@@ -77,7 +74,6 @@ function CourseVideoPage() {
   if (videoNameUrl === null) {
     return navigate(`courses/${coursesId}/watch/overview`);
   }
-
 
   return (
     <Stack>
@@ -95,12 +91,12 @@ function CourseVideoPage() {
             products={productSuggestions}
             // productSuggestions={productSuggestions}
           >
-          <CourseVideoSidebar data={contentList}  />
+            <CourseVideoSidebar data={contentList} />
           </CourseVideoMainContent>
           <Footer />
         </Grid>
         {/* The sidebar containing the course details and outline */}
-        <Grid item xs={2} display={{ xs: "none", md: "block" }}>
+        <Grid item xs={2} display={{ xs: 'none', md: 'block' }}>
           <CourseVideoSidebar data={contentList} />
         </Grid>
       </Grid>
@@ -112,17 +108,17 @@ export default CourseVideoPage;
 
 const highlights = [
   {
-    title: "Sections",
+    title: 'Sections',
     icons: <TimerIcon fontSize="small" />,
     value: 20,
   },
   {
-    title: "Hours",
+    title: 'Hours',
     icons: <TimerIcon fontSize="small" />,
     value: 20,
   },
   {
-    title: "Vidoes",
+    title: 'Vidoes',
     icons: <TimerIcon fontSize="small" />,
     value: 20,
   },
