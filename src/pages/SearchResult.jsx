@@ -67,7 +67,7 @@ function SearchResultPage() {
         setRawData(productData.data || []);
       }
     }
-  }, [courseData, category]);
+  }, [courseData, category, productData]);
 
   useEffect(() => {
     setLimit(9);
