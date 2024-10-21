@@ -16,7 +16,7 @@ import { ItemsLoading } from '../ItemsLoading';
  *     - instructor (string)
  */
 
-export default function CourseList({ data }) {
+export const CourseList = ({ data }) => {
   return (
     <Stack gap={3}>
       <Stack gap>
@@ -51,4 +51,4 @@ export default function CourseList({ data }) {
       )}
     </Stack>
   );
-}
+};

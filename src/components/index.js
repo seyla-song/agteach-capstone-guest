@@ -13,3 +13,4 @@ export { MemberComponent } from './MemberComponent';
 export { CustomCartItem } from './Cart/CustomCartItem';
 export { PurchasedHistory } from './Cart/PurchasedHistory';
 export {CustomAlert} from './CustomAlert'
+export {CourseList} from './MyLearning/CourseList'

@@ -1,6 +1,8 @@
-import { Container } from '@mui/material';
-import CourseList from '../components/MyLearning/CourseList';
 import { useGetCustomerEnrollmentsQuery } from '../services/api/enrollmentApi';
+
+import { Container } from '@mui/material';
+
+import { CourseList } from '../components/index';
 
 /**
  * A page that renders a list of courses the user is currently taking.
