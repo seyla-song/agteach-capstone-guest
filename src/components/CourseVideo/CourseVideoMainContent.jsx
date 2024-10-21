@@ -66,7 +66,6 @@ export const CourseVideoMainContent = ({
         <MediaPlayer style={{ borderRadius: 0 }} title={name} src={url}>
           <MediaProvider />
           <DefaultVideoLayout
-            // thumbnails="https://files.vidstack.io/sprite-fight/thumbnails.vtt"
             icons={defaultLayoutIcons}
           />
         </MediaPlayer>

@@ -1,5 +1,4 @@
 import { Stack, Grid } from '@mui/material';
-import TimerIcon from '@mui/icons-material/TimerOutlined';
 import {
   CourseVideoHeaderComponent,
   CourseVideoMainContent,
@@ -86,7 +85,6 @@ function CourseVideoPage() {
           <CourseVideoMainContent
             courseData={courseData}
             videoNameUrl={videoNameUrl}
-            highlights={highlights}
             courses={recommendedCourses}
             products={productSuggestions}
             // productSuggestions={productSuggestions}
@@ -106,20 +104,3 @@ function CourseVideoPage() {
 
 export default CourseVideoPage;
 
-const highlights = [
-  {
-    title: 'Sections',
-    icons: <TimerIcon fontSize="small" />,
-    value: 20,
-  },
-  {
-    title: 'Hours',
-    icons: <TimerIcon fontSize="small" />,
-    value: 20,
-  },
-  {
-    title: 'Vidoes',
-    icons: <TimerIcon fontSize="small" />,
-    value: 20,
-  },
-];

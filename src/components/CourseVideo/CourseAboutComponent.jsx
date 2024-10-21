@@ -11,13 +11,14 @@ import ExpandableText from '../../components/ExpandableText';
  * @returns {React.ReactElement} The course about component.
  */
 export const CourseAboutComponent = ({courseName, description, instructor}) => {
+  const {instructorId} = instructor
   const instructorName = `${instructor.firstName} ${instructor.lastName}`
   return (
     <Stack gap>
       <Typography variant="h3">{courseName}</Typography>
       <ExpandableText text={description} />
       <Typography variant="bxsr">
-        Created by: <Link> {instructorName}</Link>
+        Created by: <Link to={`/instructor-profile/${instructorId}`}> {instructorName}</Link>
       </Typography>
     </Stack>
   );
