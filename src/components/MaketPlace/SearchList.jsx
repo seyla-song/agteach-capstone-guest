@@ -17,7 +17,7 @@ export const SearchList = ({
             </Grid>
           ))}
         </Grid>
-        {dataObj.lenght > limit && (
+        {dataObj.length > limit && (
           <Button
             variant="outlined"
             paddingX={2}
