@@ -12,13 +12,11 @@ import { CourseAccordionComponent } from '../../components/CourseAccordionCompon
 export const CourseVideoSidebar = ({ data }) => {
   return (
     <Stack
+      position={{ xs: 'block', md: 'sticky' }}
+      height={{ xs: 'fit-content', md: '100vh' }}
+      borderLeft={{ xs: 'none', md: '1px solid #000000' }}
       sx={{
-        borderLeftColor:'primary.main',
-        borderLeftWidth: 1,
-        borderLeftStyle:'solid',
-        height: '100vh',
         bgcolor: 'grey.100',
-        position: 'sticky',
         top: 0,
         overflowY: 'auto',
       }}
