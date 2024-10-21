@@ -10,7 +10,7 @@ import { CourseList } from '../components/index';
  * @returns {React.ReactElement} A JSX element representing the course list page.
  */
 export default function MyLearning() {
-  const { data: courses } = useGetCustomerEnrollmentsQuery();
+  const { data: courses, isLoading } = useGetCustomerEnrollmentsQuery();
 
   return (
     <Container
@@ -24,7 +24,7 @@ export default function MyLearning() {
         gap: 5,
       }}
     >
-      <CourseList data={courses?.enrollments || []} />
+      <CourseList data={courses?.enrollments || []} isLoading={isLoading} />
     </Container>
   );
 }
