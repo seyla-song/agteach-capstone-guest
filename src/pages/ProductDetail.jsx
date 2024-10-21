@@ -20,9 +20,10 @@ import {
   useGetOneProductQuery,
   useGetRecommendedProductsQuery,
 } from '../services/api/productApi';
+import { ContentLoading } from '../components/ContentLoading';
+import { addItemToCart } from '../features/cart/cartSlice';
 
 import CustomModal from '../components/CustomModal';
-import { addItemToCart } from '../features/cart/cartSlice';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import TimerOutlinedIcon from '@mui/icons-material/TimerOutlined';
@@ -35,7 +36,7 @@ function ProductDetailPage() {
   const [allRelatedProducts, setAllRelatedProducts] = useState([]);
   const [selectedProductInfo, setSelectedProductInfo] = useState({});
   const { data: relatedProducts } = useGetRecommendedProductsQuery(productId);
-  const { data, isLoading, isError, error } = useGetOneProductQuery(productId);
+  const { data, isLoading } = useGetOneProductQuery(productId);
   const [open, setOpen] = useState(false);
   const toggleModal = () => setOpen((prev) => !prev); // Toggle function
 
@@ -62,49 +63,7 @@ function ProductDetailPage() {
   }, [relatedProducts, data, isLoading]);
 
   if (isLoading) {
-    return (
-      <div
-        style={{
-          width: '100%',
-          height: 'calc(100vh - 68px)',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        Loading...
-      </div>
-    );
-  }
-  if (isError) {
-    if (error.status === 404)
-      return (
-        <div
-          style={{
-            width: '100%',
-            height: 'calc(100vh - 68px)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          Product Not Found.
-        </div>
-      );
-    else
-      return (
-        <div
-          style={{
-            width: '100%',
-            height: 'calc(100vh - 68px)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          Error: {error?.message || 'An error occurred'}
-        </div>
-      );
+    return <ContentLoading />;
   }
 
   const handleAddToCart = () => {
