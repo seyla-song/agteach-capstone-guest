@@ -16,15 +16,17 @@ import { ItemsLoading } from '../ItemsLoading';
  *     - instructor (string)
  */
 
-export default function CourseList({ data }) {
+export const CourseList = ({ data, isLoading }) => {
   return (
     <Stack gap={3}>
       <Stack gap>
         <Typography variant="h3">My Learning</Typography>
-        {data.length < 1 ? (
-          <ItemsLoading title="course" />
-        ) : (
-          <Typography variant="bsr">Found ({data.length}) Courses</Typography>
+        {isLoading && <ItemsLoading title="course" />}
+        {data.length > 0 && (
+          <Typography variant="bsr">Found ({data.length}) Courses.</Typography>
+        )}
+        {data.length === 0 && !isLoading && (
+          <Typography variant="bsr">You don't have any course yet.</Typography>
         )}
       </Stack>
 
@@ -51,4 +53,4 @@ export default function CourseList({ data }) {
       )}
     </Stack>
   );
-}
+};

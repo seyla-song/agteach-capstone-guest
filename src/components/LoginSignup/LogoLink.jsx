@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const LogoLink = ({ linkTo = "/", imgSrc = "/icon/agteach.png", altText = "Logo", imgHeight = "120px" }) => {
+export const LogoLink = ({ linkTo = "/", imgSrc = "/icon/agteach.png", altText = "Logo", imgHeight = "120px" }) => {
   return (
     <Link to={linkTo}>
       <img
@@ -13,5 +13,3 @@ const LogoLink = ({ linkTo = "/", imgSrc = "/icon/agteach.png", altText = "Logo"
     </Link>
   );
 };
-
-export default LogoLink;

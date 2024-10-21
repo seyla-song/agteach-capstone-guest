@@ -1,10 +1,9 @@
-import React from "react";
-import LogoLink from "../components/LoginSignup/LogoLink";
-import FormInput from "../components/LoginSignup/FormInput";
-import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
-import { useAddPersonalInfoMutation } from "../services/api/authApi";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useAddPersonalInfoMutation } from '../services/api/authApi';
+
 import {
   Container,
   Typography,
@@ -13,7 +12,9 @@ import {
   Stack,
   TextField,
   Autocomplete,
-} from "@mui/material";
+} from '@mui/material';
+
+import { LogoLink, FormInput } from '../components/index';
 
 export default function PersonalInfoForm() {
   const { dob } = useSelector((state) => state.user);
@@ -24,12 +25,12 @@ export default function PersonalInfoForm() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      phone: "",
-      address: "",
-      city: "",
-      imageUrl: "https://placehold.co/600x400/png",
+      firstName: '',
+      lastName: '',
+      phone: '',
+      address: '',
+      city: '',
+      imageUrl: 'https://placehold.co/600x400/png',
     },
   });
   const navigate = useNavigate();
@@ -42,22 +43,22 @@ export default function PersonalInfoForm() {
         dateOfBirth: dob,
         email,
       }).unwrap();
-      navigate("/auth/signup/verification");
+      navigate('/auth/signup/verification');
     } catch (error) {
-      console.error("Error:", error);
+      console.error('Error:', error);
     }
   };
 
   const validatePhone = (value) => {
     const phonePattern = /^[0-9]+$/; // Only digits
     if (!value) return true; // Allow empty input if not required
-    if (value.length > 15) return "Phone number cannot exceed 15 digits";
-    return phonePattern.test(value) || "Please enter a valid phone number";
+    if (value.length > 15) return 'Phone number cannot exceed 15 digits';
+    return phonePattern.test(value) || 'Please enter a valid phone number';
   };
 
   return (
     <Box>
-      <Container maxWidth={false} sx={{ maxWidth: "700px" }}>
+      <Container maxWidth={false} sx={{ maxWidth: '700px' }}>
         <Stack paddingTop={{ xs: 8, md: 10 }} alignItems="center" spacing={4}>
           {/* Logo */}
           <LogoLink />
@@ -69,21 +70,21 @@ export default function PersonalInfoForm() {
           <Stack
             spacing={2}
             component="form"
-            width={"100%"}
+            width={'100%'}
             onSubmit={handleSubmit(onSubmit)}
           >
             <Stack spacing={4}>
               {/* Personal Information */}
               <Stack spacing={2}>
                 <Typography variant="blgsm">Name & Address</Typography>
-                <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
+                <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
                   <FormInput
                     label="First Name"
                     placeholder="e.g. Jane"
-                    {...register("firstName", {
+                    {...register('firstName', {
                       pattern: {
                         value: /^[A-Za-z]+$/i,
-                        message: "First name can only contain letters",
+                        message: 'First name can only contain letters',
                       },
                     })}
                     error={!!errors.firstName}
@@ -92,10 +93,10 @@ export default function PersonalInfoForm() {
                   <FormInput
                     label="Last Name"
                     placeholder="e.g. Smith"
-                    {...register("lastName", {
+                    {...register('lastName', {
                       pattern: {
                         value: /^[A-Za-z]+$/i,
-                        message: "Last name can only contain letters",
+                        message: 'Last name can only contain letters',
                       },
                     })}
                     error={!!errors.lastName}
@@ -115,14 +116,14 @@ export default function PersonalInfoForm() {
                           ...params.inputProps,
                         },
                       }}
-                      {...register("city", {})}
+                      {...register('city', {})}
                     />
                   )}
                 />
                 <FormInput
                   label="Address"
                   placeholder="e.g. 1234 Main St"
-                  {...register("address", {})}
+                  {...register('address', {})}
                   error={!!errors.address}
                   helperText={errors?.address?.message}
                 />
@@ -131,11 +132,11 @@ export default function PersonalInfoForm() {
               {/* Contact Information */}
               <Stack spacing={2}>
                 <Typography variant="blgsm">Contact Information</Typography>
-                <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
+                <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
                   <FormInput
                     label="Phone number"
                     placeholder="e.g. 0123456789"
-                    {...register("phone", {
+                    {...register('phone', {
                       validate: validatePhone,
                     })}
                     error={!!errors.phone}
@@ -148,13 +149,13 @@ export default function PersonalInfoForm() {
             <Stack
               direction="row"
               spacing={2}
-              display={"flex"}
+              display={'flex'}
               justifyContent="end"
             >
               <Button
                 type="submit"
                 variant="outlined"
-                sx={{ padding: { xs: "8px 20px", md: "8px 35px" } }}
+                sx={{ padding: { xs: '8px 20px', md: '8px 35px' } }}
               >
                 Skip
               </Button>
@@ -162,9 +163,9 @@ export default function PersonalInfoForm() {
               <Button
                 type="submit"
                 variant="contained"
-                sx={{ padding: { xs: "8px 20px", md: "8px 35px" } }}
+                sx={{ padding: { xs: '8px 20px', md: '8px 35px' } }}
               >
-                {isLoading ? "Submitting..." : "Submit"}
+                {isLoading ? 'Submitting...' : 'Submit'}
               </Button>
             </Stack>
           </Stack>
@@ -175,12 +176,12 @@ export default function PersonalInfoForm() {
 }
 
 const city = [
-  { label: "Phnom Penh" },
-  { label: "Siem Reap" },
-  { label: "Battambang" },
-  { label: "Sihanoukville" },
-  { label: "Kampot" },
-  { label: "Kratie" },
-  { label: "Pursat" },
-  { label: "Koh Kong" },
+  { label: 'Phnom Penh' },
+  { label: 'Siem Reap' },
+  { label: 'Battambang' },
+  { label: 'Sihanoukville' },
+  { label: 'Kampot' },
+  { label: 'Kratie' },
+  { label: 'Pursat' },
+  { label: 'Koh Kong' },
 ];

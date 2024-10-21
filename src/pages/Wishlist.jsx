@@ -1,6 +1,5 @@
 import { Container, Divider, Typography } from '@mui/material';
-import ProductWishlist from '../components/Wishlist/ProductWishlist';
-import CourseWishlist from '../components/Wishlist/CourseWishlist';
+import { ProductWishlist, CourseWishlist } from '../components/index';
 
 function WishlistPage() {
   return (

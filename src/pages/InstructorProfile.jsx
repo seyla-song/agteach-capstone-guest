@@ -1,9 +1,9 @@
-import { Box, CircularProgress, Container, Divider } from "@mui/material";
-import ProfilePage from "../components/InstructorProfile/ProfilePage.jsx";
-import Courses from "../components/InstructorProfile/Coures.jsx";
-import Products from "../components/InstructorProfile/Products.jsx";
-import { useGetInstructorQuery } from "../services/api/instructorApi.js";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from 'react-router-dom';
+import { useGetInstructorQuery } from '../services/api/instructorApi.js';
+
+import { Box, CircularProgress, Container, Divider } from '@mui/material';
+
+import { Courses, ProfilePage, Products } from '../components/index.js';
 
 /**
  * The InstructorProfile component renders a page with the instructor's profile,
@@ -15,17 +15,16 @@ export default function InstructorProfile() {
   let { id } = useParams();
   const { data, isLoading, isError } = useGetInstructorQuery(id);
 
-  const instructorData = !isLoading ? data : "";
+  const instructorData = !isLoading ? data : '';
   //
-
 
   if (isLoading) {
     return (
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
           mt: 10,
         }}
       >
@@ -33,14 +32,14 @@ export default function InstructorProfile() {
       </Box>
     );
   }
-  
+
   if (isError) {
     return <Navigate to="/error" />;
   }
 
   return (
     <>
-      <Container sx={{ alignItems: "center" }}>
+      <Container sx={{ alignItems: 'center' }}>
         <ProfilePage instructorData={instructorData.instructor} />
 
         <Divider sx={{ my: 6 }} />

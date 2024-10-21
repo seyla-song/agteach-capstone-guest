@@ -1,14 +1,7 @@
-import {
-  Stack,
-  Typography,
-  Container,
-  Grid,
-  Button,
-  Box,
-} from "@mui/material";
-import CustomCard from "../../components/CustomCard";
+import { Stack, Typography, Container, Grid, Button, Box } from '@mui/material';
+import CustomCard from '../../components/CustomCard';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 /**
  * A component that renders a responsive list of products, with a responsive
@@ -23,7 +16,7 @@ import { useState } from "react";
  *
  * @returns {React.ReactElement} The component element.
  */
-function Products({ instructorName, productData }) {
+export const Products = ({ instructorName, productData }) => {
   // State to keep track of the number of courses to display
   const [visibleCount, setVisibleCount] = useState(5);
 
@@ -38,9 +31,9 @@ function Products({ instructorName, productData }) {
     visibleCourses.length === 0 ? (
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
           mt: 10,
         }}
       >
@@ -58,10 +51,10 @@ function Products({ instructorName, productData }) {
     <Stack>
       <Stack>
         <Typography variant="h4">
-          {instructorName || "Default"} Products
+          {instructorName || 'Default'} Products
         </Typography>
         <Typography variant="bmdmd" color="dark.300">
-        {/* <Typography variant="bxsm"> */}
+          {/* <Typography variant="bxsm"> */}
           Found ({productContent.length || 0}) Products
         </Typography>
 
@@ -85,7 +78,4 @@ function Products({ instructorName, productData }) {
       )}
     </Stack>
   );
-}
-
-export default Products;
-
+};

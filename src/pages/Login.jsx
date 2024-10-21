@@ -1,5 +1,8 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import { useLoginMutation } from '../services/api/authApi';
+
 import {
   Button,
   Checkbox,
@@ -9,12 +12,9 @@ import {
   Stack,
   Grid,
   Container,
-} from "@mui/material";
-import FormInput from "../components/LoginSignup/FormInput";
-import LogoLink from "../components/LoginSignup/LogoLink";
-import { Link, useNavigate } from "react-router-dom";
-import { useLoginMutation } from "../services/api/authApi";
-import { CustomAlert } from "../components/CustomAlert";
+} from '@mui/material';
+
+import { CustomAlert, LogoLink, FormInput } from '../components/index';
 
 function Login() {
   const [login, { isLoading, isError }] = useLoginMutation();
@@ -26,21 +26,21 @@ function Login() {
     register,
     handleSubmit,
     setError,
-    formState: { errors }
+    formState: { errors },
   } = useForm({
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
   });
 
   const handleShowPassword = () => setShowPassword((prev) => !prev);
   const submitHandler = async (data) => {
     try {
-      const response = await login(data).unwrap();
-      navigator("/");
+      await login(data).unwrap();
+      navigator('/');
     } catch (error) {
-      console.error("Incorrect email or password", error);
+      console.error('Incorrect email or password', error);
       setOpen(true);
       setError(
         'email',
@@ -54,7 +54,6 @@ function Login() {
       );
     }
   };
-  
 
   return (
     <Box>
@@ -82,7 +81,7 @@ function Login() {
                 >
                   <CustomAlert
                     label={errors.email?.message}
-                    severity={isError ? "error" : "success"}
+                    severity={isError ? 'error' : 'success'}
                     open={open}
                     onClose={() => setOpen(false)}
                   />
@@ -91,11 +90,11 @@ function Login() {
                     variant="outlined"
                     label="Email"
                     fullWidth
-                    {...register("email", {
-                      required: "Please enter your email",
+                    {...register('email', {
+                      required: 'Please enter your email',
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: "Invalid email address",
+                        message: 'Invalid email address',
                       },
                     })}
                     error={!!errors.email}
@@ -105,9 +104,8 @@ function Login() {
                     variant="outlined"
                     label="Password"
                     fullWidth
-                    type={visible ? "text" : "password"}
-                    {...register("password", {
-                    })}
+                    type={visible ? 'text' : 'password'}
+                    {...register('password', {})}
                     error={!!errors.password}
                     helperText={errors.password?.message}
                     showPassword={showPassword}
@@ -116,12 +114,12 @@ function Login() {
 
                   <Stack py={2} alignItems="start">
                     <FormControlLabel
-                      control={<Checkbox {...register("keepMeLoggedIn")} />}
+                      control={<Checkbox {...register('keepMeLoggedIn')} />}
                       label="Keep me logged in"
                     />
                     <Link
                       to="/auth/forgot-password"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: 'none' }}
                     >
                       <Typography variant="bsr" color="primary.main">
                         Forgot Password?
@@ -134,17 +132,17 @@ function Login() {
                     variant="contained"
                     fullWidth
                     style={{
-                      marginTop: "10px",
-                      padding: "12px",
+                      marginTop: '10px',
+                      padding: '12px',
                     }}
                   >
-                    {isLoading ? "Logging in..." : "Login"}
+                    {isLoading ? 'Logging in...' : 'Login'}
                   </Button>
                   <Stack
                     py={2}
                     color="primary.main"
-                    direction={"row"}
-                    justifyContent={"center"}
+                    direction={'row'}
+                    justifyContent={'center'}
                   >
                     Need an account?
                     <Link
@@ -152,7 +150,7 @@ function Login() {
                       textDecoration="underline"
                       color="primary.main"
                     >
-                      <Typography color="primary.main" padding={"0 0 0 5px"}>
+                      <Typography color="primary.main" padding={'0 0 0 5px'}>
                         Create one
                       </Typography>
                     </Link>

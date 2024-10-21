@@ -7,7 +7,7 @@ import { useResendVerifyCodeMutation } from "../../services/api/authApi";
 import { useState } from "react";
 import { CustomAlert } from "../CustomAlert";
 
-const ResendCodeButton = ({ email }) => {
+export const ResendCodeButton = ({ email }) => {
   const [open, setOpen] = useState(true);
 
   const [resendVerifyCode, { isLoading, isError, isSuccess, error }] =

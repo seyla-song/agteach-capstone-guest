@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { useGetUserInfoQuery, useUpdateInfoMutation } from "../../services/api/userApi";// Import the isLogin query
 
 
-function BasicInfo() {
+export const BasicInfo = () => {
   const {
     register,
     handleSubmit,
@@ -39,7 +39,7 @@ function BasicInfo() {
       const customerData = data.data.customer
       console.log("customerData", customerData);
       
-      const { firstName, lastName, phone, location_id, address, dataOfBirth } = customerData;
+      const { firstName, lastName, phone, location_id, address } = customerData;
       setValue("firstName", firstName || "");
       setValue("lastName", lastName || "");
       setValue("phone", phone || "");
@@ -177,8 +177,6 @@ function BasicInfo() {
     </>
   );
 }
-
-export default BasicInfo;
 
 const city = [
   { label: "Phnom Penh" },

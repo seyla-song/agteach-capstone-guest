@@ -1,16 +1,16 @@
-import { Stack, Grid } from "@mui/material";
+import { Stack, Grid } from '@mui/material';
 import {
   CourseVideoHeaderComponent,
   CourseVideoMainContent,
   CourseVideoSidebar,
-} from "../components/CourseVideo/index";
-import Footer from "../components/Footer";
+} from '../components/CourseVideo/index';
+import { Footer } from '../components/index';
 import {
   useGetEnrollmentCourseQuery,
   useGetRecommendedCoursesQuery,
-} from "../services/api/courseApi";
-import { useNavigate, useParams } from "react-router-dom";
-import { ContentLoading } from "../components/ContentLoading";
+} from '../services/api/courseApi';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ContentLoading } from '../components/ContentLoading';
 
 /**
  * The course video page.
@@ -59,7 +59,7 @@ function CourseVideoPage() {
     return null; // Return null if no matching lecture is found
   }
   let lectureId;
-  if (videoId === "overview") {
+  if (videoId === 'overview') {
     lectureId = contentList[0].lectures[0].lectureId;
   } else {
     lectureId = videoId;
@@ -90,7 +90,7 @@ function CourseVideoPage() {
           <Footer />
         </Grid>
         {/* The sidebar containing the course details and outline */}
-        <Grid item xs={2} display={{ xs: "none", md: "block" }}>
+        <Grid item xs={2} display={{ xs: 'none', md: 'block' }}>
           <CourseVideoSidebar data={contentList} />
         </Grid>
       </Grid>

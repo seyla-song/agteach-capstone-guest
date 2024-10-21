@@ -1,10 +1,14 @@
-import ProfilePhoto from "../components/GuestProfile/ProfilePhoto.jsx";
-import BasicInfo from "../components/GuestProfile/BasicInfo.jsx";
-import AccountSecurity from "../components/GuestProfile/AccountSecurity.jsx";
-import ChangePassword from "../components/GuestProfile/ChangePassword.jsx";
-import Divider from "@mui/material/Divider";
-import Stack from "@mui/material/Stack";
-import { Container } from "@mui/material";
+import Divider from '@mui/material/Divider';
+import Stack from '@mui/material/Stack';
+
+import { Container } from '@mui/material';
+
+import {
+  ProfilePhoto,
+  BasicInfo,
+  AccountSecurity,
+  ChangePassword,
+} from '../components/index.js';
 
 /**
  * GuestProfile component is a reusable component
@@ -26,7 +30,7 @@ export default function GuestProfile() {
     <>
       <Container
         maxWidth="1420px"
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       >
         <Stack maxWidth="1420px" width="100%" sx={{ m: 5, mx: 0 }}>
           <ProfilePhoto />

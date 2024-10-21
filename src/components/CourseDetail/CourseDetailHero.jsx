@@ -52,7 +52,7 @@ export const CourseDetailHero = ({ courseData }) => {
             <Typography variant="bsr">{courseData?.description}</Typography>
             <Typography variant="bsr">
               Created by:{' '}
-              {!instructorId && (
+              {instructorId && (
                 <Link
                   sx={{
                     color: 'white',
@@ -66,7 +66,7 @@ export const CourseDetailHero = ({ courseData }) => {
                     navigate(`/instructor-profile/${instructorId}`)
                   }
                 >
-                  {courseData?.instructor?.firstName +
+                  {courseData.instructor.firstName +
                     ' ' +
                     courseData?.instructor?.lastName}
                 </Link>

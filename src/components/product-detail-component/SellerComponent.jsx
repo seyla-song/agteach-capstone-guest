@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router';
  * @function
  * @returns {React.ReactElement} A JSX element that renders a seller component
  */
-export default function SellerComponent({ seller }) {
+export const SellerComponent = ({ seller }) => {
   const navigate = useNavigate();
 
   const goToInstructorProfile = (id) => navigate(`/instructor-profile/${id}`);
@@ -24,9 +24,19 @@ export default function SellerComponent({ seller }) {
         sx={{ display: 'flex', gap: '20px', justifyContent: 'space-between' }}
       >
         <Stack direction="row" alignItems="center">
-          <Avatar sx={{cursor: 'pointer'}} src={seller.image_url} onClick={() => goToInstructorProfile(seller.instructorId)}/>
+          <Avatar
+            sx={{ cursor: 'pointer' }}
+            src={seller.image_url}
+            onClick={() => goToInstructorProfile(seller.instructorId)}
+          />
           <Stack direction="column" sx={{ marginLeft: 2 }}>
-            <Typography sx={{cursor: 'pointer'}} variant="bmdsm" onClick={() => goToInstructorProfile(seller.instructorId)}>{seller.firstName + " " + seller.lastName}</Typography>
+            <Typography
+              sx={{ cursor: 'pointer' }}
+              variant="bmdsm"
+              onClick={() => goToInstructorProfile(seller.instructorId)}
+            >
+              {seller.firstName + ' ' + seller.lastName}
+            </Typography>
             <Typography variant="bxsr" color="dark.200">
               {/* will fix later */}
               {'Kep, Kampot, Cambodia'}
@@ -37,4 +47,4 @@ export default function SellerComponent({ seller }) {
       <Divider />
     </Stack>
   );
-}
+};

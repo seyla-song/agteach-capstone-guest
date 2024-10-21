@@ -6,14 +6,14 @@ import {
   Grid,
   Link,
   Snackbar,
-  Alert, 
-} from "@mui/material";
-import React, { useState } from "react";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import InstructorProfileImg from "../../assets/InstructorProfile/instructorprofile.jpg";
-import { useNavigate } from "react-router-dom";
+  Alert,
+} from '@mui/material';
+import React, { useState } from 'react';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import InstructorProfileImg from '../../assets/InstructorProfile/instructorprofile.jpg';
+import { useNavigate } from 'react-router-dom';
 /**
  * ProfilePage is a component that renders an instructor's profile page.
  *
@@ -24,9 +24,9 @@ import { useNavigate } from "react-router-dom";
  *
  * @returns {JSX.Element} The ProfilePage component.
  */
-function ProfilePage({ instructorData }) {
+export const ProfilePage = ({ instructorData }) => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarMessage, setSnackbarMessage] = useState('');
 
   /**
    * Copies the given text to the user's clipboard.
@@ -43,7 +43,7 @@ function ProfilePage({ instructorData }) {
         setSnackbarOpen(true);
       })
       .catch((err) => {
-        console.error("Failed to copy text: ", err);
+        console.error('Failed to copy text: ', err);
       });
   };
 
@@ -79,12 +79,12 @@ function ProfilePage({ instructorData }) {
             width: 300,
             height: 300,
             m: 1,
-            border: "15px solid lightgrey",
+            border: '15px solid lightgrey',
           }}
         />
       </Grid>
       <Grid item xs={12} md={8}>
-        <Stack sx={{ pt: 2, ml: 1 }} >
+        <Stack sx={{ pt: 2, ml: 1 }}>
           <Typography variant="h4">Instructor</Typography>
           <Typography variant="h2">
             {firstName} {lastName}
@@ -150,6 +150,4 @@ function ProfilePage({ instructorData }) {
       </Grid>
     </Grid>
   );
-}
-
-export default ProfilePage;
+};

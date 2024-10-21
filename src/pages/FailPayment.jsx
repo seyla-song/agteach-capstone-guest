@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box, Typography, Grid, Stack, Button, Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
+
+import { Box, Typography, Grid, Stack, Button, Link } from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import AgteachBg from '../assets/agteach-bg.svg';

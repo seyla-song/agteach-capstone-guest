@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const data = ["Plant", "Fertilizer", "Shovel"];
 
-export default function SearchBar({ backDrop, searchLabel, searchContext, defaultSearchString }) {
+export const SearchBar = ({ backDrop, searchLabel, searchContext, defaultSearchString }) => {
 
   if (!searchContext) searchContext = 'search';
   if (!defaultSearchString) defaultSearchString = '';

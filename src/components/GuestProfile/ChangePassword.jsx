@@ -17,7 +17,7 @@ import { useForm } from "react-hook-form";
 import { useUpdatePasswordMutation } from "../../services/api/userApi";
 import { CustomAlert } from "../../components/CustomAlert";
 
-function ChangePassword() {
+export const ChangePassword = () => {
   const [open, setOpen] = useState(false);
   const {
     register,
@@ -175,5 +175,3 @@ function ChangePassword() {
     </>
   );
 }
-
-export default ChangePassword;
