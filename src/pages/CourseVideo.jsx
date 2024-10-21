@@ -86,7 +86,7 @@ function CourseVideoPage() {
       {/* The course video main content and sidebar */}
       <Grid container>
         {/* The main content containing the video */}
-        <Grid item xs={10}>
+        <Grid item xs={12} md={10}>
           <CourseVideoMainContent
             courseData={courseData}
             videoNameUrl={videoNameUrl}
