@@ -1,22 +1,19 @@
-import { Box, Typography } from "@mui/material";
-import { CustomCarousel } from "../CustomCarousel";
+import { Box, Typography } from '@mui/material';
+import { CustomCarousel } from '../CustomCarousel';
 
-export default function CarouselComponent({ data, cardVariant, children }) {
+export const CarouselComponent = ({ data, cardVariant, children }) => {
   return (
-    <Box sx={{ p: { xs: "10px", md: 0 } }}>
+    <Box sx={{ p: { xs: '10px', md: 0 } }}>
       <Typography
         sx={{
-          maxWidth: {xs:"250px", md:"300px"},
-          typography: { xs: "blgsm", sm: "h4" },
-          mb: { xs: "15px", md: "30px" },
+          maxWidth: { xs: '250px', md: '300px' },
+          typography: { xs: 'blgsm', sm: 'h4' },
+          mb: { xs: '15px', md: '30px' },
         }}
       >
         {children}
       </Typography>
-      <CustomCarousel
-        data={data}
-        cardVariant={cardVariant}
-      />
+      <CustomCarousel data={data} cardVariant={cardVariant} />
     </Box>
   );
-}
+};

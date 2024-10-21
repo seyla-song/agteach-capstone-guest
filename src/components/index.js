@@ -29,3 +29,5 @@ export { ResendCodeButton } from './LoginSignup/ResendCodeButton';
 export { ProfilePage } from './InstructorProfile/ProfilePage';
 export { Courses } from './InstructorProfile/Coures';
 export { Products } from './InstructorProfile/Products';
+export { CarouselComponent } from './HomeComponent/CarouselComponent';
+export { CoreValueComponent } from './HomeComponent/CoreValueComponent';

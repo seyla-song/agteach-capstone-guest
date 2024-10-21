@@ -1,10 +1,16 @@
-import { Container } from '@mui/material';
-import HeroComponent from '../components/HomeComponent/CoreValueComponent';
-import { MemberComponent, SearchBar } from '../components/index';
-import CarouselComponent from '../components/HomeComponent/CarouselComponent';
-import search from '../assets/Home/search.png';
 import { useGetProductCarouselQuery } from '../services/api/productApi';
 import { useGetCourseCarouselQuery } from '../services/api/courseApi';
+
+import { Container } from '@mui/material';
+
+import {
+  MemberComponent,
+  SearchBar,
+  CarouselComponent,
+  CoreValueComponent,
+} from '../components/index';
+
+import search from '../assets/Home/search.png';
 
 function HomePage() {
   const { data: productsData } = useGetProductCarouselQuery();
@@ -37,7 +43,7 @@ function HomePage() {
         </CarouselComponent>
       )}
 
-      <HeroComponent />
+      <CoreValueComponent />
 
       {products.length > 0 && (
         <CarouselComponent data={products} cardVariant="product">
