@@ -19,3 +19,5 @@ export { SortByFilter } from './MaketPlace/SortBy';
 export { SearchList } from './MaketPlace/SearchList';
 export { SearchBar } from './SearchBarComponent';
 export { ItemsLoading } from './ItemsLoading';
+export { ProductWishlist } from './Wishlist/ProductWishlist';
+export { CourseWishlist } from './Wishlist/CourseWishlist';
