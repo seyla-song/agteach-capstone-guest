@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import { Box, Typography, Grid, Stack, Button, Link } from '@mui/material';
+import { Typography, Grid, Stack } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import { Link as RouterLink } from 'react-router-dom';
 import { clearCart } from '../features/cart/cartSlice';
 import { useDispatch } from 'react-redux';
 
