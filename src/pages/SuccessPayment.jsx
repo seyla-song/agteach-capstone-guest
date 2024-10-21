@@ -68,21 +68,15 @@ export default function SuccessPayment() {
   const urlParams = new URLSearchParams(window.location.search);
   const sessionId = urlParams.get('session_id');
 
-  const { data:mydata, error, isLoading } = useGetPaymentSessionMutation(sessionId);
+  console.log(sessionId);
 
-  if (isLoading) return <p>Loading payment details...</p>;
-  if (error) return <p>Error loading payment details.</p>;
+  const {
+    data: mydata,
+    error,
+    isLoading,
+  } = useGetPaymentSessionMutation(sessionId);
 
   console.log(mydata);
-
-  // Fetch session data using session ID
-  if (sessionId) {
-    dispatch(clearCart());
-    console.log(sessionId);
-    return;
-  } else {
-    navigate('/marketplace');
-  }
 
   return (
     <Grid container height="100vh">
