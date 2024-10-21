@@ -1,4 +1,4 @@
-import { Divider, Grid, Stack, Typography } from '@mui/material';
+import { Box, Divider, Grid, Stack, Typography } from '@mui/material';
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
 import { MediaPlayer, MediaProvider } from '@vidstack/react';
@@ -22,16 +22,14 @@ import displayDuration from '../../utils/displayDuration';
  * @param {Object} data The data for the course about section.
  * @returns {React.ReactElement} The main content of the course video page.
  */
-export const CourseVideoMainContent = (data) => {
-  const {
-    videoNameUrl,
-    // highlights,
-    courses,
-    products,
-    courseData,
-    productSuggestions,
-  } = data;
-
+export const CourseVideoMainContent = ({
+  videoNameUrl,
+  courses,
+  products,
+  courseData,
+  productSuggestions,
+  children,
+}) => {
   console.log('productSuggestions', productSuggestions);
   const { name, url } = videoNameUrl;
   const {
@@ -72,7 +70,14 @@ export const CourseVideoMainContent = (data) => {
             icons={defaultLayoutIcons}
           />
         </MediaPlayer>
-
+        <Box
+          bgcolor="green"
+          width="100%"
+          display={{ xs: 'block', md: 'none' }}
+          borderBottom={{ xs: '1px solid #000000', md: 'none' }}
+        >
+          {children}
+        </Box>
         {/* The rest of the content is wrapped in a container with a maximum width of 1420px */}
         <Grid sx={{ maxWidth: '1420px' }} container px={1} py={10}>
           {/* The course about section is on the left side and takes up 7/12 of the width */}
