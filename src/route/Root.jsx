@@ -1,6 +1,6 @@
-import { Outlet } from "react-router-dom";
-import Navigation from "../components/Header";
-import Footer from "../components/Footer";
+import { Outlet } from 'react-router-dom';
+import Navigation from '../components/Header';
+import { Footer } from '../components/index';
 
 function RootLayout() {
   return (

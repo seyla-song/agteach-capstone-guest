@@ -1,10 +1,4 @@
-import {
-  Container,
-  Link,
-  Typography,
-  Button,
-  Stack,
-} from '@mui/material';
+import { Container, Link, Typography, Button, Stack } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import Logo from '../assets/agteach_logo.svg';
 import { teachAgtechURL } from '../utils/globalURL';
@@ -22,7 +16,7 @@ const FOOTER_MENU = [
  * @return {JSX.Element} The rendered Footer component.
  */
 
-export default function Footer() {
+export const Footer = () => {
   return (
     <Stack backgroundColor="primary.dark" color="white">
       <Container sx={{ py: 5 }}>
@@ -45,11 +39,7 @@ export default function Footer() {
               Phnom Penh, Cambodia
             </Typography>
           </Stack>
-          <Stack
-            direction={{ xs: 'row'}}
-            textAlign="center"
-            gap={2}
-          >
+          <Stack direction={{ xs: 'row' }} textAlign="center" gap={2}>
             {FOOTER_MENU.map((data) => (
               <Link component={RouterLink} to={data.path} key={data.page}>
                 <Typography variant="bxsr" color="common.white">
@@ -83,4 +73,4 @@ export default function Footer() {
       </Container>
     </Stack>
   );
-}
+};
