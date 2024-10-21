@@ -5,6 +5,51 @@ import { Link as RouterLink } from 'react-router-dom';
 import { clearCart } from '../features/cart/cartSlice';
 import { useDispatch } from 'react-redux';
 
+const data = {
+  session: {
+    amount_total: 5000,
+    currency: 'usd',
+    customer_details: {
+      email: 'customer@example.com',
+      address: {
+        line1: '123 Main St',
+        city: 'San Francisco',
+        state: 'CA',
+        postal_code: '94111',
+        country: 'US',
+      },
+    },
+    payment_status: 'paid',
+    status: 'complete',
+  },
+  paymentIntent: {
+    amount: 5000,
+    currency: 'usd',
+    status: 'succeeded',
+    payment_method_types: ['card'],
+    charges: {
+      data: [
+        {
+          id: 'ch_1JklMNopQrsTuv456',
+          amount: 5000,
+          currency: 'usd',
+          payment_method_details: {
+            card: {
+              brand: 'visa',
+              last4: '4242',
+              exp_month: 12,
+              exp_year: 2025,
+            },
+          },
+          status: 'succeeded',
+          receipt_url:
+            'https://pay.stripe.com/receipts/acct_1H2I3J4K5L6/ch_1JklMNopQrsTuv456',
+        },
+      ],
+    },
+  },
+};
+
 export default function SuccessPayment() {
   const dispatch = useDispatch();
 
@@ -61,7 +106,7 @@ export default function SuccessPayment() {
             }}
           >
             <Typography variant="h3" color="dark.200">
-              - 100.00 USD
+              - {data.paymentIntent.amount / 100} {data.paymentIntent.currency.toUpperCase()}
             </Typography>
           </Stack>
           <Box pt={3}>
