@@ -119,7 +119,7 @@ export default function MarketPlace() {
         Loading...
       </div>
     );
-  } else if (productData.results === 0)
+  } else if (productData?.results === 0)
     content = (
       <div
         style={{
