@@ -1,6 +1,5 @@
 import { Box, Button, Link, Stack, Typography } from '@mui/material';
 import member from '../assets/Home/member.png';
-import { Link as RouterLink } from 'react-router-dom';
 import { teachAgtechURL } from '../utils/globalURL';
 
 export const MemberComponent = () => {
