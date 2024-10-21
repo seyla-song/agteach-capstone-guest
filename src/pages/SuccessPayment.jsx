@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { clearCart } from '../features/cart/cartSlice';
 import { useDispatch } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ReceiptElement from '../assets/receipt-element.svg';
 import AgteachBg from '../assets/agteach-bg.svg';
@@ -63,6 +63,7 @@ const data = {
 
 export default function SuccessPayment() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Fetch session data using session ID
   useEffect(() => {
@@ -71,8 +72,10 @@ export default function SuccessPayment() {
 
     if (sessionId) {
       dispatch(clearCart());
+      return;
     }
-  }, [dispatch]);
+    navigate('/marketplace');
+  }, [dispatch, navigate]);
 
   return (
     <Grid container height="100vh">
