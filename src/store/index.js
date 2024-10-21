@@ -14,6 +14,7 @@ import authSlice from '../features/auth/authSlice';
 import cartSlice from '../features/cart/cartSlice';
 
 import { loadCartState, saveCartState } from '../utils/cartPersistence';
+import { paymentApi } from '../services/api/paymentApi';
 
 const persistedCartState = loadCartState();
 
@@ -28,6 +29,7 @@ export const store = createStore({
     [enrollmentApi.reducerPath]: enrollmentApi.reducer,
     [purchasedApi.reducerPath]: purchasedApi.reducer,
     [cartApi.reducerPath]: cartApi.reducer,
+    [paymentApi.reducerPath]: paymentApi.reducer,
 
     auth: authSlice,
     user: userSlice,
@@ -46,7 +48,8 @@ export const store = createStore({
       enrollmentApi.middleware,
       purchasedApi.middleware,
       instructorApi.middleware,
-      cartApi.middleware
+      cartApi.middleware,
+      paymentApi.middleware
     ),
 });
 
