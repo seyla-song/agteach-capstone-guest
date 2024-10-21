@@ -28,7 +28,7 @@ import forgetPasswordImg from '../assets/forgotpassword.png';
  * @returns {React.ReactElement} A JSX element representing the password reset form.
  */
 const ForgotPasswordPage = () => {
-  const [forgotPassword, { isLoading, error, isSuccess, isError }] =
+  const [forgotPassword, { isLoading}] =
     useForgotPasswordMutation();
   const {
     register,

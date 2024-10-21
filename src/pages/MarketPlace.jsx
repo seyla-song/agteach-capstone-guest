@@ -36,7 +36,6 @@ export default function MarketPlace() {
     data: productData,
     isLoading: isProductLoading,
     isError: isProductError,
-    error: productError,
   } = useSearchProductQuery(query);
 
   const [category, setCategory] = useState('plant');

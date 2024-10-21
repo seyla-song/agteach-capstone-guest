@@ -39,7 +39,7 @@ export const BasicInfo = () => {
       const customerData = data.data.customer
       console.log("customerData", customerData);
       
-      const { firstName, lastName, phone, location_id, address, dataOfBirth } = customerData;
+      const { firstName, lastName, phone, location_id, address } = customerData;
       setValue("firstName", firstName || "");
       setValue("lastName", lastName || "");
       setValue("phone", phone || "");

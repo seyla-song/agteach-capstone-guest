@@ -22,7 +22,7 @@ const ResetPasswordPage = () => {
     formState: { errors },
     watch,
   } = useForm();
-  const [resetPassword, { isLoading, error, isSuccess }] =
+  const [resetPassword, { isLoading, isSuccess }] =
     useResetPasswordMutation();
   const { resetToken } = useParams();
   const [showPassword, setShowPassword] = useState(false);

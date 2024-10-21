@@ -26,12 +26,12 @@ export default function VerificationPage() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [verifyEmail, { isLoading, isSuccess, isError, error }] =
+  const [verifyEmail, { isLoading, isSuccess, isError }] =
     useVerifyEmailMutation();
 
   const onSubmit = async (data) => {
     try {
-      const response = await verifyEmail(data.emailVerifyCode).unwrap();
+      await verifyEmail(data.emailVerifyCode).unwrap();
       navigate('/');
     } catch (err) {
       console.error('Verification failed', err);

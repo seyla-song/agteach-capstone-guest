@@ -40,7 +40,7 @@ const SignupPage = () => {
   const submitHandler = async (data) => {
     try {
       data.dateOfBirth = dayjs(data.dateOfBirth).format('YYYY/MM/DD');
-      const { email, password, passwordConfirm, dateOfBirth } = data;
+      const { email, dateOfBirth } = data;
       const response = await signup(data).unwrap();
       if (response.status === 'success') {
         setSnackbarSeverity('success');

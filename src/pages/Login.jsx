@@ -37,7 +37,7 @@ function Login() {
   const handleShowPassword = () => setShowPassword((prev) => !prev);
   const submitHandler = async (data) => {
     try {
-      const response = await login(data).unwrap();
+      await login(data).unwrap();
       navigator('/');
     } catch (error) {
       console.error('Incorrect email or password', error);
