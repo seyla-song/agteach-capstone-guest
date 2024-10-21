@@ -76,7 +76,7 @@ export const apiSlice = createApi({
       query: (email) => ({
         url: "/api/users/resendCode",
         method: "POST",
-        body: {email},
+        body: { email },
       }),
     }),
 
@@ -84,6 +84,7 @@ export const apiSlice = createApi({
       query: () => ({
         url: "/api/users/isLoginedIn",
         method: "GET",
+        headers: { "X-Frontend-URL": window.location },
       }),
       providesTags: ["Auth"],
     }),
