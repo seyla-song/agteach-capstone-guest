@@ -21,3 +21,5 @@ export { SearchBar } from './SearchBarComponent';
 export { ItemsLoading } from './ItemsLoading';
 export { ProductWishlist } from './Wishlist/ProductWishlist';
 export { CourseWishlist } from './Wishlist/CourseWishlist';
+export { CategoryFilter } from './SearchResult/CategoryFilter';
+export { FilterByOther } from './SearchResult/FilterByOther';

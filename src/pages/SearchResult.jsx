@@ -1,6 +1,8 @@
+import { useState, useEffect, Fragment } from 'react';
 import { useLocation } from 'react-router-dom';
-import CategoryFilter from '../components/SearchResult/CategoryFilter';
-import SortByFilter from '../components/SearchResult/SortbyFilter';
+import { useSearchProductQuery } from '../services/api/productApi';
+import { useSearchCourseQuery } from '../services/api/courseApi';
+
 import {
   Box,
   Container,
@@ -9,12 +11,14 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import FilterByOther from '../components/SearchResult/FilterByOther';
-import SearchList from '../components/SearchResult/SearchList';
-import { SearchBar } from '../components/index';
-import { useState, useEffect, Fragment } from 'react';
-import { useSearchProductQuery } from '../services/api/productApi';
-import { useSearchCourseQuery } from '../services/api/courseApi';
+
+import {
+  SearchList,
+  SearchBar,
+  SortByFilter,
+  CategoryFilter,
+  FilterByOther,
+} from '../components/index';
 
 function SearchResultPage() {
   const currentLocation = useLocation().search;

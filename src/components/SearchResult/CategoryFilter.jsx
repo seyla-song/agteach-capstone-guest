@@ -1,21 +1,20 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from '@mui/material';
 
-function CategoryFilter({ category, handleChange }) {
-
+export const CategoryFilter = ({ category, handleChange }) => {
   const inactive = {
-    backgroundColor: "dark.100",
-    color: "dark.200",
+    backgroundColor: 'dark.100',
+    color: 'dark.200',
   };
 
   return (
     <Box sx={{ pr: 1 }}>
-      <Typography sx={{ typography: { xs: "bsmr", sm: "blgsm" } }}>
+      <Typography sx={{ typography: { xs: 'bsmr', sm: 'blgsm' } }}>
         Categories
       </Typography>
       <Stack
-        direction={{ xs: "column", sm: "row" }}
+        direction={{ xs: 'column', sm: 'row' }}
         gap={{ xs: 1, sm: 2 }}
-        sx={{ mt: "6px" }}
+        sx={{ mt: '6px' }}
       >
         <Button
           variant="contained"
@@ -23,8 +22,8 @@ function CategoryFilter({ category, handleChange }) {
             if (category !== 'course') handleChange('course');
           }}
           sx={{
-            borderRadius: "45px",
-            typography: { xs: "bsr", sm: "bmdsm" },
+            borderRadius: '45px',
+            typography: { xs: 'bsr', sm: 'bmdsm' },
             ...(category === 'product' ? inactive : {}),
           }}
         >
@@ -36,8 +35,8 @@ function CategoryFilter({ category, handleChange }) {
             if (category !== 'product') handleChange('product');
           }}
           sx={{
-            borderRadius: "45px",
-            typography: { xs: "bsr", sm: "bmdsm" },
+            borderRadius: '45px',
+            typography: { xs: 'bsr', sm: 'bmdsm' },
             ...(category === 'course' ? inactive : {}),
           }}
         >
@@ -46,6 +45,6 @@ function CategoryFilter({ category, handleChange }) {
       </Stack>
     </Box>
   );
-}
+};
 
 export default CategoryFilter;
