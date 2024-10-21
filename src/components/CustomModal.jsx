@@ -17,7 +17,7 @@ const style = {
   p: 4,
 };
 
-export default function CustomModal({
+export const CustomModal = ({
   open,
   onClose,
   title,
@@ -25,7 +25,7 @@ export default function CustomModal({
   children,
   showButton = false,
   buttonText = 'Open Modal',
-}) {
+}) => {
   return (
     <div>
       {showButton && <Button onClick={onClose}>{buttonText}</Button>}
@@ -53,4 +53,4 @@ export default function CustomModal({
       </Modal>
     </div>
   );
-}
+};

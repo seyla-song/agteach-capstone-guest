@@ -1,5 +1,11 @@
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  useGetOneProductQuery,
+  useGetRecommendedProductsQuery,
+} from '../services/api/productApi';
+
 import {
   Container,
   Stack,
@@ -10,24 +16,22 @@ import {
   Alert,
   AlertTitle,
 } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import TitleComponent from '../components/product-detail-component/TitleComponent';
-import DescriptionComponent from '../components/product-detail-component/DescriptionComponent';
-import SellerComponent from '../components/product-detail-component/SellerComponent';
-import ProductCarouselComponent from '../components/product-detail-component/ProductCarouselComponent';
-import { CustomCarousel } from '../components/CustomCarousel';
-import {
-  useGetOneProductQuery,
-  useGetRecommendedProductsQuery,
-} from '../services/api/productApi';
-import { ContentLoading } from '../components/ContentLoading';
 import { addItemToCart } from '../features/cart/cartSlice';
 
-import CustomModal from '../components/CustomModal';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import TimerOutlinedIcon from '@mui/icons-material/TimerOutlined';
 import TakeoutDiningIcon from '@mui/icons-material/TakeoutDining';
+
+import {
+  CustomCarousel,
+  ContentLoading,
+  TitleComponent,
+  CustomModal,
+  SellerComponent,
+  ProductCarouselComponent,
+  DescriptionComponent,
+} from '../components/index';
 
 function ProductDetailPage() {
   const { productId } = useParams();
