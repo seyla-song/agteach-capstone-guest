@@ -76,7 +76,7 @@ export default function SuccessPayment() {
 
   return (
     <Grid container height="100vh">
-      <Grid item xs={6}>
+      <Grid item xs={12} md={6}>
         <Stack alignItems="center" justifyContent="center" height="100%" p={3}>
           <Stack gap={1} alignItems="center">
             <CheckCircleOutlineIcon sx={{ fontSize: 60, color: 'teal.main' }} />
@@ -161,7 +161,7 @@ export default function SuccessPayment() {
           </Stack>
         </Stack>
       </Grid>
-      <Grid item bgcolor="grey.100" xs={6} justifyContent="center">
+      <Grid item bgcolor="grey.100" xs={12} md={6} justifyContent="center">
         <Stack
           alignItems="center"
           justifyContent="center"
