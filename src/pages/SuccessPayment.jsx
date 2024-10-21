@@ -1,8 +1,20 @@
 import React, { useEffect } from 'react';
-import { Typography, Grid, Stack } from '@mui/material';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import {
+  Typography,
+  Grid,
+  Stack,
+  Box,
+  Divider,
+  Link,
+  Button,
+} from '@mui/material';
 import { clearCart } from '../features/cart/cartSlice';
 import { useDispatch } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import ReceiptElement from '../assets/receipt-element.svg';
+import AgteachBg from '../assets/agteach-bg.svg';
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 
 const data = {
   session: {
@@ -64,80 +76,125 @@ export default function SuccessPayment() {
 
   return (
     <Grid container height="100vh">
-      <Grid item bgcolor="yellow" xs={6}>
-        <Stack
-          alignItems="center"
-          bgcolor="green"
-          justifyContent="center"
-          height="100%"
-          p={3}
-        >
-          <Stack>
+      <Grid item xs={6}>
+        <Stack alignItems="center" justifyContent="center" height="100%" p={3}>
+          <Stack gap={1} alignItems="center">
             <CheckCircleOutlineIcon sx={{ fontSize: 60, color: 'teal.main' }} />
-            <Typography variant="blgsm" mt={2}>
+            <Typography variant="blgsm" textAlign="center" mt={2}>
               Thanks for your payment
             </Typography>
-            <Typography>
+            <Typography textAlign="center">
               A payment to AgTeach will appear on your statement.
             </Typography>
             <Stack
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-              maxWidth={400}
-              borderRadius={3}
-              width="100%"
-              p={3}
-              mt={2}
               sx={{
-                border: '1px dashed #ccc',
+                backgroundImage: `url(${ReceiptElement})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
               }}
+              width="100%"
+              height="100px"
+              justifyContent="center"
             >
-              <Typography variant="h3" color="dark.200">
-                - {data.paymentIntent.amount / 100}{' '}
-                {data.paymentIntent.currency.toUpperCase()}
-              </Typography>
+              <Stack direction="row" justifyContent="space-between" px={3}>
+                <Typography variant="bssm" color="dark.200">
+                  AgTeach
+                </Typography>
+                <Typography variant="bssm" color="dark.200">
+                  - {data.paymentIntent.amount / 100}{' '}
+                  {data.paymentIntent.currency.toUpperCase()}
+                </Typography>
+              </Stack>
             </Stack>
+
+            <Stack width="100%" py={3} borderRadius="10px">
+              <Divider />
+              <SimpleRow
+                label="Email"
+                value={data.session.customer_details.email}
+              />
+              <SimpleRow
+                label="Address"
+                value={
+                  data.session.customer_details.address.line1 +
+                  data.session.customer_details.address.city +
+                  data.session.customer_details.address.state
+                }
+              />
+
+              <SimpleRow
+                label="Postal Code"
+                value={data.session.customer_details.address.postal_code}
+              />
+            </Stack>
+          </Stack>
+          <Link component={RouterLink} to="/" underline="none">
+            <Button variant="outlined" endIcon={<ArrowCircleRightOutlinedIcon />} sx={{ width: 400 }}>
+              Back to AgTeach
+            </Button>
+          </Link>
+
+          <Stack direction="row" gap pt={2}>
+            <Typography variant="bxsmd">POWERED BY STRIPE</Typography>
+            <Typography variant="bxsmd">|</Typography>
+            <Typography variant="bxsr">
+              <Box
+                component="a"
+                href="#"
+                color="dark.200"
+                sx={{ textDecoration: 'none' }}
+              >
+                Terms and Conditon
+              </Box>
+            </Typography>
+            <Typography variant="bxsr">
+              <Box
+                component="a"
+                href="#"
+                color="dark.200"
+                sx={{ textDecoration: 'none' }}
+              >
+                Privacy Policy
+              </Box>
+            </Typography>
           </Stack>
         </Stack>
       </Grid>
-      <Grid item bgcolor="pink" xs={6} justifyContent="center">
+      <Grid item bgcolor="grey.100" xs={6} justifyContent="center">
         <Stack
           alignItems="center"
-          bgcolor="orange"
           justifyContent="center"
           height="100%"
+          bgcolor="green"
+          sx={{
+            backgroundImage: `url(${AgteachBg})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+          }}
           p={3}
-        >
-          <Stack>
-            <CheckCircleOutlineIcon sx={{ fontSize: 60, color: 'teal.main' }} />
-            <Typography variant="blgsm" mt={2}>
-              Thanks for your payment
-            </Typography>
-            <Typography>
-              A payment to AgTeach will appear on your statement.
-            </Typography>
-            <Stack
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-              maxWidth={400}
-              borderRadius={3}
-              width="100%"
-              p={3}
-              mt={2}
-              sx={{
-                border: '1px dashed #ccc',
-              }}
-            >
-              <Typography variant="h3" color="dark.200">
-                - {data.paymentIntent.amount / 100}{' '}
-                {data.paymentIntent.currency.toUpperCase()}
-              </Typography>
-            </Stack>
-          </Stack>
-        </Stack>
+        ></Stack>
       </Grid>
     </Grid>
   );
 }
+
+const SimpleRow = ({ label, value }) => {
+  return (
+    <Stack
+      direction="row"
+      alignItems="center"
+      justifyContent="space-between"
+      py={2}
+      sx={{
+        borderBottomStyle: 'dotted',
+        borderBottomWidth: '1px',
+        borderBottomColor: 'grey.400',
+      }}
+    >
+      <Typography variant="bxsmd">{label}: </Typography>
+      <Typography variant="bxsmd">{value}</Typography>
+    </Stack>
+  );
+};
