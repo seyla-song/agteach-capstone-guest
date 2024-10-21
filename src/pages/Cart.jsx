@@ -46,7 +46,8 @@ export default CartPage;
 const CartContent = () => {
   const [purchased] = usePurchasedMutation();
   const [getCartItems, { isLoading }] = useGetCartItemsMutation();
-  const { data } = useGetCustomerPurchasedQuery();
+  const { data, isLoading: isLoadingPurchased } =
+    useGetCustomerPurchasedQuery();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const [snackbar, setSnackbar] = useState({
@@ -213,7 +214,10 @@ const CartContent = () => {
         </Grid>
         {loggedIn && loggedIn?.IsAuthenticated && (
           <Grid item xs={12}>
-            <PurchasedHistory data={data?.products || []} />
+            <PurchasedHistory
+              data={data?.products || []}
+              isLoading={isLoadingPurchased}
+            />
           </Grid>
         )}
       </Grid>
