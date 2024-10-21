@@ -15,7 +15,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ReceiptElement from '../assets/receipt-element.svg';
 import AgteachBg from '../assets/agteach-bg.svg';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
-import { useGetPaymentSessionMutation } from '../services/api/paymentApi';
+import { useGetPaymentSessionQuery } from '../services/api/paymentApi';
 
 const data = {
   session: {
@@ -74,7 +74,7 @@ export default function SuccessPayment() {
     data: mydata,
     error,
     isLoading,
-  } = useGetPaymentSessionMutation(sessionId);
+  } = useGetPaymentSessionQuery(sessionId);
 
   console.log(mydata);
 

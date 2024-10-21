@@ -17,4 +17,4 @@ export const paymentApi = createApi({
   }),
 });
 
-export const { useGetPaymentSessionMutation } = paymentApi;
+export const { useGetPaymentSessionQuery } = paymentApi;
