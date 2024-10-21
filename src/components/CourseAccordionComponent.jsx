@@ -66,9 +66,9 @@ export const CourseAccordionComponent = ({ data }) => {
   return (
     <Stack>
       {/* Render each course as an accordion */}
-      {data.map((course, courseIdx) => (
+      {data.map((section, sectionIdx) => (
         <Accordion
-          key={course.title}
+          key={section.title}
           sx={{ backgroundColor: "grey.200", boxShadow: "none" }}
         >
           <AccordionSummary
@@ -77,15 +77,15 @@ export const CourseAccordionComponent = ({ data }) => {
             id="panel1-header"
           >
             <Stack>
-              {/* Title and duration of the course */}
-              <Typography variant="bssm">{course.name}</Typography>
+              {/* Title and duration of the section */}
+              <Typography variant="bssm">{section.name}</Typography>
               <Typography variant="bxsr">
-                {getTotalFormattedDuration(course.lectures)}
+                {getTotalFormattedDuration(section.lectures)}
               </Typography>
             </Stack>
           </AccordionSummary>
           {/* Each topic is rendered as a row inside the accordion */}
-          {course.lectures.map((lecture, lectureIdx) => (
+          {section.lectures.map((lecture, lectureIdx) => (
             <Stack px={2}>
               <AccordionDetails
                 key={lecture.title}

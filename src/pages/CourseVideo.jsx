@@ -8,7 +8,6 @@ import {
 import Footer from "../components/Footer";
 import {
   useGetEnrollmentCourseQuery,
-  useGetOneCourseQuery,
   useGetRecommendedCoursesQuery,
 } from "../services/api/courseApi";
 import { useNavigate, useParams } from "react-router-dom";
@@ -76,13 +75,14 @@ function CourseVideoPage() {
 
   const videoNameUrl = getVideoNameUrlByLectureId(contentList, lectureId);
   if (videoNameUrl === null) {
-    return navigate("/error");
+    return navigate(`courses/${coursesId}/watch/overview`);
   }
+
 
   return (
     <Stack>
       {/* The course video header */}
-      <CourseVideoHeaderComponent title={"Course Video"} />
+      <CourseVideoHeaderComponent title={courseData.name} />
       {/* The course video main content and sidebar */}
       <Grid container>
         {/* The main content containing the video */}

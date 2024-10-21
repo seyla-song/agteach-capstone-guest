@@ -19,6 +19,7 @@ import { CustomCarousel } from './CustomCarousel';
  * @returns {React.ReactElement} The suggested courses and products component.
  */
 export const SuggestedCourseProduct = ({ courses, products }) => {
+  console.log(courses, products)
 
   const recommendedProducts = products.map((prod) => prod.product);
   
