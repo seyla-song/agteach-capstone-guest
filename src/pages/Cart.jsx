@@ -1,3 +1,16 @@
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useGetCartItemsMutation } from '../services/api/cartApi';
+import { useNavigate } from 'react-router-dom';
+import { Elements, useStripe } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { Link as RouterLink } from 'react-router-dom';
+import { useIsLoginQuery } from '../services/api/authApi';
+import {
+  useGetCustomerPurchasedQuery,
+  usePurchasedMutation,
+} from '../services/api/purchasedApi';
+
 import {
   Typography,
   Grid,
@@ -8,23 +21,15 @@ import {
   Box,
   Link,
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { CustomCartItem } from '../components/Cart/CustomCartItem';
-import { PurchasedHistory } from '../components/Cart/PurchasedHistory';
-import { Elements, useStripe } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import {
-  useGetCustomerPurchasedQuery,
-  usePurchasedMutation,
-} from '../services/api/purchasedApi';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useGetCartItemsMutation } from '../services/api/cartApi';
-import { CustomAlert } from '../components/CustomAlert';
+
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import { Link as RouterLink } from 'react-router-dom';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
-import { useIsLoginQuery } from '../services/api/authApi';
+
+import {
+  CustomCartItem,
+  PurchasedHistory,
+  CustomAlert,
+} from '../components/index';
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
@@ -101,7 +106,6 @@ const CartContent = () => {
       );
     }
   };
-
 
   return (
     <Container

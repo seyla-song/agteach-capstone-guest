@@ -10,3 +10,6 @@ export { CourseDetailHighlight } from './CourseDetail/CouseDetailHighlight';
 export { CourseDetailContent } from './CourseDetail/CourseDetailContent';
 export { CourseDetailHero } from './CourseDetail/CourseDetailHero';
 export { MemberComponent } from './MemberComponent';
+export { CustomCartItem } from './Cart/CustomCartItem';
+export { PurchasedHistory } from './Cart/PurchasedHistory';
+export {CustomAlert} from './CustomAlert'
