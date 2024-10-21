@@ -100,8 +100,8 @@ function CourseVideoPage() {
           <Footer />
         </Grid>
         {/* The sidebar containing the course details and outline */}
-        <Grid item xs={2}>
-          <CourseVideoSidebar display={{ xs: "none", md: "block" }} data={contentList} />
+        <Grid item xs={2} display={{ xs: "none", md: "block" }}>
+          <CourseVideoSidebar data={contentList} />
         </Grid>
       </Grid>
     </Stack>
