@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Typography } from '@mui/material';
+import {Button, Stack, Typography } from '@mui/material';
 
 export const CategoryFilter = ({ category, handleChange }) => {
   const inactive = {
@@ -7,23 +7,20 @@ export const CategoryFilter = ({ category, handleChange }) => {
   };
 
   return (
-    <Box sx={{ pr: 1 }}>
-      <Typography sx={{ typography: { xs: 'bsmr', sm: 'blgsm' } }}>
+    <Stack gap={2}>
+      <Typography sx={{ typography: { xs: 'bmdsm', sm: 'blgsm' } }}>
         Categories
       </Typography>
-      <Stack
-        direction={{ xs: 'column', sm: 'row' }}
-        gap={{ xs: 1, sm: 2 }}
-        sx={{ mt: '6px' }}
-      >
+      <Stack direction="row" gap={1}>
         <Button
           variant="contained"
+          disableElevation
           onClick={() => {
             if (category !== 'course') handleChange('course');
           }}
           sx={{
             borderRadius: '45px',
-            typography: { xs: 'bsr', sm: 'bmdsm' },
+            typography: { xs: 'bsr', sm: 'bsmr' },
             ...(category === 'product' ? inactive : {}),
           }}
         >
@@ -31,19 +28,20 @@ export const CategoryFilter = ({ category, handleChange }) => {
         </Button>
         <Button
           variant="contained"
+          disableElevation
           onClick={() => {
             if (category !== 'product') handleChange('product');
           }}
           sx={{
             borderRadius: '45px',
-            typography: { xs: 'bsr', sm: 'bmdsm' },
+            typography: { xs: 'bsr', sm: 'bsmr' },
             ...(category === 'course' ? inactive : {}),
           }}
         >
           Product
         </Button>
       </Stack>
-    </Box>
+    </Stack>
   );
 };
 
