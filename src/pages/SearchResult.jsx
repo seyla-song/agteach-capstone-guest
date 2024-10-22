@@ -7,7 +7,7 @@ import {
   Box,
   Container,
   Divider,
-  Grid2 as Grid,
+  Grid,
   Stack,
   Typography,
 } from '@mui/material';
@@ -18,6 +18,8 @@ import {
   SortByFilter,
   CategoryFilter,
   FilterByOther,
+  ContentLoading,
+  ItemsLoading,
 } from '../components/index';
 
 function SearchResultPage() {
@@ -117,114 +119,19 @@ function SearchResultPage() {
     setFilteredData(rawDataToFilter);
   }, [category, sortBy, filterByRuntime, rawData]);
 
-  let content;
+  if (isCourseLoading || isProductLoading || category) <ContentLoading />;
 
-  if (category === 'course') {
-    if (isCourseLoading) {
-      content = (
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          Loading...
-        </div>
-      );
-    } else if (courseData.results === 0)
-      content = (
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          No results were found!
-        </div>
-      );
-    else if (isCourseError)
-      content = (
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          Something went wrong. please try again later!
-        </div>
-      );
-    else if (courseData)
-      content = (
-        <SearchList
-          dataObj={filteredData}
-          cardVariant={category}
-          limit={limit}
-          handleLimitChange={handleLimitChange}
-        />
-      );
-  }
-
-  if (category === 'product') {
-    if (isProductLoading) {
-      content = (
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          Loading...
-        </div>
-      );
-    } else if (productData.results === 0)
-      content = (
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          No results were found!
-        </div>
-      );
-    else if (isProductError)
-      content = (
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          Something went wrong. please try again later!
-        </div>
-      );
-    else if (productData)
-      content = (
-        <SearchList
-          dataObj={filteredData}
-          cardVariant={category}
-          limit={limit}
-          handleLimitChange={handleLimitChange}
-        />
-      );
+  if (isProductError || isCourseError) {
+    return (
+      <Stack
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}
+      >
+        Something went wrong. please try again later!
+      </Stack>
+    );
   }
 
   return (
@@ -232,12 +139,9 @@ function SearchResultPage() {
       maxWidth={false}
       sx={{
         maxWidth: '1420px',
-        display: 'flex',
-        flexDirection: 'column',
-        padding: 0,
-        margin: {
-          xs: 'auto auto 50px auto',
-          md: '100px auto 100px auto',
+        marginY: {
+          xs: '30px',
+          md: '60px',
         },
       }}
     >
@@ -246,57 +150,58 @@ function SearchResultPage() {
         searchLabel={'Learn Smarter, Learn Faster. AgTeach'}
         defaultSearchString={query}
       />
-      <Box sx={{ mx: { xs: '5px', sm: 0 } }}>
-        <Stack py={3}>
-          <Typography variant="h3">Search result for "{query}"</Typography>
+
+      <Stack py={3}>
+        <Typography maxWidth={500} variant="h3">
+          Search result for "{query}"
+        </Typography>
+        {isCourseLoading && isProductLoading && <ItemsLoading title="courses or products" />}
+        {!isCourseLoading && !isProductLoading && (
           <Typography variant="bsmr">
-            Course({courseData.results || 0}) & Product(
+            Course({courseData?.results || 0}) & Product(
             {productData?.results || 0})
           </Typography>
-        </Stack>
-        <Grid container spacing={1}>
-          <Grid
-            size={{ xs: 12, sm: 4 }}
-            sx={{
-              borderRight: { xs: 0, sm: `1px solid lightgrey` },
-              pr: { xs: 0, sm: '10px' },
-            }}
-          >
-            <Stack
-              direction={{ xs: 'row', sm: 'column' }}
-              gap={{ xs: 1, sm: 4 }}
-              sx={{
-                '& > *': {
-                  borderRight: { xs: '1px solid lightgrey', sm: 'none' },
-                },
-                '& > *:last-child': {
-                  borderRight: 'none',
-                },
-              }}
-            >
-              <CategoryFilter
-                category={category}
-                handleChange={handleCategoryChange}
-              />
-              <Divider sx={{ display: { xs: 'none', sm: 'block' } }} />
-              <SortByFilter sortBy={sortBy} handleChange={handleSortByChange} />
-              {category === 'course' && (
-                <Fragment>
-                  <Divider sx={{ display: { xs: 'none', sm: 'block' } }} />
-                  <FilterByOther
-                    filterByRuntime={filterByRuntime}
-                    handleFilterByRuntimeChange={handleFilterByRuntimeChange}
-                    context={category}
-                  />
-                </Fragment>
-              )}
-            </Stack>
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8 }} sx={{ width: '100%' }}>
-            {content}
-          </Grid>
+        )}
+      </Stack>
+
+      <Grid container>
+        <Grid
+          sx={{
+            borderRight: { xs: 0, sm: `1px solid lightgrey` },
+          }}
+          item
+          xs={12}
+          sm={3}
+        >
+          <Stack direction="column" gap={3} px={3} pb={3}>
+            <CategoryFilter
+              category={category}
+              handleChange={handleCategoryChange}
+            />
+            <Divider />
+            <SortByFilter sortBy={sortBy} handleChange={handleSortByChange} />
+
+            <Divider />
+            <FilterByOther
+              filterByRuntime={filterByRuntime}
+              handleFilterByRuntimeChange={handleFilterByRuntimeChange}
+              context={category}
+            />
+
+            <Divider />
+          </Stack>
         </Grid>
-      </Box>
+        <Grid item xs={12} sm={9}>
+          <Stack px={3} gap={2} minHeight="100vh">
+            <SearchList
+              dataObj={filteredData}
+              cardVariant={category}
+              limit={limit}
+              handleLimitChange={handleLimitChange}
+            />
+          </Stack>
+        </Grid>
+      </Grid>
     </Container>
   );
 }
