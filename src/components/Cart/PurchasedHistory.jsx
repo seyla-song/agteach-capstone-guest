@@ -62,19 +62,17 @@ export const PurchasedHistory = ({ data, isLoading }) => {
               >
                 <Stack>
                   <Typography variant="bmdsm">
-                    {' '}
                     # {order.purchased_id}
                   </Typography>
-                  {/* <Typography color="dark.300" variant="bxsr">
-                  {order.date}
-                </Typography> */}
+                  <Typography color="dark.300" variant="bxsr">
+                    {order.created_at}
+                  </Typography>
                 </Stack>
               </AccordionSummary>
               <AccordionDetails>
                 {/* Render purchased items with details */}
                 {order.products.map((itemDetail) => (
                   <Stack key={itemDetail.product_id}>
-                    {' '}
                     {/* Ensure itemDetail.id is unique */}
                     <Stack
                       color="dark.300"
