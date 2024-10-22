@@ -102,9 +102,9 @@ export default function MarketPlace() {
         maxWidth={false}
         sx={{
           maxWidth: '1420px',
-          margin: {
-            xs: '30px auto 50px auto',
-            md: '50px auto 100px auto',
+          marginY: {
+            xs: '30px',
+            md: '60px',
           },
         }}
       >
