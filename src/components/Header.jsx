@@ -19,7 +19,6 @@ import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import StarOutlineOutlinedIcon from '@mui/icons-material/StarOutlineOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { LogoutOutlined } from '@mui/icons-material';
 import GuestProfilePicture from '../assets/profile-pic.jpg';
@@ -39,7 +38,7 @@ const HEADER_MENU_MOBILE = [
   { page: 'My Learning', path: 'mylearning' },
   { page: 'Marketplace', path: 'marketplace' },
   { page: 'AgAI', path: 'agai' },
-  { page: 'Wishlist', path: 'wishlist' },
+  // { page: 'Wishlist', path: 'wishlist' },
   { page: 'Cart', path: 'cart' },
 ];
 
@@ -342,13 +341,13 @@ function Navigation() {
                 {cartItemTotal > 0 && <Typography position='absolute' top={2} right={0} bgcolor='red.main' variant='btr' borderRadius={100} width={15}>{cartItemTotal}</Typography>}
               </IconButton>
 
-              <IconButton
+              {/* <IconButton
                 sx={{ color: 'common.white' }}
                 component={RouterLink}
                 to="wishlist"
               >
                 <StarOutlineOutlinedIcon fontSize="small" />
-              </IconButton>
+              </IconButton> */}
             </Box>
           </Box>
         </Toolbar>
