@@ -5,14 +5,18 @@ import {
   TextField,
   Typography,
   Autocomplete,
-} from "@mui/material";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+} from '@mui/material';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const data = ["Plant", "Fertilizer", "Shovel"];
+const data = ['Plant', 'Fertilizer', 'Shovel'];
 
-export const SearchBar = ({ backDrop, searchLabel, searchContext, defaultSearchString }) => {
-
+export const SearchBar = ({
+  backDrop,
+  searchLabel,
+  searchContext,
+  defaultSearchString,
+}) => {
   if (!searchContext) searchContext = 'search';
   if (!defaultSearchString) defaultSearchString = '';
 
@@ -24,44 +28,44 @@ export const SearchBar = ({ backDrop, searchLabel, searchContext, defaultSearchS
   };
 
   const handleAutocompleteChange = (event, newValue) => {
-    setSearchString(newValue || "");
+    setSearchString(newValue || '');
   };
 
   const handleStartSearch = (e) => {
     e.preventDefault();
-    navigate(`/${searchContext}?name=${searchString}`)
+    navigate(`/${searchContext}?name=${searchString}`);
   };
 
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        position: 'relative', 
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
         height: backDrop
-          ? { xs: "200px", md: "300px" }
-          : { xs: "auto", md: "auto" },
+          ? { xs: '200px', md: '300px' }
+          : { xs: 'auto', md: 'auto' },
       }}
     >
       {backDrop &&
-        (backDrop === "primary" ? (
+        (backDrop === 'primary' ? (
           <Box
             height="100%"
             width="100%"
             bgcolor="primary.main"
             position="relative"
-          ></Box>
+          />
         ) : (
           <Box
             component="img"
             sx={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center",
-              position: "relative",
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center',
+              position: 'relative',
             }}
             src={backDrop}
           />
@@ -71,15 +75,15 @@ export const SearchBar = ({ backDrop, searchLabel, searchContext, defaultSearchS
         spacing="30px"
         padding="0 20px"
         sx={{
-          position: backDrop ? "absolute" : "static",
-          width: "100%",
-          padding: backDrop ? { xs: "0 20px", md: "0 120px" } : '0',
+          position: backDrop ? 'absolute' : 'static',
+          width: '100%',
+          padding: backDrop ? { xs: '0 20px', md: '0 120px' } : '0',
         }}
       >
         {searchLabel && (
           <Typography
             color="white"
-            sx={{ typography: { xs: "blgsm", md: "h4" } }}
+            sx={{ typography: { xs: 'blgsm', md: 'h4' } }}
           >
             {searchLabel}
           </Typography>
@@ -88,12 +92,12 @@ export const SearchBar = ({ backDrop, searchLabel, searchContext, defaultSearchS
           <Box display="flex" gap="20px" width="100%" height="40px">
             <Autocomplete
               id="search-bar"
-              sx={{ width: "100%", height: "40px", mx: "auto" }}
+              sx={{ width: '100%', height: '40px', mx: 'auto' }}
               options={data}
               value={searchString}
               onInputChange={handleAutocompleteChange}
               getOptionLabel={(option) => {
-                return option
+                return option;
               }}
               renderOption={(props, option) => {
                 const { key, ...optionProps } = props;
@@ -112,24 +116,24 @@ export const SearchBar = ({ backDrop, searchLabel, searchContext, defaultSearchS
                   InputProps={{
                     ...params.InputProps,
                     sx: {
-                      height: "40px",
-                      bgcolor: "grey.100",
-                      borderRadius: "4px",
+                      height: '40px',
+                      bgcolor: 'grey.100',
+                      borderRadius: '4px',
                     },
                     endAdornment: null,
-                    autoComplete: "new-password",
+                    autoComplete: 'new-password',
                   }}
                 />
               )}
             />
 
-            <Box sx={{ width: { xs: "80px", sm: "100px", md: "220px" } }}>
+            <Box sx={{ width: { xs: '80px', sm: '100px', md: '220px' } }}>
               <Button
                 onClick={handleStartSearch}
                 fullWidth
                 variant="contained"
                 color="secondary"
-                sx={{ height: "100%", color: "primary.main" }}
+                sx={{ height: '100%', color: 'primary.main' }}
               >
                 Search
               </Button>
@@ -139,4 +143,4 @@ export const SearchBar = ({ backDrop, searchLabel, searchContext, defaultSearchS
       </Stack>
     </Box>
   );
-}
+};
