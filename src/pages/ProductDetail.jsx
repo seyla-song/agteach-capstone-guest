@@ -18,7 +18,6 @@ import {
 } from '@mui/material';
 import { addItemToCart } from '../features/cart/cartSlice';
 
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import TimerOutlinedIcon from '@mui/icons-material/TimerOutlined';
 import TakeoutDiningIcon from '@mui/icons-material/TakeoutDining';
