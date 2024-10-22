@@ -13,31 +13,27 @@ import {
 } from '../../services/api/userApi';
 import { CustomAlert } from '../../components/CustomAlert';
 
-export const ProfilePhoto = () => {
+export const ProfilePhoto = ({ userData }) => {
   const [profileImage, setProfileImage] = useState();
-  const { data } = useGetUserInfoQuery();
-  const [updateInfo, { isLoading }] = useUpdateInfoMutation();
+  const [imageFile, setImageFile] = useState(null);
+  const [updateInfo, { isLoading, isError, error }] = useUpdateInfoMutation();
+  
 
   // Alert state
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertSeverity, setAlertSeverity] = useState('error');
 
-  let customerData = {};
-
-  console.log('customerDataaaaa', customerData.imageUrl);
-
   useEffect(() => {
-    if (data) {
-      customerData = data.data.customer;
-      setProfileImage(customerData.imageUrl);
+    if (userData) {
+      setProfileImage(userData?.customer?.imageUrl);
     }
-  }, [data]);
+  }, [userData]);
 
-  const handleImageUpload = async (event) => {
+  const handleImageUpload = (event) => {
     const file = event.target.files[0];
-    setProfileImage(URL.createObjectURL(file));
 
+    console.log('file', file.type)
     if (file) {
       const validImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
       if (!validImageTypes.includes(file.type)) {
@@ -46,17 +42,24 @@ export const ProfilePhoto = () => {
         setAlertOpen(true);
         return;
       }
-      const formData = new FormData();
-      formData.append('photo', file);
-      try {
-        window.location.reload();
-      } catch (error) {
-        setAlertMessage('Error submitting form. Please try again.');
-        setAlertSeverity('error');
-        setAlertOpen(true);
-      }
-    }
+      setProfileImage(URL.createObjectURL(file));
+      setImageFile(file);
+    };
+    
   };
+
+  const handleSendUpdateImage = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('photo', imageFile);
+      await updateInfo(formData);
+      window.location.reload();
+    } catch (error) {
+      setAlertMessage('Error submitting form. Please try again.');
+      setAlertSeverity('error');
+      setAlertOpen(true);
+    }
+  }
 
   // Handle alert close
   const handleAlertClose = () => {
@@ -117,7 +120,7 @@ export const ProfilePhoto = () => {
             onChange={handleImageUpload}
             sx={{ flexGrow: 1, width: 'auto' }}
           />
-          <Button variant="contained" sx={{ px: 10, py: 2 }}>
+          <Button variant="contained" sx={{ px: 10, py: 2 }} onClick={handleSendUpdateImage}>
             {isLoading ? 'Uploading...' : 'Upload'}
           </Button>
         </Stack>
