@@ -149,15 +149,6 @@ export default function MarketPlace() {
         Something went wrong. please try again later!
       </div>
     );
-  else if (productData)
-    content = (
-      <SearchList
-        dataObj={filteredData}
-        cardVariant={'product'}
-        limit={limit}
-        handleLimitChange={handleLimitChange}
-      />
-    );
 
   return (
     <>
@@ -195,19 +186,25 @@ export default function MarketPlace() {
             sm={9}
             sx={{ width: '100%', mt: { xs: '20px', sm: '0px' } }}
           >
-            <Box sx={{ p: '0px 12px 12px 12px' }}>
+            <Stack px={2} gap={2}>
               <SearchBar
                 backDrop={false}
                 searchContext={'marketplace'}
                 defaultSearchString={query}
               />
-            </Box>
-            {filteredData.length < 1 ? (
-              <ItemsLoading title={'marketplace'} />
-            ) : (
-              <Typography>{`Found (${filteredData.length}) items`}</Typography>
-            )}
-            {content}
+
+              {filteredData.length < 1 ? (
+                <ItemsLoading title={'marketplace'} />
+              ) : (
+                <Typography>{`Found (${filteredData.length}) items`}</Typography>
+              )}
+              <SearchList
+                dataObj={filteredData}
+                cardVariant={'product'}
+                limit={limit}
+                handleLimitChange={handleLimitChange}
+              />
+            </Stack>
           </Grid>
         </Grid>
       </Container>
