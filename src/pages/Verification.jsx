@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useVerifyEmailMutation } from '../services/api/authApi';
 
@@ -13,6 +13,8 @@ import {
   LogoLink,
   ResendCodeButton,
 } from '../components/index';
+
+let IS_VERIFIED = false;
 
 export default function VerificationPage() {
   const [open, setOpen] = useState(true);
@@ -32,12 +34,20 @@ export default function VerificationPage() {
   const onSubmit = async (data) => {
     try {
       await verifyEmail(data.emailVerifyCode).unwrap();
-      navigate('/');
-      if (isSuccess) window.open('/', '_blank');
+      if (isSuccess) {
+        IS_VERIFIED = true;
+        window.open('/', '_blank');
+      }
     } catch (err) {
       console.error('Verification failed', err);
     }
   };
+
+  useEffect(() => {
+    if (IS_VERIFIED) {
+      navigate('/');
+    }
+  }, [navigate]);
 
   const handleOnClick = () => {
     setOpen(true);
