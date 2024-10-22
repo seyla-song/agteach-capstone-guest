@@ -4,7 +4,6 @@ import Stack from '@mui/material/Stack';
 import { Container } from '@mui/material';
 import {
   useGetUserInfoQuery,
-  useUpdateInfoMutation,
 } from '../services/api/userApi';
 
 import {
@@ -14,6 +13,7 @@ import {
   ChangePassword,
 } from '../components/index.js';
 import { useEffect, useState } from 'react';
+import { ContentLoading } from '../components/index.js';
 /**
  * GuestProfile component is a reusable component
  * that renders a container with a Stack of several components:
@@ -31,14 +31,17 @@ import { useEffect, useState } from 'react';
  */
 export default function GuestProfile() {
   const [userData, setUserData] = useState({});
-  const {data, isloading, isError, error } = useGetUserInfoQuery();
+  const {data, isLoading, isError, error } = useGetUserInfoQuery();
 
   useEffect(() => {
     if (data) {
       setUserData(data.data);
       console.log(data)
     }
-  }, [data])
+  }, [data, setUserData]);
+
+  if (isLoading) return <ContentLoading />;
+  if (isError) return <div>Error: {error}</div>;
 
   return (
     <>
@@ -51,7 +54,7 @@ export default function GuestProfile() {
 
           <Divider sx={{ m: 5, mx: 0 }} />
 
-          <BasicInfo />
+          <BasicInfo userData={userData}/>
 
           <Divider sx={{ m: 5, mx: 0 }} />
 

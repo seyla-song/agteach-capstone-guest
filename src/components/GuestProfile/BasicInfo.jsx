@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { useGetUserInfoQuery, useUpdateInfoMutation } from "../../services/api/userApi";// Import the isLogin query
 
 
-export const BasicInfo = () => {
+export const BasicInfo = ({ userData }) => {
   const {
     register,
     handleSubmit,
@@ -35,9 +35,9 @@ export const BasicInfo = () => {
   const [updateInfo, { isLoading: isLoadingInfo }] = useUpdateInfoMutation();
   const [selectedCity, setSelectedCity] = useState(null);
   useEffect(() => {
-    if (data) {
-      const customerData = data.data.customer
-      console.log("customerData", customerData);
+    if (userData && userData.customer) {
+      const customerData = userData.customer
+      console.log("customerData", userData.customer);
       
       const { firstName, lastName, phone, location_id, address } = customerData;
       setValue("firstName", firstName || "");
@@ -47,7 +47,7 @@ export const BasicInfo = () => {
       setValue("address", address || "");
       setSelectedCity(city.find((c) => c.label === location_id) || null); // Set city autocomplete
     }
-  }, [data, setValue]);
+  }, [userData, setValue]);
 
   const onSubmit = async (formData) => {
     const { firstName, lastName, phone, city, address } = formData;

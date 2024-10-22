@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -24,6 +24,7 @@ export const ChangePassword = () => {
     handleSubmit,
     formState: { errors },
     watch,
+    reset
   } = useForm({
     defaultValues: {
       passwordCurrent: "",
@@ -32,18 +33,18 @@ export const ChangePassword = () => {
     },
   });
 
-  const [resetPassword, { isError }] = useUpdatePasswordMutation();
-  const [submitError, setSubmitError] = useState("");
+  const [resetPassword, { isError, error,  isLoading, isSuccess}] = useUpdatePasswordMutation();
 
   const onSubmit = async (formData) => {
-    try {
-      await resetPassword(formData).unwrap();
-      console.log("Success:", formData);
-    } catch (error) {
-      setSubmitError("Error submitting form. Please try again.");
-      console.error("Error submitting form:", error);
-    }
+    const res = await resetPassword(formData);
+    if (res.data?.status === 'success') reset();
+
+    setOpen(true)
   };
+
+  useEffect(() => {
+    console.log(isSuccess)
+  }, [isSuccess])
 
   const [showPassword, setShowPassword] = useState({
     current: false,
@@ -62,11 +63,10 @@ export const ChangePassword = () => {
     <>
       <Stack sx={{ m: 2, gap: 2 }}>
         <Typography variant="h4">Change Password</Typography>
-        {submitError && <Typography color="error">{submitError}</Typography>}
         {/* Current Password Field */}
         <CustomAlert
-          label={errors.passwordCurrent?.message}
-          severity={isError ? "success" : "error"}
+          label={isError ? error.data.message : isSuccess ? 'Successfuly updated password' : 'Something went wrong. Please try again.' }
+          severity={isError ? "error" : "success"}
           open={open}
           onClose={() => setOpen(false)}
         />
@@ -167,8 +167,9 @@ export const ChangePassword = () => {
             variant="contained"
             sx={{ px: 10, py: 2 }}
             onClick={handleSubmit(onSubmit)}
+            disabled={isLoading}
           >
-            Save
+            {isLoading ? 'saving...' : 'Save'}
           </Button>
         </Stack>
       </Box>

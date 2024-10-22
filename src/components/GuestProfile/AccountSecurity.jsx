@@ -18,7 +18,7 @@ export const AccountSecurity = () => {
     if (data) {
       const customerData = data.data.customer;
       const { email } = customerData;
-      console.log(customerData);
+      // console.log(customerData);
       setValue("email", email || "");
     }
   }, [data, setValue]);
