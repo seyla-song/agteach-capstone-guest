@@ -34,7 +34,6 @@ export default function GuestProfile() {
   useEffect(() => {
     if (data) {
       setUserData(data.data);
-      console.log(data);
     }
   }, [data, setUserData]);
 

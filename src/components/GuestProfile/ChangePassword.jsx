@@ -43,10 +43,6 @@ export const ChangePassword = () => {
     setOpen(true);
   };
 
-  useEffect(() => {
-    console.log(isSuccess);
-  }, [isSuccess]);
-
   const [showPassword, setShowPassword] = useState({
     current: false,
     new: false,

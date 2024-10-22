@@ -38,7 +38,6 @@ export const BasicInfo = ({ userData }) => {
   useEffect(() => {
     if (userData && userData.customer) {
       const customerData = userData.customer;
-      console.log("customerData", userData.customer);
 
       const { firstName, lastName, phone, location_id, address } = customerData;
       setValue("firstName", firstName || "");
@@ -61,7 +60,6 @@ export const BasicInfo = ({ userData }) => {
       address,
     };
 
-    console.log("Form Data Submitted:", updatedData);
     await updateInfo(updatedData);
     setOpen(true);
 
