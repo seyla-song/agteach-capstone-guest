@@ -181,23 +181,12 @@ export default function MarketPlace() {
               pr: { xs: 0, sm: '10px' },
             }}
           >
-            <Stack
-              direction={{ xs: 'row', sm: 'column' }}
-              gap={{ xs: 1, sm: 4 }}
-              sx={{
-                '& > *': {
-                  borderRight: { xs: '1px solid lightgrey', sm: 'none' }, // Add right border to each item
-                },
-                '& > *:last-child': {
-                  borderRight: 'none', // Remove border from the last item
-                },
-              }}
-            >
+            <Stack direction={{ sm: 'column' }} gap={{ xs: 1, sm: 4 }}>
               <Category
                 category={category}
                 handleChange={handleCategoryChange}
               />
-              <Divider sx={{ display: { xs: 'none', sm: 'block' } }} />
+              <Divider />
               <SortByFilter sortBy={sortBy} handleChange={handleSortByChange} />
             </Stack>
           </Grid>
