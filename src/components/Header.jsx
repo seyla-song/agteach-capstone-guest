@@ -39,7 +39,7 @@ const HEADER_MENU_MOBILE = [
   { page: 'My Learning', path: 'mylearning' },
   { page: 'Marketplace', path: 'marketplace' },
   { page: 'AgAI', path: 'agai' },
-  { page: 'Wishlist', path: 'wishlist' },
+  // { page: 'Wishlist', path: 'wishlist' },
   { page: 'Cart', path: 'cart' },
 ];
 
@@ -342,13 +342,13 @@ function Navigation() {
                 {cartItemTotal > 0 && <Typography position='absolute' top={2} right={0} bgcolor='red.main' variant='btr' borderRadius={100} width={15}>{cartItemTotal}</Typography>}
               </IconButton>
 
-              <IconButton
+              {/* <IconButton
                 sx={{ color: 'common.white' }}
                 component={RouterLink}
                 to="wishlist"
               >
                 <StarOutlineOutlinedIcon fontSize="small" />
-              </IconButton>
+              </IconButton> */}
             </Box>
           </Box>
         </Toolbar>
