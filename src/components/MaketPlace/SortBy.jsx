@@ -1,8 +1,8 @@
-import { Box, Stack, Typography } from "@mui/material";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
+import { Box, Stack, Typography } from '@mui/material';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
 
 export const SortByFilter = ({ sortBy, handleChange }) => {
   return (
@@ -14,9 +14,6 @@ export const SortByFilter = ({ sortBy, handleChange }) => {
       <Stack
         direction="row"
         gap={2} // Increased gap for better spacing
-        sx={{
-          typography: { xs: "body2", sm: "body1" },
-        }}
       >
         <FormControl>
           {/* Optionally, add a FormLabel if you need one */}
@@ -62,5 +59,4 @@ export const SortByFilter = ({ sortBy, handleChange }) => {
       </Stack>
     </Box>
   );
-}
-
+};
