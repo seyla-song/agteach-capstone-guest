@@ -89,7 +89,9 @@ project-root/
 | **client/src/components/** | Reusable UI components.                                     |
 | **client/src/constants/**  | API base url                                                |
 | **client/src/pages/**      | Components representing different pages of the application. |
+| **client/src/route/**      | Components root layout and router navigate to pages         |
 | **client/src/services/**   | API service functions.                                      |
+| **client/src/store/**      | Application state that have slice, reducer and middleware   |
 | **client/src/utils/**      | Utility functions and helpers.                              |
 | **client/config/**         | configuration files.                                        |
 
