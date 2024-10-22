@@ -18,6 +18,7 @@ export const CategoryFilter = ({ category, handleChange }) => {
       >
         <Button
           variant="contained"
+          disableElevation
           onClick={() => {
             if (category !== 'course') handleChange('course');
           }}
@@ -31,6 +32,7 @@ export const CategoryFilter = ({ category, handleChange }) => {
         </Button>
         <Button
           variant="contained"
+          disableElevation
           onClick={() => {
             if (category !== 'product') handleChange('product');
           }}
