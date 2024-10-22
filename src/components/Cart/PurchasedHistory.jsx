@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { ItemsLoading } from '../ItemsLoading';
+import { dateFormat } from '../../utils/dateFormat';
 
 /**
  * PurchasedHistory component is a reusable component
@@ -65,7 +66,7 @@ export const PurchasedHistory = ({ data, isLoading }) => {
                     # {order.purchased_id}
                   </Typography>
                   <Typography color="dark.300" variant="bxsr">
-                    {order.created_at}
+                    {dateFormat(order.created_at)}
                   </Typography>
                 </Stack>
               </AccordionSummary>
