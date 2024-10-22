@@ -8,7 +8,6 @@ import {
   Stack,
   Grid,
   Typography,
-  Box,
 } from '@mui/material';
 
 import {
