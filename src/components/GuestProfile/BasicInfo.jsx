@@ -12,7 +12,7 @@ import {
   Stack,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useGetUserInfoQuery, useUpdateInfoMutation } from "../../services/api/userApi";// Import the isLogin query
+import { useUpdateInfoMutation } from "../../services/api/userApi";// Import the isLogin query
 
 
 export const BasicInfo = ({ userData }) => {
@@ -30,8 +30,6 @@ export const BasicInfo = ({ userData }) => {
       address: "",
     },
   });
-
-  const { data , isLoading } = useGetUserInfoQuery();
   const [updateInfo, { isLoading: isLoadingInfo }] = useUpdateInfoMutation();
   const [selectedCity, setSelectedCity] = useState(null);
   useEffect(() => {
@@ -69,7 +67,6 @@ export const BasicInfo = ({ userData }) => {
     }
   };
 
-  if (isLoading) return <Stack justifyContent={"center"} alignItems={"center"}>Loading...</Stack>;
 
   const validatePhone = (value) => {
     const phonePattern = /^[0-9]+$/; // Only digits
