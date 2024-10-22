@@ -17,6 +17,7 @@ import {
   Category,
   SortByFilter,
   SearchBar,
+  ContentLoading,
 } from '../components/index';
 
 /**
@@ -105,50 +106,18 @@ export default function MarketPlace() {
     setFilteredData(dataToFilter);
   }, [rawData, category, sortBy, filterByPrice, limit]);
 
-  let content;
-
-  if (isProductLoading) {
-    content = (
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        Loading...
-      </div>
-    );
-  } else if (productData?.results === 0)
-    content = (
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        No results were found!
-      </div>
-    );
-  else if (isProductError)
-    content = (
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
+  if (isProductError) {
+    return (
+      <Stack
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}
       >
         Something went wrong. please try again later!
-      </div>
+      </Stack>
     );
+  }
 
   return (
     <>
@@ -180,13 +149,8 @@ export default function MarketPlace() {
               <SortByFilter sortBy={sortBy} handleChange={handleSortByChange} />
             </Stack>
           </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={9}
-            sx={{ width: '100%', mt: { xs: '20px', sm: '0px' } }}
-          >
-            <Stack px={3} gap={2}>
+          <Grid item xs={12} sm={9}>
+            <Stack px={3} gap={2} minHeight='100vh'>
               <SearchBar
                 backDrop={false}
                 searchContext={'marketplace'}
@@ -196,12 +160,15 @@ export default function MarketPlace() {
               {!isProductLoading && productData && (
                 <Typography typography="bsr">{`Found (${filteredData.length}) items`}</Typography>
               )}
-              <SearchList
-                dataObj={filteredData}
-                cardVariant={'product'}
-                limit={limit}
-                handleLimitChange={handleLimitChange}
-              />
+              {isProductLoading && <ContentLoading />}
+              {!isProductLoading && productData && (
+                <SearchList
+                  dataObj={filteredData}
+                  cardVariant={'product'}
+                  limit={limit}
+                  handleLimitChange={handleLimitChange}
+                />
+              )}
             </Stack>
           </Grid>
         </Grid>
