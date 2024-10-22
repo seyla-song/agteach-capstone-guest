@@ -1,4 +1,4 @@
-import { Box, Stack, Chip, Typography } from '@mui/material';
+import {Stack, Chip, Typography } from '@mui/material';
 
 export const Category = ({ category, handleChange }) => {
   return (
