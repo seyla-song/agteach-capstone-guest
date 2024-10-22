@@ -1,10 +1,9 @@
-import { useState, useEffect, Fragment } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSearchProductQuery } from '../services/api/productApi';
 import { useSearchCourseQuery } from '../services/api/courseApi';
 
 import {
-  Box,
   Container,
   Divider,
   Grid,
