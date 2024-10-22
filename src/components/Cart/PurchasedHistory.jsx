@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { ItemsLoading } from '../ItemsLoading';
+import { dateFormat } from '../../utils/dateFormat';
 
 /**
  * PurchasedHistory component is a reusable component
@@ -62,19 +63,17 @@ export const PurchasedHistory = ({ data, isLoading }) => {
               >
                 <Stack>
                   <Typography variant="bmdsm">
-                    {' '}
                     # {order.purchased_id}
                   </Typography>
-                  {/* <Typography color="dark.300" variant="bxsr">
-                  {order.date}
-                </Typography> */}
+                  <Typography color="dark.300" variant="bxsr">
+                    {dateFormat(order.created_at)}
+                  </Typography>
                 </Stack>
               </AccordionSummary>
               <AccordionDetails>
                 {/* Render purchased items with details */}
                 {order.products.map((itemDetail) => (
                   <Stack key={itemDetail.product_id}>
-                    {' '}
                     {/* Ensure itemDetail.id is unique */}
                     <Stack
                       color="dark.300"
