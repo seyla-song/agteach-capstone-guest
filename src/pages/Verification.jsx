@@ -32,6 +32,7 @@ export default function VerificationPage() {
   const onSubmit = async (data) => {
     try {
       await verifyEmail(data.emailVerifyCode).unwrap();
+      navigate('/');
       window.open('/', '_blank');
     } catch (err) {
       console.error('Verification failed', err);
