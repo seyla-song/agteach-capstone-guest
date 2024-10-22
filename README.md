@@ -129,8 +129,8 @@ project-root/
 | -------------------- | -------------------- |
 | **Bet Sela**         | Backend and Server   |
 | **Pav Munyphalla**   | Backend and Server   |
-| **Song Seyla**       | Middle man           |
-| **Khom Khit**        | Middle man           |
+| **Song Seyla**       | Backend              |
+| **Khom Khit**        | Backend              |
 | **Panha Phosda**     | Front-end            |
 | **Chiv Sovanchitra** | Front-end            |
 | **Rith Sohak Neadh** | Front-end            |
