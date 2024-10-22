@@ -3,13 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useSearchProductQuery } from '../services/api/productApi';
 import { useSearchCourseQuery } from '../services/api/courseApi';
 
-import {
-  Container,
-  Divider,
-  Grid,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Container, Divider, Grid, Stack, Typography } from '@mui/material';
 
 import {
   SearchList,
@@ -63,60 +57,37 @@ function SearchResultPage() {
   };
 
   useEffect(() => {
-    if (category === 'course') {
-      if (courseData) {
-        setRawData(courseData.data || []);
-      }
-    } else if (category === 'product') {
-      if (productData) {
-        setRawData(productData.data || []);
-      }
-    }
-  }, [courseData, category, productData]);
+    const dataMap = {
+      course: courseData?.data || [],
+      product: productData?.data || [],
+    };
+    setRawData(dataMap[category] || []);
 
-  useEffect(() => {
     setLimit(9);
 
-    let rawDataToFilter = [...rawData];
+    let sortedData = [...rawData];
 
-    // Sort by both date and price
-    rawDataToFilter.sort((a, b) => {
-      if (sortBy === 'newest') {
-        // Sort by date first (newest)
-        const dateDiff = new Date(b.createdAt) - new Date(a.createdAt);
-        if (dateDiff !== 0) return dateDiff;
-      } else if (sortBy === 'oldest') {
-        // Sort by date first (oldest)
-        const dateDiff = new Date(a.createdAt) - new Date(b.createdAt);
-        if (dateDiff !== 0) return dateDiff;
-      } else if (sortBy === 'alphabet') {
-        // Sort by name alphabetically
-        const nameDiff = a.name.localeCompare(b.name);
-        if (nameDiff !== 0) return nameDiff;
-      } else if (sortBy === 'plth') {
-        const priceA = parseFloat(a.price) || 0;
-        const priceB = parseFloat(b.price) || 0;
-        return priceA - priceB; // Sort by lowest price
-      } else if (sortBy === 'phtl') {
-        const priceA = parseFloat(a.price) || 0;
-        const priceB = parseFloat(b.price) || 0;
-        return priceB - priceA; // Sort by highest price
-      }
+    const sortCallbacks = {
+      newest: (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+      oldest: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+      alphabet: (a, b) => a.name.localeCompare(b.name),
+      plth: (a, b) => parseFloat(a.price) - parseFloat(b.price),
+      phtl: (a, b) => parseFloat(b.price) - parseFloat(a.price),
+    };
 
-      // Filter by runtime if applicable
-      if (category === 'course') {
-        if (filterByRuntime === 'long') {
-          return b.duration - a.duration;
-        } else if (filterByRuntime === 'short') {
-          return a.duration - b.duration;
-        }
-      }
+    const sortCallback = sortCallbacks[sortBy];
+    sortedData.sort(sortCallback);
 
-      return 0;
-    });
+    if (category === 'course' && filterByRuntime !== 'none') {
+      sortedData.sort((a, b) =>
+        filterByRuntime === 'long'
+          ? b.duration - a.duration
+          : a.duration - b.duration
+      );
+    }
 
-    setFilteredData(rawDataToFilter);
-  }, [category, sortBy, filterByRuntime, rawData]);
+    setFilteredData(sortedData);
+  }, [category, sortBy, filterByRuntime, rawData, courseData, productData]);
 
   if (isCourseLoading || isProductLoading || category) <ContentLoading />;
 
