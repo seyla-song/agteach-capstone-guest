@@ -247,14 +247,13 @@ function SearchResultPage() {
         defaultSearchString={query}
       />
       <Box sx={{ mx: { xs: '5px', sm: 0 } }}>
-        <Typography
-          variant="h2"
-          sx={{
-            my: { xs: '20px', md: '69px' },
-          }}
-        >
-          Search result{' '}
-        </Typography>
+        <Stack py={3}>
+          <Typography variant="h3">Search result for "{query}"</Typography>
+          <Typography variant="bsmr">
+            Course({courseData.results || 0}) & Product(
+            {productData?.results || 0})
+          </Typography>
+        </Stack>
         <Grid container spacing={1}>
           <Grid
             size={{ xs: 12, sm: 4 }}
