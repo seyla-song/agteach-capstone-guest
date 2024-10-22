@@ -117,13 +117,14 @@ export default function MarketPlace() {
               borderRight: { xs: 0, sm: `1px solid lightgrey` },
             }}
           >
-            <Stack direction="column" gap={3} px={3}>
+            <Stack direction="column" gap={3} px={3} pb={3}>
               <Category
                 category={category}
                 handleChange={handleCategoryChange}
               />
               <Divider />
               <SortByFilter sortBy={sortBy} handleChange={handleSortByChange} />
+              <Divider />
             </Stack>
           </Grid>
           <Grid item xs={12} sm={9}>
