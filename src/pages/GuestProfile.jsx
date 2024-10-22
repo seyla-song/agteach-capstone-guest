@@ -51,7 +51,7 @@ export default function GuestProfile() {
 
           <Divider sx={{ m: 5, mx: 0 }} />
 
-          {/* <BasicInfo />
+          <BasicInfo />
 
           <Divider sx={{ m: 5, mx: 0 }} />
 
@@ -59,7 +59,7 @@ export default function GuestProfile() {
 
           <Divider sx={{ m: 5, mx: 0 }} />
 
-          <ChangePassword /> */}
+          <ChangePassword />
         </Stack>
       </Container>
     </>

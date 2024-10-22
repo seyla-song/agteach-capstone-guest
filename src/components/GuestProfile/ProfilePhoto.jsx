@@ -8,7 +8,6 @@ import {
   Avatar,
 } from '@mui/material';
 import {
-  useGetUserInfoQuery,
   useUpdateInfoMutation,
 } from '../../services/api/userApi';
 import { CustomAlert } from '../../components/CustomAlert';
@@ -16,7 +15,7 @@ import { CustomAlert } from '../../components/CustomAlert';
 export const ProfilePhoto = ({ userData }) => {
   const [profileImage, setProfileImage] = useState();
   const [imageFile, setImageFile] = useState(null);
-  const [updateInfo, { isLoading, isError, error }] = useUpdateInfoMutation();
+  const [updateInfo, { isLoading }] = useUpdateInfoMutation();
   
 
   // Alert state
@@ -32,8 +31,6 @@ export const ProfilePhoto = ({ userData }) => {
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
-
-    console.log('file', file.type)
     if (file) {
       const validImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
       if (!validImageTypes.includes(file.type)) {

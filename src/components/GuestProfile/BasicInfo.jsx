@@ -143,10 +143,6 @@ export const BasicInfo = () => {
             placeholder="N. 61Eo, Street 166"
             {...register("address", {
               required: "Address is required",
-              pattern: {
-                value: /^[A-Za-z\s,]+$/,
-                message: "Enter a valid address",
-              },
             })}
           />
           {errors.address && <FormHelperText>{errors.address.message}</FormHelperText>}
