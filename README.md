@@ -30,49 +30,41 @@ We use folder structure to organize our project and it is essential for maintain
 
 ```
 project-root/
-├── client/
-│   ├── public/
-│   ├── src
-│   │   ├── assets/
-│   │   │   └── images-1.png
-│   │   ├── components/
-│   │   │   └── Button.js
-│   │   ├── constants/
-│   │   │   └── apiConstants.js
-│   │   ├── pages/
-│   │   ├── routes/
-│   │   ├── services/
-│   │   │   └── api/
-│   │   ├── store/
-│   │   ├── utils/
-│   │   └── index.js
-│   ├── config/
-│   │   └── api.js
-│   ├── .env
-│   └── package.json
-├── server/
-│   ├── config/
-│   │   └── db.js
-│   ├── controllers/
-│   │   └── userController.js
-│   ├── models/
-│   │   └── userModel.js
+├── public/
+│
+├── src/
+│   ├── assets/
+│   │   └── images-1.png
+│   │
+│   ├── components/
+│   │   └── Button.jsx
+│   │
+│   ├── constants/
+│   │   └── apiConstants.js
+│   │
+│   ├── features/
+│   │
+│   ├── pages/
+│   │
 │   ├── routes/
-│   │   └── userRoutes.js
+│   │   └── index.js
+│   │
 │   ├── services/
-│   │   └── userService.js
+│   │   └── api/
+│   │
+│   ├── store/
+│   │
+│   ├── theme/
+│   │   └── theme.js
+│   │
 │   ├── utils/
-│   ├── app.js
-│   ├── server.js
-│   ├── .env
-│   └── package.json
-├── scripts/
-│   ├── build/
-│   ├── deploy/
-│   └── start/
+│   ├── App.jsx
+│   └── index.js
+├── .env
 ├── .gitignore
-├── README.md
-└── package.json
+├── package.json
+├── package-lock.json
+└── README.md
 
 ```
 
@@ -90,23 +82,11 @@ project-root/
 | **client/src/components/** | Reusable UI components.                                     |
 | **client/src/constants/**  | API base url                                                |
 | **client/src/pages/**      | Components representing different pages of the application. |
-| **client/src/routes/**      | Components root layout and router navigate to pages         |
+| **client/src/routes/**     | Components root layout and router navigate to pages         |
 | **client/src/services/**   | API service functions.                                      |
 | **client/src/store/**      | Application state that have slice, reducer and middleware   |
 | **client/src/utils/**      | Utility functions and helpers.                              |
-| **client/config/**         | configuration files.                                        |
 
-### Server Side Folder
-
-| **Folder Name**        | **Contain**                                                                |
-| ---------------------- | -------------------------------------------------------------------------- |
-| **project-name/**      | All file and folder in project                                             |
-| **server/config**      | contain configuration file                                                 |
-| **server/controllers** | Handle HTTP requests and responses.                                        |
-| **server/model**       | files that define the data schema and interact with the database directly. |
-| **server/routes/**     | Contains route definitions                                                 |
-| **server/views/**      | Components for displaying the data to the users                            |
-| **server/utils/**      | Contains utility functions and helpers.                                    |
 
 <!-- ## Pages Included
 
@@ -137,6 +117,7 @@ project-root/
 | **Panha Phosda**     | Front-end            |
 | **Chiv Sovanchitra** | Front-end            |
 | **Rith Sohak Neadh** | Front-end            |
+| **Pann SengLay**     | Front-end            |
 
 ## Usage
 
