@@ -171,7 +171,7 @@ export default function MarketPlace() {
               borderRight: { xs: 0, sm: `1px solid lightgrey` },
             }}
           >
-            <Stack direction="column" gap={3} p={2}>
+            <Stack direction="column" gap={3} px={3}>
               <Category
                 category={category}
                 handleChange={handleCategoryChange}
@@ -186,7 +186,7 @@ export default function MarketPlace() {
             sm={9}
             sx={{ width: '100%', mt: { xs: '20px', sm: '0px' } }}
           >
-            <Stack px={2} gap={2}>
+            <Stack px={3} gap={2}>
               <SearchBar
                 backDrop={false}
                 searchContext={'marketplace'}
@@ -196,7 +196,7 @@ export default function MarketPlace() {
               {filteredData.length < 1 ? (
                 <ItemsLoading title={'marketplace'} />
               ) : (
-                <Typography>{`Found (${filteredData.length}) items`}</Typography>
+                <Typography typography="bsr">{`Found (${filteredData.length}) items`}</Typography>
               )}
               <SearchList
                 dataObj={filteredData}
