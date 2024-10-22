@@ -2,13 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router';
 import { useSearchProductQuery } from '../services/api/productApi';
 
-import {
-  Container,
-  Divider,
-  Stack,
-  Grid,
-  Typography,
-} from '@mui/material';
+import { Container, Divider, Stack, Grid, Typography } from '@mui/material';
 
 import {
   ItemsLoading,
@@ -40,7 +34,6 @@ export default function MarketPlace() {
 
   const [category, setCategory] = useState('plant');
   const [sortBy, setSortBy] = useState('newest');
-  const [filterByPrice, setFilterByPrice] = useState(false);
   const [limit, setLimit] = useState(9);
   const [rawData, setRawData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -88,7 +81,7 @@ export default function MarketPlace() {
     dataToFilter.sort(sortFunctions[sortBy] || (() => 0));
 
     setFilteredData(dataToFilter);
-  }, [rawData, category, sortBy, filterByPrice, limit, productData]);
+  }, [rawData, category, sortBy, limit, productData]);
 
   if (isProductError) {
     return (
