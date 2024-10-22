@@ -14,7 +14,7 @@ export const productApi = createApi({
 
     getProductCarousel: builder.query({
       query: () => ({
-        url: "/api/product/getAllProduct",
+        url: "/api/product/getAllProduct?page=1",
         method: "GET",
       }),
     }),

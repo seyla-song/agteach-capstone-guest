@@ -14,7 +14,7 @@ export const courseApi = createApi({
 
     getCourseCarousel: builder.query({
       query: () => ({
-        url: "/api/course/getAllCourse",
+        url: "/api/course/getAllCourse?page=1",
         method: "GET",
       }),
     }),
