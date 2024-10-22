@@ -1,9 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { useSearchProductQuery } from "../services/api/productApi";
 import { useSearchCourseQuery } from "../services/api/courseApi";
 
-import { Container, Divider, Grid, Stack, Typography } from "@mui/material";
+import {
+  Button,
+  Container,
+  Divider,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
 
 import {
   SearchList,
@@ -13,20 +20,26 @@ import {
   FilterByOther,
   ContentLoading,
   ItemsLoading,
+  CourseList,
 } from "../components/index";
+import { ProductionQuantityLimitsSharp } from "@mui/icons-material";
 
 function SearchResultPage() {
   const currentLocation = useLocation().search;
   const queryParams = new URLSearchParams(currentLocation);
   const query = queryParams.get("name");
   const [page, setPage] = useState(1);
+  const [limits, setLimit] = useState(9);
+  const [allCourses, setAllCourses] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
 
   const {
     data: courseData,
     isLoading: isCourseLoading,
     isFetching,
     isError: isCourseError,
-  } = useSearchCourseQuery({ query, page });
+  } = useSearchCourseQuery({ query, page, limits });
+
   const {
     data: productData,
     isLoading: isProductLoading,
@@ -36,8 +49,12 @@ function SearchResultPage() {
   const [category, setCategory] = useState("course");
   const [sortBy, setSortBy] = useState("newest");
 
+  const totalPages = isCourseLoading
+    ? 0
+    : Math.ceil(courseData.results / limits);
+  console.log(totalPages); // Outputs: 4
+
   const [filterByRuntime, setFilterByRuntime] = useState("none");
-  const [limit, setLimit] = useState(9);
   const [rawData, setRawData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 
@@ -56,91 +73,114 @@ function SearchResultPage() {
 
   const handleLimitChange = () => {
     console.log(isCourseLoading);
-    
+
     setPage((prevPage) => prevPage + 1); // Increment page when "Load more" is clicked
     // isCourseLoading={isFetching}
     if (isCourseLoading) return;
     console.log(isCourseLoading);
     // }
   };
+  // let courseList = [];
+
   useEffect(() => {
-    // Combine existing raw data with new page data
-    const newCourseData = courseData?.data || [];
-    const newProductData = productData?.data || [];
-
-    const dataMap = {
-      course: newCourseData,
-      product: newProductData,
-    };
-
-    if (page === 1) {
-      // If it's the first page, replace the data
-      setRawData(dataMap[category] || []);
+    if (courseData?.data) {
+      setAllCourses((prev) => [...prev, ...courseData.data]);
+      // setFilteredData(allCourses);
+    }
+    if (productData?.data) {
+      setAllProducts((prev) => [...prev, ...productData.data]);
+      // setFilteredData(allProducts);
+    }
+    if (category === "course") {
+      setFilteredData(allCourses);
     } else {
-      // For subsequent pages, concatenate the new data
-      if(isFetching) return
-      setRawData((prevRawData) => [...prevRawData, ...dataMap[category]]);
+      setFilteredData(allProducts);
     }
-    // console.log(rawData.length && rawData);
-    console.log("newCourseData 1", newCourseData);
-  }, [courseData, productData, category, page]);
+    console.log("setFilteredData", filteredData);
+  }, [courseData, productData]);
 
-  useEffect(() => {
-    // const dataMap = {
-    //   course: courseData?.data || [],
-    //   product: productData?.data || [],
-    // };
-    // // dataMap['product'] dataMap['course']
-    // console.log(dataMap[category]);
-    // setRawData(dataMap[category] || []);
+  // useEffect(() => {
+  //   // Combine existing raw data with new page data
+  //   const newCourseData = courseData?.data || [];
+  //   const newProductData = productData?.data || [];
 
-    // setLimit(9);
+  //   const dataMap = {
+  //     course: newCourseData,
+  //     product: newProductData,
+  //   };
 
-    // let sortedData = [...rawData];
+  //   setFilteredData(newCourseData);
 
-    // const sortCallbacks = {
-    //   newest: (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
-    //   oldest: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
-    //   alphabet: (a, b) => a.name.localeCompare(b.name),
-    //   plth: (a, b) => parseFloat(a.price) - parseFloat(b.price),
-    //   phtl: (a, b) => parseFloat(b.price) - parseFloat(a.price),
-    // };
+  //   if (page === 1) {
+  //     // If it's the first page, replace the data
+  //     setRawData(dataMap[category] || []);
+  //   } else {
+  //     // For subsequent pages, concatenate the new data
+  //     if (isCourseLoading && !isFetching) {
+  //     }
 
-    // const sortCallback = sortCallbacks[sortBy];
-    // sortedData.sort(sortCallback);
+  //     // setRawData((prevRawData) => [...prevRawData, ...dataMap[category]]);
+  //   }
+  //   // console.log(rawData.length && rawData);
+  //   console.log("newCourseData 1", newCourseData);
+  // }, [courseData, productData, category, page, isFetching]);
 
-    // if (category === "course" && filterByRuntime !== "none") {
-    //   sortedData.sort((a, b) =>
-    //     filterByRuntime === "long"
-    //       ? b.duration - a.duration
-    //       : a.duration - b.duration
-    //   );
-    // }
+  // useEffect(() => {
+  // const dataMap = {
+  //   course: courseData?.data || [],
+  //   product: productData?.data || [],
+  // };
+  // // dataMap['product'] dataMap['course']
+  // console.log(dataMap[category]);
+  // setRawData(dataMap[category] || []);
 
-    // setFilteredData(sortedData);
-    let sortedData = [...rawData];
+  // setLimit(9);
 
-    const sortCallbacks = {
-      newest: (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
-      oldest: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
-      alphabet: (a, b) => a.name.localeCompare(b.name),
-      plth: (a, b) => parseFloat(a.price) - parseFloat(b.price),
-      phtl: (a, b) => parseFloat(b.price) - parseFloat(a.price),
-    };
+  // let sortedData = [...rawData];
 
-    const sortCallback = sortCallbacks[sortBy];
-    sortedData.sort(sortCallback);
+  // const sortCallbacks = {
+  //   newest: (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+  //   oldest: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+  //   alphabet: (a, b) => a.name.localeCompare(b.name),
+  //   plth: (a, b) => parseFloat(a.price) - parseFloat(b.price),
+  //   phtl: (a, b) => parseFloat(b.price) - parseFloat(a.price),
+  // };
 
-    if (category === "course" && filterByRuntime !== "none") {
-      sortedData.sort((a, b) =>
-        filterByRuntime === "long"
-          ? b.duration - a.duration
-          : a.duration - b.duration
-      );
-    }
+  // const sortCallback = sortCallbacks[sortBy];
+  // sortedData.sort(sortCallback);
 
-    setFilteredData(sortedData);
-  }, [category, sortBy, filterByRuntime, rawData, courseData, productData]);
+  // if (category === "course" && filterByRuntime !== "none") {
+  //   sortedData.sort((a, b) =>
+  //     filterByRuntime === "long"
+  //       ? b.duration - a.duration
+  //       : a.duration - b.duration
+  //   );
+  // }
+
+  // setFilteredData(sortedData);
+  // let sortedData = [...rawData];
+
+  // const sortCallbacks = {
+  //   newest: (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+  //   oldest: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+  //   alphabet: (a, b) => a.name.localeCompare(b.name),
+  //   plth: (a, b) => parseFloat(a.price) - parseFloat(b.price),
+  //   phtl: (a, b) => parseFloat(b.price) - parseFloat(a.price),
+  // };
+
+  // const sortCallback = sortCallbacks[sortBy];
+  // sortedData.sort(sortCallback);
+
+  // if (category === "course" && filterByRuntime !== "none") {
+  //   sortedData.sort((a, b) =>
+  //     filterByRuntime === "long"
+  //       ? b.duration - a.duration
+  //       : a.duration - b.duration
+  //   );
+  // }
+
+  // setFilteredData(sortedData);
+  // }, [category, sortBy, filterByRuntime, rawData, courseData, productData]);
 
   if (isCourseLoading || isProductLoading || category) <ContentLoading />;
 
@@ -219,12 +259,25 @@ function SearchResultPage() {
         <Grid item xs={12} sm={9}>
           <Stack pl={{ xs: 0, md: 3 }} gap={2} minHeight="100vh">
             <SearchList
-              dataObj={filteredData}
+              dataObj={filteredData || []}
               cardVariant={category}
-              limit={limit}
+              limit={limits}
               handleLimitChange={handleLimitChange}
               isCourseLoading={isFetching}
             />
+            <Button
+              variant="outlined"
+              onClick={() => setPage((prevPage) => prevPage - 1)}
+            >
+              Previous
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => setPage((prevPage) => prevPage + 1)}
+            >
+              Next
+            </Button>
+            <Typography>Page 1 of {totalPages}</Typography>
           </Stack>
         </Grid>
       </Grid>

@@ -22,6 +22,8 @@ export const courseApi = createApi({
           : [{ type: "Course", id: "PARTIAL-LIST" }],
     }),
 
+    
+
     getCourseCarousel: builder.query({
       query: () => ({
         url: "/api/course/getAllCourse?page=1",
