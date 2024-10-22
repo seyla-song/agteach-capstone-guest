@@ -41,7 +41,7 @@ export const SearchBar = ({ backDrop, searchLabel, searchContext, defaultSearchS
         justifyContent: "center",
         position: 'relative', 
         height: backDrop
-          ? { xs: "300px", md: "300px" }
+          ? { xs: "200px", md: "300px" }
           : { xs: "auto", md: "auto" },
       }}
     >
