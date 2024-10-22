@@ -33,7 +33,7 @@ export default function VerificationPage() {
     try {
       await verifyEmail(data.emailVerifyCode).unwrap();
       navigate('/');
-      window.open('/', '_blank');
+      if (isSuccess) window.open('/', '_blank');
     } catch (err) {
       console.error('Verification failed', err);
     }
