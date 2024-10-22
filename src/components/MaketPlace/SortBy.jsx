@@ -7,7 +7,7 @@ import FormControl from "@mui/material/FormControl";
 export const SortByFilter = ({ sortBy, handleChange }) => {
   return (
     <Box>
-      <Typography sx={{ typography: { xs: "body2", sm: "h6" } }}>
+      <Typography sx={{ typography: { xs: 'bmdsm', sm: 'blgsm' } }}>
         Sort By
       </Typography>
 
