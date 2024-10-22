@@ -38,8 +38,8 @@ build_app:
 deploy_to_aws:
   stage: deploy
   image: node:20
-  # only:
-  #   - develop
+  only:
+    - develop
   before_script:
     - 'which ssh-agent || (brew install openssh)'
     - eval $(ssh-agent -s)
