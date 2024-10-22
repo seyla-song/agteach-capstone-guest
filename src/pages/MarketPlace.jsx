@@ -192,10 +192,8 @@ export default function MarketPlace() {
                 searchContext={'marketplace'}
                 defaultSearchString={query}
               />
-
-              {filteredData.length < 1 ? (
-                <ItemsLoading title={'marketplace'} />
-              ) : (
+              {isProductLoading && <ItemsLoading title={'marketplace'} />}
+              {!isProductLoading && productData && (
                 <Typography typography="bsr">{`Found (${filteredData.length}) items`}</Typography>
               )}
               <SearchList
