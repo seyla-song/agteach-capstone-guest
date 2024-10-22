@@ -1,19 +1,17 @@
-import Divider from '@mui/material/Divider';
-import Stack from '@mui/material/Stack';
+import Divider from "@mui/material/Divider";
+import Stack from "@mui/material/Stack";
 
-import { Container } from '@mui/material';
-import {
-  useGetUserInfoQuery,
-} from '../services/api/userApi';
+import { Container } from "@mui/material";
+import { useGetUserInfoQuery } from "../services/api/userApi";
 
 import {
   ProfilePhoto,
   BasicInfo,
   AccountSecurity,
   ChangePassword,
-} from '../components/index.js';
-import { useEffect, useState } from 'react';
-import { ContentLoading } from '../components/index.js';
+} from "../components/index.js";
+import { useEffect, useState } from "react";
+import { ContentLoading } from "../components/index.js";
 /**
  * GuestProfile component is a reusable component
  * that renders a container with a Stack of several components:
@@ -31,12 +29,12 @@ import { ContentLoading } from '../components/index.js';
  */
 export default function GuestProfile() {
   const [userData, setUserData] = useState({});
-  const {data, isLoading, isError, error } = useGetUserInfoQuery();
+  const { data, isLoading, isError, error } = useGetUserInfoQuery();
 
   useEffect(() => {
     if (data) {
       setUserData(data.data);
-      console.log(data)
+      console.log(data);
     }
   }, [data, setUserData]);
 
@@ -47,18 +45,18 @@ export default function GuestProfile() {
     <>
       <Container
         maxWidth="1420px"
-        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
         <Stack maxWidth="1420px" width="100%" sx={{ m: 5, mx: 0 }}>
-          <ProfilePhoto userData={userData}/>
+          <ProfilePhoto userData={userData} />
 
           <Divider sx={{ m: 5, mx: 0 }} />
 
-          <BasicInfo userData={userData}/>
+          <BasicInfo userData={userData} />
 
           <Divider sx={{ m: 5, mx: 0 }} />
 
-          <AccountSecurity userData={userData}/>
+          <AccountSecurity userData={userData} />
 
           <Divider sx={{ m: 5, mx: 0 }} />
 

@@ -24,7 +24,7 @@ export const ChangePassword = () => {
     handleSubmit,
     formState: { errors },
     watch,
-    reset
+    reset,
   } = useForm({
     defaultValues: {
       passwordCurrent: "",
@@ -33,18 +33,19 @@ export const ChangePassword = () => {
     },
   });
 
-  const [resetPassword, { isError, error,  isLoading, isSuccess}] = useUpdatePasswordMutation();
+  const [resetPassword, { isError, error, isLoading, isSuccess }] =
+    useUpdatePasswordMutation();
 
   const onSubmit = async (formData) => {
     const res = await resetPassword(formData);
-    if (res.data?.status === 'success') reset();
+    if (res.data?.status === "success") reset();
 
-    setOpen(true)
+    setOpen(true);
   };
 
   useEffect(() => {
-    console.log(isSuccess)
-  }, [isSuccess])
+    console.log(isSuccess);
+  }, [isSuccess]);
 
   const [showPassword, setShowPassword] = useState({
     current: false,
@@ -65,7 +66,13 @@ export const ChangePassword = () => {
         <Typography variant="h4">Change Password</Typography>
         {/* Current Password Field */}
         <CustomAlert
-          label={isError ? error.data.message : isSuccess ? 'Successfuly updated password' : 'Something went wrong. Please try again.' }
+          label={
+            isError
+              ? error.data.message
+              : isSuccess
+              ? "Successfuly updated password"
+              : "Something went wrong. Please try again"
+          }
           severity={isError ? "error" : "success"}
           open={open}
           onClose={() => setOpen(false)}
@@ -169,10 +176,10 @@ export const ChangePassword = () => {
             onClick={handleSubmit(onSubmit)}
             disabled={isLoading}
           >
-            {isLoading ? 'saving...' : 'Save'}
+            {isLoading ? "saving..." : "Save"}
           </Button>
         </Stack>
       </Box>
     </>
   );
-}
+};

@@ -12,8 +12,8 @@ import {
   Stack,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useUpdateInfoMutation } from "../../services/api/userApi";// Import the isLogin query
-
+import { useUpdateInfoMutation } from "../../services/api/userApi"; // Import the isLogin query
+import { CustomAlert } from "../CustomAlert";
 
 export const BasicInfo = ({ userData }) => {
   const {
@@ -30,13 +30,16 @@ export const BasicInfo = ({ userData }) => {
       address: "",
     },
   });
-  const [updateInfo, { isLoading: isLoadingInfo }] = useUpdateInfoMutation();
+  const [updateInfo, { isLoading: isLoadingInfo, isError, error, isSuccess }] =
+    useUpdateInfoMutation();
   const [selectedCity, setSelectedCity] = useState(null);
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
     if (userData && userData.customer) {
-      const customerData = userData.customer
+      const customerData = userData.customer;
       console.log("customerData", userData.customer);
-      
+
       const { firstName, lastName, phone, location_id, address } = customerData;
       setValue("firstName", firstName || "");
       setValue("lastName", lastName || "");
@@ -59,14 +62,13 @@ export const BasicInfo = ({ userData }) => {
     };
 
     console.log("Form Data Submitted:", updatedData);
-    try {
-      await updateInfo(updatedData).unwrap();
-      console.log("Success:", updatedData);
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
-  };
+    await updateInfo(updatedData);
+    setOpen(true);
 
+    setTimeout(() => {
+      setOpen(false);
+    }, 4000);
+  };
 
   const validatePhone = (value) => {
     const phonePattern = /^[0-9]+$/; // Only digits
@@ -79,6 +81,18 @@ export const BasicInfo = ({ userData }) => {
     <>
       <Stack sx={{ m: 2, gap: 2 }}>
         <Typography variant="h4">Basic Information</Typography>
+        <CustomAlert
+          label={
+            isError
+              ? error.data.message
+              : isSuccess
+              ? "Successfuly updated Information"
+              : "Something went wrong. Please try again"
+          }
+          severity={isError ? "error" : "success"}
+          open={open}
+          onClose={() => setOpen(false)}
+        />
         <FormControl variant="outlined" error={!!errors.firstName}>
           <InputLabel htmlFor="first-name">First Name</InputLabel>
           <OutlinedInput
@@ -93,7 +107,9 @@ export const BasicInfo = ({ userData }) => {
               },
             })}
           />
-          {errors.firstName && <FormHelperText>{errors.firstName.message}</FormHelperText>}
+          {errors.firstName && (
+            <FormHelperText>{errors.firstName.message}</FormHelperText>
+          )}
         </FormControl>
         <FormControl variant="outlined" error={!!errors.lastName}>
           <InputLabel htmlFor="last-name">Last Name</InputLabel>
@@ -109,7 +125,9 @@ export const BasicInfo = ({ userData }) => {
               },
             })}
           />
-          {errors.lastName && <FormHelperText>{errors.lastName.message}</FormHelperText>}
+          {errors.lastName && (
+            <FormHelperText>{errors.lastName.message}</FormHelperText>
+          )}
         </FormControl>
 
         <Autocomplete
@@ -142,7 +160,9 @@ export const BasicInfo = ({ userData }) => {
               required: "Address is required",
             })}
           />
-          {errors.address && <FormHelperText>{errors.address.message}</FormHelperText>}
+          {errors.address && (
+            <FormHelperText>{errors.address.message}</FormHelperText>
+          )}
         </FormControl>
 
         <FormControl variant="outlined" error={!!errors.phone}>
@@ -156,20 +176,31 @@ export const BasicInfo = ({ userData }) => {
               validate: validatePhone,
             })}
           />
-          {errors.phone && <FormHelperText>{errors.phone.message}</FormHelperText>}
+          {errors.phone && (
+            <FormHelperText>{errors.phone.message}</FormHelperText>
+          )}
         </FormControl>
       </Stack>
 
       <Box sx={{ width: "100%", boxSizing: "border-box" }}>
-        <Stack sx={{ m: 2, justifyContent: "flex-end" }} direction="row" spacing={2}>
-          <Button variant="contained" sx={{ px: 10, py: 2 }} disabled={isLoadingInfo} onClick={handleSubmit(onSubmit)}>
+        <Stack
+          sx={{ m: 2, justifyContent: "flex-end" }}
+          direction="row"
+          spacing={2}
+        >
+          <Button
+            variant="contained"
+            sx={{ px: 10, py: 2 }}
+            disabled={isLoadingInfo}
+            onClick={handleSubmit(onSubmit)}
+          >
             {isLoadingInfo ? "Saving..." : "Save"}
           </Button>
         </Stack>
       </Box>
     </>
   );
-}
+};
 
 const city = [
   { label: "Phnom Penh" },
@@ -181,4 +212,3 @@ const city = [
   { label: "Pursat" },
   { label: "Koh Kong" },
 ];
-
