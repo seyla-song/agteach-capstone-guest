@@ -37,6 +37,8 @@ project-root/
 │   │   │   └── images-1.png
 │   │   ├── components/
 │   │   │   └── Button.js
+│   │   ├── constants/
+│   │   │   └── apiConstants.js
 │   │   ├── hooks/
 │   │   ├── pages/
 │   │   ├── services/
@@ -85,6 +87,7 @@ project-root/
 | **client/src/**            | main source code for the React application                  |
 | **client/src/assets/**     | Contains images need to import into your React components   |
 | **client/src/components/** | Reusable UI components.                                     |
+| **client/src/constants/**  | API base url                                                |
 | **client/src/pages/**      | Components representing different pages of the application. |
 | **client/src/services/**   | API service functions.                                      |
 | **client/src/utils/**      | Utility functions and helpers.                              |
