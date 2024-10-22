@@ -149,12 +149,12 @@ function ProductDetailPage() {
                     to buy later.
                   </Alert>
                 )}
-                <Button
+                {/* <Button
                   variant="outlined"
                   endIcon={<FavoriteBorderOutlinedIcon />}
                 >
                   Favourite
-                </Button>
+                </Button> */}
               </Stack>
             </Stack>
           </Grid>
