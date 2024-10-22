@@ -62,49 +62,34 @@ export default function MarketPlace() {
     if (productData) {
       setRawData(productData.data);
     }
-  }, [productData, query]);
 
-  useEffect(() => {
     let dataToFilter = [...rawData] || [];
-    // filter by categories
-    if (category === 'plant')
-      dataToFilter = dataToFilter.filter((product) => product.categoryId === 1);
-    else if (category === 'fertilizer')
-      dataToFilter = dataToFilter.filter((product) => product.categoryId === 2);
-    else if (category === 'seed')
-      dataToFilter = dataToFilter.filter((product) => product.categoryId === 3);
-    else if (category === 'tool')
-      dataToFilter = dataToFilter.filter((product) => product.categoryId === 4);
 
-    // Sort by both date and price
-    dataToFilter.sort((a, b) => {
-      if (sortBy === 'newest') {
-        // Sort by date first (newest)
-        const dateDiff = new Date(b.createdAt) - new Date(a.createdAt);
-        if (dateDiff !== 0) return dateDiff;
-      } else if (sortBy === 'oldest') {
-        // Sort by date first (oldest)
-        const dateDiff = new Date(a.createdAt) - new Date(b.createdAt);
-        if (dateDiff !== 0) return dateDiff;
-      } else if (sortBy === 'alphabet') {
-        // Sort by name alphabetically
-        const nameDiff = a.name.localeCompare(b.name);
-        if (nameDiff !== 0) return nameDiff;
-      } else if (sortBy === 'plth') {
-        const priceA = parseFloat(a.price) || 0;
-        const priceB = parseFloat(b.price) || 0;
-        return priceA - priceB; // Sort by lowest price
-      } else if (sortBy === 'phtl') {
-        const priceA = parseFloat(a.price) || 0;
-        const priceB = parseFloat(b.price) || 0;
-        return priceB - priceA; // Sort by lowest price
-      }
+    const categoryFilterMap = {
+      plant: 1,
+      fertilizer: 2,
+      seed: 3,
+      tool: 4,
+    };
 
-      return 0;
-    });
+    const sortFunctions = {
+      newest: (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+      oldest: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+      alphabet: (a, b) => a.name.localeCompare(b.name),
+      plth: (a, b) => parseFloat(a.price) - parseFloat(b.price),
+      phtl: (a, b) => parseFloat(b.price) - parseFloat(a.price),
+    };
+
+    if (category in categoryFilterMap) {
+      dataToFilter = dataToFilter.filter(
+        (product) => product.categoryId === categoryFilterMap[category]
+      );
+    }
+
+    dataToFilter.sort(sortFunctions[sortBy] || (() => 0));
 
     setFilteredData(dataToFilter);
-  }, [rawData, category, sortBy, filterByPrice, limit]);
+  }, [rawData, category, sortBy, filterByPrice, limit, productData]);
 
   if (isProductError) {
     return (
@@ -150,7 +135,7 @@ export default function MarketPlace() {
             </Stack>
           </Grid>
           <Grid item xs={12} sm={9}>
-            <Stack px={3} gap={2} minHeight='100vh'>
+            <Stack px={3} gap={2} minHeight="100vh">
               <SearchBar
                 backDrop={false}
                 searchContext={'marketplace'}
