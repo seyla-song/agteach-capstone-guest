@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useSearchProductQuery } from '../services/api/productApi';
-import { useSearchCourseQuery } from '../services/api/courseApi';
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useSearchProductQuery } from "../services/api/productApi";
+import { useSearchCourseQuery } from "../services/api/courseApi";
 
-import { Container, Divider, Grid, Stack, Typography } from '@mui/material';
+import { Container, Divider, Grid, Stack, Typography } from "@mui/material";
 
 import {
   SearchList,
@@ -13,28 +13,30 @@ import {
   FilterByOther,
   ContentLoading,
   ItemsLoading,
-} from '../components/index';
+} from "../components/index";
 
 function SearchResultPage() {
   const currentLocation = useLocation().search;
   const queryParams = new URLSearchParams(currentLocation);
-  const query = queryParams.get('name');
+  const query = queryParams.get("name");
+  const [page, setPage] = useState(1);
 
   const {
     data: courseData,
     isLoading: isCourseLoading,
+    isFetching,
     isError: isCourseError,
-  } = useSearchCourseQuery(query);
+  } = useSearchCourseQuery({ query, page });
   const {
     data: productData,
     isLoading: isProductLoading,
     isError: isProductError,
   } = useSearchProductQuery(query);
 
-  const [category, setCategory] = useState('course');
-  const [sortBy, setSortBy] = useState('newest');
+  const [category, setCategory] = useState("course");
+  const [sortBy, setSortBy] = useState("newest");
 
-  const [filterByRuntime, setFilterByRuntime] = useState('none');
+  const [filterByRuntime, setFilterByRuntime] = useState("none");
   const [limit, setLimit] = useState(9);
   const [rawData, setRawData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -48,23 +50,74 @@ function SearchResultPage() {
   };
 
   const handleFilterByRuntimeChange = (state) => {
-    if (state === filterByRuntime) setFilterByRuntime('none');
+    if (state === filterByRuntime) setFilterByRuntime("none");
     else setFilterByRuntime(state);
   };
 
   const handleLimitChange = () => {
-    setLimit(limit + 9);
+    console.log(isCourseLoading);
+    
+    setPage((prevPage) => prevPage + 1); // Increment page when "Load more" is clicked
+    // isCourseLoading={isFetching}
+    if (isCourseLoading) return;
+    console.log(isCourseLoading);
+    // }
   };
+  useEffect(() => {
+    // Combine existing raw data with new page data
+    const newCourseData = courseData?.data || [];
+    const newProductData = productData?.data || [];
+
+    const dataMap = {
+      course: newCourseData,
+      product: newProductData,
+    };
+
+    if (page === 1) {
+      // If it's the first page, replace the data
+      setRawData(dataMap[category] || []);
+    } else {
+      // For subsequent pages, concatenate the new data
+      if(isFetching) return
+      setRawData((prevRawData) => [...prevRawData, ...dataMap[category]]);
+    }
+    // console.log(rawData.length && rawData);
+    console.log("newCourseData 1", newCourseData);
+  }, [courseData, productData, category, page]);
 
   useEffect(() => {
-    const dataMap = {
-      course: courseData?.data || [],
-      product: productData?.data || [],
-    };
-    setRawData(dataMap[category] || []);
+    // const dataMap = {
+    //   course: courseData?.data || [],
+    //   product: productData?.data || [],
+    // };
+    // // dataMap['product'] dataMap['course']
+    // console.log(dataMap[category]);
+    // setRawData(dataMap[category] || []);
 
-    setLimit(9);
+    // setLimit(9);
 
+    // let sortedData = [...rawData];
+
+    // const sortCallbacks = {
+    //   newest: (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+    //   oldest: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+    //   alphabet: (a, b) => a.name.localeCompare(b.name),
+    //   plth: (a, b) => parseFloat(a.price) - parseFloat(b.price),
+    //   phtl: (a, b) => parseFloat(b.price) - parseFloat(a.price),
+    // };
+
+    // const sortCallback = sortCallbacks[sortBy];
+    // sortedData.sort(sortCallback);
+
+    // if (category === "course" && filterByRuntime !== "none") {
+    //   sortedData.sort((a, b) =>
+    //     filterByRuntime === "long"
+    //       ? b.duration - a.duration
+    //       : a.duration - b.duration
+    //   );
+    // }
+
+    // setFilteredData(sortedData);
     let sortedData = [...rawData];
 
     const sortCallbacks = {
@@ -78,9 +131,9 @@ function SearchResultPage() {
     const sortCallback = sortCallbacks[sortBy];
     sortedData.sort(sortCallback);
 
-    if (category === 'course' && filterByRuntime !== 'none') {
+    if (category === "course" && filterByRuntime !== "none") {
       sortedData.sort((a, b) =>
-        filterByRuntime === 'long'
+        filterByRuntime === "long"
           ? b.duration - a.duration
           : a.duration - b.duration
       );
@@ -108,16 +161,16 @@ function SearchResultPage() {
     <Container
       maxWidth={false}
       sx={{
-        maxWidth: '1420px',
+        maxWidth: "1420px",
         marginY: {
-          xs: '30px',
-          md: '60px',
+          xs: "30px",
+          md: "60px",
         },
       }}
     >
       <SearchBar
-        backDrop={'primary'}
-        searchLabel={'Learn Smarter, Learn Faster. AgTeach'}
+        backDrop={"primary"}
+        searchLabel={"Learn Smarter, Learn Faster. AgTeach"}
         defaultSearchString={query}
       />
 
@@ -170,6 +223,7 @@ function SearchResultPage() {
               cardVariant={category}
               limit={limit}
               handleLimitChange={handleLimitChange}
+              isCourseLoading={isFetching}
             />
           </Stack>
         </Grid>

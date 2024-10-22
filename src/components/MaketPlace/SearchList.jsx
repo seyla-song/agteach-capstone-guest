@@ -6,6 +6,7 @@ export const SearchList = ({
   cardVariant,
   limit,
   handleLimitChange,
+  isCourseLoading
 }) => {
   return (
     <>
@@ -17,16 +18,17 @@ export const SearchList = ({
             </Grid>
           ))}
         </Grid>
-        {dataObj.length > limit && (
+        {/* {dataObj.length > limit && ( */}
           <Button
             variant="outlined"
             paddingX={2}
             fullWidth
             onClick={handleLimitChange}
+            isLoading={isCourseLoading}
           >
             View More
           </Button>
-        )}
+        {/* )} */}
       </Box>
     </>
   );

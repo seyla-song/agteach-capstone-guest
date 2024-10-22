@@ -4,12 +4,22 @@ import { API_BASE_URL } from "../../constants/apiConstants";
 export const courseApi = createApi({
   reducerPath: "courseApi", // Match this with store setup
   baseQuery: fetchBaseQuery({ baseUrl: API_BASE_URL }),
+  tagTypes: ["Course"],
   endpoints: (builder) => ({
     searchCourse: builder.query({
-      query: (name) => ({
-        url: `/api/course/searchData?name=${name}`,
+      query: ({ query, page,limits = 3 }) => ({
+        url: `/api/course/searchData?name=${query}&limit=${limits}&page=${page}`,
         method: "GET",
       }),
+      providesTags: (result, error, page) =>
+        result
+          ? [
+              // Provides a tag for each post in the current page,
+              // as well as the 'PARTIAL-LIST' tag.
+              ...result.data.map(({ id }) => ({ type: "Course", id })),
+              { type: "Course", id: "PARTIAL-LIST" },
+            ]
+          : [{ type: "Course", id: "PARTIAL-LIST" }],
     }),
 
     getCourseCarousel: builder.query({
@@ -47,5 +57,5 @@ export const {
   useGetCourseCarouselQuery,
   useGetRecommendedCoursesQuery,
   useGetOneCourseQuery,
-  useGetEnrollmentCourseQuery
+  useGetEnrollmentCourseQuery,
 } = courseApi;
