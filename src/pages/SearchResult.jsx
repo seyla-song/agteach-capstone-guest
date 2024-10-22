@@ -151,13 +151,15 @@ function SearchResultPage() {
         defaultSearchString={query}
       />
 
-      <Stack py={3}>
+      <Stack py={3} gap={1}>
         <Typography maxWidth={500} variant="h3">
           Search result for "{query}"
         </Typography>
-        {isCourseLoading && isProductLoading && <ItemsLoading title="courses or products" />}
+        {isCourseLoading && isProductLoading && (
+          <ItemsLoading title="courses or products" />
+        )}
         {!isCourseLoading && !isProductLoading && (
-          <Typography variant="bsmr">
+          <Typography variant="bsmr" color="dark.300">
             Course({courseData?.results || 0}) & Product(
             {productData?.results || 0})
           </Typography>
@@ -173,7 +175,7 @@ function SearchResultPage() {
           xs={12}
           sm={3}
         >
-          <Stack direction="column" gap={3} px={3} pb={3}>
+          <Stack direction="column" gap={3} pr={3} pb={3}>
             <CategoryFilter
               category={category}
               handleChange={handleCategoryChange}
@@ -192,7 +194,7 @@ function SearchResultPage() {
           </Stack>
         </Grid>
         <Grid item xs={12} sm={9}>
-          <Stack px={3} gap={2} minHeight="100vh">
+          <Stack pl={{ xs: 0, md: 3 }} gap={2} minHeight="100vh">
             <SearchList
               dataObj={filteredData}
               cardVariant={category}
