@@ -34,18 +34,15 @@ export default function VerificationPage() {
   const onSubmit = async (data) => {
     try {
       await verifyEmail(data.emailVerifyCode).unwrap();
-      IS_VERIFIED = true;
       window.open('/', '_blank');
     } catch (err) {
       console.error('Verification failed', err);
+    } finally {
+      IS_VERIFIED = true;
     }
   };
 
-  useEffect(() => {
-    if (IS_VERIFIED) {
-      navigate('/');
-    }
-  }, [navigate]);
+  if (IS_VERIFIED) navigate('/');
 
   const handleOnClick = () => {
     setOpen(true);
