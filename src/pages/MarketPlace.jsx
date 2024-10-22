@@ -178,10 +178,9 @@ export default function MarketPlace() {
             sm={3}
             sx={{
               borderRight: { xs: 0, sm: `1px solid lightgrey` },
-              pr: { xs: 0, sm: '10px' },
             }}
           >
-            <Stack direction="column" gap={3}>
+            <Stack direction="column" gap={3} p={2}>
               <Category
                 category={category}
                 handleChange={handleCategoryChange}
