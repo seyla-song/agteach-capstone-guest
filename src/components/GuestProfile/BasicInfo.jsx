@@ -10,13 +10,16 @@ import {
   TextField,
   FormHelperText,
   Stack,
+  MenuItem,
+  Select,
 } from '@mui/material';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useUpdateInfoMutation } from '../../services/api/userApi'; // Import the isLogin query
 import { CustomAlert } from '../CustomAlert';
 
 export const BasicInfo = ({ userData, cities }) => {
   const {
+    control,
     register,
     handleSubmit,
     setValue, // Allows you to set form values
@@ -37,6 +40,7 @@ export const BasicInfo = ({ userData, cities }) => {
   useEffect(() => {
     if (userData && userData.customer) {
       const customerData = userData?.customer;
+      console.log(customerData);
       const { firstName, lastName, phone, location, address } = customerData;
       setValue('firstName', firstName || '');
       setValue('lastName', lastName || '');
@@ -122,36 +126,31 @@ export const BasicInfo = ({ userData, cities }) => {
             <FormHelperText>{errors?.lastName?.message}</FormHelperText>
           )}
         </FormControl>
-
-        <Autocomplete
-          fullWidth
-          options={cities}
-          getOptionLabel={(option) => option?.name}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="City"
-              slotProps={{
-                htmlInput: {
-                  ...params?.inputProps,
-                },
-              }}
-              {...register('city', {
-                validate: (value) => {
-                  if (!value?.length) {
-                    return true;
-                  }
-                  return (
-                    cities?.some((city) => city?.name === value) ||
+        <FormControl fullWidth error={!!errors?.city}>
+          <Controller
+            name="city"
+            control={control}
+            defaultValue=""
+            rules={{
+              validate: (value) =>
+                value
+                  ? cities.some((city) => city.name === value) ||
                     'Please provide a valid city'
-                  );
-                },
-              })}
-              error={!!errors?.city}
-              helperText={errors?.city?.message}
-            />
-          )}
-        />
+                  : 'Please select a city',
+            }}
+            render={({ field }) => (
+              <Select {...field} label="City">
+                {cities.map((city) => (
+                  <MenuItem key={city.name} value={city.name}>
+                    {city.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            )}
+          />
+
+          <FormHelperText>{errors?.city?.message}</FormHelperText>
+        </FormControl>
 
         <FormControl variant="outlined" error={!!errors?.address}>
           <InputLabel htmlFor="address">Address</InputLabel>
@@ -167,7 +166,6 @@ export const BasicInfo = ({ userData, cities }) => {
             <FormHelperText>{errors?.address?.message}</FormHelperText>
           )}
         </FormControl>
-
         <FormControl variant="outlined" error={!!errors?.phone}>
           <InputLabel htmlFor="phone-number">Phone Number</InputLabel>
           <OutlinedInput
