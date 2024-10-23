@@ -5,7 +5,7 @@ export const SearchList = ({
   dataObj,
   cardVariant,
   limit,
-  handleLimitChange,
+  handleLoadMore,
   isCourseLoading
 }) => {
   return (
@@ -23,7 +23,7 @@ export const SearchList = ({
             variant="outlined"
             paddingX={2}
             fullWidth
-            onClick={handleLimitChange}
+            onClick={handleLoadMore}
             isLoading={isCourseLoading}
           >
             View More

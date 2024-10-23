@@ -4,10 +4,12 @@ import { useSearchProductQuery } from "../services/api/productApi";
 import { useSearchCourseQuery } from "../services/api/courseApi";
 
 import {
+  Box,
   Button,
   Container,
   Divider,
   Grid,
+  Grid2,
   Stack,
   Typography,
 } from "@mui/material";
@@ -22,7 +24,7 @@ import {
   ItemsLoading,
   CourseList,
 } from "../components/index";
-import { ProductionQuantityLimitsSharp } from "@mui/icons-material";
+import CustomCard from "../components/CustomCard";
 
 function SearchResultPage() {
   const currentLocation = useLocation().search;
@@ -32,6 +34,8 @@ function SearchResultPage() {
   const [limits, setLimit] = useState(9);
   const [allCourses, setAllCourses] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
+  const [isLoadMore, setIsLoadMore] = useState(false);
+  const [isNewQuery, setIsNewQuery] = useState(false);
 
   const {
     data: courseData,
@@ -44,7 +48,7 @@ function SearchResultPage() {
     data: productData,
     isLoading: isProductLoading,
     isError: isProductError,
-  } = useSearchProductQuery(query);
+  } = useSearchProductQuery({query, page,limits});
 
   const [category, setCategory] = useState("course");
   const [sortBy, setSortBy] = useState("newest");
@@ -71,7 +75,8 @@ function SearchResultPage() {
     else setFilterByRuntime(state);
   };
 
-  const handleLimitChange = () => {
+  const handleLoadMore = () => {
+    setIsLoadMore(true);
     console.log(isCourseLoading);
 
     setPage((prevPage) => prevPage + 1); // Increment page when "Load more" is clicked
@@ -82,22 +87,87 @@ function SearchResultPage() {
   };
   // let courseList = [];
 
+  // For loading the first time
+  useEffect(() => {
+    // Reset page, data, and load more flags
+    setPage(1);
+    setAllCourses([]);
+    setAllProducts([]);
+    setIsNewQuery(true);
+    console.log("query", query);
+  }, [query]);
+
   useEffect(() => {
     if (courseData?.data) {
-      setAllCourses((prev) => [...prev, ...courseData.data]);
-      // setFilteredData(allCourses);
+      setAllCourses(courseData.data); // setFilteredData(allCourses);
     }
     if (productData?.data) {
-      setAllProducts((prev) => [...prev, ...productData.data]);
+      setAllProducts(productData.data);
       // setFilteredData(allProducts);
     }
-    if (category === "course") {
-      setFilteredData(allCourses);
+  }, [isCourseLoading, isProductLoading]);
+
+  useEffect(() => {
+    if (courseData?.data) {
+      if (isNewQuery) {
+        setAllCourses(courseData.data); // Replace data for a new query
+        setIsNewQuery(false); // Reset after fetching new query data
+      } else if (isLoadMore) {
+        setAllCourses((prev) => [...prev, ...courseData.data]); // Append data for load more
+        setIsLoadMore(false); // Reset load more flag
+      }
+    }
+    if (productData?.data) {
+      if (isNewQuery) {
+        setAllProducts(productData.data); // Replace data for a new query
+      } else if (isLoadMore) {
+        setAllProducts((prev) => [...prev, ...productData.data]); // Append data for load more
+        setIsLoadMore(false);
+      }
+    }
+    // if (isLoadMore && isFetching) {
+    //   if (courseData?.data) {
+    //     setAllCourses((prev) => [...prev, ...courseData.data]);
+    //     // setFilteredData(allCourses);
+    //   }
+    //   if (productData?.data) {
+    //     setAllProducts((prev) => [...prev, ...productData.data]);
+    //     // setFilteredData(allProducts);
+    //   }
+    //   setIsLoadMore(false);
+    // }
+    // else {
+    //   if (isNewQuery) {
+    //     if (courseData?.data) {
+    //       setAllCourses(courseData.data); // setFilteredData(allCourses);
+    //     }
+    //     if (productData?.data) {
+    //       setAllProducts(productData.data);
+    //       // setFilteredData(allProducts);
+    //     }
+    //     setIsNewQuery(false)
+    //   }
+
+    // }
+    console.log("isFetching", isFetching);
+  }, [courseData, productData, category, isLoadMore, isFetching]);
+
+  useEffect(() => {
+    if (query === "" || !query) {
+      if (category === "course") {
+        setFilteredData(allCourses); // Show all courses if in the course category
+      } else {
+        setFilteredData(allProducts); // Show all products if in the product category
+      }
     } else {
-      setFilteredData(allProducts);
+      if (category === "course") {
+        setFilteredData(allCourses);
+      } else {
+        setFilteredData(allProducts);
+      }
     }
     console.log("setFilteredData", filteredData);
-  }, [courseData, productData]);
+  }, [allCourses, allProducts, category, query]);
 
   // useEffect(() => {
   //   // Combine existing raw data with new page data
@@ -258,11 +328,37 @@ function SearchResultPage() {
         </Grid>
         <Grid item xs={12} sm={9}>
           <Stack pl={{ xs: 0, md: 3 }} gap={2} minHeight="100vh">
-            <SearchList
+            <>
+              <Box width="100%">
+                <Grid2 container size={{ xs: 12 }} width={"100%"}>
+                  {filteredData?.map((product, idx) => (
+                    <Grid2 size={{ xs: 4 }}>
+                      <CustomCard
+                        key={idx}
+                        dataObj={product}
+                        variant={category}
+                      />
+                    </Grid2>
+                  ))}
+                </Grid2>
+                {/* {dataObj.length > limit && ( */}
+                <Button
+                  variant="outlined"
+                  paddingX={2}
+                  fullWidth
+                  onClick={handleLoadMore}
+                >
+                  View More
+                </Button>
+                {/* )} */}
+              </Box>
+            </>
+
+            {/* <SearchList
               dataObj={filteredData || []}
               cardVariant={category}
               limit={limits}
-              handleLimitChange={handleLimitChange}
+              handleLoadMore={handleLoadMore}
               isCourseLoading={isFetching}
             />
             <Button
@@ -277,7 +373,7 @@ function SearchResultPage() {
             >
               Next
             </Button>
-            <Typography>Page 1 of {totalPages}</Typography>
+            <Typography>Page 1 of {totalPages}</Typography> */}
           </Stack>
         </Grid>
       </Grid>
