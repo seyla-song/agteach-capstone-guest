@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -6,55 +6,51 @@ import {
   Stack,
   Typography,
   Avatar,
-} from '@mui/material';
-import {
-  useGetUserInfoQuery,
-  useUpdateInfoMutation,
-} from '../../services/api/userApi';
-import { CustomAlert } from '../../components/CustomAlert';
+} from "@mui/material";
+import { useUpdateInfoMutation } from "../../services/api/userApi";
+import { CustomAlert } from "../../components/CustomAlert";
 
-export const ProfilePhoto = () => {
+export const ProfilePhoto = ({ userData }) => {
   const [profileImage, setProfileImage] = useState();
-  const { data } = useGetUserInfoQuery();
+  const [imageFile, setImageFile] = useState(null);
   const [updateInfo, { isLoading }] = useUpdateInfoMutation();
 
   // Alert state
   const [alertOpen, setAlertOpen] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
-  const [alertSeverity, setAlertSeverity] = useState('error');
-
-  let customerData = {};
-
-  console.log('customerDataaaaa', customerData.imageUrl);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertSeverity, setAlertSeverity] = useState("error");
 
   useEffect(() => {
-    if (data) {
-      customerData = data.data.customer;
-      setProfileImage(customerData.imageUrl);
+    if (userData) {
+      setProfileImage(userData?.customer?.imageUrl);
     }
-  }, [data]);
+  }, [userData]);
 
-  const handleImageUpload = async (event) => {
+  const handleImageUpload = (event) => {
     const file = event.target.files[0];
-    setProfileImage(URL.createObjectURL(file));
-
     if (file) {
-      const validImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+      const validImageTypes = ["image/jpeg", "image/png", "image/jpg"];
       if (!validImageTypes.includes(file.type)) {
-        setAlertMessage('Please select a valid image file (JPEG, PNG, JPG).');
-        setAlertSeverity('error');
+        setAlertMessage("Please select a valid image file (JPEG, PNG, JPG).");
+        setAlertSeverity("error");
         setAlertOpen(true);
         return;
       }
+      setProfileImage(URL.createObjectURL(file));
+      setImageFile(file);
+    }
+  };
+
+  const handleSendUpdateImage = async () => {
+    try {
       const formData = new FormData();
-      formData.append('photo', file);
-      try {
-        window.location.reload();
-      } catch (error) {
-        setAlertMessage('Error submitting form. Please try again.');
-        setAlertSeverity('error');
-        setAlertOpen(true);
-      }
+      formData.append("photo", imageFile);
+      await updateInfo(formData);
+      window.location.reload();
+    } catch (error) {
+      setAlertMessage("Error submitting form. Please try again.");
+      setAlertSeverity("error");
+      setAlertOpen(true);
     }
   };
 
@@ -74,13 +70,13 @@ export const ProfilePhoto = () => {
 
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          backgroundColor: 'grey.100',
-          padding: '30px',
-          boxSizing: 'border-box',
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          backgroundColor: "grey.100",
+          padding: "30px",
+          boxSizing: "border-box",
         }}
       >
         <Stack>
@@ -88,7 +84,7 @@ export const ProfilePhoto = () => {
             // src={customerData.imageUrl}
             src={profileImage}
             alt="Profile Pic"
-            sx={{ width: 300, height: 300, border: '15px solid lightgrey' }}
+            sx={{ width: 300, height: 300, border: "15px solid lightgrey" }}
           />
           <Typography variant="bmdsm" textAlign="center" margin="10px">
             Image Preview
@@ -102,9 +98,9 @@ export const ProfilePhoto = () => {
 
       <Box
         sx={{
-          display: 'inline-block',
-          width: '100%',
-          boxSizing: 'border-box',
+          display: "inline-block",
+          width: "100%",
+          boxSizing: "border-box",
         }}
       >
         <Stack sx={{ m: 2, gap: 2 }} direction="row">
@@ -115,10 +111,15 @@ export const ProfilePhoto = () => {
             name="myfile"
             hiddenLabel
             onChange={handleImageUpload}
-            sx={{ flexGrow: 1, width: 'auto' }}
+            sx={{ flexGrow: 1, width: "auto" }}
           />
-          <Button variant="contained" sx={{ px: 10, py: 2 }}>
-            {isLoading ? 'Uploading...' : 'Upload'}
+          <Button
+            variant="contained"
+            sx={{ px: 10, py: 2 }}
+            onClick={handleSendUpdateImage}
+            disabled={!imageFile || isLoading}
+          >
+            {isLoading ? "Uploading..." : "Upload"}
           </Button>
         </Stack>
       </Box>
@@ -134,4 +135,3 @@ export const ProfilePhoto = () => {
     </>
   );
 };
-
