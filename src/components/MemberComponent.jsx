@@ -1,5 +1,5 @@
 import { Box, Button, Container, Link, Stack, Typography } from '@mui/material';
-import Member from '../assets/Home/member.png';
+import Member from '../assets/happy-farmer.png';
 import { teachAgtechURL } from '../utils/globalURL';
 
 export const MemberComponent = () => {
@@ -14,7 +14,7 @@ export const MemberComponent = () => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Stack maxWidth={500} gap={3}>
+        <Stack maxWidth={400} gap={3}>
           <Typography
             sx={{ typography: { xs: 'h3', md: 'h2' } }}
             color="common.white"
@@ -38,7 +38,7 @@ export const MemberComponent = () => {
         </Stack>
         <Box
           height="500px"
-          width={{ xs: '100%', md: '40%' }}
+          width={{ xs: '100%', md: '500px' }}
           sx={{
             backgroundImage: `url(${Member})`,
             backgroundRepeat: 'no-repeat',
