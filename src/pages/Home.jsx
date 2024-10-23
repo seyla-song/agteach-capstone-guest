@@ -8,9 +8,10 @@ import {
   SearchBar,
   CarouselComponent,
   CoreValueComponent,
+  CustomFaq,
 } from '../components/index';
 
-import search from '../assets/Home/search.png';
+import search from '../assets/happy-farm-community.jpeg';
 
 function HomePage() {
   const { data: productsData } = useGetProductCarouselQuery();
@@ -52,6 +53,8 @@ function HomePage() {
       )}
 
       <MemberComponent />
+
+      <CustomFaq />
     </Container>
   );
 }

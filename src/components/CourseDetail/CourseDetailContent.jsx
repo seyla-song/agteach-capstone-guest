@@ -25,7 +25,7 @@ export const CourseDetailContent = ({
 
   return (
     <Grid item xs={12}>
-      <Stack gap={2} py={10}>
+      <Stack gap={2} py={{xs:5, md:10}}>
         <Stack>
           <Typography variant="h4">Course Content</Typography>
           <Typography variant="bxsr">
