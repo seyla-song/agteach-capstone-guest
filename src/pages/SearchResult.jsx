@@ -51,11 +51,11 @@ function SearchResultPage() {
   const [sortBy, setSortBy] = useState("newest");
 
   const totalCoursePages = isCourseLoading
-    ? 0
+    ? 1
     : Math.ceil(courseData?.results / limit);
 
   const totalProductPages = isProductLoading
-    ? 0
+    ? 1
     : Math.ceil(productData?.results / limit);
   // console.log(totalPages); // Outputs: 4
 
@@ -68,8 +68,6 @@ function SearchResultPage() {
   const handleSortByChange = (state) => {
     if (state !== sortBy) setSortBy(state);
   };
-
-
 
   // Handle next page logic
   const handleNext = () => {
@@ -134,14 +132,12 @@ function SearchResultPage() {
       combinedData.product.sort(sortCallbacks[sortBy]);
     }
 
-
     // Set the filtered data based on the selected category
     setFilteredData(combinedData[category]);
 
     console.log("isFetching", isFetching);
-  }, [courseData, productData, category, sortBy,  isNewQuery]);
+  }, [courseData, productData, category, sortBy, isNewQuery]);
 
-  
   if (isCourseLoading || isProductLoading || category) <ContentLoading />;
 
   if (isProductError || isCourseError) {
@@ -207,7 +203,6 @@ function SearchResultPage() {
             <SortByFilter sortBy={sortBy} handleChange={handleSortByChange} />
 
             <Divider />
-
           </Stack>
         </Grid>
         <Grid item xs={12} sm={9}>
@@ -215,6 +210,9 @@ function SearchResultPage() {
             <>
               <Box width="100%">
                 <Grid2 container size={{ xs: 12 }} width={"100%"}>
+                  {filteredData?.length === 0 && (
+                    <Typography>There is no search result.</Typography>
+                  )}
                   {filteredData?.map((product, idx) => (
                     <Grid2 size={{ xs: 4 }}>
                       <CustomCard
@@ -225,42 +223,44 @@ function SearchResultPage() {
                     </Grid2>
                   ))}
                 </Grid2>
-                <Stack
-                  direction="row"
-                  justifyContent="center"
-                  alignItems="center"
-                  gap={3}
-                  py={3}
-                >
-                  <Button
-                    variant="outlined"
-                    onClick={handlePrevious} // Prevent going below page 1
-                    disabled={
-                      (category === "course" && coursePage === 1) ||
-                      (category === "product" && productPage === 1)
-                    }
+                {filteredData?.length !== 0 && (
+                  <Stack
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="center"
+                    gap={3}
+                    py={3}
                   >
-                    <NavigateBeforeIcon />
-                  </Button>
-                  <Typography>
-                    Page {category === "course" ? coursePage : productPage} of{" "}
-                    {category === "course"
-                      ? totalCoursePages
-                      : totalProductPages}
-                  </Typography>
-                  <Button
-                    variant="outlined"
-                    onClick={handleNext}
-                    disabled={
-                      (category === "course" &&
-                        coursePage === totalCoursePages) ||
-                      (category === "product" &&
-                        productPage === totalProductPages)
-                    }
-                  >
-                    <NavigateNextIcon />
-                  </Button>
-                </Stack>
+                    <Button
+                      variant="outlined"
+                      onClick={handlePrevious} // Prevent going below page 1
+                      disabled={
+                        (category === "course" && coursePage === 1) ||
+                        (category === "product" && productPage === 1)
+                      }
+                    >
+                      <NavigateBeforeIcon />
+                    </Button>
+                    <Typography>
+                      Page {category === "course" ? coursePage : productPage} of{" "}
+                      {category === "course"
+                        ? totalCoursePages
+                        : totalProductPages}
+                    </Typography>
+                    <Button
+                      variant="outlined"
+                      onClick={handleNext}
+                      disabled={
+                        (category === "course" &&
+                          coursePage === totalCoursePages) ||
+                        (category === "product" &&
+                          productPage === totalProductPages)
+                      }
+                    >
+                      <NavigateNextIcon />
+                    </Button>
+                  </Stack>
+                )}
                 {/* )} */}
               </Box>
             </>

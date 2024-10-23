@@ -146,6 +146,9 @@ export default function MarketPlace() {
                 <Typography typography="bsr">{`Found (${productData.results}) items`}</Typography>
               )}
               {isProductLoading && <ContentLoading />}
+              {filteredData?.length === 0 && (
+                <Typography>There is no search result.</Typography>
+              )}
               {!isProductLoading && productData && (
                 <SearchList
                   dataObj={filteredData}
@@ -153,29 +156,31 @@ export default function MarketPlace() {
                   limit={limit}
                 />
               )}
-              <Stack
-                direction="row"
-                justifyContent="center"
-                alignItems="center"
-                gap={3}
-                py={3}
-              >
-                <Button
-                  variant="outlined"
-                  onClick={handlePrevious} // Prevent going below page 1
-                  disabled={page === 1} // Disable if on the first page
+              {filteredData?.length !== 0 && (
+                <Stack
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="center"
+                  gap={3}
+                  py={3}
                 >
-                  <NavigateBeforeIcon />
-                </Button>
-                <Typography>{`Page ${page} of ${totalPages}`}</Typography>
-                <Button
-                  variant="outlined"
-                  onClick={handleNext}
-                  disabled={page === totalPages} // Disable if on the last page
-                >
-                  <NavigateNextIcon />
-                </Button>
-              </Stack>
+                  <Button
+                    variant="outlined"
+                    onClick={handlePrevious} // Prevent going below page 1
+                    disabled={page === 1} // Disable if on the first page
+                  >
+                    <NavigateBeforeIcon />
+                  </Button>
+                  <Typography>{`Page ${page} of ${totalPages}`}</Typography>
+                  <Button
+                    variant="outlined"
+                    onClick={handleNext}
+                    disabled={page === totalPages} // Disable if on the last page
+                  >
+                    <NavigateNextIcon />
+                  </Button>
+                </Stack>
+              )}
             </Stack>
           </Grid>
         </Grid>
