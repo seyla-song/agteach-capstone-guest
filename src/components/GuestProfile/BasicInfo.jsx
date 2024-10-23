@@ -36,7 +36,7 @@ export const BasicInfo = ({ userData, cities }) => {
 
   useEffect(() => {
     if (userData && userData.customer) {
-      const customerData = userData.customer;
+      const customerData = userData?.customer;
       const { firstName, lastName, phone, location: {name}, address } = customerData;
       setValue("firstName", firstName || "");
       setValue("lastName", lastName || "");
@@ -49,9 +49,9 @@ export const BasicInfo = ({ userData, cities }) => {
   const onSubmit = async (formData) => {
     const {city: selectedCity} = formData;
 
-    cities.forEach((city) => {
-      if (city.name === selectedCity) {
-        formData.locationId = city.locationId
+    cities?.forEach((city) => {
+      if (city?.name === selectedCity) {
+        formData.locationId = city?.locationId
       };
     });
 
@@ -66,7 +66,7 @@ export const BasicInfo = ({ userData, cities }) => {
   const validatePhone = (value) => {
     const phonePattern = /^[0-9]+$/; // Only digits
     if (!value) return true; // Allow empty input if not required
-    if (value.length > 15) return "Phone number cannot exceed 15 digits";
+    if (value?.length > 15) return "Phone number cannot exceed 15 digits";
     return phonePattern.test(value) || "Please enter a valid phone number";
   };
 
@@ -77,7 +77,7 @@ export const BasicInfo = ({ userData, cities }) => {
         <CustomAlert
           label={
             isError
-              ? error.data.message
+              ? error?.data?.message
               : isSuccess
               ? "Successfuly updated Information"
               : "Something went wrong. Please try again"
@@ -86,7 +86,7 @@ export const BasicInfo = ({ userData, cities }) => {
           open={open}
           onClose={() => setOpen(false)}
         />
-        <FormControl variant="outlined" error={!!errors.firstName}>
+        <FormControl variant="outlined" error={!!errors?.firstName}>
           <InputLabel htmlFor="first-name">First Name</InputLabel>
           <OutlinedInput
             id="first-name"
@@ -101,10 +101,10 @@ export const BasicInfo = ({ userData, cities }) => {
             })}
           />
           {errors.firstName && (
-            <FormHelperText>{errors.firstName.message}</FormHelperText>
+            <FormHelperText>{errors?.firstName?.message}</FormHelperText>
           )}
         </FormControl>
-        <FormControl variant="outlined" error={!!errors.lastName}>
+        <FormControl variant="outlined" error={!!errors?.lastName}>
           <InputLabel htmlFor="last-name">Last Name</InputLabel>
           <OutlinedInput
             id="last-name"
@@ -119,38 +119,38 @@ export const BasicInfo = ({ userData, cities }) => {
             })}
           />
           {errors.lastName && (
-            <FormHelperText>{errors.lastName.message}</FormHelperText>
+            <FormHelperText>{errors?.lastName?.message}</FormHelperText>
           )}
         </FormControl>
 
         <Autocomplete
           fullWidth
           options={cities}
-          getOptionLabel={(option) => option.name}
+          getOptionLabel={(option) => option?.name}
           renderInput={(params) => (
             <TextField
               {...params}
               label="City"
               slotProps={{
                 htmlInput: {
-                  ...params.inputProps,
+                  ...params?.inputProps,
                 },
               }}
               {...register('city', {
                 validate: (value) => {
-                  if (!value.length) {
+                  if (!value?.length) {
                     return true
                   }
-                  return cities.some((city) => city.name === value) || 'Please provide a valid city';
+                  return cities?.some((city) => city?.name === value) || 'Please provide a valid city';
                 }
               })}
-              error={!!errors.city}
-              helperText={errors.city?.message}
+              error={!!errors?.city}
+              helperText={errors?.city?.message}
             />
           )}
         />
 
-        <FormControl variant="outlined" error={!!errors.address}>
+        <FormControl variant="outlined" error={!!errors?.address}>
           <InputLabel htmlFor="address">Address</InputLabel>
           <OutlinedInput
             id="address"
@@ -160,12 +160,12 @@ export const BasicInfo = ({ userData, cities }) => {
               required: "Address is required",
             })}
           />
-          {errors.address && (
-            <FormHelperText>{errors.address.message}</FormHelperText>
+          {errors?.address && (
+            <FormHelperText>{errors?.address?.message}</FormHelperText>
           )}
         </FormControl>
 
-        <FormControl variant="outlined" error={!!errors.phone}>
+        <FormControl variant="outlined" error={!!errors?.phone}>
           <InputLabel htmlFor="phone-number">Phone Number</InputLabel>
           <OutlinedInput
             id="phone-number"
@@ -177,7 +177,7 @@ export const BasicInfo = ({ userData, cities }) => {
             })}
           />
           {errors.phone && (
-            <FormHelperText>{errors.phone.message}</FormHelperText>
+            <FormHelperText>{errors?.phone?.message}</FormHelperText>
           )}
         </FormControl>
       </Stack>
