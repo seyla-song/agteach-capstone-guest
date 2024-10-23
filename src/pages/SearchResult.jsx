@@ -37,7 +37,6 @@ function SearchResultPage() {
   const {
     data: courseData,
     isLoading: isCourseLoading,
-    isFetching,
     isError: isCourseError,
   } = useSearchCourseQuery({ query, page: coursePage, limit });
 
@@ -57,7 +56,6 @@ function SearchResultPage() {
   const totalProductPages = isProductLoading
     ? 1
     : Math.ceil(productData?.results / limit);
-  // console.log(totalPages); // Outputs: 4
 
   const [filteredData, setFilteredData] = useState([]);
 
@@ -135,7 +133,6 @@ function SearchResultPage() {
     // Set the filtered data based on the selected category
     setFilteredData(combinedData[category]);
 
-    console.log("isFetching", isFetching);
   }, [courseData, productData, category, sortBy, isNewQuery]);
 
   if (isCourseLoading || isProductLoading || category) <ContentLoading />;
