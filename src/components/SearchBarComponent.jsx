@@ -46,7 +46,7 @@ export const SearchBar = ({
         position: 'relative',
         height: backDrop
           ? { xs: '200px', md: '300px' }
-          : { xs: 'auto', md: 'auto' },
+          : { xs: '200px', md: '200px' },
       }}
     >
       {backDrop &&
@@ -64,7 +64,7 @@ export const SearchBar = ({
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              objectPosition: 'top',
+              objectPosition: 'center',
             }}
             src={backDrop}
           />
@@ -88,7 +88,7 @@ export const SearchBar = ({
           </Typography>
         )}
         <form onSubmit={handleStartSearch}>
-          <Box display="flex" gap="20px" width="100%" height="40px">
+          <Stack direction="row" gap={1} height="40px">
             <Autocomplete
               id="search-bar"
               sx={{ width: '100%', height: '40px', mx: 'auto' }}
@@ -115,9 +115,8 @@ export const SearchBar = ({
                   InputProps={{
                     ...params.InputProps,
                     sx: {
-                      height: '40px',
+                      height: '50px',
                       bgcolor: 'grey.100',
-                      borderRadius: '4px',
                     },
                     endAdornment: null,
                     autoComplete: 'new-password',
@@ -130,14 +129,16 @@ export const SearchBar = ({
               <Button
                 onClick={handleStartSearch}
                 fullWidth
+                disableElevation
                 variant="contained"
                 color="secondary"
-                sx={{ height: '100%', color: 'primary.main' }}
+                size="large"
+                sx={{ height: '50px' }}
               >
                 Search
               </Button>
             </Box>
-          </Box>
+          </Stack>
         </form>
       </Stack>
     </Box>
