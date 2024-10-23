@@ -1,15 +1,6 @@
-import {
-  Box,
-  Button,
-  Stack,
-  TextField,
-  Typography,
-  Autocomplete,
-} from "@mui/material";
+import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const data = ["Plant", "Fertilizer", "Shovel"];
 
 export const SearchBar = ({
   backDrop,
@@ -25,10 +16,6 @@ export const SearchBar = ({
 
   const handleSearchString = (e) => {
     setSearchString(e.target.value);
-  };
-
-  const handleAutocompleteChange = (event, newValue) => {
-    setSearchString(newValue || "");
   };
 
   const handleStartSearch = (e) => {
@@ -90,57 +77,23 @@ export const SearchBar = ({
         )}
         <form onSubmit={handleStartSearch}>
           <Box display="flex" gap="20px" width="100%" height="40px">
-            {/* <TextField
-              // {...params}
-              onChange={(e) => handleSearchString(e)}
-              value={searchString}
+            <TextField
+              id="search-bar"
+              sx={{
+                width: "100%",
+                height: "40px",
+                mx: "auto",
+                bgcolor: "grey.100",
+                borderRadius: "4px",
+              }}
+              value={searchString} // Controlled value
+              onChange={(e) => handleSearchString(e)} // Handle input change
               placeholder="Search course, plant, crop, service"
               InputProps={{
-                // ...params.InputProps,
                 sx: {
                   height: "40px",
-                  bgcolor: "grey.100",
-                  borderRadius: "4px",
                 },
-                endAdornment: null,
-                autoComplete: "new-password",
               }}
-            /> */}
-            <Autocomplete
-              id="search-bar"
-              sx={{ width: "100%", height: "40px", mx: "auto" }}
-              options={data}
-              value={searchString}
-              onInputChange={handleAutocompleteChange}
-              getOptionLabel={(option) => {
-                return option;
-              }}
-              renderOption={(props, option) => {
-                const { key, ...optionProps } = props;
-                return (
-                  <Box key={key} component="li" {...optionProps}>
-                    {option}
-                  </Box>
-                );
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  onChange={(e) => handleSearchString(e)}
-                  value={searchString}
-                  placeholder="Search course, plant, crop, service"
-                  InputProps={{
-                    ...params.InputProps,
-                    sx: {
-                      height: "40px",
-                      bgcolor: "grey.100",
-                      borderRadius: "4px",
-                    },
-                    endAdornment: null,
-                    autoComplete: "new-password",
-                  }}
-                />
-              )}
             />
 
             <Box sx={{ width: { xs: "80px", sm: "100px", md: "220px" } }}>

@@ -46,6 +46,8 @@ export default function MarketPlace() {
   const [sortBy, setSortBy] = useState("newest");
   const [rawData, setRawData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const totalItems = productData ? productData.results : 0; // Total items from the backend
+  const totalPages = Math.ceil(totalItems / limit); // Calculate total pages
 
   const handleCategoryChange = (selectedCategory) => {
     // Update the selected category and reset page to 1
@@ -148,14 +150,14 @@ export default function MarketPlace() {
               {!isProductLoading && productData && (
                 <Typography typography="bsr">{`Found (${productData.results}) items`}</Typography>
               )}
-              {isProductLoading && <ContentLoading />}  
+              {isProductLoading && <ContentLoading />}
               {!isProductLoading && productData && (
                 <SearchList
                   dataObj={filteredData}
                   cardVariant={"product"}
                   limit={limit}
                   handleLimitChange={handleLimitChange}
-                />                
+                />
               )}
               <Stack
                 direction="row"
@@ -171,11 +173,11 @@ export default function MarketPlace() {
                 >
                   <NavigateBeforeIcon />
                 </Button>
-                <Typography>{`Page ${page}`}</Typography>
+                <Typography>{`Page ${page} of ${totalPages}`}</Typography>
                 <Button
                   variant="outlined"
                   onClick={handleNext}
-                  disabled={productData && productData.results < limit} // Disable if fewer items than limit
+                  disabled={page === totalPages} // Disable if on the last page
                 >
                   <NavigateNextIcon />
                 </Button>
