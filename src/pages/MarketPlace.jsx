@@ -26,28 +26,19 @@ import {
   ContentLoading,
 } from "../components/index";
 
-/**
- * A React functional component that renders a marketplace page.
- *
- * The component includes a responsive layout with a search bar, a category filter,
- * a sort by filter, and a filter by filter. It also displays a list of products
- * with a carousel of recommended products.
- *
- * @return {JSX.Element} The JSX element representing the marketplace page.
- */
 export default function MarketPlace() {
   const currentLocation = useLocation().search;
   const queryParams = new URLSearchParams(currentLocation);
   const [limit, setLimit] = useState(9);
   const [page, setPage] = useState(1);
   const query = queryParams.get("name") || "";
-  const [category, setCategory] = useState();
+  const [category, setCategory] = useState(); // State to hold the selected category
 
   const {
     data: productData,
     isLoading: isProductLoading,
     isError: isProductError,
-  } = useSearchProductQuery({ query, page, limit, category });
+  } = useSearchProductQuery({ query, page, limit, category }); // Pass category to the query
 
   const { data: categoryData, isLoading: isCategoryLoading } =
     useGetAllCategoryQuery();
@@ -55,30 +46,32 @@ export default function MarketPlace() {
   const [sortBy, setSortBy] = useState("newest");
   const [rawData, setRawData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [isNewQuery, setIsNewQuery] = useState(false);
 
-  const handleCategoryChange = (state) => {
-    if (state !== category) {
-      setCategory(state);
-    } else {
-      setCategory();
-    }
+  const handleCategoryChange = (selectedCategory) => {
+    // Update the selected category and reset page to 1
+    setCategory(selectedCategory !== category ? selectedCategory : undefined);
+    setPage(1); // Reset to the first page on category change
   };
-  const handleNext = () => {};
-  const handlePrevious = () => {};
+
   const handleSortByChange = (state) => {
     if (state !== sortBy) setSortBy(state);
   };
 
   const handleLimitChange = () => {
-    setLimit(limit + 9);
+    setLimit((prevLimit) => prevLimit + 9);
   };
+
+  const handleNext = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePrevious = () => {
+    setPage((prevPage) => Math.max(prevPage - 1, 1)); // Prevent going below page 1
+  };
+
   useEffect(() => {
-    // Reset page, data, and load more flags
-    setPage(1);
-    setIsNewQuery(true);
-    console.log("query", query);
-  }, [query]);
+    setPage(1); // Reset page when the query or category changes
+  }, [query, category]);
 
   useEffect(() => {
     if (productData) {
@@ -86,13 +79,6 @@ export default function MarketPlace() {
     }
 
     let dataToFilter = [...rawData] || [];
-
-    const categoryFilterMap = {
-      plant: 1,
-      fertilizer: 2,
-      seed: 3,
-      tool: 4,
-    };
 
     const sortFunctions = {
       newest: (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
@@ -102,17 +88,9 @@ export default function MarketPlace() {
       phtl: (a, b) => parseFloat(b.price) - parseFloat(a.price),
     };
 
-
-    if (category in categoryFilterMap) {
-      dataToFilter = dataToFilter.filter(
-        (product) => product.categoryId === categoryFilterMap[category]
-      );
-    }
-
     dataToFilter.sort(sortFunctions[sortBy] || (() => 0));
-
     setFilteredData(dataToFilter);
-  }, [rawData, category, sortBy, limit, productData]);
+  }, [rawData, sortBy, productData, category]);
 
   if (isProductError) {
     return (
@@ -152,7 +130,7 @@ export default function MarketPlace() {
               <Category
                 allCategories={categoryData ? categoryData.data : []}
                 category={category}
-                handleChange={handleCategoryChange}
+                handleChange={handleCategoryChange} // Pass the handler
               />
               <Divider />
               <SortByFilter sortBy={sortBy} handleChange={handleSortByChange} />
@@ -170,14 +148,14 @@ export default function MarketPlace() {
               {!isProductLoading && productData && (
                 <Typography typography="bsr">{`Found (${productData.results}) items`}</Typography>
               )}
-              {isProductLoading && <ContentLoading />}
+              {isProductLoading && <ContentLoading />}  
               {!isProductLoading && productData && (
                 <SearchList
                   dataObj={filteredData}
                   cardVariant={"product"}
                   limit={limit}
                   handleLimitChange={handleLimitChange}
-                />
+                />                
               )}
               <Stack
                 direction="row"
@@ -189,11 +167,16 @@ export default function MarketPlace() {
                 <Button
                   variant="outlined"
                   onClick={handlePrevious} // Prevent going below page 1
+                  disabled={page === 1} // Disable if on the first page
                 >
                   <NavigateBeforeIcon />
                 </Button>
-                <Typography>Page</Typography>
-                <Button variant="outlined" onClick={handleNext}>
+                <Typography>{`Page ${page}`}</Typography>
+                <Button
+                  variant="outlined"
+                  onClick={handleNext}
+                  disabled={productData && productData.results < limit} // Disable if fewer items than limit
+                >
                   <NavigateNextIcon />
                 </Button>
               </Stack>
