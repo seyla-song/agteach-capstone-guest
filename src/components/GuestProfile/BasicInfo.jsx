@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -10,10 +10,10 @@ import {
   TextField,
   FormHelperText,
   Stack,
-} from "@mui/material";
-import { useForm } from "react-hook-form";
-import { useUpdateInfoMutation } from "../../services/api/userApi"; // Import the isLogin query
-import { CustomAlert } from "../CustomAlert";
+} from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { useUpdateInfoMutation } from '../../services/api/userApi'; // Import the isLogin query
+import { CustomAlert } from '../CustomAlert';
 
 export const BasicInfo = ({ userData, cities }) => {
   const {
@@ -23,11 +23,11 @@ export const BasicInfo = ({ userData, cities }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      phone: "",
-      city: "",
-      address: "",
+      firstName: '',
+      lastName: '',
+      phone: '',
+      city: '',
+      address: '',
     },
   });
   const [updateInfo, { isLoading: isLoadingInfo, isError, error, isSuccess }] =
@@ -37,22 +37,22 @@ export const BasicInfo = ({ userData, cities }) => {
   useEffect(() => {
     if (userData && userData.customer) {
       const customerData = userData?.customer;
-      const { firstName, lastName, phone, location: {name}, address } = customerData;
-      setValue("firstName", firstName || "");
-      setValue("lastName", lastName || "");
-      setValue("phone", phone || "");
-      setValue("city", name || "");
-      setValue("address", address || "");
+      const { firstName, lastName, phone, location, address } = customerData;
+      setValue('firstName', firstName || '');
+      setValue('lastName', lastName || '');
+      setValue('phone', phone || '');
+      setValue('city', location?.name || '');
+      setValue('address', address || '');
     }
   }, [userData, setValue, cities]);
 
   const onSubmit = async (formData) => {
-    const {city: selectedCity} = formData;
+    const { city: selectedCity } = formData;
 
     cities?.forEach((city) => {
       if (city?.name === selectedCity) {
-        formData.locationId = city?.locationId
-      };
+        formData.locationId = city?.locationId;
+      }
     });
 
     await updateInfo(formData);
@@ -66,8 +66,8 @@ export const BasicInfo = ({ userData, cities }) => {
   const validatePhone = (value) => {
     const phonePattern = /^[0-9]+$/; // Only digits
     if (!value) return true; // Allow empty input if not required
-    if (value?.length > 15) return "Phone number cannot exceed 15 digits";
-    return phonePattern.test(value) || "Please enter a valid phone number";
+    if (value?.length > 15) return 'Phone number cannot exceed 15 digits';
+    return phonePattern.test(value) || 'Please enter a valid phone number';
   };
 
   return (
@@ -79,10 +79,10 @@ export const BasicInfo = ({ userData, cities }) => {
             isError
               ? error?.data?.message
               : isSuccess
-              ? "Successfuly updated Information"
-              : "Something went wrong. Please try again"
+              ? 'Successfuly updated Information'
+              : 'Something went wrong. Please try again'
           }
-          severity={isError ? "error" : "success"}
+          severity={isError ? 'error' : 'success'}
           open={open}
           onClose={() => setOpen(false)}
         />
@@ -92,11 +92,11 @@ export const BasicInfo = ({ userData, cities }) => {
             id="first-name"
             label="First Name"
             placeholder="e.g. Jane"
-            {...register("firstName", {
-              required: "First name is required",
+            {...register('firstName', {
+              required: 'First name is required',
               pattern: {
                 value: /^[A-Za-z]+$/i,
-                message: "First name can only contain letters",
+                message: 'First name can only contain letters',
               },
             })}
           />
@@ -110,11 +110,11 @@ export const BasicInfo = ({ userData, cities }) => {
             id="last-name"
             label="Last Name"
             placeholder="e.g. Smith"
-            {...register("lastName", {
-              required: "Last name is required",
+            {...register('lastName', {
+              required: 'Last name is required',
               pattern: {
                 value: /^[A-Za-z]+$/i,
-                message: "Last name can only contain letters",
+                message: 'Last name can only contain letters',
               },
             })}
           />
@@ -139,10 +139,13 @@ export const BasicInfo = ({ userData, cities }) => {
               {...register('city', {
                 validate: (value) => {
                   if (!value?.length) {
-                    return true
+                    return true;
                   }
-                  return cities?.some((city) => city?.name === value) || 'Please provide a valid city';
-                }
+                  return (
+                    cities?.some((city) => city?.name === value) ||
+                    'Please provide a valid city'
+                  );
+                },
               })}
               error={!!errors?.city}
               helperText={errors?.city?.message}
@@ -156,8 +159,8 @@ export const BasicInfo = ({ userData, cities }) => {
             id="address"
             label="Address"
             placeholder="N. 61Eo, Street 166"
-            {...register("address", {
-              required: "Address is required",
+            {...register('address', {
+              required: 'Address is required',
             })}
           />
           {errors?.address && (
@@ -171,8 +174,8 @@ export const BasicInfo = ({ userData, cities }) => {
             id="phone-number"
             label="Phone Number"
             placeholder="e.g. 1234567890"
-            {...register("phone", {
-              required: "Phone number is required",
+            {...register('phone', {
+              required: 'Phone number is required',
               validate: validatePhone,
             })}
           />
@@ -182,9 +185,9 @@ export const BasicInfo = ({ userData, cities }) => {
         </FormControl>
       </Stack>
 
-      <Box sx={{ width: "100%", boxSizing: "border-box" }}>
+      <Box sx={{ width: '100%', boxSizing: 'border-box' }}>
         <Stack
-          sx={{ m: 2, justifyContent: "flex-end" }}
+          sx={{ m: 2, justifyContent: 'flex-end' }}
           direction="row"
           spacing={2}
         >
@@ -194,7 +197,7 @@ export const BasicInfo = ({ userData, cities }) => {
             disabled={isLoadingInfo}
             onClick={handleSubmit(onSubmit)}
           >
-            {isLoadingInfo ? "Saving..." : "Save"}
+            {isLoadingInfo ? 'Saving...' : 'Save'}
           </Button>
         </Stack>
       </Box>
