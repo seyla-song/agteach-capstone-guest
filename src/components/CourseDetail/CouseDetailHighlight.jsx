@@ -20,8 +20,8 @@ export const CourseDetailHighlight = ({courseData}) => {
   }
   return (
     <Grid item xs={12}>
-      <Stack py={5}>
-        <Grid container spacing={2}>
+      <Stack py={{xs:1, md:10}}>
+        <Grid container spacing={{md:2}}>
           <Grid xs={12} md={7} item>
             <Stack
               gap={1}
