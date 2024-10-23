@@ -156,6 +156,7 @@ export default function PersonalInfoForm() {
                 type="submit"
                 variant="outlined"
                 sx={{ padding: { xs: '8px 20px', md: '8px 35px' } }}
+                disabled={isLoading}
               >
                 Skip
               </Button>
@@ -164,6 +165,7 @@ export default function PersonalInfoForm() {
                 type="submit"
                 variant="contained"
                 sx={{ padding: { xs: '8px 20px', md: '8px 35px' } }}
+                disabled={isLoading}
               >
                 {isLoading ? 'Submitting...' : 'Submit'}
               </Button>

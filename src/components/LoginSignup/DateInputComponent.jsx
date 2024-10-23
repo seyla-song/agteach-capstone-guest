@@ -1,9 +1,10 @@
 import React from "react";
-import { TextField, InputAdornment } from "@mui/material";
+import { TextField, InputAdornment, FormHelperText } from "@mui/material";
 import { CalendarToday } from "@mui/icons-material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 
 const DateInput = React.forwardRef((props, ref) => {
   const { label, dateValue, onDateChange, error, helperText, ...rest } = props;
@@ -14,7 +15,7 @@ const DateInput = React.forwardRef((props, ref) => {
         disableFuture
         ref={ref}
         label={label}
-        value={dateValue}
+        value={dateValue ? dayjs(dateValue) : null}
         onChange={onDateChange}
         renderInput={(params) => (
           <TextField
@@ -34,6 +35,11 @@ const DateInput = React.forwardRef((props, ref) => {
           />
         )}
       />
+      {error && (
+        <FormHelperText error sx={{ pl: 2, marginTop: '2px !important' }}>
+          {helperText}
+        </FormHelperText>
+      )}
     </LocalizationProvider>
   );
 });

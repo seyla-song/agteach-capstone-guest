@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useForm, Controller } from 'react-hook-form';
-import { useSignupMutation } from '../services/api/authApi';
-import { useDispatch } from 'react-redux';
-import { setEmail, setDob } from '../features/auth/userSlice';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm, Controller } from "react-hook-form";
+import { useSignupMutation } from "../services/api/authApi";
+import { useDispatch } from "react-redux";
+import { setEmail, setDob } from "../features/auth/userSlice";
 
-import { Button, Typography, Box, Stack, Grid, Container } from '@mui/material';
+import { Button, Typography, Box, Stack, Grid, Container } from "@mui/material";
 
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 
-import { CustomAlert, LogoLink, FormInput } from '../components/index';
+import { CustomAlert, LogoLink, FormInput } from "../components/index";
+import { differenceInYears } from "date-fns";
 
 const SignupPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [signup, { isLoading }] = useSignupMutation();
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState('');
-  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
   const [showPassword, setShowPassword] = useState(false);
   const {
     control,
@@ -27,10 +28,10 @@ const SignupPage = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      username: '',
-      email: '',
-      password: '',
-      passwordConfirm: '',
+      username: "",
+      email: "",
+      password: "",
+      passwordConfirm: "",
       dateOfBirth: null,
     },
   });
@@ -39,19 +40,19 @@ const SignupPage = () => {
 
   const submitHandler = async (data) => {
     try {
-      data.dateOfBirth = dayjs(data.dateOfBirth).format('YYYY/MM/DD');
+      data.dateOfBirth = dayjs(data.dateOfBirth).format("YYYY/MM/DD");
       const { email, dateOfBirth } = data;
       const response = await signup(data).unwrap();
-      if (response.status === 'success') {
-        setSnackbarSeverity('success');
+      if (response.status === "success") {
+        setSnackbarSeverity("success");
         setSnackbarMessage(response.message);
       }
       dispatch(setDob(dateOfBirth));
       dispatch(setEmail(email));
-      navigate('info');
+      navigate("info");
     } catch (error) {
-      setSnackbarSeverity('error');
-      setSnackbarMessage('Email already exists. Please try another email.');
+      setSnackbarSeverity("error");
+      setSnackbarMessage("Email already exists. Please try another email.");
       setSnackbarOpen(true);
     }
   };
@@ -84,34 +85,42 @@ const SignupPage = () => {
                   <Stack spacing={2}>
                     <FormInput
                       label="Username"
-                      {...register('username', {
-                        required: 'Please enter your name',
+                      {...register("username", {
+                        required: "Please enter your name",
                       })}
-                      error={!!errors.name}
-                      helperText={errors.name?.message}
+                      error={!!errors.username}
+                      helperText={errors.username?.message}
                     />
                     <Controller
                       name="dateOfBirth"
                       control={control}
-                      rules={{ required: 'Please select your date of birth' }} // Add validation rule
+                      rules={{
+                        required: "Please provide your date of birth",
+                        validate: (value) => {
+                          const currentDate = new Date();
+                          const age = differenceInYears(currentDate, new Date(value));
+
+                          return age >= 15 || "You must be at least 15 years old.";
+                        },
+                      }}
                       render={({ field }) => (
                         <FormInput
                           label="Date of Birth"
                           isDate={true}
-                          dateValue={field.value ? dayjs(field.value) : null}
+                          dateValue={field.value}
                           onDateChange={(newDate) => field.onChange(newDate)}
-                          error={!!errors.dateOfBirth} // Set error state
-                          helperText={errors.dateOfBirth?.message} // Set helper text
+                          error={!!errors.dateOfBirth}
+                          helperText={errors.dateOfBirth?.message}
                         />
                       )}
                     />
                     <FormInput
                       label="Email"
-                      {...register('email', {
-                        required: 'Please enter your email',
+                      {...register("email", {
+                        required: "Please enter your email",
                         pattern: {
                           value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                          message: 'Invalid email address',
+                          message: "Invalid email address",
                         },
                       })}
                       error={!!errors.email}
@@ -122,20 +131,20 @@ const SignupPage = () => {
                       type="password"
                       showPassword={showPassword}
                       handleClickShowPassword={handleShowPassword}
-                      {...register('password', {
-                        required: 'Please enter your password',
+                      {...register("password", {
+                        required: "Please enter your password",
                         minLength: {
                           value: 8,
-                          message: 'Password must be at least 8 characters',
+                          message: "Password must be at least 8 characters",
                         },
                         maxLength: {
                           value: 20,
-                          message: 'Password must be at most 20 characters',
+                          message: "Password must be at most 20 characters",
                         },
                         pattern: {
                           value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/,
                           message:
-                            'Password must contain at least one letter and one number',
+                            "Password must contain at least one letter and one number",
                         },
                       })}
                       error={!!errors.password}
@@ -146,11 +155,11 @@ const SignupPage = () => {
                       type="password"
                       showPassword={showPassword}
                       handleClickShowPassword={handleShowPassword}
-                      {...register('passwordConfirm', {
-                        required: 'Please confirm your password',
+                      {...register("passwordConfirm", {
+                        required: "Please confirm your password",
                         validate: (value) => {
-                          if (value !== watch('password')) {
-                            return 'Passwords do not match';
+                          if (value !== watch("password")) {
+                            return "Passwords do not match";
                           }
                         },
                       })}
@@ -161,10 +170,10 @@ const SignupPage = () => {
                       type="submit"
                       variant="contained"
                       fullWidth
-                      sx={{ padding: '12px' }}
+                      sx={{ padding: "12px" }}
                       disabled={isLoading}
                     >
-                      {isLoading ? 'Signing Up...' : 'Sign Up'}
+                      {isLoading ? "Signing Up..." : "Sign Up"}
                     </Button>
                   </Stack>
                   <Typography py={2}>
