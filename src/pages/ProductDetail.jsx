@@ -15,7 +15,6 @@ import {
   IconButton,
   Alert,
   AlertTitle,
-  Box,
   Divider,
 } from '@mui/material';
 import { addItemToCart } from '../features/cart/cartSlice';
