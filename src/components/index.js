@@ -35,3 +35,4 @@ export { ChangePassword } from './GuestProfile/ChangePassword';
 export { ProfilePhoto } from './GuestProfile/ProfilePhoto';
 export { AccountSecurity } from './GuestProfile/AccountSecurity';
 export { Footer } from './Footer';
+export { CustomFaq } from './CustomFaq';

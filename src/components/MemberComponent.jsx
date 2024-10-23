@@ -1,62 +1,53 @@
-import { Box, Button, Link, Stack, Typography } from '@mui/material';
-import member from '../assets/Home/member.png';
+import { Box, Button, Container, Link, Stack, Typography } from '@mui/material';
+import Member from '../assets/happy-farmer.png';
 import { teachAgtechURL } from '../utils/globalURL';
 
 export const MemberComponent = () => {
   return (
-    <Box
-      maxWidth="1420px"
-      bgcolor="primary.main"
-      sx={{
-        display: 'flex',
-        gap: { xs: '20px', sm: '40px', md: '80px' },
-        padding: { xs: '30px 10px', sm: '50px', md: '100px' },
-      }}
-    >
+    <Container maxWidth={false} sx={{ bgcolor: 'primary.main', my: 5 }}>
       <Stack
-        spacing="20px"
-        sx={{
-          justifyContent: 'center',
-        }}
+        px={{ xs: 1, md: 10 }}
+        pt={{ xs: 5, md: 15 }}
+        pb={{ xs: 10, md: 15 }}
+        gap={5}
+        direction={{ xs: 'column-reverse', md: 'row' }}
+        alignItems="center"
+        justifyContent="space-between"
       >
-        <Typography
-          sx={{ typography: { xs: 'blgsm', sm: 'h4', md: 'h2' } }}
-          color="common.white"
-        >
-          Ready to share your passion for indoor gardening?
-        </Typography>
-        <Typography
-          sx={{ typography: { xs: 'bxsr', sm: 'bsr' } }}
-          color="common.white"
-        >
-          Join our platform as an instructor and inspire others while showcasing
-          your expertise. Empower the next generation of gardeners and grow your
-          impact today! Apply now and be a part of our vibrant community
-        </Typography>
-        <Box>
-          <Button
-            variant="contained"
-            color="secondary"
-            sx={{
-              color: 'primary.main',
-              typography: { xs: 'bxsr', sm: 'bsr' },
-            }}
+        <Stack maxWidth={400} gap={3}>
+          <Typography
+            sx={{ typography: { xs: 'h3', md: 'h2' } }}
+            color="common.white"
           >
-            <Link href={teachAgtechURL} underline="none">
+            Ready to share your passion for indoor gardening?
+          </Typography>
+          <Typography
+            sx={{ typography: { xs: 'bxsr', sm: 'bsr' } }}
+            color="common.white"
+          >
+            Join our platform as an instructor and inspire others while
+            showcasing your expertise. Empower the next generation of gardeners
+            and grow your impact today! Apply now and be a part of our vibrant
+            community
+          </Typography>
+          <Link href={teachAgtechURL} target="_blank" underline="none">
+            <Button variant="contained" color="secondary">
               Become an Instructor
-            </Link>
-          </Button>
-        </Box>
+            </Button>
+          </Link>
+        </Stack>
+        <Box
+          height="500px"
+          width={{ xs: '100%', md: '500px' }}
+          sx={{
+            backgroundImage: `url(${Member})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+          }}
+          p={3}
+        />
       </Stack>
-      <Box
-        component="img"
-        src={member}
-        sx={{
-          width: '50%',
-          height: 'auto',
-          objectFit: 'contain', // Ensures the image scales nicely within its container
-        }}
-      />
-    </Box>
+    </Container>
   );
 };

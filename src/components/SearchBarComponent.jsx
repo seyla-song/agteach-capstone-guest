@@ -33,7 +33,7 @@ export const SearchBar = ({
         position: "relative",
         height: backDrop
           ? { xs: "200px", md: "300px" }
-          : { xs: "auto", md: "auto" },
+          : { xs: "200px", md: "200px" },
       }}
     >
       {backDrop &&
@@ -52,7 +52,6 @@ export const SearchBar = ({
               height: "100%",
               objectFit: "cover",
               objectPosition: "center",
-              position: "relative",
             }}
             src={backDrop}
           />
@@ -81,7 +80,7 @@ export const SearchBar = ({
               id="search-bar"
               sx={{
                 width: "100%",
-                height: "40px",
+                height: "50px",
                 mx: "auto",
                 bgcolor: "grey.100",
                 borderRadius: "4px",
@@ -89,20 +88,18 @@ export const SearchBar = ({
               value={searchString} // Controlled value
               onChange={(e) => handleSearchString(e)} // Handle input change
               placeholder="Search course, plant, crop, service"
-              InputProps={{
-                sx: {
-                  height: "40px",
-                },
-              }}
             />
 
             <Box sx={{ width: { xs: "80px", sm: "100px", md: "220px" } }}>
               <Button
                 onClick={handleStartSearch}
                 fullWidth
+                disableElevation
                 variant="contained"
                 color="secondary"
-                sx={{ height: "100%", color: "primary.main" }}
+                // sx={{ height: "100%", color: "primary.main" }}
+                size="large"
+                sx={{ height: "50px" }}
               >
                 Search
               </Button>
