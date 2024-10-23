@@ -4,10 +4,11 @@ import { teachAgtechURL } from '../utils/globalURL';
 
 export const MemberComponent = () => {
   return (
-    <Container maxWidth={false} sx={{ bgcolor: 'primary.main', my:5 }}>
+    <Container maxWidth={false} sx={{ bgcolor: 'primary.main', my: 5 }}>
       <Stack
         px={{ xs: 1, md: 10 }}
-        py={{ xs: 5, md: 10 }}
+        pt={{ xs: 5, md: 10 }}
+        pb={{ xs: 10, md: 10 }}
         gap={5}
         direction={{ xs: 'column-reverse', md: 'row' }}
         alignItems="center"
@@ -29,11 +30,11 @@ export const MemberComponent = () => {
             and grow your impact today! Apply now and be a part of our vibrant
             community
           </Typography>
+          <Link href={teachAgtechURL} target="_blank" underline="none">
             <Button variant="contained" color="secondary">
-              <Link href={teachAgtechURL} underline="none">
-                Become an Instructor
-              </Link>
+              Become an Instructor
             </Button>
+          </Link>
         </Stack>
         <Box
           component="img"
