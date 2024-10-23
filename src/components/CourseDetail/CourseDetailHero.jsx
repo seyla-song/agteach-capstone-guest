@@ -44,8 +44,8 @@ export const CourseDetailHero = ({ courseData }) => {
 
   return (
     <Grid color={'white'} item xs={12}>
-      <Grid alignItems={'center'} paddingY={15} container>
-        <Grid item xs={5}>
+      <Grid alignItems={'center'} paddingY={{ xs: 5, md: 15 }} container>
+        <Grid item xs={12} md={5} p={1}>
           <Stack gap={1}>
             <Typography variant="h2">${courseData?.price}</Typography>
             <Typography variant="h4">{courseData?.name}</Typography>
@@ -74,8 +74,8 @@ export const CourseDetailHero = ({ courseData }) => {
             </Typography>
           </Stack>
         </Grid>
-        <Grid item xs={2} />
-        <Grid item xs={5}>
+        <Grid item xs={2} display={{ xs: 'none', md: 'block' }} />
+        <Grid item xs={12} md={5} p={1}>
           <Stack display={'flex'} flexDirection={'column'} gap={1}>
             <MediaPlayer title="Sprite Fight" src={courseData?.previewVideoUrl}>
               <MediaProvider />
