@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useAddPersonalInfoMutation } from '../services/api/authApi';
+import { useGetLocationsQuery } from '../services/api/locationApi';
 
 import {
   Container,
@@ -17,8 +18,10 @@ import {
 import { LogoLink, FormInput } from '../components/index';
 
 export default function PersonalInfoForm() {
+  const [skip, setSkip] = useState(false);
   const { dob } = useSelector((state) => state.user);
   const { email } = useSelector((state) => state.user);
+  const [cities, setCities] = useState([]);
   const {
     register,
     handleSubmit,
@@ -34,9 +37,18 @@ export default function PersonalInfoForm() {
     },
   });
   const navigate = useNavigate();
+  const { data } = useGetLocationsQuery();
   const [addPerosnalInfo, { isLoading }] = useAddPersonalInfoMutation();
 
   const onSubmit = async (data) => {
+    const {city: selectedCity} = data;
+
+    cities.forEach((city) => {
+      if (city.name === selectedCity) {
+        data.locationId = city.locationId
+      };
+    });
+
     try {
       await addPerosnalInfo({
         ...data,
@@ -45,9 +57,15 @@ export default function PersonalInfoForm() {
       }).unwrap();
       navigate('/auth/signup/verification');
     } catch (error) {
-      console.error('Error:', error);
-    }
+
+    };
   };
+
+  useEffect(() => {
+    if (data) {
+      setCities(data.data)
+    }
+  }, [data])
 
   const validatePhone = (value) => {
     const phonePattern = /^[0-9]+$/; // Only digits
@@ -86,6 +104,10 @@ export default function PersonalInfoForm() {
                         value: /^[A-Za-z]+$/i,
                         message: 'First name can only contain letters',
                       },
+                      maxLength: {
+                        value: 50,
+                        message: 'First name cannot be more than 50 characters'
+                      }
                     })}
                     error={!!errors.firstName}
                     helperText={errors?.firstName?.message}
@@ -97,6 +119,10 @@ export default function PersonalInfoForm() {
                       pattern: {
                         value: /^[A-Za-z]+$/i,
                         message: 'Last name can only contain letters',
+                        maxLength: {
+                          value: 50,
+                          message: 'Last name cannot be more than 50 characters'
+                        }
                       },
                     })}
                     error={!!errors.lastName}
@@ -105,8 +131,8 @@ export default function PersonalInfoForm() {
                 </Box>
                 <Autocomplete
                   fullWidth
-                  options={city}
-                  getOptionLabel={(option) => option.label}
+                  options={cities}
+                  getOptionLabel={(option) => option.name}
                   renderInput={(params) => (
                     <TextField
                       {...params}
@@ -116,7 +142,16 @@ export default function PersonalInfoForm() {
                           ...params.inputProps,
                         },
                       }}
-                      {...register('city', {})}
+                      {...register('city', {
+                        validate: (value) => {
+                          if (!value.length) {
+                            return true
+                          }
+                          return cities.some((city) => city.name === value) || 'Please provide a valid city'
+                        }
+                      })}
+                      error={!!errors.city}
+                      helperText={errors.city?.message}
                     />
                   )}
                 />
@@ -154,18 +189,22 @@ export default function PersonalInfoForm() {
             >
               <Button
                 type="submit"
+                onClick={() => setSkip(true)}
                 variant="outlined"
                 sx={{ padding: { xs: '8px 20px', md: '8px 35px' } }}
+                disabled={isLoading}
               >
                 Skip
               </Button>
 
               <Button
                 type="submit"
+                onClick={() => setSkip(false)}
                 variant="contained"
                 sx={{ padding: { xs: '8px 20px', md: '8px 35px' } }}
+                disabled={isLoading}
               >
-                {isLoading ? 'Submitting...' : 'Submit'}
+                {isLoading && !skip ? 'Submitting...' : 'Submit'}
               </Button>
             </Stack>
           </Stack>
@@ -174,14 +213,3 @@ export default function PersonalInfoForm() {
     </Box>
   );
 }
-
-const city = [
-  { label: 'Phnom Penh' },
-  { label: 'Siem Reap' },
-  { label: 'Battambang' },
-  { label: 'Sihanoukville' },
-  { label: 'Kampot' },
-  { label: 'Kratie' },
-  { label: 'Pursat' },
-  { label: 'Koh Kong' },
-];

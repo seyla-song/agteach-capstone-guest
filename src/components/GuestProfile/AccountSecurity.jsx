@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { Stack, Typography, TextField } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { useGetUserInfoQuery } from "../../services/api/userApi"; 
+import { Stack, Typography, OutlinedInput, InputLabel, FormControl } from "@mui/material";
+import { useForm } from "react-hook-form"; 
 
 /**
  * @function AccountSecurity
@@ -9,37 +8,32 @@ import { useGetUserInfoQuery } from "../../services/api/userApi";
  * @returns {JSX.Element} A JSX element that renders the form and button.
  */
 
-export const AccountSecurity = () => {
-  const { setValue, watch } = useForm();
-
-  const { data, isLoading } = useGetUserInfoQuery();
+export const AccountSecurity = ({userData}) => {
+  const { setValue, watch, register } = useForm();
 
   useEffect(() => {
-    if (data) {
-      const customerData = data.data.customer;
+    if (userData && userData.customer) {
+      const customerData = userData.customer;
       const { email } = customerData;
-      console.log(customerData);
       setValue("email", email || "");
     }
-  }, [data, setValue]);
+  }, [userData, setValue]);
 
-  if (isLoading)
-    return (
-      <Stack justifyContent={"center"} alignItems={"center"}>
-        Loading...
-      </Stack>
-    );
 
   return (
     <>
       <Stack sx={{ m: 2, gap: 2 }}>
         <Typography variant="h4">Account Security</Typography>
-        <TextField
-          label="Email"
-          disabled
-          placeholder="e.g. janeagteach@gmail.com"
-          value={watch("email")}
-        />
+        <FormControl>
+          <InputLabel htmlFor="email">Email</InputLabel>
+          <OutlinedInput
+            id="email"
+            label="email"
+            disabled
+            placeholder="e.g. janeagteach@gmail.com"
+            {...register("email", {})}
+          />
+        </FormControl>
       </Stack>
     </>
   );
