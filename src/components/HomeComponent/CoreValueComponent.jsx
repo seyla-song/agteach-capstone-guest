@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, Container, Stack } from '@mui/material';
+import { Grid, Typography, Container, Stack } from '@mui/material';
 
 const HERO_COMPONENT = [
   {
