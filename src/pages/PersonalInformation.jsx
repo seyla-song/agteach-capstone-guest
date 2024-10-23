@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +17,7 @@ import {
 import { LogoLink, FormInput } from '../components/index';
 
 export default function PersonalInfoForm() {
+  const [skip, setSkip] = useState(false);
   const { dob } = useSelector((state) => state.user);
   const { email } = useSelector((state) => state.user);
   const {
@@ -154,6 +155,7 @@ export default function PersonalInfoForm() {
             >
               <Button
                 type="submit"
+                onClick={() => setSkip(true)}
                 variant="outlined"
                 sx={{ padding: { xs: '8px 20px', md: '8px 35px' } }}
                 disabled={isLoading}
@@ -163,11 +165,12 @@ export default function PersonalInfoForm() {
 
               <Button
                 type="submit"
+                onClick={() => setSkip(false)}
                 variant="contained"
                 sx={{ padding: { xs: '8px 20px', md: '8px 35px' } }}
                 disabled={isLoading}
               >
-                {isLoading ? 'Submitting...' : 'Submit'}
+                {isLoading && !skip ? 'Submitting...' : 'Submit'}
               </Button>
             </Stack>
           </Stack>
