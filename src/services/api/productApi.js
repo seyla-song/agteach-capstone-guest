@@ -6,7 +6,7 @@ export const productApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: API_BASE_URL }),
   endpoints: (builder) => ({
     searchProduct: builder.query({
-      query: ({ query, limit = 9, page = 1, category = '' }) => ({
+      query: ({ query, limit = 12, page = 1, category = '' }) => ({
         url: `/api/product/searchData?name=${query}&page=${page}&category=${category}&limit=${limit}`,
         method: "GET",
       }),

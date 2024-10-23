@@ -29,7 +29,7 @@ import {
 export default function MarketPlace() {
   const currentLocation = useLocation().search;
   const queryParams = new URLSearchParams(currentLocation);
-  const [limit, setLimit] = useState(9);
+  const limit = 12;
   const [page, setPage] = useState(1);
   const query = queryParams.get("name") || "";
   const [category, setCategory] = useState(); // State to hold the selected category
@@ -40,8 +40,7 @@ export default function MarketPlace() {
     isError: isProductError,
   } = useSearchProductQuery({ query, page, limit, category }); // Pass category to the query
 
-  const { data: categoryData, isLoading: isCategoryLoading } =
-    useGetAllCategoryQuery();
+  const { data: categoryData } = useGetAllCategoryQuery();
 
   const [sortBy, setSortBy] = useState("newest");
   const [rawData, setRawData] = useState([]);
@@ -57,10 +56,6 @@ export default function MarketPlace() {
 
   const handleSortByChange = (state) => {
     if (state !== sortBy) setSortBy(state);
-  };
-
-  const handleLimitChange = () => {
-    setLimit((prevLimit) => prevLimit + 9);
   };
 
   const handleNext = () => {
@@ -156,7 +151,6 @@ export default function MarketPlace() {
                   dataObj={filteredData}
                   cardVariant={"product"}
                   limit={limit}
-                  handleLimitChange={handleLimitChange}
                 />
               )}
               <Stack

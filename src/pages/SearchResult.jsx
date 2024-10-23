@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useSearchProductQuery } from "../services/api/productApi";
 import { useSearchCourseQuery } from "../services/api/courseApi";
@@ -20,7 +20,6 @@ import {
   SearchBar,
   SortByFilter,
   CategoryFilter,
-  FilterByOther,
   ContentLoading,
   ItemsLoading,
 } from "../components/index";
@@ -32,7 +31,7 @@ function SearchResultPage() {
   const query = queryParams.get("name");
   const [coursePage, setCoursePage] = useState(1);
   const [productPage, setProductPage] = useState(1);
-  const [limit, setLimit] = useState(12);
+  const limit = 12;
   const [isNewQuery, setIsNewQuery] = useState(false);
 
   const {
@@ -60,7 +59,6 @@ function SearchResultPage() {
     : Math.ceil(productData?.results / limit);
   // console.log(totalPages); // Outputs: 4
 
-  const [filterByRuntime, setFilterByRuntime] = useState("none");
   const [filteredData, setFilteredData] = useState([]);
 
   const handleCategoryChange = (state) => {
@@ -71,10 +69,7 @@ function SearchResultPage() {
     if (state !== sortBy) setSortBy(state);
   };
 
-  const handleFilterByRuntimeChange = (state) => {
-    if (state === filterByRuntime) setFilterByRuntime("none");
-    else setFilterByRuntime(state);
-  };
+
 
   // Handle next page logic
   const handleNext = () => {
@@ -93,7 +88,6 @@ function SearchResultPage() {
       setProductPage((prevPage) => prevPage - 1);
     }
   };
-  // let courseList = [];
 
   // For loading the first time
   useEffect(() => {
@@ -103,19 +97,6 @@ function SearchResultPage() {
     setIsNewQuery(true);
     console.log("query", query);
   }, [query]);
-
-  // useEffect(() => {
-  //   if (courseData?.data) {
-  //     setAllCourses((prevCourses) =>
-  //       isNewQuery ? courseData.data : [...prevCourses, ...courseData.data]
-  //     );
-  //   }
-  //   if (productData?.data) {
-  //     setAllProducts((prevProducts) =>
-  //       isNewQuery ? productData.data : [...prevProducts, ...productData.data]
-  //     );
-  //   }
-  // }, [courseData, productData, isNewQuery]);
 
   useEffect(() => {
     let combinedData = {
@@ -152,20 +133,13 @@ function SearchResultPage() {
     } else {
       combinedData.product.sort(sortCallbacks[sortBy]);
     }
-    // Filter courses based on runtime
-    if (category === "course" && filterByRuntime !== "none") {
-      combinedData.course = combinedData.course.filter((course) =>
-        filterByRuntime === "long"
-          ? course.duration > 60
-          : course.duration <= 60
-      );
-    }
+
 
     // Set the filtered data based on the selected category
     setFilteredData(combinedData[category]);
 
     console.log("isFetching", isFetching);
-  }, [courseData, productData, category, sortBy, filterByRuntime, isNewQuery]);
+  }, [courseData, productData, category, sortBy,  isNewQuery]);
 
   
   if (isCourseLoading || isProductLoading || category) <ContentLoading />;
@@ -233,13 +207,7 @@ function SearchResultPage() {
             <SortByFilter sortBy={sortBy} handleChange={handleSortByChange} />
 
             <Divider />
-            <FilterByOther
-              filterByRuntime={filterByRuntime}
-              handleFilterByRuntimeChange={handleFilterByRuntimeChange}
-              context={category}
-            />
 
-            <Divider />
           </Stack>
         </Grid>
         <Grid item xs={12} sm={9}>
