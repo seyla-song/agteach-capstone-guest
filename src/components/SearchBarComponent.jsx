@@ -84,6 +84,17 @@ export const SearchBar = ({
                 mx: "auto",
                 bgcolor: "grey.100",
                 borderRadius: "4px",
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    border: "none",
+                  },
+                  "&.Mui-focused fieldset": {
+                    border: "none",
+                  },
+                  "&:hover fieldset": {
+                    border: "none",
+                  },
+                },
               }}
               value={searchString} // Controlled value
               onChange={(e) => handleSearchString(e)} // Handle input change
