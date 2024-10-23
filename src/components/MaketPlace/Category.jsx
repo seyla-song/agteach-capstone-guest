@@ -11,8 +11,8 @@ export const Category = ({ allCategories, category, handleChange }) => {
           <Chip
             variant="contained"
             label={item.name}
-            sx={category === item.name ? categoryStyle1 : categoryStyle}
-            onClick={() => handleChange(item.name)}
+            sx={category === item.categoryId ? categoryStyle1 : categoryStyle}
+            onClick={() => handleChange(item.categoryId)}
           />
         ))}
       </Stack>

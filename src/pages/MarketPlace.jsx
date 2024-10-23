@@ -1,8 +1,21 @@
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router';
-import { useGetAllCategoryQuery, useSearchProductQuery } from '../services/api/productApi';
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router";
+import {
+  useGetAllCategoryQuery,
+  useSearchProductQuery,
+} from "../services/api/productApi";
 
-import { Container, Divider, Stack, Grid, Typography } from '@mui/material';
+import {
+  Container,
+  Divider,
+  Stack,
+  Grid,
+  Typography,
+  Button,
+} from "@mui/material";
+
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
 import {
   ItemsLoading,
@@ -11,7 +24,7 @@ import {
   SortByFilter,
   SearchBar,
   ContentLoading,
-} from '../components/index';
+} from "../components/index";
 
 /**
  * A React functional component that renders a marketplace page.
@@ -26,30 +39,33 @@ export default function MarketPlace() {
   const currentLocation = useLocation().search;
   const queryParams = new URLSearchParams(currentLocation);
   const [limit, setLimit] = useState(9);
-  const [page, setPage] = useState(1)
-  const query = queryParams.get('name') || '';
+  const [page, setPage] = useState(1);
+  const query = queryParams.get("name") || "";
+  const [category, setCategory] = useState();
+
   const {
     data: productData,
     isLoading: isProductLoading,
     isError: isProductError,
-  } = useSearchProductQuery({query, page, limit});
+  } = useSearchProductQuery({ query, page, limit, category });
 
-  const {data: categoryData, isLoading: isCategoryLoading} = useGetAllCategoryQuery();
+  const { data: categoryData, isLoading: isCategoryLoading } =
+    useGetAllCategoryQuery();
 
-  const [category, setCategory] = useState();
-  const [sortBy, setSortBy] = useState('newest');
+  const [sortBy, setSortBy] = useState("newest");
   const [rawData, setRawData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const [isNewQuery, setIsNewQuery] = useState(false);
 
   const handleCategoryChange = (state) => {
     if (state !== category) {
-      setCategory(state)
-    }else{
-      setCategory()
+      setCategory(state);
+    } else {
+      setCategory();
     }
-    
   };
-
+  const handleNext = () => {};
+  const handlePrevious = () => {};
   const handleSortByChange = (state) => {
     if (state !== sortBy) setSortBy(state);
   };
@@ -57,8 +73,12 @@ export default function MarketPlace() {
   const handleLimitChange = () => {
     setLimit(limit + 9);
   };
-
-
+  useEffect(() => {
+    // Reset page, data, and load more flags
+    setPage(1);
+    setIsNewQuery(true);
+    console.log("query", query);
+  }, [query]);
 
   useEffect(() => {
     if (productData) {
@@ -81,6 +101,7 @@ export default function MarketPlace() {
       plth: (a, b) => parseFloat(a.price) - parseFloat(b.price),
       phtl: (a, b) => parseFloat(b.price) - parseFloat(a.price),
     };
+
 
     if (category in categoryFilterMap) {
       dataToFilter = dataToFilter.filter(
@@ -111,10 +132,10 @@ export default function MarketPlace() {
       <Container
         maxWidth={false}
         sx={{
-          maxWidth: '1420px',
+          maxWidth: "1420px",
           marginY: {
-            xs: '30px',
-            md: '60px',
+            xs: "30px",
+            md: "60px",
           },
         }}
       >
@@ -142,22 +163,40 @@ export default function MarketPlace() {
             <Stack px={3} gap={2} minHeight="100vh">
               <SearchBar
                 backDrop={false}
-                searchContext={'marketplace'}
+                searchContext={"marketplace"}
                 defaultSearchString={query}
               />
-              {isProductLoading && <ItemsLoading title={'marketplace'} />}
+              {isProductLoading && <ItemsLoading title={"marketplace"} />}
               {!isProductLoading && productData && (
-                <Typography typography="bsr">{`Found (${filteredData.length}) items`}</Typography>
+                <Typography typography="bsr">{`Found (${productData.results}) items`}</Typography>
               )}
               {isProductLoading && <ContentLoading />}
               {!isProductLoading && productData && (
                 <SearchList
                   dataObj={filteredData}
-                  cardVariant={'product'}
+                  cardVariant={"product"}
                   limit={limit}
                   handleLimitChange={handleLimitChange}
                 />
               )}
+              <Stack
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                gap={3}
+                py={3}
+              >
+                <Button
+                  variant="outlined"
+                  onClick={handlePrevious} // Prevent going below page 1
+                >
+                  <NavigateBeforeIcon />
+                </Button>
+                <Typography>Page</Typography>
+                <Button variant="outlined" onClick={handleNext}>
+                  <NavigateNextIcon />
+                </Button>
+              </Stack>
             </Stack>
           </Grid>
         </Grid>

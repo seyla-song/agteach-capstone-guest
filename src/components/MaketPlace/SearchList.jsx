@@ -19,15 +19,7 @@ export const SearchList = ({
           ))}
         </Grid>
         {/* {dataObj.length > limit && ( */}
-          <Button
-            variant="outlined"
-            paddingX={2}
-            fullWidth
-            onClick={handleLoadMore}
-            isLoading={isCourseLoading}
-          >
-            <NavigateNextIcon/>
-          </Button>
+
         {/* )} */}
       </Box>
     </>

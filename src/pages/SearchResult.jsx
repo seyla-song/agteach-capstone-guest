@@ -166,6 +166,8 @@ function SearchResultPage() {
 
     console.log("isFetching", isFetching);
   }, [courseData, productData, category, sortBy, filterByRuntime, isNewQuery]);
+
+  
   if (isCourseLoading || isProductLoading || category) <ContentLoading />;
 
   if (isProductError || isCourseError) {

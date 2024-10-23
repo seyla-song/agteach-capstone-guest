@@ -6,12 +6,11 @@ export const productApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: API_BASE_URL }),
   endpoints: (builder) => ({
     searchProduct: builder.query({
-      query: ({query, limit,page}) => ({
-        url: `/api/product/searchData?name=${query}&limit=${limit}&page=${page}`,
+      query: ({ query, limit = 9, page = 1, category = '' }) => ({
+        url: `/api/product/searchData?name=${query}&page=${page}&category=${category}&limit=${limit}`,
         method: "GET",
       }),
     }),
-    
 
     getProductCarousel: builder.query({
       query: () => ({
@@ -34,11 +33,11 @@ export const productApi = createApi({
       }),
     }),
     getAllCategory: builder.query({
-      query:() =>({
+      query: () => ({
         url: "/api/admin/getAllCategories",
-        method: "GET"
-      })
-    })
+        method: "GET",
+      }),
+    }),
   }),
 });
 
