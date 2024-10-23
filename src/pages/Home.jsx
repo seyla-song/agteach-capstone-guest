@@ -8,6 +8,7 @@ import {
   SearchBar,
   CarouselComponent,
   CoreValueComponent,
+  CustomFaq,
 } from '../components/index';
 
 import search from '../assets/Home/search.png';
@@ -52,6 +53,8 @@ function HomePage() {
       )}
 
       <MemberComponent />
+
+      <CustomFaq />
     </Container>
   );
 }
