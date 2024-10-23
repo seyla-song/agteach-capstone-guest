@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { useUpdateInfoMutation } from "../../services/api/userApi"; // Import the isLogin query
 import { CustomAlert } from "../CustomAlert";
 
-export const BasicInfo = ({ userData }) => {
+export const BasicInfo = ({ userData, cities }) => {
   const {
     register,
     handleSubmit,
@@ -32,35 +32,30 @@ export const BasicInfo = ({ userData }) => {
   });
   const [updateInfo, { isLoading: isLoadingInfo, isError, error, isSuccess }] =
     useUpdateInfoMutation();
-  const [selectedCity, setSelectedCity] = useState(null);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (userData && userData.customer) {
       const customerData = userData.customer;
-
-      const { firstName, lastName, phone, location_id, address } = customerData;
+      const { firstName, lastName, phone, location: {name}, address } = customerData;
       setValue("firstName", firstName || "");
       setValue("lastName", lastName || "");
       setValue("phone", phone || "");
-      setValue("city", location_id || "");
+      setValue("city", name || "");
       setValue("address", address || "");
-      setSelectedCity(city.find((c) => c.label === location_id) || null); // Set city autocomplete
     }
-  }, [userData, setValue]);
+  }, [userData, setValue, cities]);
 
   const onSubmit = async (formData) => {
-    const { firstName, lastName, phone, city, address } = formData;
+    const {city: selectedCity} = formData;
 
-    const updatedData = {
-      firstName,
-      lastName,
-      phone,
-      location_id: city, // Make sure this matches your API's expected field
-      address,
-    };
+    cities.forEach((city) => {
+      if (city.name === selectedCity) {
+        formData.locationId = city.locationId
+      };
+    });
 
-    await updateInfo(updatedData);
+    await updateInfo(formData);
     setOpen(true);
 
     setTimeout(() => {
@@ -129,21 +124,28 @@ export const BasicInfo = ({ userData }) => {
         </FormControl>
 
         <Autocomplete
-          id="city-select"
           fullWidth
-          options={city}
-          getOptionLabel={(option) => option.label}
-          value={selectedCity}
-          onChange={(e, newValue) => {
-            setSelectedCity(newValue);
-            setValue("city", newValue?.label || "");
-          }}
+          options={cities}
+          getOptionLabel={(option) => option.name}
           renderInput={(params) => (
             <TextField
               {...params}
               label="City"
+              slotProps={{
+                htmlInput: {
+                  ...params.inputProps,
+                },
+              }}
+              {...register('city', {
+                validate: (value) => {
+                  if (!value.length) {
+                    return true
+                  }
+                  return cities.some((city) => city.name === value) || 'Please provide a valid city';
+                }
+              })}
               error={!!errors.city}
-              helperText={errors?.city?.message}
+              helperText={errors.city?.message}
             />
           )}
         />
@@ -199,14 +201,3 @@ export const BasicInfo = ({ userData }) => {
     </>
   );
 };
-
-const city = [
-  { label: "Phnom Penh" },
-  { label: "Siem Reap" },
-  { label: "Battambang" },
-  { label: "Sihanoukville" },
-  { label: "Kampot" },
-  { label: "Kratie" },
-  { label: "Pursat" },
-  { label: "Koh Kong" },
-];

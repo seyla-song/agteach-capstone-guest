@@ -3,6 +3,7 @@ import Stack from "@mui/material/Stack";
 
 import { Container } from "@mui/material";
 import { useGetUserInfoQuery } from "../services/api/userApi";
+import { useGetLocationsQuery } from "../services/api/locationApi.js";
 
 import {
   ProfilePhoto,
@@ -30,14 +31,17 @@ import { ContentLoading } from "../components/index.js";
 export default function GuestProfile() {
   const [userData, setUserData] = useState({});
   const { data, isLoading, isError, error } = useGetUserInfoQuery();
+  const [cities, setCities] = useState([]);
+  const { data: citiesData, isLoading: isCityDataLoading} = useGetLocationsQuery();
 
   useEffect(() => {
-    if (data) {
+    if (data && citiesData) {
       setUserData(data.data);
+      setCities(citiesData.data)
     }
-  }, [data, setUserData]);
+  }, [data, citiesData, setUserData]);
 
-  if (isLoading) return <ContentLoading />;
+  if (isLoading || isCityDataLoading) return <ContentLoading />;
   if (isError) return <div>Error: {error}</div>;
 
   return (
@@ -51,7 +55,7 @@ export default function GuestProfile() {
 
           <Divider sx={{ m: 5, mx: 0 }} />
 
-          <BasicInfo userData={userData} />
+          <BasicInfo userData={userData} cities={cities} />
 
           <Divider sx={{ m: 5, mx: 0 }} />
 
