@@ -23,8 +23,8 @@ export const CoreValueComponent = () => {
     <Container maxWidth={false} sx={{ bgcolor: 'primary.main', my: 5 }}>
       <Stack
         px={{ xs: 1, md: 10 }}
-        pt={{ xs: 5, md: 10 }}
-        pb={{ xs: 10, md: 10 }}
+        pt={{ xs: 5, md: 15 }}
+        pb={{ xs: 10, md: 15 }}
         gap={5}
         justifyContent="space-between"
       >
