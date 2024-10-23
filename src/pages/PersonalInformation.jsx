@@ -41,7 +41,14 @@ export default function PersonalInfoForm() {
   const [addPerosnalInfo, { isLoading }] = useAddPersonalInfoMutation();
 
   const onSubmit = async (data) => {
-    console.log(data)
+    const {city: selectedCity} = data;
+
+    cities.forEach((city) => {
+      if (city.name === selectedCity) {
+        data.locationId = city.locationId
+      };
+    });
+
     try {
       await addPerosnalInfo({
         ...data,
@@ -50,14 +57,13 @@ export default function PersonalInfoForm() {
       }).unwrap();
       navigate('/auth/signup/verification');
     } catch (error) {
-      console.error('Error:', error);
-    }
+
+    };
   };
 
   useEffect(() => {
     if (data) {
       setCities(data.data)
-      console.log(data)
     }
   }, [data])
 
@@ -207,14 +213,3 @@ export default function PersonalInfoForm() {
     </Box>
   );
 }
-
-const city = [
-  { label: 'Phnom Penh' },
-  { label: 'Siem Reap' },
-  { label: 'Battambang' },
-  { label: 'Sihanoukville' },
-  { label: 'Kampot' },
-  { label: 'Kratie' },
-  { label: 'Pursat' },
-  { label: 'Koh Kong' },
-];

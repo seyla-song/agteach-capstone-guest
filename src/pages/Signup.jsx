@@ -52,7 +52,7 @@ const SignupPage = () => {
       navigate("info");
     } catch (error) {
       setSnackbarSeverity("error");
-      setSnackbarMessage("Email already exists. Please try another email.");
+      setSnackbarMessage("Email or Username already exists. Please try another email.");
       setSnackbarOpen(true);
     }
   };
