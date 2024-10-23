@@ -28,18 +28,18 @@ export const CoreValueComponent = () => {
         gap={5}
         justifyContent="space-between"
       >
-          <Typography
-            sx={{ typography: { xs: 'h3', md: 'h2' } }}
-            color="common.white"
-          >
-            There are many <br /> platform, Why should <br /> you learn on
-            AgTeach?
-          </Typography>
+        <Typography
+          sx={{ typography: { xs: 'h3', md: 'h2' } }}
+          color="common.white"
+        >
+          There are many <br /> platform, Why should <br /> you learn on
+          AgTeach?
+        </Typography>
         <Grid container spacing={{ xs: 5, md: 10 }}>
           {HERO_COMPONENT.map((data) => (
             <Grid key={data.title} item xs={12} sm={4}>
               <Typography
-                sx={{ typography: { xs: 'blgsm', sm: 'h4' } }}
+                sx={{ typography: { xs: 'bmdsm', sm: 'h4' } }}
                 color="common.white"
               >
                 {data.title}
