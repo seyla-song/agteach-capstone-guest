@@ -15,6 +15,7 @@ import {
   IconButton,
   Alert,
   AlertTitle,
+  Divider,
 } from '@mui/material';
 import { addItemToCart } from '../features/cart/cartSlice';
 
@@ -30,6 +31,7 @@ import {
   SellerComponent,
   ProductCarouselComponent,
   DescriptionComponent,
+  CustomFaq,
 } from '../components/index';
 
 function ProductDetailPage() {
@@ -173,6 +175,9 @@ function ProductDetailPage() {
             </Stack>
           )}
         </Stack>
+
+        <Divider sx={{ my: 10 }} />
+        <CustomFaq />
       </Stack>
     </Container>
   );

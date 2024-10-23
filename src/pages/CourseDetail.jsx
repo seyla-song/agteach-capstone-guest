@@ -18,6 +18,7 @@ import {
   CourseDetailContent,
   CourseDetailHero,
   MemberComponent,
+  CustomFaq,
 } from '../components/index';
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
@@ -65,7 +66,6 @@ function CourseDetailPage() {
   if (isLoading) return <ContentLoading />;
   if (isError) return <div>Error: {error}</div>;
 
-
   return (
     <Elements stripe={stripePromise}>
       <Stack alignItems="center">
@@ -88,8 +88,11 @@ function CourseDetailPage() {
             courses={recommendedCourses}
             products={currentCourseData?.data?.product_suggestions}
           />
-          <Grid item xs={12} pt={10} pb={20}>
+          <Grid item xs={12} pt={10}>
             <MemberComponent />
+          </Grid>
+          <Grid item xs={12} py={10}>
+            <CustomFaq />
           </Grid>
         </Grid>
       </Stack>
