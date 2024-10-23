@@ -21,6 +21,7 @@ export const courseApi = createApi({
             ]
           : [{ type: "Course", id: "PARTIAL-LIST" }],
     }),
+    
 
     
 

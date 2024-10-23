@@ -13,6 +13,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 import {
   SearchList,
@@ -48,15 +49,18 @@ function SearchResultPage() {
     data: productData,
     isLoading: isProductLoading,
     isError: isProductError,
-  } = useSearchProductQuery({query, page,limits});
+  } = useSearchProductQuery({ query, page, limits });
 
   const [category, setCategory] = useState("course");
   const [sortBy, setSortBy] = useState("newest");
 
-  const totalPages = isCourseLoading
+  const totalCoursePages = isCourseLoading
     ? 0
     : Math.ceil(courseData.results / limits);
-  console.log(totalPages); // Outputs: 4
+  const totalProductPages = isCourseLoading
+    ? 0
+    : Math.ceil(productData.results / limits);
+  // console.log(totalPages); // Outputs: 4
 
   const [filterByRuntime, setFilterByRuntime] = useState("none");
   const [rawData, setRawData] = useState([]);
@@ -77,6 +81,8 @@ function SearchResultPage() {
 
   const handleLoadMore = () => {
     setIsLoadMore(true);
+    setIsNewQuery(false); // Set to false because it's not a new search, just loading more data
+
     console.log(isCourseLoading);
 
     setPage((prevPage) => prevPage + 1); // Increment page when "Load more" is clicked
@@ -97,77 +103,105 @@ function SearchResultPage() {
     console.log("query", query);
   }, [query]);
 
+  // useEffect(() => {
+  //   if (courseData?.data) {
+  //     setAllCourses(courseData.data); // setFilteredData(allCourses);
+  //   }
+  //   if (productData?.data) {
+  //     setAllProducts(productData.data);
+  //     // setFilteredData(allProducts);
+  //   }
+  // }, [isCourseLoading, isProductLoading]);
+  // Handle data fetching and updating courses and products
   useEffect(() => {
     if (courseData?.data) {
-      setAllCourses(courseData.data); // setFilteredData(allCourses);
+      setAllCourses((prevCourses) =>
+        isNewQuery ? courseData.data : [...prevCourses, ...courseData.data]
+      );
     }
     if (productData?.data) {
-      setAllProducts(productData.data);
-      // setFilteredData(allProducts);
+      setAllProducts((prevProducts) =>
+        isNewQuery ? productData.data : [...prevProducts, ...productData.data]
+      );
     }
-  }, [isCourseLoading, isProductLoading]);
-
+  }, [courseData, productData, isNewQuery]);
   useEffect(() => {
-    if (courseData?.data) {
-      if (isNewQuery) {
-        setAllCourses(courseData.data); // Replace data for a new query
-        setIsNewQuery(false); // Reset after fetching new query data
-      } else if (isLoadMore) {
-        setAllCourses((prev) => [...prev, ...courseData.data]); // Append data for load more
-        setIsLoadMore(false); // Reset load more flag
-      }
+    if (isLoadMore) {
     }
-    if (productData?.data) {
-      if (isNewQuery) {
-        setAllProducts(productData.data); // Replace data for a new query
-      } else if (isLoadMore) {
-        setAllProducts((prev) => [...prev, ...productData.data]); // Append data for load more
-        setIsLoadMore(false);
-      }
-    }
-    // if (isLoadMore && isFetching) {
-    //   if (courseData?.data) {
-    //     setAllCourses((prev) => [...prev, ...courseData.data]);
-    //     // setFilteredData(allCourses);
-    //   }
-    //   if (productData?.data) {
-    //     setAllProducts((prev) => [...prev, ...productData.data]);
-    //     // setFilteredData(allProducts);
-    //   }
-    //   setIsLoadMore(false);
-    // }
-    // else {
-    //   if (isNewQuery) {
-    //     if (courseData?.data) {
-    //       setAllCourses(courseData.data); // setFilteredData(allCourses);
-    //     }
-    //     if (productData?.data) {
-    //       setAllProducts(productData.data);
-    //       // setFilteredData(allProducts);
-    //     }
-    //     setIsNewQuery(false)
-    //   }
-
-    // }
-    console.log("isFetching", isFetching);
-  }, [courseData, productData, category, isLoadMore, isFetching]);
-
+  }, [isLoadMore]);
   useEffect(() => {
-    if (query === "" || !query) {
-      if (category === "course") {
-        setFilteredData(allCourses); // Show all courses if in the course category
-      } else {
-        setFilteredData(allProducts); // Show all products if in the product category
+    let combinedData = {
+      course: [],
+      product: [],
+    };
+
+    // If `isNewQuery` is true, reset the data
+    if (isNewQuery) {
+      if (courseData?.data) {
+        combinedData.course = [...courseData.data];
+      }
+      if (productData?.data) {
+        combinedData.product = [...productData.data];
       }
     } else {
-      if (category === "course") {
-        setFilteredData(allCourses);
-      } else {
-        setFilteredData(allProducts);
-      }
+      // If `isNewQuery` is false, retain old data
+      combinedData.course = filteredData.course || [];
+      combinedData.product = filteredData.product || [];
     }
-    console.log("setFilteredData", filteredData);
-  }, [allCourses, allProducts, category, query]);
+
+    // Sorting logic based on the selected category
+    const sortCallbacks = {
+      newest: (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+      oldest: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+      alphabet: (a, b) => a.name.localeCompare(b.name),
+      plth: (a, b) => parseFloat(a.price) - parseFloat(b.price),
+      phtl: (a, b) => parseFloat(b.price) - parseFloat(a.price),
+    };
+
+    // Sort the data
+    if (category === "course") {
+      combinedData.course.sort(sortCallbacks[sortBy]);
+    } else {
+      combinedData.product.sort(sortCallbacks[sortBy]);
+    }
+
+    // if (category === "course") {
+    //   combinedData.course.sort(sortCallbacks[sortBy]);
+    // } else {
+    //   combinedData.product.sort(sortCallbacks[sortBy]);
+    // }
+    // Filter courses based on runtime
+    if (category === "course" && filterByRuntime !== "none") {
+      combinedData.course = combinedData.course.filter((course) =>
+        filterByRuntime === "long"
+          ? course.duration > 60
+          : course.duration <= 60
+      );
+    }
+
+    // Set the filtered data based on the selected category
+    setFilteredData(combinedData[category]);
+
+    console.log("isFetching", isFetching);
+  }, [courseData, productData, category, sortBy, filterByRuntime, isNewQuery]);
+  // }, [courseData, productData, category, isLoadMore, isFetching]);
+
+  // useEffect(() => {
+  //   if (query === "" || !query) {
+  //     if (category === "course") {
+  //       setFilteredData(allCourses); // Show all courses if in the course category
+  //     } else {
+  //       setFilteredData(allProducts); // Show all products if in the product category
+  //     }
+  //   } else {
+  //     if (category === "course") {
+  //       setFilteredData(allCourses);
+  //     } else {
+  //       setFilteredData(allProducts);
+  //     }
+  //   }
+  //   console.log("setFilteredData", filteredData);
+  // }, [allCourses, allProducts, category, query]);
 
   // useEffect(() => {
   //   // Combine existing raw data with new page data
@@ -342,14 +376,30 @@ function SearchResultPage() {
                   ))}
                 </Grid2>
                 {/* {dataObj.length > limit && ( */}
-                <Button
+                {/* <Button
                   variant="outlined"
                   paddingX={2}
                   fullWidth
                   onClick={handleLoadMore}
                 >
                   View More
+                </Button> */}
+                <Button
+                  variant="outlined"
+                  onClick={() => setPage((prevPage) => prevPage - 1)}
+                >
+                  Previous
                 </Button>
+                <Button
+                  variant="outlined"
+                  onClick={() => setPage((prevPage) => prevPage + 1)}
+                >
+                  <NavigateNextIcon />
+                </Button>
+                <Typography>
+                  Page {page} of{" "}
+                  {category === "course" ? totalCoursePages : totalProductPages}
+                </Typography>
                 {/* )} */}
               </Box>
             </>

@@ -1,6 +1,6 @@
 import { Box, Button, Grid2 as Grid } from '@mui/material';
 import CustomCard from '../CustomCard';
-
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 export const SearchList = ({
   dataObj,
   cardVariant,
@@ -26,7 +26,7 @@ export const SearchList = ({
             onClick={handleLoadMore}
             isLoading={isCourseLoading}
           >
-            View More
+            <NavigateNextIcon/>
           </Button>
         {/* )} */}
       </Box>
