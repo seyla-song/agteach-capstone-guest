@@ -20,9 +20,9 @@ export const CourseDetailHighlight = ({courseData}) => {
   }
   return (
     <Grid item xs={12}>
-      <Stack py={10}>
+      <Stack py={5}>
         <Grid container spacing={2}>
-          <Grid xs={7} item>
+          <Grid xs={12} md={7} item>
             <Stack
               gap={1}
               justifyContent="center"
@@ -42,7 +42,7 @@ export const CourseDetailHighlight = ({courseData}) => {
               </Stack>
             </Stack>
           </Grid>
-          <Grid xs={5} item>
+          <Grid xs={12} md={5} item>
             <Stack
               color="primary.dark"
               bgcolor="grey.300"
@@ -50,6 +50,7 @@ export const CourseDetailHighlight = ({courseData}) => {
               alignItems="center"
               height="100%"
               gap={1}
+              paddingY={10}
             >
               <Stack px={3} gap={1}>
                 <Typography variant="h4">This course include:</Typography>
