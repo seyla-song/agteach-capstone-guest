@@ -117,7 +117,7 @@ export const ProfilePhoto = ({ userData }) => {
             variant="contained"
             sx={{ px: 10, py: 2 }}
             onClick={handleSendUpdateImage}
-            disabled={isLoading}
+            disabled={!imageFile || isLoading}
           >
             {isLoading ? "Uploading..." : "Upload"}
           </Button>
