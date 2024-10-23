@@ -9,7 +9,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export const CustomFaq = () => {
   return (
-    <Stack gap={3}>
+    <Stack gap={3} pb={5}>
       <Typography variant="h4" textAlign="center">
         Frequently Asked Questions
       </Typography>
