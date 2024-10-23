@@ -25,16 +25,17 @@ import {
 export default function MarketPlace() {
   const currentLocation = useLocation().search;
   const queryParams = new URLSearchParams(currentLocation);
+  const [limit, setLimit] = useState(9);
+  const [page, setPage] = useState(1)
   const query = queryParams.get('name') || '';
   const {
     data: productData,
     isLoading: isProductLoading,
     isError: isProductError,
-  } = useSearchProductQuery(query);
+  } = useSearchProductQuery({query, page, limit});
 
   const [category, setCategory] = useState('plant');
   const [sortBy, setSortBy] = useState('newest');
-  const [limit, setLimit] = useState(9);
   const [rawData, setRawData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 

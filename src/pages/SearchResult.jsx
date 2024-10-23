@@ -32,7 +32,7 @@ function SearchResultPage() {
   const query = queryParams.get("name");
   const [coursePage, setCoursePage] = useState(1);
   const [productPage, setProductPage] = useState(1);
-  const [limits, setLimit] = useState(12);
+  const [limit, setLimit] = useState(12);
   const [isNewQuery, setIsNewQuery] = useState(false);
 
   const {
@@ -40,24 +40,24 @@ function SearchResultPage() {
     isLoading: isCourseLoading,
     isFetching,
     isError: isCourseError,
-  } = useSearchCourseQuery({ query, page: coursePage, limits });
+  } = useSearchCourseQuery({ query, page: coursePage, limit });
 
   const {
     data: productData,
     isLoading: isProductLoading,
     isError: isProductError,
-  } = useSearchProductQuery({ query, page: productPage, limits });
+  } = useSearchProductQuery({ query, page: productPage, limit });
 
   const [category, setCategory] = useState("course");
   const [sortBy, setSortBy] = useState("newest");
 
   const totalCoursePages = isCourseLoading
     ? 0
-    : Math.ceil(courseData?.results / limits);
+    : Math.ceil(courseData?.results / limit);
 
   const totalProductPages = isProductLoading
     ? 0
-    : Math.ceil(productData?.results / limits);
+    : Math.ceil(productData?.results / limit);
   // console.log(totalPages); // Outputs: 4
 
   const [filterByRuntime, setFilterByRuntime] = useState("none");

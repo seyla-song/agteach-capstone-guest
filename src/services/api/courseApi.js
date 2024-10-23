@@ -7,8 +7,8 @@ export const courseApi = createApi({
   tagTypes: ["Course"],
   endpoints: (builder) => ({
     searchCourse: builder.query({
-      query: ({ query, page,limits = 3 }) => ({
-        url: `/api/course/searchData?name=${query}&limit=${limits}&page=${page}`,
+      query: ({ query, page,limit = 3 }) => ({
+        url: `/api/course/searchData?name=${query}&limit=${limit}&page=${page}`,
         method: "GET",
       }),
       providesTags: (result, error, page) =>
