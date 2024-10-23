@@ -33,6 +33,12 @@ export const productApi = createApi({
         method: "GET",
       }),
     }),
+    getAllCategory: builder.query({
+      query:() =>({
+        url: "/api/admin/getAllCategories",
+        method: "GET"
+      })
+    })
   }),
 });
 
@@ -41,4 +47,5 @@ export const {
   useGetProductCarouselQuery,
   useGetRecommendedProductsQuery,
   useGetOneProductQuery,
+  useGetAllCategoryQuery,
 } = productApi;

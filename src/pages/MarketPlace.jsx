@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router';
-import { useSearchProductQuery } from '../services/api/productApi';
+import { useGetAllCategoryQuery, useSearchProductQuery } from '../services/api/productApi';
 
 import { Container, Divider, Stack, Grid, Typography } from '@mui/material';
 
@@ -34,13 +34,20 @@ export default function MarketPlace() {
     isError: isProductError,
   } = useSearchProductQuery({query, page, limit});
 
-  const [category, setCategory] = useState('plant');
+  const {data: categoryData, isLoading: isCategoryLoading} = useGetAllCategoryQuery();
+
+  const [category, setCategory] = useState();
   const [sortBy, setSortBy] = useState('newest');
   const [rawData, setRawData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 
   const handleCategoryChange = (state) => {
-    if (state !== category) setCategory(state);
+    if (state !== category) {
+      setCategory(state)
+    }else{
+      setCategory()
+    }
+    
   };
 
   const handleSortByChange = (state) => {
@@ -50,6 +57,8 @@ export default function MarketPlace() {
   const handleLimitChange = () => {
     setLimit(limit + 9);
   };
+
+
 
   useEffect(() => {
     if (productData) {
@@ -120,6 +129,7 @@ export default function MarketPlace() {
           >
             <Stack direction="column" gap={3} px={3} pb={3}>
               <Category
+                allCategories={categoryData ? categoryData.data : []}
                 category={category}
                 handleChange={handleCategoryChange}
               />
