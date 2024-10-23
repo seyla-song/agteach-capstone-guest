@@ -14,6 +14,8 @@ import {
   ResendCodeButton,
 } from '../components/index';
 
+let IS_VERIFIED = false;
+
 export default function VerificationPage() {
   const [open, setOpen] = useState(true);
 
@@ -32,11 +34,16 @@ export default function VerificationPage() {
   const onSubmit = async (data) => {
     try {
       await verifyEmail(data.emailVerifyCode).unwrap();
-      navigate('/');
+      IS_VERIFIED = true;
+      window.open('/', '_blank');
     } catch (err) {
       console.error('Verification failed', err);
     }
   };
+
+  if (IS_VERIFIED) {
+    navigate('/');
+  }
 
   const handleOnClick = () => {
     setOpen(true);

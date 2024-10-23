@@ -83,7 +83,7 @@ const SignupPage = () => {
                 <form onSubmit={handleSubmit(submitHandler)}>
                   <Stack spacing={2}>
                     <FormInput
-                      label="Name"
+                      label="Username"
                       {...register('username', {
                         required: 'Please enter your name',
                       })}

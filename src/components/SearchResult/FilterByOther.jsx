@@ -11,7 +11,7 @@ export const FilterByOther = ({
 }) => {
   return (
     <Box>
-      <Typography sx={{ typography: { xs: 'bsmr', sm: 'bmdsm' } }}>
+      <Typography sx={{ typography: { xs: 'bmdsm', sm: 'blgsm' } }}>
         Filter By
       </Typography>
       <Stack direction="row" gap={0}>

@@ -101,7 +101,7 @@ export const CourseDetailHero = ({ courseData }) => {
                   </Typography>
                 </Button>
               </Link>
-              <Button
+              {/* <Button
                 sx={{
                   backgroundColor: 'tertiary.main',
                   color: 'tertiary.contrastText',
@@ -109,7 +109,7 @@ export const CourseDetailHero = ({ courseData }) => {
                 variant="contained"
               >
                 Add to Wishlist
-              </Button>
+              </Button> */}
             </Stack>
           </Stack>
         </Grid>
