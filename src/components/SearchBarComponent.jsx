@@ -64,8 +64,7 @@ export const SearchBar = ({
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              objectPosition: 'center',
-              position: 'relative',
+              objectPosition: 'top',
             }}
             src={backDrop}
           />
