@@ -13,7 +13,8 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
 import {
   SearchList,
@@ -384,22 +385,42 @@ function SearchResultPage() {
                 >
                   View More
                 </Button> */}
-                <Button
-                  variant="outlined"
-                  onClick={() => setPage((prevPage) => prevPage - 1)}
+                {/* Pagination Controls */}
+                <Stack
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="center"
+                  gap={3}
+                  py={3}
                 >
-                  Previous
-                </Button>
-                <Button
-                  variant="outlined"
-                  onClick={() => setPage((prevPage) => prevPage + 1)}
-                >
-                  <NavigateNextIcon />
-                </Button>
-                <Typography>
-                  Page {page} of{" "}
-                  {category === "course" ? totalCoursePages : totalProductPages}
-                </Typography>
+                  <Button
+                    variant="outlined"
+                    onClick={() =>
+                      setPage((prevPage) => Math.max(prevPage - 1, 1))
+                    } // Prevent going below page 1
+                    disabled={page === 1} // Disable if on page 1
+                  >
+                    <NavigateBeforeIcon />
+                  </Button>
+                  <Typography>
+                    Page {page} of{" "}
+                    {category === "course"
+                      ? totalCoursePages
+                      : totalProductPages}
+                  </Typography>
+                  <Button
+                    variant="outlined"
+                    onClick={() => setPage((prevPage) => prevPage + 1)}
+                    disabled={
+                      page ===
+                      (category === "course"
+                        ? totalCoursePages
+                        : totalProductPages)
+                    }
+                  >
+                    <NavigateNextIcon />
+                  </Button>
+                </Stack>
                 {/* )} */}
               </Box>
             </>
