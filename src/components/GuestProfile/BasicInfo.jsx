@@ -125,6 +125,7 @@ export const BasicInfo = ({ userData, cities }) => {
           )}
         </FormControl>
         <FormControl fullWidth error={!!errors?.city}>
+        <InputLabel htmlFor="city">City</InputLabel>
           <Controller
             name="city"
             control={control}
