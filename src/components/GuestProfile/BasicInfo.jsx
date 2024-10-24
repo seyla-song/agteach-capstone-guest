@@ -69,6 +69,7 @@ export const BasicInfo = ({ userData, cities }) => {
     const phonePattern = /^[0-9]+$/; // Only digits
     if (!value) return true; // Allow empty input if not required
     if (value?.length > 15) return 'Phone number cannot exceed 15 digits';
+    if (value?.length < 8) return 'A Valid phone number should contains atleast 8 digits'
     return phonePattern.test(value) || 'Please enter a valid phone number';
   };
 
