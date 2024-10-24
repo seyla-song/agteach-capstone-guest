@@ -96,7 +96,6 @@ const CartContent = () => {
         return res; // Return the entire response
       }
     } catch (err) {
-      console.log(err);
       setSnackbar({
         label: err.data.message,
         open: true,
@@ -127,7 +126,7 @@ const CartContent = () => {
         severity={snackbar.severity}
       />
       <Grid container>
-        <Grid item md={totalItemQuantity < 1 ? 12 : 8} pr={3} pb={5} xs={12}>
+        <Grid item md={totalItemQuantity < 1 ? 12 : 8} pr={totalItemQuantity < 1 ? 0 : 2} pb={5} xs={12}>
           <Typography variant="h4">Your Shopping Cart</Typography>
           <Typography color="dark.400">
             {totalItemQuantity > 0
