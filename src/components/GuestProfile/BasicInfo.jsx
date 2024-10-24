@@ -38,7 +38,6 @@ export const BasicInfo = ({ userData, cities }) => {
   useEffect(() => {
     if (userData && userData.customer) {
       const customerData = userData?.customer;
-      console.log(customerData);
       const { firstName, lastName, phone, location, address } = customerData;
       setValue('firstName', firstName || '');
       setValue('lastName', lastName || '');
@@ -69,6 +68,7 @@ export const BasicInfo = ({ userData, cities }) => {
     const phonePattern = /^[0-9]+$/; // Only digits
     if (!value) return true; // Allow empty input if not required
     if (value?.length > 15) return 'Phone number cannot exceed 15 digits';
+    if (value?.length < 8) return 'A Valid phone number should contains atleast 8 digits'
     return phonePattern.test(value) || 'Please enter a valid phone number';
   };
 
@@ -125,6 +125,7 @@ export const BasicInfo = ({ userData, cities }) => {
           )}
         </FormControl>
         <FormControl fullWidth error={!!errors?.city}>
+        <InputLabel htmlFor="city">City</InputLabel>
           <Controller
             name="city"
             control={control}
