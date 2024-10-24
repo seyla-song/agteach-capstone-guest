@@ -33,7 +33,7 @@ export const SearchBar = ({
         position: "relative",
         height: backDrop
           ? { xs: "200px", md: "300px" }
-          : { xs: "200px", md: "200px" },
+          : "100px",
       }}
     >
       {backDrop &&
