@@ -71,8 +71,10 @@ function SearchResultPage() {
   const handleNext = () => {
     if (category === "course" && coursePage < totalCoursePages) {
       setCoursePage((prevPage) => prevPage + 1);
+      window.scrollTo(0, 0);
     } else if (category === "product" && productPage < totalProductPages) {
       setProductPage((prevPage) => prevPage + 1);
+      window.scrollTo(0, 0);
     }
   };
 
@@ -80,8 +82,10 @@ function SearchResultPage() {
   const handlePrevious = () => {
     if (category === "course" && coursePage > 1) {
       setCoursePage((prevPage) => prevPage - 1);
+      window.scrollTo(0, 0);
     } else if (category === "product" && productPage > 1) {
       setProductPage((prevPage) => prevPage - 1);
+      window.scrollTo(0, 0);
     }
   };
 
