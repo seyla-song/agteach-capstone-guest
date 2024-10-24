@@ -7,13 +7,13 @@ import {
   Link,
   Snackbar,
   Alert,
-} from '@mui/material';
-import React, { useState } from 'react';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import InstructorProfileImg from '../../assets/InstructorProfile/instructorprofile.jpg';
-import { useNavigate } from 'react-router-dom';
+} from "@mui/material";
+import React, { useState } from "react";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import InstructorProfileImg from "../../assets/InstructorProfile/instructorprofile.jpg";
+import { useNavigate } from "react-router-dom";
 /**
  * ProfilePage is a component that renders an instructor's profile page.
  *
@@ -26,7 +26,7 @@ import { useNavigate } from 'react-router-dom';
  */
 export const ProfilePage = ({ instructorData }) => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
   /**
    * Copies the given text to the user's clipboard.
@@ -43,7 +43,7 @@ export const ProfilePage = ({ instructorData }) => {
         setSnackbarOpen(true);
       })
       .catch((err) => {
-        console.error('Failed to copy text: ', err);
+        console.error("Failed to copy text: ", err);
       });
   };
 
@@ -70,7 +70,16 @@ export const ProfilePage = ({ instructorData }) => {
           </Button>
         </Link>
       </Grid>
-      <Grid item xs={12} md={4}>
+      <Grid
+        item
+        xs={12}
+        md={4}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Avatar
           alt="Instructor Profile Image"
           src={imageUrl || InstructorProfileImg}
@@ -78,7 +87,7 @@ export const ProfilePage = ({ instructorData }) => {
             width: 300,
             height: 300,
             m: 1,
-            border: '15px solid lightgrey',
+            border: "15px solid lightgrey",
           }}
         />
       </Grid>
@@ -91,26 +100,7 @@ export const ProfilePage = ({ instructorData }) => {
           <Typography variant="blgsm" sx={{ mt: 3, mb: 2 }}>
             About Me
           </Typography>
-          <Typography variant="bsr">
-            {bio ||
-              `
-            I'm Emily Greene, I'm a developer with a passion for teaching. I'm
-            the lead instructor at the London App Brewery, London's leading
-            Programming Bootcamp. I've helped hundreds of thousands of students
-            learn to code and change their lives by becoming a developer. I've
-            been invited by companies such as Twitter, Facebook and Google to
-            teach their employees. My first foray into programming was when I
-            was just 12 years old, wanting to build my own Space Invader game.
-            Since then, I've made hundred of websites, apps and games. But most
-            importantly, I realised that my greatest passion is teaching. I
-            spend most of my time researching how to make learning to code fun
-            and make hard concepts easy to understand. I apply everything I
-            discover into my bootcamp courses. In my courses, you'll find lots
-            of geeky humour but also lots of explanations and animations to make
-            sure everything is easy to understand. I'll be there for you every
-            step of the way.
-            `}
-          </Typography>
+          <Typography variant="bsr">{bio || "Intructor Bio"}</Typography>
 
           <Grid container sx={{ py: 2, gap: 2 }} direction="row">
             <Button

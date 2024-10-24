@@ -29,8 +29,9 @@ function CourseDetailPage() {
 
   const [recommendedCourses, setRecommendedCourses] = useState([]);
 
-  const { data: enrolledCourses, isLoading: isLoadingEnrolled } =
-    useGetUserEnrollmentsQuery();
+  const { data: enrolledCourses, isLoading: isLoadingEnrolled, isError: isEnrollError } =
+  useGetUserEnrollmentsQuery();
+  console.log('error')
 
   const {
     data: currentCourseData,
@@ -39,10 +40,11 @@ function CourseDetailPage() {
     error,
   } = useGetOneCourseQuery(coursesId);
 
-  const { data: recommendedCoursesData } =
+  const { data: recommendedCoursesData, isError: isRecommendedError } =
     useGetRecommendedCoursesQuery(coursesId);
 
   useEffect(() => {
+    console.log('error')
     if (
       !isLoadingEnrolled &&
       enrolledCourses?.courseIds.includes(Number(coursesId))
@@ -64,7 +66,8 @@ function CourseDetailPage() {
   ]);
 
   if (isLoading) return <ContentLoading />;
-  if (isError) return <div>Error: {error}</div>;
+  console.log(isEnrollError, isError, isRecommendedError)
+  if (isError || isRecommendedError || isEnrollError) return <div>Error: {error}</div>;
 
   return (
     <Elements stripe={stripePromise}>
