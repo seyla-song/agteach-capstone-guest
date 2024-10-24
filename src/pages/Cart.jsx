@@ -58,21 +58,37 @@ const CartContent = () => {
   const { data: loggedIn } = useIsLoginQuery();
 
   const navigate = useNavigate();
-
   const cart = useSelector((state) => state.cart);
+  const {isAuthenticated, isVerified} = useSelector((state) => state.auth);
   const totalItemQuantity = cart.totalQuantity;
 
   const handleCheckout = async () => {
     setLoading(true);
+    
+    // Check if the user is logged in and their account status (verified)
+    if (!isAuthenticated) {
+      // Redirect to login page if not logged in
+      navigate('/auth/login');
+      return;
+    }
+    
+    if (isAuthenticated && !isVerified) {
+      // Redirect to verification page if logged in but not verified
+      navigate('/auth/signup/verification');
+      return;
+    }
+  
     try {
+      // Proceed with checkout if both conditions are true
       const cartItemsResult = await handleGetCartItems();
       if (!cartItemsResult || !cartItemsResult.items) {
         throw new Error('Failed to retrieve cart items');
       }
-
+  
       const data = await purchased({
         cartItems: cartItemsResult.items,
       }).unwrap();
+  
       if (data.id) {
         const result = await stripe.redirectToCheckout({ sessionId: data.id });
         if (result.error) {
@@ -83,11 +99,12 @@ const CartContent = () => {
       }
     } catch (err) {
       console.error('Error during checkout', err);
-      err.status === 401 && navigate('/auth/login');
+      // Handle potential errors (e.g., authentication or cart item fetching errors)
     } finally {
       setLoading(false);
     }
   };
+  
 
   const handleGetCartItems = async () => {
     try {
@@ -96,7 +113,6 @@ const CartContent = () => {
         return res; // Return the entire response
       }
     } catch (err) {
-      console.log(err);
       setSnackbar({
         label: err.data.message,
         open: true,
