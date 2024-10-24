@@ -38,7 +38,6 @@ export const BasicInfo = ({ userData, cities }) => {
   useEffect(() => {
     if (userData && userData.customer) {
       const customerData = userData?.customer;
-      console.log(customerData);
       const { firstName, lastName, phone, location, address } = customerData;
       setValue('firstName', firstName || '');
       setValue('lastName', lastName || '');

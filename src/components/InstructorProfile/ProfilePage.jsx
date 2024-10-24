@@ -57,7 +57,6 @@ export const ProfilePage = ({ instructorData }) => {
 
   const { firstName, lastName, phone, email, imageUrl, bio } = instructorData;
 
-  console.log(imageUrl);
   return (
     <Grid container pt={10}>
       <Grid item xs={12} pb="10px">
