@@ -60,10 +60,12 @@ export default function MarketPlace() {
 
   const handleNext = () => {
     setPage((prevPage) => prevPage + 1);
+    window.scrollTo(0, 0);
   };
 
   const handlePrevious = () => {
-    setPage((prevPage) => Math.max(prevPage - 1, 1)); // Prevent going below page 1
+    setPage((prevPage) => Math.max(prevPage - 1, 1));
+    window.scrollTo(0, 0); // Prevent going below page 1
   };
 
   useEffect(() => {
