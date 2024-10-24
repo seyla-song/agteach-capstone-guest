@@ -129,7 +129,7 @@ function Navigation() {
             component="img"
             style={{ width: '24px', borderRadius: '50%', marginRight: '5px' }}
             src={
-              !isLoginLoading ? data?.customer?.imageUrl : GuestProfilePicture
+              !isLoginLoading ? data?.customer?.imageUrl + `?${new Date().getTime()}` : GuestProfilePicture
             }
             alt="profile image"
           />
