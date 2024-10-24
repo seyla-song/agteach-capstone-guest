@@ -40,7 +40,6 @@ const HEADER_MENU_MOBILE = [
   { page: 'Marketplace', path: 'marketplace' },
   { page: 'AgAI', path: 'agai' },
   // { page: 'Wishlist', path: 'wishlist' },
-  // { page: 'Cart', path: 'cart' },
 ];
 
 function Navigation() {
