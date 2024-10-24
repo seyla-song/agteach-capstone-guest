@@ -6,8 +6,8 @@ stages:
 install_dependencies:
   stage: install
   image: node:20
-  only:
-    - develop
+  # only:
+  #   - develop
   script:
     - node -v
     - echo "Installing dependencies"
@@ -19,14 +19,14 @@ install_dependencies:
 build_app:
   stage: build
   image: node:20
-  only:
-    - develop
+  # only:
+  #   - develop
   script:
     - echo "Building Instructor Application"
     - export REACT_APP_PUBLISHABLE_KEY=$REACT_APP_PUBLISHABLE_KEY
     - node -v
     - npm -v
-    - npm i  # Use 'npm ci' instead of 'npm install' for CI environments
+    - npm i # Use 'npm ci' instead of 'npm install' for CI environments
     - CI=false npm run build --verbose
     - ls -la build # List the conents of the build folder
   artifacts:
@@ -38,10 +38,10 @@ build_app:
 deploy_to_aws:
   stage: deploy
   image: node:20
-  only:
-    - develop
+  # only:
+  #   - develop
   before_script:
-    - 'which ssh-agent || (brew install openssh)'
+    - "which ssh-agent || (brew install openssh)"
     - eval $(ssh-agent -s)
     - mkdir -p ~/.ssh
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/agtech.pem
@@ -52,10 +52,5 @@ deploy_to_aws:
     - ls -la build/
     - rsync -avz -e "ssh -i ~/.ssh/agtech.pem" build/* $AWS_SSH_USER@$AWS_SSH_IP:/home/ubuntu/app/guest
   dependencies:
-    - build_app  # Ensure we pull artifacts from the build_app stage
-
-
-
-
-
+    - build_app # Ensure we pull artifacts from the build_app stage
 
