@@ -6,15 +6,15 @@ export const productApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: API_BASE_URL }),
   endpoints: (builder) => ({
     searchProduct: builder.query({
-      query: (name) => ({
-        url: `/api/product/searchData?name=${name}`,
+      query: ({ query, limit = 12, page = 1, category = '' }) => ({
+        url: `/api/product/searchData?name=${query}&page=${page}&category=${category}&limit=${limit}`,
         method: "GET",
       }),
     }),
 
     getProductCarousel: builder.query({
       query: () => ({
-        url: "/api/product/getAllProduct",
+        url: "/api/product/getAllProduct?page=1",
         method: "GET",
       }),
     }),
@@ -32,6 +32,12 @@ export const productApi = createApi({
         method: "GET",
       }),
     }),
+    getAllCategory: builder.query({
+      query: () => ({
+        url: "/api/admin/getAllCategories",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -40,4 +46,5 @@ export const {
   useGetProductCarouselQuery,
   useGetRecommendedProductsQuery,
   useGetOneProductQuery,
+  useGetAllCategoryQuery,
 } = productApi;

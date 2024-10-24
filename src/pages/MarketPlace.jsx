@@ -1,8 +1,21 @@
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router';
-import { useSearchProductQuery } from '../services/api/productApi';
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router";
+import {
+  useGetAllCategoryQuery,
+  useSearchProductQuery,
+} from "../services/api/productApi";
 
-import { Container, Divider, Stack, Grid, Typography } from '@mui/material';
+import {
+  Container,
+  Divider,
+  Stack,
+  Grid,
+  Typography,
+  Button,
+} from "@mui/material";
+
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
 import {
   ItemsLoading,
@@ -11,44 +24,54 @@ import {
   SortByFilter,
   SearchBar,
   ContentLoading,
-} from '../components/index';
+} from "../components/index";
 
-/**
- * A React functional component that renders a marketplace page.
- *
- * The component includes a responsive layout with a search bar, a category filter,
- * a sort by filter, and a filter by filter. It also displays a list of products
- * with a carousel of recommended products.
- *
- * @return {JSX.Element} The JSX element representing the marketplace page.
- */
 export default function MarketPlace() {
   const currentLocation = useLocation().search;
   const queryParams = new URLSearchParams(currentLocation);
-  const query = queryParams.get('name') || '';
+  const limit = 12;
+  const [page, setPage] = useState(1);
+  const query = queryParams.get("name") || "";
+  const [category, setCategory] = useState(); // State to hold the selected category
+
   const {
     data: productData,
     isLoading: isProductLoading,
     isError: isProductError,
-  } = useSearchProductQuery(query);
+    isFetching: isProductFetching,
+  } = useSearchProductQuery({ query, page, limit, category }); // Pass category to the query
 
-  const [category, setCategory] = useState('plant');
-  const [sortBy, setSortBy] = useState('newest');
-  const [limit, setLimit] = useState(9);
+  const { data: categoryData } = useGetAllCategoryQuery();
+
+  const [sortBy, setSortBy] = useState("newest");
   const [rawData, setRawData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const totalItems = productData ? productData.results : 0; // Total items from the backend
+  const totalPages = Math.ceil(totalItems / limit); // Calculate total pages
 
-  const handleCategoryChange = (state) => {
-    if (state !== category) setCategory(state);
+  const handleCategoryChange = (selectedCategory) => {
+    // Update the selected category and reset page to 1
+    setCategory(selectedCategory !== category ? selectedCategory : undefined);
+    setPage(1); // Reset to the first page on category change
   };
 
   const handleSortByChange = (state) => {
     if (state !== sortBy) setSortBy(state);
   };
 
-  const handleLimitChange = () => {
-    setLimit(limit + 9);
+  const handleNext = () => {
+    setPage((prevPage) => prevPage + 1);
+    window.scrollTo(0, 0);
   };
+
+  const handlePrevious = () => {
+    setPage((prevPage) => Math.max(prevPage - 1, 1));
+    window.scrollTo(0, 0); // Prevent going below page 1
+  };
+
+  useEffect(() => {
+    setPage(1); // Reset page when the query or category changes
+  }, [query, category]);
 
   useEffect(() => {
     if (productData) {
@@ -56,13 +79,6 @@ export default function MarketPlace() {
     }
 
     let dataToFilter = [...rawData] || [];
-
-    const categoryFilterMap = {
-      plant: 1,
-      fertilizer: 2,
-      seed: 3,
-      tool: 4,
-    };
 
     const sortFunctions = {
       newest: (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
@@ -72,16 +88,9 @@ export default function MarketPlace() {
       phtl: (a, b) => parseFloat(b.price) - parseFloat(a.price),
     };
 
-    if (category in categoryFilterMap) {
-      dataToFilter = dataToFilter.filter(
-        (product) => product.categoryId === categoryFilterMap[category]
-      );
-    }
-
     dataToFilter.sort(sortFunctions[sortBy] || (() => 0));
-
     setFilteredData(dataToFilter);
-  }, [rawData, category, sortBy, limit, productData]);
+  }, [rawData, sortBy, productData, category]);
 
   if (isProductError) {
     return (
@@ -101,10 +110,10 @@ export default function MarketPlace() {
       <Container
         maxWidth={false}
         sx={{
-          maxWidth: '1420px',
+          maxWidth: "1420px",
           marginY: {
-            xs: '30px',
-            md: '60px',
+            xs: "30px",
+            md: "60px",
           },
         }}
       >
@@ -119,8 +128,9 @@ export default function MarketPlace() {
           >
             <Stack direction="column" gap={3} px={3} pb={3}>
               <Category
+                allCategories={categoryData ? categoryData.data : []}
                 category={category}
-                handleChange={handleCategoryChange}
+                handleChange={handleCategoryChange} // Pass the handler
               />
               <Divider />
               <SortByFilter sortBy={sortBy} handleChange={handleSortByChange} />
@@ -131,21 +141,48 @@ export default function MarketPlace() {
             <Stack px={3} gap={2} minHeight="100vh">
               <SearchBar
                 backDrop={false}
-                searchContext={'marketplace'}
+                searchContext={"marketplace"}
                 defaultSearchString={query}
               />
-              {isProductLoading && <ItemsLoading title={'marketplace'} />}
               {!isProductLoading && productData && (
-                <Typography typography="bsr">{`Found (${filteredData.length}) items`}</Typography>
+                <Typography typography="bsr">{`Found (${productData.results}) items`}</Typography>
               )}
-              {isProductLoading && <ContentLoading />}
-              {!isProductLoading && productData && (
+              {(isProductLoading || isProductFetching) && <ItemsLoading title={"marketplace"} />}
+              {/* {(isProductLoading || isProductFetching) && <ContentLoading />} */}
+              {!isProductLoading && filteredData?.length === 0 && (
+                <Typography>There is no search result.</Typography>
+              )}
+              {(!isProductLoading && !isProductFetching) && productData && (
                 <SearchList
                   dataObj={filteredData}
-                  cardVariant={'product'}
+                  cardVariant={"product"}
                   limit={limit}
-                  handleLimitChange={handleLimitChange}
                 />
+              )}
+              {filteredData?.length !== 0 && (
+                <Stack
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="center"
+                  gap={3}
+                  py={3}
+                >
+                  <Button
+                    variant="outlined"
+                    onClick={handlePrevious} // Prevent going below page 1
+                    disabled={page === 1} // Disable if on the first page
+                  >
+                    <NavigateBeforeIcon />
+                  </Button>
+                  <Typography>{`Page ${page} of ${totalPages}`}</Typography>
+                  <Button
+                    variant="outlined"
+                    onClick={handleNext}
+                    disabled={page === totalPages} // Disable if on the last page
+                  >
+                    <NavigateNextIcon />
+                  </Button>
+                </Stack>
               )}
             </Stack>
           </Grid>

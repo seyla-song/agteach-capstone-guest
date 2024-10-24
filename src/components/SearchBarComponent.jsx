@@ -1,15 +1,6 @@
-import {
-  Box,
-  Button,
-  Stack,
-  TextField,
-  Typography,
-  Autocomplete,
-} from '@mui/material';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-const data = ['Plant', 'Fertilizer', 'Shovel'];
+import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const SearchBar = ({
   backDrop,
@@ -17,18 +8,14 @@ export const SearchBar = ({
   searchContext,
   defaultSearchString,
 }) => {
-  if (!searchContext) searchContext = 'search';
-  if (!defaultSearchString) defaultSearchString = '';
+  if (!searchContext) searchContext = "search";
+  if (!defaultSearchString) defaultSearchString = "";
 
   const navigate = useNavigate();
   const [searchString, setSearchString] = useState(defaultSearchString);
 
   const handleSearchString = (e) => {
     setSearchString(e.target.value);
-  };
-
-  const handleAutocompleteChange = (event, newValue) => {
-    setSearchString(newValue || '');
   };
 
   const handleStartSearch = (e) => {
@@ -39,18 +26,18 @@ export const SearchBar = ({
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "relative",
         height: backDrop
-          ? { xs: '200px', md: '300px' }
-          : { xs: '200px', md: '200px' },
+          ? { xs: "200px", md: "300px" }
+          : "100px",
       }}
     >
       {backDrop &&
-        (backDrop === 'primary' ? (
+        (backDrop === "primary" ? (
           <Box
             height="100%"
             width="100%"
@@ -61,10 +48,10 @@ export const SearchBar = ({
           <Box
             component="img"
             sx={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'center',
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center",
             }}
             src={backDrop}
           />
@@ -74,71 +61,61 @@ export const SearchBar = ({
         spacing="30px"
         padding="0 20px"
         sx={{
-          position: backDrop ? 'absolute' : 'static',
-          width: '100%',
-          padding: backDrop ? { xs: '0 20px', md: '0 120px' } : '0',
+          position: backDrop ? "absolute" : "static",
+          width: "100%",
+          padding: backDrop ? { xs: "0 20px", md: "0 120px" } : "0",
         }}
       >
         {searchLabel && (
           <Typography
             color="white"
-            sx={{ typography: { xs: 'blgsm', md: 'h4' } }}
+            sx={{ typography: { xs: "blgsm", md: "h4" } }}
           >
             {searchLabel}
           </Typography>
         )}
         <form onSubmit={handleStartSearch}>
-          <Stack direction="row" gap={1} height="40px">
-            <Autocomplete
+          <Box display="flex" gap="20px" width="100%" height="40px">
+            <TextField
               id="search-bar"
-              sx={{ width: '100%', height: '40px', mx: 'auto' }}
-              options={data}
-              value={searchString}
-              onInputChange={handleAutocompleteChange}
-              getOptionLabel={(option) => {
-                return option;
+              sx={{
+                width: "100%",
+                height: "50px",
+                mx: "auto",
+                bgcolor: "grey.100",
+                borderRadius: "4px",
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    border: "none",
+                  },
+                  "&.Mui-focused fieldset": {
+                    border: "none",
+                  },
+                  "&:hover fieldset": {
+                    border: "none",
+                  },
+                },
               }}
-              renderOption={(props, option) => {
-                const { key, ...optionProps } = props;
-                return (
-                  <Box key={key} component="li" {...optionProps}>
-                    {option}
-                  </Box>
-                );
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  onChange={(e) => handleSearchString(e)}
-                  value={searchString}
-                  placeholder="Search course, plant, crop, service"
-                  InputProps={{
-                    ...params.InputProps,
-                    sx: {
-                      height: '50px',
-                      bgcolor: 'grey.100',
-                    },
-                    endAdornment: null,
-                    autoComplete: 'new-password',
-                  }}
-                />
-              )}
+              value={searchString} // Controlled value
+              onChange={(e) => handleSearchString(e)} // Handle input change
+              placeholder="Search course, plant, crop, service"
             />
 
-            <Box sx={{ width: { xs: '80px', sm: '100px', md: '220px' } }}>
+            <Box sx={{ width: { xs: "80px", sm: "100px", md: "220px" } }}>
               <Button
                 onClick={handleStartSearch}
                 fullWidth
                 disableElevation
                 variant="contained"
                 color="secondary"
+                // sx={{ height: "100%", color: "primary.main" }}
                 size="large"
-                sx={{ height: '50px' }}
+                sx={{ height: "50px" }}
               >
                 Search
               </Button>
             </Box>
-          </Stack>
+          </Box>
         </form>
       </Stack>
     </Box>

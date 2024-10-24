@@ -1,42 +1,64 @@
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useSearchProductQuery } from '../services/api/productApi';
-import { useSearchCourseQuery } from '../services/api/courseApi';
-
-import { Container, Divider, Grid, Stack, Typography } from '@mui/material';
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useSearchProductQuery } from "../services/api/productApi";
+import { useSearchCourseQuery } from "../services/api/courseApi";
 
 import {
-  SearchList,
+  Box,
+  Button,
+  Container,
+  Divider,
+  Grid,
+  Grid2,
+  Stack,
+  Typography,
+} from "@mui/material";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+
+import {
   SearchBar,
   SortByFilter,
   CategoryFilter,
-  FilterByOther,
   ContentLoading,
   ItemsLoading,
-} from '../components/index';
+} from "../components/index";
+import CustomCard from "../components/CustomCard";
 
 function SearchResultPage() {
   const currentLocation = useLocation().search;
   const queryParams = new URLSearchParams(currentLocation);
-  const query = queryParams.get('name');
+  const query = queryParams.get("name");
+  const [coursePage, setCoursePage] = useState(1);
+  const [productPage, setProductPage] = useState(1);
+  const limit = 12;
+  const [isNewQuery, setIsNewQuery] = useState(false);
 
   const {
     data: courseData,
     isLoading: isCourseLoading,
+    isFetching: isCourseFetching,
     isError: isCourseError,
-  } = useSearchCourseQuery(query);
+  } = useSearchCourseQuery({ query, page: coursePage, limit });
+
   const {
     data: productData,
     isLoading: isProductLoading,
+    isFetching: isProductFetching,
     isError: isProductError,
-  } = useSearchProductQuery(query);
+  } = useSearchProductQuery({ query, page: productPage, limit });
 
-  const [category, setCategory] = useState('course');
-  const [sortBy, setSortBy] = useState('newest');
+  const [category, setCategory] = useState("course");
+  const [sortBy, setSortBy] = useState("newest");
 
-  const [filterByRuntime, setFilterByRuntime] = useState('none');
-  const [limit, setLimit] = useState(9);
-  const [rawData, setRawData] = useState([]);
+  const totalCoursePages = isCourseLoading
+    ? 1
+    : Math.ceil(courseData?.results / limit);
+
+  const totalProductPages = isProductLoading
+    ? 1
+    : Math.ceil(productData?.results / limit);
+
   const [filteredData, setFilteredData] = useState([]);
 
   const handleCategoryChange = (state) => {
@@ -47,26 +69,59 @@ function SearchResultPage() {
     if (state !== sortBy) setSortBy(state);
   };
 
-  const handleFilterByRuntimeChange = (state) => {
-    if (state === filterByRuntime) setFilterByRuntime('none');
-    else setFilterByRuntime(state);
+  // Handle next page logic
+  const handleNext = () => {
+    if (category === "course" && coursePage < totalCoursePages) {
+      setCoursePage((prevPage) => prevPage + 1);
+      window.scrollTo(0, 0);
+    } else if (category === "product" && productPage < totalProductPages) {
+      setProductPage((prevPage) => prevPage + 1);
+      window.scrollTo(0, 0);
+    }
   };
 
-  const handleLimitChange = () => {
-    setLimit(limit + 9);
+  // Handle previous page logic
+  const handlePrevious = () => {
+    if (category === "course" && coursePage > 1) {
+      setCoursePage((prevPage) => prevPage - 1);
+      window.scrollTo(0, 0);
+    } else if (category === "product" && productPage > 1) {
+      setProductPage((prevPage) => prevPage - 1);
+      window.scrollTo(0, 0);
+    }
   };
+  console.log('isfetching', isCourseFetching)
+
+  // For loading the first time
+  useEffect(() => {
+    // Reset page, data, and load more flags
+    setCoursePage(1);
+    setProductPage(1);
+    setIsNewQuery(true);
+    console.log("query", query);
+  }, [query]);
 
   useEffect(() => {
-    const dataMap = {
-      course: courseData?.data || [],
-      product: productData?.data || [],
+    let combinedData = {
+      course: [],
+      product: [],
     };
-    setRawData(dataMap[category] || []);
 
-    setLimit(9);
+    // If `isNewQuery` is true, reset the data
+    if (isNewQuery) {
+      if (courseData?.data) {
+        combinedData.course = [...courseData.data];
+      }
+      if (productData?.data) {
+        combinedData.product = [...productData.data];
+      }
+    } else {
+      // If `isNewQuery` is false, retain old data
+      combinedData.course = filteredData.course || [];
+      combinedData.product = filteredData.product || [];
+    }
 
-    let sortedData = [...rawData];
-
+    // Sorting logic based on the selected category
     const sortCallbacks = {
       newest: (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
       oldest: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
@@ -75,19 +130,17 @@ function SearchResultPage() {
       phtl: (a, b) => parseFloat(b.price) - parseFloat(a.price),
     };
 
-    const sortCallback = sortCallbacks[sortBy];
-    sortedData.sort(sortCallback);
-
-    if (category === 'course' && filterByRuntime !== 'none') {
-      sortedData.sort((a, b) =>
-        filterByRuntime === 'long'
-          ? b.duration - a.duration
-          : a.duration - b.duration
-      );
+    // Sort the data
+    if (category === "course") {
+      combinedData.course.sort(sortCallbacks[sortBy]);
+    } else {
+      combinedData.product.sort(sortCallbacks[sortBy]);
     }
 
-    setFilteredData(sortedData);
-  }, [category, sortBy, filterByRuntime, rawData, courseData, productData]);
+    // Set the filtered data based on the selected category
+    setFilteredData(combinedData[category]);
+
+  }, [courseData, productData, category, sortBy, isNewQuery]);
 
   if (isCourseLoading || isProductLoading || category) <ContentLoading />;
 
@@ -108,16 +161,16 @@ function SearchResultPage() {
     <Container
       maxWidth={false}
       sx={{
-        maxWidth: '1420px',
+        maxWidth: "1420px",
         marginY: {
-          xs: '30px',
-          md: '60px',
+          xs: "30px",
+          md: "60px",
         },
       }}
     >
       <SearchBar
-        backDrop={'primary'}
-        searchLabel={'Learn Smarter, Learn Faster. AgTeach'}
+        backDrop={"primary"}
+        searchLabel={"Learn Smarter, Learn Faster. AgTeach"}
         defaultSearchString={query}
       />
 
@@ -154,23 +207,69 @@ function SearchResultPage() {
             <SortByFilter sortBy={sortBy} handleChange={handleSortByChange} />
 
             <Divider />
-            <FilterByOther
-              filterByRuntime={filterByRuntime}
-              handleFilterByRuntimeChange={handleFilterByRuntimeChange}
-              context={category}
-            />
-
-            <Divider />
           </Stack>
         </Grid>
         <Grid item xs={12} sm={9}>
           <Stack pl={{ xs: 0, md: 3 }} gap={2} minHeight="100vh">
-            <SearchList
-              dataObj={filteredData}
-              cardVariant={category}
-              limit={limit}
-              handleLimitChange={handleLimitChange}
-            />
+            <>
+              <Box width="100%">
+                <Grid2 container size={{ xs: 12 }} width={"100%"}>
+                  {(!isCourseLoading && !isProductLoading) && filteredData?.length === 0 && (
+                    <Typography>There is no search result.</Typography>
+                  )}
+                  {(isCourseFetching || isProductFetching) && <ItemsLoading />}
+                  {(!isCourseFetching && !isProductFetching) &&filteredData?.map((product, idx) => (
+                    <Grid2 size={{ xs: 4 }}>
+                      <CustomCard
+                        key={idx}
+                        dataObj={product}
+                        variant={category}
+                      />
+                    </Grid2>
+                  ))}
+                </Grid2>
+                {filteredData?.length !== 0 && (
+                  <Stack
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="center"
+                    gap={3}
+                    py={3}
+                  >
+                    <Button
+                      variant="outlined"
+                      onClick={handlePrevious} // Prevent going below page 1
+                      disabled={
+                        (category === "course" && coursePage === 1) ||
+                        (category === "product" && productPage === 1)
+                      }
+                    >
+                      <NavigateBeforeIcon />
+                    </Button>
+                    <Typography>
+                      Page {category === "course" ? coursePage : productPage} of{" "}
+                      {category === "course"
+                        ? totalCoursePages
+                        : totalProductPages}
+                    </Typography>
+                    <Button
+                      variant="outlined"
+                      onClick={handleNext}
+                      disabled={
+                        (category === "course" &&
+                          coursePage === totalCoursePages) ||
+                        (category === "product" &&
+                          productPage === totalProductPages)
+                      }
+                    >
+                      <NavigateNextIcon />
+                    </Button>
+                  </Stack>
+                )}
+                {/* )} */}
+              </Box>
+            </>
+            
           </Stack>
         </Grid>
       </Grid>
