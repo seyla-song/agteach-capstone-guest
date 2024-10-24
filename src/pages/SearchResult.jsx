@@ -37,12 +37,14 @@ function SearchResultPage() {
   const {
     data: courseData,
     isLoading: isCourseLoading,
+    isFetching: isCourseFetching,
     isError: isCourseError,
   } = useSearchCourseQuery({ query, page: coursePage, limit });
 
   const {
     data: productData,
     isLoading: isProductLoading,
+    isFetching: isProductFetching,
     isError: isProductError,
   } = useSearchProductQuery({ query, page: productPage, limit });
 
@@ -88,6 +90,7 @@ function SearchResultPage() {
       window.scrollTo(0, 0);
     }
   };
+  console.log('isfetching', isCourseFetching)
 
   // For loading the first time
   useEffect(() => {
@@ -211,10 +214,11 @@ function SearchResultPage() {
             <>
               <Box width="100%">
                 <Grid2 container size={{ xs: 12 }} width={"100%"}>
-                  {filteredData?.length === 0 && (
+                  {(!isCourseLoading && !isProductLoading) && filteredData?.length === 0 && (
                     <Typography>There is no search result.</Typography>
                   )}
-                  {filteredData?.map((product, idx) => (
+                  {(isCourseFetching || isProductFetching) && <ItemsLoading />}
+                  {(!isCourseFetching && !isProductFetching) &&filteredData?.map((product, idx) => (
                     <Grid2 size={{ xs: 4 }}>
                       <CustomCard
                         key={idx}
@@ -265,6 +269,7 @@ function SearchResultPage() {
                 {/* )} */}
               </Box>
             </>
+            
           </Stack>
         </Grid>
       </Grid>

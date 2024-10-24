@@ -38,6 +38,7 @@ export default function MarketPlace() {
     data: productData,
     isLoading: isProductLoading,
     isError: isProductError,
+    isFetching: isProductFetching,
   } = useSearchProductQuery({ query, page, limit, category }); // Pass category to the query
 
   const { data: categoryData } = useGetAllCategoryQuery();
@@ -143,15 +144,15 @@ export default function MarketPlace() {
                 searchContext={"marketplace"}
                 defaultSearchString={query}
               />
-              {isProductLoading && <ItemsLoading title={"marketplace"} />}
               {!isProductLoading && productData && (
                 <Typography typography="bsr">{`Found (${productData.results}) items`}</Typography>
               )}
-              {isProductLoading && <ContentLoading />}
-              {filteredData?.length === 0 && (
+              {(isProductLoading || isProductFetching) && <ItemsLoading title={"marketplace"} />}
+              {/* {(isProductLoading || isProductFetching) && <ContentLoading />} */}
+              {!isProductLoading && filteredData?.length === 0 && (
                 <Typography>There is no search result.</Typography>
               )}
-              {!isProductLoading && productData && (
+              {(!isProductLoading && !isProductFetching) && productData && (
                 <SearchList
                   dataObj={filteredData}
                   cardVariant={"product"}
