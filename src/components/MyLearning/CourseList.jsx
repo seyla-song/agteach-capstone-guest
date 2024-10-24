@@ -1,7 +1,10 @@
-import { Button, Grid, Stack, Typography, Link } from '@mui/material';
-import CustomCard from '../CustomCard';
-import { Link as RouterLink } from 'react-router-dom';
-import { ItemsLoading } from '../ItemsLoading';
+import { Button, Grid, Stack, Typography, Link } from "@mui/material";
+import CustomCard from "../CustomCard";
+import { Link as RouterLink } from "react-router-dom";
+import { ItemsLoading } from "../ItemsLoading";
+import { useEffect, useState } from "react";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
 /**
  * CourseList component renders a list of courses that the user has
@@ -17,6 +20,27 @@ import { ItemsLoading } from '../ItemsLoading';
  */
 
 export const CourseList = ({ data, isLoading }) => {
+  const [page, setPage] = useState(1);
+  const limit = 15;
+  const totalPages = Math.ceil(data.length / limit);
+
+  const [paginatedData, setPaginatedData] = useState([]);
+
+  useEffect(()=>{
+    const startIdx = (page - 1) * limit;
+    const endIdx = startIdx + limit;
+    setPaginatedData(data.slice(startIdx, endIdx))  
+  },[page, data])
+  const handleNext = () => {
+    setPage((prevPage) => prevPage + 1);
+    window.scrollTo(0, 0);
+  };
+
+  const handlePrevious = () => {
+    setPage((prevPage) => prevPage - 1);
+    window.scrollTo(0, 0); // Prevent going below page 1
+  };
+
   return (
     <Stack gap={3}>
       <Stack gap>
@@ -30,10 +54,10 @@ export const CourseList = ({ data, isLoading }) => {
         )}
       </Stack>
 
-      {data && (
+      {paginatedData && (
         <Grid container spacing>
-          {data?.map((item, idx) => (
-            <Grid item key={idx} xs={6} md={2}>
+          {paginatedData?.map((item, idx) => (
+            <Grid item key={idx} xs={4} md={2.4}>
               <Link
                 component={RouterLink}
                 to={`/courses/${item.course_id}/watch/overview`}
@@ -46,10 +70,30 @@ export const CourseList = ({ data, isLoading }) => {
         </Grid>
       )}
 
-      {data.length > 10 && (
-        <Button variant="outlined" sx={{ px: 4, py: 2 }}>
-          View (5) more
-        </Button>
+      {data?.length !== 0 && (
+        <Stack
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          gap={3}
+          py={3}
+        >
+          <Button
+            variant="outlined"
+            onClick={handlePrevious} // Prevent going below page 1
+            disabled={page === 1} // Disable if on the first page
+          >
+            <NavigateBeforeIcon />
+          </Button>
+          <Typography>{`Page ${page} of ${totalPages}`}</Typography>
+          <Button
+            variant="outlined"
+            onClick={handleNext}
+            disabled={page === totalPages} // Disable if on the last page
+          >
+            <NavigateNextIcon />
+          </Button>
+        </Stack>
       )}
     </Stack>
   );
