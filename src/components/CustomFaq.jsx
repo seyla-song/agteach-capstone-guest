@@ -64,9 +64,4 @@ const faqList = [
                - Pest control
                - Safety gear`,
   },
-  {
-    question: 'Is my information safe?',
-    answer: `100%! We use top-notch security to protect your data and payments. 
-               We never share your personal info.`,
-  },
 ];

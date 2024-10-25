@@ -7,7 +7,7 @@ function AgAiPage() {
   const zipUrl = `${process.env.PUBLIC_URL}/files/test_images.zip`; // Path to your ZIP file
   const zipName = 'test_images.zip'; // Name the ZIP file for download
   return (
-    <Container>
+    <Container sx={{minHeight:'100vh', pb:10}}>
       <Stack gap={5} my={10}>
         <Stack>
           <Typography variant="h3">
