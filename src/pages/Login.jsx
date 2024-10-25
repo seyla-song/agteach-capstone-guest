@@ -15,6 +15,9 @@ import {
 } from "@mui/material";
 
 import { CustomAlert, LogoLink, FormInput } from "../components/index";
+import { useDispatch, useSelector } from "react-redux";
+import { checkLoginStatus } from "../features/auth/authSlice";
+import { setEmail } from "../features/auth/userSlice";
 
 function Login() {
   const [login, { isLoading, isError }] = useLoginMutation();
@@ -22,6 +25,7 @@ function Login() {
   const [open, setOpen] = useState(false);
   const [visible] = useState(false);
   const navigator = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -36,10 +40,24 @@ function Login() {
   });
 
   const handleShowPassword = () => setShowPassword((prev) => !prev);
+  const { isAtCourseDetail, isAtCart } = useSelector((state) => state.auth);
+  const {courseId} = useSelector((state) => state.user);
+  
   const submitHandler = async (data) => {
     try {
-      await login(data).unwrap();
-      navigator("/");
+      const res = await login(data).unwrap();
+      if (res.token) {
+        let verification = res?.data?.user?.isVerify;
+        dispatch(
+          checkLoginStatus({ isAuthenticated: true, isVerified: verification })
+        );
+        dispatch(setEmail(res?.data?.user?.email));
+      }
+      if (isAtCart) {
+        navigator("/cart");
+      } else if (isAtCourseDetail) {
+        navigator(`/courses/${courseId}`);
+      } else navigator("/");
     } catch (error) {
       console.error("Incorrect email or password", error);
       setOpen(true);

@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { useIsLoginQuery } from "./services/api/authApi";
 import { checkLoginStatus } from "./features/auth/authSlice";
 import { useEffect } from "react";
+import { setEmail } from "./features/auth/userSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -14,7 +15,13 @@ function App() {
 
   useEffect(() => {
     if (data) {
-      dispatch(checkLoginStatus(data.IsAuthenticated));
+      dispatch(
+        checkLoginStatus({
+          isAuthenticated: data?.IsAuthenticated,
+          isVerified: data?.IsVerify,
+        })
+      );
+      dispatch(setEmail(data?.email));
     }
   }, [data, dispatch]);
 

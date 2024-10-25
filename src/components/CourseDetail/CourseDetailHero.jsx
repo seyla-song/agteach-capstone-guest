@@ -10,17 +10,30 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useStripe } from '@stripe/react-stripe-js';
 import { useEnrollmentMutation } from '../../services/api/enrollmentApi';
+import { useDispatch, useSelector } from 'react-redux';
+import { isAtCourseDetail } from '../../features/auth/authSlice';
 
 export const CourseDetailHero = ({ courseData }) => {
   const [enrollment] = useEnrollmentMutation();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const { courseId, instructorId } = courseData || {};
-
+  const {isAuthenticated, isVerified} = useSelector((state) => state.auth);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleCheckout = async () => {
     setLoading(true);
+    dispatch(isAtCourseDetail(true));
+    if (!isAuthenticated) {
+      navigate('/auth/login');
+      return;
+    }
+
+    if (isAuthenticated && !isVerified) {
+      navigate('/auth/signup/verification');
+      return;
+    }
     try {
       if (!courseId || !instructorId) return;
       const data = await enrollment({ courseId: courseId }).unwrap();

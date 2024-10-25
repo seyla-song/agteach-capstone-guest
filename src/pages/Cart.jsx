@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useGetCartItemsMutation } from '../services/api/cartApi';
 import { useNavigate } from 'react-router-dom';
 import { Elements, useStripe } from '@stripe/react-stripe-js';
@@ -30,6 +30,7 @@ import {
   PurchasedHistory,
   CustomAlert,
 } from '../components/index';
+import { isAtCart } from '../features/auth/authSlice';
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
@@ -50,6 +51,7 @@ const CartContent = () => {
     useGetCustomerPurchasedQuery();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
+  const dispatch = useDispatch();
   const [snackbar, setSnackbar] = useState({
     label: '',
     open: false,
@@ -58,21 +60,33 @@ const CartContent = () => {
   const { data: loggedIn } = useIsLoginQuery();
 
   const navigate = useNavigate();
-
   const cart = useSelector((state) => state.cart);
+  const {isAuthenticated, isVerified} = useSelector((state) => state.auth);
   const totalItemQuantity = cart.totalQuantity;
 
   const handleCheckout = async () => {
     setLoading(true);
+    dispatch(isAtCart(true));
+    if (!isAuthenticated) {
+      navigate('/auth/login');
+      return;
+    }
+    
+    if (isAuthenticated && !isVerified) {
+      navigate('/auth/signup/verification');
+      return;
+    }
+  
     try {
       const cartItemsResult = await handleGetCartItems();
       if (!cartItemsResult || !cartItemsResult.items) {
         throw new Error('Failed to retrieve cart items');
       }
-
+  
       const data = await purchased({
         cartItems: cartItemsResult.items,
       }).unwrap();
+  
       if (data.id) {
         const result = await stripe.redirectToCheckout({ sessionId: data.id });
         if (result.error) {
@@ -83,17 +97,17 @@ const CartContent = () => {
       }
     } catch (err) {
       console.error('Error during checkout', err);
-      err.status === 401 && navigate('/auth/login');
     } finally {
       setLoading(false);
     }
   };
+  
 
   const handleGetCartItems = async () => {
     try {
       const res = await getCartItems(cart.items).unwrap();
       if (res.status === 'success') {
-        return res; // Return the entire response
+        return res; 
       }
     } catch (err) {
       setSnackbar({
