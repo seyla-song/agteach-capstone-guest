@@ -58,7 +58,7 @@ export const ProfilePage = ({ instructorData }) => {
   const { firstName, lastName, phone, email, imageUrl, bio } = instructorData;
 
   return (
-    <Grid container pt={10}>
+    <Grid container sx={{ pt: { xs: 5, md: 10 }}} >
       <Grid item xs={12} pb="10px">
         <Link>
           <Button
@@ -94,7 +94,9 @@ export const ProfilePage = ({ instructorData }) => {
       <Grid item xs={12} md={8}>
         <Stack sx={{ pt: 2, ml: 1 }}>
           <Typography variant="h4">Instructor</Typography>
-          <Typography variant="h2">
+          <Typography 
+            sx={{ typography: { xs: 'h3', md: 'h2' } }}
+          >
             {firstName} {lastName}
           </Typography>
           <Typography variant="blgsm" sx={{ mt: 3, mb: 2 }}>

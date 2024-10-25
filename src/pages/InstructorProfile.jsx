@@ -1,14 +1,14 @@
-import { Navigate, useParams } from 'react-router-dom';
-import { useGetInstructorQuery } from '../services/api/instructorApi.js';
+import { Navigate, useParams } from "react-router-dom";
+import { useGetInstructorQuery } from "../services/api/instructorApi.js";
 
-import { Container, Divider } from '@mui/material';
+import { Container, Divider, Stack } from "@mui/material";
 
 import {
   Courses,
   ProfilePage,
   Products,
   ContentLoading,
-} from '../components/index.js';
+} from "../components/index.js";
 
 /**
  * The InstructorProfile component renders a page with the instructor's profile,
@@ -20,8 +20,7 @@ export default function InstructorProfile() {
   let { id } = useParams();
   const { data, isLoading, isError } = useGetInstructorQuery(id);
 
-  const instructorData = !isLoading ? data : '';
-  //
+  const instructorData = !isLoading ? data : "";
 
   if (isLoading) {
     return <ContentLoading />;
@@ -32,20 +31,22 @@ export default function InstructorProfile() {
   }
 
   return (
-    <Container sx={{minHeight:'100vh'}}>
+    <Container sx={{ minHeight: "100vh", mb: 10 }}>
       <ProfilePage instructorData={instructorData.instructor} />
 
       <Divider sx={{ my: 6 }} />
 
-      <Courses
-        courseData={instructorData.courses}
-        instructorName={instructorData.instructor.lastName}
-      />
+      <Stack gap={10}>
+        <Courses
+          courseData={instructorData.courses}
+          instructorName={instructorData.instructor.lastName}
+        />
 
-      <Products
-        productData={instructorData.products}
-        instructorName={instructorData.instructor.lastName}
-      />
+        <Products
+          productData={instructorData.products}
+          instructorName={instructorData.instructor.lastName}
+        />
+      </Stack>
     </Container>
   );
 }
