@@ -42,11 +42,6 @@ function Login() {
   const handleShowPassword = () => setShowPassword((prev) => !prev);
   const { isAtCourseDetail, isAtCart } = useSelector((state) => state.auth);
   const {courseId} = useSelector((state) => state.user);
-  console.log('courseId', courseId);
-  console.log('isAtCart', isAtCart, 'isAtCourseDetail', isAtCourseDetail);
-
-  const { isAuthenticated, isVerified } = useSelector((state) => state.auth);
-  console.log("isAuthenticated", isAuthenticated, "isVerified", isVerified);
   
   const submitHandler = async (data) => {
     try {

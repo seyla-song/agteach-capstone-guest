@@ -67,21 +67,17 @@ const CartContent = () => {
   const handleCheckout = async () => {
     setLoading(true);
     dispatch(isAtCart(true));
-    // Check if the user is logged in and their account status (verified)
     if (!isAuthenticated) {
-      // Redirect to login page if not logged in
       navigate('/auth/login');
       return;
     }
     
     if (isAuthenticated && !isVerified) {
-      // Redirect to verification page if logged in but not verified
       navigate('/auth/signup/verification');
       return;
     }
   
     try {
-      // Proceed with checkout if both conditions are true
       const cartItemsResult = await handleGetCartItems();
       if (!cartItemsResult || !cartItemsResult.items) {
         throw new Error('Failed to retrieve cart items');
@@ -101,7 +97,6 @@ const CartContent = () => {
       }
     } catch (err) {
       console.error('Error during checkout', err);
-      // Handle potential errors (e.g., authentication or cart item fetching errors)
     } finally {
       setLoading(false);
     }
@@ -112,7 +107,7 @@ const CartContent = () => {
     try {
       const res = await getCartItems(cart.items).unwrap();
       if (res.status === 'success') {
-        return res; // Return the entire response
+        return res; 
       }
     } catch (err) {
       setSnackbar({

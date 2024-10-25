@@ -12,7 +12,6 @@ import { useStripe } from '@stripe/react-stripe-js';
 import { useEnrollmentMutation } from '../../services/api/enrollmentApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { isAtCourseDetail } from '../../features/auth/authSlice';
-import { useIsLoginQuery } from '../../services/api/authApi';
 
 export const CourseDetailHero = ({ courseData }) => {
   const [enrollment] = useEnrollmentMutation();
@@ -20,7 +19,6 @@ export const CourseDetailHero = ({ courseData }) => {
   const stripe = useStripe();
   const { courseId, instructorId } = courseData || {};
   const {isAuthenticated, isVerified} = useSelector((state) => state.auth);
-  console.log("isAuthenticated", isAuthenticated, "isVerified", isVerified);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

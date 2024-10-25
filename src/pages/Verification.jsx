@@ -14,8 +14,7 @@ import { checkLoginStatus } from "../features/auth/authSlice";
 export default function VerificationPage() {
   const timeoutRef = useRef(null);
   const [open, setOpen] = useState(true);
-  const {data: {IsAuthenticated, IsVerify}} = useIsLoginQuery()
-  console.log("IsAuthenticated", IsAuthenticated, "IsVerify", IsVerify);
+  const {data: {IsAuthenticated}} = useIsLoginQuery()
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -24,22 +23,15 @@ export default function VerificationPage() {
     formState: { errors },
   } = useForm();
 
-  const { email } = useSelector((state) => state.user);
-
   const [verifyEmail, { isLoading, isSuccess, isError }] =
-    useVerifyEmailMutation();
+  useVerifyEmailMutation();
+  const { email } = useSelector((state) => state.user);
   const { isAtCourseDetail, isAtCart } = useSelector((state) => state.auth);
-  console.log("isAtCart", isAtCart, "isAtCourseDetail", isAtCourseDetail);
-
-  const { isAuthenticated, isVerified } = useSelector((state) => state.auth);
-  console.log("isAuthenticated", isAuthenticated, "isVerified", isVerified);
-
   const { courseId } = useSelector((state) => state.user);
 
   const onSubmit = async (data) => {
     try {
-      const res = await verifyEmail(data.emailVerifyCode).unwrap();
-      console.log("res", res);
+      await verifyEmail(data.emailVerifyCode).unwrap();
       dispatch(checkLoginStatus({ isAuthenticated: IsAuthenticated, isVerified: true }));
       if (isAtCart) {
         navigate("/cart");
