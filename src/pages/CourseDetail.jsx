@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
-import { Divider, Grid, Stack } from '@mui/material';
+import { Divider, Grid, Stack } from "@mui/material";
 
-import { useGetUserEnrollmentsQuery } from '../services/api/enrollmentApi';
+import { useGetUserEnrollmentsQuery } from "../services/api/enrollmentApi";
 import {
   useGetRecommendedCoursesQuery,
   useGetOneCourseQuery,
-} from '../services/api/courseApi';
+} from "../services/api/courseApi";
 
 import {
   ContentLoading,
@@ -19,7 +19,7 @@ import {
   CourseDetailHero,
   MemberComponent,
   CustomFaq,
-} from '../components/index';
+} from "../components/index";
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
@@ -29,17 +29,19 @@ function CourseDetailPage() {
 
   const [recommendedCourses, setRecommendedCourses] = useState([]);
 
-  const { data: enrolledCourses, isLoading: isLoadingEnrolled } =
-    useGetUserEnrollmentsQuery();
+  const {
+    data: enrolledCourses,
+    isLoading: isLoadingEnrolled,
+    isError: isEnrollError,
+  } = useGetUserEnrollmentsQuery();
 
   const {
     data: currentCourseData,
     isLoading,
     isError,
-    error,
   } = useGetOneCourseQuery(coursesId);
 
-  const { data: recommendedCoursesData } =
+  const { data: recommendedCoursesData, isError: isRecommendedError } =
     useGetRecommendedCoursesQuery(coursesId);
 
   useEffect(() => {
@@ -64,17 +66,19 @@ function CourseDetailPage() {
   ]);
 
   if (isLoading) return <ContentLoading />;
-  if (isError) return <div>Error: {error}</div>;
 
+  if (isError || isRecommendedError || isEnrollError) {
+    return navigate("/CoursesNotFound");
+  }
   return (
     <Elements stripe={stripePromise}>
       <Stack alignItems="center">
-        <Stack width="100%" alignItems="center" bgcolor={'primary.dark'}>
-          <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
+        <Stack width="100%" alignItems="center" bgcolor={"primary.dark"}>
+          <Grid sx={{ maxWidth: "1420px" }} container paddingX={1}>
             <CourseDetailHero courseData={currentCourseData?.data} />
           </Grid>
         </Stack>
-        <Grid sx={{ maxWidth: '1420px' }} container paddingX={1}>
+        <Grid sx={{ maxWidth: "1420px" }} container paddingX={1}>
           <CourseDetailHighlight courseData={currentCourseData?.data} />
           <CourseDetailContent
             sections={currentCourseData?.data?.sections}

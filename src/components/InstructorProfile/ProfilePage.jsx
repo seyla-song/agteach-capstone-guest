@@ -7,13 +7,13 @@ import {
   Link,
   Snackbar,
   Alert,
-} from '@mui/material';
-import React, { useState } from 'react';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import InstructorProfileImg from '../../assets/InstructorProfile/instructorprofile.jpg';
-import { useNavigate } from 'react-router-dom';
+} from "@mui/material";
+import React, { useState } from "react";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import InstructorProfileImg from "../../assets/InstructorProfile/instructorprofile.jpg";
+import { useNavigate } from "react-router-dom";
 /**
  * ProfilePage is a component that renders an instructor's profile page.
  *
@@ -26,7 +26,7 @@ import { useNavigate } from 'react-router-dom';
  */
 export const ProfilePage = ({ instructorData }) => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
   /**
    * Copies the given text to the user's clipboard.
@@ -43,7 +43,7 @@ export const ProfilePage = ({ instructorData }) => {
         setSnackbarOpen(true);
       })
       .catch((err) => {
-        console.error('Failed to copy text: ', err);
+        console.error("Failed to copy text: ", err);
       });
   };
 
@@ -70,7 +70,16 @@ export const ProfilePage = ({ instructorData }) => {
           </Button>
         </Link>
       </Grid>
-      <Grid item xs={12} md={4}>
+      <Grid
+        item
+        xs={12}
+        md={4}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Avatar
           alt="Instructor Profile Image"
           src={imageUrl || InstructorProfileImg}
@@ -78,7 +87,7 @@ export const ProfilePage = ({ instructorData }) => {
             width: 300,
             height: 300,
             m: 1,
-            border: '15px solid lightgrey',
+            border: "15px solid lightgrey",
           }}
         />
       </Grid>

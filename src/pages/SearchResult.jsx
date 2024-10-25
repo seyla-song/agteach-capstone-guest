@@ -90,7 +90,6 @@ function SearchResultPage() {
       window.scrollTo(0, 0);
     }
   };
-  console.log('isfetching', isCourseFetching)
 
   // For loading the first time
   useEffect(() => {
@@ -98,7 +97,6 @@ function SearchResultPage() {
     setCoursePage(1);
     setProductPage(1);
     setIsNewQuery(true);
-    console.log("query", query);
   }, [query]);
 
   useEffect(() => {
@@ -219,7 +217,7 @@ function SearchResultPage() {
                   )}
                   {(isCourseFetching || isProductFetching) && <ItemsLoading />}
                   {(!isCourseFetching && !isProductFetching) &&filteredData?.map((product, idx) => (
-                    <Grid2 size={{ xs: 4 }}>
+                    <Grid2 size={{ xs: 4 }} key={idx}>
                       <CustomCard
                         key={idx}
                         dataObj={product}
