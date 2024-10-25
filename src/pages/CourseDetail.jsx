@@ -34,20 +34,17 @@ function CourseDetailPage() {
     isLoading: isLoadingEnrolled,
     isError: isEnrollError,
   } = useGetUserEnrollmentsQuery();
-  console.log("error");
 
   const {
     data: currentCourseData,
     isLoading,
     isError,
-    error,
   } = useGetOneCourseQuery(coursesId);
 
   const { data: recommendedCoursesData, isError: isRecommendedError } =
     useGetRecommendedCoursesQuery(coursesId);
 
   useEffect(() => {
-    console.log("error");
     if (
       !isLoadingEnrolled &&
       enrolledCourses?.courseIds.includes(Number(coursesId))
@@ -69,9 +66,7 @@ function CourseDetailPage() {
   ]);
 
   if (isLoading) return <ContentLoading />;
-  console.log(isEnrollError, isError, isRecommendedError);
-  // if (isError || isRecommendedError || isEnrollError)
-  //   return <div>Error: {error}</div>;
+
   if (isError || isRecommendedError || isEnrollError) {
     return navigate("/CoursesNotFound");
   }
