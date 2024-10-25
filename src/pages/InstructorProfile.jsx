@@ -3,7 +3,12 @@ import { useGetInstructorQuery } from '../services/api/instructorApi.js';
 
 import { Box, CircularProgress, Container, Divider } from '@mui/material';
 
-import { Courses, ProfilePage, Products } from '../components/index.js';
+import {
+  Courses,
+  ProfilePage,
+  Products,
+  ContentLoading,
+} from '../components/index.js';
 
 /**
  * The InstructorProfile component renders a page with the instructor's profile,
@@ -19,18 +24,7 @@ export default function InstructorProfile() {
   //
 
   if (isLoading) {
-    return (
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          mt: 10,
-        }}
-      >
-        <CircularProgress />
-      </Box>
-    );
+    return <ContentLoading />;
   }
 
   if (isError) {
@@ -38,22 +32,20 @@ export default function InstructorProfile() {
   }
 
   return (
-    <>
-      <Container sx={{ alignItems: 'center' }}>
-        <ProfilePage instructorData={instructorData.instructor} />
+    <Container>
+      <ProfilePage instructorData={instructorData.instructor} />
 
-        <Divider sx={{ my: 6 }} />
+      <Divider sx={{ my: 6 }} />
 
-        <Courses
-          courseData={instructorData.courses}
-          instructorName={instructorData.instructor.lastName}
-        />
+      <Courses
+        courseData={instructorData.courses}
+        instructorName={instructorData.instructor.lastName}
+      />
 
-        <Products
-          productData={instructorData.products}
-          instructorName={instructorData.instructor.lastName}
-        />
-      </Container>
-    </>
+      <Products
+        productData={instructorData.products}
+        instructorName={instructorData.instructor.lastName}
+      />
+    </Container>
   );
 }
