@@ -23,7 +23,6 @@ import {
   Category,
   SortByFilter,
   SearchBar,
-  ContentLoading,
 } from "../components/index";
 
 export default function MarketPlace() {

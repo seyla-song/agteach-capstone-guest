@@ -26,7 +26,7 @@ export const SellerComponent = ({ seller }) => {
         <Stack direction="row" alignItems="center">
           <Avatar
             sx={{ cursor: 'pointer' }}
-            src={seller.image_url}
+            src={seller?.imageUrl}
             onClick={() => goToInstructorProfile(seller.instructorId)}
           />
           <Stack direction="column" sx={{ marginLeft: 2 }}>

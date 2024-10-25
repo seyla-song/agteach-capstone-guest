@@ -146,8 +146,7 @@ function ProductDetailPage() {
                 ) : (
                   <Alert icon={<TakeoutDiningIcon />} severity="warning">
                     <AlertTitle>Out of Stock</AlertTitle>
-                    Sorry, this item is out of stock. Favourite the product now
-                    to buy later.
+                    Out of Stock. Explore similar products in our collection below.
                   </Alert>
                 )}
                 {/* <Button

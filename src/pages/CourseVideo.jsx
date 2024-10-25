@@ -38,10 +38,10 @@ function CourseVideoPage() {
   if (isCoursesLoading) {
     return <ContentLoading />;
   }
-  const contentList = !isCoursesLoading ? courses.data.sections : [];
-  const courseData = !isCoursesLoading ? courses.data : [];
+  const contentList = !isCoursesLoading ? courses?.data?.sections : [];
+  const courseData = !isCoursesLoading ? courses?.data : [];
   const productSuggestions = !isCoursesLoading
-    ? courses.data.product_suggestions
+    ? courses?.data.product_suggestions
     : [];
   const recommendedCourses = !isRecommendedLoading
     ? recommendedCoursesData.data
@@ -61,7 +61,7 @@ function CourseVideoPage() {
   }
   let lectureId;
   if (videoId === 'overview') {
-    lectureId = contentList[0].lectures[0].lectureId;
+    lectureId = contentList[0]?.lectures[0]?.lectureId;
   } else {
     lectureId = videoId;
   }
