@@ -15,6 +15,7 @@ import {
   DialogContentText,
   DialogActions,
   Stack,
+  Avatar,
 } from '@mui/material';
 import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
@@ -112,34 +113,26 @@ function Navigation() {
       <Box>
         <Button
           onClick={handleClick}
-          variant="text"
           sx={{
-            backgroundColor: 'teal.main',
-            color: 'common.white',
-            borderRadius: 50,
-            borderColor: 'common.white',
+            minWidth: 'auto',
+            p: 0.4,
+            bgcolor: 'common.white',
+            width: 'hug-content',
+            borderRadius: '100%',
+            borderColor: 'secondary.main',
+            borderWidth: 2,
             borderStyle: 'solid',
-            borderWidth: 1,
-            display: 'flex',
-            justifyContent: 'start',
-            typography: 'bssm',
           }}
         >
-          <Box
-            component="img"
-            style={{ width: '24px', borderRadius: '50%', marginRight: '5px' }}
+          <Avatar
+            alt="AgTeach Profile"
+            sx={{ width: 23, height: 23 }}
             src={
               !isLoginLoading
                 ? data?.customer?.imageUrl + `?${new Date().getTime()}`
                 : GuestProfilePicture
             }
-            alt="profile image"
           />
-          {isLoginLoading
-            ? 'Guest'
-            : data?.username?.length > 6
-            ? data.username.slice(0, 6) + '...'
-            : data.username}
         </Button>
 
         {/* Dropdown Menu */}
@@ -344,7 +337,7 @@ function Navigation() {
                   </MenuItem>
                 ))}
                 <MenuItem component={RouterLink} to="cart">
-                  <Stack direction='row' gap={1} alignItems='center'>
+                  <Stack direction="row" gap={1} alignItems="center">
                     <Typography variant="bsr">Cart</Typography>
                     {cartItemTotal > 0 && (
                       <Typography
