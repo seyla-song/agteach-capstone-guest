@@ -10,7 +10,8 @@ install_dependencies:
       - node_modules/
   image: node:20
   only:
-    - develop
+    # - develop
+    - main
   script:
     - node -v
     - echo "Installing dependencies"
@@ -23,7 +24,8 @@ build_app:
       - node_modules/
   image: node:20
   only:
-    - develop
+    # - develop
+    - main
   script:
     - echo "Building Instructor Application"
     - export REACT_APP_PUBLISHABLE_KEY=$REACT_APP_PUBLISHABLE_KEY
@@ -42,7 +44,8 @@ deploy_to_aws:
   stage: deploy
   image: node:20
   only:
-    - develop
+    # - develop
+    - main
   before_script:
     - "which ssh-agent || (brew install openssh)"
     - eval $(ssh-agent -s)
