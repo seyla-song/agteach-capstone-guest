@@ -52,7 +52,10 @@ function HomePage() {
 
       {products.length > 0 && (
         <CarouselComponent data={products} cardVariant="product">
-          Most people interested in this product
+          <CustomSectionTitle
+            title="Most people interested in this product"
+            path="/marketplace"
+          />
         </CarouselComponent>
       )}
 
