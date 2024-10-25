@@ -96,7 +96,7 @@ export const CustomCartItem = ({
         </Stack>
         <Stack textAlign="right" alignItems="end" pt={1}>
           <Typography variant="blgsm" color="initial">
-            ${price * quantity}
+            ${(price * quantity || 0).toFixed(2)}
           </Typography>
           <Typography variant="bxsr" color="initial">
             ${price} X ({quantity}) items
