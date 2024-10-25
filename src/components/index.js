@@ -36,3 +36,4 @@ export { ProfilePhoto } from './GuestProfile/ProfilePhoto';
 export { AccountSecurity } from './GuestProfile/AccountSecurity';
 export { Footer } from './Footer';
 export { CustomFaq } from './CustomFaq';
+export { CustomSectionTitle } from './CustomSectionTitle';

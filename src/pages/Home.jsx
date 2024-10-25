@@ -9,6 +9,7 @@ import {
   CarouselComponent,
   CoreValueComponent,
   CustomFaq,
+  CustomSectionTitle,
 } from '../components/index';
 
 import search from '../assets/happy-farm-community.jpeg';
@@ -40,7 +41,10 @@ function HomePage() {
 
       {courses.length > 0 && (
         <CarouselComponent data={courses} cardVariant="course">
-          Most people interested in this course
+          <CustomSectionTitle
+            title="Most people interested in this course"
+            path="/search?name="
+          />
         </CarouselComponent>
       )}
 
@@ -48,7 +52,10 @@ function HomePage() {
 
       {products.length > 0 && (
         <CarouselComponent data={products} cardVariant="product">
-          Most people interested in this product
+          <CustomSectionTitle
+            title="Most people interested in this product"
+            path="/marketplace"
+          />
         </CarouselComponent>
       )}
 
