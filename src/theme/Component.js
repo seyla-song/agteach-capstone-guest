@@ -3,6 +3,7 @@ const components = {
     styleOverrides: {
       root: {
         textTransform: 'none',
+        boxShadow: 'none',
       },
     },
     defaultProps: {
