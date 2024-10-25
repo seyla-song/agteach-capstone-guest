@@ -32,7 +32,7 @@ export default function InstructorProfile() {
   }
 
   return (
-    <Container>
+    <Container sx={{minHeight:'100vh'}}>
       <ProfilePage instructorData={instructorData.instructor} />
 
       <Divider sx={{ my: 6 }} />
