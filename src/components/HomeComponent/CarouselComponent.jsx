@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { CustomCarousel } from '../CustomCarousel';
 
 export const CarouselComponent = ({ data, cardVariant, children }) => {
