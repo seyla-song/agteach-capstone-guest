@@ -4,6 +4,7 @@ const initialState = {
   isAuthenticated: false,
   isVerified : false,
   isAtCart: false,
+  isAtCourseDetail: false,
 };
 
 const authSlice = createSlice({
@@ -19,8 +20,12 @@ const authSlice = createSlice({
     isAtCart: (state, action) => {
       state.isAtCart = action.payload;
     },
+
+    isAtCourseDetail: (state, action) => {
+      state.isAtCourseDetail = action.payload;
+    },
   },
 });
 
-export const { checkLoginStatus, isAtCart } = authSlice.actions;
+export const { checkLoginStatus, isAtCart, isAtCourseDetail } = authSlice.actions;
 export default authSlice.reducer;

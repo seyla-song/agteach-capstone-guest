@@ -1,7 +1,7 @@
 import { Box, Typography, Button, Stack, Grid2 } from "@mui/material";
 import { FormInput } from "../components";
 import { useForm } from "react-hook-form";
-import { useVerifyEmailMutation } from "../services/api/authApi";
+import { useIsLoginQuery, useVerifyEmailMutation } from "../services/api/authApi";
 import { ArrowBack } from "@mui/icons-material";
 import { CustomAlert } from "../components/CustomAlert";
 import ResendCodeButton from "../components/LoginSignup/ResendCodeButton";
@@ -14,6 +14,8 @@ import { checkLoginStatus } from "../features/auth/authSlice";
 export default function VerificationPage() {
   const timeoutRef = useRef(null);
   const [open, setOpen] = useState(true);
+  const {data: {IsAuthenticated, IsVerify}} = useIsLoginQuery()
+  console.log("IsAuthenticated", IsAuthenticated, "IsVerify", IsVerify);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -26,12 +28,24 @@ export default function VerificationPage() {
 
   const [verifyEmail, { isLoading, isSuccess, isError }] =
     useVerifyEmailMutation();
+  const { isAtCourseDetail, isAtCart } = useSelector((state) => state.auth);
+  console.log("isAtCart", isAtCart, "isAtCourseDetail", isAtCourseDetail);
+
+  const { isAuthenticated, isVerified } = useSelector((state) => state.auth);
+  console.log("isAuthenticated", isAuthenticated, "isVerified", isVerified);
+
+  const { courseId } = useSelector((state) => state.user);
 
   const onSubmit = async (data) => {
     try {
-      await verifyEmail(data.emailVerifyCode).unwrap();
-      dispatch(checkLoginStatus({ isVerify: true }));
-      navigate("/");
+      const res = await verifyEmail(data.emailVerifyCode).unwrap();
+      console.log("res", res);
+      dispatch(checkLoginStatus({ isAuthenticated: IsAuthenticated, isVerified: true }));
+      if (isAtCart) {
+        navigate("/cart");
+      } else if (isAtCourseDetail) {
+        navigate(`/courses/${courseId}`);
+      } else navigate("/");
     } catch (err) {
       console.error("Verification failed", err);
     }
@@ -61,7 +75,7 @@ export default function VerificationPage() {
         margin: "0 auto",
       }}
     >
-      <img height='60px' src={Logo} alt="logo" />
+      <img height="60px" src={Logo} alt="logo" />
       <Grid2
         container
         sx={{ width: "100%" }}
@@ -84,15 +98,14 @@ export default function VerificationPage() {
               Check your email for verification code .
             </Typography>
             <Typography variant="bsr" sx={{ color: "dark.300" }}>
-              Please enter code number that you receive in the email.
+              Please enter code number that you receive in the email <br /> to
+              verify your account.
             </Typography>
           </Box>
         </Grid2>
         <Grid2 item="true" sx={{ width: { xs: "100%", sm: "40%" } }}>
           <Stack width={"100%"} spacing={2}>
-            <Typography variant="blgsm">
-              Enter verification code
-            </Typography>
+            <Typography variant="blgsm">Enter verification code</Typography>
             <Box
               component="form"
               onSubmit={handleSubmit(onSubmit)}

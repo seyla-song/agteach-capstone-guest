@@ -32,6 +32,7 @@ function CourseVideoPage() {
     useGetRecommendedCoursesQuery(coursesId);
   const navigate = useNavigate();
   if (isError) {
+    
     return navigate(`/courses/${coursesId}`);
   }
   if (isCoursesLoading) {

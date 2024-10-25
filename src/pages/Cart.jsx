@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useGetCartItemsMutation } from '../services/api/cartApi';
 import { useNavigate } from 'react-router-dom';
 import { Elements, useStripe } from '@stripe/react-stripe-js';
@@ -30,6 +30,7 @@ import {
   PurchasedHistory,
   CustomAlert,
 } from '../components/index';
+import { isAtCart } from '../features/auth/authSlice';
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
@@ -50,6 +51,7 @@ const CartContent = () => {
     useGetCustomerPurchasedQuery();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
+  const dispatch = useDispatch();
   const [snackbar, setSnackbar] = useState({
     label: '',
     open: false,
@@ -64,7 +66,7 @@ const CartContent = () => {
 
   const handleCheckout = async () => {
     setLoading(true);
-    
+    dispatch(isAtCart(true));
     // Check if the user is logged in and their account status (verified)
     if (!isAuthenticated) {
       // Redirect to login page if not logged in

@@ -20,12 +20,16 @@ import {
   MemberComponent,
   CustomFaq,
 } from '../components/index';
+import { setCourseId } from '../features/auth/userSlice';
+import { useDispatch } from 'react-redux';
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 function CourseDetailPage() {
   const { coursesId } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  dispatch(setCourseId(coursesId));
 
   const [recommendedCourses, setRecommendedCourses] = useState([]);
 
