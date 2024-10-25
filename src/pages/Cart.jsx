@@ -192,7 +192,7 @@ const CartContent = () => {
             >
               <Stack direction="row" justifyContent="space-between">
                 <Typography variant="blgsm">Subtotal</Typography>
-                <Typography variant="blgsm">${cart.totalAmount}</Typography>
+                <Typography variant="blgsm">${(cart.totalAmount || 0).toFixed(2)}</Typography>
               </Stack>
               <Divider />
               <Button
