@@ -14,6 +14,8 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
+  Stack,
+  Avatar,
 } from '@mui/material';
 import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
@@ -39,7 +41,6 @@ const HEADER_MENU_MOBILE = [
   { page: 'Marketplace', path: 'marketplace' },
   { page: 'AgAI', path: 'agai' },
   // { page: 'Wishlist', path: 'wishlist' },
-  { page: 'Cart', path: 'cart' },
 ];
 
 function Navigation() {
@@ -112,32 +113,26 @@ function Navigation() {
       <Box>
         <Button
           onClick={handleClick}
-          variant="text"
           sx={{
-            backgroundColor: 'teal.main',
-            color: 'common.white',
-            borderRadius: 50,
-            borderColor: 'common.white',
+            minWidth: 'auto',
+            p: 0.4,
+            bgcolor: 'common.white',
+            width: 'hug-content',
+            borderRadius: '100%',
+            borderColor: 'secondary.main',
+            borderWidth: 2,
             borderStyle: 'solid',
-            borderWidth: 1,
-            display: 'flex',
-            justifyContent: 'start',
-            typography: 'bssm',
           }}
         >
-          <Box
-            component="img"
-            style={{ width: '24px', borderRadius: '50%', marginRight: '5px' }}
+          <Avatar
+            alt="AgTeach Profile"
+            sx={{ width: 23, height: 23 }}
             src={
-              !isLoginLoading ? data?.customer?.imageUrl + `?${new Date().getTime()}` : GuestProfilePicture
+              !isLoginLoading
+                ? data?.customer?.imageUrl + `?${new Date().getTime()}`
+                : GuestProfilePicture
             }
-            alt="profile image"
           />
-          {isLoginLoading
-            ? 'Guest'
-            : data?.username?.length > 6
-            ? data.username.slice(0, 6) + '...'
-            : data.username}
         </Button>
 
         {/* Dropdown Menu */}
@@ -298,6 +293,19 @@ function Navigation() {
                 color="inherit"
               >
                 <MenuIcon />
+                {cartItemTotal > 0 && (
+                  <Typography
+                    position="absolute"
+                    top={10}
+                    right={5}
+                    bgcolor="red.main"
+                    variant="btr"
+                    borderRadius={100}
+                    width={15}
+                  >
+                    {cartItemTotal}
+                  </Typography>
+                )}
               </IconButton>
 
               <Menu
@@ -328,6 +336,23 @@ function Navigation() {
                     <Typography variant="bsr">{data.page}</Typography>
                   </MenuItem>
                 ))}
+                <MenuItem component={RouterLink} to="cart">
+                  <Stack direction="row" gap={1} alignItems="center">
+                    <Typography variant="bsr">Cart</Typography>
+                    {cartItemTotal > 0 && (
+                      <Typography
+                        textAlign="center"
+                        bgcolor="red.main"
+                        variant="btr"
+                        color="common.white"
+                        borderRadius={100}
+                        width={15}
+                      >
+                        {cartItemTotal}
+                      </Typography>
+                    )}
+                  </Stack>
+                </MenuItem>
               </Menu>
             </Box>
 
@@ -338,7 +363,19 @@ function Navigation() {
                 to="cart"
               >
                 <ShoppingCartOutlinedIcon fontSize="small" />
-                {cartItemTotal > 0 && <Typography position='absolute' top={2} right={0} bgcolor='red.main' variant='btr' borderRadius={100} width={15}>{cartItemTotal}</Typography>}
+                {cartItemTotal > 0 && (
+                  <Typography
+                    position="absolute"
+                    top={2}
+                    right={0}
+                    bgcolor="red.main"
+                    variant="btr"
+                    borderRadius={100}
+                    width={15}
+                  >
+                    {cartItemTotal}
+                  </Typography>
+                )}
               </IconButton>
 
               {/* <IconButton
