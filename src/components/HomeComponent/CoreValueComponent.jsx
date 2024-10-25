@@ -2,19 +2,19 @@ import { Grid, Typography, Container, Stack } from '@mui/material';
 
 const HERO_COMPONENT = [
   {
-    title: 'Embrace Sustainability and Self-Sufficiency',
+    title: 'Learn to live sustainably and be self-sufficient',
     message:
-      'Our platform teaches you how to become self-sufficient, reducing your reliance on grocery stores and minimizing your carbon footprint',
+      'Our platform helps you grow your own food, reduce grocery store trips, and cut down on your carbon footprint',
   },
   {
-    title: 'Prioritize Your Health and Wellness',
+    title: 'Your Health and Wellness is our priority',
     message:
-      'Our courses guide you in cultivating nutritious, pesticide-free produce, ensuring that you and your family enjoy the healthiest, freshest food possible',
+      'Our courses teach you how to grow nutritious, pesticide-free food so you and your family can enjoy the freshest, healthiest meals.',
   },
   {
     title: 'Gain Valuable Knowledge and Skills',
     message:
-      "You'll learn modern agricultural techniques, advanced gardening skills, and practical tips that you can apply immediately",
+      "You'll learn techniques like hydroponics, vertical farming and crop rotation, along with practical tips you can apply immediately.",
   },
 ];
 
