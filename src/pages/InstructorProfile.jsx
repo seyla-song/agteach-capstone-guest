@@ -1,7 +1,7 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { useGetInstructorQuery } from '../services/api/instructorApi.js';
 
-import { Box, CircularProgress, Container, Divider } from '@mui/material';
+import { Container, Divider } from '@mui/material';
 
 import {
   Courses,
