@@ -5,12 +5,12 @@ import {
   RadioGroup,
   FormControl,
   FormControlLabel,
-} from '@mui/material';
+} from "@mui/material";
 
 export const SortByFilter = ({ sortBy, handleChange }) => {
   return (
     <Box>
-      <Typography sx={{ typography: { xs: 'bmdsm', sm: 'blgsm' } }}>
+      <Typography sx={{ typography: { xs: "bmdsm", sm: "blgsm" } }}>
         Sort By
       </Typography>
 
@@ -25,11 +25,6 @@ export const SortByFilter = ({ sortBy, handleChange }) => {
         >
           <FormControlLabel control={<Radio />} label="Newest" value="newest" />
           <FormControlLabel control={<Radio />} label="Oldest" value="oldest" />
-          <FormControlLabel
-            control={<Radio />}
-            label="Popularity"
-            value="popularity"
-          />
           <FormControlLabel control={<Radio />} label="A-Z" value="alphabet" />
           <FormControlLabel
             control={<Radio />}
