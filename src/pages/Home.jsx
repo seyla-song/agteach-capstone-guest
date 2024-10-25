@@ -1,7 +1,8 @@
 import { useGetProductCarouselQuery } from '../services/api/productApi';
 import { useGetCourseCarouselQuery } from '../services/api/courseApi';
 
-import { Container } from '@mui/material';
+import { Container, Link, Stack, Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 
 import {
   MemberComponent,
@@ -9,6 +10,7 @@ import {
   CarouselComponent,
   CoreValueComponent,
   CustomFaq,
+  CustomSectionTitle,
 } from '../components/index';
 
 import search from '../assets/happy-farm-community.jpeg';
@@ -40,7 +42,10 @@ function HomePage() {
 
       {courses.length > 0 && (
         <CarouselComponent data={courses} cardVariant="course">
-          Most people interested in this course
+          <CustomSectionTitle
+            title="Most people interested in this course"
+            path="/search?name="
+          />
         </CarouselComponent>
       )}
 
