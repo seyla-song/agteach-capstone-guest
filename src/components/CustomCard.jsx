@@ -74,9 +74,7 @@ const CourseCard = ({ dataObj, showDelete, onDelete }) => {
   };
 
   const navigate = useNavigate();
-
-  console.log(dataObj);
-
+  
   return (
     <Box
       mr={1}
