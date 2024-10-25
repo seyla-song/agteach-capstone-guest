@@ -31,8 +31,8 @@ export const CoreValueComponent = () => {
           sx={{ typography: { xs: 'h3', md: 'h2' } }}
           color="common.white"
         >
-          There are many <br /> platform, Why should <br /> you learn on
-          AgTeach?
+          With many platforms <br /> available, what makes <br /> AgTeach the
+          best choice?
         </Typography>
         <Grid container spacing={{ xs: 5, md: 10 }}>
           {HERO_COMPONENT.map((data) => (
