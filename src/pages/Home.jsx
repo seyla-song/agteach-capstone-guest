@@ -1,8 +1,7 @@
 import { useGetProductCarouselQuery } from '../services/api/productApi';
 import { useGetCourseCarouselQuery } from '../services/api/courseApi';
 
-import { Container, Link, Stack, Typography } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Container } from '@mui/material';
 
 import {
   MemberComponent,
