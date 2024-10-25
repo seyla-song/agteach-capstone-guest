@@ -18,6 +18,9 @@ install_dependencies:
 
 build_app:
   stage: build
+  cache:
+    paths:
+      - node_modules/
   image: node:20
   only:
     - develop
