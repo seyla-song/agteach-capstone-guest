@@ -5,6 +5,9 @@ stages:
 
 install_dependencies:
   stage: install
+  cache:
+    paths:
+      - node_modules/
   image: node:20
   only:
     - develop
@@ -12,12 +15,12 @@ install_dependencies:
     - node -v
     - echo "Installing dependencies"
     - npm install
-  cache:
-    paths:
-      - node_modules/
 
 build_app:
   stage: build
+  cache:
+    paths:
+      - node_modules/
   image: node:20
   only:
     - develop

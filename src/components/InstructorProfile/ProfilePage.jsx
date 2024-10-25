@@ -100,7 +100,7 @@ export const ProfilePage = ({ instructorData }) => {
           <Typography variant="blgsm" sx={{ mt: 3, mb: 2 }}>
             About Me
           </Typography>
-          <Typography variant="bsr">{bio || "Intructor Bio"}</Typography>
+          <Typography variant="bsr">{bio || 'No biography.'}</Typography>
 
           <Grid container sx={{ py: 2, gap: 2 }} direction="row">
             <Button
