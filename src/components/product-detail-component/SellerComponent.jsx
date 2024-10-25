@@ -39,7 +39,7 @@ export const SellerComponent = ({ seller }) => {
             </Typography>
             <Typography variant="bxsr" color="dark.200">
               {/* will fix later */}
-              {'Kep, Kampot, Cambodia'}
+              {`${seller?.location?.name} , Cambodia`}
             </Typography>
           </Stack>
         </Stack>

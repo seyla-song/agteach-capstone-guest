@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { API_BASE_URL } from '../../constants/apiConstants';
+import { AI_API_URL } from '../../constants/apiConstants';
 
 export const aiApi = createApi({
   reducerPath: 'aiApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: API_BASE_URL,
+    baseUrl: AI_API_URL,
   }),
   endpoints: (builder) => ({
     predictImage: builder.mutation({

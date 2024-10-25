@@ -22,7 +22,7 @@ export const ProfilePhoto = ({ userData }) => {
 
   useEffect(() => {
     if (userData) {
-      setProfileImage(userData?.customer?.imageUrl);
+      setProfileImage(userData?.customer?.imageUrl + `?${new Date().getTime()}`);
     }
   }, [userData]);
 
@@ -46,7 +46,6 @@ export const ProfilePhoto = ({ userData }) => {
       const formData = new FormData();
       formData.append("photo", imageFile);
       await updateInfo(formData);
-      window.location.reload();
     } catch (error) {
       setAlertMessage("Error submitting form. Please try again.");
       setAlertSeverity("error");
