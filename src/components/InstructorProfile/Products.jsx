@@ -81,7 +81,7 @@ export const Products = ({ instructorName, productData }) => {
         <Stack sx={{ mt: 4, mb: 4 }}>
           <Button
             variant="outlined"
-            sx={{ px: 4, py: 2 }}
+            sx={{ px: 4, py: 1 }}
             onClick={handleLoadMore}
           >
             {showAll ? "Show Less" : "View 5 More"}
