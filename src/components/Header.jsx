@@ -223,15 +223,10 @@ function Navigation() {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button
-              onClick={handleLogoutDialogClose}
-              sx={{ color: 'red.main' }}
-            >
-              Cancel
-            </Button>
-            <Button onClick={handleLogout} color="primary" autoFocus>
+            <Button onClick={handleLogout} sx={{ color: 'red.main' }} autoFocus>
               Log Out
             </Button>
+            <Button onClick={handleLogoutDialogClose}>Cancel</Button>
           </DialogActions>
         </Dialog>
       </Box>
