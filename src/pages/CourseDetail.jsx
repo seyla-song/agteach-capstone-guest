@@ -36,7 +36,6 @@ function CourseDetailPage() {
   const {
     data: enrolledCourses,
     isLoading: isLoadingEnrolled,
-    isError: isEnrollError,
   } = useGetUserEnrollmentsQuery();
 
   const {
@@ -71,7 +70,7 @@ function CourseDetailPage() {
 
   if (isLoading) return <ContentLoading />;
 
-  if (isError || isRecommendedError || isEnrollError) {
+  if (isError || isRecommendedError) {
     return navigate("/CoursesNotFound");
   }
   return (
