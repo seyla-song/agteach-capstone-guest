@@ -1,7 +1,7 @@
-import { Stack, Typography, Container, Grid, Button, Box } from '@mui/material';
-import CustomCard from '../../components/CustomCard';
+import { Stack, Typography, Container, Grid, Button, Box } from "@mui/material";
+import CustomCard from "../../components/CustomCard";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 /**
  * A component that renders a responsive list of products, with a responsive
@@ -17,30 +17,42 @@ import { useState } from 'react';
  * @returns {React.ReactElement} The component element.
  */
 export const Products = ({ instructorName, productData }) => {
-  // State to keep track of the number of courses to display
-  const [visibleCount, setVisibleCount] = useState(5);
+  const limit = 5;
+  const [visibleCount, setVisibleCount] = useState(limit);
+  const [showAll, setShowAll] = useState(false); // New state to track if all products are shown
 
   // Show a limited number of courses based on visibleCount
-  const visibleCourses = productData.slice(0, visibleCount);
+  // const visibleCourses = courseData.slice(0, visibleCount);
+  const visibleProducts = showAll
+    ? productData
+    : productData.slice(0, visibleCount);
 
   const handleLoadMore = () => {
-    setVisibleCount((prevCount) => prevCount + 5); // Load 5 more courses
+    if (showAll) {
+      setShowAll(false); // Collapse back to showing only 5 products
+      setVisibleCount(limit); // Reset visibleCount to 5
+    } else {
+      setVisibleCount((prevCount) => prevCount + limit); // Load 5 more products
+      if (visibleCount + limit >= productData.length) {
+        setShowAll(true); // Show all products when visibleCount reaches the total number of courses
+      }
+    }
   };
 
   const productContent =
-    visibleCourses.length === 0 ? (
+    visibleProducts.length === 0 ? (
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
           mt: 10,
         }}
       >
         There is no course for this instructor yet!
       </Box>
     ) : (
-      visibleCourses.map((item, idx) => (
+      visibleProducts.map((item, idx) => (
         <Grid item xl={2.4} md={4} xs={4} key={idx}>
           <CustomCard dataObj={item} variant="product" />
         </Grid>
@@ -51,7 +63,7 @@ export const Products = ({ instructorName, productData }) => {
     <Stack>
       <Stack>
         <Typography variant="h4">
-          {instructorName || 'Default'} Products
+          {instructorName || "Default"} Products
         </Typography>
         <Typography variant="bmdmd" color="dark.300">
           {/* <Typography variant="bxsm"> */}
@@ -65,14 +77,14 @@ export const Products = ({ instructorName, productData }) => {
         </Container>
       </Stack>
 
-      {visibleCount < productContent.length && (
+      {productData.length > limit && (
         <Stack sx={{ mt: 4, mb: 4 }}>
           <Button
             variant="outlined"
-            sx={{ px: 4, py: 2 }}
+            sx={{ px: 4, py: 1 }}
             onClick={handleLoadMore}
           >
-            View 5 more
+            {showAll ? "Show Less" : "View 5 More"}
           </Button>
         </Stack>
       )}
