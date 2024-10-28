@@ -1,0 +1,100 @@
+import { Button, Grid, Stack, Typography, Link } from "@mui/material";
+import CustomCard from "../CustomCard";
+import { Link as RouterLink } from "react-router-dom";
+import { ItemsLoading } from "../ItemsLoading";
+import { useEffect, useState } from "react";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+
+/**
+ * CourseList component renders a list of courses that the user has
+ * in their my learning section.
+ *
+ * @param {{ data: Array<Course> }} props
+ *   - data is an array of Course objects that will be passed to CustomCard
+ *     component. Each Course object should have the following properties:
+ *     - id (number)
+ *     - name (string)
+ *     - image (string)
+ *     - instructor (string)
+ */
+
+export const CourseList = ({ data, isLoading }) => {
+  const [page, setPage] = useState(1);
+  const limit = 15;
+  const totalPages = Math.ceil(data.length / limit);
+
+  const [paginatedData, setPaginatedData] = useState([]);
+
+  useEffect(()=>{
+    const startIdx = (page - 1) * limit;
+    const endIdx = startIdx + limit;
+    setPaginatedData(data.slice(startIdx, endIdx))  
+  },[page, data])
+  const handleNext = () => {
+    setPage((prevPage) => prevPage + 1);
+    window.scrollTo(0, 0);
+  };
+
+  const handlePrevious = () => {
+    setPage((prevPage) => prevPage - 1);
+    window.scrollTo(0, 0); // Prevent going below page 1
+  };
+
+  return (
+    <Stack gap={3}>
+      <Stack gap>
+        <Typography variant="h3">My Learning</Typography>
+        {isLoading && <ItemsLoading title="course" />}
+        {data.length > 0 && (
+          <Typography variant="bsr">Found ({data.length}) Courses.</Typography>
+        )}
+        {data.length === 0 && !isLoading && (
+          <Typography variant="bsr">You don't have any course yet.</Typography>
+        )}
+      </Stack>
+
+      {paginatedData && (
+        <Grid container spacing>
+          {paginatedData?.map((item, idx) => (
+            <Grid item key={idx} xs={4} md={2.4}>
+              <Link
+                component={RouterLink}
+                to={`/courses/${item.course_id}/watch/overview`}
+                underline="none"
+              >
+                <CustomCard dataObj={item} />
+              </Link>
+            </Grid>
+          ))}
+        </Grid>
+      )}
+
+      {data?.length !== 0 && (
+        <Stack
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          gap={3}
+          py={3}
+        >
+          <Button
+            variant="outlined"
+            onClick={handlePrevious} // Prevent going below page 1
+            disabled={page === 1} // Disable if on the first page
+          >
+            <NavigateBeforeIcon />
+          </Button>
+          <Typography>{`Page ${page} of ${totalPages}`}</Typography>
+          <Button
+            variant="outlined"
+            onClick={handleNext}
+            disabled={page === totalPages} // Disable if on the last page
+          >
+            <NavigateNextIcon />
+          </Button>
+        </Stack>
+      )}
+    </Stack>
+  );
+};
