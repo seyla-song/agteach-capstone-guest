@@ -35,9 +35,9 @@ export const CourseVideoHeaderComponent = ({ title }) => {
         <Typography variant="bmdr">{title}</Typography>
       </Stack>
       {/* Progress bar of course video */}
-      <Stack bgcolor="secondary.main" px={3} py={1} borderRadius="10px">
+      {/* <Stack bgcolor="secondary.main" px={3} py={1} borderRadius="10px">
         <Typography variant="blgsm">50%</Typography>
-      </Stack>
+      </Stack> */}
     </Stack>
   );
 };
