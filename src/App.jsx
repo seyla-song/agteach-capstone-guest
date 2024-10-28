@@ -17,8 +17,8 @@ function App() {
     if (data) {
       dispatch(
         checkLoginStatus({
-          isAuthenticated: data?.IsAuthenticated,
-          isVerified: data?.IsVerify,
+          isAuthenticated: data?.IsAuthenticated || false,
+          isVerified: data?.IsVerify || false,
         })
       );
       dispatch(setEmail(data?.email));

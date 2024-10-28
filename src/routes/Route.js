@@ -81,7 +81,6 @@ export const router = createBrowserRouter([
       { path: 'signup/info', element: <PersonalInformationPage /> },
       { path: 'signup/verification', element: <VerificationPage /> },
       { path: 'login', element: <LoginPage /> },
-      { path: 'info', element: <PersonalInformationPage /> },
       { path: 'forgot-password', element: <ForgotPasswordPage /> },
       { path: 'reset-password/:resetToken', element: <ResetPasswordPage /> },
     ],

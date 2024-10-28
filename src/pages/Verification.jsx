@@ -1,7 +1,10 @@
 import { Box, Typography, Button, Stack, Grid2 } from "@mui/material";
 import { FormInput } from "../components";
 import { useForm } from "react-hook-form";
-import { useIsLoginQuery, useVerifyEmailMutation } from "../services/api/authApi";
+import {
+  useIsLoginQuery,
+  useVerifyEmailMutation,
+} from "../services/api/authApi";
 import { ArrowBack } from "@mui/icons-material";
 import { CustomAlert } from "../components/CustomAlert";
 import ResendCodeButton from "../components/LoginSignup/ResendCodeButton";
@@ -14,7 +17,7 @@ import { checkLoginStatus } from "../features/auth/authSlice";
 export default function VerificationPage() {
   const timeoutRef = useRef(null);
   const [open, setOpen] = useState(true);
-  const {data: {IsAuthenticated}} = useIsLoginQuery()
+  const { data: isLoginData } = useIsLoginQuery();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -24,7 +27,7 @@ export default function VerificationPage() {
   } = useForm();
 
   const [verifyEmail, { isLoading, isSuccess, isError }] =
-  useVerifyEmailMutation();
+    useVerifyEmailMutation();
   const { email } = useSelector((state) => state.user);
   const { isAtCourseDetail, isAtCart } = useSelector((state) => state.auth);
   const { courseId } = useSelector((state) => state.user);
@@ -32,7 +35,12 @@ export default function VerificationPage() {
   const onSubmit = async (data) => {
     try {
       await verifyEmail(data.emailVerifyCode).unwrap();
-      dispatch(checkLoginStatus({ isAuthenticated: IsAuthenticated, isVerified: true }));
+      dispatch(
+        checkLoginStatus({
+          isAuthenticated: isLoginData?.IsAuthenticated,
+          isVerified: true,
+        })
+      );
       if (isAtCart) {
         navigate("/cart");
       } else if (isAtCourseDetail) {
