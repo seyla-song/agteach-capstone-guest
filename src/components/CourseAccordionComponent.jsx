@@ -97,10 +97,10 @@ export const CourseAccordionComponent = ({ data }) => {
                 }}
                 onClick={() => handleSelectLecture(lecture.lectureId)}
               >
-                <Stack direction="row" justifyContent="space-between" py={2}>
+                <Stack direction="column" justifyContent="space-between" py={2}>
                   {/* Topic title and duration */}
                   <Typography variant="bsr">{lecture.name}</Typography>
-                  <Typography variant="bsr">
+                  <Typography variant="bxsr">
                     {displayDuration(lecture.duration)}
                   </Typography>
                 </Stack>

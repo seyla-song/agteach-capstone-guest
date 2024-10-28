@@ -14,7 +14,7 @@ const displayDuration = ({ hours = 0, minutes = 0, seconds = 0 }) => {
 
   // Handle seconds
   if (seconds > 0) {
-    if (result) result += ' and '; // Add "and" if hours or minutes are present
+    if (result) result += ', '; // Add "and" if hours or minutes are present
     result += `${seconds} second${seconds !== 1 ? 's' : ''}`;
   }
 
