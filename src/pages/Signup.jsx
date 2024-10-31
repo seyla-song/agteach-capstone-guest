@@ -38,6 +38,14 @@ const SignupPage = () => {
 
   const handleShowPassword = () => setShowPassword((prev) => !prev);
 
+  const validatePassword = (value) => {
+    if (!/[a-z]/.test(value)) return "Password must contain at least one lowercase letter.";
+    if (!/[A-Z]/.test(value)) return "Password must contain at least one uppercase letter.";
+    if (!/\d/.test(value)) return "Password must contain at least one number.";
+    if (!/[@$!%*?&]/.test(value)) return "Password must contain at least one special character.";
+    return true; 
+  };
+
   const submitHandler = async (data) => {
     try {
       data.dateOfBirth = dayjs(data.dateOfBirth).format("YYYY/MM/DD");
@@ -52,7 +60,7 @@ const SignupPage = () => {
       navigate("info");
     } catch (error) {
       setSnackbarSeverity("error");
-      setSnackbarMessage("Email or Username already exists. Please try another email.");
+      setSnackbarMessage(error.data.message);
       setSnackbarOpen(true);
     }
   };
@@ -141,11 +149,7 @@ const SignupPage = () => {
                           value: 20,
                           message: "Password must be at most 20 characters",
                         },
-                        pattern: {
-                          value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/,
-                          message:
-                            "Password must contain at least one letter and one number",
-                        },
+                        validate: validatePassword,
                       })}
                       error={!!errors.password}
                       helperText={errors.password?.message}
