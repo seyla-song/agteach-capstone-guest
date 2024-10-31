@@ -20,16 +20,19 @@ import { checkLoginStatus } from "../features/auth/authSlice";
 import { setEmail } from "../features/auth/userSlice";
 
 function Login() {
-  const [login, { isLoading, isError }] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "",
+  });
   const [visible] = useState(false);
   const navigator = useNavigate();
   const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -41,8 +44,8 @@ function Login() {
 
   const handleShowPassword = () => setShowPassword((prev) => !prev);
   const { isAtCourseDetail, isAtCart } = useSelector((state) => state.auth);
-  const {courseId} = useSelector((state) => state.user);
-  
+  const { courseId } = useSelector((state) => state.user);
+
   const submitHandler = async (data) => {
     try {
       const res = await login(data).unwrap();
@@ -59,18 +62,11 @@ function Login() {
         navigator(`/courses/${courseId}`);
       } else navigator("/");
     } catch (error) {
-      console.error("Incorrect email or password", error);
-      setOpen(true);
-      setError(
-        "email",
-        { type: "manual", message: "Incorrect email or password" },
-        { shouldFocus: true }
-      );
-      setError(
-        "password",
-        { type: "manual", message: "Incorrect email or password" },
-        { shouldFocus: true }
-      );
+      setSnackbar({
+        open: true,
+        message: error.data.message,
+        severity: "error",
+      });
     }
   };
 
@@ -99,10 +95,10 @@ function Login() {
                   onSubmit={handleSubmit(submitHandler)}
                 >
                   <CustomAlert
-                    label={errors.email?.message}
-                    severity={isError ? "error" : "success"}
-                    open={open}
-                    onClose={() => setOpen(false)}
+                    label={snackbar.message}
+                    severity={snackbar.severity}
+                    open={snackbar.open}
+                    onClose={() => setSnackbar({ ...snackbar, open: false })}
                   />
 
                   <FormInput
@@ -124,7 +120,7 @@ function Login() {
                     label="Password"
                     fullWidth
                     type={visible ? "text" : "password"}
-                    {...register("password", {})}
+                    {...register("password", {required: "Please enter your password"})}
                     error={!!errors.password}
                     helperText={errors.password?.message}
                     showPassword={showPassword}
