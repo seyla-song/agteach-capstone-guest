@@ -19,6 +19,7 @@ install_dependencies:
 build_app:
   stage: build
   cache:
+    key: "$CI_COMMIT_REF_SLUG"
     paths:
       - node_modules/
   image: node:20
