@@ -62,7 +62,19 @@ export const CourseVideoMainContent = ({
       <Stack width="100%" alignItems="center">
         <MediaPlayer style={{ borderRadius: 0 }} title={name} src={url}>
           <MediaProvider />
-          <DefaultVideoLayout icons={defaultLayoutIcons} />
+          <DefaultVideoLayout
+            icons={defaultLayoutIcons}
+            noAudioGain={true}
+            noKeyboardAnimations={true}
+            noModal={true}
+            slot={{
+              pipButton: null,
+            }}
+            slots={{
+              pipButton: null,
+              googleCastButton: null,
+            }}
+          />
         </MediaPlayer>
         <Box
           bgcolor="green"
