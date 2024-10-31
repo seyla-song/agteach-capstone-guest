@@ -59,7 +59,7 @@ export const Footer = () => {
             </Typography>
             <Link href={teachAgtechURL} color="common.white" underline="none">
               <Button variant="contained" color="secondary">
-                Becom an Instructor
+                Become an Instructor
               </Button>
             </Link>
           </Stack>
