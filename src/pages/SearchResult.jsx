@@ -217,7 +217,7 @@ function SearchResultPage() {
                   )}
                   {(isCourseFetching || isProductFetching) && <ItemsLoading />}
                   {(!isCourseFetching && !isProductFetching) &&filteredData?.map((product, idx) => (
-                    <Grid2 size={{ xs: 4 }} key={idx}>
+                    <Grid2 size={{ xs: 6, md: 4 }} key={idx}>
                       <CustomCard
                         key={idx}
                         dataObj={product}

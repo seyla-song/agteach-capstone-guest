@@ -9,7 +9,7 @@ export const SearchList = ({
       <Box width="100%">
         <Grid container size={{ xs: 12 }} width={"100%"}>
           {dataObj.map((product, idx) => (
-            <Grid size={{ xs: 4 }}>
+            <Grid size={{ xs: 6, md:4 }}>
               <CustomCard key={idx} dataObj={product} variant={cardVariant} />
             </Grid>
           ))}

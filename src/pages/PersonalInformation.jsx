@@ -71,7 +71,8 @@ export default function PersonalInfoForm() {
     const phonePattern = /^[0-9]+$/; // Only digits
     if (!value) return true; // Allow empty input if not required
     if (value.length > 15) return 'Phone number cannot exceed 15 digits';
-    if (value?.length < 8) return 'A Valid phone number should contains atleast 8 digits'
+    if (value?.length < 8) return 'A Valid phone number should contains atleast 8 digits';
+    if (String(value[0]) !== '0') return 'Phone number shoud start with 0. e.g. 0123456789';
     return phonePattern.test(value) || 'Please enter a valid phone number';
   };
 
