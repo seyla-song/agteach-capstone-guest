@@ -95,6 +95,18 @@ const SignupPage = () => {
                       label="Username"
                       {...register("username", {
                         required: "Please enter your name",
+                        minLength: {
+                          value: 3,
+                          message: "Username must be at least 3 characters",
+                        },
+                        maxLength: {
+                          value: 20,
+                          message: "Username must be at most 20 characters",
+                        },
+                        pattern: {
+                          value: /^[a-zA-Z0-9]+$/,
+                          message: "Username can only contain letters and numbers",
+                        },
                       })}
                       error={!!errors.username}
                       helperText={errors.username?.message}
