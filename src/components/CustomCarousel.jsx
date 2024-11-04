@@ -12,7 +12,6 @@ export const CustomCarousel = ({ data, cardVariant }) => {
   const [slidesToShow, setSlidesToShow] = useState(4); // Default to showing 4 slides
   const [slidesToScroll, setSlidesToScroll] = useState(4); // Default scrolls by 4 slides
 
-  const [sliderInstance, setSliderInstance] = useState(null);
 
   // Responsive breakpoints to adjust number of slides shown based on window width
   useEffect(() => {
@@ -53,7 +52,6 @@ export const CustomCarousel = ({ data, cardVariant }) => {
     },
     created(slider) {
       setLoaded(true);
-      setSliderInstance(slider); // Set slider instance for external control
     },
   });
 
