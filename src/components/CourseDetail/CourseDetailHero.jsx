@@ -93,8 +93,18 @@ export const CourseDetailHero = ({ courseData }) => {
             <MediaPlayer title="Sprite Fight" src={courseData?.previewVideoUrl}>
               <MediaProvider />
               <DefaultVideoLayout
-                thumbnails={courseData?.thumbnailUrl}
+                thumbnails={courseData?.thumbnailUrl}                
                 icons={defaultLayoutIcons}
+                noAudioGain={true}
+                noKeyboardAnimations={true}
+                noModal={true}
+                slot={{
+                  pipButton: null,
+                }}
+                slots={{
+                  pipButton: null,
+                  googleCastButton: null,
+                }}
               />
             </MediaPlayer>
             <Stack display={'flex'} flexDirection={'column'} gap={1}>
