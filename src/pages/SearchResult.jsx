@@ -138,7 +138,7 @@ function SearchResultPage() {
     // Set the filtered data based on the selected category
     setFilteredData(combinedData[category]);
 
-  }, [courseData, productData, category, sortBy, isNewQuery]);
+  }, [courseData, productData, category, sortBy, isNewQuery, filteredData.course, filteredData.product]);
 
   if (isCourseLoading || isProductLoading || category) <ContentLoading />;
 
@@ -217,7 +217,7 @@ function SearchResultPage() {
                   )}
                   {(isCourseFetching || isProductFetching) && <ItemsLoading />}
                   {(!isCourseFetching && !isProductFetching) &&filteredData?.map((product, idx) => (
-                    <Grid2 size={{ xs: 4 }} key={idx}>
+                    <Grid2 size={{ xs: 6, md: 4 }} key={idx}>
                       <CustomCard
                         key={idx}
                         dataObj={product}
