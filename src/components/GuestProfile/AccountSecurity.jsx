@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
  */
 
 export const AccountSecurity = ({userData}) => {
-  const { setValue, watch, register } = useForm();
+  const { setValue, register } = useForm();
 
   useEffect(() => {
     if (userData && userData.customer) {
