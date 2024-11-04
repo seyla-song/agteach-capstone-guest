@@ -138,7 +138,7 @@ function SearchResultPage() {
     // Set the filtered data based on the selected category
     setFilteredData(combinedData[category]);
 
-  }, [courseData, productData, category, sortBy, isNewQuery]);
+  }, [courseData, productData, category, sortBy, isNewQuery, filteredData.course, filteredData.product]);
 
   if (isCourseLoading || isProductLoading || category) <ContentLoading />;
 
