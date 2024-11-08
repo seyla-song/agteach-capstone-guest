@@ -109,7 +109,7 @@ const ResetPasswordPage = () => {
                         },
                       })}
                       error={Boolean(errors.newPassword)}
-                      helperText={errors.newPassword?.message}
+                      helperText={errors.newPassword?.message || 'Password must contains at least one lowercase letter, one uppercase letter, one number, and one special character.'}
                       showPassword={showPassword}
                       handleClickShowPassword={handleClickShowPassword}
                     />

@@ -164,7 +164,7 @@ const SignupPage = () => {
                         validate: validatePassword,
                       })}
                       error={!!errors.password}
-                      helperText={errors.password?.message}
+                      helperText={errors.password?.message || 'Password must contains at least one lowercase letter, one uppercase letter, one number, and one special character.'}
                     />
                     <FormInput
                       label="Confirm Password"
