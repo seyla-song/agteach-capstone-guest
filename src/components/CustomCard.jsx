@@ -72,7 +72,7 @@ const CourseCard = ({ dataObj, showDelete, onDelete }) => {
   const [courseId, setCourseId] = useState(null);
   const [triggerFetch, setTriggerFetch] = useState(false);
   const [redirectTo, setRedirectTo] = useState(null); // To track redirection
-  const { data, isLoading, refetch, isFetching, isError } =
+  const { data, isLoading } =
     useGetEnrollmentCourseQuery(courseId, { skip: !triggerFetch });
   const navigate = useNavigate();
 
