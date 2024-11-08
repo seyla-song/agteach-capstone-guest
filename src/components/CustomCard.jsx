@@ -81,47 +81,7 @@ const CourseCard = ({ dataObj, showDelete, onDelete }) => {
     event.stopPropagation();
     onDelete(dataObj.id);
   };
-  // const handleNavigate = async (id) => {
-  //   console.log('id', id)
-  //   setCourseId(id);
-  //   const result = await refetch(id);
-  //   console.log(result)
-  //   if (result.data && result.data.length > 0) {
-  //     navigate(`/courses/${courseId}/watch/overview`)
-  //   } else {
-  //     navigate(`/courses/${id}`);
-  //   }
-  // };
-  // const handleNavigate = (id) => {
-  //   setCourseId(id); // Set courseId for the query
-  //   setTriggerFetch(true); // Enable query
-
-  //   if (!isLoading && data && data.length > 0) {
-  //     navigate(`/courses/${id}/watch/overview`);
-  //   } else {
-  //     navigate(`/courses/${id}`);
-  //   }
-  // };
-  // useEffect(() => {
-  //   if (!isLoading && data && !isFetching) {
-  //     console.log(data);
-  //     if (data.data) {
-  //       console.log('new page');
-  //       navigate(`/courses/${courseId}/watch/overview`);
-  //     } else {
-  //       console.log('new page');
-  //     }
-  //   }
-  // }, [data, isLoading, navigate, courseId, isFetching, isError]);
-
-  // const handleNavigate = (id) => {
-  //   setCourseId(id); // Set the courseId for the query
-  //   setTriggerFetch(true); // Enable query to start fetching
-  //   refetch();
-  //   if (isError) {
-  //     navigate(`/courses/${id}`);
-  //   }
-  // };
+  
 
   // Wait for the data to be fetched before navigating
   useEffect(() => {
@@ -133,22 +93,7 @@ const CourseCard = ({ dataObj, showDelete, onDelete }) => {
       }
     }
   }, [data, isLoading, courseId, triggerFetch]);
-  // // Wait for the data to be fetched or if there is an error
-  //   useEffect(() => {
-  //     if (!isLoading) {
-  //       if (isError) {
-  //         // Navigate to a specific error page if there is an error
-  //         setRedirectTo('/error-page'); // Set the redirection for error
-  //       } else if (data) {
-  //         // Navigate to the appropriate page if data is fetched
-  //         if (data.length > 0) {
-  //           setRedirectTo(`/courses/${courseId}/watch/overview`);
-  //         } else {
-  //           setRedirectTo(`/courses/${courseId}`);
-  //         }
-  //       }
-  //     }
-  //   }, [data, isLoading, isError, courseId]);
+ 
   // Redirect if redirection is set
   useEffect(() => {
     if (redirectTo) {
