@@ -56,6 +56,17 @@ export const ChangePassword = () => {
     }));
   };
 
+  const validatePassword = (value) => {
+    if (!/[a-z]/.test(value))
+      return "Password must contain at least one lowercase letter.";
+    if (!/[A-Z]/.test(value))
+      return "Password must contain at least one uppercase letter.";
+    if (!/\d/.test(value)) return "Password must contain at least one number.";
+    if (!/[@$!%*?&]/.test(value))
+      return "Password must contain at least one special character.";
+    return true;
+  };
+
   return (
     <>
       <Stack sx={{ m: 2, gap: 2 }}>
@@ -66,8 +77,8 @@ export const ChangePassword = () => {
             isError
               ? error.data.message
               : isSuccess
-              ? "Successfuly updated password"
-              : "Something went wrong. Please try again"
+                ? "Successfuly updated password"
+                : "Something went wrong. Please try again"
           }
           severity={isError ? "error" : "success"}
           open={open}
@@ -95,7 +106,7 @@ export const ChangePassword = () => {
             }
           />
           {errors.passwordCurrent && (
-            <FormHelperText error>This field is required</FormHelperText>
+            <FormHelperText error>Current Password is required</FormHelperText>
           )}
         </FormControl>
 
@@ -105,7 +116,18 @@ export const ChangePassword = () => {
           <OutlinedInput
             id="new-password"
             type={showPassword.new ? "text" : "password"}
-            {...register("password", { required: true })}
+            {...register("password", {
+              required: true,
+              minLength: {
+                value: 8,
+                message: "Password must be at least 8 characters",
+              },
+              maxLength: {
+                value: 20,
+                message: "Password must at most 20 characters",
+              },
+              validate: validatePassword,
+            })}
             label="Enter New Password"
             endAdornment={
               <InputAdornment position="end">
@@ -120,7 +142,7 @@ export const ChangePassword = () => {
             }
           />
           {errors.password && (
-            <FormHelperText error>This field is required</FormHelperText>
+            <FormHelperText error>{errors.password.message || "A new password is required"}</FormHelperText>
           )}
         </FormControl>
 
@@ -153,7 +175,7 @@ export const ChangePassword = () => {
           />
           {errors.passwordConfirm && (
             <FormHelperText error>
-              {errors.passwordConfirm.message || "This field is required"}
+              {errors.passwordConfirm.message || "Please re-type your password"}
             </FormHelperText>
           )}
         </FormControl>
