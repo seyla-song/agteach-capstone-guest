@@ -1,48 +1,45 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { API_BASE_URL } from "../../constants/apiConstants";
-
-// //  https://api.agteach.site
-// //  http://localhost:3001
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { API_BASE_URL } from '../../constants/apiConstants';
 
 export const apiSlice = createApi({
-  reducerPath: "authApi",
+  reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
     baseUrl: API_BASE_URL,
-    // baseUrl: "http://localhost:3001",
-    credentials: "include",
+
+    credentials: 'include',
   }),
-  tagTypes: ["Auth"],
+  tagTypes: ['Auth'],
   endpoints: (builder) => ({
     signup: builder.mutation({
       query: (signupData) => ({
-        url: "/api/users/signup",
-        method: "POST",
+        url: '/api/users/signup',
+        method: 'POST',
         body: signupData,
       }),
     }),
 
     login: builder.mutation({
       query: (loginData) => ({
-        url: "/api/users/login",
-        method: "POST",
+        url: '/api/users/login',
+        method: 'POST',
         body: loginData,
-        headers: { "X-Frontend-URL": window.location },
+        headers: { 'X-Frontend-URL': window.location },
       }),
-      invalidatesTags: ["Auth"],
+      invalidatesTags: ['Auth'],
     }),
 
     logout: builder.mutation({
       query: () => ({
-        url: "/api/users/logout",
-        method: "POST",
+        url: '/api/users/logout',
+        method: 'POST',
       }),
-      invalidatesTags: ["Auth"],
+      invalidatesTags: ['Auth'],
     }),
 
     forgotPassword: builder.mutation({
       query: (email) => ({
-        url: "/api/users/forgotPassword",
-        method: "POST",
+        url: '/api/users/forgotPassword',
+        method: 'POST',
         body: email,
       }),
     }),
@@ -50,43 +47,43 @@ export const apiSlice = createApi({
     resetPassword: builder.mutation({
       query: (resetData) => ({
         url: `/api/users/resetPassword/${resetData.resetToken}`,
-        method: "PATCH",
+        method: 'PATCH',
         body: resetData.body,
       }),
-      invalidatesTags: ["Auth"],
+      invalidatesTags: ['Auth'],
     }),
 
     addPersonalInfo: builder.mutation({
       query: (personalInfoData) => ({
-        url: "/api/users/signup/additionalInfo",
-        method: "POST",
+        url: '/api/users/signup/additionalInfo',
+        method: 'POST',
         body: personalInfoData,
       }),
     }),
 
     verifyEmail: builder.mutation({
       query: (emailVerifyCode) => ({
-        url: "/api/users/verifyEmail",
-        method: "POST",
+        url: '/api/users/verifyEmail',
+        method: 'POST',
         body: { emailVerifyCode },
       }),
     }),
 
     resendVerifyCode: builder.mutation({
       query: (email) => ({
-        url: "/api/users/resendCode",
-        method: "POST",
+        url: '/api/users/resendCode',
+        method: 'POST',
         body: { email },
       }),
     }),
 
     isLogin: builder.query({
       query: () => ({
-        url: "/api/users/isLoginedIn",
-        method: "GET",
-        headers: { "X-Frontend-URL": window.location },
+        url: '/api/users/isLoginedIn',
+        method: 'GET',
+        headers: { 'X-Frontend-URL': window.location },
       }),
-      providesTags: ["Auth"],
+      providesTags: ['Auth'],
     }),
   }),
 });
