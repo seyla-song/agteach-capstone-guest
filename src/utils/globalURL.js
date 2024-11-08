@@ -1,1 +1,1 @@
-export const teachAgtechURL = "https://teach.agteach.site/";
+export const teachAgtechURL = "https://instructor.alphabeez.anbschool.org/";
