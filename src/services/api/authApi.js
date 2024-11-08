@@ -16,6 +16,7 @@ export const apiSlice = createApi({
         method: 'POST',
         body: signupData,
       }),
+      invalidatesTags: ['Auth'],
     }),
 
     login: builder.mutation({
