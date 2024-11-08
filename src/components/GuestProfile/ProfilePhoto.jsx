@@ -6,9 +6,11 @@ import {
   Stack,
   Typography,
   Avatar,
+  CircularProgress,
 } from "@mui/material";
 import { useUpdateInfoMutation } from "../../services/api/userApi";
 import { CustomAlert } from "../../components/CustomAlert";
+import ProfilePlaceholder from "../../assets/profile-placeholder.png";
 
 export const ProfilePhoto = ({ userData }) => {
   const [profileImage, setProfileImage] = useState();
@@ -85,8 +87,7 @@ export const ProfilePhoto = ({ userData }) => {
       >
         <Stack>
           <Avatar
-            // src={customerData.imageUrl}
-            src={profileImage}
+            src={profileImage || ProfilePlaceholder}
             alt="Profile Pic"
             sx={{ width: 300, height: 300, border: "15px solid lightgrey" }}
           />

@@ -127,11 +127,7 @@ function Navigation() {
           <Avatar
             alt="AgTeach Profile"
             sx={{ width: 23, height: 23 }}
-            src={
-              isLoginLoading
-                ? data?.customer?.imageUrl + `?${new Date().getTime()}`
-                : ProfilePlaceholder
-            }
+            src={data?.customer?.imageUrl || ProfilePlaceholder}
           />
         </Button>
 
