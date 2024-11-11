@@ -151,7 +151,7 @@ export const ImageScan = () => {
             {...register('file')}
           />
           {!data && (
-            <Stack gap direction="row" py={3}>
+            <Stack gap={1} direction="row" py={3}>
               <Button
                 onClick={() => document.getElementById('file').click()}
                 disabled-={!selectedFile || !isValidFile}
