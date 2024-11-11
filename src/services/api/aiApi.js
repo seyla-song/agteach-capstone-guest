@@ -9,7 +9,7 @@ export const aiApi = createApi({
   endpoints: (builder) => ({
     predictImage: builder.mutation({
       query: (formData) => ({
-        url: '/',
+        url: '/predict',
         method: 'POST',
         body: formData,
       }),
