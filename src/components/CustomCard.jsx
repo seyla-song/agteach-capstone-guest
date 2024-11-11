@@ -4,6 +4,8 @@ import { Box, Stack, Typography, IconButton } from '@mui/material';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 import { dateFormat } from '../utils/dateFormat';
+import { useGetEnrollmentCourseQuery } from '../services/api/courseApi';
+import { useEffect, useState } from 'react';
 
 export default function CustomCard({ dataObj, variant, showDelete, onDelete }) {
   const cardVariant = () => {
@@ -67,19 +69,46 @@ const ProductCard = ({ dataObj, showDelete, onDelete }) => {
 };
 
 const CourseCard = ({ dataObj, showDelete, onDelete }) => {
+  const [courseId, setCourseId] = useState(null);
+  const [triggerFetch, setTriggerFetch] = useState(false);
+  const navigate = useNavigate();
+  
+  const { data: courses, isLoading } =
+    useGetEnrollmentCourseQuery(courseId, { skip: !triggerFetch });
+
   const handleDeleteClick = (event) => {
     event.preventDefault();
     event.stopPropagation();
     onDelete(dataObj.id);
   };
-
-  const navigate = useNavigate();
   
+
+  // Wait for the data to be fetched before navigating
+  useEffect(() => {
+    if (!isLoading && triggerFetch) {
+      let navigateTo = '';
+      if (courses?.data) {        
+        navigateTo = `/courses/${courseId}/watch/overview`;
+      } else {
+        navigateTo =`/courses/${courseId}` 
+      }
+      navigate(navigateTo);
+    }
+  }, [courses, isLoading, courseId, triggerFetch, navigate]);
+ 
+
+  const handleNavigate = (id) => {
+    setCourseId(id); // Set courseId to trigger the query
+    setTriggerFetch(true); // Trigger fetch
+  };
+
   return (
     <Box
       mr={1}
       sx={{ cursor: 'pointer' }}
-      onClick={() => navigate(`/courses/${dataObj.courseId}`)}
+      onClick={() => {
+        handleNavigate(dataObj.courseId);
+      }}
     >
       <Box
         width="100%"
