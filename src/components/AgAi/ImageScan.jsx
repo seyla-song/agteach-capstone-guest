@@ -54,8 +54,8 @@ export const ImageScan = () => {
   const onSubmit = async (data) => {
     setScan(true);
 
-    const file = data.file[0]
-    const resizeFile = await convertToJPG(file)
+    const file = data.file[0];
+    const resizeFile = await convertToJPG(file);
     const formData = new FormData();
     formData.append('image', resizeFile);
 
@@ -74,6 +74,12 @@ export const ImageScan = () => {
       console.error(err);
     }
   };
+
+  // Check if there's a selected file and if its type is valid
+  const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
+  const selectedFileOption = selectedFile && selectedFile[0];
+  const isValidFile =
+    selectedFileOption && validTypes.includes(selectedFileOption.type);
 
   const handleReset = () => {
     reset();
@@ -97,7 +103,7 @@ export const ImageScan = () => {
             <Stack alignItems="center">
               <ImageIcon sx={{ width: 200, height: 200 }} />
               <Typography variant="bxsr" color="dark.300">
-              Upload your image here .jpg 150 x 150
+                Upload your image here .jpg 150 x 150
               </Typography>
             </Stack>
           )}
@@ -148,17 +154,18 @@ export const ImageScan = () => {
             <Stack gap direction="row" py={3}>
               <Button
                 onClick={() => document.getElementById('file').click()}
-                disabled-={!selectedFile}
+                disabled-={!selectedFile || !isValidFile}
                 variant="outlined"
                 color="primary"
                 endIcon={<UploadIcon />}
               >
                 Upload
               </Button>
-              {selectedImageUrl && (
+              {selectedImageUrl &&  (
                 <Button
                   variant="contained"
                   type="submit"
+                  disabled={!isValidFile}
                   endIcon={<ScanIcon />}
                 >
                   Scan
@@ -176,6 +183,11 @@ export const ImageScan = () => {
                 Scan another plant
               </Button>
             </Stack>
+          )}
+          {!isValidFile && selectedFile && (
+            <Typography variant="bxsr" color="red.main">
+              Please select a valid image file (JPG, PNG, or WEBP).
+            </Typography>
           )}
         </Stack>
       </Box>
