@@ -141,6 +141,7 @@ export const ImageScan = () => {
             component="input"
             id="file"
             type="file"
+            accept="image/jpeg, image/png, image/webp"
             {...register('file')}
           />
           {!data && (
