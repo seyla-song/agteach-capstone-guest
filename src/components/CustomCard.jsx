@@ -72,7 +72,7 @@ const CourseCard = ({ dataObj, showDelete, onDelete }) => {
   const [courseId, setCourseId] = useState(null);
   const [triggerFetch, setTriggerFetch] = useState(false);
   const [redirectTo, setRedirectTo] = useState(null); // To track redirection
-  const { data, isLoading } =
+  const { data: courses, isLoading } =
     useGetEnrollmentCourseQuery(courseId, { skip: !triggerFetch });
   const navigate = useNavigate();
 
@@ -86,20 +86,25 @@ const CourseCard = ({ dataObj, showDelete, onDelete }) => {
   // Wait for the data to be fetched before navigating
   useEffect(() => {
     if (!isLoading && triggerFetch) {
-      if (data?.data) {
-        setRedirectTo(`/courses/${courseId}/watch/overview`);
+      let navigateTo = '';
+      if (courses?.data) {
+        setRedirectTo(`/courses/${courseId}/watch/overview`);                
+        navigateTo = `/courses/${courseId}/watch/overview`;
       } else {
-        setRedirectTo(`/courses/${courseId}`);
+        navigateTo =`/courses/${courseId}` 
+        // setRedirectTo(`/courses/${courseId}`);
       }
+      console.log(navigateTo);
+      navigate(navigateTo);
     }
-  }, [data, isLoading, courseId, triggerFetch]);
+  }, [courses, isLoading, courseId, triggerFetch, navigate]);
  
-  // Redirect if redirection is set
-  useEffect(() => {
-    if (redirectTo) {
-      navigate(redirectTo); // Perform the actual navigation
-    }
-  }, [redirectTo, navigate]);
+  // Use for redirect when redictTo Update
+  // useEffect(() => {
+  //   if (redirectTo) {
+  //     navigate(redirectTo); 
+  //   }
+  // }, [redirectTo, navigate]);
 
   const handleNavigate = (id) => {
     setCourseId(id); // Set courseId to trigger the query
