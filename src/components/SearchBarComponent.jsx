@@ -104,10 +104,6 @@ export const SearchBar = ({
                 value={searchString} // Controlled value
                 onChange={(e) => handleSearchString(e)} // Handle input change
                 placeholder="Search course, plant, crop, service"
-                // helperText={
-                //   searchString.length === maxLength ? 'Text Input Limit 70' : ''
-                // }
-                // helperText = 'hello'
               />
 
               <Box sx={{ width: { xs: '80px', sm: '100px', md: '220px' } }}>
