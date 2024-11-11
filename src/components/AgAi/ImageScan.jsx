@@ -1,12 +1,15 @@
+import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+
 import { Button, Stack, Typography, Box } from '@mui/material';
 import ImageIcon from '@mui/icons-material/Image';
 import UploadIcon from '@mui/icons-material/FileUploadOutlined';
 import ScanIcon from '@mui/icons-material/CenterFocusStrongOutlined';
-import { useForm } from 'react-hook-form';
-import { useState } from 'react';
-import { DiseaseInfoComponent } from './DiseaseInfoComponent';
+
 import { usePredictImageMutation } from '../../services/api/aiApi';
 import { convertToJPG } from '../../utils/imageUtils';
+
+import { DiseaseInfoComponent } from './DiseaseInfoComponent';
 
 /**
  * ImageScan component is a reusable component
