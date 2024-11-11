@@ -22,7 +22,6 @@ export const SearchBar = ({
 
   const handleStartSearch = (e) => {
     e.preventDefault();
-    console.log(searchString);
     if (searchString.length >= maxLength) {
       setIsLimit(true);
     } else {
@@ -126,10 +125,11 @@ export const SearchBar = ({
                 </Button>
               </Box>
             </Box>
-            {isLimit ? (
-              <Typography variant="bxsr" color="white">Limit 70 Character </Typography>
-            ) : (
-              ''
+
+            {isLimit && (
+              <Typography variant="bxsr" color="white">
+                Limit 70 Character{' '}
+              </Typography>
             )}
           </Stack>
         </form>
