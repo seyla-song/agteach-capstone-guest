@@ -174,7 +174,7 @@ function SearchResultPage() {
 
       <Stack py={3} gap={1}>
         <Typography maxWidth={500} variant="h3">
-          Search result for "{query}"
+          Search result for "{query} {query.length >= 70 && '...'}"
         </Typography>
         {isCourseLoading && isProductLoading && (
           <ItemsLoading title="courses or products" />
