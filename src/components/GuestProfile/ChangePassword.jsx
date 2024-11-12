@@ -143,7 +143,7 @@ export const ChangePassword = () => {
           />
           {(errors.password && (
             <FormHelperText error>This field is required</FormHelperText>
-          )) || <FormHelperText>Password must contains at least one lowercase letter, one uppercase letter, one number, and one special character.</FormHelperText>}
+          ))}
         </FormControl>
 
         {/* Re-type Password Field */}
@@ -179,6 +179,9 @@ export const ChangePassword = () => {
             </FormHelperText>
           )}
         </FormControl>
+        <Typography color="dark.300" fontSize="12px" marginTop={"10px"} textAlign={"left"}>
+          Password must contains at least one lowercase letter, one uppercase letter, one number, and one special character.
+        </Typography>
       </Stack>
 
       {/* Save Button */}
