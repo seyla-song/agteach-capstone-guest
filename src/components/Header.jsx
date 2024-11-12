@@ -23,7 +23,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { LogoutOutlined } from '@mui/icons-material';
-import GuestProfilePicture from '../assets/profile-pic.jpg';
+import ProfilePlaceholder from '../assets/profile-placeholder.png';
 import Logo from '../assets/agteach_logo.svg';
 import { useLogoutMutation } from '../services/api/authApi';
 import { useNavigate } from 'react-router-dom';
@@ -127,11 +127,7 @@ function Navigation() {
           <Avatar
             alt="AgTeach Profile"
             sx={{ width: 23, height: 23 }}
-            src={
-              !isLoginLoading
-                ? data?.customer?.imageUrl + `?${new Date().getTime()}`
-                : GuestProfilePicture
-            }
+            src={data?.customer?.imageUrl + `?${new Date().getTime()}` || ProfilePlaceholder}
           />
         </Button>
 
