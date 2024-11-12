@@ -104,8 +104,8 @@ const SignupPage = () => {
                           message: "Username must be at most 20 characters",
                         },
                         pattern: {
-                          value: /^[a-zA-Z0-9]+$/,
-                          message: "Username can only contain letters and numbers",
+                          value: /^[a-zA-Z][a-zA-Z0-9]*$/,
+                          message: "Username must at least start with a letter and contain only letters and numbers",
                         },
                       })}
                       error={!!errors.username}
