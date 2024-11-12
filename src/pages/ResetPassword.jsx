@@ -109,7 +109,7 @@ const ResetPasswordPage = () => {
                         },
                       })}
                       error={Boolean(errors.newPassword)}
-                      helperText={errors.newPassword?.message || 'Password must contains at least one lowercase letter, one uppercase letter, one number, and one special character.'}
+                      helperText={errors.newPassword?.message}
                       showPassword={showPassword}
                       handleClickShowPassword={handleClickShowPassword}
                     />
@@ -128,6 +128,9 @@ const ResetPasswordPage = () => {
                       showPassword={showPassword}
                       handleClickShowPassword={handleClickShowPassword}
                     />
+                    <Typography color="dark.300" fontSize="12px" marginTop={"10px"} textAlign={"left"}>
+                      Password must contains at least one lowercase letter, one uppercase letter, one number, and one special character.
+                    </Typography>
                     <Link to="/auth/login">
                       <Button
                         type="submit"
@@ -135,7 +138,7 @@ const ResetPasswordPage = () => {
                         fullWidth
                         disabled={isLoading || isSuccess}
                         style={{
-                          marginTop: '16px',
+                          marginTop: '12px',
                           padding: '12px',
                         }}
                       >
