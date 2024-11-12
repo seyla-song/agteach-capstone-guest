@@ -66,11 +66,10 @@ export const BasicInfo = ({ userData, cities }) => {
 
   const validatePhone = (value) => {
     const phonePattern = /^[0-9]+$/; // Only digits
-    if (!value) return true; // Allow empty input if not required
-    if (value?.length > 15) return 'Phone number cannot exceed 15 digits';
-    if (value?.length < 8) return 'A Valid phone number should contains atleast 8 digits';
-    if (String(value[0]) !== '0') return 'Phone number shoud start with 0. e.g. 0123456789';
-    return phonePattern.test(value) || 'Please enter a valid phone number';
+    if (!value.startsWith("0")) return "Phone number must start with 0";
+    if (!phonePattern.test(value)) return "Please enter a valid phone number";
+    if (value.length > 15) return "Phone number cannot exceed 15 digits";
+    if (value?.length < 8) return "A valid phone number should contains atleast 8 digits";
   };
 
   return (
@@ -101,6 +100,10 @@ export const BasicInfo = ({ userData, cities }) => {
                 value: /^[A-Za-z]+$/i,
                 message: 'First name can only contain letters',
               },
+              validate: (value) => {
+                if (value.length < 2) return "First name must be at least 2 characters";
+                if (value.length > 25) return "First name must be at most 25 characters";
+              }
             })}
           />
           {errors.firstName && (
@@ -119,6 +122,10 @@ export const BasicInfo = ({ userData, cities }) => {
                 value: /^[A-Za-z]+$/i,
                 message: 'Last name can only contain letters',
               },
+              validate: (value) => {
+                if (value.length < 2) return "Last name must be at least 2 characters";
+                if (value.length > 25) return "Last name must be at most 25 characters";
+              }
             })}
           />
           {errors.lastName && (
@@ -160,6 +167,9 @@ export const BasicInfo = ({ userData, cities }) => {
             placeholder="N. 61Eo, Street 166"
             {...register('address', {
               required: 'Address is required',
+              validate: (value) => {
+                if (value.length > 100) return "Address must be at most 100 characters";
+              }
             })}
           />
           {errors?.address && (
