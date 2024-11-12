@@ -164,7 +164,7 @@ const SignupPage = () => {
                         validate: validatePassword,
                       })}
                       error={!!errors.password}
-                      helperText={errors.password?.message || 'Password must contains at least one lowercase letter, one uppercase letter, one number, and one special character.'}
+                      helperText={errors.password?.message}
                     />
                     <FormInput
                       label="Confirm Password"
@@ -182,6 +182,9 @@ const SignupPage = () => {
                       error={!!errors.passwordConfirm}
                       helperText={errors.passwordConfirm?.message}
                     />
+                    <Typography color="dark.300" fontSize="12px" marginTop={"10px"} textAlign={"left"}>
+                      Password must contains at least one lowercase letter, one uppercase letter, one number, and one special character.
+                    </Typography>
                     <Button
                       type="submit"
                       variant="contained"
