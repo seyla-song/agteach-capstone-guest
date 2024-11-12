@@ -142,7 +142,7 @@ export const ChangePassword = () => {
             }
           />
           {(errors.password && (
-            <FormHelperText error>This field is required</FormHelperText>
+            <FormHelperText>{errors.password.message || "This field is required." }</FormHelperText>
           ))}
         </FormControl>
 
