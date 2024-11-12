@@ -69,11 +69,10 @@ export default function PersonalInfoForm() {
 
   const validatePhone = (value) => {
     const phonePattern = /^[0-9]+$/; // Only digits
-    if (!value) return true; // Allow empty input if not required
-    if (value.length > 15) return 'Phone number cannot exceed 15 digits';
-    if (value?.length < 8) return 'A Valid phone number should contains atleast 8 digits';
-    if (String(value[0]) !== '0') return 'Phone number shoud start with 0. e.g. 0123456789';
-    return phonePattern.test(value) || 'Please enter a valid phone number';
+    if (!value.startsWith("0")) return "Phone number must start with 0";
+    if (!phonePattern.test(value)) return "Please enter a valid phone number";
+    if (value.length > 15) return "Phone number cannot exceed 15 digits";
+    if (value?.length < 8) return "A valid phone number should contains atleast 8 digits";
   };
 
   return (
@@ -107,9 +106,14 @@ export default function PersonalInfoForm() {
                         message: 'First name can only contain letters',
                       },
                       maxLength: {
-                        value: 50,
-                        message: 'First name cannot be more than 50 characters'
-                      }
+                        value: 25,
+                        message: 'First name cannot be more than 25 characters'
+                      },
+                      validate: (value) => {
+                        if (!value) return true;
+                        if (value.length < 2) return 'First name must be at least 2 characters';
+                        if (value.length > 25) return 'First name must be at most 25 characters';
+                      },
                     })}
                     error={!!errors.firstName}
                     helperText={errors?.firstName?.message}
@@ -121,10 +125,15 @@ export default function PersonalInfoForm() {
                       pattern: {
                         value: /^[A-Za-z]+$/i,
                         message: 'Last name can only contain letters',
-                        maxLength: {
-                          value: 50,
-                          message: 'Last name cannot be more than 50 characters'
-                        }
+                      },
+                      maxLength: {
+                        value: 25,
+                        message: 'Last name cannot be more than 25 characters'
+                      },
+                      validate: (value) => {
+                        if (!value) return true;
+                        if (value.length < 2) return 'Last name must be at least 2 characters';
+                        if (value.length > 25) return 'Last name must be at most 25 characters';
                       },
                     })}
                     error={!!errors.lastName}
@@ -160,7 +169,13 @@ export default function PersonalInfoForm() {
                 <FormInput
                   label="Address"
                   placeholder="e.g. 1234 Main St"
-                  {...register('address', {})}
+                  {...register('address', {
+                    validate: (value) => {
+                      if (!value) return true;
+                      if (value.length < 2) return 'Address must be at least 2 characters';
+                      if (value.length > 100) return 'Address must be at most 100 characters';
+                    },
+                  })}
                   error={!!errors.address}
                   helperText={errors?.address?.message}
                 />

@@ -52,7 +52,7 @@ function CourseDetailPage() {
       !isLoadingEnrolled &&
       enrolledCourses?.courseIds.includes(Number(coursesId))
     ) {
-      navigate(`/courses/${coursesId}/watch/overview`);
+      // navigate(`/courses/${coursesId}/watch/overview`);
     }
     if (recommendedCoursesData) {
       setRecommendedCourses(recommendedCoursesData.data);
@@ -71,7 +71,7 @@ function CourseDetailPage() {
   if (isLoading) return <ContentLoading />;
 
   if (isError || isRecommendedError) {
-    return navigate("/CoursesNotFound");
+    return navigate("/course-not-found");
   }
   return (
     <Elements stripe={stripePromise}>

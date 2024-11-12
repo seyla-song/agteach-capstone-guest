@@ -1,12 +1,15 @@
+import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+
 import { Button, Stack, Typography, Box } from '@mui/material';
 import ImageIcon from '@mui/icons-material/Image';
 import UploadIcon from '@mui/icons-material/FileUploadOutlined';
 import ScanIcon from '@mui/icons-material/CenterFocusStrongOutlined';
-import { useForm } from 'react-hook-form';
-import { useState } from 'react';
-import { DiseaseInfoComponent } from './DiseaseInfoComponent';
+
 import { usePredictImageMutation } from '../../services/api/aiApi';
 import { convertToJPG } from '../../utils/imageUtils';
+
+import { DiseaseInfoComponent } from './DiseaseInfoComponent';
 
 /**
  * ImageScan component is a reusable component
@@ -54,8 +57,8 @@ export const ImageScan = () => {
   const onSubmit = async (data) => {
     setScan(true);
 
-    const file = data.file[0]
-    const resizeFile = await convertToJPG(file)
+    const file = data.file[0];
+    const resizeFile = await convertToJPG(file);
     const formData = new FormData();
     formData.append('image', resizeFile);
 
@@ -74,6 +77,12 @@ export const ImageScan = () => {
       console.error(err);
     }
   };
+
+  // Check if there's a selected file and if its type is valid
+  const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
+  const selectedFileOption = selectedFile && selectedFile[0];
+  const isValidFile =
+    selectedFileOption && validTypes.includes(selectedFileOption.type);
 
   const handleReset = () => {
     reset();
@@ -97,7 +106,7 @@ export const ImageScan = () => {
             <Stack alignItems="center">
               <ImageIcon sx={{ width: 200, height: 200 }} />
               <Typography variant="bxsr" color="dark.300">
-              Upload your image here .jpg 150 x 150
+                Upload your image here .jpg 150 x 150
               </Typography>
             </Stack>
           )}
@@ -141,23 +150,25 @@ export const ImageScan = () => {
             component="input"
             id="file"
             type="file"
+            accept="image/jpeg, image/png, image/webp"
             {...register('file')}
           />
           {!data && (
-            <Stack gap direction="row" py={3}>
+            <Stack gap={1} direction="row" py={3}>
               <Button
                 onClick={() => document.getElementById('file').click()}
-                disabled-={!selectedFile}
+                disabled-={!selectedFile || !isValidFile}
                 variant="outlined"
                 color="primary"
                 endIcon={<UploadIcon />}
               >
                 Upload
               </Button>
-              {selectedImageUrl && (
+              {selectedImageUrl &&  (
                 <Button
                   variant="contained"
                   type="submit"
+                  disabled={!isValidFile}
                   endIcon={<ScanIcon />}
                 >
                   Scan
@@ -175,6 +186,11 @@ export const ImageScan = () => {
                 Scan another plant
               </Button>
             </Stack>
+          )}
+          {!isValidFile && selectedFile && (
+            <Typography variant="bxsr" color="red.main">
+              Please select a valid image file (JPG, PNG, or WEBP).
+            </Typography>
           )}
         </Stack>
       </Box>
