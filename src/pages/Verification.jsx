@@ -41,6 +41,7 @@ export default function VerificationPage() {
           isVerified: true,
         })
       );
+      localStorage.setItem("signupStage", "complete");
       if (isAtCart) {
         navigate("/cart");
       } else if (isAtCourseDetail) {

@@ -6,12 +6,14 @@ import { CssBaseline } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useIsLoginQuery } from "./services/api/authApi";
 import { checkLoginStatus } from "./features/auth/authSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { setEmail } from "./features/auth/userSlice";
+import { ContentLoading } from "./components";
 
 function App() {
   const dispatch = useDispatch();
-  const { data } = useIsLoginQuery();
+  const { data, isLoading } = useIsLoginQuery();
+  const [authLoaded, setAuthLoaded] = useState(false);
 
   useEffect(() => {
     if (data) {
@@ -22,8 +24,15 @@ function App() {
         })
       );
       dispatch(setEmail(data?.email));
+      setAuthLoaded(true);
     }
   }, [data, dispatch]);
+
+  if (isLoading || !authLoaded) {
+    return (
+      <ContentLoading />
+    );
+  }
 
   return (
     <ThemeProvider theme={theme}>

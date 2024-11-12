@@ -66,6 +66,14 @@ const ResetPasswordPage = () => {
     }
   };
 
+  const validatePassword = (value) => {
+    if (!/[a-z]/.test(value)) return "Password must contain at least one lowercase letter.";
+    if (!/[A-Z]/.test(value)) return "Password must contain at least one uppercase letter.";
+    if (!/\d/.test(value)) return "Password must contain at least one number.";
+    if (!/[@$!%*?&]/.test(value)) return "Password must contain at least one special character.";
+    return true; 
+  };
+
   return (
     <Box>
       <Container maxWidth="md">
@@ -107,6 +115,7 @@ const ResetPasswordPage = () => {
                           message:
                             'Password must be at least 8 characters long',
                         },
+                        validate: validatePassword
                       })}
                       error={Boolean(errors.newPassword)}
                       helperText={errors.newPassword?.message}
@@ -128,6 +137,9 @@ const ResetPasswordPage = () => {
                       showPassword={showPassword}
                       handleClickShowPassword={handleClickShowPassword}
                     />
+                    <Typography color="dark.300" fontSize="12px" marginTop={"10px"} textAlign={"left"}>
+                      Password must contains at least one lowercase letter, one uppercase letter, one number, and one special character.
+                    </Typography>
                     <Link to="/auth/login">
                       <Button
                         type="submit"
@@ -135,7 +147,7 @@ const ResetPasswordPage = () => {
                         fullWidth
                         disabled={isLoading || isSuccess}
                         style={{
-                          marginTop: '16px',
+                          marginTop: '12px',
                           padding: '12px',
                         }}
                       >

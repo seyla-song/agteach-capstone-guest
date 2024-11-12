@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { useUpdateInfoMutation } from "../../services/api/userApi";
 import { CustomAlert } from "../../components/CustomAlert";
+import ProfilePlaceholder from "../../assets/profile-placeholder.png";
 
 export const ProfilePhoto = ({ userData }) => {
   const [profileImage, setProfileImage] = useState();
@@ -22,7 +23,9 @@ export const ProfilePhoto = ({ userData }) => {
 
   useEffect(() => {
     if (userData) {
-      setProfileImage(userData?.customer?.imageUrl + `?${new Date().getTime()}`);
+      setProfileImage(
+        userData?.customer?.imageUrl + `?${new Date().getTime()}`
+      );
     }
   }, [userData]);
 
@@ -46,6 +49,9 @@ export const ProfilePhoto = ({ userData }) => {
       const formData = new FormData();
       formData.append("photo", imageFile);
       await updateInfo(formData);
+      setAlertMessage("Profile image updated successfully.");
+      setAlertSeverity("success");
+      setAlertOpen(true);
     } catch (error) {
       setAlertMessage("Error submitting form. Please try again.");
       setAlertSeverity("error");
@@ -80,8 +86,7 @@ export const ProfilePhoto = ({ userData }) => {
       >
         <Stack>
           <Avatar
-            // src={customerData.imageUrl}
-            src={profileImage}
+            src={profileImage || ProfilePlaceholder}
             alt="Profile Pic"
             sx={{ width: 300, height: 300, border: "15px solid lightgrey" }}
           />

@@ -67,7 +67,7 @@ export const CourseAccordionComponent = ({ data }) => {
       {/* Render each course as an accordion */}
       {data.map((section, sectionIdx) => (
         <Accordion
-          key={section.title}
+          key={sectionIdx}
           sx={{ backgroundColor: "grey.200", boxShadow: "none" }}
         >
           <AccordionSummary
@@ -85,9 +85,8 @@ export const CourseAccordionComponent = ({ data }) => {
           </AccordionSummary>
           {/* Each topic is rendered as a row inside the accordion */}
           {section.lectures.map((lecture, lectureIdx) => (
-            <Stack px={2}>
-              <AccordionDetails
-                key={lecture.title}
+            <Stack px={2} key={lectureIdx}>
+              <AccordionDetails                
                 sx={{
                   cursor: "pointer",
                   bgcolor:
