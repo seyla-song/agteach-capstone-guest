@@ -2,7 +2,6 @@ import { Container, Box, Stack, Typography, Button } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import Logout from "../assets/Authentication/logout.svg";
 
-
 /**
  * A React functional component that renders a login prompt with a message and a login button.
  *
@@ -10,10 +9,10 @@ import Logout from "../assets/Authentication/logout.svg";
  * @return {JSX.Element} The JSX element representing the login prompt.
  */
 
-export default function LoginPromptComponent({ pageName}) {
+export default function LoginPromptComponent({ pageName }) {
   return (
     <Container
-    maxWidth={false}
+      maxWidth={false}
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -47,10 +46,9 @@ export default function LoginPromptComponent({ pageName}) {
           }}
           gap={1}
         >
-          <Typography variant="blgsm">Your {pageName} is empty</Typography>
+          <Typography variant="blgsm">Looks like you're not logged in</Typography>
           <Typography variant="bsr">
-            Start create account or login now to save your favourite course and
-            more
+            Signup or login now to gain access to your {pageName}
           </Typography>
           <Button
             component={RouterLink}

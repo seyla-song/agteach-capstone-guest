@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { useSignupMutation } from "../services/api/authApi";
 import { useDispatch } from "react-redux";
-import { setEmail, setDob } from "../features/auth/userSlice";
+import { setEmail } from "../features/auth/userSlice";
 
 import { Button, Typography, Box, Stack, Grid, Container } from "@mui/material";
 
@@ -39,11 +39,14 @@ const SignupPage = () => {
   const handleShowPassword = () => setShowPassword((prev) => !prev);
 
   const validatePassword = (value) => {
-    if (!/[a-z]/.test(value)) return "Password must contain at least one lowercase letter.";
-    if (!/[A-Z]/.test(value)) return "Password must contain at least one uppercase letter.";
+    if (!/[a-z]/.test(value))
+      return "Password must contain at least one lowercase letter.";
+    if (!/[A-Z]/.test(value))
+      return "Password must contain at least one uppercase letter.";
     if (!/\d/.test(value)) return "Password must contain at least one number.";
-    if (!/[@$!%*?&]/.test(value)) return "Password must contain at least one special character.";
-    return true; 
+    if (!/[@$!%*?&]/.test(value))
+      return "Password must contain at least one special character.";
+    return true;
   };
 
   const submitHandler = async (data) => {
@@ -54,10 +57,11 @@ const SignupPage = () => {
       if (response.status === "success") {
         setSnackbarSeverity("success");
         setSnackbarMessage(response.message);
+        localStorage.setItem("signupStage", "additionalInfo");
       }
-      dispatch(setDob(dateOfBirth));
+      localStorage.setItem('dob', dateOfBirth);
       dispatch(setEmail(email));
-      navigate("info");
+      navigate("/auth/signup/info");
     } catch (error) {
       setSnackbarSeverity("error");
       setSnackbarMessage(error.data.message);
@@ -118,9 +122,14 @@ const SignupPage = () => {
                         required: "Please provide your date of birth",
                         validate: (value) => {
                           const currentDate = new Date();
-                          const age = differenceInYears(currentDate, new Date(value));
+                          const age = differenceInYears(
+                            currentDate,
+                            new Date(value)
+                          );
 
-                          return age >= 15 || "You must be at least 15 years old.";
+                          return (
+                            age >= 15 || "You must be at least 15 years old."
+                          );
                         },
                       }}
                       render={({ field }) => (
@@ -182,8 +191,14 @@ const SignupPage = () => {
                       error={!!errors.passwordConfirm}
                       helperText={errors.passwordConfirm?.message}
                     />
-                    <Typography color="dark.300" fontSize="12px" marginTop={"10px"} textAlign={"left"}>
-                      Password must contains at least one lowercase letter, one uppercase letter, one number, and one special character.
+                    <Typography
+                      color="dark.300"
+                      fontSize="12px"
+                      marginTop={"10px"}
+                      textAlign={"left"}
+                    >
+                      Password must contains at least one lowercase letter, one
+                      uppercase letter, one number, and one special character.
                     </Typography>
                     <Button
                       type="submit"

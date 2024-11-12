@@ -50,7 +50,7 @@ function Navigation() {
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
   const [logout] = useLogoutMutation();
-  const { data: guestData, isLoading: isLoginLoading } = useGetUserInfoQuery();
+  const { data: guestData } = useGetUserInfoQuery();
 
   const cartItemTotal = useSelector((state) => state.cart.totalQuantity);
 
@@ -80,6 +80,7 @@ function Navigation() {
       await logout(); // Call the logout mutation
       localStorage.removeItem('authToken');
       localStorage.removeItem('userInfo');
+      localStorage.removeItem('signupStage');
       navigate('/auth/login'); // Redirect to login page
     } catch (error) {
       console.error('Logout failed:', error);

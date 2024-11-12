@@ -6,7 +6,6 @@ import {
   Stack,
   Typography,
   Avatar,
-  CircularProgress,
 } from "@mui/material";
 import { useUpdateInfoMutation } from "../../services/api/userApi";
 import { CustomAlert } from "../../components/CustomAlert";
