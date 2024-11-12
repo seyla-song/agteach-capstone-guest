@@ -107,9 +107,14 @@ export default function PersonalInfoForm() {
                         message: 'First name can only contain letters',
                       },
                       maxLength: {
-                        value: 50,
-                        message: 'First name cannot be more than 50 characters'
-                      }
+                        value: 25,
+                        message: 'First name cannot be more than 25 characters'
+                      },
+                      validate: (value) => {
+                        if (!value) return true;
+                        if (value.length < 2) return 'First name must be at least 2 characters';
+                        if (value.length > 25) return 'First name must be at most 25 characters';
+                      },
                     })}
                     error={!!errors.firstName}
                     helperText={errors?.firstName?.message}
@@ -121,10 +126,15 @@ export default function PersonalInfoForm() {
                       pattern: {
                         value: /^[A-Za-z]+$/i,
                         message: 'Last name can only contain letters',
-                        maxLength: {
-                          value: 50,
-                          message: 'Last name cannot be more than 50 characters'
-                        }
+                      },
+                      maxLength: {
+                        value: 25,
+                        message: 'Last name cannot be more than 25 characters'
+                      },
+                      validate: (value) => {
+                        if (!value) return true;
+                        if (value.length < 2) return 'Last name must be at least 2 characters';
+                        if (value.length > 25) return 'Last name must be at most 25 characters';
                       },
                     })}
                     error={!!errors.lastName}
@@ -160,7 +170,13 @@ export default function PersonalInfoForm() {
                 <FormInput
                   label="Address"
                   placeholder="e.g. 1234 Main St"
-                  {...register('address', {})}
+                  {...register('address', {
+                    validate: (value) => {
+                      if (!value) return true;
+                      if (value.length < 2) return 'Address must be at least 2 characters';
+                      if (value.length > 100) return 'Address must be at most 100 characters';
+                    },
+                  })}
                   error={!!errors.address}
                   helperText={errors?.address?.message}
                 />
