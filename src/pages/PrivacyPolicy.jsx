@@ -1,10 +1,10 @@
 import React from 'react';
-import { Box, Typography, Container, Divider } from '@mui/material';
+import { Stack, Typography, Container, Divider } from '@mui/material';
 
 const PrivacyPolicy = () => {
   return (
     <Container>
-      <Box sx={{ padding: 4 }}>
+      <Stack pt={10} minHeight='100vh'>
         <Typography variant="blgsm" gutterBottom>
           Privacy Policy
         </Typography>
@@ -101,7 +101,7 @@ const PrivacyPolicy = () => {
         <Typography variant="bsr" paragraph>
           If you have questions or concerns, contact us at [Insert Contact Email].
         </Typography>
-      </Box>
+      </Stack>
     </Container>
   );
 };
