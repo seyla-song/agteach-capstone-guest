@@ -71,7 +71,7 @@ const PrivacyPolicy = () => {
           5. Your Rights
         </Typography>
         <Typography variant="bsr" paragraph>
-          You can access, update, or delete your data by contacting us at [Insert Contact Email].
+          You can access, update, or delete your data by contacting us at khomkhit460@gmail.com
         </Typography>
 
         <Divider sx={{ my: 2 }} />
@@ -99,7 +99,7 @@ const PrivacyPolicy = () => {
           8. Contact Us
         </Typography>
         <Typography variant="bsr" paragraph>
-          If you have questions or concerns, contact us at [Insert Contact Email].
+          If you have questions or concerns, contact us at khomkhit460@gmail.com.
         </Typography>
       </Stack>
     </Container>
