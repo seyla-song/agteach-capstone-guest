@@ -23,6 +23,7 @@ import VerificationPage from '../pages/Verification';
 import SuccessPayment from '../pages/SuccessPayment';
 import FailPayment from '../pages/FailPayment';
 import TermsAndConditions from '../pages/TermsAndCondition';
+import PrivacyPolicy from '../pages/PrivacyPolicy';
 
 export {
   HomePage,
@@ -49,5 +50,6 @@ export {
   VerificationPage,
   SuccessPayment,
   FailPayment,
-  TermsAndConditions
+  TermsAndConditions,
+  PrivacyPolicy
 };
