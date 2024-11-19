@@ -57,7 +57,7 @@ export const Footer = () => {
             <Typography variant="blgsm">
               Ready to share your passion ? Join with us.
             </Typography>
-            <Link href={teachAgtechURL} color="common.white" underline="none">
+            <Link href={teachAgtechURL} target="_blank" color="common.white" underline="none">
               <Button variant="contained" color="secondary">
                 Become an Instructor
               </Button>
@@ -66,8 +66,14 @@ export const Footer = () => {
         </Stack>
         <Stack textAlign="center" width="100%">
           <Typography variant="btr">
-            © All right reserved AgTeach - 2024 | Terms and Service | Privacy
-            Policy
+            © All right reserved AgTeach - 2024 |{' '}
+            <Link component={RouterLink} to={'/terms-and-conditions'} target="_blank" sx={{color: 'common.white'}}>
+              Terms and Service
+            </Link>{' '}
+            | {' '}
+            <Link component={RouterLink} to={'/privacy-policy'} target="_blank" sx={{color: 'common.white'}}>
+            Privacy Policy
+            </Link>
           </Typography>
         </Stack>
       </Container>
