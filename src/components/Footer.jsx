@@ -70,7 +70,10 @@ export const Footer = () => {
             <Link component={RouterLink} to={'/terms-and-conditions'} sx={{color: 'common.white'}}>
               Terms and Service
             </Link>{' '}
-            | Privacy Policy
+            | {' '}
+            <Link component={RouterLink} to={'/privacy-policy'} sx={{color: 'common.white'}}>
+            Privacy Policy
+            </Link>
           </Typography>
         </Stack>
       </Container>
