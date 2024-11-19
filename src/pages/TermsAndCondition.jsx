@@ -1,14 +1,14 @@
 import React from 'react';
-import { Box, Typography, Container, Divider } from '@mui/material';
+import { Stack, Typography, Container, Divider } from '@mui/material';
 
 const TermsAndConditions = () => {
   return (
     <Container>
-      <Box sx={{ padding: 4 }}>
+      <Stack sx={{ padding: 4 }}>
         <Typography variant="blgsm" gutterBottom>
           Terms and Conditions
         </Typography>
-        <Typography variant="body2" color="textSecondary">
+        <Typography variant="bsr">
           Last Updated: Nov 19, 2024
         </Typography>
 
@@ -137,7 +137,7 @@ const TermsAndConditions = () => {
         <Typography variant="bsr" paragraph>
           For questions or concerns about these Terms, please contact us at khomkhit460@gmail.com
         </Typography>
-      </Box>
+      </Stack>
     </Container>
   );
 };
