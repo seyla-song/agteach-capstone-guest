@@ -23,6 +23,7 @@ import {
   SuccessPayment,
   FailPayment,
   TermsAndConditions,
+  PrivacyPolicy,
 } from "./index";
 
 import ProtectedRoute from "./ProtectedRoute";
@@ -49,6 +50,7 @@ export const router = createBrowserRouter([
       { path: "marketplace/:productId", element: <ProductDetailPage /> },
       { path: "*", element: <ErrorPage /> },
       { path: "/terms-and-conditions", element: <TermsAndConditions /> },
+      { path: "/privacy-policy", element: <PrivacyPolicy /> },
       {
         path: "mylearning",
         element: <ProtectedRoute pageName="course" />,
