@@ -66,8 +66,11 @@ export const Footer = () => {
         </Stack>
         <Stack textAlign="center" width="100%">
           <Typography variant="btr">
-            © All right reserved AgTeach - 2024 | Terms and Service | Privacy
-            Policy
+            © All right reserved AgTeach - 2024 |{' '}
+            <Link component={RouterLink} to={'/terms-and-conditions'} sx={{color: 'common.white'}}>
+              Terms and Service
+            </Link>{' '}
+            | Privacy Policy
           </Typography>
         </Stack>
       </Container>
