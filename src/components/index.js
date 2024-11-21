@@ -1,10 +1,10 @@
 export { CustomCarousel } from './CustomCarousel';
 export { ContentLoading } from './ContentLoading';
-export { TitleComponent } from './product-detail-component/TitleComponent';
+export { TitleComponent } from './ProductDetailComponent/TitleComponent';
 export { CustomModal } from './CustomModal';
-export { SellerComponent } from './product-detail-component/SellerComponent';
-export { DescriptionComponent } from './product-detail-component/DescriptionComponent';
-export { ProductCarouselComponent } from './product-detail-component/ProductCarouselComponent';
+export { SellerComponent } from './ProductDetailComponent/SellerComponent';
+export { DescriptionComponent } from './ProductDetailComponent/DescriptionComponent';
+export { ProductCarouselComponent } from './ProductDetailComponent/ProductCarouselComponent';
 export { SuggestedCourseProduct } from './SuggestCourseProduct';
 export { CourseDetailHighlight } from './CourseDetail/CouseDetailHighlight';
 export { CourseDetailContent } from './CourseDetail/CourseDetailContent';
