@@ -1,5 +1,5 @@
 import { RouterProvider } from "react-router-dom";
-import { router } from "./routes/Route";
+import { router } from "./routes/routes";
 import { ThemeProvider } from "@emotion/react";
 import theme from "./theme/theme";
 import { CssBaseline } from "@mui/material";
