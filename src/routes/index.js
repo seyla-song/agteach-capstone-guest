@@ -12,7 +12,7 @@ import PersonalInformationPage from '../pages/PersonalInformation';
 import ProductDetailPage from '../pages/ProductDetail';
 import WishlistPage from '../pages/Wishlist';
 import AgAiPage from '../pages/AgAI';
-import RootLayout from '../routes/Root';
+import RootLayout from './Root';
 import ProductRootLayout from '../routes/ProductRoot';
 import ForgotPasswordPage from '../pages/ForgotPassword';
 import ResetPasswordPage from '../pages/ResetPassword';
