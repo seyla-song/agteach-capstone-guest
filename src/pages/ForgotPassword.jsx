@@ -17,7 +17,7 @@ import {
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 import { CustomAlert, LogoLink } from '../components/index';
-import forgetPasswordImg from '../assets/forgotpassword.png';
+import forgetPasswordImg from '../assets/forgot-password.png';
 
 /**
  * Renders a form to reset the user's password.

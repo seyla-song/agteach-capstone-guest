@@ -12,7 +12,7 @@ import React, { useState } from "react";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import InstructorProfileImg from "../../assets/InstructorProfile/instructorprofile.jpg";
+import InstructorProfileImg from "../../assets/InstructorProfile/instructor-profile.jpg";
 import { useNavigate } from "react-router-dom";
 /**
  * ProfilePage is a component that renders an instructor's profile page.
