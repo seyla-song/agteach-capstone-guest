@@ -1,6 +1,6 @@
 import { Container, Link, Typography, Button, Stack } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import Logo from '../assets/agteach_logo.svg';
+import Logo from '../assets/agteach-main-logo.svg';
 import { teachAgtechURL } from '../utils/globalURL';
 
 const FOOTER_MENU = [

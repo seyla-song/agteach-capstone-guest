@@ -24,7 +24,7 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { LogoutOutlined } from '@mui/icons-material';
 import ProfilePlaceholder from '../assets/profile-placeholder.png';
-import Logo from '../assets/agteach_logo.svg';
+import Logo from '../assets/agteach-main-logo.svg';
 import { useLogoutMutation } from '../services/api/authApi';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
