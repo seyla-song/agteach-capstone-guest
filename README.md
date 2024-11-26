@@ -2,14 +2,11 @@
 
 This project is designed to help aspiring farmer to start growing plan with knowledge and product, The platform offers high-quality, paid agricultural training videos alongside a marketplace for related products. This dual approach provides comprehensive support for farmers and agricultural workers worldwide.  
 
-[//]: # (> 🎯 Samsung Web Clone <a href="https://samsungalphabeez.netlify.app/index.html">Click Here</a>.)
-
 ## Table of Contents
 
 - [Technology Used](#technology-used)
 - [Folder Structure](#folder-structure)
 - [Pages Included](#pages-included)
-<!-- - [Contributors](#contributors) -->
 - [Usage](#usage)
 - [Git Strategy](#git-strategy)
 - [Acknowledgement](#acknowledgement)
@@ -76,16 +73,16 @@ project-root/
 
 | **Folder Name**            | **Contain**                                                 |
 | -------------------------- | ----------------------------------------------------------- |
-| **client/public/**         | Contains static files like HTML, CSS, and images.           |
-| **client/src/**            | main source code for the React application                  |
-| **client/src/assets/**     | Contains images need to import into your React components   |
-| **client/src/components/** | Reusable UI components.                                     |
-| **client/src/constants/**  | API base url                                                |
-| **client/src/pages/**      | Components representing different pages of the application. |
-| **client/src/routes/**     | Components root layout and router navigate to pages         |
-| **client/src/services/**   | API service functions.                                      |
-| **client/src/store/**      | Application state that have slice, reducer and middleware   |
-| **client/src/utils/**      | Utility functions and helpers.                              |
+| **public/**         | Contains static files like HTML, CSS, and images.           |
+| **src/**            | main source code for the React application                  |
+| **src/assets/**     | Contains images need to import into your React components   |
+| **src/components/** | Reusable UI components.                                     |
+| **src/constants/**  | API base url                                                |
+| **src/pages/**      | Components representing different pages of the application. |
+| **src/routes/**     | Components root layout and router navigate to pages         |
+| **src/services/**   | API service functions.                                      |
+| **src/store/**      | Application state that have slice, reducer and middleware   |
+| **src/utils/**      | Utility functions and helpers.                              |
 
 
 ## Contributors
@@ -98,7 +95,7 @@ project-root/
 | **Khom Khit**        | Backend              |
 | **Panha Phosda**     | Front-end            |
 | **Chiv Sovanchitra** | Front-end            |
-| **Rith Sohak Neadh** | Front-end            |
+| **Rith Sokha Neadh** | Front-end            |
 | **Pann SengLay**     | Front-end            |
 
 ## Usage
