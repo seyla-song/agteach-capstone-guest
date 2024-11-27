@@ -150,7 +150,14 @@
 
   },
   "verification": { 
-
+    "enterVerificationCode": "បញ្ចូលលេខកូដផ្ទៀងផ្ទាត់",
+    "submit": "ដាក់ស្នើ",
+    "goBack": "ត្រឡប់ក្រោយ",
+    "didntReceiveTheCode": "មិនបានទទួលបានលេខកូដ?",
+    "requestCode": "ស្នើសុំលេខកូដ",
+    "checkYourEmailForVerificationCode": "ពិនិត្យអ៊ីមែលរបស់អ្នកសម្រាប់លេខកូដផ្ទៀងផ្ទាត់",
+    "pleaseEnterCodeNumber": "សូមបញ្ចូលលេខកូដដែលអ្នកទទួលបានក្នុងអ៊ីមែល ដើម្បីផ្ទៀងផ្ទាត់គណនីរបស់អ្នក.",
+    "code": "កូដ"
   },
   "guestProfile": { 
 
