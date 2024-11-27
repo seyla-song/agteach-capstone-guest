@@ -124,7 +124,7 @@ export default function PersonalInfoForm() {
                 </Typography>
                 <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
                   <FormInput
-                    label="First Name"
+                    label={t("additionalInfo.firstName")}
                     placeholder="e.g. Jane"
                     {...register("firstName", {
                       pattern: {
@@ -147,7 +147,7 @@ export default function PersonalInfoForm() {
                     helperText={errors?.firstName?.message}
                   />
                   <FormInput
-                    label="Last Name"
+                    label={t("additionalInfo.lastName")}
                     placeholder="e.g. Smith"
                     {...register("lastName", {
                       pattern: {
@@ -177,7 +177,7 @@ export default function PersonalInfoForm() {
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                      label="City"
+                      label={t("additionalInfo.city")}
                       slotProps={{
                         htmlInput: {
                           ...params.inputProps,
@@ -200,7 +200,7 @@ export default function PersonalInfoForm() {
                   )}
                 />
                 <FormInput
-                  label="Address"
+                  label={t("additionalInfo.address")}
                   placeholder="e.g. 1234 Main St"
                   {...register("address", {
                     validate: (value) => {
@@ -223,7 +223,7 @@ export default function PersonalInfoForm() {
                 </Typography>
                 <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
                   <FormInput
-                    label="Phone number"
+                    label={t("additionalInfo.phone")}
                     placeholder="e.g. 0123456789"
                     {...register("phone", {
                       validate: validatePhone,
