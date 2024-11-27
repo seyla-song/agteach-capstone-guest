@@ -54,7 +54,8 @@
     "hour":"ម៉ោង",
     "minute": "នាទី",
     "second":"វិនាទី",
-    "whatYouWillLearnInThisCourse?": "តើអ្នកនឹងរៀនអ្វីខ្លះក្នុងវគ្គសិក្សានេះ?"
+    "whatYouWillLearnInThisCourse?": "តើអ្នកនឹងរៀនអ្វីខ្លះក្នុងវគ្គសិក្សានេះ?",
+    "courseContent": "ខ្លឹមសារនៃវគ្គសិក្សា"
   },
   "productDetail": { 
     "reachStockLimit":"ឈានដល់ដែនកំណត់ស្តុក",
