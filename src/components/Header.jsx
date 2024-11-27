@@ -32,12 +32,7 @@ import { useSelector } from "react-redux";
 import { useGetUserInfoQuery } from "../services/api/userApi";
 import { useTranslation } from "react-i18next";
 
-const HEADER_MENU_MOBILE = [
-  { page: "My Learning", path: "mylearning" },
-  { page: "Marketplace", path: "marketplace" },
-  { page: "AgAI", path: "agai" },
-  // { page: 'Wishlist', path: 'wishlist' },
-];
+
 
 function Navigation() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -53,6 +48,12 @@ function Navigation() {
     { page: t("header.myLearning"), path: "mylearning" },
     { page: t("header.marketPlace"), path: "marketplace" },
     { page: t("header.agai"), path: "agai" },
+  ];
+  const HEADER_MENU_MOBILE = [
+    { page: t("header.myLearning"), path: "mylearning" },
+    { page: t("header.marketPlace"), path: "marketplace" },
+    { page: t("header.agai"), path: "agai" },
+    // { page: 'Wishlist', path: 'wishlist' },
   ];
 
   const cartItemTotal = useSelector((state) => state.cart.totalQuantity);
