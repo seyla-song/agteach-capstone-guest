@@ -10,7 +10,7 @@ install_dependencies:
       - node_modules/
   image: node:20
   only:
-    # - main
+    - main
   script:
     - node -v
     - echo "Installing dependencies"
