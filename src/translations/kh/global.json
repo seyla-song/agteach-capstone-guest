@@ -89,6 +89,28 @@
 
   },
   "additionalInfo": { 
+    "additionalInformation": "ព័ត៌មានបន្ថែម",
+    "nameAddress": "ឈ្មោះ & អាសយដ្ឋាន",
+    "firstName": "នាមត្រកូល",
+    "lastName": "នាមខ្លួន",
+    "city": "ទីក្រុង ឬ ខេត្ត",
+    "address":"អាសយដ្ឋាន",
+
+    "contactInformation": "ព័ត៌មានទំនាក់ទំនង",
+    "phone": "លេខទូរស័ព្ទ",
+    "skip": "បន្ត",
+
+    "firstNameMustBeAtLeast2Characters": "នាមត្រកូលត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
+    "lastNameMustBeAtLeast2Characters": "នាមខ្លួនត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
+    "firstNameCanOnlyContainLetters":"នាមត្រកូលអាចមានតែអក្សរប៉ុណ្ណោះ",
+    "lastNameCanOnlyContainLetters": "នាមខ្លួនអាចមានតែអក្សរប៉ុណ្ណោះ",
+    "addressMustBeAtLeast2Characters": "អាសយដ្ឋានត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
+    "phoneNumberMustStartWith0": "លេខទូរស័ព្ទត្រូវតែចាប់ផ្តើមដោយលេខ 0",
+    "aValidPhoneNumberShouldContainsAtleast8Digits": "លេខទូរស័ព្ទដែលមានសុពលភាពគួរតែមានយ៉ាងហោចណាស់ 8 ខ្ទង់",
+    "phoneNumberCannotExceed15Digits": "លេខទូរស័ព្ទមិនអាចលើសពី 15 ខ្ទង់បានទេ",
+    "pleaseEnterAValidPhoneNumber": "សូមបញ្ចូលលេខទូរស័ព្ទអោយបានត្រឹមត្រូវ",
+    
+    "submit": "ដាក់ស្នើ"
 
   },
   "verification": { 
