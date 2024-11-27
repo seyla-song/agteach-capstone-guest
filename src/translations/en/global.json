@@ -122,7 +122,28 @@
     "youMustBeAtLeast15YearsOld":"You must be at least 15 years old."
   },
   "additionalInfo": { 
+    "additionalInformation": "Additional Information",
+    "nameAddress": "Name & Address",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "city": "City",
+    "address": "Address",
 
+    "contactInformation": "Contact Information",
+    "phone": "Phone number",
+    "skip": "Skip",
+
+    "firstNameMustBeAtLeast2Characters": "First name must be at least 2 characters",
+    "lastNameMustBeAtLeast2Characters": "Last name must be at least 2 characters",
+    "firstNameCanOnlyContainLetters":"First name can only contain letters",
+    "lastNameCanOnlyContainLetters": "Last name can only contain letters",
+    "addressMustBeAtLeast2Characters": "Address must be at least 2 characters",
+    "phoneNumberMustStartWith0": "Phone number must start with 0",
+    "aValidPhoneNumberShouldContainsAtleast8Digits": "A valid phone number should contains atleast 8 digits",
+    "phoneNumberCannotExceed15Digits": "Phone number cannot exceed 15 digits",
+    "pleaseEnterAValidPhoneNumber": "Please enter a valid phone number",
+    
+    "submit": "Submit"
   },
   "verification": { 
 
