@@ -153,6 +153,7 @@
     "goBack": "Go Back",
     "didntReceiveTheCode": "Didn't receive the code?",
     "requestCode": "Request code",
+    "resendCode": "Resend code",
     "checkYourEmailForVerificationCode": "Check your email for verification code.",
     "pleaseEnterCodeNumber": "Please enter code number that you receive in the email to verify your account.",
     "code": "Code"

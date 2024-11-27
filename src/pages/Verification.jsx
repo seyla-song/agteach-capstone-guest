@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useRef } from "react";
 import { checkLoginStatus } from "../features/auth/authSlice";
+import { useTranslation } from "react-i18next";
 
 export default function VerificationPage() {
   const timeoutRef = useRef(null);
@@ -26,6 +27,7 @@ export default function VerificationPage() {
     formState: { errors },
   } = useForm();
 
+  const [t] = useTranslation("global");
   const [verifyEmail, { isLoading, isSuccess, isError }] =
     useVerifyEmailMutation();
   const { email } = useSelector((state) => state.user);
@@ -96,17 +98,16 @@ export default function VerificationPage() {
           </Stack>
           <Box textAlign={"center"}>
             <Typography sx={{ typography: { xs: "h4", sm: "blgsm" } }}>
-              Check your email for verification code .
+              {t("verification.checkYourEmailForVerificationCode")}
             </Typography>
-            <Typography variant="bsr" sx={{ color: "dark.300" }}>
-              Please enter code number that you receive in the email <br /> to
-              verify your account.
+            <Typography variant="bsr" sx={{ color: "dark.300" }}>             
+              {t("verification.pleaseEnterCodeNumber")}
             </Typography>
           </Box>
         </Grid2>
         <Grid2 item="true" sx={{ width: { xs: "100%", sm: "40%" } }}>
           <Stack width={"100%"} spacing={2}>
-            <Typography variant="blgsm">Enter verification code</Typography>
+            <Typography variant="blgsm">{t("verification.enterVerificationCode")}</Typography>
             <Box
               component="form"
               onSubmit={handleSubmit(onSubmit)}
@@ -114,7 +115,7 @@ export default function VerificationPage() {
             >
               <FormInput
                 mt={2}
-                label="Code"
+                label={t("verification.code")}
                 type="text"
                 {...register("emailVerifyCode", {
                   required: "Verification code is required",
@@ -146,7 +147,7 @@ export default function VerificationPage() {
                   variant="contained"
                   disabled={isLoading}
                 >
-                  Submit
+                  {t("verification.submit")}
                 </Button>
                 <Button
                   fullWidth
@@ -155,7 +156,7 @@ export default function VerificationPage() {
                   startIcon={<ArrowBack />}
                   onClick={() => navigate("/auth/signup")}
                 >
-                  Go Back
+                  {t("verification.goBack")}
                 </Button>
                 <ResendCodeButton email={email} timeoutRef={timeoutRef} />
               </Stack>
