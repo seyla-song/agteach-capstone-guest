@@ -4,14 +4,18 @@ import {
   AccordionDetails,
   Typography,
   Stack,
-} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useTranslation } from "react-i18next";
 
 export const CustomFaq = () => {
+  const [t] = useTranslation("global");
+  const faqList = t("homepage.faqList", { returnObjects: true });
+  console.log(faqList);
   return (
     <Stack gap={3} pb={5}>
       <Typography variant="h4" textAlign="center">
-        Frequently Asked Questions
+        {t("homepage.faqTitle")}
       </Typography>
       <Stack>
         {faqList.map((item) => (
@@ -24,7 +28,7 @@ export const CustomFaq = () => {
               <Typography variant="bmdsm">{item.question}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography color="dark.300">{item.answer}</Typography>
+              <Typography color="dark.300" multiline>{item.answer}</Typography>
             </AccordionDetails>
           </Accordion>
         ))}
@@ -32,36 +36,3 @@ export const CustomFaq = () => {
     </Stack>
   );
 };
-
-const faqList = [
-  {
-    question: 'What exactly is AgTeach?',
-    answer: `Simple! We're your one-stop platform for learning farming through video courses and buying the supplies you need. 
-               Think of us as your farming teacher and supply store, all in one place.`,
-  },
-  {
-    question: 'Is this for complete beginners?',
-    answer: `Absolutely! Whether you've never planted a seed or you're an experienced farmer, we've got something for you. 
-               We start with the basics and build up to advanced techniques.`,
-  },
-  {
-    question: 'What kinds of farming videos do you have?',
-    answer: `Everything from "How to Start Your First Garden" to advanced topics like:
-               - Growing different crops
-               - Taking care of your soil
-               - Dealing with pests naturally
-               - Setting up irrigation
-               - Harvesting tips
-               - And lots more!`,
-  },
-  {
-    question: 'What can I buy in your marketplace?',
-    answer: `All the essentials you learn about in our videos:
-               - Seeds
-               - Tools
-               - Soil supplies
-               - Plant food
-               - Pest control
-               - Safety gear`,
-  },
-];

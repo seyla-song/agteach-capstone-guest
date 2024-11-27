@@ -6,6 +6,7 @@
     "login": "Login"
   },
   "homepage": { 
+    "faqTitle": "Frequently Asked Questions",
     "faqList": [
     {
       "question": "What exactly is AgTeach?",
