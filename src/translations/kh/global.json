@@ -24,7 +24,17 @@
 
   },
   "courseDetail": { 
-
+    "createdBy": "បង្កើតឡើងដោយ",
+    "enroll": "ចុះឈ្មោះឥឡូវនេះ",
+    "whatYouWillLearnInThisCourse?WhatIncluded": "តើអ្នកនឹងរៀនអ្វីខ្លះក្នុងវគ្គសិក្សានេះ? អ្វីដែលរួមបញ្ចូល",
+    "thisCourseIncludes": "វគ្គសិក្សានេះរួមបញ្ចូល",
+    "min": "នាទី",
+    "video": "វីដេអូ",
+    "courseContent": "ខ្លឹមសារនៃវគ្គសិក្សា",
+    "section": "វគ្គ",
+    "totalLength": "ប្រវែងសរុប",
+    "peopleAlsoLearnThisCourse": "សិស្សនានាក័ចូលរៀនវគ្គសិក្សានេះដែរ",
+    "youMightWantToBuyTheProductRelatedToThisCourse":"អ្នកប្រហែលជាចង់ទិញផលិតផលដែលទាក់ទងនឹងវគ្គសិក្សានេះ"
   },
   "courseVideo": { 
 
