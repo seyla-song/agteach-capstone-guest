@@ -4,5 +4,75 @@
     "marketPlace": "ទីផ្សារ",
     "agai": "អេជី​អេអាយ",
     "login": "ចូលគណនី"
-  }  
+  },
+  "homepage": { 
+
+  },
+  "myLearning": { 
+
+  },
+  "marketplace": { 
+
+  },
+  "agai": { 
+
+  },
+  "cart": { 
+
+  },
+  "searchResult": { 
+
+  },
+  "courseDetail": { 
+
+  },
+  "courseVideo": { 
+
+  },
+  "productDetail": { 
+
+  },
+  "termsService": { 
+
+  },
+  "privacyPolicy": { 
+
+  },
+  "error": { 
+
+  },
+  "cartEmpty": { 
+
+  },
+  "sucessPayment": { 
+
+  },
+  "failPayment": { 
+
+  },
+  "login": { 
+
+  },
+  "forgotPassword": { 
+
+  },
+  "resetPassword": { 
+
+  },
+  "signup": { 
+
+  },
+  "additionalInfo": { 
+
+  },
+  "verification": { 
+
+  },
+  "guestProfile": { 
+
+  },
+  "instructorProfile": { 
+
+  }
+  
 }

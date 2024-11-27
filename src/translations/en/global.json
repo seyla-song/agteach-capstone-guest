@@ -4,5 +4,74 @@
     "marketPlace": "Marketplace",
     "agai": "AgAI",
     "login": "Login"
-  }  
+  },
+  "homepage": { 
+
+  },
+  "myLearning": { 
+
+  },
+  "marketplace": { 
+
+  },
+  "agai": { 
+
+  },
+  "cart": { 
+
+  },
+  "searchResult": { 
+
+  },
+  "courseDetail": { 
+
+  },
+  "courseVideo": { 
+
+  },
+  "productDetail": { 
+
+  },
+  "termsService": { 
+
+  },
+  "privacyPolicy": { 
+
+  },
+  "error": { 
+
+  },
+  "cartEmpty": { 
+
+  },
+  "sucessPayment": { 
+
+  },
+  "failPayment": { 
+
+  },
+  "login": { 
+
+  },
+  "forgotPassword": { 
+
+  },
+  "resetPassword": { 
+
+  },
+  "signup": { 
+
+  },
+  "additionalInfo": { 
+
+  },
+  "verification": { 
+
+  },
+  "guestProfile": { 
+
+  },
+  "instructorProfile": { 
+
+  }
 }

@@ -48,7 +48,6 @@ function Navigation() {
   const [logout] = useLogoutMutation();
   const { data: guestData } = useGetUserInfoQuery();
   const [t, i18next] = useTranslation("global");
-  const [language, setLanguage] = useState(10);
 
   const HEADER_MENU_DESKTOP = [
     { page: t("header.myLearning"), path: "mylearning" },
@@ -244,16 +243,14 @@ function Navigation() {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  
+
   const handleChangeLanguage = (event) => {
-    setLanguage(event.target.value);
-    if(event.target.value === 10){
-      i18next.changeLanguage('en');
-    }else{
-      i18next.changeLanguage('kh');
+    if (event.target.value === 10) {
+      i18next.changeLanguage("en");
+    } else {
+      i18next.changeLanguage("kh");
     }
   };
-
 
   return (
     <AppBar position="sticky">
@@ -289,17 +286,24 @@ function Navigation() {
           </Box>
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                defaultValue={10}
-                sx={{color: "common.white"}}
-                label="Langauge"
-                onChange={handleChangeLanguage}
-              >
-                <MenuItem value={10}>English</MenuItem>
-                <MenuItem value={20}>ភាសាខ្មែរ</MenuItem>
-              </Select>
+            <Select
+              labelId="language-select-label"
+              id="language-select"
+              defaultValue={10}
+              sx={{
+                border: "none",
+                color: "common.white",
+                ".MuiSelect-icon": {
+                  color: "common.white",
+                },
+                ".MuiOutlinedInput-notchedOutline": { border: 0 },
+              }}
+              label="Langauge"
+              onChange={handleChangeLanguage}
+            >
+              <MenuItem value={10}>English</MenuItem>
+              <MenuItem value={20}>ភាសាខ្មែរ</MenuItem>
+            </Select>
             {accountStatus}
 
             {/* menubar */}
@@ -327,7 +331,7 @@ function Navigation() {
                   </Typography>
                 )}
               </IconButton>
-              
+
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorElNav}
