@@ -94,7 +94,20 @@
 
   },
   "signup": { 
-
+    "signup": "Sign Up",
+    "signUpToEnjoyAgteachFeatures": "Sign up to enjoy AgTeach features",
+    "username": "Username",
+    "dateOfBirth": "Date of Birth",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "passwordMustContains": "Password must contains at least one lowercase letter, one uppercase letter, one number, and one special character.",
+    "alreadyHaveAccount?": "Already have an account?",
+    "login": "Login",
+    "pleaseEnterYourEmail": "Please enter your email",
+    "pleaseEnterYourPassword": "Please enter your password",
+    "keepMeLoggedIn": "Keep me logged in",
+    "forgotPassword": "Forgot password?"
   },
   "additionalInfo": { 
 

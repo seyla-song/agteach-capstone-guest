@@ -94,7 +94,20 @@
 
   },
   "signup": { 
-
+    "signup": "ចុះឈ្មោះ",
+    "signUpToEnjoyAgteachFeatures": "ចុះឈ្មោះដើម្បីប្រើប្រាស់ជាមួយមុខងារAgteach",
+    "username": "ឈ្មោះអ្នកប្រើប្រាស់",
+    "dateOfBirth": "ថ្ងៃខែឆ្នាំកំណើត",
+    "email": "អ៊ីម៉ែល",
+    "password": "ពាក្យសម្ងាត់",
+    "confirmPassword": "បញ្ជាក់ពាក្យសម្ងាត់",
+    "passwordMustContains": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់អក្សរតូចមួយ អក្សរធំមួយ លេខមួយ និងតួអក្សរពិសេសមួយ។",
+    "alreadyHaveAccount?": "មានគណនីរួចហើយ?",
+    "login": "ចូលគណនី",
+    "pleaseEnterYourEmail": "សូមបញ្ចូលអ៊ីមែលរបស់អ្នក",
+    "pleaseEnterYourPassword": "សូមបញ្ចូលពាក្យសម្ងាត់របស់អ្នក",
+    "keepMeLoggedIn": "ចងចាំគណនីខ្ញុំ",
+    "forgotPassword": "ភ្លេចលេខសម្ងាត់?"
   },
   "additionalInfo": { 
 
