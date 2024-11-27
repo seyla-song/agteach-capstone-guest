@@ -54,7 +54,8 @@
     "hour":"hour",
     "minute":"minute",
     "second":"second",
-    "whatYouWillLearnInThisCourse?": "What you will learn in this course?"
+    "whatYouWillLearnInThisCourse?": "What you will learn in this course?",
+    "courseContent": "Course Content"
   },
   "productDetail": { 
     "reachStockLimit":"Reach Stock Limit",
