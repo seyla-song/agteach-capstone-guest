@@ -35,7 +35,10 @@
     "totalLength": "ប្រវែងសរុប",
     "peopleAlsoLearnThisCourse": "សិស្សនានាក័ចូលរៀនវគ្គសិក្សានេះដែរ",
     "youMightWantToBuyTheProductRelatedToThisCourse":"អ្នកប្រហែលជាចង់ទិញផលិតផលដែលទាក់ទងនឹងវគ្គសិក្សានេះ",
-    "processing":"កំពុងដំណើរការ"
+    "processing":"កំពុងដំណើរការ",
+    "stripeCheckoutError":"Stripe បរាជ័យក្នុងការបង្កើតវគ្គបង់ប្រាក់ចេញ",
+    "failedToCreateCheckoutSession":"បានបរាជ័យក្នុងការបង្កើតវគ្គបង់ប្រាក់ចេញ",
+    "errorDuringCheckout":"កំហុសអំឡុងពេលបង់ប្រាក់ចេញ"
   },
   "courseVideo": { 
 

@@ -42,15 +42,15 @@ export const CourseDetailHero = ({ courseData }) => {
       if (data.id) {
         const result = await stripe.redirectToCheckout({ sessionId: data.id });
         if (result.error) {
-          console.error('Stripe checkout error', result.error);
+          console.error(t('courseDetail.stripeCheckoutError'), result.error);
         }
       } else if (data.redirectUrl) {
         navigate(data.redirectUrl);
       } else {
-        console.error('Failed to create checkout session');
+        console.error(t('courseDetail.failedToCreateCheckoutSession'));
       }
     } catch (error) {
-      console.error('Error during checkout', error);
+      console.error(t('courseDetail.errorDuringCheckout'), error);
       if (error.status === 401) navigate('/auth/login');
     } finally {
       setLoading(false);
