@@ -3,7 +3,7 @@ const displayDuration = ({
   minutes,
   seconds,
   hourLabel = "",
-  minuteLabel = "d",
+  minuteLabel = "",
   secondLabel = "",
 }) => {
   let result = "";
@@ -12,7 +12,7 @@ const displayDuration = ({
 
   // Handle hours
   if (hours > 0) {
-    result += `${hours} hour$`;
+    result += `${hours} ${hourLabel}`;
   }
 
   // Handle minutes
