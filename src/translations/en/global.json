@@ -34,7 +34,8 @@
     "section": "Sections",
     "totalLength": "Total Length",
     "peopleAlsoLearnThisCourse": "People also learn this course",
-    "youMightWantToBuyTheProductRelatedToThisCourse":"You might want to buy the product related to this course"
+    "youMightWantToBuyTheProductRelatedToThisCourse":"You might want to buy the product related to this course",
+    "processing":"Processing"
 
   },
   "courseVideo": { 

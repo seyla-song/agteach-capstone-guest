@@ -66,7 +66,7 @@ export const CourseDetailHero = ({ courseData }) => {
             <Typography variant="h4">{courseData?.name}</Typography>
             <Typography variant="bsr">{courseData?.description}</Typography>
             <Typography variant="bsr">
-              Created by:{' '}
+              {t('courseDetail.createdBy')} :{' '}
               {instructorId && (
                 <Link
                   sx={{
@@ -122,7 +122,7 @@ export const CourseDetailHero = ({ courseData }) => {
                     variant="bmd"
                     color={!stripe || loading ? 'common.white' : 'primary'}
                   >
-                    {loading ? 'Processing...' : 'Enroll Now'}
+                    {loading ?  t('courseDetail.processing') : t('courseDetail.enroll')}
                   </Typography>
                 </Button>
               </Link>
