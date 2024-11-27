@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 
 import { LogoLink, FormInput, CustomAlert } from "../components/index";
+import { useTranslation } from "react-i18next";
 
 export default function PersonalInfoForm() {
   const [skip, setSkip] = useState(false);
@@ -43,6 +44,7 @@ export default function PersonalInfoForm() {
   });
   const navigate = useNavigate();
   const { data } = useGetLocationsQuery();
+  const [t] = useTranslation("global");
   const [addPerosnalInfo, { isLoading }] = useAddPersonalInfoMutation();
 
   const onSubmit = async (data) => {
@@ -105,7 +107,7 @@ export default function PersonalInfoForm() {
           <LogoLink />
 
           <Typography variant="h2" textAlign="center">
-            Additional Information
+            {t("additionalInfo.additionalInformation")}
           </Typography>
 
           <Stack
@@ -117,7 +119,9 @@ export default function PersonalInfoForm() {
             <Stack spacing={4}>
               {/* Personal Information */}
               <Stack spacing={2}>
-                <Typography variant="blgsm">Name & Address</Typography>
+                <Typography variant="blgsm">
+                  {t("additionalInfo.nameAddress")}
+                </Typography>
                 <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
                   <FormInput
                     label="First Name"
@@ -214,7 +218,9 @@ export default function PersonalInfoForm() {
 
               {/* Contact Information */}
               <Stack spacing={2}>
-                <Typography variant="blgsm">Contact Information</Typography>
+                <Typography variant="blgsm">
+                  {t("additionalInfo.contactInformation")}
+                </Typography>
                 <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
                   <FormInput
                     label="Phone number"
@@ -242,7 +248,7 @@ export default function PersonalInfoForm() {
                 sx={{ padding: { xs: "8px 20px", md: "8px 35px" } }}
                 disabled={isLoading}
               >
-                Skip
+                {t("additionalInfo.skip")}
               </Button>
 
               <Button
@@ -252,7 +258,9 @@ export default function PersonalInfoForm() {
                 sx={{ padding: { xs: "8px 20px", md: "8px 35px" } }}
                 disabled={isLoading}
               >
-                {isLoading && !skip ? "Submitting..." : "Submit"}
+                {isLoading && !skip
+                  ? t("additionalInfo.submit") + "..."
+                  : t("additionalInfo.submit")}
               </Button>
             </Stack>
           </Stack>
