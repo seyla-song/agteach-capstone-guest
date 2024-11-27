@@ -12,6 +12,7 @@ import { useStripe } from '@stripe/react-stripe-js';
 import { useEnrollmentMutation } from '../../services/api/enrollmentApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { isAtCourseDetail } from '../../features/auth/authSlice';
+import { useTranslation } from "react-i18next";
 
 export const CourseDetailHero = ({ courseData }) => {
   const [enrollment] = useEnrollmentMutation();
@@ -21,6 +22,7 @@ export const CourseDetailHero = ({ courseData }) => {
   const {isAuthenticated, isVerified} = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [t] = useTranslation("global");
 
   const handleCheckout = async () => {
     setLoading(true);
@@ -40,15 +42,15 @@ export const CourseDetailHero = ({ courseData }) => {
       if (data.id) {
         const result = await stripe.redirectToCheckout({ sessionId: data.id });
         if (result.error) {
-          console.error('Stripe checkout error', result.error);
+          console.error(t('courseDetail.stripeCheckoutError'), result.error);
         }
       } else if (data.redirectUrl) {
         navigate(data.redirectUrl);
       } else {
-        console.error('Failed to create checkout session');
+        console.error(t('courseDetail.failedToCreateCheckoutSession'));
       }
     } catch (error) {
-      console.error('Error during checkout', error);
+      console.error(t('courseDetail.errorDuringCheckout'), error);
       if (error.status === 401) navigate('/auth/login');
     } finally {
       setLoading(false);
@@ -64,7 +66,7 @@ export const CourseDetailHero = ({ courseData }) => {
             <Typography variant="h4">{courseData?.name}</Typography>
             <Typography variant="bsr">{courseData?.description}</Typography>
             <Typography variant="bsr">
-              Created by:{' '}
+              {t('courseDetail.createdBy')} :{' '}
               {instructorId && (
                 <Link
                   sx={{
@@ -120,7 +122,7 @@ export const CourseDetailHero = ({ courseData }) => {
                     variant="bmd"
                     color={!stripe || loading ? 'common.white' : 'primary'}
                   >
-                    {loading ? 'Processing...' : 'Enroll Now'}
+                    {loading ?  t('courseDetail.processing') : t('courseDetail.enroll')}
                   </Typography>
                 </Button>
               </Link>

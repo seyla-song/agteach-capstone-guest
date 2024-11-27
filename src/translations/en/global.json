@@ -23,7 +23,10 @@
       "question": "What can I buy in your marketplace?",
       "answer": "All the essentials you learn about in our videos:\n- Seeds\n- Tools\n- Soil supplies\n- Plant food\n- Pest control\n- Safety gear"
     }
-  ]
+  ],
+    "ctaTitle": "Ready to share your passion for indoor gardening?",
+    "ctaDescription": "Join our platform as an instructor and inspire others while showcasing your expertise. Empower the next generation of gardeners and grow your impact today! Apply now and be a part of our vibrant community",
+    "becomeAnInstructor":"Become an Instructor" 
   },
   "myLearning": { 
 
@@ -41,7 +44,22 @@
 
   },
   "courseDetail": { 
-
+    "createdBy": "Created by",
+    "enroll": "Enroll",
+    "whatYouWillLearnInThisCourse?": "What you will learn in this course?",
+    "thisCourseIncludes": "This course includes",
+    "min": "min",
+    "hour": "h",
+    "video": "Videos",
+    "courseContent": "Course Content",
+    "section": "Sections",
+    "totalLength": "Total Length",
+    "peopleAlsoLearnThisCourse": "People also learn this course",
+    "youMightWantToBuyTheProductRelatedToThisCourse":"You might want to buy the product related to this course",
+    "processing":"Processing",
+    "stripeCheckoutError":"Stripe checkout error",
+    "failedToCreateCheckoutSession":"Failed to create checkout session",
+    "errorDuringCheckout":"Error during checkout"
   },
   "courseVideo": { 
 
