@@ -11,6 +11,7 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { showDuration } from '../../utils/showDuration';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const CourseDetailContent = ({
   sections,
@@ -18,6 +19,7 @@ export const CourseDetailContent = ({
   courseLength,
 }) => {
   const [sectionLimit, setSectionLimit] = useState(10);
+  const [t] = useTranslation("global");
 
   const handleChangeSectionLimit = () => {
     setSectionLimit(sectionLimit + 10);
@@ -27,10 +29,10 @@ export const CourseDetailContent = ({
     <Grid item xs={12}>
       <Stack gap={2} py={{xs:5, md:10}}>
         <Stack>
-          <Typography variant="h4">Course Content</Typography>
+          <Typography variant="h4">{t('courseDetail.courseContent')}</Typography>
           <Typography variant="bxsr">
-            {sections.length} sections • {numberOfVideos} videos •{' '}
-            {showDuration(courseLength)} total length
+            {sections.length} {t('courseDetail.section')} • {numberOfVideos} {t('courseDetail.video')} •{' '}
+            {showDuration(courseLength, t('courseDetail.min'), t('courseDetail.hour'))} {t('courseDetail.totalLength')}
           </Typography>
         </Stack>
         <Stack>
@@ -58,7 +60,7 @@ export const CourseDetailContent = ({
                       >
                         <Typography>{lecture.name}</Typography>
                         <Typography>
-                          {showDuration(lecture.duration)}
+                          {showDuration(lecture.duration, t('courseDetail.min'), t('courseDetail.hour'))}
                         </Typography>
                       </Stack>
                       <Divider />
