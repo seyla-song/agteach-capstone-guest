@@ -13,9 +13,12 @@ import global_kh from "./translations/kh/global.json";
 import i18next from "i18next";
 import { I18nextProvider } from "react-i18next";
 
+const savedLanguage = localStorage.getItem("language") || "en";
+
 i18next.init({
   interpolate: { escapeValue: false },
-  lng: "en",
+  lng: savedLanguage,
+  fallbackLng: "en",
   resources: {
     en: {
       global: global_en,
