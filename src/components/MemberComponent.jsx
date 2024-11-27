@@ -1,8 +1,10 @@
 import { Box, Button, Container, Link, Stack, Typography } from '@mui/material';
 import Member from '../assets/happy-farmer.png';
 import { teachAgtechURL } from '../utils/globalURL';
+import { useTranslation } from 'react-i18next';
 
 export const MemberComponent = () => {
+  const [t] = useTranslation("global");
   return (
     <Container maxWidth={false} sx={{ bgcolor: 'primary.main', my: 5 }}>
       <Stack
@@ -19,20 +21,17 @@ export const MemberComponent = () => {
             sx={{ typography: { xs: 'h3', md: 'h2' } }}
             color="common.white"
           >
-            Ready to share your passion for indoor gardening?
+            {t('homepage.ctaTitle')}
           </Typography>
           <Typography
             sx={{ typography: { xs: 'bxsr', sm: 'bsr' } }}
             color="common.white"
           >
-            Join our platform as an instructor and inspire others while
-            showcasing your expertise. Empower the next generation of gardeners
-            and grow your impact today! Apply now and be a part of our vibrant
-            community
+            {t('homepage.ctaDescription')}
           </Typography>
           <Link href={teachAgtechURL} target="_blank" underline="none">
             <Button variant="contained" color="secondary">
-              Become an Instructor
+              {t('homepage.becomeAnInstructor')}
             </Button>
           </Link>
         </Stack>
