@@ -12,6 +12,7 @@ import { useStripe } from '@stripe/react-stripe-js';
 import { useEnrollmentMutation } from '../../services/api/enrollmentApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { isAtCourseDetail } from '../../features/auth/authSlice';
+import { useTranslation } from "react-i18next";
 
 export const CourseDetailHero = ({ courseData }) => {
   const [enrollment] = useEnrollmentMutation();
