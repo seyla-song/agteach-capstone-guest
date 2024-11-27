@@ -100,7 +100,7 @@ export default function SuccessPayment() {
                 color="dark.200"
                 sx={{ textDecoration: 'none' }}
               >
-                Terms and Conditon
+                <a href='https://stripe.com/legal/consumer'>Terms and Conditon</a>
               </Box>
             </Typography>
             <Typography variant="bxsr">
@@ -110,7 +110,7 @@ export default function SuccessPayment() {
                 color="dark.200"
                 sx={{ textDecoration: 'none' }}
               >
-                Privacy Policy
+                <a href='https://stripe.com/privacy'>Privacy Policy</a>
               </Box>
             </Typography>
           </Stack>
