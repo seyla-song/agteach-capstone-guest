@@ -22,7 +22,7 @@ export const CourseDetailHero = ({ courseData }) => {
   const {isAuthenticated, isVerified} = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [t, i18next] = useTranslation("global");
+  const [t] = useTranslation("global");
 
   const handleCheckout = async () => {
     setLoading(true);
