@@ -26,16 +26,6 @@ export const CourseObjectiveComponent = (props, children) => {
         <Typography variant="h4">{t('courseVideo.whatYouWillLearnInThisCourse?')}</Typography>
         <Typography variant="bxsr">
           {courseObjective}
-          {/* ✅ How to mix and manage nutrient solutions to ensure optimal plant
-          growth and health in a soil-free environment
-        </Typography>
-        <Typography variant="bxsr">
-          ✅ How to design and build various types of hydroponic systems,
-          including nutrient film techniques and deep water culture.
-        </Typography>
-        <Typography variant="bxsr">
-          ✅ Techniques for managing light, temperature, and humidity to create
-          the ideal conditions for indoor plant growth. */}
         </Typography>
       </Stack>
     </Stack>
