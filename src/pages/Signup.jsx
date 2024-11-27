@@ -11,6 +11,7 @@ import dayjs from "dayjs";
 
 import { CustomAlert, LogoLink, FormInput } from "../components/index";
 import { differenceInYears } from "date-fns";
+import { useTranslation } from "react-i18next";
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -35,17 +36,18 @@ const SignupPage = () => {
       dateOfBirth: null,
     },
   });
+  const [t] = useTranslation("global");
 
   const handleShowPassword = () => setShowPassword((prev) => !prev);
 
   const validatePassword = (value) => {
     if (!/[a-z]/.test(value))
-      return "Password must contain at least one lowercase letter.";
+      return t("signup.passwordMustContainLowercase");
     if (!/[A-Z]/.test(value))
-      return "Password must contain at least one uppercase letter.";
-    if (!/\d/.test(value)) return "Password must contain at least one number.";
+      return t("signup.passwordMustContainUppercase");
+    if (!/\d/.test(value)) return t("signup.passwordMustContainNumber");
     if (!/[@$!%*?&]/.test(value))
-      return "Password must contain at least one special character.";
+      return t("signup.passwordMustContainSpecialCharacter");
     return true;
   };
 
@@ -82,9 +84,9 @@ const SignupPage = () => {
         <Grid container justifyContent="center">
           <Grid item xs={12} sm={8} md={6}>
             <Stack spacing={2}>
-              <Typography variant="h2">Sign Up</Typography>
+              <Typography variant="h2">{t("signup.signup")}</Typography>
               <Typography variant="bmdr">
-                Sign up to enjoy AgTeach features
+              {t("signup.signUpToEnjoyAgteachFeatures")}
               </Typography>
               <Box width="100%">
                 <CustomAlert
@@ -96,20 +98,20 @@ const SignupPage = () => {
                 <form onSubmit={handleSubmit(submitHandler)}>
                   <Stack spacing={2}>
                     <FormInput
-                      label="Username"
+                      label={t("signup.username")}
                       {...register("username", {
-                        required: "Please enter your name",
+                        required: t("signup.pleaseEnterYourName"),
                         minLength: {
                           value: 3,
-                          message: "Username must be at least 3 characters",
+                          message: t("signup.usernameMustBeAtLease3characters"),
                         },
                         maxLength: {
                           value: 20,
-                          message: "Username must be at most 20 characters",
+                          message: t("signup.usernameMustBeAtMost20characters"),
                         },
                         pattern: {
                           value: /^[a-zA-Z][a-zA-Z0-9]*$/,
-                          message: "Username must at least start with a letter and contain only letters and numbers",
+                          message: t("signup.usernameMustStartWithALetter"),
                         },
                       })}
                       error={!!errors.username}
@@ -119,7 +121,7 @@ const SignupPage = () => {
                       name="dateOfBirth"
                       control={control}
                       rules={{
-                        required: "Please provide your date of birth",
+                        required: t("signup.pleaseProvideYourDateOfBirth"),
                         validate: (value) => {
                           const currentDate = new Date();
                           const age = differenceInYears(
@@ -128,13 +130,13 @@ const SignupPage = () => {
                           );
 
                           return (
-                            age >= 15 || "You must be at least 15 years old."
+                            age >= 15 || t("signup.youMustBeAtLeast15YearsOld")
                           );
                         },
                       }}
                       render={({ field }) => (
                         <FormInput
-                          label="Date of Birth"
+                          label={t("signup.dateOfBirth")}
                           isDate={true}
                           dateValue={field.value}
                           onDateChange={(newDate) => field.onChange(newDate)}
@@ -144,31 +146,31 @@ const SignupPage = () => {
                       )}
                     />
                     <FormInput
-                      label="Email"
+                      label={t("signup.email")}
                       {...register("email", {
-                        required: "Please enter your email",
+                        required: t("signup.pleaseEnterYourName"),
                         pattern: {
                           value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                          message: "Invalid email address",
+                          message: t("signup.invalidEmail"),
                         },
                       })}
                       error={!!errors.email}
                       helperText={errors.email?.message}
                     />
                     <FormInput
-                      label="Password"
+                      label={t("signup.password")}
                       type="password"
                       showPassword={showPassword}
                       handleClickShowPassword={handleShowPassword}
                       {...register("password", {
-                        required: "Please enter your password",
+                        required:  t("signup.pleaseEnterYourPassword"),
                         minLength: {
                           value: 8,
-                          message: "Password must be at least 8 characters",
+                          message: t("signup.passwordMustBeAtLease8characters"),
                         },
                         maxLength: {
                           value: 20,
-                          message: "Password must be at most 20 characters",
+                          message: t("signup.passwordMustBeAtMost20characters"),
                         },
                         validate: validatePassword,
                       })}
@@ -176,15 +178,15 @@ const SignupPage = () => {
                       helperText={errors.password?.message}
                     />
                     <FormInput
-                      label="Confirm Password"
+                      label={t("signup.confirmPassword")}
                       type="password"
                       showPassword={showPassword}
                       handleClickShowPassword={handleShowPassword}
                       {...register("passwordConfirm", {
-                        required: "Please confirm your password",
+                        required: t("signup.pleaseConfirmYourPassword"),
                         validate: (value) => {
                           if (value !== watch("password")) {
-                            return "Passwords do not match";
+                            return t("signup.passwordsDoNotMatch");
                           }
                         },
                       })}
@@ -197,8 +199,7 @@ const SignupPage = () => {
                       marginTop={"10px"}
                       textAlign={"left"}
                     >
-                      Password must contains at least one lowercase letter, one
-                      uppercase letter, one number, and one special character.
+                      {t("signup.passwordMustContains")}
                     </Typography>
                     <Button
                       type="submit"
@@ -207,11 +208,11 @@ const SignupPage = () => {
                       sx={{ padding: "12px" }}
                       disabled={isLoading}
                     >
-                      {isLoading ? "Signing Up..." : "Sign Up"}
+                      {isLoading ? t("signup.signup") + "..." : t("signup.signup")}
                     </Button>
                   </Stack>
                   <Typography py={2}>
-                    Already have an account? <Link to="/auth/login">Login</Link>
+                    {t("signup.alreadyHaveAccount")} <Link to="/auth/login">{t("signup.login")}</Link>
                   </Typography>
                 </form>
               </Box>
