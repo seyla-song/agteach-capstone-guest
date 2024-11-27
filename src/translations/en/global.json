@@ -6,6 +6,21 @@
     "login": "Login"
   },
   "homepage": { 
+    "coreValueTitle": "With many platforms available, what makes AgTeach the best choice?",
+    "coreValue": [
+      {
+        "title": "Learn to live sustainably and be self-sufficient",
+        "message": "Our platform helps you grow your own food, reduce grocery store trips, and cut down on your carbon footprint"
+      },
+      {
+        "title": "Your Health and Wellness is our priority",
+        "message": "Our courses teach you how to grow nutritious, pesticide-free food so you and your family can enjoy the freshest, healthiest meals."
+      },
+      {
+        "title": "Gain Valuable Knowledge and Skills",
+        "message": "You'll learn techniques like hydroponics, vertical farming and crop rotation, along with practical tips you can apply immediately."
+      }
+    ],
     "faqTitle": "Frequently Asked Questions",
     "faqList": [
     {

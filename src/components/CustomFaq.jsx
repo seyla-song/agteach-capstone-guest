@@ -11,7 +11,6 @@ import { useTranslation } from "react-i18next";
 export const CustomFaq = () => {
   const [t] = useTranslation("global");
   const faqList = t("homepage.faqList", { returnObjects: true });
-  console.log(faqList);
   return (
     <Stack gap={3} pb={5}>
       <Typography variant="h4" textAlign="center">
