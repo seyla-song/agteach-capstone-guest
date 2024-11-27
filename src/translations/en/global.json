@@ -9,7 +9,9 @@
 
     "ctaTitle": "Ready to share your passion for indoor gardening?",
     "ctaDescription": "Join our platform as an instructor and inspire others while showcasing your expertise. Empower the next generation of gardeners and grow your impact today! Apply now and be a part of our vibrant community",
-    "becomeAnInstructor":"Become an Instructor" 
+    "becomeAnInstructor":"Become an Instructor",
+    "seeMore":"See More",
+    "seeLess": "See Less"
   },
   "myLearning": { 
 
@@ -48,7 +50,13 @@
 
   },
   "productDetail": { 
-
+    "reachStockLimit":"Reach Stock Limit",
+    "reachStockLimitMessage":"Sorry, you have reached the available stock limit. You can still add other item to the cart.",
+    "callToAction": "Hurry only {{availableStock}} items left !",
+    "addToCart": "Add to Cart",
+    "outOfStock": "Out of Stock",
+    "outOfStockMessage":"Out of Stock. Explore similar products in our collection below.",
+    "youMightAlsoWantToBuyTheseProducts":"You might also want to buy these products"
   },
   "termsService": { 
 
