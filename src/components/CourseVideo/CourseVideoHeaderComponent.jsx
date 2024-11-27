@@ -1,6 +1,7 @@
 import { Button, Stack, Typography, Link } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Link as RouterLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 /**
  * A component that renders a course video header.
@@ -9,6 +10,7 @@ import { Link as RouterLink } from 'react-router-dom';
  * @returns {React.ReactElement} A `Stack` component with the course video header.
  */
 export const CourseVideoHeaderComponent = ({ title }) => {
+  const [t] = useTranslation("global");
   return (
     <Stack
       p={2}
@@ -28,7 +30,7 @@ export const CourseVideoHeaderComponent = ({ title }) => {
             sx={{ color: 'common.white' }}
             startIcon={<ChevronLeftIcon />}
           >
-            <Typography variant="bmdr"> Back</Typography>
+            <Typography variant="bmdr">{t('courseVideo.back')}</Typography>
           </Button>
         </Link>
         <Typography>|</Typography>
