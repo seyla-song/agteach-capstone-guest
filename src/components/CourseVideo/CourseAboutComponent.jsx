@@ -1,6 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import ExpandableText from "../../components/ExpandableText";
+import { useTranslation } from "react-i18next";
 
 /**
  * A component that renders a course about section.
@@ -17,12 +18,13 @@ export const CourseAboutComponent = ({
 }) => {
   const { instructorId } = instructor;
   const instructorName = `${instructor.firstName} ${instructor.lastName}`;
+  const [t] = useTranslation("global");
   return (
     <Stack gap={1}>
       <Typography variant="h3">{courseName}</Typography>
       <ExpandableText text={description} />
       <Typography variant="bxsr">
-        Created by:{" "}
+        {t('courseVideo.createdBy')}:{" "}
         <Link to={`/instructor-profile/${instructorId}`}>
           {" "}
           {instructorName}
