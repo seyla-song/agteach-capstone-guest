@@ -53,7 +53,8 @@
     "video": "វីដេអូ",
     "hour":"ម៉ោង",
     "minute": "នាទី",
-    "second":"វិនាទី"
+    "second":"វិនាទី",
+    "whatYouWillLearnInThisCourse?": "តើអ្នកនឹងរៀនអ្វីខ្លះក្នុងវគ្គសិក្សានេះ?"
   },
   "productDetail": { 
     "reachStockLimit":"ឈានដល់ដែនកំណត់ស្តុក",

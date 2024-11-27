@@ -53,7 +53,8 @@
     "video": "Videos",
     "hour":"hour",
     "minute":"minute",
-    "second":"second"
+    "second":"second",
+    "whatYouWillLearnInThisCourse?": "What you will learn in this course?"
   },
   "productDetail": { 
     "reachStockLimit":"Reach Stock Limit",
