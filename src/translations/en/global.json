@@ -24,6 +24,17 @@
 
   },
   "courseDetail": { 
+    "createdBy": "Created by",
+    "enroll": "Enroll",
+    "whatYouWillLearnInThisCourse?WhatIncluded": "What you will learn in this course? What included",
+    "thisCourseIncludes": "This course includes",
+    "min": "min",
+    "video": "Videos",
+    "courseContent": "Course Content",
+    "section": "Sections",
+    "totalLength": "Total Length",
+    "peopleAlsoLearnThisCourse": "People also learn this course",
+    "youMightWantToBuyTheProductRelatedToThisCourse":"You might want to buy the product related to this course"
 
   },
   "courseVideo": { 
