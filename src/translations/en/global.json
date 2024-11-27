@@ -142,6 +142,8 @@
     "aValidPhoneNumberShouldContainsAtleast8Digits": "A valid phone number should contains atleast 8 digits",
     "phoneNumberCannotExceed15Digits": "Phone number cannot exceed 15 digits",
     "pleaseEnterAValidPhoneNumber": "Please enter a valid phone number",
+    "firstNameCannotBeMoreThan25Characters": "First name cannot be more than 25 characters",
+    "lastNameCannotBeMoreThan25Characters": "Last name cannot be more than 25 characters",
     
     "submit": "Submit"
   },

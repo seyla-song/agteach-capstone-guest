@@ -86,11 +86,11 @@ export default function PersonalInfoForm() {
 
   const validatePhone = (value) => {
     const phonePattern = /^[0-9]+$/; // Only digits
-    if (!value.startsWith("0")) return "Phone number must start with 0";
-    if (!phonePattern.test(value)) return "Please enter a valid phone number";
-    if (value.length > 15) return "Phone number cannot exceed 15 digits";
+    if (!value.startsWith("0")) return t("additionalInfo.phoneNumberMustStartWith0");
+    if (!phonePattern.test(value)) return t("pleaseEnterAValidPhoneNumber");
+    if (value.length > 15) return t("additionalInfo.phoneNumberCannotExceed15Digits");
     if (value?.length < 8)
-      return "A valid phone number should contains atleast 8 digits";
+      return t("additionalInfo.aValidPhoneNumberShouldContainsAtleast8Digits");;
   };
 
   return (
@@ -129,18 +129,22 @@ export default function PersonalInfoForm() {
                     {...register("firstName", {
                       pattern: {
                         value: /^[A-Za-z]+$/i,
-                        message: "First name can only contain letters",
+                        message: t(
+                          "additionalInfo.firstNameCanOnlyContainLetters"
+                        ),
                       },
                       maxLength: {
                         value: 25,
-                        message: "First name cannot be more than 25 characters",
+                        message: t("additionalInfo.firstNameCannotBeMoreThan25Characters"),
                       },
                       validate: (value) => {
                         if (!value) return true;
                         if (value.length < 2)
-                          return "First name must be at least 2 characters";
+                          return t(
+                            "additionalInfo.firstNameMustBeAtLeast2Characters"
+                          );
                         if (value.length > 25)
-                          return "First name must be at most 25 characters";
+                          return t("additionalInfo.firstNameCannotBeMoreThan25Characters");
                       },
                     })}
                     error={!!errors.firstName}
@@ -152,16 +156,21 @@ export default function PersonalInfoForm() {
                     {...register("lastName", {
                       pattern: {
                         value: /^[A-Za-z]+$/i,
-                        message: "Last name can only contain letters",
+                        message: t(
+                          "additionalInfo.lastNameCanOnlyContainLetters"
+                        ),
                       },
                       maxLength: {
                         value: 25,
-                        message: "Last name cannot be more than 25 characters",
+                        message: t("additionalInfo.lastNameCannotBeMoreThan25Characters"),
                       },
+
                       validate: (value) => {
                         if (!value) return true;
                         if (value.length < 2)
-                          return "Last name must be at least 2 characters";
+                          return t(
+                            "additionalInfo.lastNameMustBeAtLeast2Characters"
+                          );
                         if (value.length > 25)
                           return "Last name must be at most 25 characters";
                       },
@@ -206,7 +215,7 @@ export default function PersonalInfoForm() {
                     validate: (value) => {
                       if (!value) return true;
                       if (value.length < 2)
-                        return "Address must be at least 2 characters";
+                        return t("additionalInfo.addressMustBeAtLeast2Characters");
                       if (value.length > 100)
                         return "Address must be at most 100 characters";
                     },

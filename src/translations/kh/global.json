@@ -143,6 +143,8 @@
     "aValidPhoneNumberShouldContainsAtleast8Digits": "លេខទូរស័ព្ទដែលមានសុពលភាពគួរតែមានយ៉ាងហោចណាស់ 8 ខ្ទង់",
     "phoneNumberCannotExceed15Digits": "លេខទូរស័ព្ទមិនអាចលើសពី 15 ខ្ទង់បានទេ",
     "pleaseEnterAValidPhoneNumber": "សូមបញ្ចូលលេខទូរស័ព្ទអោយបានត្រឹមត្រូវ",
+    "firstNameCannotBeMoreThan25Characters": "នាមត្រកូលមិនអាចលើសពី 25 តួអក្សរទេ",
+    "lastNameCannotBeMoreThan25Characters": "នាមខ្លួនមិនអាចលើសពី 25 តួអក្សរទេ",
     
     "submit": "ដាក់ស្នើ"
 
