@@ -1,5 +1,8 @@
 {
   "header": {
-    "mylearn": "My Learning"
+    "myLearning": "My Learning",
+    "marketPlace": "Marketplace",
+    "agai": "AgAI",
+    "login": "Login"
   }  
 }
