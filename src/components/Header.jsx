@@ -32,8 +32,6 @@ import { useSelector } from "react-redux";
 import { useGetUserInfoQuery } from "../services/api/userApi";
 import { useTranslation } from "react-i18next";
 
-
-
 function Navigation() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -43,6 +41,7 @@ function Navigation() {
   const [logout] = useLogoutMutation();
   const { data: guestData } = useGetUserInfoQuery();
   const [t, i18next] = useTranslation("global");
+  const savedLanguage = localStorage.getItem("language") || "en";
 
   const HEADER_MENU_DESKTOP = [
     { page: t("header.myLearning"), path: "mylearning" },
@@ -248,8 +247,10 @@ function Navigation() {
   const handleChangeLanguage = (event) => {
     if (event.target.value === 10) {
       i18next.changeLanguage("en");
+      localStorage.setItem("language", "en");
     } else {
       i18next.changeLanguage("kh");
+      localStorage.setItem("language", "kh");
     }
   };
 
@@ -290,7 +291,7 @@ function Navigation() {
             <Select
               labelId="language-select-label"
               id="language-select"
-              defaultValue={10}
+              defaultValue={savedLanguage === "en" ? 10 : 20}
               sx={{
                 border: "none",
                 color: "common.white",
