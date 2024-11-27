@@ -47,7 +47,13 @@
     "errorDuringCheckout":"Error during checkout"
   },
   "courseVideo": { 
-
+    "createdBy": "Created by",
+    "back": "Back",
+    "section": "Sections",
+    "video": "Videos",
+    "hour":"hour",
+    "minute":"minute",
+    "second":"second"
   },
   "productDetail": { 
     "reachStockLimit":"Reach Stock Limit",

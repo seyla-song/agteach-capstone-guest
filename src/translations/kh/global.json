@@ -47,7 +47,13 @@
     "errorDuringCheckout":"កំហុសអំឡុងពេលបង់ប្រាក់ចេញ"
   },
   "courseVideo": { 
-
+    "createdBy": "បង្កើតឡើងដោយ",
+    "back": "ថយក្រោយ",
+    "section": "វគ្គ",
+    "video": "វីដេអូ",
+    "hour":"ម៉ោង",
+    "minute": "នាទី",
+    "second":"វិនាទី"
   },
   "productDetail": { 
     "reachStockLimit":"ឈានដល់ដែនកំណត់ស្តុក",
