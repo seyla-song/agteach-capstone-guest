@@ -142,7 +142,14 @@
     "goShopping":"តស់ទៅទិញទំនិញ"
   },
   "sucessPayment": { 
-
+    "thanksForYourPayment":"សូមអរគុណចំពោះការទូទាត់ប្រាក់របស់អ្នក",
+    "aPaymentToAgTeachWillAppearOnYourStatement":"ការទូទាត់មកកាន់ AgTeach នឹងបង្ហាញនៅលើរបាយការណ៍របស់អ្នក",
+    "email":"អ៊ីមែល",
+    "address":"អាស័យដ្ឋាន",
+    "backToAgTeach":"ត្រឡប់ទៅកាន់ AgTeach",
+    "poweredByStripe":"ដំណើរការដោយ STRIPE",
+    "termsAndConditions":"លក្ខខណ្ឌ",
+    "privacyPolicy":"គោលការណ៍ឯកជនភាព"
   },
   "failPayment": { 
 
