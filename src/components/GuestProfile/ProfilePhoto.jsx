@@ -6,12 +6,15 @@ import {
   Stack,
   Typography,
   Avatar,
+  InputLabel,
 } from "@mui/material";
 import { useUpdateInfoMutation } from "../../services/api/userApi";
 import { CustomAlert } from "../../components/CustomAlert";
 import ProfilePlaceholder from "../../assets/profile-placeholder.png";
+import { useTranslation } from "react-i18next";
 
 export const ProfilePhoto = ({ userData }) => {
+  const [t] = useTranslation("global");
   const [profileImage, setProfileImage] = useState();
   const [imageFile, setImageFile] = useState(null);
   const [updateInfo, { isLoading }] = useUpdateInfoMutation();
@@ -67,10 +70,8 @@ export const ProfilePhoto = ({ userData }) => {
   return (
     <>
       <Stack sx={{ m: 2 }}>
-        <Typography variant="h2">Photo</Typography>
-        <Typography variant="bssm">
-          Add a nice photo of yourself for your profile
-        </Typography>
+        <Typography variant="h2">{t("guestProfile.photoSection")}</Typography>
+        <Typography variant="bssm">{t("guestProfile.description")}</Typography>
       </Stack>
 
       <Box
@@ -91,13 +92,13 @@ export const ProfilePhoto = ({ userData }) => {
             sx={{ width: 300, height: 300, border: "15px solid lightgrey" }}
           />
           <Typography variant="bmdsm" textAlign="center" margin="10px">
-            Image Preview
+            {t("guestProfile.imagePreview")}
           </Typography>
         </Stack>
       </Box>
 
       <Stack sx={{ m: 2, mb: 0 }}>
-        <Typography variant="h4">Add/Change Image</Typography>
+        <Typography variant="h4">{t("guestProfile.imageName")}</Typography>
       </Stack>
 
       <Box
@@ -123,7 +124,9 @@ export const ProfilePhoto = ({ userData }) => {
             onClick={handleSendUpdateImage}
             disabled={!imageFile || isLoading}
           >
-            {isLoading ? "Uploading..." : "Upload"}
+            {isLoading
+              ? t("guestProfile.uploading")
+              : t("guestProfile.imageButton")}
           </Button>
         </Stack>
       </Box>
