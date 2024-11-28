@@ -1,7 +1,9 @@
 import { Stack, Typography, Link } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router-dom';
 
 export const CustomSectionTitle = ({ title, path }) => {
+  const [t] = useTranslation('global');
   return (
     <Stack
       direction="row"
@@ -24,7 +26,7 @@ export const CustomSectionTitle = ({ title, path }) => {
         fontSize="small"
         sx={{ textUnderlineOffset: 3 }}
       >
-        View All
+        {t('homepage.viewAll')}
       </Link>
     </Stack>
   );

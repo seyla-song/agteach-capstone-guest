@@ -5,15 +5,71 @@
     "agai": "AgAI",
     "login": "Login"
   },
+  "footer": {
+    "footerMenu": [
+      { "page": "My Learning", "path": "/mylearning" },
+      { "page": "Marketplace", "path": "/marketplace" },
+      { "page": "AgAI", "path": "/agai" }
+    ],
+    "address": "8th Floor, OCIC Blvd, Sangkat Chroy Changvar, Khan Chroy Changvar, Phnom Penh, Cambodia",
+    "copyright": "© All right reserved AgTeach - 2024",
+    "terms": "Terms and Conditions",
+    "privacy": "Privacy Policy",
+    "passion": "Ready to share your passion ? Join with us.",
+    "becomeAnInstructor": "Become an Instructor"
+  },
   "homepage": {
+    "searchbarPlaceholder": "Search course, plant, crop, service",
+    "search": "Search",
+    "carouselCourseTitle": "Most people interested in this course",
+    "carouselProductTitle": "Most people interested in this product",
+    "viewAll": "View All",
+    "coreValueTitle": "With many platforms available, what makes AgTeach the best choice?",
+    "coreValue": [
+      {
+        "title": "Learn to live sustainably and be self-sufficient",
+        "message": "Our platform helps you grow your own food, reduce grocery store trips, and cut down on your carbon footprint"
+      },
+      {
+        "title": "Your Health and Wellness is our priority",
+        "message": "Our courses teach you how to grow nutritious, pesticide-free food so you and your family can enjoy the freshest, healthiest meals."
+      },
+      {
+        "title": "Gain Valuable Knowledge and Skills",
+        "message": "You'll learn techniques like hydroponics, vertical farming and crop rotation, along with practical tips you can apply immediately."
+      }
+    ],
+    "faqTitle": "Frequently Asked Questions",
+    "faqList": [
+      {
+        "question": "What exactly is AgTeach?",
+        "answer": "Simple! We're your one-stop platform for learning farming through video courses and buying the supplies you need. Think of us as your farming teacher and supply store, all in one place."
+      },
+      {
+        "question": "Is this for complete beginners?",
+        "answer": "Absolutely! Whether you've never planted a seed or you're an experienced farmer, we've got something for you. We start with the basics and build up to advanced techniques."
+      },
+      {
+        "question": "What kinds of farming videos do you have?",
+        "answer": "Everything from \"How to Start Your First Garden\" to advanced topics like:\n- Growing different crops\n- Taking care of your soil\n- Dealing with pests naturally\n- Setting up irrigation\n- Harvesting tips\n- And lots more!"
+      },
+      {
+        "question": "What can I buy in your marketplace?",
+        "answer": "All the essentials you learn about in our videos:\n- Seeds\n- Tools\n- Soil supplies\n- Plant food\n- Pest control\n- Safety gear"
+      }
+    ],
     "ctaTitle": "Ready to share your passion for indoor gardening?",
     "ctaDescription": "Join our platform as an instructor and inspire others while showcasing your expertise. Empower the next generation of gardeners and grow your impact today! Apply now and be a part of our vibrant community",
     "becomeAnInstructor": "Become an Instructor",
     "seeMore": "See More",
     "seeLess": "See Less"
   },
-  "myLearning": {},
-  "marketplace": {},
+  "myLearning": { 
+
+  },
+  "marketplace": { 
+
+  },
   "agai": {
     "beta": "BETA",
     "plantDiseaseDetection": " Plant Disease Detection",
@@ -37,9 +93,24 @@
     "areYouInerestedIn": "Are you interested in",
     "learnMore": "Learn more on plant disease and prventions"
   },
-  "cart": {},
-  "searchResult": {},
-  "courseDetail": {
+  "cart": {
+    "yourShoppingCart": "Your Shopping Cart",
+    "thereAreNoItemsInYourCart": "There are no items in your cart",
+    "foundItem_one": "Found ({{count}}) item",
+    "foundItem_other": "Found ({{count}}) items",
+    "item_one": "item",
+    "item_other": "items",
+    "checkout": "Checkout",
+    "subtotal": "Subtotal",
+    "purchasedHistory": "Purchased History",
+    "total": "Total",
+    "processing": "Processing",
+    "youDontHaveAnyPurchasedYet": "You don't have any purchased yet"
+  },
+  "searchResult": { 
+
+  },
+  "courseDetail": { 
     "createdBy": "Created by",
     "enroll": "Enroll",
     "whatYouWillLearnInThisCourse?": "What you will learn in this course?",
@@ -77,16 +148,46 @@
     "outOfStockMessage": "Out of Stock. Explore similar products in our collection below.",
     "youMightAlsoWantToBuyTheseProducts": "You might also want to buy these products"
   },
-  "termsService": {},
-  "privacyPolicy": {},
-  "error": {},
-  "cartEmpty": {},
-  "sucessPayment": {},
-  "failPayment": {},
-  "login": {},
-  "forgotPassword": {},
-  "resetPassword": {},
-  "signup": {
+  "termsService": { 
+
+  },
+  "privacyPolicy": { 
+
+  },
+  "error": { 
+
+  },
+  "cartEmpty": { 
+    "cartEmptyMessage": "Your cart looks a little lonely. How about adding something special?",
+    "goShopping":"Go Shopping"
+  },
+  "sucessPayment": { 
+
+  },
+  "failPayment": { 
+
+  },
+  "login": { 
+    "description": "Please login to continue to your account",
+    "email": "Email",
+    "pleaseEnterYourEmail": "Please enter your email",
+    "invalidEmail": "Invalid email address",
+    "password": "Password",
+    "pleaseEnterYourPassword": "Please enter your password",
+    "keepMeLoggedIn": "Keep me logged in",
+    "login": "Login",
+    "loggingIn": "Logging in...",
+    "forgotPassword": "Forgot Password?",
+    "needAnAccount": "Need an account?",
+    "signUp": "Sign Up"
+  },
+  "forgotPassword": { 
+
+  },
+  "resetPassword": { 
+
+  },
+  "signup": { 
     "signup": "Sign Up",
     "signUpToEnjoyAgteachFeatures": "Sign up to enjoy AgTeach features",
     "username": "Username",
@@ -121,11 +222,9 @@
     "lastName": "Last Name",
     "city": "City",
     "address": "Address",
-
     "contactInformation": "Contact Information",
     "phone": "Phone number",
     "skip": "Skip",
-
     "firstNameMustBeAtLeast2Characters": "First name must be at least 2 characters",
     "lastNameMustBeAtLeast2Characters": "Last name must be at least 2 characters",
     "firstNameCanOnlyContainLetters": "First name can only contain letters",
@@ -137,10 +236,30 @@
     "pleaseEnterAValidPhoneNumber": "Please enter a valid phone number",
     "firstNameCannotBeMoreThan25Characters": "First name cannot be more than 25 characters",
     "lastNameCannotBeMoreThan25Characters": "Last name cannot be more than 25 characters",
-
+    
     "submit": "Submit"
   },
-  "verification": {},
-  "guestProfile": {},
-  "instructorProfile": {}
+  "verification": { 
+    "enterVerificationCode": "Enter verification code",
+    "submit": "Submit",
+    "goBack": "Go Back",
+    "didntReceiveTheCode": "Didn't receive the code?",
+    "requestCode": "Request code",
+    "resendCode": "Resend code",
+    "checkYourEmailForVerificationCode": "Check your email for verification code.",
+    "pleaseEnterCodeNumber": "Please enter code number that you receive in the email to verify your account.",
+    "code": "Code",
+    "verificationCodeIsRequired": "Verification code is required",
+    "verificationSuccessful": "Verification successful!",
+    "incorrectVerificationCode": "Incorrect Verification Code!",
+    "codeSentSuccessfullyPleaseCheckYourEmail": "Code sent successfully , Please Check your email!",
+    "pleaseWait": "Please wait {{time}}s to resend the code again.",    
+    "requesting": "Requesting..."
+  },
+  "guestProfile": { 
+
+  },
+  "instructorProfile": { 
+
+  }
 }
