@@ -5,6 +5,7 @@ import { ItemsLoading } from "../ItemsLoading";
 import { useEffect, useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import { useTranslation } from "react-i18next";
 
 /**
  * CourseList component renders a list of courses that the user has
@@ -26,6 +27,8 @@ export const CourseList = ({ data, isLoading }) => {
 
   const [paginatedData, setPaginatedData] = useState([]);
 
+  const [t] = useTranslation("global");
+
   useEffect(()=>{
     const startIdx = (page - 1) * limit;
     const endIdx = startIdx + limit;
@@ -44,13 +47,13 @@ export const CourseList = ({ data, isLoading }) => {
   return (
     <Stack gap={3}>
       <Stack gap>
-        <Typography variant="h3">My Learning</Typography>
+        <Typography variant="h3">{t("myLearning.pageTitle")}</Typography>
         {isLoading && <ItemsLoading title="course" />}
         {data.length > 0 && (
-          <Typography variant="bsr">Found ({data.length}) Courses.</Typography>
+          <Typography variant="bsr">{t("myLearning.myCourses", { numberOfCourses: data.length })}</Typography>
         )}
         {data.length === 0 && !isLoading && (
-          <Typography variant="bsr">You don't have any course yet.</Typography>
+          <Typography variant="bsr">{t("myLearning.noCourse")}</Typography>
         )}
       </Stack>
 
