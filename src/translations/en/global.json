@@ -78,7 +78,18 @@
 
   },
   "cart": { 
-
+    "yourShoppingCart":"Your Shopping Cart",
+    "thereAreNoItemsInYourCart":"There are no items in your cart",
+    "foundItem_one":"Found ({{count}}) item",
+    "foundItem_other":"Found ({{count}}) items",
+    "item_one": "item",
+    "item_other": "items",
+    "checkout":"Checkout",
+    "subtotal":"Subtotal",
+    "purchasedHistory": "Purchased History",
+    "total":"Total",
+    "processing":"Processing",
+    "youDontHaveAnyPurchasedYet":"You don't have any purchased yet"
   },
   "searchResult": { 
 
@@ -131,7 +142,8 @@
 
   },
   "cartEmpty": { 
-
+    "cartEmptyMessage": "Your cart looks a little lonely. How about adding something special?",
+    "goShopping":"Go Shopping"
   },
   "sucessPayment": { 
 
@@ -140,7 +152,18 @@
 
   },
   "login": { 
-
+    "description": "Please login to continue to your account",
+    "email": "Email",
+    "pleaseEnterYourEmail": "Please enter your email",
+    "invalidEmail": "Invalid email address",
+    "password": "Password",
+    "pleaseEnterYourPassword": "Please enter your password",
+    "keepMeLoggedIn": "Keep me logged in",
+    "login": "Login",
+    "loggingIn": "Logging in...",
+    "forgotPassword": "Forgot Password?",
+    "needAnAccount": "Need an account?",
+    "signUp": "Sign Up"
   },
   "forgotPassword": { 
 
@@ -183,11 +206,9 @@
     "lastName": "Last Name",
     "city": "City",
     "address": "Address",
-
     "contactInformation": "Contact Information",
     "phone": "Phone number",
     "skip": "Skip",
-
     "firstNameMustBeAtLeast2Characters": "First name must be at least 2 characters",
     "lastNameMustBeAtLeast2Characters": "Last name must be at least 2 characters",
     "firstNameCanOnlyContainLetters":"First name can only contain letters",
@@ -199,11 +220,24 @@
     "pleaseEnterAValidPhoneNumber": "Please enter a valid phone number",
     "firstNameCannotBeMoreThan25Characters": "First name cannot be more than 25 characters",
     "lastNameCannotBeMoreThan25Characters": "Last name cannot be more than 25 characters",
-    
     "submit": "Submit"
   },
   "verification": { 
-
+    "enterVerificationCode": "Enter verification code",
+    "submit": "Submit",
+    "goBack": "Go Back",
+    "didntReceiveTheCode": "Didn't receive the code?",
+    "requestCode": "Request code",
+    "resendCode": "Resend code",
+    "checkYourEmailForVerificationCode": "Check your email for verification code.",
+    "pleaseEnterCodeNumber": "Please enter code number that you receive in the email to verify your account.",
+    "code": "Code",
+    "verificationCodeIsRequired": "Verification code is required",
+    "verificationSuccessful": "Verification successful!",
+    "incorrectVerificationCode": "Incorrect Verification Code!",
+    "codeSentSuccessfullyPleaseCheckYourEmail": "Code sent successfully , Please Check your email!",
+    "pleaseWait": "Please wait {{time}}s to resend the code again.",    
+    "requesting": "Requesting..."
   },
   "guestProfile": { 
 

@@ -77,7 +77,18 @@
 
   },
   "cart": { 
-
+    "yourShoppingCart":"រទេះទិញទំនិញរបស់អ្នក",
+    "thereAreNoItemsInYourCart":"មិនមានទំនិញនៅក្នុងរទេះរបស់អ្នកទេ",
+    "foundItem_one":"បានរកឃើញ ({{count}}) ធាតុ",
+    "foundItem_other":"បានរកឃើញ ({{count}}) ធាតុ",
+    "item_one": "ធាតុ",
+    "item_other": "ធាតុ",
+    "checkout":"ទូទាត់ទំនិញ",
+    "subtotal":"សរុបរង",
+    "purchasedHistory": "ប្រវត្តិនៃការទិញ",
+    "total":"សរុប",
+    "processing":"កំពុងដំណើរការ",
+    "youDontHaveAnyPurchasedYet":"អ្នកមិនទាន់មានវិក័យប័ត្រទិញនៅឡើយទេ"
   },
   "searchResult": { 
 
@@ -130,7 +141,8 @@
 
   },
   "cartEmpty": { 
-
+    "cartEmptyMessage": "រទេះរបស់អ្នកមើលទៅឯកោណាស់ សាកដាក់អីវ៉ាន់ចូលទៅក្នុងរទេះយល់យ៉ាងណាដែរ?",
+    "goShopping":"តស់ទៅទិញទំនិញ"
   },
   "sucessPayment": { 
 
@@ -139,7 +151,18 @@
 
   },
   "login": { 
-
+    "description": "សូមបំពេញព័ត៌មានគណនីរបស់អ្នក ដើម្បីចូលប្រើប្រាស់។",
+    "email": "អ៊ីមែល",
+    "pleaseEnterYourEmail": "សូមបញ្ចូលអ៊ីមែលរបស់អ្នក",
+    "invalidEmail": "អ៊ីមែលមិនត្រឹមត្រូវ",
+    "password": "ពាក្យសម្ងាត់",
+    "pleaseEnterYourPassword": "សូមបញ្ចូលពាក្យសម្ងាត់របស់អ្នក",
+    "keepMeLoggedIn": "ចងចាំគណនីរបស់ខ្ញុំ",
+    "login": "ចូលប្រើប្រាស់",
+    "loggingIn": "កំពុងចូលប្រើប្រាស់...",
+    "forgotPassword": "ភ្លេចពាក្យសម្ងាត់របស់អ្នក?",
+    "needAnAccount": "ត្រូវការគណនីថ្មី?",
+    "signUp": "ចុះឈ្មោះ"
   },
   "forgotPassword": { 
 
@@ -183,11 +206,9 @@
     "lastName": "នាមខ្លួន",
     "city": "ទីក្រុង ឬ ខេត្ត",
     "address":"អាស័យដ្ឋាន",
-
     "contactInformation": "ព័ត៌មានទំនាក់ទំនង",
     "phone": "លេខទូរស័ព្ទ",
     "skip": "រំលង",
-
     "firstNameMustBeAtLeast2Characters": "នាមត្រកូលត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
     "lastNameMustBeAtLeast2Characters": "នាមខ្លួនត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
     "firstNameCanOnlyContainLetters":"នាមត្រកូលអាចមានតែអក្សរប៉ុណ្ណោះ",
@@ -199,12 +220,24 @@
     "pleaseEnterAValidPhoneNumber": "សូមបញ្ចូលលេខទូរស័ព្ទអោយបានត្រឹមត្រូវ",
     "firstNameCannotBeMoreThan25Characters": "នាមត្រកូលមិនអាចលើសពី 25 តួអក្សរទេ",
     "lastNameCannotBeMoreThan25Characters": "នាមខ្លួនមិនអាចលើសពី 25 តួអក្សរទេ",
-    
     "submit": "ដាក់ស្នើ"
-
   },
   "verification": { 
-
+    "enterVerificationCode": "បញ្ចូលលេខកូដផ្ទៀងផ្ទាត់",
+    "submit": "ដាក់ស្នើ",
+    "goBack": "ត្រឡប់ក្រោយ",
+    "didntReceiveTheCode": "មិនទទួលបានលេខកូដ?",
+    "requestCode": "ស្នើសុំលេខកូដ",
+    "resendCode": "ផ្ញើលេខកូដឡើងវិញ",
+    "checkYourEmailForVerificationCode": "ពិនិត្យអ៊ីមែលរបស់អ្នកសម្រាប់លេខកូដផ្ទៀងផ្ទាត់",
+    "pleaseEnterCodeNumber": "សូមបញ្ចូលលេខកូដដែលអ្នកទទួលបានក្នុងអ៊ីមែល ដើម្បីផ្ទៀងផ្ទាត់គណនីរបស់អ្នក",
+    "code": "កូដ",
+    "verificationCodeIsRequired": "តម្រូវ​ឱ្យ​មាន​លេខ​កូដ​ផ្ទៀងផ្ទាត់!",
+    "verificationSuccessful": "ការផ្ទៀងផ្ទាត់បានជោគជ័យ!",
+    "incorrectVerificationCode": "លេខកូដផ្ទៀងផ្ទាត់មិនត្រឹមត្រូវ!",
+    "codeSentSuccessfullyPleaseCheckYourEmail": "លេខកូដត្រូវបានផ្ញើដោយជោគជ័យ សូមពិនិត្យមើលអ៊ីមែលរបស់អ្នក!",
+    "pleaseWait": "សូមរង់ចាំ {{time}}s ដើម្បីផ្ញើលេខកូដម្តងទៀត",    
+    "requesting": "កំពុងស្នើសុំ..."
   },
   "guestProfile": { 
 

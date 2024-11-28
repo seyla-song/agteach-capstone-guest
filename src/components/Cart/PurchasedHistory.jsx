@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Accordion,
   AccordionDetails,
@@ -6,10 +6,11 @@ import {
   Stack,
   Typography,
   Divider,
-} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { ItemsLoading } from '../ItemsLoading';
-import { dateFormat } from '../../utils/dateFormat';
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { ItemsLoading } from "../ItemsLoading";
+import { dateFormat } from "../../utils/dateFormat";
+import { useTranslation } from "react-i18next";
 
 /**
  * PurchasedHistory component is a reusable component
@@ -28,19 +29,21 @@ import { dateFormat } from '../../utils/dateFormat';
  *     - totalPrice: The total price of the purchased history.
  */
 export const PurchasedHistory = ({ data, isLoading }) => {
+  const [t] = useTranslation("global");
+
   return (
     <Stack gap={3} pb={10}>
       <Stack>
-        <Typography variant="h3">Purchased History</Typography>
+        <Typography variant="h3">{t("cart.purchasedHistory")}</Typography>
         {isLoading && <ItemsLoading title="purchased" />}
         {data?.length > 0 && (
           <Typography variant="bxsmd" color="dark.300">
-            Found ({data?.length}) Items
+            {t("cart.foundItem", { count: data?.length })}
           </Typography>
         )}
         {data.length === 0 && !isLoading && (
           <Typography variant="bxsmd" color="dark.300">
-            You don't have any purchased yet.
+            {t("cart.youDontHaveAnyPurchasedYet")}
           </Typography>
         )}
       </Stack>
@@ -52,8 +55,8 @@ export const PurchasedHistory = ({ data, isLoading }) => {
               elevation={0}
               sx={{
                 borderWidth: 1,
-                borderColor: 'grey.300',
-                borderStyle: 'solid',
+                borderColor: "grey.300",
+                borderStyle: "solid",
               }}
             >
               <AccordionSummary
@@ -85,24 +88,25 @@ export const PurchasedHistory = ({ data, isLoading }) => {
                           {itemDetail.name}
                         </Typography>
                         <Typography variant="bxsr">
-                          {itemDetail.price} x ({itemDetail.quantity}) items
+                          {itemDetail.price} x ({itemDetail.quantity}){" "}
+                          {t("cart.item", { count: itemDetail.quantity })}
                         </Typography>
                       </Stack>
                       <Typography variant="bxsr">
                         ${itemDetail.total}
                       </Typography>
                     </Stack>
-                    <Divider sx={{ borderStyle: 'dotted', py: 1 }} />
+                    <Divider sx={{ borderStyle: "dotted", py: 1 }} />
                   </Stack>
                 ))}
                 {/* Render total price */}
                 <Stack
-                  color={'dark.300'}
+                  color={"dark.300"}
                   direction="row"
                   justifyContent="space-between"
                   pt={2}
                 >
-                  <Typography variant="bmdsm">Total</Typography>
+                  <Typography variant="bmdsm">{t("cart.total")}</Typography>
                   <Typography variant="bmdsm">${order.total_price}</Typography>
                 </Stack>
               </AccordionDetails>
