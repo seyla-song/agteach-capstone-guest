@@ -180,7 +180,7 @@ const CartContent = () => {
               <ShoppingCartOutlinedIcon
                 sx={{ width: 100, height: 100, color: "dark.200" }}
               />
-              <Typography variant="bsr" color="dark.200">
+              <Typography sx={{maxWidth:300}} variant="bsr" color="dark.200">
                 {t("cartEmpty.cartEmptyMessage")}
               </Typography>
               <Link to="/marketplace" component={RouterLink}>
