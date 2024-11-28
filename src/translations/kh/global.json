@@ -66,8 +66,8 @@
   },
   "myLearning": { 
     "pageTitle": "វគ្គសិក្សារបស់ខ្ញុំ",
-    "myCourses": "បានរកឃើញ ({{count}}) វគ្គសិក្សា។",
-    "noCourse": "អ្នកមិនទាន់មានវគ្គសិក្សានៅឡើយទេ។",
+    "myCourses": "បានរកឃើញ ({{count}}) វគ្គសិក្សា",
+    "noCourse": "អ្នកមិនទាន់មានវគ្គសិក្សានៅឡើយទេ",
     "pagination": "ទំព័រ {{page}} នៃ {{totalPages}}"
   },
   "marketplace": { 
