@@ -73,14 +73,14 @@ export default function SuccessPayment() {
               </Stack>
             </Stack>
 
-            {/* <Stack width="100%" py={3} borderRadius="10px">
+            <Stack width="100%" py={3} borderRadius="10px">
               <Divider />
               <SimpleRow label="Email" value={session.customer_details.email} />
               <SimpleRow
                 label="Address"
                 value={data.session.customer_details.address.country}
               />
-            </Stack> */}
+            </Stack>
           </Stack>
           <Link component={RouterLink} to="/" underline="none">
             <Button
