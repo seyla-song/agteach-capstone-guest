@@ -65,7 +65,18 @@
     "seeLess": "See Less"
   },
   "myLearning": {},
-  "marketplace": {},
+  "marketplace": {
+    "category": "Categories",
+    "sortBy": "Sort By",
+    "itemFound": "Found ({{count}}) items",
+    "noItemFound": "There is no search result.",
+    "newest": "Newest",
+    "oldest": "Oldest",
+    "aToZ": "A-Z",
+    "priceLowToHigh": "Price Low to High",
+    "priceHighToLow": "Price High to Low",
+    "error": "Something went wrong. please try again later!"
+  },
   "agai": {},
   "cart": {},
   "searchResult": {},

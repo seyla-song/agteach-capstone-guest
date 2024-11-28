@@ -67,8 +67,17 @@
   "myLearning": { 
 
   },
-  "marketplace": { 
-
+  "marketplace": {
+    "category": "ប្រភេទ",
+    "sortBy": "តម្រៀបតាម",
+    "itemFound": "បានរកឃើញ ({{count}}) ធាតុ",
+    "noItemFound": "មិនមានលទ្ធផលស្វែងរកទេ។",
+    "newest": "ថ្មីបំផុត",
+    "oldest": "ចាស់បំផុត",
+    "aToZ": "A-Z",
+    "priceLowToHigh": "តម្លៃទាបទៅខ្ពស់",
+    "priceHighToLow": "តម្លៃខ្ពស់ទៅទាប",
+    "error": "មានអ្វីមួយខុសប្រក្រតី។ សូមព្យាយាមម្តងទៀតនៅពេលក្រោយ!"
   },
   "agai": { 
 
