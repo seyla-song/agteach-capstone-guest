@@ -118,7 +118,7 @@ export default function VerificationPage() {
                 label={t("verification.code")}
                 type="text"
                 {...register("emailVerifyCode", {
-                  required: "Verification code is required",
+                  required: t("verification.verificationCodeIsRequired"),
                 })}
               />
               {errors.code && (
@@ -126,7 +126,7 @@ export default function VerificationPage() {
               )}
               {isSuccess && (
                 <CustomAlert
-                  label="Verification successful!"
+                  label={t("verification.verificationSuccessful")}
                   open={open}
                   onClose={() => setOpen(false)}
                   severity="success"
@@ -134,7 +134,7 @@ export default function VerificationPage() {
               )}
               {isError && (
                 <CustomAlert
-                  label="Incorrect Verification Code!"
+                  label={t("verification.incorrectVerificationCode")}
                   open={open}
                   onClose={() => setOpen(false)}
                   severity="error"

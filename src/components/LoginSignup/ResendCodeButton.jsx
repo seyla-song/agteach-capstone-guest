@@ -59,7 +59,7 @@ export const ResendCodeButton = ({ email, timeoutRef }) => {
       </Stack>
       {isSuccess && (
         <CustomAlert
-          label="Code sent successfully , Please Check your email!"
+          label={t("verification.codeSentSuccessfullyPleaseCheckYourEmail")}
           open={open}
           onClose={() => setOpen(false)}
           severity="success"
@@ -67,7 +67,7 @@ export const ResendCodeButton = ({ email, timeoutRef }) => {
       )}
       {isError && (
         <CustomAlert
-          label={`Please please wait ${Math.floor(error.data.remainingCooldown / 1000)}s to resend the code again.`}
+          label={t("verification.pleaseWait", { time: Math.floor(error.data.remainingCooldown / 1000) })}
           open={open}
           onClose={() => setOpen(false)}
           severity="error"

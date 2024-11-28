@@ -153,13 +153,14 @@
     "requestCode": "ស្នើសុំលេខកូដ",
     "resendCode": "ផ្ញើលេខកូដឡើងវិញ",
     "checkYourEmailForVerificationCode": "ពិនិត្យអ៊ីមែលរបស់អ្នកសម្រាប់លេខកូដផ្ទៀងផ្ទាត់",
-    "pleaseEnterCodeNumber": "សូមបញ្ចូលលេខកូដដែលអ្នកទទួលបានក្នុងអ៊ីមែល ដើម្បីផ្ទៀងផ្ទាត់គណនីរបស់អ្នក.",
+    "pleaseEnterCodeNumber": "សូមបញ្ចូលលេខកូដដែលអ្នកទទួលបានក្នុងអ៊ីមែល ដើម្បីផ្ទៀងផ្ទាត់គណនីរបស់អ្នក",
     "code": "កូដ",
     "verificationCodeIsRequired": "តម្រូវ​ឱ្យ​មាន​លេខ​កូដ​ផ្ទៀងផ្ទាត់!",
     "verificationSuccessful": "ការផ្ទៀងផ្ទាត់បានជោគជ័យ!",
     "incorrectVerificationCode": "លេខកូដផ្ទៀងផ្ទាត់មិនត្រឹមត្រូវ!",
+    "codeSentSuccessfullyPleaseCheckYourEmail": "លេខកូដត្រូវបានផ្ញើដោយជោគជ័យ សូមពិនិត្យមើលអ៊ីមែលរបស់អ្នក!",
+    "pleaseWait": "សូមរង់ចាំ {{time}}s ដើម្បីផ្ញើលេខកូដម្តងទៀត",    
     "requesting": "កំពុងស្នើសុំ..."
-
   },
   "guestProfile": { 
 

@@ -128,11 +128,9 @@
     "lastName": "Last Name",
     "city": "City",
     "address": "Address",
-
     "contactInformation": "Contact Information",
     "phone": "Phone number",
     "skip": "Skip",
-
     "firstNameMustBeAtLeast2Characters": "First name must be at least 2 characters",
     "lastNameMustBeAtLeast2Characters": "Last name must be at least 2 characters",
     "firstNameCanOnlyContainLetters":"First name can only contain letters",
@@ -144,7 +142,6 @@
     "pleaseEnterAValidPhoneNumber": "Please enter a valid phone number",
     "firstNameCannotBeMoreThan25Characters": "First name cannot be more than 25 characters",
     "lastNameCannotBeMoreThan25Characters": "Last name cannot be more than 25 characters",
-    
     "submit": "Submit"
   },
   "verification": { 
@@ -160,6 +157,8 @@
     "verificationCodeIsRequired": "Verification code is required",
     "verificationSuccessful": "Verification successful!",
     "incorrectVerificationCode": "Incorrect Verification Code!",
+    "codeSentSuccessfullyPleaseCheckYourEmail": "Code sent successfully , Please Check your email!",
+    "pleaseWait": "Please wait {{time}}s to resend the code again.",    
     "requesting": "Requesting..."
   },
   "guestProfile": { 
