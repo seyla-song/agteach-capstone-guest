@@ -229,7 +229,16 @@
     "sending": "កំពុងផ្ញើ...",
     "backToLogin": "ត្រលប់ទៅការចូលគណនី"
   },
-  "resetPassword": {},
+  "resetPassword": {
+    "newPassword": "ពាក្យសម្ងាត់",
+    "confirmPassword": "បញ្ជាក់ពាក្យសម្ងាត់",
+    "passwordMustContainLowercase": "ពាក្យសម្ងាត់ត្រូវតែមានអក្សរតូចមួយ",
+    "passwordMustContainUppercase": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់អក្សរធំមួយ",
+    "passwordMustContainNumber": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់លេខមួយ",
+    "passwordMustContainSpecialCharacter": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់តួអក្សរពិសេសមួយ",
+    "passwordMustContains": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់អក្សរតូចមួយ អក្សរធំមួយ លេខមួយ និងតួអក្សរពិសេសមួយ",
+    "passwordsDoNotMatch": "ពាក្យសម្ងាត់មិនត្រូវគ្នា"
+  },
   "signup": {
     "signup": "ចុះឈ្មោះ",
     "signUpToEnjoyAgteachFeatures": "ចុះឈ្មោះដើម្បីប្រើប្រាស់ជាមួយមុខងារAgteach",

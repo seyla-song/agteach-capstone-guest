@@ -216,7 +216,16 @@
     "sending": "Sending...",
     "backToLogin": "Back to Login"
   },
-  "resetPassword": {},
+  "resetPassword": {
+    "newPassword": "Password",
+    "confirmPassword": "Confirm Password",
+    "passwordMustContainLowercase": "Password must contain at least one lowercase letter.",
+    "passwordMustContainUppercase": "Password must contain at least one uppercase letter.",
+    "passwordMustContainNumber": "Password must contain at least one number.",
+    "passwordMustContainSpecialCharacter": "Password must contain at least one special character.",
+    "passwordMustContains": "Password must contains at least one lowercase letter, one uppercase letter, one number, and one special character.",
+    "passwordsDoNotMatch": "Passwords do not match"
+  },
   "signup": {
     "signup": "Sign Up",
     "signUpToEnjoyAgteachFeatures": "Sign up to enjoy AgTeach features",
