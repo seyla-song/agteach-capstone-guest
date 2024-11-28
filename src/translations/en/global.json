@@ -66,8 +66,10 @@
   },
   "myLearning": { 
     "pageTitle": "My Learning",
-    "myCourses": "Found {{numberOfCourses}} Courses.",
-    "noCourse": "You don't have any course yet."
+    "myCourses_one": "Found ({{count}}) Course.",
+    "myCourses_other": "Found ({{count}}) Courses.",
+    "noCourse": "You don't have any course yet.",
+    "pagination": "Page {{page}} of {{totalPage}}"
   },
   "marketplace": { 
 

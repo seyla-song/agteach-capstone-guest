@@ -1,8 +1,8 @@
-import { useGetCustomerEnrollmentsQuery } from '../services/api/enrollmentApi';
+import { useGetCustomerEnrollmentsQuery } from "../services/api/enrollmentApi";
 
-import { Container } from '@mui/material';
+import { Container } from "@mui/material";
 
-import { CourseList } from '../components/index';
+import { CourseList } from "../components/index";
 
 /**
  * A page that renders a list of courses the user is currently taking.
@@ -16,10 +16,10 @@ export default function MyLearning() {
     <Container
       maxWidth={false}
       sx={{
-        maxWidth: '1420px',
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
+        maxWidth: "1420px",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
         py: 10,
         gap: 5,
       }}

@@ -29,11 +29,11 @@ export const CourseList = ({ data, isLoading }) => {
 
   const [t] = useTranslation("global");
 
-  useEffect(()=>{
+  useEffect(() => {
     const startIdx = (page - 1) * limit;
     const endIdx = startIdx + limit;
-    setPaginatedData(data.slice(startIdx, endIdx))  
-  },[page, data])
+    setPaginatedData(data.slice(startIdx, endIdx));
+  }, [page, data]);
   const handleNext = () => {
     setPage((prevPage) => prevPage + 1);
     window.scrollTo(0, 0);
@@ -50,7 +50,9 @@ export const CourseList = ({ data, isLoading }) => {
         <Typography variant="h3">{t("myLearning.pageTitle")}</Typography>
         {isLoading && <ItemsLoading title="course" />}
         {data.length > 0 && (
-          <Typography variant="bsr">{t("myLearning.myCourses", { numberOfCourses: data.length })}</Typography>
+          <Typography variant="bsr">
+            {t("myLearning.myCourses", { count: data.length })}
+          </Typography>
         )}
         {data.length === 0 && !isLoading && (
           <Typography variant="bsr">{t("myLearning.noCourse")}</Typography>
@@ -88,7 +90,7 @@ export const CourseList = ({ data, isLoading }) => {
           >
             <NavigateBeforeIcon />
           </Button>
-          <Typography>{`Page ${page} of ${totalPages}`}</Typography>
+          <Typography>{t("myLearning.pagination", { page: page, totalPage: totalPages })}</Typography>
           <Button
             variant="outlined"
             onClick={handleNext}
