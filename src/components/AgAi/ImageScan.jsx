@@ -1,15 +1,16 @@
-import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { Button, Stack, Typography, Box } from '@mui/material';
-import ImageIcon from '@mui/icons-material/Image';
-import UploadIcon from '@mui/icons-material/FileUploadOutlined';
-import ScanIcon from '@mui/icons-material/CenterFocusStrongOutlined';
+import { Button, Stack, Typography, Box } from "@mui/material";
+import ImageIcon from "@mui/icons-material/Image";
+import UploadIcon from "@mui/icons-material/FileUploadOutlined";
+import ScanIcon from "@mui/icons-material/CenterFocusStrongOutlined";
 
-import { usePredictImageMutation } from '../../services/api/aiApi';
-import { convertToJPG } from '../../utils/imageUtils';
+import { usePredictImageMutation } from "../../services/api/aiApi";
+import { convertToJPG } from "../../utils/imageUtils";
 
-import { DiseaseInfoComponent } from './DiseaseInfoComponent';
+import { DiseaseInfoComponent } from "./DiseaseInfoComponent";
 
 /**
  * ImageScan component is a reusable component
@@ -29,7 +30,8 @@ export const ImageScan = () => {
   const [data, setData] = useState();
   const [predictImage, { isLoading, isError }] = usePredictImageMutation();
 
-  const selectedFile = watch('file');
+  const selectedFile = watch("file");
+  const [t] = useTranslation("global");
 
   /**
    * The URL of the selected image.
@@ -60,13 +62,13 @@ export const ImageScan = () => {
     const file = data.file[0];
     const resizeFile = await convertToJPG(file);
     const formData = new FormData();
-    formData.append('image', resizeFile);
+    formData.append("image", resizeFile);
 
     try {
       const res = await predictImage(formData).unwrap();
 
       if (isError) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
 
       if (!isLoading) {
@@ -79,7 +81,7 @@ export const ImageScan = () => {
   };
 
   // Check if there's a selected file and if its type is valid
-  const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
+  const validTypes = ["image/jpeg", "image/png", "image/webp"];
   const selectedFileOption = selectedFile && selectedFile[0];
   const isValidFile =
     selectedFileOption && validTypes.includes(selectedFileOption.type);
@@ -106,7 +108,7 @@ export const ImageScan = () => {
             <Stack alignItems="center">
               <ImageIcon sx={{ width: 200, height: 200 }} />
               <Typography variant="bxsr" color="dark.300">
-                Upload your image here .jpg 150 x 150
+                {t("agai.uploadImageDescription")}
               </Typography>
             </Stack>
           )}
@@ -115,7 +117,7 @@ export const ImageScan = () => {
               width="100%"
               bgcolor="black"
               height={350}
-              sx={{ position: 'relative' }}
+              sx={{ position: "relative" }}
             >
               <Box
                 component="img"
@@ -123,8 +125,8 @@ export const ImageScan = () => {
                 height={350}
                 width="100%"
                 sx={{
-                  position: 'absolute',
-                  objectFit: 'contain',
+                  position: "absolute",
+                  objectFit: "contain",
                   zIndex: 1, // Lower z-index
                 }}
               />
@@ -135,10 +137,10 @@ export const ImageScan = () => {
                   height={350}
                   bgcolor="black"
                   sx={{
-                    border: 'none',
+                    border: "none",
                     opacity: 0.5,
-                    width: '100%',
-                    position: 'absolute',
+                    width: "100%",
+                    position: "absolute",
                     zIndex: 2, // Higher z-index
                   }}
                 />
@@ -151,27 +153,27 @@ export const ImageScan = () => {
             id="file"
             type="file"
             accept="image/jpeg, image/png, image/webp"
-            {...register('file')}
+            {...register("file")}
           />
           {!data && (
             <Stack gap={1} direction="row" py={3}>
               <Button
-                onClick={() => document.getElementById('file').click()}
+                onClick={() => document.getElementById("file").click()}
                 disabled-={!selectedFile || !isValidFile}
                 variant="outlined"
                 color="primary"
                 endIcon={<UploadIcon />}
               >
-                Upload
+                {t("agai.upload")}
               </Button>
-              {selectedImageUrl &&  (
+              {selectedImageUrl && (
                 <Button
                   variant="contained"
                   type="submit"
                   disabled={!isValidFile}
                   endIcon={<ScanIcon />}
                 >
-                  Scan
+                  {t("agai.scan")}
                 </Button>
               )}
             </Stack>
@@ -183,13 +185,13 @@ export const ImageScan = () => {
                 onClick={handleReset}
                 endIcon={<ScanIcon />}
               >
-                Scan another plant
+                {t("agai.scanAnotherPlant")}
               </Button>
             </Stack>
           )}
           {!isValidFile && selectedFile && (
             <Typography variant="bxsr" color="red.main">
-              Please select a valid image file (JPG, PNG, or WEBP).
+              {t("agai.errorValidFileDescription")}
             </Typography>
           )}
         </Stack>
@@ -201,7 +203,7 @@ export const ImageScan = () => {
           justifyContent="start"
           direction="row"
         >
-          <Typography variant="bxsr">@Analyzing</Typography>
+          <Typography variant="bxsr">{t("agai.analyzing")}</Typography>
         </Stack>
       )}
       {data && <DiseaseInfoComponent data={data} />}
