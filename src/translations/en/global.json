@@ -419,6 +419,20 @@
     "saving": "Saving..."
   },
   "instructorProfile": { 
-
+    "copied":"Copied",
+    "back":"Back",
+    "instructor":"Instructor",
+    "aboutMe":"About Me",
+    "close":"Close",
+    "courses":"Courses",
+    "courseFound_one":"Found ({{count}}) Course",
+    "courseFound_other":"Found ({{count}}) Courses",
+    "showLess":"Show Less",
+    "viewMore":"View ({{item}}) More",
+    "thereIsNoCourse":"There is no course for this instructor yet!",
+    "thereIsNoProduct":"There is no product for this instructor yet!",
+    "productFound_one":"Found ({{count}}) Product",
+    "productFound_other":"Found ({{count}}) Products",
+    "products":"Products"
   }
 }
