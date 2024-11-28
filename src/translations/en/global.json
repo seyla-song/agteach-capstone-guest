@@ -14,7 +14,9 @@
     "seeLess": "See Less"
   },
   "myLearning": { 
-
+    "pageTitle": "My Learning",
+    "myCourses": "Found {{numberOfCourses}} Courses.",
+    "noCourse": "You don't have any course yet."
   },
   "marketplace": { 
 

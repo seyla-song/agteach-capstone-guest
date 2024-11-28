@@ -14,7 +14,9 @@
     "seeLess": "មើលតិច"
   },
   "myLearning": { 
-
+    "pageTitle": "វគ្គសិក្សារបស់ខ្ញុំ",
+    "myCourses": "បានរកឃើញ {{numberOfCourses}} វគ្គសិក្សា។",
+    "noCourse": "អ្នកមិនទាន់មានវគ្គសិក្សានៅឡើយទេ។"
   },
   "marketplace": { 
 
