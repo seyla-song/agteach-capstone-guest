@@ -78,7 +78,7 @@
     "error": "Something went wrong. please try again later!",
     "pagination": "Page {{page}} of {{totalPages}}"
   },
-  "myLearning": { 
+  "myLearning": {
     "pageTitle": "My Learning",
     "myCourses_one": "Found ({{count}}) Course.",
     "myCourses_other": "Found ({{count}}) Courses.",
@@ -122,10 +122,16 @@
     "processing": "Processing",
     "youDontHaveAnyPurchasedYet": "You don't have any purchased yet"
   },
-  "searchResult": { 
-
+  "searchResult": {
+    "noSearchResult": "There is no search result.",
+    "product": "Product",
+    "course": "Course",
+    "categories": "Categories",
+    "searchLabel": "Learn Smarter, Learn Faster. AgTeach",
+    "searchResultHeader": "Search result for '{{query}} {{queryLength}}'",
+    "pagination": "Page {{page}} of {{totalPages}}"
   },
-  "courseDetail": { 
+  "courseDetail": {
     "createdBy": "Created by",
     "enroll": "Enroll",
     "whatYouWillLearnInThisCourse?": "What you will learn in this course?",
@@ -163,33 +169,83 @@
     "outOfStockMessage": "Out of Stock. Explore similar products in our collection below.",
     "youMightAlsoWantToBuyTheseProducts": "You might also want to buy these products"
   },
-  "termsService": { 
-
+  "termsService": {
+    "termsAndConditions": "Terms and Conditions",
+    "lastUpdated": "Last Updated",
+    "generalInformationTitle": "General Information",
+    "generalInformationP1": "Welcome to AgTeach! By accessing or using our website (https://alphabeez.anbschool.org/), you agree to comply with and be bound by these Terms and Conditions. ",
+    "generalInformationP2": "AgTeach is an educational and e-commerce platform offering courses and products primarily focused on the agriculture sector. By using AgTeach, you confirm that you are at least 15 years old. Users under this age are not permitted to register or use our services.",
+    "userAccountsTitle": "User Accounts",
+    "userAccounts": "To access certain features, users must create an account by providing accurate information, including username, date of birth, email, password, phone number, first name, last name, city, and address. Users are responsible for maintaining the confidentiality of their account credentials. Notify us immediately of any unauthorized use.",
+    "purchasesAndPaymentsTitle": "Purchases and Payments",
+    "purchasesAndPayments": "AgTeach offers both tangible agricultural products and digital courses. Payments are securely processed through Stripe. Refunds are issued only for products that are out of stock or undelivered. No refunds are available for course purchases.",
+    "prohibitedActivitiesTitle": "Prohibited Activites",
+    "prohibitedActivities": "Users must refrain from spamming, posting illegal or inappropriate content, or engaging in activities that violate Cambodian law. Violations may result in account suspension, termination, or legal action.",
+    "intellectualPropertyTitle": "Intellectual Property",
+    "intellectualProperty": "All website content, including text, graphics, and logos, is owned by AgTeach. Users may not reproduce or distribute this content without written consent.",
+    "privacyPolicyTitle": "Privacy Policy",
+    "privacyPolicy": "AgTeach collects only the information provided during signup and does not share user data with third parties. For details, refer to our Privacy Policy.",
+    "disclaimerofLiabilityTitle": "Disclaimer of Liability",
+    "disclaimerofLiability": "AgTeach is not responsible for technical issues, system downtime, or losses resulting from unauthorized access. Users acknowledge that they use the website at their own risk.",
+    "disputeResolutionTitle": "Dispute Resolution",
+    "disputeResolution": "These Terms are governed by Cambodian law. Disputes will first be addressed through direct negotiation. If unresolved, disputes will be handled through arbitration or Cambodian courts.",
+    "modificationstoTermsTitle": "Modifications to Terms",
+    "modificationstoTerms": "AgTeach reserves the right to update these Terms and Conditions at any time. Updates will be posted on the website. Continued use constitutes acceptance of the revised terms.",
+    "terminationofAccessTitle": "Termination of Access",
+    "terminationofAccess": "AgTeach may terminate or suspend user accounts for violating these Terms or engaging in prohibited activities.",
+    "contactUsTitle": "Contact Us",
+    "contactUs": "For questions or concerns about these Terms, please contact us at khomkhit460@gmail.com"
   },
-  "privacyPolicy": { 
-
+  "privacyPolicy": {
+    "privacyPolicyTitle": "Privacy Policy",
+    "lastUpdated": "Last Updated",
+    "informationWeCollectTitle": "Information We Collect",
+    "informationWeCollectP1": "When you use our website, we collect the following information:",
+    "informationWeCollectTitle2": "- Account Information: ",
+    "informationWeCollectP2": "Username, date of birth, email, password, phone number, first name, last name, city, and address when you register.",
+    "informationWeCollectTitle3": "- Usage Data: ",
+    "informationWeCollectP3": "Information about your interactions, such as IP address, browser type, and accessed pages.",
+    "howWeUseYourInformationTitle": "How We Use Your Information",
+    "howWeUseYourInformationP1": "We use the collected information for: ",
+    "howWeUseYourInformationP2": "- Managing accounts and processing transactions.",
+    "howWeUseYourInformationP3": "- Sending confirmations, updates, and optional promotional content.",
+    "howWeUseYourInformationP4": "- Improving website functionality.",
+    "howWeUseYourInformationP5": "- Complying with legal obligations.",
+    "howWeProtectYourInformationTitle": "How We Protect Your Information",
+    "howWeProtectYourInformationP1": "We use encryption, access controls, and regular monitoring to protect your personal data.",
+    "sharingYourInformationTitle": "Sharing Your Information",
+    "sharingYourInformationP1": "We do not share your personal data except with payment processors (e.g., Stripe) or when required by law.",
+    "yourRightsTitle": "Your Rights",
+    "yourRightsP1": "You can access, update, or delete your data by contacting us at khomkhit460@gmail.com",
+    "cookiesAndTrackingTechnologiesTitle": "Cookies and Tracking Technologies",
+    "cookiesAndTrackingTechnologiesP1": "     We use cookies to improve your experience. Manage cookies via your browser settings.",
+    "changestoThisPolicyTitle": "Changes to This Policy",
+    "changestoThisPolicyP1": "We may update this policy periodically. Continued use of our services implies acceptance of the updated policy.",
+    "contactUsTitle": "Contact Us",
+    "contactUsP1": "If you have questions or concerns, contact us at khomkhit460@gmail.com."
   },
-  "error": { 
-
+  "error": {
+    "pageNotFoundTitle": "Oops! Page not found.",
+    "pageNotFoundP1": "We can't find the page you're looking for.",
+    "backToHome": "Back to home",
+    "refresh": "Refresh"
   },
-  "cartEmpty": { 
+  "cartEmpty": {
     "cartEmptyMessage": "Your cart looks a little lonely. How about adding something special?",
-    "goShopping":"Go Shopping"
+    "goShopping": "Go Shopping"
   },
-  "successPayment": { 
-    "thanksForYourPayment":"Thanks for your payment",
-    "aPaymentToAgTeachWillAppearOnYourStatement":"A payment to AgTeach will appear on your statement",
-    "email":"Email",
-    "address":"Address",
-    "backToAgTeach":"Back to AgTeach",
-    "poweredByStripe":"Powered by Stripe",
-    "termsAndConditions":"Terms and Conditions",
-    "privacyPolicy":"Privacy Policy"
+  "successPayment": {
+    "thanksForYourPayment": "Thanks for your payment",
+    "aPaymentToAgTeachWillAppearOnYourStatement": "A payment to AgTeach will appear on your statement",
+    "email": "Email",
+    "address": "Address",
+    "backToAgTeach": "Back to AgTeach",
+    "poweredByStripe": "Powered by Stripe",
+    "termsAndConditions": "Terms and Conditions",
+    "privacyPolicy": "Privacy Policy"
   },
-  "failPayment": { 
-
-  },
-  "login": { 
+  "failPayment": {},
+  "login": {
     "description": "Please login to continue to your account",
     "email": "Email",
     "pleaseEnterYourEmail": "Please enter your email",
@@ -203,13 +259,19 @@
     "needAnAccount": "Need an account?",
     "signUp": "Sign Up"
   },
-  "forgotPassword": { 
-
+  "forgotPassword": {
+    "description": "Enter your email address",
+    "forgotYourPassword": "Forgot your password?",
+    "instruction": "Please enter the email address associated with this account and we will email you a link to reset your password.",
+    "email": "Email",
+    "invalidEmail": "Please enter a valid email address",
+    "pleaseEnterYourEmail": "Email is required",
+    "sendResetLink": "Send reset link",
+    "sending": "Sending...",
+    "backToLogin": "Back to Login"
   },
-  "resetPassword": { 
-
-  },
-  "signup": { 
+  "resetPassword": {},
+  "signup": {
     "signup": "Sign Up",
     "signUpToEnjoyAgteachFeatures": "Sign up to enjoy AgTeach features",
     "username": "Username",
@@ -258,10 +320,10 @@
     "pleaseEnterAValidPhoneNumber": "Please enter a valid phone number",
     "firstNameCannotBeMoreThan25Characters": "First name cannot be more than 25 characters",
     "lastNameCannotBeMoreThan25Characters": "Last name cannot be more than 25 characters",
-    
+
     "submit": "Submit"
   },
-  "verification": { 
+  "verification": {
     "enterVerificationCode": "Enter verification code",
     "submit": "Submit",
     "goBack": "Go Back",
@@ -275,7 +337,7 @@
     "verificationSuccessful": "Verification successful!",
     "incorrectVerificationCode": "Incorrect Verification Code!",
     "codeSentSuccessfullyPleaseCheckYourEmail": "Code sent successfully , Please Check your email!",
-    "pleaseWait": "Please wait {{time}}s to resend the code again.",    
+    "pleaseWait": "Please wait {{time}}s to resend the code again.",
     "requesting": "Requesting..."
   },
   "guestProfile": { 

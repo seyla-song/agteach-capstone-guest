@@ -18,7 +18,7 @@
     "passion": "រួចរាល់ដើម្បី​ចែក​រំលែក​ចំណង់​ចំណូល​ចិត្ត​របស់​អ្នក​? ចូលរួមជាមួយយើង។",
     "becomeAnInstructor": "ចុះឈ្មោះជាគ្រូបង្រៀន"
   },
-  "homepage": { 
+  "homepage": {
     "searchbarPlaceholder": "ស្វែងរកវគ្គសិក្សា, រុក្ខជាតិ, ដំណាំ, សេវាកម្ម",
     "search": "ស្វែងរក",
     "carouselCourseTitle": "មនុស្សភាគច្រើនចាប់អារម្មណ៍លើវគ្គសិក្សានេះ",
@@ -64,7 +64,7 @@
     "seeMore": "មើលបន្ត",
     "seeLess": "មើលតិច"
   },
-  "myLearning": { 
+  "myLearning": {
     "pageTitle": "វគ្គសិក្សារបស់ខ្ញុំ",
     "myCourses": "បានរកឃើញ ({{count}}) វគ្គសិក្សា",
     "noCourse": "អ្នកមិនទាន់មានវគ្គសិក្សានៅឡើយទេ",
@@ -121,10 +121,16 @@
     "processing": "កំពុងដំណើរការ",
     "youDontHaveAnyPurchasedYet": "អ្នកមិនទាន់មានវិក័យប័ត្រទិញនៅឡើយទេ"
   },
-  "searchResult": { 
-
+  "searchResult": {
+    "noSearchResult": "លទ្ធផលដែលស្វែងរកមិនមានទេ",
+    "product": "ផលិតផល",
+    "course": "វគ្គសិក្សា",
+    "categories": "ប្រភេទ",
+    "searchLabel": "រៀនឆ្លាតជាងមុន រៀនលឿនជាងមុន AgTeach",
+    "searchResultHeader": "លទ្ធផលស្វែងរកសម្រាប់ '{{query}} {{queryLength}}'",
+    "pagination": "ទំព័រ {{page}} នៃ {{totalPages}}"
   },
-  "courseDetail": { 
+  "courseDetail": {
     "createdBy": "បង្កើតឡើងដោយ",
     "enroll": "ចុះឈ្មោះឥឡូវនេះ",
     "whatYouWillLearnInThisCourse?": "តើអ្នកនឹងរៀនអ្វីខ្លះក្នុងវគ្គសិក្សានេះ?",
@@ -162,33 +168,84 @@
     "outOfStockMessage": "អីវ៉ាន់អស់ពីស្តុក អ្នកអាចស្វែងរកផលិតផលស្រដៀងគ្នានៅក្នុងបណ្តុំរបស់យើងខាងក្រោម",
     "youMightAlsoWantToBuyTheseProducts": "អ្នកក៏ប្រហែលជាចង់ទិញផលិតផលទាំងនេះដែរ"
   },
-  "termsService": { 
-
+  "termsService": {
+    "termsAndConditions": "លក្ខខណ្ឌ",
+    "lastUpdated": "ការកែសម្រួលចុងក្រោយ",
+    "generalInformationTitle": "ព័ត៌មានទូទៅ",
+    "generalInformationP1": "សូមស្វាគមន៍មកកាន់ AgTeach! តាមរយៈការចូលប្រើ ឬប្រើប្រាស់គេហទំព័ររបស់យើង (https://alphabeez.anbschool.org/) អ្នកយល់ព្រមគោរពតាម និងត្រូវចងតាមលក្ខខណ្ឌទាំងនេះ។ ",
+    "generalInformationP2": "AgTeach គឺជាវេទិកាអប់រំ និងពាណិជ្ជកម្មអេឡិចត្រូនិក ដែលផ្តល់ជូននូវវគ្គសិក្សា និងផលិតផលដែលផ្តោតជាចម្បងលើវិស័យកសិកម្ម។ ដោយប្រើ AgTeach អ្នកបញ្ជាក់ថាអ្នកមានអាយុយ៉ាងតិច 15 ឆ្នាំ។ អ្នកប្រើប្រាស់ដែលមានអាយុក្រោមនេះមិនត្រូវបានអនុញ្ញាតឱ្យចុះឈ្មោះ ឬប្រើប្រាស់សេវាកម្មរបស់យើងទេ។",
+    "userAccountsTitle": "គណនីអ្នកប្រើប្រាស់",
+    "userAccounts": "ដើម្បីចូលប្រើមុខងារមួយចំនួន អ្នកប្រើប្រាស់ត្រូវតែបង្កើតគណនីមួយដោយផ្តល់នូវព័ត៌មានត្រឹមត្រូវ រួមទាំងឈ្មោះអ្នកប្រើប្រាស់ ថ្ងៃខែឆ្នាំកំណើត អ៊ីមែល ពាក្យសម្ងាត់ លេខទូរស័ព្ទ នាម នាមត្រកូល ទីក្រុង និងអាសយដ្ឋាន។ អ្នកប្រើប្រាស់មានទំនួលខុសត្រូវក្នុងការរក្សាការសម្ងាត់នៃព័ត៌មានសម្ងាត់គណនីរបស់ពួកគេ។ ជូនដំណឹងជាបន្ទាន់អំពីការប្រើប្រាស់ដោយគ្មានការអនុញ្ញាត។",
+    "purchasesAndPaymentsTitle": "ការទិញ និងការទូទាត់",
+    "purchasesAndPayments": "AgTeach ផ្តល់ជូនទាំងផលិតផលកសិកម្ម និងវគ្គសិក្សាឌីជីថល។ ការទូទាត់ត្រូវបានដំណើរការដោយសុវត្ថិភាពតាមរយៈ Stripe។ ការសងប្រាក់វិញត្រូវបានចេញសម្រាប់តែផលិតផលដែលអស់ស្តុក ឬមិនទាន់បានចែកចាយ។ មិនមានការបង្វិលសងវិញទេសម្រាប់ការទិញវគ្គសិក្សា។",
+    "prohibitedActivitiesTitle": "សកម្មភាពហាមឃាត់",
+    "prohibitedActivities": "អ្នកប្រើប្រាស់ត្រូវតែជៀសវាងពីការផ្ញើសារឥតបានការ ការបង្ហោះខ្លឹមសារខុសច្បាប់ ឬមិនសមរម្យ ឬចូលរួមក្នុងសកម្មភាពដែលបំពានច្បាប់កម្ពុជា។ ការបំពានអាចបណ្តាលឱ្យមានការផ្អាកគណនី ការបញ្ចប់ ឬចាត់វិធានការផ្លូវច្បាប់។",
+    "intellectualPropertyTitle": "កម្មសិទ្ធិបញ្ញា",
+    "intellectualProperty": "មាតិកាគេហទំព័រទាំងអស់ រួមទាំងអត្ថបទ ក្រាហ្វិក និងឡូហ្គោ គឺជាកម្មសិទ្ធិរបស់ AgTeach ។ អ្នកប្រើប្រាស់មិនអាចផលិតឡើងវិញ ឬចែកចាយខ្លឹមសារនេះដោយគ្មានការយល់ព្រមជាលាយលក្ខណ៍អក្សរទេ។",
+    "privacyPolicyTitle": "គោលការណ៍ឯកជនភាព",
+    "privacyPolicy": "AgTeach ប្រមូលតែព័ត៌មានដែលបានផ្តល់អំឡុងពេលចុះឈ្មោះ និងមិនចែករំលែកទិន្នន័យអ្នកប្រើប្រាស់ជាមួយភាគីទីបី។ សម្រាប់ព័ត៌មានលម្អិត សូមមើលគោលការណ៍ឯកជនភាពរបស់យើង។",
+    "disclaimerofLiabilityTitle": "ការបដិសេធនៃការទទួលខុសត្រូវ",
+    "disclaimerofLiability": "AgTeach មិនទទួលខុសត្រូវចំពោះបញ្ហាបច្ចេកទេស ការមិនដំណើរការប្រព័ន្ធ ឬការខាតបង់ដែលបណ្តាលមកពីការចូលប្រើដោយគ្មានការអនុញ្ញាត។ អ្នកប្រើប្រាស់ទទួលស្គាល់ថាពួកគេប្រើប្រាស់គេហទំព័រដោយហានិភ័យផ្ទាល់ខ្លួនរបស់ពួកគេ។",
+    "disputeResolutionTitle": "ដំណោះស្រាយវិវាទ",
+    "disputeResolution": "លក្ខខណ្ឌទាំងនេះត្រូវបានគ្រប់គ្រងដោយច្បាប់កម្ពុជា។ វិវាទនឹងត្រូវដោះស្រាយជាមុន តាមរយៈការចរចាដោយផ្ទាល់។ ប្រសិន​បើ​មិន​បាន​ដោះស្រាយ​ទេ វិវាទ​នឹង​ត្រូវ​ដោះស្រាយ​តាម​រយៈ​មជ្ឈត្តកម្ម ឬ​តុលាការ​កម្ពុជា។",
+    "modificationstoTermsTitle": "កែប្រែលក្ខខណ្ឌ",
+    "modificationstoTerms": "AgTeach រក្សាសិទ្ធិដើម្បីធ្វើការផ្លាស់ប្ដូលលក្ខខណ្ឌទាំងនេះដោយគ្មានការជូនដំណឹងជាមុន។ ការអាប់ដេតនឹងត្រូវបានបង្ហោះនៅលើគេហទំព័រ។ ការប្រើប្រាស់បន្តគឺជាការទទួលយកលក្ខខណ្ឌដែលបានកែប្រែ។",
+    "terminationofAccessTitle": "បញ្ចប់ការប្រើប្រាស់",
+    "terminationofAccess": "AgTeach អាចបញ្ចប់ ឬផ្អាកគណនីអ្នកប្រើប្រាស់សម្រាប់ការបំពានលក្ខខណ្ឌទាំងនេះ ឬចូលរួមក្នុងសកម្មភាពហាមឃាត់។",
+    "contactUsTitle": "ទាក់ទងមកយើងខ្ញុំ",
+    "contactUs": "សម្រាប់សំណួរ ឬចម្ងល់អំពីលក្ខខណ្ឌទាំងនេះ សូមទាក់ទងមកយើងខ្ញុំតាមអ៊ីម៉ែល khomkhit460@gmail.com"
   },
-  "privacyPolicy": { 
 
+  "privacyPolicy": {
+    "privacyPolicyTitle": "គោលការណ៍ឯកជនភាព",
+    "lastUpdated": "ការកែសម្រួលចុងក្រោយ",
+    "informationWeCollectTitle": "ព័ត៌មានដែលយើងប្រមូល",
+    "informationWeCollectP1": "នៅពេលអ្នកប្រើគេហទំព័ររបស់យើង យើងប្រមូលព័ត៌មានខាងក្រោម៖",
+    "informationWeCollectTitle2": "- ព័ត៌មានគណនី៖ ",
+    "informationWeCollectP2": " ឈ្មោះអ្នកប្រើប្រាស់ ថ្ងៃខែឆ្នាំកំណើត អ៊ីមែល ពាក្យសម្ងាត់ លេខទូរស័ព្ទ ឈ្មោះ នាមត្រកូល ទីក្រុង និងអាសយដ្ឋាននៅពេលអ្នកចុះឈ្មោះ។",
+    "informationWeCollectTitle3": "- ទិន្នន័យប្រើប្រាស់៖ ",
+    "informationWeCollectP3": "ព័ត៌មានអំពីអន្តរកម្មរបស់អ្នក ដូចជាអាសយដ្ឋាន IP ប្រភេទកម្មវិធីរុករក និងទំព័រដែលបានចូលប្រើ។",
+    "howWeUseYourInformationTitle": "របៀបដែលយើងប្រើប្រាស់ព័ត៌មានរបស់អ្នក",
+    "howWeUseYourInformationP1": "យើងប្រើប្រាស់ព័ត៌មានដែលប្រមូលបានសម្រាប់៖ ",
+    "howWeUseYourInformationP2": "- គ្រប់គ្រងគណនី និងដំណើរការប្រតិបត្តិការ។",
+    "howWeUseYourInformationP3": "- ការផ្ញើការបញ្ជាក់ បច្ចុប្បន្នភាព និងមាតិកាផ្សព្វផ្សាយជាជម្រើស។",
+    "howWeUseYourInformationP4": "- ការកែលម្អមុខងារគេហទំព័រ។",
+    "howWeUseYourInformationP5": "- ការអនុលោមតាមកាតព្វកិច្ចផ្លូវច្បាប់។",
+    "howWeProtectYourInformationTitle": "របៀបដែលយើងការពារព័ត៌មានរបស់អ្នក",
+    "howWeProtectYourInformationP1": "យើងប្រើការអ៊ិនគ្រីប ការគ្រប់គ្រងការចូលប្រើ និងការត្រួតពិនិត្យជាប្រចាំដើម្បីការពារទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នក។",
+    "sharingYourInformationTitle": "ការចែករំលែកព័ត៌មានរបស់អ្នក",
+    "sharingYourInformationP1": "យើងមិនចែករំលែកទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នកទេ លើកលែងតែអ្នកដំណើរការការទូទាត់ (ឧ. Stripe) ឬនៅពេលដែលតម្រូវដោយច្បាប់។",
+    "yourRightsTitle": "សិទ្ធិរបស់អ្នក",
+    "yourRightsP1": "អ្នកអាចចូលប្រើ អាប់ដេត ឬលុបទិន្នន័យរបស់អ្នកបានដោយទាក់ទងមកយើងខ្ញុំតាមអ៊ីម៉ែល khomkhit460@gmail.com",
+    "cookiesAndTrackingTechnologiesTitle": "ខូឃី និងបច្ចេកវិទ្យាតាមដាន",
+    "cookiesAndTrackingTechnologiesP1": " យើងប្រើខូឃីដើម្បីកែលម្អបទពិសោធន៍របស់អ្នក។ គ្រប់គ្រងខូឃីតាមរយៈការកំណត់កម្មវិធីរុករករបស់អ្នក។",
+    "changestoThisPolicyTitle": "ការផ្លាស់ប្តូរចំពោះគោលការណ៍នេះ",
+    "changestoThisPolicyP1": "យើងអាចអាប់ដេតគោលការណ៍នេះតាមកាលកំណត់។ ការប្រើប្រាស់សេវាកម្មរបស់យើងបន្តមានន័យថាទទួលយកគោលការណ៍ដែលបានធ្វើបច្ចុប្បន្នភាព។",
+    "contactUsTitle": "ទាក់ទង​យើង",
+    "contactUsP1": "ប្រសិន​បើ​អ្នក​មាន​ចម្ងល់ ឬ​ការ​ព្រួយ​បារម្ភ សូម​ទាក់ទង​មក​យើង​ខ្ញុំ​តាម​រយៈ khomkhit460@gmail.com ។"
   },
-  "error": { 
-
+  "error": {
+    "pageNotFoundTitle": "រកមិនឃើញទំព័រ",
+    "pageNotFoundP1": "យើងមិនអាចស្វែងរកទំព័រដែលអ្នកកំពុងស្វែងរកបានទេ។",
+    "backToHome": "ត្រឡប់ទៅទំព័រដើម",
+    "refresh": "កំណត់ឡើងវិញ"
   },
-  "cartEmpty": { 
+  "cartEmpty": {
     "cartEmptyMessage": "រទេះរបស់អ្នកមើលទៅឯកោណាស់ សាកដាក់អីវ៉ាន់ចូលទៅក្នុងរទេះយល់យ៉ាងណាដែរ?",
-    "goShopping":"តស់ទៅទិញទំនិញ"
+    "goShopping": "តស់ទៅទិញទំនិញ"
   },
-  "successPayment": { 
-    "thanksForYourPayment":"សូមអរគុណចំពោះការទូទាត់ប្រាក់របស់អ្នក",
-    "aPaymentToAgTeachWillAppearOnYourStatement":"ការទូទាត់មកកាន់ AgTeach នឹងបង្ហាញនៅលើរបាយការណ៍របស់អ្នក",
-    "email":"អ៊ីមែល",
-    "address":"អាស័យដ្ឋាន",
-    "backToAgTeach":"ត្រឡប់ទៅកាន់ AgTeach",
-    "poweredByStripe":"ដំណើរការដោយ Stripe",
-    "termsAndConditions":"លក្ខខណ្ឌ",
-    "privacyPolicy":"គោលការណ៍ឯកជនភាព"
+  "successPayment": {
+    "thanksForYourPayment": "សូមអរគុណចំពោះការទូទាត់ប្រាក់របស់អ្នក",
+    "aPaymentToAgTeachWillAppearOnYourStatement": "ការទូទាត់មកកាន់ AgTeach នឹងបង្ហាញនៅលើរបាយការណ៍របស់អ្នក",
+    "email": "អ៊ីមែល",
+    "address": "អាសយដ្ឋាន",
+    "backToAgTeach": "ត្រឡប់ទៅកាន់ AgTeach",
+    "poweredByStripe": "ដំណើរការដោយ Stripe",
+    "termsAndConditions": "លក្ខខណ្ឌ",
+    "privacyPolicy": "គោលការណ៍ឯកជនភាព"
   },
-  "failPayment": { 
-
-  },
-  "login": { 
+  "failPayment": {},
+  "login": {
     "description": "សូមបំពេញព័ត៌មានគណនីរបស់អ្នក ដើម្បីចូលប្រើប្រាស់។",
     "email": "អ៊ីមែល",
     "pleaseEnterYourEmail": "សូមបញ្ចូលអ៊ីមែលរបស់អ្នក",
@@ -202,13 +259,19 @@
     "needAnAccount": "ត្រូវការគណនីថ្មី?",
     "signUp": "ចុះឈ្មោះ"
   },
-  "forgotPassword": { 
-
+  "forgotPassword": {
+    "description": "បញ្ចូលអាសយដ្ឋានអ៊ីមែលរបស់អ្នក",
+    "forgotYourPassword": "ភ្លេចពាក្យសម្ងាត់របស់អ្នក?",
+    "instruction": "សូមបញ្ចូលអាសយដ្ឋានអ៊ីមែលដែលភ្ជាប់ជាមួយគណនីរបស់អ្នក ហើយយើងនឹងផ្ញើអ៊ីមែលទៅអ្នកនូវតំណដើម្បីកំណត់ពាក្យសម្ងាត់របស់អ្នកឡើងវិញ។",
+    "email": "អ៊ីមែល",
+    "invalidEmail": "សូមបញ្ចូលអ៊ីមែលដែលត្រឹមត្រូវ",
+    "pleaseEnterYourEmail": "សូមបញ្ចូលអ៊ីមែលរបស់អ្នក",
+    "sendResetLink": "ផ្ញើតំណកំណត់ឡើងវិញ",
+    "sending": "កំពុងផ្ញើ...",
+    "backToLogin": "ត្រលប់ទៅការចូលគណនី"
   },
-  "resetPassword": { 
-
-  },
-  "signup": { 
+  "resetPassword": {},
+  "signup": {
     "signup": "ចុះឈ្មោះ",
     "signUpToEnjoyAgteachFeatures": "ចុះឈ្មោះដើម្បីប្រើប្រាស់ជាមួយមុខងារAgteach",
     "username": "ឈ្មោះអ្នកប្រើប្រាស់",
@@ -239,11 +302,11 @@
   },
   "additionalInfo": {
     "additionalInformation": "ព័ត៌មានបន្ថែម",
-    "nameAddress": "ឈ្មោះ & អាស័យដ្ឋាន",
+    "nameAddress": "ឈ្មោះ & អាសយដ្ឋាន",
     "firstName": "នាមត្រកូល",
     "lastName": "នាមខ្លួន",
     "city": "ទីក្រុង ឬ ខេត្ត",
-    "address":"អាស័យដ្ឋាន",
+    "address": "អាសយដ្ឋាន",
     "contactInformation": "ព័ត៌មានទំនាក់ទំនង",
     "phone": "លេខទូរស័ព្ទ",
     "skip": "រំលង",
@@ -251,7 +314,7 @@
     "lastNameMustBeAtLeast2Characters": "នាមខ្លួនត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
     "firstNameCanOnlyContainLetters": "នាមត្រកូលអាចមានតែអក្សរប៉ុណ្ណោះ",
     "lastNameCanOnlyContainLetters": "នាមខ្លួនអាចមានតែអក្សរប៉ុណ្ណោះ",
-    "addressMustBeAtLeast2Characters": "អាស័យដ្ឋានត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
+    "addressMustBeAtLeast2Characters": "អាសយដ្ឋានត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
     "phoneNumberMustStartWith0": "លេខទូរស័ព្ទត្រូវតែចាប់ផ្តើមដោយលេខ 0",
     "aValidPhoneNumberShouldContainsAtleast8Digits": "លេខទូរស័ព្ទដែលមានសុពលភាពគួរតែមានយ៉ាងហោចណាស់ 8 ខ្ទង់",
     "phoneNumberCannotExceed15Digits": "លេខទូរស័ព្ទមិនអាចលើសពី 15 ខ្ទង់បានទេ",
@@ -260,7 +323,7 @@
     "lastNameCannotBeMoreThan25Characters": "នាមខ្លួនមិនអាចលើសពី 25 តួអក្សរទេ",
     "submit": "ដាក់ស្នើ"
   },
-  "verification": { 
+  "verification": {
     "enterVerificationCode": "បញ្ចូលលេខកូដផ្ទៀងផ្ទាត់",
     "submit": "ដាក់ស្នើ",
     "goBack": "ត្រឡប់ក្រោយ",
@@ -274,7 +337,7 @@
     "verificationSuccessful": "ការផ្ទៀងផ្ទាត់បានជោគជ័យ!",
     "incorrectVerificationCode": "លេខកូដផ្ទៀងផ្ទាត់មិនត្រឹមត្រូវ!",
     "codeSentSuccessfullyPleaseCheckYourEmail": "លេខកូដត្រូវបានផ្ញើដោយជោគជ័យ សូមពិនិត្យមើលអ៊ីមែលរបស់អ្នក!",
-    "pleaseWait": "សូមរង់ចាំ {{time}}s ដើម្បីផ្ញើលេខកូដម្តងទៀត",    
+    "pleaseWait": "សូមរង់ចាំ {{time}}s ដើម្បីផ្ញើលេខកូដម្តងទៀត",
     "requesting": "កំពុងស្នើសុំ..."
   },
   "guestProfile": {

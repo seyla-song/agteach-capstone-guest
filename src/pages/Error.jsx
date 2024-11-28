@@ -1,5 +1,7 @@
 import { Link as RouterLink } from "react-router-dom";
 
+import { useTranslation } from "react-i18next";
+
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 
 import Error from "../assets/Authentication/error.svg";
@@ -11,6 +13,8 @@ import Error from "../assets/Authentication/error.svg";
  */
 
 export default function ErrorPage() {
+  const [t] = useTranslation("global");
+
   return (
     <Container
       sx={{
@@ -37,10 +41,10 @@ export default function ErrorPage() {
         />
         <Stack sx={{ textAlign: "center" }} gap={1}>
           <Typography variant="blgsm" gutterBottom>
-            Oops! Page not found.
+            {t("error.pageNotFoundTitle")}
           </Typography>
           <Typography variant="bsr" gutterBottom>
-            We can't find the page you're looking for.
+            {t("error.pageNotFoundP1")}
           </Typography>
           <Stack direction="row" gap={2} alignSelf="center">
             <Button
@@ -52,7 +56,7 @@ export default function ErrorPage() {
                 borderColor: "primary.main",
               }}
             >
-              Back to home
+              {t("error.backToHome")}
             </Button>
             <Button
               variant="contained"
@@ -62,7 +66,7 @@ export default function ErrorPage() {
                 bgcolor: "primary.main",
               }}
             >
-              Refresh
+              {t("error.refresh")}
             </Button>
           </Stack>
         </Stack>
