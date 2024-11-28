@@ -197,7 +197,12 @@
     "contactUs": "For questions or concerns about these Terms, please contact us at khomkhit460@gmail.com"
   },
   "privacyPolicy": {},
-  "error": {},
+  "error": {
+    "pageNotFoundTitle": "Oops! Page not found.",
+    "pageNotFoundP1": "We can't find the page you're looking for.",
+    "backToHome": "Back to home",
+    "refresh": "Refresh"
+  },
   "cartEmpty": {
     "cartEmptyMessage": "Your cart looks a little lonely. How about adding something special?",
     "goShopping": "Go Shopping"

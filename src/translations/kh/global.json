@@ -130,7 +130,7 @@
     "searchResultHeader": "លទ្ធផលស្វែងរកសម្រាប់ '{{query}} {{queryLength}}'",
     "pagination": "ទំព័រ {{page}} នៃ {{totalPages}}"
   },
-  "courseDetail": { 
+  "courseDetail": {
     "createdBy": "បង្កើតឡើងដោយ",
     "enroll": "ចុះឈ្មោះឥឡូវនេះ",
     "whatYouWillLearnInThisCourse?": "តើអ្នកនឹងរៀនអ្វីខ្លះក្នុងវគ្គសិក្សានេះ?",
@@ -196,7 +196,12 @@
     "contactUs": "សម្រាប់សំណួរ ឬចម្ងល់អំពីលក្ខខណ្ឌទាំងនេះ សូមទាក់ទងមកយើងខ្ញុំតាមអ៊ីម៉ែល khomkhit460@gmail.com"
   },
   "privacyPolicy": {},
-  "error": {},
+  "error": {
+    "pageNotFoundTitle": "រកមិនឃើញទំព័រ",
+    "pageNotFoundP1": "យើងមិនអាចស្វែងរកទំព័រដែលអ្នកកំពុងស្វែងរកបានទេ។",
+    "backToHome": "ត្រឡប់ទៅទំព័រដើម",
+    "refresh": "កំណត់ឡើងវិញ"
+  },
   "cartEmpty": {
     "cartEmptyMessage": "រទេះរបស់អ្នកមើលទៅឯកោណាស់ សាកដាក់អីវ៉ាន់ចូលទៅក្នុងរទេះយល់យ៉ាងណាដែរ?",
     "goShopping": "តស់ទៅទិញទំនិញ"
