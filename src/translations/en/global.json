@@ -64,7 +64,6 @@
     "seeMore": "See More",
     "seeLess": "See Less"
   },
-  "myLearning": {},
   "marketplace": {
     "category": "Categories",
     "sortBy": "Sort By",
@@ -77,6 +76,13 @@
     "priceLowToHigh": "Price Low to High",
     "priceHighToLow": "Price High to Low",
     "error": "Something went wrong. please try again later!",
+    "pagination": "Page {{page}} of {{totalPages}}"
+  },
+  "myLearning": { 
+    "pageTitle": "My Learning",
+    "myCourses_one": "Found ({{count}}) Course.",
+    "myCourses_other": "Found ({{count}}) Courses.",
+    "noCourse": "You don't have any course yet.",
     "pagination": "Page {{page}} of {{totalPages}}"
   },
   "agai": {
