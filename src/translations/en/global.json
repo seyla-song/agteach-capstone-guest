@@ -90,7 +90,7 @@
     "problem": "Problem",
     "symptom": "Symptom",
     "cure": "Cure Management",
-    "areYouInerestedIn": "Are you interested in",
+    "areYouInerestedIn": "Are you interested in {{disease}} ?",
     "learnMore": "Learn more on plant disease and prventions"
   },
   "cart": {

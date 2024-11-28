@@ -44,9 +44,7 @@ export const DiseaseInfoComponent = ({ data }) => {
       <Divider />
       <Alert icon={<BloodtypeIcon />} severity="success">
         <Stack gap={1}>
-          <Typography>
-            {t("agai.areYouInerestedIn")} {disease} ?
-          </Typography>
+          <Typography>{t("agai.areYouInerestedIn", { disease })}</Typography>
           <Link
             component={RouterLink}
             to="https://alphabeez.anbschool.org/courses/912"

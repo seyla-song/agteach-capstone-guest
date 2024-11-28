@@ -91,7 +91,7 @@
     "problem": "បញ្ហា",
     "symptom": "រោគសញ្ញា",
     "cure": "ការព្យាបាល",
-    "areYouInerestedIn": "តើអ្នកចាប់អារម្មណ៍",
+    "areYouInerestedIn": "តើអ្នកចាប់អារម្មណ៍ ({{disease}})",
     "learnMore": "ស្វែងយល់បន្ថែមអំពីជំងឺរុក្ខជាតិ និងការការពារ"
   },
   "cart": {
