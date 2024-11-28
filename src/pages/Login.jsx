@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../services/api/authApi";
+import { useTranslation } from "react-i18next";
 
 import {
   Button,
@@ -20,6 +21,7 @@ import { checkLoginStatus } from "../features/auth/authSlice";
 import { setEmail } from "../features/auth/userSlice";
 
 function Login() {
+  const [t] = useTranslation("global");
   const [login, { isLoading }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
   const [snackbar, setSnackbar] = useState({
@@ -85,9 +87,9 @@ function Login() {
           <Grid container justifyContent="center">
             <Grid item xs={12} md={6}>
               <Stack spacing={2}>
-                <Typography variant="h2">Login</Typography>
+                <Typography variant="h2">{t("login.login")}</Typography>
                 <Typography variant="bmdr">
-                  Please login to continue to your account
+                  {t("login.description")}
                 </Typography>
                 <Stack
                   component="form"
@@ -103,13 +105,13 @@ function Login() {
 
                   <FormInput
                     variant="outlined"
-                    label="Email"
+                    label={t("login.email")}
                     fullWidth
                     {...register("email", {
-                      required: "Please enter your email",
+                      required: t("login.pleaseEnterYourEmail"),
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: "Invalid email address",
+                        message: t("login.invalidEmail"),
                       },
                     })}
                     error={!!errors.email}
@@ -117,10 +119,10 @@ function Login() {
                   />
                   <FormInput
                     variant="outlined"
-                    label="Password"
+                    label={t("login.password")}
                     fullWidth
                     type={visible ? "text" : "password"}
-                    {...register("password", {required: "Please enter your password"})}
+                    {...register("password", {required: t("login.pleaseEnterYourPassword")})}
                     error={!!errors.password}
                     helperText={errors.password?.message}
                     showPassword={showPassword}
@@ -130,14 +132,14 @@ function Login() {
                   <Stack py={2} alignItems="start">
                     <FormControlLabel
                       control={<Checkbox {...register("keepMeLoggedIn")} />}
-                      label="Keep me logged in"
+                      label={t("login.keepMeLoggedIn")}
                     />
                     <Link
                       to="/auth/forgot-password"
                       style={{ textDecoration: "none" }}
                     >
                       <Typography variant="bsr" color="primary.main">
-                        Forgot Password?
+                        {t("login.forgotPassword")}
                       </Typography>
                     </Link>
                   </Stack>
@@ -151,7 +153,7 @@ function Login() {
                       padding: "12px",
                     }}
                   >
-                    {isLoading ? "Logging in..." : "Login"}
+                    {isLoading ? `${t("login.loggingIn")}` : t("login.login")}
                   </Button>
                   <Stack
                     py={2}
@@ -159,14 +161,14 @@ function Login() {
                     direction={"row"}
                     justifyContent={"center"}
                   >
-                    Need an account?
+                    {t("login.needAnAccount")}
                     <Link
                       to="/auth/signup"
                       textDecoration="underline"
                       color="primary.main"
                     >
                       <Typography color="primary.main" padding={"0 0 0 5px"}>
-                        Create one
+                        {t("login.signUp")}
                       </Typography>
                     </Link>
                   </Stack>
