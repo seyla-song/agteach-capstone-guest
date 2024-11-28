@@ -5,8 +5,11 @@ import { Box, Typography, Grid, Stack, Button, Link } from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import AgteachBg from '../assets/agteach-bg.svg';
+import { useTranslation } from 'react-i18next';
 
 export default function FailPayment() {
+  const [t] = useTranslation('global');
+
   return (
     <Grid container height="100vh">
       <Grid item xs={12} md={6}>
@@ -19,10 +22,10 @@ export default function FailPayment() {
               variant="blgsm"
               mt={2}
             >
-              We have not received your payment
+              {t('failPayment.weHaveNotReceivedYourPayment')}
             </Typography>
             <Typography variant="bsr" textAlign="center" color="dark.200" mt>
-              You payment did not complete, try again
+              {t('failPayment.youPaymentDidNotComplete')}
             </Typography>
           </Stack>
           <Link mt={2} component={RouterLink} to="/" underline="none">
@@ -31,12 +34,12 @@ export default function FailPayment() {
               endIcon={<ArrowCircleRightOutlinedIcon />}
               sx={{ width: 400 }}
             >
-              Back to AgTeach
+             {t('failPayment.backToAgTeach')}
             </Button>
           </Link>
 
           <Stack direction="row" gap pt={2}>
-            <Typography variant="bxsmd">POWERED BY STRIPE</Typography>
+            <Typography variant="bxsmd">{t('failPayment.poweredByStripe').toUpperCase()}</Typography>
             <Typography variant="bxsmd">|</Typography>
             <Typography variant="bxsr">
               <Box
@@ -45,7 +48,7 @@ export default function FailPayment() {
                 color="dark.200"
                 sx={{ textDecoration: 'none' }}
               >
-                <a href='https://stripe.com/legal/consumer'>Terms and Conditon</a>
+                <a href='https://stripe.com/legal/consumer'>{t('failPayment.termsAndConditions')}</a>
               </Box>
             </Typography>
             <Typography variant="bxsr">
@@ -55,7 +58,7 @@ export default function FailPayment() {
                 color="dark.200"
                 sx={{ textDecoration: 'none' }}
               >
-                <a href='https://stripe.com/privacy'>Privacy Policy</a>
+                <a href='https://stripe.com/privacy'>{t('failPayment.privacyPolicy')}</a>
               </Box>
             </Typography>
           </Stack>

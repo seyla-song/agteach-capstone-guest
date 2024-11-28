@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -10,12 +10,14 @@ import {
   Stack,
   MenuItem,
   Select,
-} from '@mui/material';
-import { Controller, useForm } from 'react-hook-form';
-import { useUpdateInfoMutation } from '../../services/api/userApi'; // Import the isLogin query
-import { CustomAlert } from '../CustomAlert';
+} from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
+import { useUpdateInfoMutation } from "../../services/api/userApi"; // Import the isLogin query
+import { CustomAlert } from "../CustomAlert";
+import { useTranslation } from "react-i18next";
 
 export const BasicInfo = ({ userData, cities }) => {
+  const [t] = useTranslation("global");
   const {
     control,
     register,
@@ -24,11 +26,11 @@ export const BasicInfo = ({ userData, cities }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      firstName: '',
-      lastName: '',
-      phone: '',
-      city: '',
-      address: '',
+      firstName: "",
+      lastName: "",
+      phone: "",
+      city: "",
+      address: "",
     },
   });
   const [updateInfo, { isLoading: isLoadingInfo, isError, error, isSuccess }] =
@@ -39,11 +41,11 @@ export const BasicInfo = ({ userData, cities }) => {
     if (userData && userData.customer) {
       const customerData = userData?.customer;
       const { firstName, lastName, phone, location, address } = customerData;
-      setValue('firstName', firstName || '');
-      setValue('lastName', lastName || '');
-      setValue('phone', phone || '');
-      setValue('city', location?.name || '');
-      setValue('address', address || '');
+      setValue("firstName", firstName || "");
+      setValue("lastName", lastName || "");
+      setValue("phone", phone || "");
+      setValue("city", location?.name || "");
+      setValue("address", address || "");
     }
   }, [userData, setValue, cities]);
 
@@ -66,44 +68,48 @@ export const BasicInfo = ({ userData, cities }) => {
 
   const validatePhone = (value) => {
     const phonePattern = /^[0-9]+$/; // Only digits
-    if (!value.startsWith("0")) return "Phone number must start with 0";
-    if (!phonePattern.test(value)) return "Please enter a valid phone number";
-    if (value.length > 15) return "Phone number cannot exceed 15 digits";
-    if (value?.length < 8) return "A valid phone number should contains atleast 8 digits";
+    if (!phonePattern.test(value)) return t("guestProfile.phoneNumberValid");
+    if (!value.startsWith("0")) return t("guestProfile.phoneNumberStart");
+    if (value.length > 15) return t("guestProfile.phoneNumberMax");
+    if (value?.length < 8) return t("guestProfile.phoneNumberMin");
   };
 
   return (
     <>
       <Stack sx={{ m: 2, gap: 2 }}>
-        <Typography variant="h4">Basic Information</Typography>
+        <Typography variant="h4">
+          {t("guestProfile.basicInfoSection")}
+        </Typography>
         <CustomAlert
           label={
             isError
               ? error?.data?.message
               : isSuccess
-              ? 'Successfuly updated Information'
-              : 'Something went wrong. Please try again'
+                ? "Successfuly updated Information"
+                : "Something went wrong. Please try again"
           }
-          severity={isError ? 'error' : 'success'}
+          severity={isError ? "error" : "success"}
           open={open}
           onClose={() => setOpen(false)}
         />
         <FormControl variant="outlined" error={!!errors?.firstName}>
-          <InputLabel htmlFor="first-name">First Name</InputLabel>
+          <InputLabel htmlFor="first-name">
+            {t("guestProfile.firstNameLabel")}
+          </InputLabel>
           <OutlinedInput
             id="first-name"
-            label="First Name"
-            placeholder="e.g. Jane"
-            {...register('firstName', {
-              required: 'First name is required',
+            label={t("guestProfile.firstNameLabel")}
+            placeholder={t("guestProfile.firstNamePlaceholder")}
+            {...register("firstName", {
+              required: t("guestProfile.firstNameRequired"),
               pattern: {
                 value: /^[A-Za-z]+$/i,
-                message: 'First name can only contain letters',
+                message: t("guestProfile.firstNameOnlyLetters"),
               },
               validate: (value) => {
-                if (value.length < 2) return "First name must be at least 2 characters";
-                if (value.length > 25) return "First name must be at most 25 characters";
-              }
+                if (value.length < 2) return t("guestProfile.firstNameMin");
+                if (value.length > 25) return t("guestProfile.firstNameMax");
+              },
             })}
           />
           {errors.firstName && (
@@ -111,21 +117,23 @@ export const BasicInfo = ({ userData, cities }) => {
           )}
         </FormControl>
         <FormControl variant="outlined" error={!!errors?.lastName}>
-          <InputLabel htmlFor="last-name">Last Name</InputLabel>
+          <InputLabel htmlFor="last-name">
+            {t("guestProfile.lastNameLabel")}
+          </InputLabel>
           <OutlinedInput
             id="last-name"
-            label="Last Name"
-            placeholder="e.g. Smith"
-            {...register('lastName', {
-              required: 'Last name is required',
+            label={t("guestProfile.lastNameLabel")}
+            placeholder={t("guestProfile.lastNamePlaceholder")}
+            {...register("lastName", {
+              required: t("guestProfile.lastNameRequired"),
               pattern: {
                 value: /^[A-Za-z]+$/i,
-                message: 'Last name can only contain letters',
+                message: t("guestProfile.lastNameOnlyLetters"),
               },
               validate: (value) => {
-                if (value.length < 2) return "Last name must be at least 2 characters";
-                if (value.length > 25) return "Last name must be at most 25 characters";
-              }
+                if (value.length < 2) return t("guestProfile.lastNameMin");
+                if (value.length > 25) return t("guestProfile.lastNameMax");
+              },
             })}
           />
           {errors.lastName && (
@@ -133,7 +141,7 @@ export const BasicInfo = ({ userData, cities }) => {
           )}
         </FormControl>
         <FormControl fullWidth error={!!errors?.city}>
-        <InputLabel htmlFor="city">City</InputLabel>
+          <InputLabel htmlFor="city">{t("guestProfile.cityLabel")}</InputLabel>
           <Controller
             name="city"
             control={control}
@@ -142,8 +150,8 @@ export const BasicInfo = ({ userData, cities }) => {
               validate: (value) =>
                 value
                   ? cities.some((city) => city.name === value) ||
-                    'Please provide a valid city'
-                  : 'Please select a city',
+                    "Please provide a valid city"
+                  : "Please select a city",
             }}
             render={({ field }) => (
               <Select {...field} label="City">
@@ -160,16 +168,18 @@ export const BasicInfo = ({ userData, cities }) => {
         </FormControl>
 
         <FormControl variant="outlined" error={!!errors?.address}>
-          <InputLabel htmlFor="address">Address</InputLabel>
+          <InputLabel htmlFor="address">
+            {t("guestProfile.addressLabel")}
+          </InputLabel>
           <OutlinedInput
             id="address"
-            label="Address"
-            placeholder="N. 61Eo, Street 166"
-            {...register('address', {
-              required: 'Address is required',
+            label={t("guestProfile.addressLabel")}
+            placeholder={t("guestProfile.addressPlaceholder")}
+            {...register("address", {
+              required: t("guestProfile.addressRequired"),
               validate: (value) => {
-                if (value.length > 100) return "Address must be at most 100 characters";
-              }
+                if (value.length > 100) return t("guestProfile.addressMax");
+              },
             })}
           />
           {errors?.address && (
@@ -177,13 +187,15 @@ export const BasicInfo = ({ userData, cities }) => {
           )}
         </FormControl>
         <FormControl variant="outlined" error={!!errors?.phone}>
-          <InputLabel htmlFor="phone-number">Phone Number</InputLabel>
+          <InputLabel htmlFor="phone-number">
+            {t("guestProfile.phoneNumberLabel")}
+          </InputLabel>
           <OutlinedInput
             id="phone-number"
-            label="Phone Number"
-            placeholder="e.g. 1234567890"
-            {...register('phone', {
-              required: 'Phone number is required',
+            label={t("guestProfile.phoneNumberLabel")}
+            placeholder={t("guestProfile.phoneNumberPlaceholder")}
+            {...register("phone", {
+              required: t("guestProfile.phoneNumberRequired"),
               validate: validatePhone,
             })}
           />
@@ -193,9 +205,9 @@ export const BasicInfo = ({ userData, cities }) => {
         </FormControl>
       </Stack>
 
-      <Box sx={{ width: '100%', boxSizing: 'border-box' }}>
+      <Box sx={{ width: "100%", boxSizing: "border-box" }}>
         <Stack
-          sx={{ m: 2, justifyContent: 'flex-end' }}
+          sx={{ m: 2, justifyContent: "flex-end" }}
           direction="row"
           spacing={2}
         >
@@ -205,7 +217,9 @@ export const BasicInfo = ({ userData, cities }) => {
             disabled={isLoadingInfo}
             onClick={handleSubmit(onSubmit)}
           >
-            {isLoadingInfo ? 'Saving...' : 'Save'}
+            {isLoadingInfo
+              ? t("guestProfile.saving")
+              : t("guestProfile.saveButton")}
           </Button>
         </Stack>
       </Box>
