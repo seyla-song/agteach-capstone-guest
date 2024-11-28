@@ -434,6 +434,10 @@
     "productFound_one":"បានរកឃើញ ({{count}}) ទំនិញ",
     "productFound_other":"បានរកឃើញ ({{count}}) ទំនិញ",
     "products":"ទំនិញ"
+  },
+  "loginPrompt":{
+    "loginPromptTitle": "មើលទៅអ្នក ដូចជាមិនទាន់បានចូលគណនី",
+    "loginPromptDescription": "ចុះឈ្មោះ ឬចូលគណនីឥឡូវនេះ ដើម្បីទទួលបានសិទ្ធិចូលប្រើប្រាស់",
+    "login":"ចូលគណនី"  
   }
-  
 }
