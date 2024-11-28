@@ -402,6 +402,11 @@
     "saving": "Saving..."
   },
   "instructorProfile": { 
+    "copied":"Copied",
+    "back":"Back",
+    "instructor":"Instructor",
+    "aboutMe":"About Me",
+    "close":"Close"
 
   }
 }

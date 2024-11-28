@@ -402,7 +402,11 @@
     "saving": "កំពុងរក្សាទុក..."
   },
   "instructorProfile": { 
-
+      "copied":"ចម្លង",
+      "back":"ថយក្រោយ",
+      "instructor":"គ្រូបង្រៀន",
+      "aboutMe":"អំពីខ្ញុំ",
+      "close":"បិទ"
   }
   
 }
