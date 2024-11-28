@@ -85,7 +85,17 @@
 
   },
   "login": { 
-
+    "description": "សូមបំពេញព័ត៌មានគណនីរបស់អ្នក ដើម្បីប្រើចូកប្រាស់។",
+    "email": "អ៊ីមែល",
+    "pleaseEnterYourEmail": "សូមបញ្ចូលអ៊ីមែលរបស់អ្នក",
+    "invalidEmail": "អ៊ីមែលមិនត្រឹមត្រូវ",
+    "password": "ពាក្យសម្ងាត់",
+    "pleaseEnterYourPassword": "សូមបញ្ចូលពាក្យសម្ងាត់របស់អ្នក",
+    "keepMeLoggedIn": "ចងចាំគណនេយ្យរបស់ខ្ញុំ",
+    "login": "ចូលប្រើប្រាស់",
+    "forgotPassword": "ភ្លេចពាក្យសម្ងាត់របស់អ្នក?",
+    "needAnAccount": "ត្រូវការគណនីថ្មី?",
+    "signUp": "ចុះឈ្មោះ"
   },
   "forgotPassword": { 
 
