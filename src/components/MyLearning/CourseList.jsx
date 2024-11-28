@@ -5,6 +5,7 @@ import { ItemsLoading } from "../ItemsLoading";
 import { useEffect, useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import { useTranslation } from "react-i18next";
 
 /**
  * CourseList component renders a list of courses that the user has
@@ -26,11 +27,13 @@ export const CourseList = ({ data, isLoading }) => {
 
   const [paginatedData, setPaginatedData] = useState([]);
 
-  useEffect(()=>{
+  const [t] = useTranslation("global");
+
+  useEffect(() => {
     const startIdx = (page - 1) * limit;
     const endIdx = startIdx + limit;
-    setPaginatedData(data.slice(startIdx, endIdx))  
-  },[page, data])
+    setPaginatedData(data.slice(startIdx, endIdx));
+  }, [page, data]);
   const handleNext = () => {
     setPage((prevPage) => prevPage + 1);
     window.scrollTo(0, 0);
@@ -44,13 +47,15 @@ export const CourseList = ({ data, isLoading }) => {
   return (
     <Stack gap={3}>
       <Stack gap>
-        <Typography variant="h3">My Learning</Typography>
+        <Typography variant="h3">{t("myLearning.pageTitle")}</Typography>
         {isLoading && <ItemsLoading title="course" />}
         {data.length > 0 && (
-          <Typography variant="bsr">Found ({data.length}) Courses.</Typography>
+          <Typography variant="bsr">
+            {t("myLearning.myCourses", { count: data.length })}
+          </Typography>
         )}
         {data.length === 0 && !isLoading && (
-          <Typography variant="bsr">You don't have any course yet.</Typography>
+          <Typography variant="bsr">{t("myLearning.noCourse")}</Typography>
         )}
       </Stack>
 
@@ -85,7 +90,7 @@ export const CourseList = ({ data, isLoading }) => {
           >
             <NavigateBeforeIcon />
           </Button>
-          <Typography>{`Page ${page} of ${totalPages}`}</Typography>
+          <Typography>{t("myLearning.pagination", { page, totalPages })}</Typography>
           <Button
             variant="outlined"
             onClick={handleNext}

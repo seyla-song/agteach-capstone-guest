@@ -35,8 +35,7 @@ import {
   DescriptionComponent,
   CustomFaq,
 } from "../components/index";
-import { useTranslation } from 'react-i18next';
-
+import { useTranslation } from "react-i18next";
 
 function ProductDetailPage() {
   const { productId } = useParams();
@@ -150,10 +149,10 @@ function ProductDetailPage() {
                     <Stack direction="row" gap={1} justifyContent="center">
                       <TimerOutlinedIcon color="error" />
                       <Typography color="error" variant="bmdr">
-                        {t("productDetail.callToAction",{availableStock})}
+                        {t("productDetail.callToAction", { availableStock })}
                       </Typography>
                     </Stack>
-                  )}
+                  )}                                
                   {availableStock > 0 ? (
                     <Button onClick={handleAddToCart} variant="contained">
                       {t("productDetail.addToCart")}
@@ -161,7 +160,7 @@ function ProductDetailPage() {
                   ) : (
                     <Alert icon={<TakeoutDiningIcon />} severity="warning">
                       <AlertTitle>{t("productDetail.outOfStock")}</AlertTitle>
-                      {t('productDetail.outOfStockMessage')}
+                      {t("productDetail.outOfStockMessage")}
                     </Alert>
                   )}
                   {/* <Button
