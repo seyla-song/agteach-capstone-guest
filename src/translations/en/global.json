@@ -156,7 +156,11 @@
     "resendCode": "Resend code",
     "checkYourEmailForVerificationCode": "Check your email for verification code.",
     "pleaseEnterCodeNumber": "Please enter code number that you receive in the email to verify your account.",
-    "code": "Code"
+    "code": "Code",
+    "verificationCodeIsRequired": "Verification code is required",
+    "verificationSuccessful": "Verification successful!",
+    "incorrectVerificationCode": "Incorrect Verification Code!",
+    "requesting": "Requesting..."
   },
   "guestProfile": { 
 

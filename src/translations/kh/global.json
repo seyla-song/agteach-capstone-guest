@@ -129,11 +129,9 @@
     "lastName": "នាមខ្លួន",
     "city": "ទីក្រុង ឬ ខេត្ត",
     "address":"អាស័យដ្ឋាន",
-
     "contactInformation": "ព័ត៌មានទំនាក់ទំនង",
     "phone": "លេខទូរស័ព្ទ",
     "skip": "រំលង",
-
     "firstNameMustBeAtLeast2Characters": "នាមត្រកូលត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
     "lastNameMustBeAtLeast2Characters": "នាមខ្លួនត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
     "firstNameCanOnlyContainLetters":"នាមត្រកូលអាចមានតែអក្សរប៉ុណ្ណោះ",
@@ -145,20 +143,23 @@
     "pleaseEnterAValidPhoneNumber": "សូមបញ្ចូលលេខទូរស័ព្ទអោយបានត្រឹមត្រូវ",
     "firstNameCannotBeMoreThan25Characters": "នាមត្រកូលមិនអាចលើសពី 25 តួអក្សរទេ",
     "lastNameCannotBeMoreThan25Characters": "នាមខ្លួនមិនអាចលើសពី 25 តួអក្សរទេ",
-    
     "submit": "ដាក់ស្នើ"
-
   },
   "verification": { 
     "enterVerificationCode": "បញ្ចូលលេខកូដផ្ទៀងផ្ទាត់",
     "submit": "ដាក់ស្នើ",
     "goBack": "ត្រឡប់ក្រោយ",
-    "didntReceiveTheCode": "មិនបានទទួលបានលេខកូដ?",
+    "didntReceiveTheCode": "មិនទទួលបានលេខកូដ?",
     "requestCode": "ស្នើសុំលេខកូដ",
     "resendCode": "ផ្ញើលេខកូដឡើងវិញ",
     "checkYourEmailForVerificationCode": "ពិនិត្យអ៊ីមែលរបស់អ្នកសម្រាប់លេខកូដផ្ទៀងផ្ទាត់",
     "pleaseEnterCodeNumber": "សូមបញ្ចូលលេខកូដដែលអ្នកទទួលបានក្នុងអ៊ីមែល ដើម្បីផ្ទៀងផ្ទាត់គណនីរបស់អ្នក.",
-    "code": "កូដ"
+    "code": "កូដ",
+    "verificationCodeIsRequired": "តម្រូវ​ឱ្យ​មាន​លេខ​កូដ​ផ្ទៀងផ្ទាត់!",
+    "verificationSuccessful": "ការផ្ទៀងផ្ទាត់បានជោគជ័យ!",
+    "incorrectVerificationCode": "លេខកូដផ្ទៀងផ្ទាត់មិនត្រឹមត្រូវ!",
+    "requesting": "កំពុងស្នើសុំ..."
+
   },
   "guestProfile": { 
 
