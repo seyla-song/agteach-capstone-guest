@@ -59,33 +59,67 @@
       }
     ],
     "ctaTitle": "ត្រៀម​ខ្លួន​ហើយឬនៅ ដើម្បី​ចែក​រំលែក​ចំណង់​ចំណូល​ចិត្ត​របស់​អ្នក​សម្រាប់​ការ​ថែ​សួន​ក្នុង​ផ្ទះ​?",
-    "ctaDescription": "ចូលរួមវេទិការបស់យើងក្នុងនាមជាគ្រូបង្ហាត់ និងលើកទឹកចិត្តអ្នកដទៃក្នុងពេលនោះ។ បង្ហាញពីជំនាញរបស់អ្នក ផ្តល់លើកស្ទួយអ្នកជំនាន់ក្រោយ  និងបង្កើនសមត្ថភាពរបស់អ្នកនៅថ្ងៃនេះ! ដាក់ពាក្យឥឡូវនេះ ហើយក្លាយជាផ្នែកមួយនៃភាពរស់រវើករបស់សហគមន៍យើង",  
-    "becomeAnInstructor":"ចុះឈ្មោះជាគ្រូបង្រៀន",
-    "seeMore":"មើលបន្ត",
+    "ctaDescription": "ចូលរួមវេទិការបស់យើងក្នុងនាមជាគ្រូបង្ហាត់ និងលើកទឹកចិត្តអ្នកដទៃក្នុងពេលនោះ។ បង្ហាញពីជំនាញរបស់អ្នក ផ្តល់លើកស្ទួយអ្នកជំនាន់ក្រោយ  និងបង្កើនសមត្ថភាពរបស់អ្នកនៅថ្ងៃនេះ! ដាក់ពាក្យឥឡូវនេះ ហើយក្លាយជាផ្នែកមួយនៃភាពរស់រវើករបស់សហគមន៍យើង",
+    "becomeAnInstructor": "ចុះឈ្មោះជាគ្រូបង្រៀន",
+    "seeMore": "មើលបន្ត",
     "seeLess": "មើលតិច"
   },
   "myLearning": { 
-
+    "pageTitle": "វគ្គសិក្សារបស់ខ្ញុំ",
+    "myCourses": "បានរកឃើញ ({{count}}) វគ្គសិក្សា",
+    "noCourse": "អ្នកមិនទាន់មានវគ្គសិក្សានៅឡើយទេ",
+    "pagination": "ទំព័រ {{page}} នៃ {{totalPages}}"
   },
-  "marketplace": { 
-
+  "marketplace": {
+    "category": "ប្រភេទ",
+    "sortBy": "តម្រៀបតាម",
+    "itemFound": "បានរកឃើញ ({{count}}) ធាតុ",
+    "noItemFound": "មិនមានលទ្ធផលស្វែងរកទេ",
+    "newest": "ថ្មីបំផុត",
+    "oldest": "ចាស់បំផុត",
+    "aToZ": "A-Z",
+    "priceLowToHigh": "តម្លៃទាបទៅខ្ពស់",
+    "priceHighToLow": "តម្លៃខ្ពស់ទៅទាប",
+    "error": "មានអ្វីមួយខុសប្រក្រតី សូមព្យាយាមម្តងទៀតនៅពេលក្រោយ!",
+    "pagination": "ទំព័រ {{page}} នៃ {{totalPages}}"
   },
-  "agai": { 
-
+  "agai": {
+    "beta": "បេតា",
+    "plantDiseaseDetection": " ពិនិត្យរកជំងឺរបស់រុក្ខជាតិ",
+    "plantDiseaseDetectionDescription": " ស្វែងយល់ពីបញ្ហា រោគសញ្ញា និងការព្យាបាលរបស់រុក្ខជាតិ។",
+    "searchAnyPlantWithAgai": "ស្វែងរករុក្ខជាតិណាមួយជាមួយ អេជី​អេអាយ",
+    "download": "ទាញយក",
+    "note": "ចំណាំ:",
+    "noteDescriptionFirst": "- ទាំងនេះគឺជារូបភាពសាកល្បងរបស់យើង ដែលមិនត្រូវបានប៉ះពាល់នឹងគំរូអំឡុងពេលហ្វឹកហាត់។ ប្រើពួកវាដើម្បីមើលគំរូក្នុងសកម្មភាព៖ ",
+    "noteDescriptionSecond": "- អេជី​អេអាយ អាចធ្វើខុស។ គំរូការរៀនម៉ាស៊ីននេះដំណើរការជាមួយសំណុំទិន្នន័យមានកំណត់ និងភាពចម្រុះនៃរូបភាពដែលមានកម្រិតពី ",
+    "noteDescriptionThird": " ដែលមានន័យថា សំណុំទិន្នន័យមានការខ្វះខាតក្នុងការធ្វើឱ្យទូទៅ។ ដូច្នេះហើយ គំរូអាចទស្សន៍ទាយបានតែ 38 ថ្នាក់នៃរុក្ខជាតិ ដោយបែងចែករវាងរុក្ខជាតិដែលមានសុខភាពល្អ និងជំងឺដូចខាងក្រោម៖",
+    "noteDescriptionExpandableText": "ស្នាមប្រឡាក់ផ្លែប៉ោម, ផ្លែប៉ោមខ្មៅរលួយ,Apple Cedar ផ្លែប៉ោមច្រែះ, ផ្លែប៉ោមមានសុខភាពល្អ, ប៊្លូបឺរីមានសុខភាពល្អ, ផ្លែឆេរី (រួមទាំងជូរ) ផ្សិតម្សៅ, ផ្លែឆេរី (រួមទាំងជូរ) មានសុខភាពល្អ, ពោត (ពោត) Cercospora leaf spot ចំណុចស្លឹកប្រផេះ ពោត (ពោត) ទូទៅ ច្រែះ, ពោត (ពោត) ស្លឹកភាគខាងជើង Blight, ពោត (ពោត) មានសុខភាពល្អ, ទំពាំងបាយជូខ្មៅរលួយ, ទំពាំងបាយជូ Esca (កញ្ជ្រឹលខ្មៅ), ស្លឹកទំពាំងបាយជូ (Isariopsis Leaf Spot), ទំពាំងបាយជូមានសុខភាពល្អ, ផ្លែក្រូច ហាំងឡុងប៊ីង (ក្រូចឆ្មារពណ៌បៃតង), ចំណុចបាក់តេរី ផ្លែប៉ែស, ផ្លែប៉ែស មានសុខភាពល្អ, ម្រេច, កណ្តឹង Bacterial spot, ម្រេច កណ្តឹងមានសុខភាពល្អ, ដំឡូងបារាំងឆាប់ blight, ដំបៅដំឡូង, ដំឡូងមានសុខភាពល្អ, Raspberry មានសុខភាពល្អ, សណ្តែកសៀងមានសុខភាពល្អ, Squash Powdery mildew, ស្លឹក ផ្លែស្ត្របឺរី ក្រហាយ, ផ្លែស្ត្របឺរីមានសុខភាពល្អ, កន្លែងបាក់តេរីប៉េងប៉ោះ, ស្នាមរបួសដើមប៉េងប៉ោះ, រលាកចុងប៉េងប៉ោះ, ផ្សិតស្លឹកប៉េងប៉ោះ, ចំណុចស្លឹកប៉េងប៉ោះ, ចំណុចស្លឹកប៉េងប៉ោះ, សត្វល្អិតពីងពាងប៉េងប៉ោះពីរចំណុច, ចំណុចគោលដៅប៉េងប៉ោះ, ប៉េងប៉ោះប៉េងប៉ោះ មេរោគស្លឹកលឿង, មេរោគប៉េងប៉ោះ Tomato mosaic , ប៉េងប៉ោះមានសុខភាពល្អ",
+    "imageUploadDescription": "បង្ហោះរូបភាពរបស់អ្នកនៅទីនេះ .jpg 150 x 150",
+    "upload": "បង្ហោះ",
+    "scan": "ស្កេន",
+    "scanAnotherPlant": "ស្កេនរុក្ខជាតិផ្សេងទៀត",
+    "errorValidFileDescription": "សូមជ្រើសរើសឯកសាររូបភាពដែលមានសុពលភាព (JPG, PNG, ឬ WEBP)។",
+    "uploadImageDescription": "បង្ហោះរូបភាពរបស់អ្នកនៅទីនេះ .jpg 150 x 150",
+    "analyzing": "@កំពុងវិភាគ",
+    "problem": "បញ្ហា",
+    "symptom": "រោគសញ្ញា",
+    "cure": "ការព្យាបាល",
+    "areYouInerestedIn": "តើអ្នកចាប់អារម្មណ៍ ({{disease}})",
+    "learnMore": "ស្វែងយល់បន្ថែមអំពីជំងឺរុក្ខជាតិ និងការការពារ"
   },
-  "cart": { 
-    "yourShoppingCart":"រទេះទិញទំនិញរបស់អ្នក",
-    "thereAreNoItemsInYourCart":"មិនមានទំនិញនៅក្នុងរទេះរបស់អ្នកទេ",
-    "foundItem_one":"បានរកឃើញ ({{count}}) ធាតុ",
-    "foundItem_other":"បានរកឃើញ ({{count}}) ធាតុ",
+  "cart": {
+    "yourShoppingCart": "រទេះទិញទំនិញរបស់អ្នក",
+    "thereAreNoItemsInYourCart": "មិនមានទំនិញនៅក្នុងរទេះរបស់អ្នកទេ",
+    "foundItem_one": "បានរកឃើញ ({{count}}) ធាតុ",
+    "foundItem_other": "បានរកឃើញ ({{count}}) ធាតុ",
     "item_one": "ធាតុ",
     "item_other": "ធាតុ",
-    "checkout":"ទូទាត់ទំនិញ",
-    "subtotal":"សរុបរង",
+    "checkout": "ទូទាត់ទំនិញ",
+    "subtotal": "សរុបរង",
     "purchasedHistory": "ប្រវត្តិនៃការទិញ",
-    "total":"សរុប",
-    "processing":"កំពុងដំណើរការ",
-    "youDontHaveAnyPurchasedYet":"អ្នកមិនទាន់មានវិក័យប័ត្រទិញនៅឡើយទេ"
+    "total": "សរុប",
+    "processing": "កំពុងដំណើរការ",
+    "youDontHaveAnyPurchasedYet": "អ្នកមិនទាន់មានវិក័យប័ត្រទិញនៅឡើយទេ"
   },
   "searchResult": { 
 
@@ -96,37 +130,37 @@
     "whatYouWillLearnInThisCourse?": "តើអ្នកនឹងរៀនអ្វីខ្លះក្នុងវគ្គសិក្សានេះ?",
     "thisCourseIncludes": "វគ្គសិក្សានេះរួមបញ្ចូល",
     "min": "នាទី",
-    "hour":"ម៉ោង",
+    "hour": "ម៉ោង",
     "video": "វីដេអូ",
     "courseContent": "ខ្លឹមសារនៃវគ្គសិក្សា",
     "section": "វគ្គ",
     "totalLength": "ប្រវែងសរុប",
     "peopleAlsoLearnThisCourse": "សិស្សនានាក៏ចូលរៀនវគ្គសិក្សានេះដែរ",
-    "youMightWantToBuyTheProductRelatedToThisCourse":"អ្នកប្រហែលជាចង់ទិញផលិតផលដែលទាក់ទងនឹងវគ្គសិក្សានេះ",
-    "processing":"កំពុងដំណើរការ",
-    "stripeCheckoutError":"Stripe បរាជ័យក្នុងការបង្កើតវគ្គបង់ប្រាក់ចេញ",
-    "failedToCreateCheckoutSession":"បានបរាជ័យក្នុងការបង្កើតវគ្គបង់ប្រាក់ចេញ",
-    "errorDuringCheckout":"កំហុសអំឡុងពេលបង់ប្រាក់ចេញ"
+    "youMightWantToBuyTheProductRelatedToThisCourse": "អ្នកប្រហែលជាចង់ទិញផលិតផលដែលទាក់ទងនឹងវគ្គសិក្សានេះ",
+    "processing": "កំពុងដំណើរការ",
+    "stripeCheckoutError": "Stripe បរាជ័យក្នុងការបង្កើតវគ្គបង់ប្រាក់ចេញ",
+    "failedToCreateCheckoutSession": "បានបរាជ័យក្នុងការបង្កើតវគ្គបង់ប្រាក់ចេញ",
+    "errorDuringCheckout": "កំហុសអំឡុងពេលបង់ប្រាក់ចេញ"
   },
-  "courseVideo": { 
+  "courseVideo": {
     "createdBy": "បង្កើតឡើងដោយ",
     "back": "ថយក្រោយ",
     "section": "វគ្គ",
     "video": "វីដេអូ",
-    "hour":"ម៉ោង",
+    "hour": "ម៉ោង",
     "minute": "នាទី",
-    "second":"វិនាទី",
+    "second": "វិនាទី",
     "whatYouWillLearnInThisCourse?": "តើអ្នកនឹងរៀនអ្វីខ្លះក្នុងវគ្គសិក្សានេះ?",
     "courseContent": "ខ្លឹមសារនៃវគ្គសិក្សា"
   },
-  "productDetail": { 
-    "reachStockLimit":"ឈានដល់ដែនកំណត់ស្តុក",
-    "reachStockLimitMessage":"សូមអភ័យទោស អ្នកបានឈានដល់ដែនកំណត់ស្តុកដែលមាន អ្នកនៅតែអាចបន្ថែមធាតុផ្សេងទៀតទៅក្នុងរទេះ",
+  "productDetail": {
+    "reachStockLimit": "ឈានដល់ដែនកំណត់ស្តុក",
+    "reachStockLimitMessage": "សូមអភ័យទោស អ្នកបានឈានដល់ដែនកំណត់ស្តុកដែលមាន អ្នកនៅតែអាចបន្ថែមធាតុផ្សេងទៀតទៅក្នុងរទេះ",
     "callToAction": "ប្រញាប់ឡើង នៅសល់តែទំនិញ {{availableStock}} ប៉ុណ្ណោះ!",
     "addToCart": "បញ្ចូលទៅក្នុងរទេះ",
     "outOfStock": "អស់ពីស្តុក",
-    "outOfStockMessage":"អីវ៉ាន់អស់ពីស្តុក អ្នកអាចស្វែងរកផលិតផលស្រដៀងគ្នានៅក្នុងបណ្តុំរបស់យើងខាងក្រោម",
-    "youMightAlsoWantToBuyTheseProducts":"អ្នកក៏ប្រហែលជាចង់ទិញផលិតផលទាំងនេះដែរ"
+    "outOfStockMessage": "អីវ៉ាន់អស់ពីស្តុក អ្នកអាចស្វែងរកផលិតផលស្រដៀងគ្នានៅក្នុងបណ្តុំរបស់យើងខាងក្រោម",
+    "youMightAlsoWantToBuyTheseProducts": "អ្នកក៏ប្រហែលជាចង់ទិញផលិតផលទាំងនេះដែរ"
   },
   "termsService": { 
 
@@ -141,8 +175,15 @@
     "cartEmptyMessage": "រទេះរបស់អ្នកមើលទៅឯកោណាស់ សាកដាក់អីវ៉ាន់ចូលទៅក្នុងរទេះយល់យ៉ាងណាដែរ?",
     "goShopping":"តស់ទៅទិញទំនិញ"
   },
-  "sucessPayment": { 
-
+  "successPayment": { 
+    "thanksForYourPayment":"សូមអរគុណចំពោះការទូទាត់ប្រាក់របស់អ្នក",
+    "aPaymentToAgTeachWillAppearOnYourStatement":"ការទូទាត់មកកាន់ AgTeach នឹងបង្ហាញនៅលើរបាយការណ៍របស់អ្នក",
+    "email":"អ៊ីមែល",
+    "address":"អាស័យដ្ឋាន",
+    "backToAgTeach":"ត្រឡប់ទៅកាន់ AgTeach",
+    "poweredByStripe":"ដំណើរការដោយ Stripe",
+    "termsAndConditions":"លក្ខខណ្ឌ",
+    "privacyPolicy":"គោលការណ៍ឯកជនភាព"
   },
   "failPayment": { 
 
@@ -196,15 +237,15 @@
     "passwordMustBeAtLease8characters": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់៨តួអក្សរ",
     "usernameMustBeAtMost20characters": "ឈ្មោះអ្នកប្រើប្រាស់ត្រូវតែមានយ៉ាងច្រើន២០តួអក្សរ",
     "passwordMustBeAtMost20characters": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងច្រើន២០តួអក្សរ",
-    "usernameMustStartWithLetter":"ឈ្មោះអ្នកប្រើប្រាស់ត្រូវតែចាប់ផ្តើមជាអក្សរនិងមានតែតួអក្សរនិងលេខ",
-    "pleaseProvideYourDateOfBirth": "សូមបញ្ចូលថ្ងៃខែឆ្នាំកំណើតរបស់អ្នក",    
+    "usernameMustStartWithLetter": "ឈ្មោះអ្នកប្រើប្រាស់ត្រូវតែចាប់ផ្តើមជាអក្សរនិងមានតែតួអក្សរនិងលេខ",
+    "pleaseProvideYourDateOfBirth": "សូមបញ្ចូលថ្ងៃខែឆ្នាំកំណើតរបស់អ្នក",
     "pleaseEnterYourEmail": "សូមបញ្ចូលអ៊ីមែលរបស់អ្នក",
     "pleaseEnterYourPassword": "សូមបញ្ចូលពាក្យសម្ងាត់របស់អ្នក",
     "pleaseConfirmYourPassword": "សូមបញ្ចូលបញ្ជាក់ពាក្យសម្ងាត់របស់អ្នក",
     "passwordsDoNotMatch": "ពាក្យសម្ងាត់មិនត្រូវគ្នាទេ",
-    "youMustBeAtLeast15YearsOld":"អ្នកត្រូវតែមានអាយុយ៉ាងតិច15ឆ្នាំ"
+    "youMustBeAtLeast15YearsOld": "អ្នកត្រូវតែមានអាយុយ៉ាងតិច15ឆ្នាំ"
   },
-  "additionalInfo": { 
+  "additionalInfo": {
     "additionalInformation": "ព័ត៌មានបន្ថែម",
     "nameAddress": "ឈ្មោះ & អាស័យដ្ឋាន",
     "firstName": "នាមត្រកូល",
@@ -216,7 +257,7 @@
     "skip": "រំលង",
     "firstNameMustBeAtLeast2Characters": "នាមត្រកូលត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
     "lastNameMustBeAtLeast2Characters": "នាមខ្លួនត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
-    "firstNameCanOnlyContainLetters":"នាមត្រកូលអាចមានតែអក្សរប៉ុណ្ណោះ",
+    "firstNameCanOnlyContainLetters": "នាមត្រកូលអាចមានតែអក្សរប៉ុណ្ណោះ",
     "lastNameCanOnlyContainLetters": "នាមខ្លួនអាចមានតែអក្សរប៉ុណ្ណោះ",
     "addressMustBeAtLeast2Characters": "អាស័យដ្ឋានត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
     "phoneNumberMustStartWith0": "លេខទូរស័ព្ទត្រូវតែចាប់ផ្តើមដោយលេខ 0",

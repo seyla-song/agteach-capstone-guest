@@ -1,10 +1,12 @@
 import { Stack, Chip, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export const Category = ({ allCategories, category, handleChange }) => {
+  const [t] = useTranslation("global");
   return (
     <Stack gap={1}>
       <Typography sx={{ typography: { xs: "bmdsm", sm: "blgsm" } }}>
-        Categoires
+        {t("marketplace.category")}
       </Typography>
       <Stack direction="row" flexWrap="wrap" gap={1}>
         {allCategories.map((item, idx) => (
