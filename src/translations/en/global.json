@@ -76,7 +76,8 @@
     "aToZ": "A-Z",
     "priceLowToHigh": "Price Low to High",
     "priceHighToLow": "Price High to Low",
-    "error": "Something went wrong. please try again later!"
+    "error": "Something went wrong. please try again later!",
+    "pagination": "Page {{page}} of {{totalPages}}"
   },
   "agai": {},
   "cart": {},

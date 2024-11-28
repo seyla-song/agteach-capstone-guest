@@ -180,7 +180,7 @@ export default function MarketPlace() {
                   >
                     <NavigateBeforeIcon />
                   </Button>
-                  <Typography>{`Page ${page} of ${totalPages}`}</Typography>
+                  <Typography>{t("marketplace.pagination", { page, totalPages })}</Typography>
                   <Button
                     variant="outlined"
                     onClick={handleNext}
