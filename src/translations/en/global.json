@@ -419,5 +419,10 @@
   },
   "instructorProfile": { 
 
+  },
+  "loginPrompt":{
+    "loginPromptTitle": "Looks like you're not logged in",
+    "loginPromptDescription": "Signup or login now to gain access to your {{pageName}}",
+    "login":"Login"       
   }
 }
