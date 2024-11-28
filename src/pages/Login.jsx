@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../services/api/authApi";
@@ -13,12 +13,15 @@ import {
   Stack,
   Grid,
   Container,
+  Select,
+  MenuItem,
 } from "@mui/material";
 
 import { CustomAlert, LogoLink, FormInput } from "../components/index";
 import { useDispatch, useSelector } from "react-redux";
 import { checkLoginStatus } from "../features/auth/authSlice";
 import { setEmail } from "../features/auth/userSlice";
+import i18next from "i18next";
 
 function Login() {
   const [t] = useTranslation("global");
@@ -32,6 +35,8 @@ function Login() {
   const [visible] = useState(false);
   const navigator = useNavigate();
   const dispatch = useDispatch();
+
+  const savedLanguage = localStorage.getItem("language") || "en";
   const {
     register,
     handleSubmit,
@@ -43,7 +48,15 @@ function Login() {
       keepMeLoggedIn: false,
     },
   });
-
+  const handleChangeLanguage = (event) => {
+    if (event.target.value === 10) {
+      i18next.changeLanguage("en");
+      localStorage.setItem("language", "en");
+    } else {
+      i18next.changeLanguage("kh");
+      localStorage.setItem("language", "kh");
+    }
+  };
   const handleShowPassword = () => setShowPassword((prev) => !prev);
   const { isAtCourseDetail, isAtCart } = useSelector((state) => state.auth);
   const { courseId } = useSelector((state) => state.user);
@@ -88,9 +101,7 @@ function Login() {
             <Grid item xs={12} md={6}>
               <Stack spacing={2}>
                 <Typography variant="h2">{t("login.login")}</Typography>
-                <Typography variant="bmdr">
-                  {t("login.description")}
-                </Typography>
+                <Typography variant="bmdr">{t("login.description")}</Typography>
                 <Stack
                   component="form"
                   spacing={2}
@@ -122,7 +133,9 @@ function Login() {
                     label={t("login.password")}
                     fullWidth
                     type={visible ? "text" : "password"}
-                    {...register("password", {required: t("login.pleaseEnterYourPassword")})}
+                    {...register("password", {
+                      required: t("login.pleaseEnterYourPassword"),
+                    })}
                     error={!!errors.password}
                     helperText={errors.password?.message}
                     showPassword={showPassword}
@@ -172,6 +185,35 @@ function Login() {
                       </Typography>
                     </Link>
                   </Stack>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Select
+                      labelId="language-select-label"
+                      id="language-select"
+                      defaultValue={savedLanguage === "en" ? 10 : 20}
+                      sx={{
+                        width: "120px",
+                        border: "none",
+                        color: "common.black",
+                        ".MuiSelect-icon": {
+                          color: "common.black",
+                        },
+                        ".MuiOutlinedInput-notchedOutline": { border: 0 },
+                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                          border: "0", // Remove border when focused
+                        },
+                      }}
+                      label="Language"
+                      onChange={handleChangeLanguage}
+                    >
+                      <MenuItem value={10}>English</MenuItem>
+                      <MenuItem value={20}>ភាសាខ្មែរ</MenuItem>
+                    </Select>
+                  </Box>
                 </Stack>
               </Stack>
             </Grid>

@@ -364,7 +364,7 @@ function Navigation() {
                 ))}
                 <MenuItem component={RouterLink} to="cart">
                   <Stack direction="row" gap={1} alignItems="center">
-                    <Typography variant="bsr">Cart</Typography>
+                    <Typography variant="bsr">{t("header.cart")}</Typography>
                     {cartItemTotal > 0 && (
                       <Typography
                         textAlign="center"
