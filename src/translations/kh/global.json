@@ -121,8 +121,16 @@
     "processing": "កំពុងដំណើរការ",
     "youDontHaveAnyPurchasedYet": "អ្នកមិនទាន់មានវិក័យប័ត្រទិញនៅឡើយទេ"
   },
-  "searchResult": {},
-  "courseDetail": {
+  "searchResult": {
+    "noSearchResult": "លទ្ធផលដែលស្វែងរកមិនមានទេ",
+    "product": "ផលិតផល",
+    "course": "វគ្គសិក្សា",
+    "categories": "ប្រភេទ",
+    "searchLabel": "រៀនឆ្លាតជាងមុន រៀនលឿនជាងមុន AgTeach",
+    "searchResultHeader": "លទ្ធផលស្វែងរកសម្រាប់ '{{query}} {{queryLength}}'",
+    "pagination": "ទំព័រ {{page}} នៃ {{totalPages}}"
+  },
+  "courseDetail": { 
     "createdBy": "បង្កើតឡើងដោយ",
     "enroll": "ចុះឈ្មោះឥឡូវនេះ",
     "whatYouWillLearnInThisCourse?": "តើអ្នកនឹងរៀនអ្វីខ្លះក្នុងវគ្គសិក្សានេះ?",

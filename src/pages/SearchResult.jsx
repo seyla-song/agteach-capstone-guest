@@ -24,6 +24,7 @@ import {
   ItemsLoading,
 } from "../components/index";
 import CustomCard from "../components/CustomCard";
+import { useTranslation } from "react-i18next";
 
 function SearchResultPage() {
   const currentLocation = useLocation().search;
@@ -33,6 +34,8 @@ function SearchResultPage() {
   const [productPage, setProductPage] = useState(1);
   const limit = 12;
   const [isNewQuery, setIsNewQuery] = useState(false);
+
+  const [t] = useTranslation("global");
 
   const {
     data: courseData,
@@ -137,8 +140,15 @@ function SearchResultPage() {
 
     // Set the filtered data based on the selected category
     setFilteredData(combinedData[category]);
-
-  }, [courseData, productData, category, sortBy, isNewQuery, filteredData.course, filteredData.product]);
+  }, [
+    courseData,
+    productData,
+    category,
+    sortBy,
+    isNewQuery,
+    filteredData.course,
+    filteredData.product,
+  ]);
 
   if (isCourseLoading || isProductLoading || category) <ContentLoading />;
 
@@ -155,6 +165,11 @@ function SearchResultPage() {
     );
   }
 
+  const queryLength = (query.length >= 70 && "...") || "";
+  const page = category === "course" ? coursePage : productPage;
+  const totalPages =
+    category === "course" ? totalCoursePages : totalProductPages;
+
   return (
     <Container
       maxWidth={false}
@@ -168,21 +183,21 @@ function SearchResultPage() {
     >
       <SearchBar
         backDrop={"primary"}
-        searchLabel={"Learn Smarter, Learn Faster. AgTeach"}
+        searchLabel={t("searchResult.searchLabel")}
         defaultSearchString={query}
       />
 
       <Stack py={3} gap={1}>
         <Typography maxWidth={500} variant="h3">
-          Search result for "{query} {query.length >= 70 && '...'}"
+          {t("searchResult.searchResultHeader", { query, queryLength })}
         </Typography>
         {isCourseLoading && isProductLoading && (
           <ItemsLoading title="courses or products" />
         )}
         {!isCourseLoading && !isProductLoading && (
           <Typography variant="bsmr" color="dark.300">
-            Course({courseData?.results || 0}) & Product(
-            {productData?.results || 0})
+            {t("searchResult.course")}({courseData?.results || 0}) &{" "}
+            {t("searchResult.product")}({productData?.results || 0})
           </Typography>
         )}
       </Stack>
@@ -212,19 +227,25 @@ function SearchResultPage() {
             <>
               <Box width="100%">
                 <Grid2 container size={{ xs: 12 }} width={"100%"}>
-                  {(!isCourseLoading && !isProductLoading) && filteredData?.length === 0 && (
-                    <Typography>There is no search result.</Typography>
-                  )}
+                  {!isCourseLoading &&
+                    !isProductLoading &&
+                    filteredData?.length === 0 && (
+                      <Typography>
+                        {t("searchResult.noSearchResult")}
+                      </Typography>
+                    )}
                   {(isCourseFetching || isProductFetching) && <ItemsLoading />}
-                  {(!isCourseFetching && !isProductFetching) &&filteredData?.map((product, idx) => (
-                    <Grid2 size={{ xs: 6, md: 4 }} key={idx}>
-                      <CustomCard
-                        key={idx}
-                        dataObj={product}
-                        variant={category}
-                      />
-                    </Grid2>
-                  ))}
+                  {!isCourseFetching &&
+                    !isProductFetching &&
+                    filteredData?.map((product, idx) => (
+                      <Grid2 size={{ xs: 6, md: 4 }} key={idx}>
+                        <CustomCard
+                          key={idx}
+                          dataObj={product}
+                          variant={category}
+                        />
+                      </Grid2>
+                    ))}
                 </Grid2>
                 {filteredData?.length !== 0 && (
                   <Stack
@@ -245,10 +266,7 @@ function SearchResultPage() {
                       <NavigateBeforeIcon />
                     </Button>
                     <Typography>
-                      Page {category === "course" ? coursePage : productPage} of{" "}
-                      {category === "course"
-                        ? totalCoursePages
-                        : totalProductPages}
+                      {t("searchResult.pagination", { page, totalPages })}
                     </Typography>
                     <Button
                       variant="outlined"
@@ -267,7 +285,6 @@ function SearchResultPage() {
                 {/* )} */}
               </Box>
             </>
-            
           </Stack>
         </Grid>
       </Grid>
