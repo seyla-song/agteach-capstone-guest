@@ -176,8 +176,15 @@
     "cartEmptyMessage": "Your cart looks a little lonely. How about adding something special?",
     "goShopping":"Go Shopping"
   },
-  "sucessPayment": { 
-
+  "successPayment": { 
+    "thanksForYourPayment":"Thanks for your payment",
+    "aPaymentToAgTeachWillAppearOnYourStatement":"A payment to AgTeach will appear on your statement",
+    "email":"Email",
+    "address":"Address",
+    "backToAgTeach":"Back to AgTeach",
+    "poweredByStripe":"Powered by Stripe",
+    "termsAndConditions":"Terms and Conditions",
+    "privacyPolicy":"Privacy Policy"
   },
   "failPayment": { 
 

@@ -175,8 +175,15 @@
     "cartEmptyMessage": "រទេះរបស់អ្នកមើលទៅឯកោណាស់ សាកដាក់អីវ៉ាន់ចូលទៅក្នុងរទេះយល់យ៉ាងណាដែរ?",
     "goShopping":"តស់ទៅទិញទំនិញ"
   },
-  "sucessPayment": { 
-
+  "successPayment": { 
+    "thanksForYourPayment":"សូមអរគុណចំពោះការទូទាត់ប្រាក់របស់អ្នក",
+    "aPaymentToAgTeachWillAppearOnYourStatement":"ការទូទាត់មកកាន់ AgTeach នឹងបង្ហាញនៅលើរបាយការណ៍របស់អ្នក",
+    "email":"អ៊ីមែល",
+    "address":"អាស័យដ្ឋាន",
+    "backToAgTeach":"ត្រឡប់ទៅកាន់ AgTeach",
+    "poweredByStripe":"ដំណើរការដោយ Stripe",
+    "termsAndConditions":"លក្ខខណ្ឌ",
+    "privacyPolicy":"គោលការណ៍ឯកជនភាព"
   },
   "failPayment": { 
 
