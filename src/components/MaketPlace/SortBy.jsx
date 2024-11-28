@@ -6,12 +6,14 @@ import {
   FormControl,
   FormControlLabel,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export const SortByFilter = ({ sortBy, handleChange }) => {
+  const [t] = useTranslation("global");
   return (
     <Box>
       <Typography sx={{ typography: { xs: "bmdsm", sm: "blgsm" } }}>
-        Sort By
+        {t("marketplace.sortBy")}
       </Typography>
 
       <FormControl>
@@ -23,17 +25,17 @@ export const SortByFilter = ({ sortBy, handleChange }) => {
           name="radio-buttons-group"
           onChange={(e) => handleChange(e.target.value)}
         >
-          <FormControlLabel control={<Radio />} label="Newest" value="newest" />
-          <FormControlLabel control={<Radio />} label="Oldest" value="oldest" />
-          <FormControlLabel control={<Radio />} label="A-Z" value="alphabet" />
+          <FormControlLabel control={<Radio />} label={t("marketplace.newest")} value="newest" />
+          <FormControlLabel control={<Radio />} label={t("marketplace.oldest")} value="oldest" />
+          <FormControlLabel control={<Radio />} label={t("marketplace.aToZ")} value="alphabet" />
           <FormControlLabel
             control={<Radio />}
-            label="Price Low to high"
+            label={t("marketplace.priceLowToHigh")}
             value="plth"
           />
           <FormControlLabel
             control={<Radio />}
-            label="Price high to low"
+            label={t("marketplace.priceHighToLow")}
             value="phtl"
           />
         </RadioGroup>
