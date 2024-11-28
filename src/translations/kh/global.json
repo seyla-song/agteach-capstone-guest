@@ -230,14 +230,21 @@
     "backToLogin": "ត្រលប់ទៅការចូលគណនី"
   },
   "resetPassword": {
-    "newPassword": "ពាក្យសម្ងាត់",
-    "confirmPassword": "បញ្ជាក់ពាក្យសម្ងាត់",
+    "resetPassword": "កំណត់ពាក្យសម្ងាត់ឡើងវិញ",
+    "description": "ពាក្យសម្ងាត់ដែលមានសុវត្តិភាព រួមមានលេខ អក្សរ និងសញ្ញាវណ្ណយុត្តិ។",
+    "password": "ពាក្យសម្ងាត់ថ្មី",
+    "passwordIsRequired" : "ពាក្យសម្ងាត់ថ្មី គឺតម្រូវឲបញ្ចូល",
+    "passwordMustBeAtLease8characters": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់ ៨តួអក្សរ",
+    "confirmPassword": "បញ្ជាក់ពាក្យសម្ងាត់ថ្មី",
+    "confirmPasswordIsRequired" : "បញ្ជាក់ពាក្យសម្ងាត់ថ្មី គឺតម្រូវឲបញ្ចូល",
     "passwordMustContainLowercase": "ពាក្យសម្ងាត់ត្រូវតែមានអក្សរតូចមួយ",
     "passwordMustContainUppercase": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់អក្សរធំមួយ",
     "passwordMustContainNumber": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់លេខមួយ",
     "passwordMustContainSpecialCharacter": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់តួអក្សរពិសេសមួយ",
     "passwordMustContains": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់អក្សរតូចមួយ អក្សរធំមួយ លេខមួយ និងតួអក្សរពិសេសមួយ",
-    "passwordsDoNotMatch": "ពាក្យសម្ងាត់មិនត្រូវគ្នា"
+    "passwordsDoNotMatch": "ពាក្យសម្ងាត់មិនផ្ទៀងផ្ទាត់គ្នា",
+    "sendResetPassword": "កំណត់ពាក្យសម្ងាត់ឡើងវិញ",
+    "sendingRequest": "កំពុងកំណត់ពាក្យសម្ងាត់ឡើងវិញ..."
   },
   "signup": {
     "signup": "ចុះឈ្មោះ",
