@@ -5,7 +5,25 @@
     "agai": "AgAI",
     "login": "Login"
   },
-  "homepage": { 
+  "footer": {
+    "footerMenu": [
+      { "page": "My Learning", "path": "/mylearning" },
+      { "page": "Marketplace", "path": "/marketplace" },
+      { "page": "AgAI", "path": "/agai" }
+    ],
+    "address": "8th Floor, OCIC Blvd, Sangkat Chroy Changvar, Khan Chroy Changvar, Phnom Penh, Cambodia",
+    "copyright": "© All right reserved AgTeach - 2024",
+    "terms": "Terms and Conditions",
+    "privacy": "Privacy Policy",
+    "passion": "Ready to share your passion ? Join with us.",
+    "becomeAnInstructor": "Become an Instructor"
+  },
+  "homepage": {
+    "searchbarPlaceholder": "Search course, plant, crop, service",
+    "search": "Search",
+    "carouselCourseTitle": "Most people interested in this course",
+    "carouselProductTitle": "Most people interested in this product",
+    "viewAll": "View All",
     "coreValueTitle": "With many platforms available, what makes AgTeach the best choice?",
     "coreValue": [
       {
@@ -23,43 +41,33 @@
     ],
     "faqTitle": "Frequently Asked Questions",
     "faqList": [
-    {
-      "question": "What exactly is AgTeach?",
-      "answer": "Simple! We're your one-stop platform for learning farming through video courses and buying the supplies you need. Think of us as your farming teacher and supply store, all in one place."
-    },
-    {
-      "question": "Is this for complete beginners?",
-      "answer": "Absolutely! Whether you've never planted a seed or you're an experienced farmer, we've got something for you. We start with the basics and build up to advanced techniques."
-    },
-    {
-      "question": "What kinds of farming videos do you have?",
-      "answer": "Everything from \"How to Start Your First Garden\" to advanced topics like:\n- Growing different crops\n- Taking care of your soil\n- Dealing with pests naturally\n- Setting up irrigation\n- Harvesting tips\n- And lots more!"
-    },
-    {
-      "question": "What can I buy in your marketplace?",
-      "answer": "All the essentials you learn about in our videos:\n- Seeds\n- Tools\n- Soil supplies\n- Plant food\n- Pest control\n- Safety gear"
-    }
-  ],
+      {
+        "question": "What exactly is AgTeach?",
+        "answer": "Simple! We're your one-stop platform for learning farming through video courses and buying the supplies you need. Think of us as your farming teacher and supply store, all in one place."
+      },
+      {
+        "question": "Is this for complete beginners?",
+        "answer": "Absolutely! Whether you've never planted a seed or you're an experienced farmer, we've got something for you. We start with the basics and build up to advanced techniques."
+      },
+      {
+        "question": "What kinds of farming videos do you have?",
+        "answer": "Everything from \"How to Start Your First Garden\" to advanced topics like:\n- Growing different crops\n- Taking care of your soil\n- Dealing with pests naturally\n- Setting up irrigation\n- Harvesting tips\n- And lots more!"
+      },
+      {
+        "question": "What can I buy in your marketplace?",
+        "answer": "All the essentials you learn about in our videos:\n- Seeds\n- Tools\n- Soil supplies\n- Plant food\n- Pest control\n- Safety gear"
+      }
+    ],
     "ctaTitle": "Ready to share your passion for indoor gardening?",
     "ctaDescription": "Join our platform as an instructor and inspire others while showcasing your expertise. Empower the next generation of gardeners and grow your impact today! Apply now and be a part of our vibrant community",
-    "becomeAnInstructor":"Become an Instructor" 
+    "becomeAnInstructor": "Become an Instructor"
   },
-  "myLearning": { 
-
-  },
-  "marketplace": { 
-
-  },
-  "agai": { 
-
-  },
-  "cart": { 
-
-  },
-  "searchResult": { 
-
-  },
-  "courseDetail": { 
+  "myLearning": {},
+  "marketplace": {},
+  "agai": {},
+  "cart": {},
+  "searchResult": {},
+  "courseDetail": {
     "createdBy": "Created by",
     "enroll": "Enroll",
     "whatYouWillLearnInThisCourse?": "What you will learn in this course?",
@@ -71,58 +79,26 @@
     "section": "Sections",
     "totalLength": "Total Length",
     "peopleAlsoLearnThisCourse": "People also learn this course",
-    "youMightWantToBuyTheProductRelatedToThisCourse":"You might want to buy the product related to this course",
-    "processing":"Processing",
-    "stripeCheckoutError":"Stripe checkout error",
-    "failedToCreateCheckoutSession":"Failed to create checkout session",
-    "errorDuringCheckout":"Error during checkout"
+    "youMightWantToBuyTheProductRelatedToThisCourse": "You might want to buy the product related to this course",
+    "processing": "Processing",
+    "stripeCheckoutError": "Stripe checkout error",
+    "failedToCreateCheckoutSession": "Failed to create checkout session",
+    "errorDuringCheckout": "Error during checkout"
   },
-  "courseVideo": { 
-
-  },
-  "productDetail": { 
-
-  },
-  "termsService": { 
-
-  },
-  "privacyPolicy": { 
-
-  },
-  "error": { 
-
-  },
-  "cartEmpty": { 
-
-  },
-  "sucessPayment": { 
-
-  },
-  "failPayment": { 
-
-  },
-  "login": { 
-
-  },
-  "forgotPassword": { 
-
-  },
-  "resetPassword": { 
-
-  },
-  "signup": { 
-
-  },
-  "additionalInfo": { 
-
-  },
-  "verification": { 
-
-  },
-  "guestProfile": { 
-
-  },
-  "instructorProfile": { 
-
-  }
+  "courseVideo": {},
+  "productDetail": {},
+  "termsService": {},
+  "privacyPolicy": {},
+  "error": {},
+  "cartEmpty": {},
+  "sucessPayment": {},
+  "failPayment": {},
+  "login": {},
+  "forgotPassword": {},
+  "resetPassword": {},
+  "signup": {},
+  "additionalInfo": {},
+  "verification": {},
+  "guestProfile": {},
+  "instructorProfile": {}
 }

@@ -13,6 +13,7 @@ import {
 } from '../components/index';
 
 import search from '../assets/happy-farm-community.jpeg';
+import { useTranslation } from 'react-i18next';
 
 function HomePage() {
   const { data: productsData } = useGetProductCarouselQuery();
@@ -21,6 +22,8 @@ function HomePage() {
   // Assuming the data structure includes images for courses and products
   const courses = coursesData?.data || []; // Adjust based on actual structure
   const products = productsData?.data || []; // Adjust based on actual structure
+
+  const [t] = useTranslation('global');
 
   return (
     <Container
@@ -42,7 +45,7 @@ function HomePage() {
       {courses.length > 0 && (
         <CarouselComponent data={courses} cardVariant="course">
           <CustomSectionTitle
-            title="Most people interested in this course"
+            title={t('homepage.carouselCourseTitle')}
             path="/search?name="
           />
         </CarouselComponent>
@@ -53,7 +56,7 @@ function HomePage() {
       {products.length > 0 && (
         <CarouselComponent data={products} cardVariant="product">
           <CustomSectionTitle
-            title="Most people interested in this product"
+            title={t('homepage.carouselProductTitle')}
             path="/marketplace"
           />
         </CarouselComponent>
