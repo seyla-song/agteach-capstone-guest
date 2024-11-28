@@ -93,6 +93,7 @@
     "pleaseEnterYourPassword": "Please enter your password",
     "keepMeLoggedIn": "Keep me logged in",
     "login": "Login",
+    "loggingIn": "Logging in...",
     "forgotPassword": "Forgot Password?",
     "needAnAccount": "Need an account?",
     "signUp": "Sign Up"
