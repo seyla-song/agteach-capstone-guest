@@ -1,22 +1,25 @@
-import { Typography, Container, Stack, Alert, Chip, Box } from '@mui/material';
-import theme from '../theme/theme';
-import { ImageScan } from '../components/AgAi/ImageScan';
-import ExpandableText from '../components/ExpandableText';
+import { Typography, Container, Stack, Alert, Chip, Box } from "@mui/material";
+import theme from "../theme/theme";
+import { ImageScan } from "../components/AgAi/ImageScan";
+import ExpandableText from "../components/ExpandableText";
+import { useTranslation } from "react-i18next";
 
 function AgAiPage() {
   const zipUrl = `${process.env.PUBLIC_URL}/files/test_images.zip`; // Path to your ZIP file
-  const zipName = 'test_images.zip'; // Name the ZIP file for download
+  const zipName = "test_images.zip"; // Name the ZIP file for download
+
+  const [t] = useTranslation("global");
+
   return (
-    <Container sx={{minHeight:'100vh', pb:10}}>
+    <Container sx={{ minHeight: "100vh", pb: 10 }}>
       <Stack gap={5} my={10}>
         <Stack>
           <Typography variant="h3">
-            <Chip label="BETA" color="secondary" />
-            {` `}
-            Plant Disease Detection
+            <Chip label={t("agai.beta")} color="secondary" />
+            {t("agai.plantDiseaseDetection")}
           </Typography>
           <Typography variant="bxsmd">
-            Find out the problem, symptom, and cure of the plant.
+            {t("agai.plantDiseaseDetectionDescription")}
           </Typography>
         </Stack>
         <Stack
@@ -27,45 +30,26 @@ function AgAiPage() {
           p={5}
         >
           <Typography variant="bmdsm" color="initial">
-            Search any plant with AgAI
+            {t("agai.searchAnyPlantWithAgai")}
           </Typography>
           <ImageScan />
         </Stack>
         <Alert severity="info">
-          <Typography>Note:</Typography>
+          <Typography> {t("agai.note")}</Typography>
           <Typography variant="bxsr">
-            - These are our test images, which were not exposed to the model
-            during training. Use them to see the model in action:{` `}
+            {t("agai.noteDescriptionFirst")}
             <a href={zipUrl} download={zipName}>
-              Download
+              {t("agai.download")}
             </a>
-            <Box component="br" /> - AgAI can make mistakes. This machine
-            learning model works with a limited dataset, and the constrained
-            diversity of images from the{' '}
+            <Box component="br" />
+            {t("agai.noteDescriptionSecond")}
             <a href="https://www.kaggle.com/datasets/abdallahalidev/plantvillage-dataset/data">
               PlantVillage
-            </a>{` `}
-            dataset means it lacks generalization. Consequently, the model can
-            only predict 38 classes of plants, distinguishing between healthy
-            and diseased plants as follows:
+            </a>
+            {t("agai.noteDescriptionThird")}
             <ExpandableText
               initialLength={10}
-              text="Apple Apple
-            scab, Apple Black rot, Apple Cedar apple rust, Apple healthy,
-            Blueberry healthy, Cherry (including sour) Powdery mildew, Cherry
-            (including sour) healthy, Corn (maize) Cercospora leaf spot Gray
-            leaf spot, Corn (maize) Common rust, Corn (maize) Northern Leaf
-            Blight, Corn (maize) healthy, Grape Black rot, Grape Esca (Black
-            Measles), Grape Leaf blight (Isariopsis Leaf Spot), Grape healthy,
-            Orange Haunglongbing (Citrus greening), Peach Bacterial spot, Peach
-            healthy, Pepper, bell Bacterial spot, Pepper, bell healthy, Potato
-            Early blight, Potato Late blight, Potato healthy, Raspberry healthy,
-            Soybean healthy, Squash Powdery mildew, Strawberry Leaf scorch,
-            Strawberry healthy, Tomato Bacterial spot, Tomato Early Blight,
-            Tomato Late blight, Tomato Leaf Mold, Tomato Septoria leaf spot,
-            Tomato Spider mites Two-spotted spider mite, Tomato Target Spot,
-            Tomato Tomato Yellow Leaf Curl Virus, Tomato Tomato mosaic virus,
-            Tomato healthy"
+              text={t("agai.noteDescriptionExpandableText")}
             />
           </Typography>
         </Alert>
