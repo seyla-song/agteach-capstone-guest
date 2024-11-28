@@ -179,7 +179,7 @@
     "thanksForYourPayment":"សូមអរគុណចំពោះការទូទាត់ប្រាក់របស់អ្នក",
     "aPaymentToAgTeachWillAppearOnYourStatement":"ការទូទាត់មកកាន់ AgTeach នឹងបង្ហាញនៅលើរបាយការណ៍របស់អ្នក",
     "email":"អ៊ីមែល",
-    "address":"អាស័យដ្ឋាន",
+    "address":"អាសយដ្ឋាន",
     "backToAgTeach":"ត្រឡប់ទៅកាន់ AgTeach",
     "poweredByStripe":"ដំណើរការដោយ Stripe",
     "termsAndConditions":"លក្ខខណ្ឌ",
@@ -208,7 +208,15 @@
     "signUp": "ចុះឈ្មោះ"
   },
   "forgotPassword": { 
-
+    "description": "បញ្ចូលអាសយដ្ឋានអ៊ីមែលរបស់អ្នក",
+    "forgotYourPassword": "ភ្លេចពាក្យសម្ងាត់របស់អ្នក?",
+    "instruction": "សូមបញ្ចូលអាសយដ្ឋានអ៊ីមែលដែលភ្ជាប់ជាមួយគណនីរបស់អ្នក ហើយយើងនឹងផ្ញើអ៊ីមែលទៅអ្នកនូវតំណដើម្បីកំណត់ពាក្យសម្ងាត់របស់អ្នកឡើងវិញ។",
+    "email": "អ៊ីមែល",
+    "invalidEmail": "សូមបញ្ចូលអ៊ីមែលដែលត្រឹមត្រូវ",
+    "pleaseEnterYourEmail": "សូមបញ្ចូលអ៊ីមែលរបស់អ្នក",
+    "sendResetLink": "ផ្ញើតំណកំណត់ឡើងវិញ",
+    "sending": "កំពុងផ្ញើ...",
+    "backToLogin": "ត្រលប់ទៅការចូលគណនី"
   },
   "resetPassword": { 
 
@@ -244,11 +252,11 @@
   },
   "additionalInfo": {
     "additionalInformation": "ព័ត៌មានបន្ថែម",
-    "nameAddress": "ឈ្មោះ & អាស័យដ្ឋាន",
+    "nameAddress": "ឈ្មោះ & អាសយដ្ឋាន",
     "firstName": "នាមត្រកូល",
     "lastName": "នាមខ្លួន",
     "city": "ទីក្រុង ឬ ខេត្ត",
-    "address":"អាស័យដ្ឋាន",
+    "address":"អាសយដ្ឋាន",
     "contactInformation": "ព័ត៌មានទំនាក់ទំនង",
     "phone": "លេខទូរស័ព្ទ",
     "skip": "រំលង",
@@ -256,7 +264,7 @@
     "lastNameMustBeAtLeast2Characters": "នាមខ្លួនត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
     "firstNameCanOnlyContainLetters": "នាមត្រកូលអាចមានតែអក្សរប៉ុណ្ណោះ",
     "lastNameCanOnlyContainLetters": "នាមខ្លួនអាចមានតែអក្សរប៉ុណ្ណោះ",
-    "addressMustBeAtLeast2Characters": "អាស័យដ្ឋានត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
+    "addressMustBeAtLeast2Characters": "អាសយដ្ឋានត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
     "phoneNumberMustStartWith0": "លេខទូរស័ព្ទត្រូវតែចាប់ផ្តើមដោយលេខ 0",
     "aValidPhoneNumberShouldContainsAtleast8Digits": "លេខទូរស័ព្ទដែលមានសុពលភាពគួរតែមានយ៉ាងហោចណាស់ 8 ខ្ទង់",
     "phoneNumberCannotExceed15Digits": "លេខទូរស័ព្ទមិនអាចលើសពី 15 ខ្ទង់បានទេ",

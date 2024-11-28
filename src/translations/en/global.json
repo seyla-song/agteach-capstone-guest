@@ -209,7 +209,15 @@
     "signUp": "Sign Up"
   },
   "forgotPassword": { 
-
+    "description" : "Enter your email address",
+    "forgotYourPassword": "Forgot your password?",
+    "instruction": "Please enter the email address associated with this account and we will email you a link to reset your password.",
+    "email": "Email",
+    "invalidEmail": "Please enter a valid email address",
+    "pleaseEnterYourEmail": "Email is required",
+    "sendResetLink": "Send reset link",
+    "sending": "Sending...",
+    "backToLogin": "Back to Login"
   },
   "resetPassword": { 
 
