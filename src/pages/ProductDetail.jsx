@@ -35,6 +35,8 @@ import {
   DescriptionComponent,
   CustomFaq,
 } from "../components/index";
+import { useTranslation } from 'react-i18next';
+
 
 function ProductDetailPage() {
   const { productId } = useParams();
@@ -46,6 +48,7 @@ function ProductDetailPage() {
   const { data, isLoading } = useGetOneProductQuery(productId);
   const [open, setOpen] = useState(false);
   const toggleModal = () => setOpen((prev) => !prev); // Toggle function
+  const [t] = useTranslation("global");
 
   // Find the product in the cart
   const cartItem = useSelector((state) =>
@@ -114,8 +117,8 @@ function ProductDetailPage() {
         <CustomModal
           open={open}
           onClose={toggleModal} // Use the same function to close the modal
-          title="Reach Stock Limit"
-          description="Sorry, you have reached the available stock limit. You can still add other item to the cart."
+          title={t("productDetail.reachStockLimit")}
+          description={t("productDetail.reachStockLimitMessage")}
         >
           <IconButton onClick={toggleModal} aria-label="delete">
             <CloseIcon />
@@ -147,19 +150,18 @@ function ProductDetailPage() {
                     <Stack direction="row" gap={1} justifyContent="center">
                       <TimerOutlinedIcon color="error" />
                       <Typography color="error" variant="bmdr">
-                        Hurry only ({availableStock}) item left !
+                        {t("productDetail.callToAction",{availableStock})}
                       </Typography>
                     </Stack>
                   )}
                   {availableStock > 0 ? (
                     <Button onClick={handleAddToCart} variant="contained">
-                      Add to cart
+                      {t("productDetail.addToCart")}
                     </Button>
                   ) : (
                     <Alert icon={<TakeoutDiningIcon />} severity="warning">
-                      <AlertTitle>Out of Stock</AlertTitle>
-                      Out of Stock. Explore similar products in our collection
-                      below.
+                      <AlertTitle>{t("productDetail.outOfStock")}</AlertTitle>
+                      {t('productDetail.outOfStockMessage')}
                     </Alert>
                   )}
                   {/* <Button
@@ -181,7 +183,7 @@ function ProductDetailPage() {
                     typography: { xs: "blgsm", md: "h4" },
                   }}
                 >
-                  You might also want to buy these products
+                  {t("productDetail.youMightAlsoWantToBuyTheseProducts")}
                 </Typography>
                 <CustomCarousel
                   data={allRelatedProducts}

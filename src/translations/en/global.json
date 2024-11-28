@@ -60,7 +60,9 @@
     ],
     "ctaTitle": "Ready to share your passion for indoor gardening?",
     "ctaDescription": "Join our platform as an instructor and inspire others while showcasing your expertise. Empower the next generation of gardeners and grow your impact today! Apply now and be a part of our vibrant community",
-    "becomeAnInstructor": "Become an Instructor"
+    "becomeAnInstructor":"Become an Instructor",
+    "seeMore":"See More",
+    "seeLess": "See Less"
   },
   "myLearning": {},
   "marketplace": {},
@@ -85,20 +87,114 @@
     "failedToCreateCheckoutSession": "Failed to create checkout session",
     "errorDuringCheckout": "Error during checkout"
   },
-  "courseVideo": {},
-  "productDetail": {},
-  "termsService": {},
-  "privacyPolicy": {},
-  "error": {},
-  "cartEmpty": {},
-  "sucessPayment": {},
-  "failPayment": {},
-  "login": {},
-  "forgotPassword": {},
-  "resetPassword": {},
-  "signup": {},
-  "additionalInfo": {},
-  "verification": {},
-  "guestProfile": {},
-  "instructorProfile": {}
+  "courseVideo": { 
+    "createdBy": "Created by",
+    "back": "Back",
+    "section": "Sections",
+    "video": "Videos",
+    "hour":"hour",
+    "minute":"minute",
+    "second":"second",
+    "whatYouWillLearnInThisCourse?": "What you will learn in this course?",
+    "courseContent": "Course Content"
+  },
+  "productDetail": { 
+    "reachStockLimit":"Reach Stock Limit",
+    "reachStockLimitMessage":"Sorry, you have reached the available stock limit. You can still add other item to the cart.",
+    "callToAction": "Hurry only {{availableStock}} items left !",
+    "addToCart": "Add to Cart",
+    "outOfStock": "Out of Stock",
+    "outOfStockMessage":"Out of Stock. Explore similar products in our collection below.",
+    "youMightAlsoWantToBuyTheseProducts":"You might also want to buy these products"
+  },
+  "termsService": { 
+
+  },
+  "privacyPolicy": { 
+
+  },
+  "error": { 
+
+  },
+  "cartEmpty": { 
+
+  },
+  "sucessPayment": { 
+
+  },
+  "failPayment": { 
+
+  },
+  "login": { 
+
+  },
+  "forgotPassword": { 
+
+  },
+  "resetPassword": { 
+
+  },
+  "signup": { 
+    "signup": "Sign Up",
+    "signUpToEnjoyAgteachFeatures": "Sign up to enjoy AgTeach features",
+    "username": "Username",
+    "dateOfBirth": "Date of Birth",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "passwordMustContainLowercase": "Password must contain at least one lowercase letter.",
+    "passwordMustContainUppercase": "Password must contain at least one uppercase letter.",
+    "passwordMustContainNumber": "Password must contain at least one number.",
+    "passwordMustContainSpecialCharacter": "Password must contain at least one special character.",
+    "passwordMustContains": "Password must contains at least one lowercase letter, one uppercase letter, one number, and one special character.",
+    "alreadyHaveAccount": "Already have an account?",
+    "login": "Login",
+    "pleaseEnterYourUsername": "Please enter your name",
+    "invalidEmail": "Invalid email address",
+    "usernameMustBeAtLease3characters": "Username must be at least 3 characters",
+    "usernameMustBeAtMost20characters": "Username must be at most 20 characters",
+    "usernameMustStartWithLetter": "Username must at least start with a letter and contain only letters and numbers",
+    "pleaseProvideYourDateOfBirth": "Please provide your date of birth",
+    "pleaseEnterYourEmail": "Please enter your email",
+    "pleaseEnterYourPassword": "Please enter your password",
+    "pleaseEnterYourConfirmPassword": "Please enter your confirm password",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "passwordMustContainAtLeastOneUppercaseLetter": "Password must contain at least one uppercase letter",
+    "youMustBeAtLeast15YearsOld":"You must be at least 15 years old."
+  },
+  "additionalInfo": { 
+    "additionalInformation": "Additional Information",
+    "nameAddress": "Name & Address",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "city": "City",
+    "address": "Address",
+
+    "contactInformation": "Contact Information",
+    "phone": "Phone number",
+    "skip": "Skip",
+
+    "firstNameMustBeAtLeast2Characters": "First name must be at least 2 characters",
+    "lastNameMustBeAtLeast2Characters": "Last name must be at least 2 characters",
+    "firstNameCanOnlyContainLetters":"First name can only contain letters",
+    "lastNameCanOnlyContainLetters": "Last name can only contain letters",
+    "addressMustBeAtLeast2Characters": "Address must be at least 2 characters",
+    "phoneNumberMustStartWith0": "Phone number must start with 0",
+    "aValidPhoneNumberShouldContainsAtleast8Digits": "A valid phone number should contains atleast 8 digits",
+    "phoneNumberCannotExceed15Digits": "Phone number cannot exceed 15 digits",
+    "pleaseEnterAValidPhoneNumber": "Please enter a valid phone number",
+    "firstNameCannotBeMoreThan25Characters": "First name cannot be more than 25 characters",
+    "lastNameCannotBeMoreThan25Characters": "Last name cannot be more than 25 characters",
+    
+    "submit": "Submit"
+  },
+  "verification": { 
+
+  },
+  "guestProfile": { 
+
+  },
+  "instructorProfile": { 
+
+  }
 }

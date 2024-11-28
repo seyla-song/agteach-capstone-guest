@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 
 import { LogoLink, FormInput, CustomAlert } from "../components/index";
+import { useTranslation } from "react-i18next";
 
 export default function PersonalInfoForm() {
   const [skip, setSkip] = useState(false);
@@ -43,6 +44,7 @@ export default function PersonalInfoForm() {
   });
   const navigate = useNavigate();
   const { data } = useGetLocationsQuery();
+  const [t] = useTranslation("global");
   const [addPerosnalInfo, { isLoading }] = useAddPersonalInfoMutation();
 
   const onSubmit = async (data) => {
@@ -84,11 +86,11 @@ export default function PersonalInfoForm() {
 
   const validatePhone = (value) => {
     const phonePattern = /^[0-9]+$/; // Only digits
-    if (!value.startsWith("0")) return "Phone number must start with 0";
-    if (!phonePattern.test(value)) return "Please enter a valid phone number";
-    if (value.length > 15) return "Phone number cannot exceed 15 digits";
+    if (!value.startsWith("0")) return t("additionalInfo.phoneNumberMustStartWith0");
+    if (!phonePattern.test(value)) return t("pleaseEnterAValidPhoneNumber");
+    if (value.length > 15) return t("additionalInfo.phoneNumberCannotExceed15Digits");
     if (value?.length < 8)
-      return "A valid phone number should contains atleast 8 digits";
+      return t("additionalInfo.aValidPhoneNumberShouldContainsAtleast8Digits");;
   };
 
   return (
@@ -105,7 +107,7 @@ export default function PersonalInfoForm() {
           <LogoLink />
 
           <Typography variant="h2" textAlign="center">
-            Additional Information
+            {t("additionalInfo.additionalInformation")}
           </Typography>
 
           <Stack
@@ -117,47 +119,58 @@ export default function PersonalInfoForm() {
             <Stack spacing={4}>
               {/* Personal Information */}
               <Stack spacing={2}>
-                <Typography variant="blgsm">Name & Address</Typography>
+                <Typography variant="blgsm">
+                  {t("additionalInfo.nameAddress")}
+                </Typography>
                 <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
                   <FormInput
-                    label="First Name"
+                    label={t("additionalInfo.firstName")}
                     placeholder="e.g. Jane"
                     {...register("firstName", {
                       pattern: {
                         value: /^[A-Za-z]+$/i,
-                        message: "First name can only contain letters",
+                        message: t(
+                          "additionalInfo.firstNameCanOnlyContainLetters"
+                        ),
                       },
                       maxLength: {
                         value: 25,
-                        message: "First name cannot be more than 25 characters",
+                        message: t("additionalInfo.firstNameCannotBeMoreThan25Characters"),
                       },
                       validate: (value) => {
                         if (!value) return true;
                         if (value.length < 2)
-                          return "First name must be at least 2 characters";
+                          return t(
+                            "additionalInfo.firstNameMustBeAtLeast2Characters"
+                          );
                         if (value.length > 25)
-                          return "First name must be at most 25 characters";
+                          return t("additionalInfo.firstNameCannotBeMoreThan25Characters");
                       },
                     })}
                     error={!!errors.firstName}
                     helperText={errors?.firstName?.message}
                   />
                   <FormInput
-                    label="Last Name"
+                    label={t("additionalInfo.lastName")}
                     placeholder="e.g. Smith"
                     {...register("lastName", {
                       pattern: {
                         value: /^[A-Za-z]+$/i,
-                        message: "Last name can only contain letters",
+                        message: t(
+                          "additionalInfo.lastNameCanOnlyContainLetters"
+                        ),
                       },
                       maxLength: {
                         value: 25,
-                        message: "Last name cannot be more than 25 characters",
+                        message: t("additionalInfo.lastNameCannotBeMoreThan25Characters"),
                       },
+
                       validate: (value) => {
                         if (!value) return true;
                         if (value.length < 2)
-                          return "Last name must be at least 2 characters";
+                          return t(
+                            "additionalInfo.lastNameMustBeAtLeast2Characters"
+                          );
                         if (value.length > 25)
                           return "Last name must be at most 25 characters";
                       },
@@ -173,7 +186,7 @@ export default function PersonalInfoForm() {
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                      label="City"
+                      label={t("additionalInfo.city")}
                       slotProps={{
                         htmlInput: {
                           ...params.inputProps,
@@ -196,13 +209,13 @@ export default function PersonalInfoForm() {
                   )}
                 />
                 <FormInput
-                  label="Address"
+                  label={t("additionalInfo.address")}
                   placeholder="e.g. 1234 Main St"
                   {...register("address", {
                     validate: (value) => {
                       if (!value) return true;
                       if (value.length < 2)
-                        return "Address must be at least 2 characters";
+                        return t("additionalInfo.addressMustBeAtLeast2Characters");
                       if (value.length > 100)
                         return "Address must be at most 100 characters";
                     },
@@ -214,10 +227,12 @@ export default function PersonalInfoForm() {
 
               {/* Contact Information */}
               <Stack spacing={2}>
-                <Typography variant="blgsm">Contact Information</Typography>
+                <Typography variant="blgsm">
+                  {t("additionalInfo.contactInformation")}
+                </Typography>
                 <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
                   <FormInput
-                    label="Phone number"
+                    label={t("additionalInfo.phone")}
                     placeholder="e.g. 0123456789"
                     {...register("phone", {
                       validate: validatePhone,
@@ -242,7 +257,7 @@ export default function PersonalInfoForm() {
                 sx={{ padding: { xs: "8px 20px", md: "8px 35px" } }}
                 disabled={isLoading}
               >
-                Skip
+                {t("additionalInfo.skip")}
               </Button>
 
               <Button
@@ -252,7 +267,9 @@ export default function PersonalInfoForm() {
                 sx={{ padding: { xs: "8px 20px", md: "8px 35px" } }}
                 disabled={isLoading}
               >
-                {isLoading && !skip ? "Submitting..." : "Submit"}
+                {isLoading && !skip
+                  ? t("additionalInfo.submit") + "..."
+                  : t("additionalInfo.submit")}
               </Button>
             </Stack>
           </Stack>

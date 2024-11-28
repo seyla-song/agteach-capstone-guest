@@ -60,7 +60,9 @@
     ],
     "ctaTitle": "ត្រៀម​ខ្លួន​ហើយឬនៅ ដើម្បី​ចែក​រំលែក​ចំណង់​ចំណូល​ចិត្ត​របស់​អ្នក​សម្រាប់​ការ​ថែ​សួន​ក្នុង​ផ្ទះ​?",
     "ctaDescription": "ចូលរួមវេទិការបស់យើងក្នុងនាមជាគ្រូបង្ហាត់ និងលើកទឹកចិត្តអ្នកដទៃក្នុងពេលនោះ។ បង្ហាញពីជំនាញរបស់អ្នក ផ្តល់លើកស្ទួយអ្នកជំនាន់ក្រោយ  និងបង្កើនសមត្ថភាពរបស់អ្នកនៅថ្ងៃនេះ! ដាក់ពាក្យឥឡូវនេះ ហើយក្លាយជាផ្នែកមួយនៃភាពរស់រវើករបស់សហគមន៍យើង",  
-    "becomeAnInstructor":"ចុះឈ្មោះជាគ្រូបង្រៀន"
+    "becomeAnInstructor":"ចុះឈ្មោះជាគ្រូបង្រៀន",
+    "seeMore":"មើលបន្ត",
+    "seeLess": "មើលតិច"
   },
   "myLearning": { 
 
@@ -96,10 +98,24 @@
     "errorDuringCheckout":"កំហុសអំឡុងពេលបង់ប្រាក់ចេញ"
   },
   "courseVideo": { 
-
+    "createdBy": "បង្កើតឡើងដោយ",
+    "back": "ថយក្រោយ",
+    "section": "វគ្គ",
+    "video": "វីដេអូ",
+    "hour":"ម៉ោង",
+    "minute": "នាទី",
+    "second":"វិនាទី",
+    "whatYouWillLearnInThisCourse?": "តើអ្នកនឹងរៀនអ្វីខ្លះក្នុងវគ្គសិក្សានេះ?",
+    "courseContent": "ខ្លឹមសារនៃវគ្គសិក្សា"
   },
   "productDetail": { 
-
+    "reachStockLimit":"ឈានដល់ដែនកំណត់ស្តុក",
+    "reachStockLimitMessage":"សូមអភ័យទោស អ្នកបានឈានដល់ដែនកំណត់ស្តុកដែលមាន អ្នកនៅតែអាចបន្ថែមធាតុផ្សេងទៀតទៅក្នុងរទេះ",
+    "callToAction": "ប្រញាប់ឡើង នៅសល់តែទំនិញ {{availableStock}} ប៉ុណ្ណោះ!",
+    "addToCart": "បញ្ចូលទៅក្នុងរទេះ",
+    "outOfStock": "អស់ពីស្តុក",
+    "outOfStockMessage":"អីវ៉ាន់អស់ពីស្តុក អ្នកអាចស្វែងរកផលិតផលស្រដៀងគ្នានៅក្នុងបណ្តុំរបស់យើងខាងក្រោម",
+    "youMightAlsoWantToBuyTheseProducts":"អ្នកក៏ប្រហែលជាចង់ទិញផលិតផលទាំងនេះដែរ"
   },
   "termsService": { 
 
@@ -129,9 +145,59 @@
 
   },
   "signup": { 
-
+    "signup": "ចុះឈ្មោះ",
+    "signUpToEnjoyAgteachFeatures": "ចុះឈ្មោះដើម្បីប្រើប្រាស់ជាមួយមុខងារAgteach",
+    "username": "ឈ្មោះអ្នកប្រើប្រាស់",
+    "dateOfBirth": "ថ្ងៃខែឆ្នាំកំណើត",
+    "email": "អ៊ីម៉ែល",
+    "password": "ពាក្យសម្ងាត់",
+    "confirmPassword": "បញ្ជាក់ពាក្យសម្ងាត់",
+    "passwordMustContainLowercase": "ពាក្យសម្ងាត់ត្រូវតែមានអក្សរតូចមួយ",
+    "passwordMustContainUppercase": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់អក្សរធំមួយ",
+    "passwordMustContainNumber": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់លេខមួយ",
+    "passwordMustContainSpecialCharacter": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់តួអក្សរពិសេសមួយ",
+    "passwordMustContains": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់អក្សរតូចមួយ អក្សរធំមួយ លេខមួយ និងតួអក្សរពិសេសមួយ",
+    "alreadyHaveAccount": "មានគណនីរួចហើយ?",
+    "login": "ចូលគណនី",
+    "pleaseEnterYourName": "សូមបញ្ចូលឈ្មោះរបស់អ្នក",
+    "invalidEmail": "អ៊ីមែលមិនត្រឹមត្រូវ",
+    "usernameMustBeAtLease3characters": "ឈ្មោះអ្នកប្រើប្រាស់ត្រូវតែមានយ៉ាងហោចណាស់៣តួអក្សរ",
+    "passwordMustBeAtLease8characters": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់៨តួអក្សរ",
+    "usernameMustBeAtMost20characters": "ឈ្មោះអ្នកប្រើប្រាស់ត្រូវតែមានយ៉ាងច្រើន២០តួអក្សរ",
+    "passwordMustBeAtMost20characters": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងច្រើន២០តួអក្សរ",
+    "usernameMustStartWithLetter":"ឈ្មោះអ្នកប្រើប្រាស់ត្រូវតែចាប់ផ្តើមជាអក្សរនិងមានតែតួអក្សរនិងលេខ",
+    "pleaseProvideYourDateOfBirth": "សូមបញ្ចូលថ្ងៃខែឆ្នាំកំណើតរបស់អ្នក",    
+    "pleaseEnterYourEmail": "សូមបញ្ចូលអ៊ីមែលរបស់អ្នក",
+    "pleaseEnterYourPassword": "សូមបញ្ចូលពាក្យសម្ងាត់របស់អ្នក",
+    "pleaseConfirmYourPassword": "សូមបញ្ចូលបញ្ជាក់ពាក្យសម្ងាត់របស់អ្នក",
+    "passwordsDoNotMatch": "ពាក្យសម្ងាត់មិនត្រូវគ្នាទេ",
+    "youMustBeAtLeast15YearsOld":"អ្នកត្រូវតែមានអាយុយ៉ាងតិច15ឆ្នាំ"
   },
   "additionalInfo": { 
+    "additionalInformation": "ព័ត៌មានបន្ថែម",
+    "nameAddress": "ឈ្មោះ & អាស័យដ្ឋាន",
+    "firstName": "នាមត្រកូល",
+    "lastName": "នាមខ្លួន",
+    "city": "ទីក្រុង ឬ ខេត្ត",
+    "address":"អាស័យដ្ឋាន",
+
+    "contactInformation": "ព័ត៌មានទំនាក់ទំនង",
+    "phone": "លេខទូរស័ព្ទ",
+    "skip": "រំលង",
+
+    "firstNameMustBeAtLeast2Characters": "នាមត្រកូលត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
+    "lastNameMustBeAtLeast2Characters": "នាមខ្លួនត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
+    "firstNameCanOnlyContainLetters":"នាមត្រកូលអាចមានតែអក្សរប៉ុណ្ណោះ",
+    "lastNameCanOnlyContainLetters": "នាមខ្លួនអាចមានតែអក្សរប៉ុណ្ណោះ",
+    "addressMustBeAtLeast2Characters": "អាស័យដ្ឋានត្រូវបានត្រូវមានតូអក្សរយ៉ាងតិច2",
+    "phoneNumberMustStartWith0": "លេខទូរស័ព្ទត្រូវតែចាប់ផ្តើមដោយលេខ 0",
+    "aValidPhoneNumberShouldContainsAtleast8Digits": "លេខទូរស័ព្ទដែលមានសុពលភាពគួរតែមានយ៉ាងហោចណាស់ 8 ខ្ទង់",
+    "phoneNumberCannotExceed15Digits": "លេខទូរស័ព្ទមិនអាចលើសពី 15 ខ្ទង់បានទេ",
+    "pleaseEnterAValidPhoneNumber": "សូមបញ្ចូលលេខទូរស័ព្ទអោយបានត្រឹមត្រូវ",
+    "firstNameCannotBeMoreThan25Characters": "នាមត្រកូលមិនអាចលើសពី 25 តួអក្សរទេ",
+    "lastNameCannotBeMoreThan25Characters": "នាមខ្លួនមិនអាចលើសពី 25 តួអក្សរទេ",
+    
+    "submit": "ដាក់ស្នើ"
 
   },
   "verification": { 
