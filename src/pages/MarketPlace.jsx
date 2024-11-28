@@ -24,6 +24,7 @@ import {
   SortByFilter,
   SearchBar,
 } from "../components/index";
+import { useTranslation } from "react-i18next";
 
 export default function MarketPlace() {
   const currentLocation = useLocation().search;
@@ -32,6 +33,8 @@ export default function MarketPlace() {
   const [page, setPage] = useState(1);
   const query = queryParams.get("name") || "";
   const [category, setCategory] = useState(); // State to hold the selected category
+
+  const [t] = useTranslation("global");
 
   const {
     data: productData,
@@ -99,7 +102,7 @@ export default function MarketPlace() {
         alignItems="center"
         spacing={2}
       >
-        Something went wrong. please try again later!
+        {t("marketplace.error")}
       </Stack>
     );
   }
@@ -144,14 +147,18 @@ export default function MarketPlace() {
                 defaultSearchString={query}
               />
               {!isProductLoading && productData && (
-                <Typography typography="bsr">{`Found (${productData.results}) items`}</Typography>
+                <Typography typography="bsr">
+                  {t("marketplace.itemFound", { count: productData.results })}
+                </Typography>
               )}
-              {(isProductLoading || isProductFetching) && <ItemsLoading title={"marketplace"} />}
+              {(isProductLoading || isProductFetching) && (
+                <ItemsLoading title={"marketplace"} />
+              )}
               {/* {(isProductLoading || isProductFetching) && <ContentLoading />} */}
               {!isProductLoading && filteredData?.length === 0 && (
-                <Typography>There is no search result.</Typography>
+                <Typography>{t("marketplace.noItemFound")}</Typography>
               )}
-              {(!isProductLoading && !isProductFetching) && productData && (
+              {!isProductLoading && !isProductFetching && productData && (
                 <SearchList
                   dataObj={filteredData}
                   cardVariant={"product"}
@@ -173,7 +180,7 @@ export default function MarketPlace() {
                   >
                     <NavigateBeforeIcon />
                   </Button>
-                  <Typography>{`Page ${page} of ${totalPages}`}</Typography>
+                  <Typography>{t("marketplace.pagination", { page, totalPages })}</Typography>
                   <Button
                     variant="outlined"
                     onClick={handleNext}
