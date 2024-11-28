@@ -15,7 +15,7 @@ function AgAiPage() {
       <Stack gap={5} my={10}>
         <Stack>
           <Typography variant="h3">
-            <Chip label="BETA" color="secondary" />
+            <Chip label={t("agai.beta")} color="secondary" />
             {t("agai.plantDiseaseDetection")}
           </Typography>
           <Typography variant="bxsmd">
