@@ -245,15 +245,15 @@
     "termsAndConditions": "លក្ខខណ្ឌ",
     "privacyPolicy": "គោលការណ៍ឯកជនភាព"
   },
-  "failPayment": { 
-    "weHaveNotReceivedYourPayment":"យើងមិនទាន់បានទទួលការបង់ប្រាក់របស់អ្នកទេ",
-    "youPaymentDidNotComplete":"ការបង់ប្រាក់របស់អ្នកមិនទទួលបានជោគជ័យនោះទេ សូមព្យាយាមម្តងទៀត",
-    "backToAgTeach":"ត្រឡប់ទៅកាន់ AgTeach",
-    "poweredByStripe":"ដំណើរការដោយ Stripe",
-    "termsAndConditions":"លក្ខខណ្ឌ",
-    "privacyPolicy":"គោលការណ៍ឯកជនភាព"
+  "failPayment": {
+    "weHaveNotReceivedYourPayment": "យើងមិនទាន់បានទទួលការបង់ប្រាក់របស់អ្នកទេ",
+    "youPaymentDidNotComplete": "ការបង់ប្រាក់របស់អ្នកមិនទទួលបានជោគជ័យនោះទេ សូមព្យាយាមម្តងទៀត",
+    "backToAgTeach": "ត្រឡប់ទៅកាន់ AgTeach",
+    "poweredByStripe": "ដំណើរការដោយ Stripe",
+    "termsAndConditions": "លក្ខខណ្ឌ",
+    "privacyPolicy": "គោលការណ៍ឯកជនភាព"
   },
-  "login": { 
+  "login": {
     "description": "សូមបំពេញព័ត៌មានគណនីរបស់អ្នក ដើម្បីចូលប្រើប្រាស់។",
     "email": "អ៊ីមែល",
     "pleaseEnterYourEmail": "សូមបញ្ចូលអ៊ីមែលរបស់អ្នក",
@@ -282,10 +282,10 @@
     "resetPassword": "កំណត់ពាក្យសម្ងាត់ឡើងវិញ",
     "description": "ពាក្យសម្ងាត់ដែលមានសុវត្តិភាព រួមមានលេខ អក្សរ និងសញ្ញាវណ្ណយុត្តិ។",
     "password": "ពាក្យសម្ងាត់ថ្មី",
-    "passwordIsRequired" : "ពាក្យសម្ងាត់ថ្មី គឺតម្រូវឲ្យបញ្ចូល",
+    "passwordIsRequired": "ពាក្យសម្ងាត់ថ្មី គឺតម្រូវឲ្យបញ្ចូល",
     "passwordMustBeAtLease8characters": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់ ៨តួអក្សរ",
     "confirmPassword": "បញ្ជាក់ពាក្យសម្ងាត់ថ្មី",
-    "confirmPasswordIsRequired" : "បញ្ជាក់ពាក្យសម្ងាត់ថ្មី គឺតម្រូវឲ្យបញ្ចូល",
+    "confirmPasswordIsRequired": "បញ្ជាក់ពាក្យសម្ងាត់ថ្មី គឺតម្រូវឲ្យបញ្ចូល",
     "passwordMustContainLowercase": "ពាក្យសម្ងាត់ត្រូវតែមានអក្សរតូចមួយ",
     "passwordMustContainUppercase": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់អក្សរធំមួយ",
     "passwordMustContainNumber": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់លេខមួយ",
@@ -418,26 +418,26 @@
     "saveButton": "រក្សាទុក",
     "saving": "កំពុងរក្សាទុក..."
   },
-  "instructorProfile": { 
-    "copied":"បានចម្លង",
-    "back":"ថយក្រោយ",
-    "instructor":"គ្រូបង្រៀន",
-    "aboutMe":"អំពីខ្ញុំ",
-    "close":"បិទ",
-    "courses":"វគ្គសិក្សា",
-    "courseFound_one":"បានរកឃើញ ({{count}}) វគ្គសិក្សា",
-    "courseFound_other":"បានរកឃើញ ({{count}}) វគ្គសិក្សា",
-    "showLess":"បង្ហាញតិច",
-    "viewMore":"បង្ហាញ ({{item}}) បន្ថែម",
-    "thereIsNoCourse":"មិន​ទាន់​មាន​វគ្គ​សម្រាប់​គ្រូ​ម្នាក់​នេះ​ទេ",
-    "thereIsNoProduct":"មិន​ទាន់​មាន​ទំនិញ​សម្រាប់​គ្រូ​ម្នាក់​នេះ​ទេ",
-    "productFound_one":"បានរកឃើញ ({{count}}) ទំនិញ",
-    "productFound_other":"បានរកឃើញ ({{count}}) ទំនិញ",
-    "products":"ទំនិញ"
+  "instructorProfile": {
+    "copied": "បានចម្លង",
+    "back": "ថយក្រោយ",
+    "instructor": "គ្រូបង្រៀន",
+    "aboutMe": "អំពីខ្ញុំ",
+    "close": "បិទ",
+    "courses": "វគ្គសិក្សា",
+    "courseFound_one": "បានរកឃើញ ({{count}}) វគ្គសិក្សា",
+    "courseFound_other": "បានរកឃើញ ({{count}}) វគ្គសិក្សា",
+    "showLess": "បង្ហាញតិច",
+    "viewMore": "បង្ហាញ ({{item}}) បន្ថែម",
+    "thereIsNoCourse": "មិន​ទាន់​មាន​វគ្គ​សម្រាប់​គ្រូ​ម្នាក់​នេះ​ទេ",
+    "thereIsNoProduct": "មិន​ទាន់​មាន​ទំនិញ​សម្រាប់​គ្រូ​ម្នាក់​នេះ​ទេ",
+    "productFound_one": "បានរកឃើញ ({{count}}) ទំនិញ",
+    "productFound_other": "បានរកឃើញ ({{count}}) ទំនិញ",
+    "products": "ទំនិញ"
   },
-  "loginPrompt":{
+  "loginPrompt": {
     "loginPromptTitle": "មើលទៅអ្នក ដូចជាមិនទាន់បានចូលគណនី",
     "loginPromptDescription": "ចុះឈ្មោះ ឬចូលគណនីឥឡូវនេះ ដើម្បីទទួលបានសិទ្ធិចូលប្រើប្រាស់",
-    "login":"ចូលគណនី"  
+    "login": "ចូលគណនី"
   }
 }

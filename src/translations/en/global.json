@@ -245,15 +245,15 @@
     "termsAndConditions": "Terms and Conditions",
     "privacyPolicy": "Privacy Policy"
   },
-  "failPayment": { 
-    "weHaveNotReceivedYourPayment":"We have not received your payment",
-    "youPaymentDidNotComplete":"You payment did not complete, try again",
-    "backToAgTeach":"Back to AgTeach",
-    "poweredByStripe":"Powered by Stripe",
-    "termsAndConditions":"Terms and Conditions",
-    "privacyPolicy":"Privacy Policy"
+  "failPayment": {
+    "weHaveNotReceivedYourPayment": "We have not received your payment",
+    "youPaymentDidNotComplete": "You payment did not complete, try again",
+    "backToAgTeach": "Back to AgTeach",
+    "poweredByStripe": "Powered by Stripe",
+    "termsAndConditions": "Terms and Conditions",
+    "privacyPolicy": "Privacy Policy"
   },
-  "login": { 
+  "login": {
     "description": "Please login to continue to your account",
     "email": "Email",
     "pleaseEnterYourEmail": "Please enter your email",
@@ -364,7 +364,7 @@
     "pleaseWait": "Please wait {{time}}s to resend the code again.",
     "requesting": "Requesting..."
   },
-  "guestProfile": { 
+  "guestProfile": {
     "photoSection": "Photo",
     "description": "Add a nice photo of yourself for your profile",
     "imagePreview": "Image Preview",
@@ -418,25 +418,26 @@
     "saveButton": "Save",
     "saving": "Saving..."
   },
-  "instructorProfile": { 
-    "copied":"Copied",
-    "back":"Back",
-    "instructor":"Instructor",
-    "aboutMe":"About Me",
-    "close":"Close",
-    "courses":"Courses",
-    "courseFound_one":"Found ({{count}}) Course",
-    "courseFound_other":"Found ({{count}}) Courses",
-    "showLess":"Show Less",
-    "viewMore":"View ({{item}}) More",
-    "thereIsNoCourse":"There is no course for this instructor yet!",
-    "thereIsNoProduct":"There is no product for this instructor yet!",
-    "productFound_one":"Found ({{count}}) Product",
-    "productFound_other":"Found ({{count}}) Products",
-    "products":"Products"
+  "instructorProfile": {
+    "copied": "Copied",
+    "back": "Back",
+    "instructor": "Instructor",
+    "aboutMe": "About Me",
+    "close": "Close",
+    "courses": "Courses",
+    "courseFound_one": "Found ({{count}}) Course",
+    "courseFound_other": "Found ({{count}}) Courses",
+    "showLess": "Show Less",
+    "viewMore": "View ({{item}}) More",
+    "thereIsNoCourse": "There is no course for this instructor yet!",
+    "thereIsNoProduct": "There is no product for this instructor yet!",
+    "productFound_one": "Found ({{count}}) Product",
+    "productFound_other": "Found ({{count}}) Products",
+    "products": "Products"
   },
-  "loginPrompt":{
+  "loginPrompt": {
     "loginPromptTitle": "Looks like you're not logged in",
     "loginPromptDescription": "Signup or login now to gain access to your {{pageName}}",
-    "login":"Login" }
+    "login": "Login"
+  }
 }
