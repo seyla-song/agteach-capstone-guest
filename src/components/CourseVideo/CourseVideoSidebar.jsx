@@ -1,5 +1,6 @@
 import { Stack, Typography } from '@mui/material';
 import { CourseAccordionComponent } from '../../components/CourseAccordionComponent';
+import { useTranslation } from 'react-i18next';
 /**
  * A component that renders the sidebar of the course video page.
  *
@@ -10,6 +11,8 @@ import { CourseAccordionComponent } from '../../components/CourseAccordionCompon
  * @returns {React.ReactElement} The course video sidebar component.
  */
 export const CourseVideoSidebar = ({ data }) => {
+  const [t] = useTranslation("global");
+
   return (
     <Stack
       position={{ xs: 'block', md: 'sticky' }}
@@ -22,7 +25,7 @@ export const CourseVideoSidebar = ({ data }) => {
       }}
     >
       <Stack p={2} bgcolor="primary.main" color="common.white">
-        <Typography variant="blgsm">Course Content</Typography>
+        <Typography variant="blgsm">{t('courseVideo.courseContent')}</Typography>
       </Stack>
       <CourseAccordionComponent data={data} />
     </Stack>

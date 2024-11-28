@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form'; // Import useForm from react-hook-form
 import { useNavigate, useParams } from 'react-router-dom';
 import { useResetPasswordMutation } from '../services/api/authApi';
+import { useTranslation } from 'react-i18next';
 
 import {
   Button,
@@ -16,6 +17,7 @@ import {
 import { CustomAlert, LogoLink, FormInput } from '../components/index';
 
 const ResetPasswordPage = () => {
+  const [t] = useTranslation("global");
   const {
     register,
     handleSubmit,
@@ -67,11 +69,14 @@ const ResetPasswordPage = () => {
   };
 
   const validatePassword = (value) => {
-    if (!/[a-z]/.test(value)) return "Password must contain at least one lowercase letter.";
-    if (!/[A-Z]/.test(value)) return "Password must contain at least one uppercase letter.";
-    if (!/\d/.test(value)) return "Password must contain at least one number.";
-    if (!/[@$!%*?&]/.test(value)) return "Password must contain at least one special character.";
-    return true; 
+    if (!/[a-z]/.test(value))
+      return t("signup.passwordMustContainLowercase");
+    if (!/[A-Z]/.test(value))
+      return t("signup.passwordMustContainUppercase");
+    if (!/\d/.test(value)) return t("signup.passwordMustContainNumber");
+    if (!/[@$!%*?&]/.test(value))
+      return t("signup.passwordMustContainSpecialCharacter");
+    return true;
   };
 
   return (
@@ -94,26 +99,25 @@ const ResetPasswordPage = () => {
                   gutterBottom
                   sx={{ textAlign: 'left' }}
                 >
-                  Reset Password
+                  {t("resetPassword.resetPassword")}
                 </Typography>
 
                 <Typography variant="bmdr" sx={{ textAlign: 'left' }}>
-                  Strong passwords include numbers, letters, and punctuation
-                  marks.
+                  {t("resetPassword.description")}
                 </Typography>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <Stack spacing={3} marginTop={2}>
                     <FormInput
-                      label="New Password"
+                      label={t("resetPassword.password")}
                       type="password"
                       // Register the input with validation rules
                       {...register('newPassword', {
-                        required: 'Password is required',
+                        required: t("resetPassword.passwordIsRequired"),
                         minLength: {
                           value: 8,
                           message:
-                            'Password must be at least 8 characters long',
+                            t("resetPassword.passwordMustBeAtLease8characters"),
                         },
                         validate: validatePassword
                       })}
@@ -123,14 +127,14 @@ const ResetPasswordPage = () => {
                       handleClickShowPassword={handleClickShowPassword}
                     />
                     <FormInput
-                      label="Confirm Password"
+                      label={t("resetPassword.confirmPassword")}
                       type="password"
                       // Register the input with validation and match password logic
                       {...register('confirmPassword', {
-                        required: 'Confirm password is required',
+                        required: t("resetPassword.confirmPasswordIsRequired"),
                         validate: (value) =>
                           value === watch('newPassword') ||
-                          "Passwords don't match",
+                          t("resetPassword.passwordsDoNotMatch"),
                       })}
                       error={Boolean(errors.confirmPassword)}
                       helperText={errors.confirmPassword?.message}
@@ -138,7 +142,7 @@ const ResetPasswordPage = () => {
                       handleClickShowPassword={handleClickShowPassword}
                     />
                     <Typography color="dark.300" fontSize="12px" marginTop={"10px"} textAlign={"left"}>
-                      Password must contains at least one lowercase letter, one uppercase letter, one number, and one special character.
+                      {t("resetPassword.passwordMustContains")}
                     </Typography>
                     <Link to="/auth/login">
                       <Button
@@ -151,7 +155,7 @@ const ResetPasswordPage = () => {
                           padding: '12px',
                         }}
                       >
-                        {isLoading ? 'Sending Request...' : 'Reset Password'}
+                        {isLoading ? t("resetPassword.sendingRequest") : t("resetPassword.sendResetPassword")}
                       </Button>
                     </Link>
                   </Stack>

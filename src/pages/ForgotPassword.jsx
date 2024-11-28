@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useForgotPasswordMutation } from '../services/api/authApi';
 import { Link as RouterLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import {
   TextField,
@@ -28,6 +29,7 @@ import forgetPasswordImg from '../assets/forgot-password.png';
  * @returns {React.ReactElement} A JSX element representing the password reset form.
  */
 const ForgotPasswordPage = () => {
+  const [t] = useTranslation("global");
   const [forgotPassword, { isLoading}] =
     useForgotPasswordMutation();
   const {
@@ -110,11 +112,10 @@ const ForgotPasswordPage = () => {
                 textAlign="center"
                 sx={{ whiteSpace: 'nowrap' }}
               >
-                Forgot Your Password?
+                {t("forgotPassword.forgotYourPassword")}
               </Typography>
               <Typography variant="bmdmd">
-                Please enter the email address associated with this account and
-                we will email you a link to reset your password.
+                {t("forgotPassword.instruction")}
               </Typography>
             </Grid>
 
@@ -131,20 +132,21 @@ const ForgotPasswordPage = () => {
             >
               <Stack spacing={2} sx={{ width: '100%', maxWidth: '400px' }}>
                 <Typography variant="h4" textAlign="center">
-                  Enter your email address
+                  {t("forgotPassword.description")}
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit(onSubmit)}>
                   <TextField
-                    label="Email"
+                    label={t("forgotPassword.email")}
+                    placeholder={t("forgotPassword.email")}
                     variant="outlined"
                     fullWidth
                     margin="normal"
                     {...register('email', {
-                      required: 'Email is required',
+                      required: t("forgotPassword.pleaseEnterYourEmail"),
                       pattern: {
                         value:
                           /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                        message: 'Please enter a valid email address',
+                        message: t("forgotPassword.invalidEmail"),
                       },
                     })}
                     error={!!errors.email}
@@ -160,7 +162,7 @@ const ForgotPasswordPage = () => {
                     sx={{ padding: '12px', marginY: 2 }}
                     disabled={isLoading}
                   >
-                    {isLoading ? 'Sending...' : 'Send reset link'}
+                    {isLoading ? t("forgotPassword.sending") : t("forgotPassword.sendResetLink")}
                   </Button>
                   <Link component={RouterLink} to="/auth/login">
                     <Button
@@ -168,7 +170,7 @@ const ForgotPasswordPage = () => {
                       startIcon={<ArrowBackIosNewIcon />}
                       variant="outlined"
                     >
-                      Back to login
+                      {t("forgotPassword.backToLogin")}
                     </Button>
                   </Link>
                 </Box>

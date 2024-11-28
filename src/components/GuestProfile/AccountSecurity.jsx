@@ -1,6 +1,14 @@
 import React, { useEffect } from "react";
-import { Stack, Typography, OutlinedInput, InputLabel, FormControl } from "@mui/material";
-import { useForm } from "react-hook-form"; 
+import {
+  Stack,
+  Typography,
+  OutlinedInput,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
+import { useForm } from "react-hook-form";
+import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 /**
  * @function AccountSecurity
@@ -8,8 +16,9 @@ import { useForm } from "react-hook-form";
  * @returns {JSX.Element} A JSX element that renders the form and button.
  */
 
-export const AccountSecurity = ({userData}) => {
+export const AccountSecurity = ({ userData }) => {
   const { setValue, register } = useForm();
+  const [t] = useTranslation("global");
 
   useEffect(() => {
     if (userData && userData.customer) {
@@ -19,16 +28,19 @@ export const AccountSecurity = ({userData}) => {
     }
   }, [userData, setValue]);
 
-
   return (
     <>
       <Stack sx={{ m: 2, gap: 2 }}>
-        <Typography variant="h4">Account Security</Typography>
+        <Typography variant="h4">
+          {t("guestProfile.accountSecuritySection")}
+        </Typography>
         <FormControl>
-          <InputLabel htmlFor="email">Email</InputLabel>
+          <InputLabel htmlFor="email">
+            {t("guestProfile.emailLabel")}
+          </InputLabel>
           <OutlinedInput
             id="email"
-            label="email"
+            label={t("guestProfile.emailLabel")}
             disabled
             placeholder="e.g. janeagteach@gmail.com"
             {...register("email", {})}
@@ -37,5 +49,4 @@ export const AccountSecurity = ({userData}) => {
       </Stack>
     </>
   );
-}
-
+};

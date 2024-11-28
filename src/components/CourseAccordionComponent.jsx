@@ -9,6 +9,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useNavigate, useParams } from "react-router-dom";
 import displayDuration from "../utils/displayDuration";
+import { useTranslation } from "react-i18next";
 
 /**
  * A component that renders a list of courses as an accordion.
@@ -27,6 +28,7 @@ import displayDuration from "../utils/displayDuration";
 export const CourseAccordionComponent = ({ data }) => {
   const { coursesId, videoId } = useParams();
   const navigate = useNavigate();
+  const [t] = useTranslation("global");
 
   const handleSelectLecture = (lectureId) => {
     navigate(`/courses/${coursesId}/watch/${lectureId}`);
@@ -52,15 +54,15 @@ export const CourseAccordionComponent = ({ data }) => {
     // Formatting the result into a readable string
     const output = [];
 
-    if (hours > 0) output.push(`${hours} hour${hours !== 1 ? "s" : ""}`);
-    if (minutes > 0)
-      output.push(`${minutes} minute${minutes !== 1 ? "s" : ""}`);
+    if (hours > 0) output.push(`${hours} ${t("courseVideo.hour")}`);
+    if (minutes > 0) output.push(`${minutes} ${t("courseVideo.minute")}`);
     if (seconds > 0 || output.length === 0)
       // Always display seconds if no hours/minutes
-      output.push(`${seconds} second${seconds !== 1 ? "s" : ""}`);
+      output.push(`${seconds} ${t("courseVideo.second")}`);
 
     return output.join(", ");
   };
+console.log(data);
 
   return (
     <Stack>
@@ -86,7 +88,7 @@ export const CourseAccordionComponent = ({ data }) => {
           {/* Each topic is rendered as a row inside the accordion */}
           {section.lectures.map((lecture, lectureIdx) => (
             <Stack px={2} key={lectureIdx}>
-              <AccordionDetails                
+              <AccordionDetails
                 sx={{
                   cursor: "pointer",
                   bgcolor:
@@ -100,7 +102,14 @@ export const CourseAccordionComponent = ({ data }) => {
                   {/* Topic title and duration */}
                   <Typography variant="bsr">{lecture.name}</Typography>
                   <Typography variant="bxsr">
-                    {displayDuration(lecture.duration)}
+                    {displayDuration({
+                      hours: lecture.duration.hours || 0,
+                      minutes: lecture.duration.minutes || 0,
+                      seconds: lecture.duration.seconds || 0,
+                      hourLabel: t("courseVideo.hour"),
+                      minuteLabel: t("courseVideo.minute"),
+                      secondLabel: t("courseVideo.second"),
+                    })}
                   </Typography>
                 </Stack>
                 <Divider />
