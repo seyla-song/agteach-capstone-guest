@@ -67,7 +67,20 @@
   "myLearning": {},
   "marketplace": {},
   "agai": {},
-  "cart": {},
+  "cart": {
+    "yourShoppingCart": "Your Shopping Cart",
+    "thereAreNoItemsInYourCart": "There are no items in your cart",
+    "foundItem_one": "Found ({{count}}) item",
+    "foundItem_other": "Found ({{count}}) items",
+    "item_one": "item",
+    "item_other": "items",
+    "checkout": "Checkout",
+    "subtotal": "Subtotal",
+    "purchasedHistory": "Purchased History",
+    "total": "Total",
+    "processing": "Processing",
+    "youDontHaveAnyPurchasedYet": "You don't have any purchased yet"
+  },
   "searchResult": {},
   "courseDetail": {
     "createdBy": "Created by",
@@ -107,21 +120,7 @@
     "outOfStockMessage": "Out of Stock. Explore similar products in our collection below.",
     "youMightAlsoWantToBuyTheseProducts": "You might also want to buy these products"
   },
-  "termsService": {
-    "termsAndConditions": "Terms and Conditions",
-    "lastUpdated": "Last Updated",
-    "generalInformation": "Welcome to AgTeach! By accessing or using our website (https://alphabeez.anbschool.org/), you agree to comply with and be bound by these Terms and Conditions. AgTeach is an educational and e-commerce platform offering courses and products primarily focused on the agriculture sector. By using AgTeach, you confirm that you are at least 15 years old. Users under this age are not permitted to register or use our services.",
-    "userAccounts": "To access certain features, users must create an account by providing accurate information, including username, date of birth, email, password, phone number, first name, last name, city, and address. Users are responsible for maintaining the confidentiality of their account credentials. Notify us immediately of any unauthorized use.",
-    "purchasesandPayments": "AgTeach offers both tangible agricultural products and digital courses. Payments are securely processed through Stripe. Refunds are issued only for products that are out of stock or undelivered. No refunds are available for course purchases.",
-    "prohibitedActivities": "Users must refrain from spamming, posting illegal or inappropriate content, or engaging in activities that violate Cambodian law. Violations may result in account suspension, termination, or legal action.",
-    "intellectualProperty": "All website content, including text, graphics, and logos, is owned by AgTeach. Users may not reproduce or distribute this content without written consent.",
-    "privacyPolicy": "AgTeach collects only the information provided during signup and does not share user data with third parties. For details, refer to our Privacy Policy.",
-    "disclaimerofLiability": "AgTeach is not responsible for technical issues, system downtime, or losses resulting from unauthorized access. Users acknowledge that they use the website at their own risk.",
-    "disputeResolution": "These Terms are governed by Cambodian law. Disputes will first be addressed through direct negotiation. If unresolved, disputes will be handled through arbitration or Cambodian courts.",
-    "modificationstoTerms": "AgTeach reserves the right to update these Terms and Conditions at any time. Updates will be posted on the website. Continued use constitutes acceptance of the revised terms.",
-    "terminationofAccess": "AgTeach may terminate or suspend user accounts for violating these Terms or engaging in prohibited activities.",
-    "ContactUs": "For questions or concerns about these Terms, please contact us at khomkhit460@gmail.com"
-  },
+  "termsService": {},
   "privacyPolicy": {},
   "error": {},
   "cartEmpty": {},
@@ -165,11 +164,9 @@
     "lastName": "Last Name",
     "city": "City",
     "address": "Address",
-
     "contactInformation": "Contact Information",
     "phone": "Phone number",
     "skip": "Skip",
-
     "firstNameMustBeAtLeast2Characters": "First name must be at least 2 characters",
     "lastNameMustBeAtLeast2Characters": "Last name must be at least 2 characters",
     "firstNameCanOnlyContainLetters": "First name can only contain letters",
@@ -187,4 +184,27 @@
   "verification": {},
   "guestProfile": {},
   "instructorProfile": {}
+  "verification": { 
+    "enterVerificationCode": "Enter verification code",
+    "submit": "Submit",
+    "goBack": "Go Back",
+    "didntReceiveTheCode": "Didn't receive the code?",
+    "requestCode": "Request code",
+    "resendCode": "Resend code",
+    "checkYourEmailForVerificationCode": "Check your email for verification code.",
+    "pleaseEnterCodeNumber": "Please enter code number that you receive in the email to verify your account.",
+    "code": "Code",
+    "verificationCodeIsRequired": "Verification code is required",
+    "verificationSuccessful": "Verification successful!",
+    "incorrectVerificationCode": "Incorrect Verification Code!",
+    "codeSentSuccessfullyPleaseCheckYourEmail": "Code sent successfully , Please Check your email!",
+    "pleaseWait": "Please wait {{time}}s to resend the code again.",    
+    "requesting": "Requesting..."
+  },
+  "guestProfile": { 
+
+  },
+  "instructorProfile": { 
+
+  }
 }

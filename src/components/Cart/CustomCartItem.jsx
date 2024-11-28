@@ -16,6 +16,7 @@ import {
   removeItemFromCart,
   updateItemQuantity,
 } from '../../features/cart/cartSlice';
+import { useTranslation } from 'react-i18next';
 
 /**
  * A reusable React component that renders a single item in the cart.
@@ -37,6 +38,7 @@ export const CustomCartItem = ({
   availableStock,
 }) => {
   const dispatch = useDispatch();
+  const [t] = useTranslation('global');
 
   const handleIncreament = () => {
     if (quantity < availableStock)
@@ -99,7 +101,7 @@ export const CustomCartItem = ({
             ${(price * quantity || 0).toFixed(2)}
           </Typography>
           <Typography variant="bxsr" color="initial">
-            ${price} X ({quantity}) items
+            ${price} X ({quantity}) {t('cart.item', { count: quantity })}
           </Typography>
         </Stack>
       </Stack>
