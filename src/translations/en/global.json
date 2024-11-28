@@ -187,7 +187,12 @@
     "privacyPolicy":"Privacy Policy"
   },
   "failPayment": { 
-
+    "weHaveNotReceivedYourPayment":"We have not received your payment",
+    "youPaymentDidNotComplete":"You payment did not complete, try again",
+    "backToAgTeach":"Back to AgTeach",
+    "poweredByStripe":"Powered by Stripe",
+    "termsAndConditions":"Terms and Conditions",
+    "privacyPolicy":"Privacy Policy"
   },
   "login": { 
     "description": "Please login to continue to your account",

@@ -186,7 +186,12 @@
     "privacyPolicy":"គោលការណ៍ឯកជនភាព"
   },
   "failPayment": { 
-
+    "weHaveNotReceivedYourPayment":"យើងមិនទាន់បានទទួលការបង់ប្រាក់របស់អ្នកទេ",
+    "youPaymentDidNotComplete":"ការបង់ប្រាក់របស់អ្នកមិនទទួលបានជោគជ័យនោះទេ សូមព្យាយាមម្តងទៀត",
+    "backToAgTeach":"ត្រឡប់ទៅកាន់ AgTeach",
+    "poweredByStripe":"ដំណើរការដោយ Stripe",
+    "termsAndConditions":"លក្ខខណ្ឌ",
+    "privacyPolicy":"គោលការណ៍ឯកជនភាព"
   },
   "login": { 
     "description": "សូមបំពេញព័ត៌មានគណនីរបស់អ្នក ដើម្បីចូលប្រើប្រាស់។",
