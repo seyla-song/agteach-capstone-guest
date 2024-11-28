@@ -14,6 +14,7 @@ import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import InstructorProfileImg from "../../assets/InstructorProfile/instructor-profile.jpg";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 /**
  * ProfilePage is a component that renders an instructor's profile page.
  *
@@ -27,6 +28,7 @@ import { useNavigate } from "react-router-dom";
 export const ProfilePage = ({ instructorData }) => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [t] = useTranslation('global');
 
   /**
    * Copies the given text to the user's clipboard.
@@ -39,7 +41,7 @@ export const ProfilePage = ({ instructorData }) => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        setSnackbarMessage(`Copied: ${text}`);
+        setSnackbarMessage(`${t('instructorProfile.copied')} ${text}`);
         setSnackbarOpen(true);
       })
       .catch((err) => {
@@ -66,7 +68,7 @@ export const ProfilePage = ({ instructorData }) => {
             startIcon={<ArrowBackIosIcon />}
             onClick={() => navigate(-1)}
           >
-            <Typography variant=" bsr">Back</Typography>
+            <Typography variant=" bsr">{t('instructorProfile.back')}</Typography>
           </Button>
         </Link>
       </Grid>
@@ -93,14 +95,14 @@ export const ProfilePage = ({ instructorData }) => {
       </Grid>
       <Grid item xs={12} md={8}>
         <Stack sx={{ pt: 2, ml: 1 }}>
-          <Typography variant="h4">Instructor</Typography>
+          <Typography variant="h4">{t('instructorProfile.instructor')}</Typography>
           <Typography 
             sx={{ typography: { xs: 'h3', md: 'h2' } }}
           >
             {firstName} {lastName}
           </Typography>
           <Typography variant="blgsm" sx={{ mt: 3, mb: 2 }}>
-            About Me
+            {t('instructorProfile.aboutMe')}
           </Typography>
           <Typography variant="bsr">{bio || 'No biography.'}</Typography>
 
@@ -128,7 +130,7 @@ export const ProfilePage = ({ instructorData }) => {
               message={snackbarMessage}
               action={
                 <Button color="inherit" onClick={handleCloseSnackbar}>
-                  Close
+                  {t('instructorProfile.close')}
                 </Button>
               }
             >
