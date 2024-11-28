@@ -21,11 +21,13 @@ import ReceiptElement from '../assets/receipt-element.svg';
 import AgteachBg from '../assets/agteach-bg.svg';
 
 import { ContentLoading } from '../components/index';
+import { useTranslation } from 'react-i18next';
 
 export default function SuccessPayment() {
   const dispatch = useDispatch();
   const urlParams = new URLSearchParams(window.location.search);
   const sessionId = urlParams.get('session_id');
+  const [t] = useTranslation('global');
 
   const { data, isLoading } = useGetPaymentSessionQuery(sessionId);
 
@@ -44,10 +46,10 @@ export default function SuccessPayment() {
           <Stack gap={1} alignItems="center">
             <CheckCircleOutlineIcon sx={{ fontSize: 60, color: 'teal.main' }} />
             <Typography variant="blgsm" textAlign="center" mt={2}>
-              Thanks for your payment
+              {t('successPayment.thanksForYourPayment')}
             </Typography>
             <Typography textAlign="center">
-              A payment to AgTeach will appear on your statement.
+              {t('successPayment.aPaymentToAgTeachWillAppearOnYourStatement')}
             </Typography>
             <Stack
               sx={{
@@ -71,14 +73,14 @@ export default function SuccessPayment() {
               </Stack>
             </Stack>
 
-            <Stack width="100%" py={3} borderRadius="10px">
+            {/* <Stack width="100%" py={3} borderRadius="10px">
               <Divider />
               <SimpleRow label="Email" value={session.customer_details.email} />
               <SimpleRow
                 label="Address"
                 value={data.session.customer_details.address.country}
               />
-            </Stack>
+            </Stack> */}
           </Stack>
           <Link component={RouterLink} to="/" underline="none">
             <Button
@@ -86,12 +88,12 @@ export default function SuccessPayment() {
               endIcon={<ArrowCircleRightOutlinedIcon />}
               sx={{ width: 400 }}
             >
-              Back to AgTeach
+              {t('successPayment.backToAgTeach')}
             </Button>
           </Link>
 
           <Stack direction="row" gap pt={2}>
-            <Typography variant="bxsmd">POWERED BY STRIPE</Typography>
+            <Typography variant="bxsmd">{t('successPayment.poweredByStripe').toUpperCase()}</Typography>
             <Typography variant="bxsmd">|</Typography>
             <Typography variant="bxsr">
               <Box
@@ -100,7 +102,7 @@ export default function SuccessPayment() {
                 color="dark.200"
                 sx={{ textDecoration: 'none' }}
               >
-                <a href='https://stripe.com/legal/consumer'>Terms and Conditon</a>
+                <a href='https://stripe.com/legal/consumer'>{t('successPayment.termsAndConditions')}</a>
               </Box>
             </Typography>
             <Typography variant="bxsr">
@@ -110,7 +112,7 @@ export default function SuccessPayment() {
                 color="dark.200"
                 sx={{ textDecoration: 'none' }}
               >
-                <a href='https://stripe.com/privacy'>Privacy Policy</a>
+                <a href='https://stripe.com/privacy'>{t('successPayment.privacyPolicy')}</a>
               </Box>
             </Typography>
           </Stack>

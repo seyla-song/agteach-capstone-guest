@@ -141,7 +141,7 @@
     "cartEmptyMessage": "Your cart looks a little lonely. How about adding something special?",
     "goShopping":"Go Shopping"
   },
-  "sucessPayment": { 
+  "successPayment": { 
     "thanksForYourPayment":"Thanks for your payment",
     "aPaymentToAgTeachWillAppearOnYourStatement":"A payment to AgTeach will appear on your statement",
     "email":"Email",
