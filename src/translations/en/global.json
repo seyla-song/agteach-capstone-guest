@@ -68,7 +68,8 @@
   "marketplace": {
     "category": "Categories",
     "sortBy": "Sort By",
-    "itemFound": "Found ({{count}}) items",
+    "itemFound_one": "Found ({{count}}) item",
+    "itemFound_other": "Found ({{count}}) items",
     "noItemFound": "There is no search result.",
     "newest": "Newest",
     "oldest": "Oldest",

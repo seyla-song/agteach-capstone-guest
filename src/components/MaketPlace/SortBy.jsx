@@ -25,9 +25,21 @@ export const SortByFilter = ({ sortBy, handleChange }) => {
           name="radio-buttons-group"
           onChange={(e) => handleChange(e.target.value)}
         >
-          <FormControlLabel control={<Radio />} label={t("marketplace.newest")} value="newest" />
-          <FormControlLabel control={<Radio />} label={t("marketplace.oldest")} value="oldest" />
-          <FormControlLabel control={<Radio />} label={t("marketplace.aToZ")} value="alphabet" />
+          <FormControlLabel
+            control={<Radio />}
+            label={t("marketplace.newest")}
+            value="newest"
+          />
+          <FormControlLabel
+            control={<Radio />}
+            label={t("marketplace.oldest")}
+            value="oldest"
+          />
+          <FormControlLabel
+            control={<Radio />}
+            label={t("marketplace.aToZ")}
+            value="alphabet"
+          />
           <FormControlLabel
             control={<Radio />}
             label={t("marketplace.priceLowToHigh")}
