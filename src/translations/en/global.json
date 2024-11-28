@@ -181,10 +181,7 @@
 
     "submit": "Submit"
   },
-  "verification": {},
-  "guestProfile": {},
-  "instructorProfile": {}
-  "verification": { 
+  "verification": {
     "enterVerificationCode": "Enter verification code",
     "submit": "Submit",
     "goBack": "Go Back",
@@ -198,13 +195,9 @@
     "verificationSuccessful": "Verification successful!",
     "incorrectVerificationCode": "Incorrect Verification Code!",
     "codeSentSuccessfullyPleaseCheckYourEmail": "Code sent successfully , Please Check your email!",
-    "pleaseWait": "Please wait {{time}}s to resend the code again.",    
+    "pleaseWait": "Please wait {{time}}s to resend the code again.",
     "requesting": "Requesting..."
   },
-  "guestProfile": { 
-
-  },
-  "instructorProfile": { 
-
-  }
+  "guestProfile": {},
+  "instructorProfile": {}
 }
