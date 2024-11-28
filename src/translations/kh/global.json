@@ -74,7 +74,18 @@
 
   },
   "cart": { 
-
+    "yourShoppingCart":"រទេះទិញទំនិញរបស់អ្នក",
+    "thereAreNoItemsInYourCart":"មិនមានទំនិញនៅក្នុងរទេះរបស់អ្នកទេ",
+    "foundItem_one":"បានរកឃើញ ({{count}}) ធាតុ",
+    "foundItem_other":"បានរកឃើញ ({{count}}) ធាតុ",
+    "item_one": "ធាតុ",
+    "item_other": "ធាតុ",
+    "checkout":"ទូទាត់ទំនិញ",
+    "subtotal":"សរុបរង",
+    "purchasedHistory": "ប្រវត្តិនៃការទិញ",
+    "total":"សរុប",
+    "processing":"កំពុងដំណើរការ",
+    "youDontHaveAnyPurchasedYet":"អ្នកមិនទាន់មានវិក័យប័ត្រទិញនៅឡើយទេ"
   },
   "searchResult": { 
 
@@ -127,7 +138,8 @@
 
   },
   "cartEmpty": { 
-
+    "cartEmptyMessage": "រទេះរបស់អ្នកមើលទៅឯកោណាស់ សាកដាក់អីវ៉ាន់ចូលទៅក្នុងរទេះយល់យ៉ាងណាដែរ?",
+    "goShopping":"តស់ទៅទិញទំនិញ"
   },
   "sucessPayment": { 
 
