@@ -41,7 +41,7 @@ export const ProfilePage = ({ instructorData }) => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        setSnackbarMessage(`${t('instructorProfile.copied')}: ${text}`);
+        setSnackbarMessage(`${t('instructorProfile.copied')} ${text}`);
         setSnackbarOpen(true);
       })
       .catch((err) => {
