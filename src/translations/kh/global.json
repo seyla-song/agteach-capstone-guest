@@ -402,11 +402,17 @@
     "saving": "កំពុងរក្សាទុក..."
   },
   "instructorProfile": { 
-      "copied":"ចម្លង",
-      "back":"ថយក្រោយ",
-      "instructor":"គ្រូបង្រៀន",
-      "aboutMe":"អំពីខ្ញុំ",
-      "close":"បិទ"
+    "copied":"ចម្លង",
+    "back":"ថយក្រោយ",
+    "instructor":"គ្រូបង្រៀន",
+    "aboutMe":"អំពីខ្ញុំ",
+    "close":"បិទ",
+    "courses":"វគ្គសិក្សា",
+    "courseFound_one":"បានរកឃើញ ({{count}}) វគ្គសិក្សា",
+    "courseFound_other":"បានរកឃើញ ({{count}}) វគ្គសិក្សា",
+    "showLess":"បង្ហាញតិច",
+    "viewMore":"បង្ហាញ ({{item}}) បន្ថែម",
+    "thereIsNoCourse":"មិន​ទាន់​មាន​វគ្គ​សម្រាប់​គ្រូ​ម្នាក់​នេះ​ទេ"
   }
   
 }

@@ -406,7 +406,12 @@
     "back":"Back",
     "instructor":"Instructor",
     "aboutMe":"About Me",
-    "close":"Close"
-
+    "close":"Close",
+    "courses":"Courses",
+    "courseFound_one":"Found ({{count}}) Course",
+    "courseFound_other":"Found ({{count}}) Courses",
+    "showLess":"Show Less",
+    "viewMore":"View ({{item}}) More",
+    "thereIsNoCourse":"There is no course for this instructor yet!"
   }
 }
