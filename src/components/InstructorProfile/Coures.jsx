@@ -1,6 +1,7 @@
 import { Stack, Typography, Container, Grid, Button, Box } from "@mui/material";
 import CustomCard from "../../components/CustomCard";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 /**
  * A component that renders a list of courses, with a responsive design
@@ -19,7 +20,7 @@ export const Courses = ({ courseData, instructorName }) => {
   const limit = 5;
   const [visibleCount, setVisibleCount] = useState(limit);
   const [showAll, setShowAll] = useState(false); // New state to track if all products are shown
-
+  const [t] = useTranslation("global");
   // Show a limited number of courses based on visibleCount
   // const visibleCourses = courseData.slice(0, visibleCount);
   const visibleCourses = showAll
@@ -47,7 +48,7 @@ export const Courses = ({ courseData, instructorName }) => {
           mt: 10,
         }}
       >
-        There is no course for this instructor yet!
+        {t('instructorProfile.thereIsNoCourse')}
       </Box>
     ) : (
       visibleCourses.map((item, idx) => (
@@ -61,10 +62,10 @@ export const Courses = ({ courseData, instructorName }) => {
     <Stack>
       <Stack>
         <Typography variant="h4">
-          {instructorName || "Default"} Courses
+          {instructorName || "Default"} {t('instructorProfile.courses')}
         </Typography>
         <Typography variant="bmdmd" color="dark.300">
-          Found ({courseData.length || 0}) Courses
+          {t('instructorProfile.courseFound',{count: courseData.length})}
         </Typography>
 
         <Container sx={{ mt: 2 }}>
@@ -81,7 +82,7 @@ export const Courses = ({ courseData, instructorName }) => {
             sx={{ px: 4, py: 1 }}
             onClick={handleLoadMore}
           >
-            {showAll ? "Show Less" : "View 5 More"}
+            {showAll ? t('instructorProfile.showLess') : t('instructorProfile.viewMore', {item: 5})}
           </Button>
         </Stack>
       )}
