@@ -122,7 +122,15 @@
     "processing": "Processing",
     "youDontHaveAnyPurchasedYet": "You don't have any purchased yet"
   },
-  "searchResult": {},
+  "searchResult": {
+    "noSearchResult": "There is no search result.",
+    "product": "Product",
+    "course": "Course",
+    "categories": "Categories",
+    "searchLabel": "Learn Smarter, Learn Faster. AgTeach",
+    "searchResultHeader": "Search result for '{{query}} {{queryLength}}'",
+    "pagination": "Page {{page}} of {{totalPages}}"
+  },
   "courseDetail": {
     "createdBy": "Created by",
     "enroll": "Enroll",
