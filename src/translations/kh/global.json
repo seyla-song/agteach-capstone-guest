@@ -130,7 +130,7 @@
     "searchResultHeader": "លទ្ធផលស្វែងរកសម្រាប់ '{{query}} {{queryLength}}'",
     "pagination": "ទំព័រ {{page}} នៃ {{totalPages}}"
   },
-  "courseDetail": { 
+  "courseDetail": {
     "createdBy": "បង្កើតឡើងដោយ",
     "enroll": "ចុះឈ្មោះឥឡូវនេះ",
     "whatYouWillLearnInThisCourse?": "តើអ្នកនឹងរៀនអ្វីខ្លះក្នុងវគ្គសិក្សានេះ?",
@@ -216,7 +216,7 @@
     "sharingYourInformationP1": "យើងមិនចែករំលែកទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នកទេ លើកលែងតែអ្នកដំណើរការការទូទាត់ (ឧ. Stripe) ឬនៅពេលដែលតម្រូវដោយច្បាប់។",
     "yourRightsTitle": "សិទ្ធិរបស់អ្នក",
     "yourRightsP1": "អ្នកអាចចូលប្រើ អាប់ដេត ឬលុបទិន្នន័យរបស់អ្នកបានដោយទាក់ទងមកយើងខ្ញុំតាមអ៊ីម៉ែល khomkhit460@gmail.com",
-    "cookiesAndTrackingTechnologiesTitle": "Cookies and Tracking Technologies",
+    "cookiesAndTrackingTechnologiesTitle": "ខូឃី និងបច្ចេកវិទ្យាតាមដាន",
     "cookiesAndTrackingTechnologiesP1": " យើងប្រើខូគីដើម្បីកែលម្អបទពិសោធន៍របស់អ្នក។ គ្រប់គ្រងខូឃីតាមរយៈការកំណត់កម្មវិធីរុករករបស់អ្នក។",
     "changestoThisPolicyTitle": "ការផ្លាស់ប្តូរចំពោះគោលការណ៍នេះ",
     "changestoThisPolicyP1": "យើងអាចអាប់ដេតគោលការណ៍នេះតាមកាលកំណត់។ ការប្រើប្រាស់សេវាកម្មរបស់យើងបន្តមានន័យថាទទួលយកគោលការណ៍ដែលបានធ្វើបច្ចុប្បន្នភាព។",
