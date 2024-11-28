@@ -60,8 +60,8 @@
     ],
     "ctaTitle": "Ready to share your passion for indoor gardening?",
     "ctaDescription": "Join our platform as an instructor and inspire others while showcasing your expertise. Empower the next generation of gardeners and grow your impact today! Apply now and be a part of our vibrant community",
-    "becomeAnInstructor":"Become an Instructor",
-    "seeMore":"See More",
+    "becomeAnInstructor": "Become an Instructor",
+    "seeMore": "See More",
     "seeLess": "See Less"
   },
   "myLearning": { 
@@ -74,22 +74,42 @@
   "marketplace": { 
 
   },
-  "agai": { 
-
+  "agai": {
+    "beta": "BETA",
+    "plantDiseaseDetection": " Plant Disease Detection",
+    "plantDiseaseDetectionDescription": " Find out the problem, symptom, and cure of the plant.",
+    "searchAnyPlantWithAgai": "Search any plant with AgAI",
+    "download": "Download",
+    "note": "Note:",
+    "noteDescriptionFirst": "- These are our test images, which were not exposed to the model during training. Use them to see the model in action:",
+    "noteDescriptionSecond": "- AgAI can make mistakes. This machine learning model works with a limited dataset, and the constrained diversity of images from the ",
+    "noteDescriptionThird": " dataset means it lacks generalization. Consequently, the model can only predict 38 classes of plants, distinguishing between healthy and diseased plants as follows:",
+    "noteDescriptionExpandableText": "Apple Apple scab, Apple Black rot, Apple Cedar apple rust, Apple healthy, Blueberry healthy, Cherry (including sour) Powdery mildew, Cherry (including sour) healthy, Corn (maize) Cercospora leaf spot Gray leaf spot, Corn (maize) Common rust, Corn (maize) Northern Leaf Blight, Corn (maize) healthy, Grape Black rot, Grape Esca (Black Measles), Grape Leaf blight (Isariopsis Leaf Spot), Grape healthy, Orange Haunglongbing (Citrus greening), Peach Bacterial spot, Peach healthy, Pepper, bell Bacterial spot, Pepper, bell healthy, Potato Early blight, Potato Late blight, Potato healthy, Raspberry healthy, Soybean healthy, Squash Powdery mildew, Strawberry Leaf scorch, Strawberry healthy, Tomato Bacterial spot, Tomato Early Blight, Tomato Late blight, Tomato Leaf Mold, Tomato Septoria leaf spot, Tomato Spider mites Two-spotted spider mite, Tomato Target Spot, Tomato Tomato Yellow Leaf Curl Virus, Tomato Tomato mosaic virus, Tomato healthy",
+    "upload": "Upload",
+    "scan": "Scan",
+    "errorValidFileDescription": "Please select a valid image file (JPG, PNG, or WEBP).",
+    "scanAnotherPlant": "Scan another plant",
+    "uploadImageDescription": "Upload your image here .jpg 150 x 150",
+    "analyzing": "@Analyzing",
+    "problem": "Problem",
+    "symptom": "Symptom",
+    "cure": "Cure Management",
+    "areYouInerestedIn": "Are you interested in {{disease}} ?",
+    "learnMore": "Learn more on plant disease and prventions"
   },
-  "cart": { 
-    "yourShoppingCart":"Your Shopping Cart",
-    "thereAreNoItemsInYourCart":"There are no items in your cart",
-    "foundItem_one":"Found ({{count}}) item",
-    "foundItem_other":"Found ({{count}}) items",
+  "cart": {
+    "yourShoppingCart": "Your Shopping Cart",
+    "thereAreNoItemsInYourCart": "There are no items in your cart",
+    "foundItem_one": "Found ({{count}}) item",
+    "foundItem_other": "Found ({{count}}) items",
     "item_one": "item",
     "item_other": "items",
-    "checkout":"Checkout",
-    "subtotal":"Subtotal",
+    "checkout": "Checkout",
+    "subtotal": "Subtotal",
     "purchasedHistory": "Purchased History",
-    "total":"Total",
-    "processing":"Processing",
-    "youDontHaveAnyPurchasedYet":"You don't have any purchased yet"
+    "total": "Total",
+    "processing": "Processing",
+    "youDontHaveAnyPurchasedYet": "You don't have any purchased yet"
   },
   "searchResult": { 
 
@@ -112,25 +132,25 @@
     "failedToCreateCheckoutSession": "Failed to create checkout session",
     "errorDuringCheckout": "Error during checkout"
   },
-  "courseVideo": { 
+  "courseVideo": {
     "createdBy": "Created by",
     "back": "Back",
     "section": "Sections",
     "video": "Videos",
-    "hour":"hour",
-    "minute":"minute",
-    "second":"second",
+    "hour": "hour",
+    "minute": "minute",
+    "second": "second",
     "whatYouWillLearnInThisCourse?": "What you will learn in this course?",
     "courseContent": "Course Content"
   },
-  "productDetail": { 
-    "reachStockLimit":"Reach Stock Limit",
-    "reachStockLimitMessage":"Sorry, you have reached the available stock limit. You can still add other item to the cart.",
+  "productDetail": {
+    "reachStockLimit": "Reach Stock Limit",
+    "reachStockLimitMessage": "Sorry, you have reached the available stock limit. You can still add other item to the cart.",
     "callToAction": "Hurry only {{availableStock}} items left !",
     "addToCart": "Add to Cart",
     "outOfStock": "Out of Stock",
-    "outOfStockMessage":"Out of Stock. Explore similar products in our collection below.",
-    "youMightAlsoWantToBuyTheseProducts":"You might also want to buy these products"
+    "outOfStockMessage": "Out of Stock. Explore similar products in our collection below.",
+    "youMightAlsoWantToBuyTheseProducts": "You might also want to buy these products"
   },
   "termsService": { 
 
@@ -197,9 +217,9 @@
     "pleaseEnterYourConfirmPassword": "Please enter your confirm password",
     "passwordsDoNotMatch": "Passwords do not match",
     "passwordMustContainAtLeastOneUppercaseLetter": "Password must contain at least one uppercase letter",
-    "youMustBeAtLeast15YearsOld":"You must be at least 15 years old."
+    "youMustBeAtLeast15YearsOld": "You must be at least 15 years old."
   },
-  "additionalInfo": { 
+  "additionalInfo": {
     "additionalInformation": "Additional Information",
     "nameAddress": "Name & Address",
     "firstName": "First Name",
@@ -211,7 +231,7 @@
     "skip": "Skip",
     "firstNameMustBeAtLeast2Characters": "First name must be at least 2 characters",
     "lastNameMustBeAtLeast2Characters": "Last name must be at least 2 characters",
-    "firstNameCanOnlyContainLetters":"First name can only contain letters",
+    "firstNameCanOnlyContainLetters": "First name can only contain letters",
     "lastNameCanOnlyContainLetters": "Last name can only contain letters",
     "addressMustBeAtLeast2Characters": "Address must be at least 2 characters",
     "phoneNumberMustStartWith0": "Phone number must start with 0",
@@ -220,6 +240,7 @@
     "pleaseEnterAValidPhoneNumber": "Please enter a valid phone number",
     "firstNameCannotBeMoreThan25Characters": "First name cannot be more than 25 characters",
     "lastNameCannotBeMoreThan25Characters": "Last name cannot be more than 25 characters",
+    
     "submit": "Submit"
   },
   "verification": { 
