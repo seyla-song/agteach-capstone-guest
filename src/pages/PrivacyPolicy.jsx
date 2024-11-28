@@ -1,105 +1,106 @@
-import React from 'react';
-import { Stack, Typography, Container, Divider } from '@mui/material';
+import React from "react";
+import { Stack, Typography, Container, Divider } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const PrivacyPolicy = () => {
+  const [t] = useTranslation("global");
+  // const strong = <strong>Account Information</strong>;
   return (
     <Container>
-      <Stack pt={10} minHeight='100vh'>
+      <Stack pt={10} minHeight="100vh">
         <Typography variant="blgsm" gutterBottom>
-          Privacy Policy
+          {t("privacyPolicy.privacyPolicyTitle")}
         </Typography>
         <Typography variant="bsr" color="textSecondary">
-          Last Updated: Nov 19, 2024
+          {t("privacyPolicy.lastUpdated")}: Nov 19, 2024
         </Typography>
 
         <Divider sx={{ my: 2 }} />
 
         <Typography variant="blgsm" gutterBottom>
-          1. Information We Collect
+          1. {t("privacyPolicy.informationWeCollectTitle")}
         </Typography>
         <Typography variant="bsr" paragraph>
-          When you use our website, we collect the following information:
+          {t("privacyPolicy.informationWeCollectP1")}
         </Typography>
         <Typography variant="bsr" paragraph>
-          - <strong>Account Information:</strong> Username, date of birth, email, password, phone
-          number, first name, last name, city, and address when you register.
+          <strong>{t("privacyPolicy.informationWeCollectTitle2")}</strong>
+          {t("privacyPolicy.informationWeCollectP2")}
           <br />
-          - <strong>Usage Data:</strong> Information about your interactions, such as IP address,
-          browser type, and accessed pages.
+          <strong>{t("privacyPolicy.informationWeCollectTitle3")}</strong>
+          {t("privacyPolicy.informationWeCollectP3")}
         </Typography>
 
         <Divider sx={{ my: 2 }} />
 
         <Typography variant="blgsm" gutterBottom>
-          2. How We Use Your Information
+          2. {t("privacyPolicy.howWeUseYourInformationTitle")}
         </Typography>
         <Typography variant="bsr" paragraph>
-          We use the collected information for:
+          {t("privacyPolicy.howWeUseYourInformationP1")}
         </Typography>
         <Typography variant="bsr" paragraph>
-          - Managing accounts and processing transactions.
+          {t("privacyPolicy.howWeUseYourInformationP2")}
           <br />
-          - Sending confirmations, updates, and optional promotional content.
+          {t("privacyPolicy.howWeUseYourInformationP3")}
           <br />
-          - Improving website functionality.
+          {t("privacyPolicy.howWeUseYourInformationP4")}
           <br />
-          - Complying with legal obligations.
+          {t("privacyPolicy.howWeUseYourInformationP5")}
         </Typography>
 
         <Divider sx={{ my: 2 }} />
 
         <Typography variant="blgsm" gutterBottom>
-          3. How We Protect Your Information
+          3. {t("privacyPolicy.howWeProtectYourInformationTitle")}
         </Typography>
         <Typography variant="bsr" paragraph>
-          We use encryption, access controls, and regular monitoring to protect your personal data.
+          {t("privacyPolicy.howWeProtectYourInformationP1")}
         </Typography>
 
         <Divider sx={{ my: 2 }} />
 
         <Typography variant="blgsm" gutterBottom>
-          4. Sharing Your Information
+          4. {t("privacyPolicy.sharingYourInformationTitle")}
         </Typography>
         <Typography variant="bsr" paragraph>
-          We do not share your personal data except with payment processors (e.g., Stripe) or when
-          required by law.
+          {t("privacyPolicy.sharingYourInformationP1")}
         </Typography>
 
         <Divider sx={{ my: 2 }} />
 
         <Typography variant="blgsm" gutterBottom>
-          5. Your Rights
+          5. {t("privacyPolicy.yourRightsTitle")}
         </Typography>
         <Typography variant="bsr" paragraph>
-          You can access, update, or delete your data by contacting us at khomkhit460@gmail.com
+          {t("privacyPolicy.yourRightsP1")}
         </Typography>
 
         <Divider sx={{ my: 2 }} />
 
         <Typography variant="blgsm" gutterBottom>
-          6. Cookies and Tracking Technologies
+          6. {t("privacyPolicy.cookiesAndTrackingTechnologiesTitle")}
         </Typography>
         <Typography variant="bsr" paragraph>
-          We use cookies to improve your experience. Manage cookies via your browser settings.
+          {t("privacyPolicy.cookiesAndTrackingTechnologiesP1")}
         </Typography>
 
         <Divider sx={{ my: 2 }} />
 
         <Typography variant="blgsm" gutterBottom>
-          7. Changes to This Policy
+          7. {t("privacyPolicy.changestoThisPolicyTitle")}
         </Typography>
         <Typography variant="bsr" paragraph>
-          We may update this policy periodically. Continued use of our services implies acceptance
-          of the updated policy.
+          {t("privacyPolicy.changestoThisPolicyP1")}
         </Typography>
 
         <Divider sx={{ my: 2 }} />
 
         <Typography variant="blgsm" gutterBottom>
-          8. Contact Us
+          8. {t("privacyPolicy.contactUsTitle")}
         </Typography>
         <Typography variant="bsr" paragraph>
-          If you have questions or concerns, contact us at khomkhit460@gmail.com.
+          {t("privacyPolicy.contactUsP1")}
         </Typography>
       </Stack>
     </Container>
