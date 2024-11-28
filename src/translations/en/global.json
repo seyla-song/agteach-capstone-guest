@@ -69,7 +69,7 @@
     "myCourses_one": "Found ({{count}}) Course.",
     "myCourses_other": "Found ({{count}}) Courses.",
     "noCourse": "You don't have any course yet.",
-    "pagination": "Page {{page}} of {{totalPage}}"
+    "pagination": "Page {{page}} of {{totalPages}}"
   },
   "marketplace": { 
 

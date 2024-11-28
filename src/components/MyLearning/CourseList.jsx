@@ -90,7 +90,7 @@ export const CourseList = ({ data, isLoading }) => {
           >
             <NavigateBeforeIcon />
           </Button>
-          <Typography>{t("myLearning.pagination", { page: page, totalPage: totalPages })}</Typography>
+          <Typography>{t("myLearning.pagination", { page, totalPages })}</Typography>
           <Button
             variant="outlined"
             onClick={handleNext}
