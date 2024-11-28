@@ -1,6 +1,7 @@
 import { Container, Box, Stack, Typography, Button } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import Logout from "../assets/Authentication/logout.svg";
+import { useTranslation } from "react-i18next";
 
 /**
  * A React functional component that renders a login prompt with a message and a login button.
@@ -10,6 +11,7 @@ import Logout from "../assets/Authentication/logout.svg";
  */
 
 export default function LoginPromptComponent({ pageName }) {
+  const [t] = useTranslation("global");
   return (
     <Container
       maxWidth={false}
@@ -46,9 +48,11 @@ export default function LoginPromptComponent({ pageName }) {
           }}
           gap={1}
         >
-          <Typography variant="blgsm">Looks like you're not logged in</Typography>
+          <Typography variant="blgsm">
+            {t('loginPrompt.loginPromptTitle')}
+          </Typography>
           <Typography variant="bsr">
-            Signup or login now to gain access to your {pageName}
+            {t('loginPrompt.loginPromptDescription', {pageName})}
           </Typography>
           <Button
             component={RouterLink}
@@ -60,7 +64,7 @@ export default function LoginPromptComponent({ pageName }) {
               width: "100px",
             }}
           >
-            Login
+            {t('loginPrompt.login')}
           </Button>
         </Stack>
       </Box>

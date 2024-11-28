@@ -16,8 +16,10 @@ import Visibility from "@mui/icons-material/Visibility";
 import { useForm } from "react-hook-form";
 import { useUpdatePasswordMutation } from "../../services/api/userApi";
 import { CustomAlert } from "../../components/CustomAlert";
+import { useTranslation } from "react-i18next";
 
 export const ChangePassword = () => {
+  const [t] = useTranslation("global");
   const [open, setOpen] = useState(false);
   const {
     register,
@@ -58,19 +60,19 @@ export const ChangePassword = () => {
 
   const validatePassword = (value) => {
     if (!/[a-z]/.test(value))
-      return "Password must contain at least one lowercase letter.";
+      return t("signup.passwordMustContainLowercase");
     if (!/[A-Z]/.test(value))
-      return "Password must contain at least one uppercase letter.";
-    if (!/\d/.test(value)) return "Password must contain at least one number.";
+      return t("signup.passwordMustContainUppercase");
+    if (!/\d/.test(value)) return t("signup.passwordMustContainNumber");
     if (!/[@$!%*?&]/.test(value))
-      return "Password must contain at least one special character.";
+      return t("signup.passwordMustContainSpecialCharacter");
     return true;
   };
 
   return (
     <>
       <Stack sx={{ m: 2, gap: 2 }}>
-        <Typography variant="h4">Change Password</Typography>
+        <Typography variant="h4">{t("guestProfile.changePasswordSection")}</Typography>
         {/* Current Password Field */}
         <CustomAlert
           label={
@@ -86,13 +88,13 @@ export const ChangePassword = () => {
         />
         <FormControl variant="outlined" error={Boolean(errors.passwordCurrent)}>
           <InputLabel htmlFor="current-password">
-            Enter Current Password
+            {t("guestProfile.currentPasswordLabel")}
           </InputLabel>
           <OutlinedInput
             id="current-password"
             type={showPassword.current ? "text" : "password"}
             {...register("passwordCurrent", { required: true })}
-            label="Enter Current Password"
+            label={t("guestProfile.currentPasswordLabel")}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -106,13 +108,13 @@ export const ChangePassword = () => {
             }
           />
           {errors.passwordCurrent && (
-            <FormHelperText error>Current Password is required</FormHelperText>
+            <FormHelperText error>{errors.passwordCurrent.message || t("guestProfile.passwordRequired")}</FormHelperText>
           )}
         </FormControl>
 
         {/* New Password Field */}
         <FormControl variant="outlined" error={Boolean(errors.password)}>
-          <InputLabel htmlFor="new-password">Enter New Password</InputLabel>
+          <InputLabel htmlFor="new-password">{t("guestProfile.newPasswordLabel")}</InputLabel>
           <OutlinedInput
             id="new-password"
             type={showPassword.new ? "text" : "password"}
@@ -120,15 +122,15 @@ export const ChangePassword = () => {
               required: true,
               minLength: {
                 value: 8,
-                message: "Password must be at least 8 characters",
+                message: t("guestProfile.passwordMin"),
               },
               maxLength: {
                 value: 20,
-                message: "Password must at most 20 characters",
+                message: t("guestProfile.passwordMax"),
               },
               validate: validatePassword,
             })}
-            label="Enter New Password"
+            label={t("guestProfile.newPasswordLabel")}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -142,13 +144,13 @@ export const ChangePassword = () => {
             }
           />
           {(errors.password && (
-            <FormHelperText>{errors.password.message || "This field is required." }</FormHelperText>
+            <FormHelperText>{errors.password.message || t("guestProfile.passwordRequired") }</FormHelperText>
           ))}
         </FormControl>
 
         {/* Re-type Password Field */}
         <FormControl variant="outlined" error={Boolean(errors.passwordConfirm)}>
-          <InputLabel htmlFor="retype-password">Re-type Password</InputLabel>
+          <InputLabel htmlFor="retype-password">{t("guestProfile.retypePasswordLabel")}</InputLabel>
           <OutlinedInput
             id="retype-password"
             type={showPassword.retype ? "text" : "password"}
@@ -156,11 +158,11 @@ export const ChangePassword = () => {
               required: true,
               validate: (value) => {
                 if (value !== watch("password")) {
-                  return "Passwords do not match";
+                  return t("guestProfile.passwordRetypeNotMatch");
                 }
               },
             })}
-            label="Re-type Password"
+            label={t("guestProfile.retypePasswordLabel")}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -175,12 +177,12 @@ export const ChangePassword = () => {
           />
           {errors.passwordConfirm && (
             <FormHelperText error>
-              {errors.passwordConfirm.message || "Please re-type your password"}
+              {errors.passwordConfirm.message || t("guestProfile.passwordRetypeRequired")}
             </FormHelperText>
           )}
         </FormControl>
         <Typography color="dark.300" fontSize="12px" marginTop={"10px"} textAlign={"left"}>
-          Password must contains at least one lowercase letter, one uppercase letter, one number, and one special character.
+          {t("guestProfile.passwordDescription")}
         </Typography>
       </Stack>
 
@@ -197,7 +199,7 @@ export const ChangePassword = () => {
             onClick={handleSubmit(onSubmit)}
             disabled={isLoading}
           >
-            {isLoading ? "saving..." : "Save"}
+            {isLoading ? t('guestProfile.saving') : t('guestProfile.saveButton')}
           </Button>
         </Stack>
       </Box>

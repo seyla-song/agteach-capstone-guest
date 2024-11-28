@@ -1,6 +1,7 @@
 // ExpandableText.js
 import React, { useState } from "react";
 import { Button, Typography, Box } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 /**
  * A component that displays a given text, truncated to a given length with an
@@ -16,6 +17,7 @@ import { Button, Typography, Box } from "@mui/material";
  */
 const ExpandableText = ({ text, initialLength = 150, ...props }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [t] = useTranslation("global");
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -31,7 +33,7 @@ const ExpandableText = ({ text, initialLength = 150, ...props }) => {
       </Typography>
       {text.length > initialLength && (
         <Button size="small" onClick={toggleExpand} variant="text">
-          {isExpanded ? "See Less" : "See More"}
+          {isExpanded ? t("homepage.seeLess") : t("homepage.seeMore")}
         </Button>
       )}
     </Box>

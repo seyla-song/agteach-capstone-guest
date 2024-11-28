@@ -1,5 +1,6 @@
 import { Stack, Typography } from '@mui/material';
 import { CustomCarousel } from './CustomCarousel';
+import { useTranslation } from 'react-i18next';
 
 /**
  * A component that renders a carousel of suggested courses and related products.
@@ -19,7 +20,7 @@ import { CustomCarousel } from './CustomCarousel';
  * @returns {React.ReactElement} The suggested courses and products component.
  */
 export const SuggestedCourseProduct = ({ courses, products }) => {
-
+  const [t] = useTranslation("global");
   const recommendedProducts = products.map((prod) => prod.product);
   
   return (
@@ -27,7 +28,7 @@ export const SuggestedCourseProduct = ({ courses, products }) => {
       {courses.length > 0 && 
         <Stack gap={2}>
           <Typography variant="h4" maxWidth={300}>
-            People also learn this course
+            {t('courseDetail.peopleAlsoLearnThisCourse')}
           </Typography>
           <CustomCarousel data={courses} slideToShow={5} />
         </Stack>
@@ -35,7 +36,7 @@ export const SuggestedCourseProduct = ({ courses, products }) => {
       {products.length > 0 &&
         <Stack gap={2}>
           <Typography variant="h4" maxWidth={300}>
-            You might want to buy the product related to this course
+          {t('courseDetail.youMightWantToBuyTheProductRelatedToThisCourse')}
           </Typography>
           <CustomCarousel data={recommendedProducts} cardVariant="product" slideToShow={5} />
         </Stack>

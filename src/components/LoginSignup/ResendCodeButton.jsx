@@ -5,12 +5,15 @@ import { useResendVerifyCodeMutation } from "../../services/api/authApi";
 import { useState } from "react";
 import { CustomAlert } from "../CustomAlert";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 export const ResendCodeButton = ({ email, timeoutRef }) => {
   const [open, setOpen] = useState(true);
 
   const [resendVerifyCode, { isLoading, isError, isSuccess, error }] =
     useResendVerifyCodeMutation();
+
+  const [t] = useTranslation("global");
 
   const handleResend = () => {
     resendVerifyCode(email);
@@ -34,7 +37,7 @@ export const ResendCodeButton = ({ email, timeoutRef }) => {
   return (
     <Box onClick={handleOnClick}>
       <Stack direction="row" sx={{ alignItems: "center", justifyContent: "center" }}>
-        <Typography variant="bssm" color="dark.300">Didn't receive the code?</Typography>
+        <Typography variant="bssm" color="dark.300">{t("verification.didntReceiveTheCode")}</Typography>
         <Button
           sx={{
             textTransform: "none",
@@ -50,13 +53,13 @@ export const ResendCodeButton = ({ email, timeoutRef }) => {
           {isLoading
             ? "Requesting..."
             : isLogin && !isVerified
-              ? "Request code"
-              : "Resend code"}
+              ? t("verification.requestCode")
+              : t("verification.resendCode")}
         </Button>
       </Stack>
       {isSuccess && (
         <CustomAlert
-          label="Code sent successfully , Please Check your email!"
+          label={t("verification.codeSentSuccessfullyPleaseCheckYourEmail")}
           open={open}
           onClose={() => setOpen(false)}
           severity="success"
@@ -64,7 +67,7 @@ export const ResendCodeButton = ({ email, timeoutRef }) => {
       )}
       {isError && (
         <CustomAlert
-          label={`Please please wait ${Math.floor(error.data.remainingCooldown / 1000)}s to resend the code again.`}
+          label={t("verification.pleaseWait", { time: Math.floor(error.data.remainingCooldown / 1000) })}
           open={open}
           onClose={() => setOpen(false)}
           severity="error"

@@ -3,11 +3,12 @@ import TimerIcon from '@mui/icons-material/TimerOutlined';
 import MovieIcon from '@mui/icons-material/MovieOutlined';
 import { Fragment } from 'react';
 import { showDuration } from '../../utils/showDuration';
+import { useTranslation } from 'react-i18next';
 
 export const CourseDetailHighlight = ({courseData}) => {
   let objectiveConent;
   const courseObjectives = courseData?.courseObjective?.includes('\r') ? courseData?.courseObjective?.replace('\r', '-+-&+-+ ').split('-+-&+-+ ') : courseData?.courseObjective;
-
+  const [t] = useTranslation("global");
   if (Array.isArray(courseObjectives)) {
     objectiveConent = courseObjectives.map((objective, idx) => {
       return <Typography variant="bxsr" key={idx}>
@@ -34,7 +35,7 @@ export const CourseDetailHighlight = ({courseData}) => {
             >
               <Stack gap={1} maxWidth={500}>
                 <Typography variant="h4">
-                  What you learn in this course? What included
+                  {t('courseDetail.whatYouWillLearnInThisCourse?')}
                 </Typography>
                 <Fragment>
                   {objectiveConent}
@@ -53,14 +54,14 @@ export const CourseDetailHighlight = ({courseData}) => {
               paddingY={10}
             >
               <Stack px={3} gap={1}>
-                <Typography variant="h4">This course include:</Typography>
+                <Typography variant="h4">{t('courseDetail.thisCourseIncludes')}:</Typography>
                 <Stack direction="row" gap={2}>
                   <TimerIcon />
-                  <Typography variant="bsr">{showDuration(courseData?.duration)}</Typography>
+                  <Typography variant="bsr">{showDuration(courseData?.duration, t('courseDetail.min'), t('courseDetail.hour'))}</Typography>
                 </Stack>
                 <Stack direction="row" gap={2}>
                   <MovieIcon />
-                  <Typography variant="bsr">{courseData?.numberOfVideo} videos</Typography>
+                  <Typography variant="bsr">{courseData?.numberOfVideo} {t('courseDetail.video')}</Typography>
                 </Stack>
               </Stack>
             </Stack>
