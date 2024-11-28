@@ -34,7 +34,7 @@ import AuthRootLayout from "./AuthRoot";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <FailPayment />,
+    element: <RootLayout />,
 
     children: [
       { index: true, element: <HomePage /> },
