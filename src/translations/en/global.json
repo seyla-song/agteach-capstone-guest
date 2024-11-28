@@ -23,7 +23,18 @@
 
   },
   "cart": { 
-
+    "yourShoppingCart":"Your Shopping Cart",
+    "thereAreNoItemsInYourCart":"There are no items in your cart",
+    "foundItem_one":"Found ({{count}}) item",
+    "foundItem_other":"Found ({{count}}) items",
+    "item_one": "item",
+    "item_other": "items",
+    "checkout":"Checkout",
+    "subtotal":"Subtotal",
+    "purchasedHistory": "Purchased History",
+    "total":"Total",
+    "processing":"Processing",
+    "youDontHaveAnyPurchasedYet":"You don't have any purchased yet"
   },
   "searchResult": { 
 
@@ -76,7 +87,8 @@
 
   },
   "cartEmpty": { 
-
+    "cartEmptyMessage": "Your cart looks a little lonely. How about adding something special?",
+    "goShopping":"Go Shopping"
   },
   "sucessPayment": { 
 
