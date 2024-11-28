@@ -11,29 +11,32 @@ import {
 import WarningIcon from "@mui/icons-material/Warning";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
+import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import BloodtypeIcon from "@mui/icons-material/Bloodtype";
 import { Link as RouterLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export const DiseaseInfoComponent = ({ data }) => {
   const { cure, disease, problem, symptom } = data;
+
+  const [t] = useTranslation("global");
 
   return (
     <Stack width="100%" gap={3}>
       <Typography variant="h3">{disease}</Typography>
       <Stack gap={3}>
         <InformationDetail
-          title="Problem"
+          title={t("agai.problem")}
           desc={problem}
           icon={<WarningIcon color="error" fontSize="large" />}
         />
         <InformationDetail
-          title="Symptom"
+          title={t("agai.symptom")}
           desc={symptom}
           icon={<SearchOutlinedIcon color="blue" fontSize="large" />}
         />
         <InformationDetail
-          title="Cure Management"
+          title={t("agai.cure")}
           desc={cure}
           icon={<FavoriteBorderOutlinedIcon color="teal" fontSize="large" />}
         />
@@ -41,7 +44,9 @@ export const DiseaseInfoComponent = ({ data }) => {
       <Divider />
       <Alert icon={<BloodtypeIcon />} severity="success">
         <Stack gap={1}>
-          <Typography>Are you interested in {disease} ?</Typography>
+          <Typography>
+            {t("agai.areYouInerestedIn")} {disease} ?
+          </Typography>
           <Link
             component={RouterLink}
             to="https://alphabeez.anbschool.org/courses/912"
@@ -53,7 +58,7 @@ export const DiseaseInfoComponent = ({ data }) => {
               color="secondary"
               endIcon={<OndemandVideoIcon />}
             >
-              Learn more on plant disease and prventions
+              {t("agai.learnMore")}
             </Button>
           </Link>
         </Stack>
