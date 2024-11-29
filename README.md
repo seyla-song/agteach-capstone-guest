@@ -100,9 +100,9 @@ project-root/
 | **Song Seyla**       | Backend              |
 | **Khom Khit**        | Backend              |
 | **Panha Phosda**     | Front-end            |
-| **Chiv Sovanchitra** | Front-end            |
+| **Chiv Sovan Chitra** | Front-end            |
 | **Rith Sokha Neadh** | Front-end            |
-| **Pann SengLay**     | Front-end            |
+| **Pann Senglay**     | Front-end            |
 
 ## Usage
 
