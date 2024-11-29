@@ -4,7 +4,11 @@
     "marketPlace": "ទីផ្សារ",
     "agai": "អេជី​អេអាយ",
     "login": "ចូលគណនី",
-    "cart": "រទេះទំនិញ"
+    "cart": "រទេះទំនិញ",
+    "logout": "ចាកចេញ",
+    "confirmLogout":"បញ្ជាក់ការចាកចេញ",
+    "confirmLogoutMessage": "តើអ្នកពិតជាចង់ចាកចេញមែនទេ?",
+    "cancel": "បោះបង់"
   },
   "footer": {
     "footerMenu": [

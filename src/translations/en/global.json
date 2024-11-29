@@ -4,7 +4,11 @@
     "marketPlace": "Marketplace",
     "agai": "AgAI",
     "login": "Login",
-    "cart": "Cart"
+    "cart": "Cart",
+    "logout": "Logout",
+    "confirmLogout":"Confirm Logout",
+    "confirmLogoutMessage": "Are you sure you want to logout?",
+    "cancel": "Cancel"
   },
   "footer": {
     "footerMenu": [

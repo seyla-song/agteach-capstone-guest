@@ -206,7 +206,7 @@ function Navigation() {
                 fontSize="small"
                 sx={{ mr: 1, typography: "bmdsm" }}
               />
-              Log Out
+              {t("header.logout")}
             </Typography>
           </MenuItem>
         </Menu>
@@ -218,18 +218,18 @@ function Navigation() {
           aria-labelledby="logout-dialog-title"
         >
           <DialogTitle id="logout-dialog-title" color="primary">
-            Confirm Logout
+            {t("header.confirmLogout")}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Are you sure you want to log out?
+            {t("header.confirmLogoutMessage")}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleLogout} sx={{ color: "red.main" }} autoFocus>
-              Log Out
+              {t('header.logout')}
             </Button>
-            <Button onClick={handleLogoutDialogClose}>Cancel</Button>
+            <Button onClick={handleLogoutDialogClose}>{t('header.cancel')}</Button>
           </DialogActions>
         </Dialog>
       </Box>
