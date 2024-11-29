@@ -452,6 +452,11 @@
   },
   "contentLoading": {
     "justAMoment": "Just a moment",
-    "gettingContent": "Getting {{title}} items..."
+    "gettingContent": "Getting {{title}} items...",
+    "purchased": "purchased",
+    "course": "course",
+    "product": "product",
+    "marketPlace": "marketplace",
+    "courseOrProduct": "courses or products"
   }
 }

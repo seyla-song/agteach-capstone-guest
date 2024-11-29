@@ -452,6 +452,11 @@
   },
   "contentLoading": {
     "justAMoment": "សូមរង់ចាំបន្តិច",
-    "gettingContent": "កំពុងទទួលទិន្នន័យ..."
+    "gettingContent": "កំពុងទទួលទិន្នន័យ{{title}}...",
+    "purchased": "ផលិតផលបានទិញ",
+    "course": "វគ្គសិក្សា",
+    "product": "ផលិតផល",
+    "marketPlace": "ទីផ្សារ",
+    "courseOrProduct": "វគ្គសិក្សា ឬ ផលិតផល"
   }
 }
