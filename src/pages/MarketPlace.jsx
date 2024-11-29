@@ -152,7 +152,7 @@ export default function MarketPlace() {
                 </Typography>
               )}
               {(isProductLoading || isProductFetching) && (
-                <ItemsLoading title={"marketplace"} />
+                <ItemsLoading title={t("contentLoading.marketPlace")} />
               )}
               {/* {(isProductLoading || isProductFetching) && <ContentLoading />} */}
               {!isProductLoading && filteredData?.length === 0 && (
