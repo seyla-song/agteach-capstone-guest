@@ -192,7 +192,7 @@ function SearchResultPage() {
           {t("searchResult.searchResultHeader", { query, queryLength })}
         </Typography>
         {isCourseLoading && isProductLoading && (
-          <ItemsLoading title="courses or products" />
+          <ItemsLoading title={t("contentLoading.courseOrProduct")} />
         )}
         {!isCourseLoading && !isProductLoading && (
           <Typography variant="bsmr" color="dark.300">

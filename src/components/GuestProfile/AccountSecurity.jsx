@@ -7,7 +7,6 @@ import {
   FormControl,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 
 /**

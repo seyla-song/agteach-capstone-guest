@@ -48,7 +48,7 @@ export const CourseList = ({ data, isLoading }) => {
     <Stack gap={3}>
       <Stack gap>
         <Typography variant="h3">{t("myLearning.pageTitle")}</Typography>
-        {isLoading && <ItemsLoading title="course" />}
+        {isLoading && <ItemsLoading title={t("contentLoading.course")} />}
         {data.length > 0 && (
           <Typography variant="bsr">
             {t("myLearning.myCourses", { count: data.length })}
