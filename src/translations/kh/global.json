@@ -6,7 +6,7 @@
     "login": "ចូលគណនី",
     "cart": "រទេះទំនិញ",
     "logout": "ចាកចេញ",
-    "confirmLogout":"បញ្ជាក់ការចាកចេញ",
+    "confirmLogout": "បញ្ជាក់ការចាកចេញ",
     "confirmLogoutMessage": "តើអ្នកពិតជាចង់ចាកចេញមែនទេ?",
     "cancel": "បោះបង់"
   },
@@ -421,11 +421,11 @@
     "passwordMustContainSpecialCharacter": "ពាក្យសម្ងាត់ត្រូវមានតួអក្សរពិសេសយ៉ាងហោចណាស់មួយ។",
     "saveButton": "រក្សាទុក",
     "saving": "កំពុងរក្សាទុក...",
-    "profileImageUpdated":"បានផ្លាស់ប្តូររូបភាពគណនីដោយជោគជ័យ",
-    "errorProfileImageUpdated":"មានបញ្ហាក្នុងការផ្លាស់ប្តូរព័ត៌មាន​​ សូមព្យាយាមម្តងទៀត",
-    "successfullyUpdated":"បានបំពេញពត៌មានដោយជោគជ័យ",
-    "errorUpdated":"មានបញ្ហាមិនប្រក្រតី​ សូមព្យាយាមម្តងទៀត",
-    "successfullyUpdatedPassword":"បានកែប្រែពាក្យសម្ងាត់ដោយជោគជ័យ",
+    "profileImageUpdated": "បានផ្លាស់ប្តូររូបភាពគណនីដោយជោគជ័យ",
+    "errorProfileImageUpdated": "មានបញ្ហាក្នុងការផ្លាស់ប្តូរព័ត៌មាន​​ សូមព្យាយាមម្តងទៀត",
+    "successfullyUpdated": "បានបំពេញពត៌មានដោយជោគជ័យ",
+    "errorUpdated": "មានបញ្ហាមិនប្រក្រតី​ សូមព្យាយាមម្តងទៀត",
+    "successfullyUpdatedPassword": "បានកែប្រែពាក្យសម្ងាត់ដោយជោគជ័យ",
     "invalidFileMessage": "សូមជ្រើសរើសឯកសាររូបភាពដែលមានសុពលភាព {{file}}"
   },
   "instructorProfile": {
@@ -449,5 +449,9 @@
     "loginPromptTitle": "មើលទៅអ្នក ដូចជាមិនទាន់បានចូលគណនី",
     "loginPromptDescription": "ចុះឈ្មោះ ឬចូលគណនីឥឡូវនេះ ដើម្បីទទួលបានសិទ្ធិចូលប្រើប្រាស់",
     "login": "ចូលគណនី"
+  },
+  "contentLoading": {
+    "justAMoment": "សូមរង់ចាំបន្តិច",
+    "gettingContent": "កំពុងទទួលទិន្នន័យ..."
   }
 }
