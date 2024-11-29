@@ -420,7 +420,13 @@
     "passwordMustContainNumber": "ពាក្យសម្ងាត់ត្រូវមានលេខយ៉ាងហោចណាស់មួយ។",
     "passwordMustContainSpecialCharacter": "ពាក្យសម្ងាត់ត្រូវមានតួអក្សរពិសេសយ៉ាងហោចណាស់មួយ។",
     "saveButton": "រក្សាទុក",
-    "saving": "កំពុងរក្សាទុក..."
+    "saving": "កំពុងរក្សាទុក...",
+    "profileImageUpdated":"បានផ្លាស់ប្តូររូបភាពគណនីដោយជោគជ័យ",
+    "errorProfileImageUpdated":"មានបញ្ហាក្នុងការផ្លាស់ប្តូរព័ត៌មាន​​ សូមព្យាយាមម្តងទៀត",
+    "successfullyUpdated":"បានបំពេញពត៌មានដោយជោគជ័យ",
+    "errorUpdated":"មានបញ្ហាមិនប្រក្រតី​ សូមព្យាយាមម្តងទៀត",
+    "successfullyUpdatedPassword":"បានកែប្រែពាក្យសម្ងាត់ដោយជោគជ័យ",
+    "invalidFileMessage": "សូមជ្រើសរើសឯកសាររូបភាពដែលមានសុពលភាព {{file}}"
   },
   "instructorProfile": {
     "copied": "បានចម្លង",

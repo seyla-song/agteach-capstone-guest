@@ -79,8 +79,8 @@ export const ChangePassword = () => {
             isError
               ? error.data.message
               : isSuccess
-                ? "Successfuly updated password"
-                : "Something went wrong. Please try again"
+                ? t('guestProfile.successfullyUpdatedPassword')
+                : t('guestProfile.errorUpdated')
           }
           severity={isError ? "error" : "success"}
           open={open}

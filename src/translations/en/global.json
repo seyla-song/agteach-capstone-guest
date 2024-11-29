@@ -420,7 +420,13 @@
     "passwordMustContainNumber": "Password must contain at least one number.",
     "passwordMustContainSpecialCharacter": "Password must contain at least one special character.",
     "saveButton": "Save",
-    "saving": "Saving..."
+    "saving": "Saving...",
+    "profileImageUpdated":"Profile image updated successfully.",
+    "errorProfileImageUpdated":"Error submitting form. Please try again.",
+    "successfullyUpdated":"Successfuly updated Information",
+    "errorUpdated":"Something went wrong. Please try again",
+    "successfullyUpdatedPassword":"Successfuly updated password",
+    "invalidFileMessage": "Please select a valid image file {{file}}"
   },
   "instructorProfile": {
     "copied": "Copied",

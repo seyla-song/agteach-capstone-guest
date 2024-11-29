@@ -85,8 +85,8 @@ export const BasicInfo = ({ userData, cities }) => {
             isError
               ? error?.data?.message
               : isSuccess
-                ? "Successfuly updated Information"
-                : "Something went wrong. Please try again"
+                ? t("guestProfile.successfullyUpdated")
+                : t("guestProfile.errorUpdated")
           }
           severity={isError ? "error" : "success"}
           open={open}

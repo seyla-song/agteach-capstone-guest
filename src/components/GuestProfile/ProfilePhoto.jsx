@@ -36,7 +36,7 @@ export const ProfilePhoto = ({ userData }) => {
     if (file) {
       const validImageTypes = ["image/jpeg", "image/png", "image/jpg"];
       if (!validImageTypes.includes(file.type)) {
-        setAlertMessage("Please select a valid image file (JPEG, PNG, JPG).");
+        setAlertMessage(t('guestProfile.invalidFileMessage',{file:'(JPEG, PNG, JPG)'}));
         setAlertSeverity("error");
         setAlertOpen(true);
         return;
@@ -51,11 +51,11 @@ export const ProfilePhoto = ({ userData }) => {
       const formData = new FormData();
       formData.append("photo", imageFile);
       await updateInfo(formData);
-      setAlertMessage("Profile image updated successfully.");
+      setAlertMessage(t('guestProfile.profileImageUpdated'));
       setAlertSeverity("success");
       setAlertOpen(true);
     } catch (error) {
-      setAlertMessage("Error submitting form. Please try again.");
+      setAlertMessage(t('guestProfile.errorProfileImageUpdated'));
       setAlertSeverity("error");
       setAlertOpen(true);
     }
