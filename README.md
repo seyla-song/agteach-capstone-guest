@@ -53,6 +53,11 @@ project-root/
 │   │
 │   ├── theme/
 │   │   └── theme.js
+│   ├── translations/
+│   │   ├── en/
+│   │   │   └── global.js
+│   │   └── kh/
+│   │       └── global.js
 │   │
 │   ├── utils/
 │   ├── App.jsx
@@ -81,6 +86,7 @@ project-root/
 | **src/pages/**      | Components representing different pages of the application. |
 | **src/routes/**     | Components root layout and router navigate to pages         |
 | **src/services/**   | API service functions.                                      |
+| **src/translations/**| Contains language-specific resources                       |
 | **src/store/**      | Application state that have slice, reducer and middleware   |
 | **src/utils/**      | Utility functions and helpers.                              |
 
@@ -94,9 +100,9 @@ project-root/
 | **Song Seyla**       | Backend              |
 | **Khom Khit**        | Backend              |
 | **Panha Phosda**     | Front-end            |
-| **Chiv Sovanchitra** | Front-end            |
+| **Chiv Sovan Chitra** | Front-end            |
 | **Rith Sokha Neadh** | Front-end            |
-| **Pann SengLay**     | Front-end            |
+| **Pann Senglay**     | Front-end            |
 
 ## Usage
 

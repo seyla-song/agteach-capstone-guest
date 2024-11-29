@@ -35,7 +35,7 @@ export const PurchasedHistory = ({ data, isLoading }) => {
     <Stack gap={3} pb={10}>
       <Stack>
         <Typography variant="h3">{t("cart.purchasedHistory")}</Typography>
-        {isLoading && <ItemsLoading title="purchased" />}
+        {isLoading && <ItemsLoading title={t("contentLoading.purchased")} />}
         {data?.length > 0 && (
           <Typography variant="bxsmd" color="dark.300">
             {t("cart.foundItem", { count: data?.length })}

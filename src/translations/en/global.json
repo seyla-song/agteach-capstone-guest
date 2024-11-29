@@ -4,7 +4,11 @@
     "marketPlace": "Marketplace",
     "agai": "AgAI",
     "login": "Login",
-    "cart": "Cart"
+    "cart": "Cart",
+    "logout": "Logout",
+    "confirmLogout": "Confirm Logout",
+    "confirmLogoutMessage": "Are you sure you want to logout?",
+    "cancel": "Cancel"
   },
   "footer": {
     "footerMenu": [
@@ -416,7 +420,13 @@
     "passwordMustContainNumber": "Password must contain at least one number.",
     "passwordMustContainSpecialCharacter": "Password must contain at least one special character.",
     "saveButton": "Save",
-    "saving": "Saving..."
+    "saving": "Saving...",
+    "profileImageUpdated": "Profile image updated successfully.",
+    "errorProfileImageUpdated": "Error submitting form. Please try again.",
+    "successfullyUpdated": "Successfuly updated Information",
+    "errorUpdated": "Something went wrong. Please try again",
+    "successfullyUpdatedPassword": "Successfuly updated password",
+    "invalidFileMessage": "Please select a valid image file {{file}}"
   },
   "instructorProfile": {
     "copied": "Copied",
@@ -439,5 +449,14 @@
     "loginPromptTitle": "Looks like you're not logged in",
     "loginPromptDescription": "Signup or login now to gain access to your {{pageName}}",
     "login": "Login"
+  },
+  "contentLoading": {
+    "justAMoment": "Just a moment",
+    "gettingContent": "Getting {{title}} items...",
+    "purchased": "purchased",
+    "course": "course",
+    "product": "product",
+    "marketPlace": "marketplace",
+    "courseOrProduct": "courses or products"
   }
 }
