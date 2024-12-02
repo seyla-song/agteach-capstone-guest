@@ -320,7 +320,7 @@
     "passwordMustBeAtLease8characters": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់៨តួអក្សរ",
     "usernameMustBeAtMost20characters": "ឈ្មោះអ្នកប្រើប្រាស់ត្រូវតែមានយ៉ាងច្រើន២០តួអក្សរ",
     "passwordMustBeAtMost20characters": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងច្រើន២០តួអក្សរ",
-    "usernameMustStartWithLetter": "ឈ្មោះអ្នកប្រើប្រាស់ត្រូវតែចាប់ផ្តើមជាអក្សរនិងមានតែតួអក្សរនិងលេខ",
+    "usernameMustStartWithALetter": "ឈ្មោះអ្នកប្រើប្រាស់ត្រូវតែចាប់ផ្តើមជាអក្សរនិងមានតែតួអក្សរនិងលេខ",
     "pleaseProvideYourDateOfBirth": "សូមបញ្ចូលថ្ងៃខែឆ្នាំកំណើតរបស់អ្នក",
     "pleaseEnterYourEmail": "សូមបញ្ចូលអ៊ីមែលរបស់អ្នក",
     "pleaseEnterYourPassword": "សូមបញ្ចូលពាក្យសម្ងាត់របស់អ្នក",

@@ -319,7 +319,7 @@
     "usernameMustBeAtLease3characters": "Username must be at least 3 characters",
     "passwordMustBeAtLease8characters": "Password must be at least 8 characters",
     "usernameMustBeAtMost20characters": "Username must be at most 20 characters",
-    "usernameMustStartWithLetter": "Username must at least start with a letter and contain only letters and numbers",
+    "usernameMustStartWithALetter": "Username must at least start with a letter and contain only letters and numbers",
     "pleaseProvideYourDateOfBirth": "Please provide your date of birth",
     "pleaseEnterYourEmail": "Please enter your email",
     "pleaseEnterYourPassword": "Please enter your password",
