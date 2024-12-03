@@ -62,7 +62,6 @@ export const CourseAccordionComponent = ({ data }) => {
 
     return output.join(", ");
   };
-console.log(data);
 
   return (
     <Stack>
