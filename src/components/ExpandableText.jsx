@@ -24,7 +24,7 @@ const ExpandableText = ({ text, initialLength = 150, ...props }) => {
   };
 
   // Truncate text to initial length if not expanded
-  const displayText = isExpanded ? text : `${text.slice(0, initialLength)}...`;
+  const displayText = isExpanded || text.length < initialLength ? text : `${text.slice(0, initialLength)}...`;
 
   return (
     <Box {...props}>

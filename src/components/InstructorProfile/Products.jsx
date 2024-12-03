@@ -67,7 +67,7 @@ export const Products = ({ instructorName, productData }) => {
           {instructorName || "Default"} {t('instructorProfile.products')}
         </Typography>
         <Typography variant="bmdmd" color="dark.300">
-          {t('instructorProfile.productFound', { count: productContent.length })}
+        {t('instructorProfile.productFound', { count: productData.length })}
         </Typography>
 
         <Container sx={{ mt: 2 }}>
